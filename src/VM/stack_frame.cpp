@@ -3,15 +3,14 @@
 namespace elsa {
 	namespace vm {
 				
-		StackFrame::StackFrame()
+		StackFrame::StackFrame(FunctionEntry* function, std::size_t ret_addr)
+			:
+			function_(function),
+			ret_addr_(ret_addr)
 		{
-
 		}
 
-		StackFrame::~StackFrame()
-		{
-
-		}
+		StackFrame::~StackFrame() {}
 
 		void StackFrame::push(Object o)
 		{
@@ -28,7 +27,16 @@ namespace elsa {
 
 		Object StackFrame::local(std::size_t i)
 		{
+			// TODO: Add custom exceptions
+			if (i > function_->get_num_locals() - 1)
+				throw;
+
 			return locals_[i];
+		}
+
+		std::size_t StackFrame::get_ret_addr()
+		{
+			return ret_addr_;
 		}
 
 	}

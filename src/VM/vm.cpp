@@ -8,6 +8,7 @@ namespace elsa {
 			code_(code),
 			code_length_(length),
 			pc_(0),
+			entry_point_(-1),
 			oc_(nop)
 		{
 		}
@@ -18,7 +19,11 @@ namespace elsa {
 
 		void VM::execute()
 		{
-			call_stack_.push(new StackFrame());
+			if (entry_point_ == -1)
+				throw;
+
+			// Push main on the call stack
+			call_stack_.push(new StackFrame(constant_pool_.get_func_at(entry_point_), entry_point_));
 
 			while (oc_ != halt && pc_ < code_length_)
 			{
@@ -26,6 +31,19 @@ namespace elsa {
 
 				cycle();
 			}
+
+			delete call_stack_.pop();
+		}
+
+		void VM::add_constant_entry(ConstantEntry* entry)
+		{
+			constant_pool_.add_entry(entry);
+		}
+
+		void VM::set_entry_point(std::size_t entry_point)
+		{
+			entry_point_ = entry_point;
+			pc_ = entry_point_;
 		}
 
 		void VM::cycle()
@@ -51,8 +69,24 @@ namespace elsa {
 				current_frame_->push(Object(o1.i() * o2.i()));
 				break;
 			}
-			case print: {
-				//std::cout 
+			case call_static: {
+				auto addr = code_[pc_];
+
+				// TODO: Copy args from callers stack
+				auto func = constant_pool_.get_func_at(addr);
+				call_stack_.push(new StackFrame(func, pc_ + 1));
+				pc_ = addr;
+				break;
+			}
+			case ret: {
+				auto ret_func = call_stack_.pop();
+				// TODO: Push the return value on the stack (if there is one)
+				pc_ = ret_func->get_ret_addr();
+				delete ret_func;
+				break;
+			}
+			case print_ln: {
+				print_line(current_frame_->pop());
 				break;
 			}
 			case halt: {
@@ -64,6 +98,16 @@ namespace elsa {
 			default:
 				break;
 			}
+		}
+
+		void VM::print_line(const Object& o)
+		{
+			if (o.get_type() == OType::Int)
+				std::cout << o.i() << std::endl;
+			else if(o.get_type() == OType::Float)
+				std::cout << o.f() << std::endl;
+			else if (o.get_type() == OType::Char)
+				std::cout << o.c() << std::endl;
 		}
 	}
 }

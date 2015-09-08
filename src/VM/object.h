@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace vm {
 
-		enum TValue {
+		enum OType {
 			Int,
 			Float,
 			Char
@@ -22,12 +22,13 @@ namespace elsa {
 			Object(float v);
 			Object(char v);
 
-			int i();
-			float f();
-			char c();
+			int i() const;
+			float f() const;
+			char c() const;
+			OType get_type() const;
 
 		private:
-			TValue type_;
+			OType type_;
 			Value value_;
 		};
 

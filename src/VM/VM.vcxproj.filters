@@ -33,6 +33,15 @@
     <ClInclude Include="object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="constants\constant_pool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\constant_entry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\function_entry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="elsa_vm.cpp">
@@ -48,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\constant_pool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\function_entry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

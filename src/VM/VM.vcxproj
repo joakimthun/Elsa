@@ -143,6 +143,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="call_stack.cpp" />
+    <ClCompile Include="constants\constant_pool.cpp" />
+    <ClCompile Include="constants\function_entry.cpp" />
     <ClCompile Include="elsa_vm.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="stack_frame.cpp" />
@@ -150,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="call_stack.h" />
+    <ClInclude Include="constants\constant_pool.h" />
+    <ClInclude Include="constants\constant_entry.h" />
+    <ClInclude Include="constants\function_entry.h" />
     <ClInclude Include="instruction.h" />
     <ClInclude Include="opcodes.h" />
     <ClInclude Include="stack_frame.h" />

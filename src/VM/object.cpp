@@ -21,19 +21,24 @@ namespace elsa {
 			type_ = Char;
 		};
 
-		int Object::i()
+		int Object::i() const
 		{
 			return value_.i;
 		}
 
-		float Object::f()
+		float Object::f() const
 		{
 			return value_.f;
 		}
 
-		char Object::c()
+		char Object::c() const
 		{
 			return value_.c;
+		}
+
+		OType Object::get_type() const
+		{
+			return type_;
 		}
 	}
 }

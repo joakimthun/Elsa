@@ -7,6 +7,9 @@
 #include "opcodes.h"
 #include "object.h"
 #include "call_stack.h"
+#include "constants\constant_pool.h"
+#include "constants\constant_entry.h"
+#include "constants\function_entry.h"
 
 namespace elsa {
 	namespace vm {
@@ -18,15 +21,20 @@ namespace elsa {
 			~VM();
 
 			void execute();
+			void add_constant_entry(ConstantEntry* entry);
+			void set_entry_point(std::size_t entry_point);
 		private:
 			void cycle();
+			void print_line(const Object& o);
 
 			int* code_;
 			std::size_t code_length_;
 			OpCode oc_;
 			std::size_t pc_;
+			int entry_point_;
 			CallStack call_stack_;
 			StackFrame* current_frame_;
+			ConstantPool constant_pool_;
 		};
 
 	}

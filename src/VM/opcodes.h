@@ -9,7 +9,8 @@ namespace elsa {
 		{
 			nop = 0,
 			halt,
-			call,
+			call_inst,
+			call_static,
 			ret,
 
 			iconst,
@@ -18,7 +19,7 @@ namespace elsa {
 			isub,
 			idiv,
 
-			print
+			print_ln
 
 		};
 
