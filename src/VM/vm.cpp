@@ -89,10 +89,9 @@ namespace elsa {
 				break;
 			}
 			case ret: {
-				auto ret_func = call_stack_.pop();
+				std::unique_ptr<StackFrame> sf(call_stack_.pop());
 				// TODO: Push the return value on the stack (if there is one)
-				pc_ = ret_func->get_ret_addr();
-				delete ret_func;
+				pc_ = sf.get()->get_ret_addr();
 				break;
 			}
 			case print_ln: {

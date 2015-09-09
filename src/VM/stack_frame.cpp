@@ -11,7 +11,10 @@ namespace elsa {
 			locals_ = new Object[function->get_num_locals()];
 		}
 
-		StackFrame::~StackFrame() {}
+		StackFrame::~StackFrame() 
+		{
+			delete[] locals_;
+		}
 
 		void StackFrame::push(Object o)
 		{

@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <vector>
 #include <iostream>
+#include <memory>
 
 #include "opcodes.h"
 #include "object.h"
