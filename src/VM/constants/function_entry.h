@@ -20,11 +20,11 @@ namespace elsa {
 			FunctionEntry(std::string name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type);
 			~FunctionEntry();
 
-			std::string get_name();
-			std::size_t get_num_args();
-			std::size_t get_num_locals();
-			std::size_t get_addr();
-			FunctionType get_type();
+			std::string get_name() const;
+			std::size_t get_num_args() const;
+			std::size_t get_num_locals() const;
+			std::size_t get_addr() const;
+			FunctionType get_type() const;
 
 		private:
 			std::string name_;

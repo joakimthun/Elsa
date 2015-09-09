@@ -2,7 +2,12 @@
 
 namespace elsa {
 	namespace vm {
-		
+
+		Object::Object()
+		{
+			type_ = Undefined;
+		}
+
 		Object::Object(int v)
 		{
 			value_.i = v;

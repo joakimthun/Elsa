@@ -14,27 +14,27 @@ namespace elsa {
 
 		FunctionEntry::~FunctionEntry() {}
 
-		std::string FunctionEntry::get_name()
+		std::string FunctionEntry::get_name() const
 		{
 			return name_;
 		}
 
-		std::size_t FunctionEntry::get_num_args()
+		std::size_t FunctionEntry::get_num_args() const
 		{
 			return num_args_;
 		}
 
-		std::size_t FunctionEntry::get_num_locals()
+		std::size_t FunctionEntry::get_num_locals() const
 		{
 			return num_locals_;
 		}
 
-		std::size_t FunctionEntry::get_addr()
+		std::size_t FunctionEntry::get_addr() const
 		{
 			return addr_;
 		}
 
-		FunctionType FunctionEntry::get_type()
+		FunctionType FunctionEntry::get_type() const
 		{
 			return type_;
 		}

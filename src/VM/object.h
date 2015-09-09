@@ -6,7 +6,8 @@ namespace elsa {
 		enum OType {
 			Int,
 			Float,
-			Char
+			Char,
+			Undefined
 		};
 
 		typedef union {
@@ -18,6 +19,7 @@ namespace elsa {
 		class Object
 		{
 		public:
+			Object();
 			Object(int v);
 			Object(float v);
 			Object(char v);

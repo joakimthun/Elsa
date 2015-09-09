@@ -8,6 +8,7 @@ namespace elsa {
 			function_(function),
 			ret_addr_(ret_addr)
 		{
+			locals_ = new Object[function->get_num_locals()];
 		}
 
 		StackFrame::~StackFrame() {}
@@ -25,13 +26,18 @@ namespace elsa {
 			return o;
 		}
 
-		Object StackFrame::local(std::size_t i)
+		Object StackFrame::get_local(std::size_t i)
 		{
 			// TODO: Add custom exceptions
 			if (i > function_->get_num_locals() - 1)
 				throw;
 
 			return locals_[i];
+		}
+
+		void StackFrame::add_local(std::size_t i, Object local)
+		{
+			locals_[i] = local;
 		}
 
 		std::size_t StackFrame::get_ret_addr()

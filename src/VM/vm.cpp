@@ -74,7 +74,17 @@ namespace elsa {
 
 				// TODO: Copy args from callers stack
 				auto func = constant_pool_.get_func_at(addr);
-				call_stack_.push(new StackFrame(func, pc_ + 1));
+				auto sf = new StackFrame(func, pc_ + 1);
+				call_stack_.push(sf);
+
+				if (func->get_num_args() > 0)
+				{
+					for (std::size_t i = func->get_num_args(); i >= 0; --i)
+					{
+						sf->add_local(i, current_frame_->pop());
+					}
+				}
+
 				pc_ = addr;
 				break;
 			}

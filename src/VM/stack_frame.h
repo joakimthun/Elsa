@@ -16,12 +16,13 @@ namespace elsa {
 
 			void push(Object o);
 			Object pop();
-			Object local(std::size_t i);
+			Object get_local(std::size_t i);
+			void add_local(std::size_t i, Object local);
 			std::size_t get_ret_addr();
 
 		private:
 			std::vector<Object> eval_stack_;
-			std::vector<Object> locals_;
+			Object* locals_;
 			std::size_t ret_addr_;
 			FunctionEntry* function_;
 		};
