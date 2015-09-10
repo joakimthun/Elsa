@@ -19,20 +19,28 @@ namespace elsa {
 
 		void VM::execute()
 		{
-			if (entry_point_ == -1)
-				throw;
-
-			// Push main on the call stack
-			call_stack_.push(new StackFrame(constant_pool_.get_func_at(entry_point_), entry_point_));
-
-			while (oc_ != halt && pc_ < code_length_)
+			try 
 			{
-				current_frame_ = call_stack_.current();
 
-				cycle();
+				if (entry_point_ == -1)
+					throw ElsaException("No entry point specified.");
+
+				// Push main on the call stack
+				call_stack_.push(new StackFrame(constant_pool_.get_func_at(entry_point_), entry_point_));
+
+				while (oc_ != halt && pc_ < code_length_)
+				{
+					current_frame_ = call_stack_.current();
+
+					cycle();
+				}
+
+				delete call_stack_.pop();
 			}
-
-			delete call_stack_.pop();
+			catch (ElsaException& e)
+			{
+				std::cout << e.what() << std::endl;
+			}
 		}
 
 		void VM::add_constant_entry(ConstantEntry* entry)
@@ -104,8 +112,8 @@ namespace elsa {
 				break;
 			}
 			case arg: {
-				auto local_index = code_[pc_++];
-				current_frame_->push(current_frame_->get_local(local_index));
+				auto arg_index = code_[pc_++];
+				current_frame_->push(current_frame_->get_arg(arg_index));
 				break;
 			}
 			case print_ln: {

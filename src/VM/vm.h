@@ -11,6 +11,7 @@
 #include "constants\constant_pool.h"
 #include "constants\constant_entry.h"
 #include "constants\function_entry.h"
+#include "exceptions\elsa_exception.h"
 
 namespace elsa {
 	namespace vm {

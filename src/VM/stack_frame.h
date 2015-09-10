@@ -18,12 +18,14 @@ namespace elsa {
 			Object pop();
 			bool has_stack_entries() const;
 			Object get_local(std::size_t i) const;
+			Object get_arg(std::size_t i) const;
 			void add_local(std::size_t i, Object local);
 			std::size_t get_ret_addr() const;
 
 		private:
 			std::vector<Object> eval_stack_;
 			Object* locals_;
+			std::size_t locals_size_;
 			std::size_t ret_addr_;
 			FunctionEntry* function_;
 		};
