@@ -8,7 +8,7 @@ namespace elsa {
 			function_(function),
 			ret_addr_(ret_addr)
 		{
-			locals_ = new Object[function->get_num_locals()];
+			locals_ = new Object[function->get_num_locals() + function->get_num_args()];
 		}
 
 		StackFrame::~StackFrame() 
@@ -29,7 +29,12 @@ namespace elsa {
 			return o;
 		}
 
-		Object StackFrame::get_local(std::size_t i)
+		bool StackFrame::has_stack_entries() const
+		{
+			return !eval_stack_.empty();
+		}
+
+		Object StackFrame::get_local(std::size_t i) const
 		{
 			// TODO: Add custom exceptions
 			if (i > function_->get_num_locals() - 1)
@@ -43,7 +48,7 @@ namespace elsa {
 			locals_[i] = local;
 		}
 
-		std::size_t StackFrame::get_ret_addr()
+		std::size_t StackFrame::get_ret_addr() const
 		{
 			return ret_addr_;
 		}

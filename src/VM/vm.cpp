@@ -72,14 +72,13 @@ namespace elsa {
 			case call_static: {
 				auto addr = code_[pc_];
 
-				// TODO: Copy args from callers stack
-				auto func = constant_pool_.get_func_at(addr);
-				auto sf = new StackFrame(func, pc_ + 1);
+				auto f = constant_pool_.get_func_at(addr);
+				auto sf = new StackFrame(f, pc_ + 1);
 				call_stack_.push(sf);
 
-				if (func->get_num_args() > 0)
+				if (f->get_num_args() > 0)
 				{
-					for (std::size_t i = func->get_num_args(); i >= 0; --i)
+					for (int i = f->get_num_args() - 1; i >= 0; --i)
 					{
 						sf->add_local(i, current_frame_->pop());
 					}
@@ -89,9 +88,24 @@ namespace elsa {
 				break;
 			}
 			case ret: {
-				std::unique_ptr<StackFrame> sf(call_stack_.pop());
-				// TODO: Push the return value on the stack (if there is one)
-				pc_ = sf.get()->get_ret_addr();
+				{
+					std::unique_ptr<StackFrame> sf(call_stack_.pop());
+					auto ret_addr = sf.get()->get_ret_addr();
+
+					// Push the return value on the stack (if there is one)
+					// Add support for multiple return values?
+					if (sf.get()->has_stack_entries())
+					{
+						call_stack_.current()->push(sf.get()->pop());
+					}
+
+					pc_ = ret_addr;
+				}
+				break;
+			}
+			case arg: {
+				auto local_index = code_[pc_++];
+				current_frame_->push(current_frame_->get_local(local_index));
 				break;
 			}
 			case print_ln: {

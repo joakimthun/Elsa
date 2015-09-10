@@ -19,6 +19,8 @@ namespace elsa {
 			isub,
 			idiv,
 
+			arg,
+
 			print_ln
 
 		};
