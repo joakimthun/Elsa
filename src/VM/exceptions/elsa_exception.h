@@ -16,7 +16,7 @@ namespace elsa {
 				return message_.c_str();
 			}
 
-		private:
+		protected:
 			std::string message_;
 		};
 

@@ -3,14 +3,24 @@
 namespace elsa {
 	namespace vm {
 
-		VM::VM(int* code, std::size_t length)
+		VM::VM()
 			:
-			code_(code),
-			code_length_(length),
+			code_length_(0),
 			pc_(0),
 			entry_point_(-1),
 			oc_(nop)
 		{
+		}
+
+		VM::VM(const std::vector<int>& code)
+			:
+			code_(code),
+			code_length_(code.size()),
+			pc_(0),
+			entry_point_(-1),
+			oc_(nop)
+		{
+			code_length_ = code_.size();
 		}
 
 		VM::~VM()
@@ -21,9 +31,11 @@ namespace elsa {
 		{
 			try 
 			{
+				if (code_length_ == 0)
+					throw RuntimeException("No program to execute.");
 
 				if (entry_point_ == -1)
-					throw ElsaException("No entry point specified.");
+					throw RuntimeException("No entry point specified.");
 
 				// Push main on the call stack
 				call_stack_.push(new StackFrame(constant_pool_.get_func_at(entry_point_), entry_point_));
@@ -41,6 +53,12 @@ namespace elsa {
 			{
 				std::cout << e.what() << std::endl;
 			}
+		}
+
+		void VM::set_program(const std::vector<int>& code)
+		{
+			code_ = code;
+			code_length_ = code.size();
 		}
 
 		void VM::add_constant_entry(ConstantEntry* entry)
@@ -77,6 +95,16 @@ namespace elsa {
 				current_frame_->push(Object(o1.i() * o2.i()));
 				break;
 			}
+			case b_ieq: {
+				auto jmp_addr = code_[pc_];
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				
+				if (o1.i() == o2.i())
+					pc_ = jmp_addr;
+
+				break;
+			}
 			case call_static: {
 				auto addr = code_[pc_];
 
@@ -111,7 +139,7 @@ namespace elsa {
 				}
 				break;
 			}
-			case arg: {
+			case load_arg: {
 				auto arg_index = code_[pc_++];
 				current_frame_->push(current_frame_->get_arg(arg_index));
 				break;

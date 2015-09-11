@@ -5,37 +5,43 @@
 #include "opcodes.h"
 #include "constants\function_entry.h"
 
-void simple_call_static(std::vector<int>&, int&);
-void simple_ret_and_print(std::vector<int>&, int&);
-void simple_ret_added_args_and_print(std::vector<int>&, int&);
-
 using namespace elsa::vm;
+
+void print_rec(int value);
+
+VM* recursive_print();
+VM* simple_call_static();
+VM* simple_ret_and_print();
+VM* simple_ret_added_args_and_print();
 
 int main()
 {
-	std::vector<int> p;
-	int ep;
-	simple_ret_added_args_and_print(p, ep);
+	VM* vm = simple_ret_added_args_and_print();
+	
+	vm->execute();
 
-	auto vm = VM(&p.front(), p.size());
+	delete vm;
 
-	vm.add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
-	//vm.add_constant_entry(new FunctionEntry("print", 0, 0, 0, FunctionType::Static));
-	//vm.add_constant_entry(new FunctionEntry("ret_int", 0, 0, 0, FunctionType::Static));
-	vm.add_constant_entry(new FunctionEntry("ret_added", 2, 0, 0, FunctionType::Static));
-	vm.set_entry_point(ep);
-
-
-	vm.execute();
+	print_rec(10);
 
 	return 0;
 }
 
-void simple_call_static(std::vector<int>& p, int& ep)
+void print_rec(int value)
 {
-	ep = 7;
+	std::cout << value << std::endl;
 
-	p =
+	if (value == 0)
+	{
+		return;
+	}
+
+	print_rec(value - 1);
+}
+
+VM* recursive_print()
+{
+	std::vector<int> p =
 	{
 		// Print
 		iconst, 2,
@@ -47,13 +53,47 @@ void simple_call_static(std::vector<int>& p, int& ep)
 		call_static, 0,
 		halt
 	};
+
+	int ep = 7;
+
+	auto vm = new VM(p);
+
+	vm->add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
+	vm->add_constant_entry(new FunctionEntry("print", 0, 0, 0, FunctionType::Static));
+	vm->set_entry_point(ep);
+
+	return vm;
 }
 
-void simple_ret_and_print(std::vector<int>& p, int& ep)
+VM* simple_call_static()
 {
-	ep = 6;
+	std::vector<int> p =
+	{
+		// Print
+		iconst, 2,
+		iconst, 6,
+		imul,
+		print_ln,
+		ret,
+		// Main
+		call_static, 0,
+		halt
+	};
+	
+	int ep = 7;
+	
+	auto vm = new VM(p);
+	
+	vm->add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
+	vm->add_constant_entry(new FunctionEntry("print", 0, 0, 0, FunctionType::Static));
+	vm->set_entry_point(ep);
 
-	p =
+	return vm;
+}
+
+VM* simple_ret_and_print()
+{
+	std::vector<int> p =
 	{
 		// Print
 		iconst, 2,
@@ -65,23 +105,41 @@ void simple_ret_and_print(std::vector<int>& p, int& ep)
 		print_ln,
 		halt
 	};
+
+	int ep = 6;
+
+	VM* vm = new VM(p);
+
+	vm->add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
+	vm->add_constant_entry(new FunctionEntry("ret_int", 0, 0, 0, FunctionType::Static));
+	vm->set_entry_point(ep);
+
+	return vm;
 }
 
-void simple_ret_added_args_and_print(std::vector<int>& p, int& ep)
+VM* simple_ret_added_args_and_print()
 {
-	ep = 6;
-
-	p =
+	std::vector<int> p =
 	{
-		arg, 0,
-		arg, 1,
+		load_arg, 0,
+		load_arg, 1,
 		iadd,
 		ret,
 		// Main
-		iconst, 5,
+		iconst, 12,
 		iconst, 5,
 		call_static, 0,
 		print_ln,
 		halt
 	};
+
+	int ep = 6;
+
+	VM* vm = new VM(p);
+
+	vm->add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
+	vm->add_constant_entry(new FunctionEntry("ret_added", 2, 0, 0, FunctionType::Static));
+	vm->set_entry_point(ep);
+
+	return vm;
 }

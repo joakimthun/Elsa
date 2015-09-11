@@ -19,7 +19,10 @@ namespace elsa {
 			isub,
 			idiv,
 
-			arg,
+			b_ieq,
+
+			load_arg,
+			load_local,
 
 			print_ln
 

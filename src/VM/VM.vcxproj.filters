@@ -45,6 +45,9 @@
     <ClInclude Include="exceptions\elsa_exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="exceptions\runtime_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="elsa_vm.cpp">

@@ -11,7 +11,7 @@
 #include "constants\constant_pool.h"
 #include "constants\constant_entry.h"
 #include "constants\function_entry.h"
-#include "exceptions\elsa_exception.h"
+#include "exceptions\runtime_exception.h"
 
 namespace elsa {
 	namespace vm {
@@ -19,17 +19,19 @@ namespace elsa {
 		class  VM
 		{
 		public:
-			VM(int* code, std::size_t length);
+			VM();
+			VM(const std::vector<int>& code);
 			~VM();
 
 			void execute();
+			void set_program(const std::vector<int>& code);
 			void add_constant_entry(ConstantEntry* entry);
 			void set_entry_point(std::size_t entry_point);
 		private:
 			void cycle();
 			void print_line(const Object& o);
 
-			int* code_;
+			std::vector<int> code_;
 			std::size_t code_length_;
 			OpCode oc_;
 			std::size_t pc_;
