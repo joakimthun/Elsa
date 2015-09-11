@@ -35,26 +35,30 @@ namespace elsa {
 			return !eval_stack_.empty();
 		}
 
-		Object StackFrame::get_local(std::size_t i) const
+		Object StackFrame::load_local(std::size_t i) const
 		{
-			auto li = function_->get_num_args() + 1;
+			auto li = function_->get_num_args() + i;
 			if (li > locals_size_ - 1)
-				throw;
+				throw RuntimeException("Tried to access an out of range local.");
 
 			return locals_[li];
 		}
 
-		Object StackFrame::get_arg(std::size_t i) const
+		Object StackFrame::load_arg(std::size_t i) const
 		{
 			if (i > locals_size_ - 1)
-				throw;
+				throw RuntimeException("Tried to access an out of range argument.");
 
 			return locals_[i];
 		}
 
-		void StackFrame::add_local(std::size_t i, Object local)
+		void StackFrame::store_local(std::size_t i, Object local)
 		{
-			locals_[i] = local;
+			auto li = function_->get_num_args() + i;
+			if (li > locals_size_ - 1)
+				throw RuntimeException("Tried to store an out of range local.");
+
+			locals_[li] = local;
 		}
 
 		std::size_t StackFrame::get_ret_addr() const

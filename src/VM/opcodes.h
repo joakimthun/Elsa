@@ -21,8 +21,10 @@ namespace elsa {
 
 			b_ieq,
 
-			load_arg,
-			load_local,
+			l_arg,
+			l_local,
+
+			s_local,
 
 			print_ln
 

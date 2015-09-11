@@ -5,6 +5,7 @@
 
 #include "object.h"
 #include "constants\function_entry.h"
+#include "exceptions\runtime_exception.h"
 
 namespace elsa {
 	namespace vm {
@@ -17,9 +18,9 @@ namespace elsa {
 			void push(Object o);
 			Object pop();
 			bool has_stack_entries() const;
-			Object get_local(std::size_t i) const;
-			Object get_arg(std::size_t i) const;
-			void add_local(std::size_t i, Object local);
+			Object load_local(std::size_t i) const;
+			Object load_arg(std::size_t i) const;
+			void store_local(std::size_t i, Object local);
 			std::size_t get_ret_addr() const;
 
 		private:

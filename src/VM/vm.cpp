@@ -116,7 +116,7 @@ namespace elsa {
 				{
 					for (int i = f->get_num_args() - 1; i >= 0; --i)
 					{
-						sf->add_local(i, current_frame_->pop());
+						sf->store_local(i, current_frame_->pop());
 					}
 				}
 
@@ -139,9 +139,20 @@ namespace elsa {
 				}
 				break;
 			}
-			case load_arg: {
-				auto arg_index = code_[pc_++];
-				current_frame_->push(current_frame_->get_arg(arg_index));
+			case l_arg: {
+				auto a_index = code_[pc_++];
+				current_frame_->push(current_frame_->load_arg(a_index));
+				break;
+			}
+			case l_local: {
+				auto l_index = code_[pc_++];
+				current_frame_->push(current_frame_->load_local(l_index));
+				break;
+			}
+			case s_local: {
+				auto l_index = code_[pc_++];
+				auto value = current_frame_->pop();
+				current_frame_->store_local(l_index, value);
 				break;
 			}
 			case print_ln: {

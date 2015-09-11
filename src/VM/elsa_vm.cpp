@@ -10,19 +10,20 @@ using namespace elsa::vm;
 void print_rec(int value);
 
 VM* recursive_print();
+VM* store_load_local();
 VM* simple_call_static();
 VM* simple_ret_and_print();
 VM* simple_ret_added_args_and_print();
 
 int main()
 {
-	VM* vm = simple_ret_added_args_and_print();
+	VM* vm = store_load_local();
 	
 	vm->execute();
 
 	delete vm;
 
-	print_rec(10);
+	//print_rec(10);
 
 	return 0;
 }
@@ -60,6 +61,27 @@ VM* recursive_print()
 
 	vm->add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
 	vm->add_constant_entry(new FunctionEntry("print", 0, 0, 0, FunctionType::Static));
+	vm->set_entry_point(ep);
+
+	return vm;
+}
+
+VM* store_load_local()
+{
+	std::vector<int> p =
+	{
+		iconst, 10,
+		s_local, 0,
+		l_local, 0,
+		print_ln,
+		halt
+	};
+
+	int ep = 0;
+
+	auto vm = new VM(p);
+
+	vm->add_constant_entry(new FunctionEntry("main", 0, 1, ep, FunctionType::Static));
 	vm->set_entry_point(ep);
 
 	return vm;
@@ -121,8 +143,8 @@ VM* simple_ret_added_args_and_print()
 {
 	std::vector<int> p =
 	{
-		load_arg, 0,
-		load_arg, 1,
+		l_arg, 0,
+		l_arg, 1,
 		iadd,
 		ret,
 		// Main
