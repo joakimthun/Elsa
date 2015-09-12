@@ -26,18 +26,15 @@ namespace elsa {
 			type_ = Char;
 		}
 
-		Object::Object(void* ptr, OType type)
+		Object::Object(GCObject* o)
 		{
-			value_.ptr = ptr;
-			type_ = type;
+			value_.gco = o;
 		}
 
 		int Object::i() const
 		{
 			if (type_ == Int)
 				return value_.i;
-			if (type_ == IPtr)
-				return *(int*)value_.ptr;
 
 			throw RuntimeException("Can not get an integer value from a non integer type.");
 		}
@@ -46,8 +43,6 @@ namespace elsa {
 		{
 			if (type_ == Float)
 				return value_.f;
-			if (type_ == FPtr)
-				return *(float*)value_.ptr;
 
 			throw RuntimeException("Can not get a float value from a non float type.");
 		}
@@ -56,8 +51,6 @@ namespace elsa {
 		{
 			if (type_ == Char)
 				return value_.c;
-			if (type_ == CPtr)
-				return *(wchar_t*)value_.ptr;
 
 			throw RuntimeException("Can not get a char value from a non char type.");
 		}
@@ -66,15 +59,16 @@ namespace elsa {
 		{
 			if (type_ == Bool)
 				return value_.b;
-			if (type_ == BPtr)
-				return *(bool*)value_.ptr;
 
 			throw RuntimeException("Can not get a boolean value from a non bool type.");
 		}
 
-		void* Object::ptr() const
+		GCObject* Object::gco() const
 		{
-			return value_.ptr;
+			if (type_ == GCOPtr)
+				return value_.gco;
+
+			throw RuntimeException("Can not get a GCObject pointer from a non GCObject pointer type.");
 		}
 
 		OType Object::get_type() const

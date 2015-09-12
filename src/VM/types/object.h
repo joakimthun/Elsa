@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../exceptions/runtime_exception.h"
+#include "../constants/function_info.h"
 
 namespace elsa {
 	namespace vm {
@@ -11,10 +12,14 @@ namespace elsa {
 			Float,
 			Char,
 			Bool,
-			IPtr,
-			FPtr,
-			CPtr,
-			BPtr,
+			GCOPtr,
+		};
+
+		struct GCObject
+		{
+			bool marked;
+			void* ptr;
+			FunctionInfo* fi;
 		};
 
 		typedef union {
@@ -22,7 +27,7 @@ namespace elsa {
 			float f;
 			wchar_t c;
 			bool b;
-			void* ptr;
+			GCObject* gco;
 		} Value;
 
 		class Object
@@ -32,13 +37,13 @@ namespace elsa {
 			Object(int v);
 			Object(float v);
 			Object(wchar_t v);
-			Object(void* ptr, OType type);
+			Object(GCObject* o);
 
 			int i() const;
 			float f() const;
 			wchar_t c() const;
 			bool b() const;
-			void* ptr() const;
+			GCObject* gco() const;
 			OType get_type() const;
 
 		private:
