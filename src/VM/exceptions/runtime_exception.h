@@ -8,7 +8,7 @@ namespace elsa {
 		class RuntimeException : public ElsaException
 		{
 		public:
-			inline RuntimeException(std::string message) : ElsaException(message) {};
+			inline RuntimeException(const std::string& message) : ElsaException(message) {};
 
 			virtual const char* what() const throw()
 			{

@@ -30,22 +30,28 @@
     <ClInclude Include="call_stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="constants\constant_pool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="constants\constant_entry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="constants\function_entry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="exceptions\elsa_exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="exceptions\runtime_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\heap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\function_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\struct_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types\object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,13 +68,19 @@
     <ClCompile Include="stack_frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="constants\constant_pool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="constants\function_entry.cpp">
+    <ClCompile Include="memory\heap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\function_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\struct_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="types\object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

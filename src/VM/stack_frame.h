@@ -3,8 +3,8 @@
 #include <cstddef>
 #include <vector>
 
-#include "object.h"
-#include "constants\function_entry.h"
+#include "types\object.h"
+#include "constants\function_info.h"
 #include "exceptions\runtime_exception.h"
 
 namespace elsa {
@@ -12,7 +12,7 @@ namespace elsa {
 
 		class StackFrame {
 		public:
-			StackFrame(FunctionEntry* function, std::size_t ret_addr);
+			StackFrame(FunctionInfo* function, std::size_t ret_addr);
 			~StackFrame();
 
 			void push(Object o);
@@ -29,7 +29,7 @@ namespace elsa {
 			Object* locals_;
 			std::size_t locals_size_;
 			std::size_t ret_addr_;
-			FunctionEntry* function_;
+			FunctionInfo* function_;
 		};
 
 	}

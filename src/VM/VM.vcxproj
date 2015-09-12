@@ -144,9 +144,11 @@
   <ItemGroup>
     <ClCompile Include="call_stack.cpp" />
     <ClCompile Include="constants\constant_pool.cpp" />
-    <ClCompile Include="constants\function_entry.cpp" />
+    <ClCompile Include="constants\function_info.cpp" />
+    <ClCompile Include="constants\struct_info.cpp" />
     <ClCompile Include="elsa_vm.cpp" />
-    <ClCompile Include="object.cpp" />
+    <ClCompile Include="memory\heap.cpp" />
+    <ClCompile Include="types\object.cpp" />
     <ClCompile Include="stack_frame.cpp" />
     <ClCompile Include="vm.cpp" />
   </ItemGroup>
@@ -154,13 +156,15 @@
     <ClInclude Include="call_stack.h" />
     <ClInclude Include="constants\constant_pool.h" />
     <ClInclude Include="constants\constant_entry.h" />
-    <ClInclude Include="constants\function_entry.h" />
+    <ClInclude Include="constants\function_info.h" />
+    <ClInclude Include="constants\struct_info.h" />
     <ClInclude Include="exceptions\elsa_exception.h" />
     <ClInclude Include="exceptions\runtime_exception.h" />
     <ClInclude Include="instruction.h" />
+    <ClInclude Include="memory\heap.h" />
     <ClInclude Include="opcodes.h" />
     <ClInclude Include="stack_frame.h" />
-    <ClInclude Include="object.h" />
+    <ClInclude Include="types\object.h" />
     <ClInclude Include="vm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

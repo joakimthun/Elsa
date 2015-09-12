@@ -14,11 +14,11 @@ namespace elsa {
 			Member
 		};
 
-		class FunctionEntry : public ConstantEntry
+		class FunctionInfo : public ConstantEntry
 		{
 		public:
-			FunctionEntry(std::string name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type);
-			~FunctionEntry();
+			FunctionInfo(const std::string& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type);
+			~FunctionInfo();
 
 			std::string get_name() const;
 			std::size_t get_num_args() const;

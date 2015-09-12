@@ -5,7 +5,8 @@
 #include <cstddef>
 
 #include "constant_entry.h"
-#include "function_entry.h"
+#include "function_info.h"
+#include "struct_info.h"
 
 namespace elsa {
 	namespace vm {
@@ -17,7 +18,9 @@ namespace elsa {
 			~ConstantPool();
 
 			void add_entry(ConstantEntry* entry);
-			FunctionEntry* get_func_at(std::size_t addr);
+			FunctionInfo* get_func_at(std::size_t addr);
+			StructInfo* get_struct_at(std::size_t index);
+
 		private:
 			std::vector<std::unique_ptr<ConstantEntry>> entries_;
 		};

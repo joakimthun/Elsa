@@ -1,9 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
 
 #include "vm.h"
 #include "opcodes.h"
-#include "constants\function_entry.h"
+#include "constants\function_info.h"
 
 using namespace elsa::vm;
 
@@ -20,6 +21,12 @@ int main()
 	VM* vm = recursive_print();
 	
 	vm->execute();
+
+	//std::cout << "sizeof(bool): " << sizeof(bool) << std::endl;
+
+	//void* ptr = malloc(sizeof(int));
+	//*(int*)ptr = 10;
+	//std::cout << "iptr: " << *(int*)ptr << std::endl;
 
 	delete vm;
 
@@ -66,8 +73,8 @@ VM* recursive_print()
 
 	auto vm = new VM(p);
 
-	vm->add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
-	vm->add_constant_entry(new FunctionEntry("rec_print", 1, 0, 0, FunctionType::Static));
+	vm->add_constant_entry(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+	vm->add_constant_entry(new FunctionInfo("rec_print", 1, 0, 0, FunctionType::Static));
 	vm->set_entry_point(ep);
 
 	return vm;
@@ -88,7 +95,7 @@ VM* store_load_local()
 
 	auto vm = new VM(p);
 
-	vm->add_constant_entry(new FunctionEntry("main", 0, 1, ep, FunctionType::Static));
+	vm->add_constant_entry(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
 	vm->set_entry_point(ep);
 
 	return vm;
@@ -113,8 +120,8 @@ VM* simple_call_static()
 	
 	auto vm = new VM(p);
 	
-	vm->add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
-	vm->add_constant_entry(new FunctionEntry("print", 0, 0, 0, FunctionType::Static));
+	vm->add_constant_entry(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+	vm->add_constant_entry(new FunctionInfo("print", 0, 0, 0, FunctionType::Static));
 	vm->set_entry_point(ep);
 
 	return vm;
@@ -139,8 +146,8 @@ VM* simple_ret_and_print()
 
 	VM* vm = new VM(p);
 
-	vm->add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
-	vm->add_constant_entry(new FunctionEntry("ret_int", 0, 0, 0, FunctionType::Static));
+	vm->add_constant_entry(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+	vm->add_constant_entry(new FunctionInfo("ret_int", 0, 0, 0, FunctionType::Static));
 	vm->set_entry_point(ep);
 
 	return vm;
@@ -166,8 +173,8 @@ VM* simple_ret_added_args_and_print()
 
 	VM* vm = new VM(p);
 
-	vm->add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
-	vm->add_constant_entry(new FunctionEntry("ret_added", 2, 0, 0, FunctionType::Static));
+	vm->add_constant_entry(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+	vm->add_constant_entry(new FunctionInfo("ret_added", 2, 0, 0, FunctionType::Static));
 	vm->set_entry_point(ep);
 
 	return vm;

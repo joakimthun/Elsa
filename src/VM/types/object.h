@@ -1,19 +1,28 @@
 #pragma once
 
+#include "../exceptions/runtime_exception.h"
+
 namespace elsa {
 	namespace vm {
 
 		enum OType {
+			Undefined,
 			Int,
 			Float,
 			Char,
-			Undefined
+			Bool,
+			IPtr,
+			FPtr,
+			CPtr,
+			BPtr,
 		};
 
 		typedef union {
 			int i;
 			float f;
-			char c;
+			wchar_t c;
+			bool b;
+			void* ptr;
 		} Value;
 
 		class Object
@@ -22,11 +31,14 @@ namespace elsa {
 			Object();
 			Object(int v);
 			Object(float v);
-			Object(char v);
+			Object(wchar_t v);
+			Object(void* ptr, OType type);
 
 			int i() const;
 			float f() const;
-			char c() const;
+			wchar_t c() const;
+			bool b() const;
+			void* ptr() const;
 			OType get_type() const;
 
 		private:

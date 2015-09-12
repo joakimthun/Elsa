@@ -6,11 +6,11 @@
 #include <memory>
 
 #include "opcodes.h"
-#include "object.h"
+#include "types\object.h"
 #include "call_stack.h"
 #include "constants\constant_pool.h"
 #include "constants\constant_entry.h"
-#include "constants\function_entry.h"
+#include "constants\function_info.h"
 #include "exceptions\runtime_exception.h"
 
 namespace elsa {

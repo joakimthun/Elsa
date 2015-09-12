@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace vm {
 				
-		StackFrame::StackFrame(FunctionEntry* function, std::size_t ret_addr)
+		StackFrame::StackFrame(FunctionInfo* function, std::size_t ret_addr)
 			:
 			function_(function),
 			ret_addr_(ret_addr)
@@ -24,6 +24,9 @@ namespace elsa {
 
 		Object StackFrame::pop()
 		{
+			if(eval_stack_.size() == 0)
+				throw RuntimeException("Can not call pop on an empty evaluation stack.");
+
 			auto o = eval_stack_.back();
 			eval_stack_.pop_back();
 
