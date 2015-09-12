@@ -21,6 +21,7 @@ namespace elsa {
 			Object load_local(std::size_t i) const;
 			Object load_arg(std::size_t i) const;
 			void store_local(std::size_t i, Object local);
+			void store_arg(std::size_t i, Object arg);
 			std::size_t get_ret_addr() const;
 
 		private:

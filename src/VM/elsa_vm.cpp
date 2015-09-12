@@ -17,7 +17,7 @@ VM* simple_ret_added_args_and_print();
 
 int main()
 {
-	VM* vm = store_load_local();
+	VM* vm = recursive_print();
 	
 	vm->execute();
 
@@ -44,23 +44,30 @@ VM* recursive_print()
 {
 	std::vector<int> p =
 	{
-		// Print
-		iconst, 2,
-		iconst, 6,
-		imul,
+		l_arg, 0,
 		print_ln,
+		l_arg, 0,
+		iconst, 0,
+		b_ineq, 10, 
 		ret,
+		l_arg, 0,
+		iconst, 1,
+		isub,
+		call_static, 0,
+		ret,
+
 		// Main
+		iconst, 10,
 		call_static, 0,
 		halt
 	};
 
-	int ep = 7;
+	int ep = 18;
 
 	auto vm = new VM(p);
 
 	vm->add_constant_entry(new FunctionEntry("main", 0, 0, ep, FunctionType::Static));
-	vm->add_constant_entry(new FunctionEntry("print", 0, 0, 0, FunctionType::Static));
+	vm->add_constant_entry(new FunctionEntry("rec_print", 1, 0, 0, FunctionType::Static));
 	vm->set_entry_point(ep);
 
 	return vm;

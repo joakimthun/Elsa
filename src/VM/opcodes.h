@@ -20,6 +20,7 @@ namespace elsa {
 			idiv,
 
 			b_ieq,
+			b_ineq,
 
 			l_arg,
 			l_local,

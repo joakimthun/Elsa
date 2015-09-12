@@ -89,6 +89,12 @@ namespace elsa {
 				current_frame_->push(Object(o1.i() + o2.i()));
 				break;
 			}
+			case isub: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o2.i() - o1.i()));
+				break;
+			}
 			case imul: {
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
@@ -96,11 +102,21 @@ namespace elsa {
 				break;
 			}
 			case b_ieq: {
-				auto jmp_addr = code_[pc_];
+				auto jmp_addr = code_[pc_++];
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 				
 				if (o1.i() == o2.i())
+					pc_ = jmp_addr;
+
+				break;
+			}
+			case b_ineq: {
+				auto jmp_addr = code_[pc_++];
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+
+				if (o1.i() != o2.i())
 					pc_ = jmp_addr;
 
 				break;
@@ -116,7 +132,7 @@ namespace elsa {
 				{
 					for (int i = f->get_num_args() - 1; i >= 0; --i)
 					{
-						sf->store_local(i, current_frame_->pop());
+						sf->store_arg(i, current_frame_->pop());
 					}
 				}
 

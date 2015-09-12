@@ -61,6 +61,14 @@ namespace elsa {
 			locals_[li] = local;
 		}
 
+		void StackFrame::store_arg(std::size_t i, Object arg)
+		{
+			if (i > locals_size_ - 1)
+				throw RuntimeException("Tried to store an out of range argument.");
+
+			locals_[i] = arg;
+		}
+
 		std::size_t StackFrame::get_ret_addr() const
 		{
 			return ret_addr_;
