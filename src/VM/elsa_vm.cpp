@@ -32,7 +32,27 @@ VM* structy_struct()
 {
 	std::vector<int> p =
 	{
+		// Create new struct and store in local 0
 		new_struct, 1,
+		s_local, 0,
+
+		// Store 77 in field 0
+		l_local, 0,
+		iconst, 77,
+		s_field, 0,
+
+		// Store 898 in field 1
+		l_local, 0,
+		iconst, 898,
+		s_field, 1,
+
+		// Print field 0
+		l_local, 0,
+		l_field, 0,
+		print_ln,
+
+		// Print field 1
+		l_local, 0,
 		l_field, 1,
 		print_ln,
 		halt
@@ -42,7 +62,7 @@ VM* structy_struct()
 
 	auto vm = new VM(p);
 
-	vm->add_constant_entry(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+	vm->add_constant_entry(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
 
 	auto si = new StructInfo("my_struct");
 	si->add_field(new FieldInfo("ifield1", OType::Int));

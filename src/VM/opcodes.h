@@ -22,6 +22,9 @@ namespace elsa {
 			isub,
 			idiv,
 
+			// Char operations
+			cconst,
+
 			// Branching
 			b_ieq,
 			b_ineq,

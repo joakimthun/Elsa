@@ -52,9 +52,9 @@ namespace elsa {
 			case Bool:
 				size_ = sizeof(bool);
 				break;
-				//case GCOPtr:
-				//	size_ += sizeof(int*);
-				//	break;
+			//case GCOPtr:
+			//	size_ += sizeof(int*);
+			//	break;
 			default:
 				throw ElsaException("Invalid field type.");
 			}

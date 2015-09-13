@@ -192,6 +192,10 @@ namespace elsa {
 				break;
 			}
 			case s_field: {
+				auto fi = code_[pc_++];
+				auto value = current_frame_->pop();
+				auto instance = current_frame_->pop();
+				heap_.store_field(instance, value, fi);
 				break;
 			}
 			case halt: {
@@ -212,7 +216,7 @@ namespace elsa {
 			else if(o.get_type() == OType::Float)
 				std::cout << o.f() << std::endl;
 			else if (o.get_type() == OType::Char)
-				std::cout << o.c() << std::endl;
+				std::wcout << o.c() << std::endl;
 			else if (o.get_type() == OType::Bool)
 				std::cout << o.b() << std::endl;
 			else

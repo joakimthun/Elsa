@@ -27,6 +27,10 @@ namespace elsa {
 
 			Object load_field(const Object& instance, std::size_t field_index);
 			void store_field(const Object& instance, const Object& value, std::size_t field_index);
+
+		private:
+			void assert_is_gcoptr(const Object & instance);
+			byte* get_field_ptr(void* s_ptr, FieldInfo* f);
 		};
 
 	}
