@@ -31,6 +31,11 @@ namespace elsa {
 			return size_;
 		}
 
+		std::size_t FieldInfo::get_num_bytes_offset() const
+		{
+			return num_bytes_offset_;
+		}
+
 		void FieldInfo::set_size()
 		{
 			switch (type_)

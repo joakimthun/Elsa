@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "../exceptions/elsa_exception.h"
+#include "../exceptions/runtime_exception.h"
 #include "../types/otype.h"
 #include "constant_entry.h"
 #include "field_info.h"
@@ -21,6 +22,8 @@ namespace elsa {
 
 			std::string get_name() const;
 			std::size_t get_size() const;
+			FieldInfo* get_field(std::size_t index) const;
+
 			void add_field(FieldInfo* field);
 
 		private:

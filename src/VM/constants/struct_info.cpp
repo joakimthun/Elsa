@@ -21,8 +21,17 @@ namespace elsa {
 			return size_;
 		}
 
+		FieldInfo* StructInfo::get_field(std::size_t index) const
+		{
+			if (index > fields_.size() - 1)
+				throw RuntimeException("Field index out of range");
+
+			return fields_[index].get();
+		}
+
 		void StructInfo::add_field(FieldInfo* field)
 		{
+			field->set_num_bytes_offset(size_);
 			update_size(*field);
 			fields_.push_back(std::unique_ptr<FieldInfo>(field));
 		}

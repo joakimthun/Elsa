@@ -19,6 +19,7 @@ namespace elsa {
 			std::string get_name() const;
 			OType get_type() const;
 			std::size_t get_size() const;
+			std::size_t get_num_bytes_offset() const;
 
 		private:
 			void set_size();

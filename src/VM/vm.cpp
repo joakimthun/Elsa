@@ -186,6 +186,9 @@ namespace elsa {
 				break;
 			}
 			case l_field: {
+				auto fi = code_[pc_++];
+				auto instance = current_frame_->pop();
+				current_frame_->push(heap_.load_field(instance, fi));
 				break;
 			}
 			case s_field: {
@@ -210,6 +213,10 @@ namespace elsa {
 				std::cout << o.f() << std::endl;
 			else if (o.get_type() == OType::Char)
 				std::cout << o.c() << std::endl;
+			else if (o.get_type() == OType::Bool)
+				std::cout << o.b() << std::endl;
+			else
+				throw RuntimeException("Unsupported type: print_ln");
 		}
 	}
 }

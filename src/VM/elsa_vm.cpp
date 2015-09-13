@@ -33,7 +33,8 @@ VM* structy_struct()
 	std::vector<int> p =
 	{
 		new_struct, 1,
-		del_struct,
+		l_field, 1,
+		print_ln,
 		halt
 	};
 
@@ -44,7 +45,8 @@ VM* structy_struct()
 	vm->add_constant_entry(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
 
 	auto si = new StructInfo("my_struct");
-	si->add_field(new FieldInfo("ifield", OType::Int));
+	si->add_field(new FieldInfo("ifield1", OType::Int));
+	si->add_field(new FieldInfo("ifield2", OType::Int));
 	vm->add_constant_entry(si);
 
 	vm->set_entry_point(ep);
