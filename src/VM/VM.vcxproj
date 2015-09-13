@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="call_stack.cpp" />
     <ClCompile Include="constants\constant_pool.cpp" />
+    <ClCompile Include="constants\field_info.cpp" />
     <ClCompile Include="constants\function_info.cpp" />
     <ClCompile Include="constants\struct_info.cpp" />
     <ClCompile Include="elsa_vm.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="call_stack.h" />
     <ClInclude Include="constants\constant_pool.h" />
     <ClInclude Include="constants\constant_entry.h" />
+    <ClInclude Include="constants\field_info.h" />
     <ClInclude Include="constants\function_info.h" />
     <ClInclude Include="constants\struct_info.h" />
     <ClInclude Include="exceptions\elsa_exception.h" />
@@ -164,7 +166,9 @@
     <ClInclude Include="memory\heap.h" />
     <ClInclude Include="opcodes.h" />
     <ClInclude Include="stack_frame.h" />
+    <ClInclude Include="types\gcobject.h" />
     <ClInclude Include="types\object.h" />
+    <ClInclude Include="types\otype.h" />
     <ClInclude Include="vm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

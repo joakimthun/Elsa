@@ -5,6 +5,8 @@
 #include <vector>
 #include <memory>
 
+#include "../types/otype.h"
+#include "../types/object.h"
 #include "../constants/struct_info.h"
 #include "../exceptions/runtime_exception.h"
 
@@ -17,10 +19,8 @@ namespace elsa {
 			Heap();
 			~Heap();
 
-			void* alloc(const StructInfo* type);
-		private:
-
-			std::vector<void*> objects_;
+			Object alloc(StructInfo* si);
+			void dealloc(const Object& o);
 		};
 
 	}

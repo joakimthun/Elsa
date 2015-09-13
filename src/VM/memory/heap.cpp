@@ -6,18 +6,28 @@ namespace elsa {
 		Heap::Heap() {}
 		Heap::~Heap() {}
 
-		void* Heap::alloc(const StructInfo* type)
+		Object Heap::alloc(StructInfo* si)
 		{
-			auto ptr = malloc(type->get_size());
+			auto ptr = malloc(si->get_size());
 
 			if (ptr == nullptr)
 			{
-				throw RuntimeException("Memory allocation failed for type: " + type->get_name());
+				throw RuntimeException("Memory allocation failed for type: " + si->get_name());
 			}
 
-			objects_.push_back(ptr);
+			auto gco = new GCObject;
+			gco->si = si;
+			gco->ptr = ptr;
 
-			return ptr;
+			return Object(gco);
+		}
+
+		void Heap::dealloc(const Object& o)
+		{
+			if(o.get_type() != GCOPtr)
+				throw RuntimeException("Can only deallocate memory for heap allocated objects");
+
+			delete o.gco();
 		}
 	}
 }

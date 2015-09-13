@@ -8,6 +8,7 @@
 #include "opcodes.h"
 #include "types\object.h"
 #include "call_stack.h"
+#include "memory\heap.h"
 #include "constants\constant_pool.h"
 #include "constants\constant_entry.h"
 #include "constants\function_info.h"
@@ -39,6 +40,7 @@ namespace elsa {
 			CallStack call_stack_;
 			StackFrame* current_frame_;
 			ConstantPool constant_pool_;
+			Heap heap_;
 		};
 
 	}

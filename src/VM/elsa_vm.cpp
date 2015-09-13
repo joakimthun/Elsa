@@ -4,12 +4,12 @@
 
 #include "vm.h"
 #include "opcodes.h"
-#include "constants\function_info.h"
+#include "constants/function_info.h"
+#include "constants/struct_info.h"
 
 using namespace elsa::vm;
 
-void print_rec(int value);
-
+VM* structy_struct();
 VM* recursive_print();
 VM* store_load_local();
 VM* simple_call_static();
@@ -18,33 +18,38 @@ VM* simple_ret_added_args_and_print();
 
 int main()
 {
-	VM* vm = recursive_print();
+	//VM* vm = recursive_print();
+	VM* vm = structy_struct();
 	
 	vm->execute();
 
-	//std::cout << "sizeof(bool): " << sizeof(bool) << std::endl;
-
-	//void* ptr = malloc(sizeof(int));
-	//*(int*)ptr = 10;
-	//std::cout << "iptr: " << *(int*)ptr << std::endl;
-
 	delete vm;
-
-	//print_rec(10);
 
 	return 0;
 }
 
-void print_rec(int value)
+VM* structy_struct()
 {
-	std::cout << value << std::endl;
-
-	if (value == 0)
+	std::vector<int> p =
 	{
-		return;
-	}
+		new_struct, 1,
+		del_struct,
+		halt
+	};
 
-	print_rec(value - 1);
+	int ep = 0;
+
+	auto vm = new VM(p);
+
+	vm->add_constant_entry(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+
+	auto si = new StructInfo("my_struct");
+	si->add_field(new FieldInfo("ifield", OType::Int));
+	vm->add_constant_entry(si);
+
+	vm->set_entry_point(ep);
+
+	return vm;
 }
 
 VM* recursive_print()

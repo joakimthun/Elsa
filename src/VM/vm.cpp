@@ -175,6 +175,22 @@ namespace elsa {
 				print_line(current_frame_->pop());
 				break;
 			}
+			case new_struct: {
+				auto i = code_[pc_++];
+				auto si = constant_pool_.get_struct_at(i);
+				current_frame_->push(heap_.alloc(si));
+				break;
+			}
+			case del_struct: {
+				heap_.dealloc(current_frame_->pop());
+				break;
+			}
+			case l_field: {
+				break;
+			}
+			case s_field: {
+				break;
+			}
 			case halt: {
 				break;
 			}

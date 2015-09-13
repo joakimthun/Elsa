@@ -29,6 +29,7 @@ namespace elsa {
 		Object::Object(GCObject* o)
 		{
 			value_.gco = o;
+			type_ = GCOPtr;
 		}
 
 		int Object::i() const

@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstddef>
 
+#include "../exceptions/elsa_exception.h"
 #include "constant_entry.h"
 #include "function_info.h"
 #include "struct_info.h"

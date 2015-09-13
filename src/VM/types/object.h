@@ -1,26 +1,12 @@
 #pragma once
 
+#include "otype.h"
+#include "gcobject.h"
 #include "../exceptions/runtime_exception.h"
-#include "../constants/function_info.h"
+#include "../constants/struct_info.h"
 
 namespace elsa {
 	namespace vm {
-
-		enum OType {
-			Undefined,
-			Int,
-			Float,
-			Char,
-			Bool,
-			GCOPtr,
-		};
-
-		struct GCObject
-		{
-			bool marked;
-			void* ptr;
-			FunctionInfo* fi;
-		};
 
 		typedef union {
 			int i;

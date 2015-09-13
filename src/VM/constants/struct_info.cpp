@@ -18,37 +18,18 @@ namespace elsa {
 
 		std::size_t StructInfo::get_size() const
 		{
-			return sizeof(int);
+			return size_;
 		}
 
-		void StructInfo::add_field(FieldInfo field)
+		void StructInfo::add_field(FieldInfo* field)
 		{
-			update_size(field);
-			fields_.push_back(field);
+			update_size(*field);
+			fields_.push_back(std::unique_ptr<FieldInfo>(field));
 		}
 
 		void StructInfo::update_size(const FieldInfo & field)
 		{
-			switch (field.type)
-			{
-				case Int:
-					size_ += sizeof(int);
-					break;
-				case Float:
-					size_ += sizeof(float);
-					break;
-				case Char:
-					size_ += sizeof(wchar_t);
-					break;
-				case Bool:
-					size_ += sizeof(bool);
-					break;
-				//case GCOPtr:
-				//	size_ += sizeof(int*);
-				//	break;
-				default:
-					throw new ElsaException("Invalid field type.");
-			}
+			size_ += field.get_size();
 		}
 	}
 }
