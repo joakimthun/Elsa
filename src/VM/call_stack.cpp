@@ -18,6 +18,9 @@ namespace elsa {
 
 		StackFrame* CallStack::pop()
 		{
+			if (stack_.size() == 0)
+				throw RuntimeException("Can not call pop on an empty call stack.");
+
 			auto last = stack_.back();
 			stack_.pop_back();
 

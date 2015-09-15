@@ -17,6 +17,7 @@ namespace elsa {
 
 			void push(Object o);
 			Object pop();
+			Object dump_top();
 			bool has_stack_entries() const;
 			Object load_local(std::size_t i) const;
 			Object load_arg(std::size_t i) const;

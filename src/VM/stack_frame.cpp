@@ -33,6 +33,14 @@ namespace elsa {
 			return o;
 		}
 
+		Object StackFrame::dump_top()
+		{
+			if (eval_stack_.size() == 0)
+				throw RuntimeException("Can not call pop on an empty evaluation stack.");
+
+			return eval_stack_.back();
+		}
+
 		bool StackFrame::has_stack_entries() const
 		{
 			return !eval_stack_.empty();

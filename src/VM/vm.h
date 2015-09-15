@@ -28,6 +28,8 @@ namespace elsa {
 			void set_program(const std::vector<int>& code);
 			void add_constant_entry(ConstantEntry* entry);
 			void set_entry_point(std::size_t entry_point);
+			Object dump_eval_stack_top();
+
 		private:
 			void cycle();
 			void print_line(const Object& o);

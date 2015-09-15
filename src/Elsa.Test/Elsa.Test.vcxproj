@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Dev\VS\Elsa\src\VM.Test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Dev\VS\Elsa\src\VM;C:\Dev\VS\Elsa\src\VM.Test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,7 +117,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Dev\VS\Elsa\src\VM.Test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Dev\VS\Elsa\src\VM;C:\Dev\VS\Elsa\src\VM.Test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +149,9 @@
   <ItemGroup>
     <ProjectReference Include="..\VM.Test\VM.Test.vcxproj">
       <Project>{8043ee2b-5919-48b4-b666-00a04ae624a1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\VM\VM.vcxproj">
+      <Project>{f45fa80e-e6ba-4d96-831b-d5a5debbc8d9}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

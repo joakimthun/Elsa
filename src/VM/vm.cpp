@@ -25,6 +25,7 @@ namespace elsa {
 
 		VM::~VM()
 		{
+			delete call_stack_.pop();
 		}
 
 		void VM::execute()
@@ -46,8 +47,6 @@ namespace elsa {
 
 					cycle();
 				}
-
-				delete call_stack_.pop();
 			}
 			catch (ElsaException& e)
 			{
@@ -70,6 +69,11 @@ namespace elsa {
 		{
 			entry_point_ = entry_point;
 			pc_ = entry_point_;
+		}
+
+		Object VM::dump_eval_stack_top()
+		{
+			return current_frame_->dump_top();
 		}
 
 		void VM::cycle()

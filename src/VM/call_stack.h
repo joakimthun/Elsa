@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "stack_frame.h"
+#include "exceptions\runtime_exception.h"
 
 namespace elsa {
 	namespace vm {
