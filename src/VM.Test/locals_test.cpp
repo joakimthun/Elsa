@@ -21,5 +21,5 @@ TEST(LOCALS, STORE_LOAD_INT)
 	vm.set_entry_point(ep);
 	vm.execute();
 
-	EXPECT_EQ(10, vm.dump_eval_stack_top().i());
+	EXPECT_EQ(10, vm.eval_stack_top().i());
 }

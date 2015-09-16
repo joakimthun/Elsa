@@ -26,8 +26,8 @@ namespace elsa {
 			cconst,
 
 			// Branching
-			b_ieq,
-			b_ineq,
+			br_ieq,
+			br_ineq,
 
 			// Locals and arguments
 			l_arg,

@@ -38,13 +38,13 @@ namespace elsa {
 				if (entry_point_ == -1)
 					throw RuntimeException("No entry point specified.");
 
-				// Push main on the call stack
-				call_stack_.push(new StackFrame(constant_pool_.get_func_at(entry_point_), entry_point_));
+				if (call_stack_.size() == 0)
+				{
+					push_main();
+				}
 
 				while (oc_ != halt && pc_ < code_length_)
 				{
-					current_frame_ = call_stack_.current();
-
 					cycle();
 				}
 			}
@@ -52,6 +52,16 @@ namespace elsa {
 			{
 				std::cout << e.what() << std::endl;
 			}
+		}
+
+		void VM::execute_one()
+		{
+			if (call_stack_.size() == 0)
+			{
+				push_main();
+			}
+
+			cycle();
 		}
 
 		void VM::set_program(const std::vector<int>& code)
@@ -71,13 +81,19 @@ namespace elsa {
 			pc_ = entry_point_;
 		}
 
-		Object VM::dump_eval_stack_top()
+		Object VM::eval_stack_top()
 		{
 			return current_frame_->dump_top();
 		}
 
+		std::size_t VM::get_pc()
+		{
+			return pc_;
+		}
+
 		void VM::cycle()
 		{
+			current_frame_ = call_stack_.current();
 			oc_ = (OpCode)code_[pc_++];
 
 			switch (oc_)
@@ -105,7 +121,13 @@ namespace elsa {
 				current_frame_->push(Object(o1.i() * o2.i()));
 				break;
 			}
-			case b_ieq: {
+			case idiv: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o2.i() / o1.i()));
+				break;
+			}
+			case br_ieq: {
 				auto jmp_addr = code_[pc_++];
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
@@ -115,7 +137,7 @@ namespace elsa {
 
 				break;
 			}
-			case b_ineq: {
+			case br_ineq: {
 				auto jmp_addr = code_[pc_++];
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
@@ -211,6 +233,12 @@ namespace elsa {
 			default:
 				break;
 			}
+		}
+
+		void VM::push_main()
+		{
+			// Push main on the call stack
+			call_stack_.push(new StackFrame(constant_pool_.get_func_at(entry_point_), entry_point_));
 		}
 
 		void VM::print_line(const Object& o)

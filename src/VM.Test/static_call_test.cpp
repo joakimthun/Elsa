@@ -26,5 +26,5 @@ TEST(STATIC_CALL, RETURN_INT)
 
 	vm.execute();
 
-	EXPECT_EQ(6, vm.dump_eval_stack_top().i());
+	EXPECT_EQ(6, vm.eval_stack_top().i());
 }

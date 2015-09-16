@@ -27,6 +27,9 @@
     <ClCompile Include="static_call_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="int_opcodes_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

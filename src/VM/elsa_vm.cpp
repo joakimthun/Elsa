@@ -82,7 +82,7 @@ VM* recursive_print()
 		print_ln,
 		l_arg, 0,
 		iconst, 0,
-		b_ineq, 10, 
+		br_ineq, 10, 
 		ret,
 		l_arg, 0,
 		iconst, 1,
