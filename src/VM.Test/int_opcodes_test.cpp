@@ -176,3 +176,40 @@ TEST_F(IntOpCodesTest, BR_IEQ_NO_JUMP)
 
 	EXPECT_NE(0, vm_.get_pc());
 }
+
+TEST_F(IntOpCodesTest, BR_INEQ_JUMP)
+{
+	std::vector<int> p =
+	{
+		iconst, 1,
+		iconst, 2,
+		br_ineq, 6,
+		halt
+	};
+
+	vm_.set_program(p);
+	vm_.execute_one();
+	vm_.execute_one();
+	vm_.execute_one();
+
+	EXPECT_EQ(6, vm_.get_pc());
+}
+
+TEST_F(IntOpCodesTest, BR_INEQ_NO_JUMP)
+{
+
+	std::vector<int> p =
+	{
+		iconst, 1,
+		iconst, 1,
+		br_ineq, 0,
+		halt
+	};
+
+	vm_.set_program(p);
+	vm_.execute_one();
+	vm_.execute_one();
+	vm_.execute_one();
+
+	EXPECT_NE(0, vm_.get_pc());
+}

@@ -30,6 +30,9 @@
     <ClCompile Include="int_opcodes_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="float_opcodes_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

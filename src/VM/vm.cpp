@@ -109,16 +109,16 @@ namespace elsa {
 				current_frame_->push(Object(o1.i() + o2.i()));
 				break;
 			}
-			case isub: {
-				auto o1 = current_frame_->pop();
-				auto o2 = current_frame_->pop();
-				current_frame_->push(Object(o2.i() - o1.i()));
-				break;
-			}
 			case imul: {
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 				current_frame_->push(Object(o1.i() * o2.i()));
+				break;
+			}
+			case isub: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o2.i() - o1.i()));
 				break;
 			}
 			case idiv: {
@@ -126,6 +126,37 @@ namespace elsa {
 				auto o2 = current_frame_->pop();
 				current_frame_->push(Object(o2.i() / o1.i()));
 				break;
+			}
+			case fconst: { 
+				auto index = code_[pc_++];
+				auto f = constant_pool_.get_float_at(index);
+				current_frame_->push(Object(f->get_value()));
+				break; 
+			}
+			case fadd: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.f() + o2.f()));
+				break;
+				break; 
+			}
+			case fmul: { 
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.f() * o2.f()));
+				break; 
+			}
+			case fsub: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o2.f() - o1.f()));
+				break; 
+			}
+			case fdiv: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o2.f() / o1.f()));
+				break; 
 			}
 			case br_ieq: {
 				auto jmp_addr = code_[pc_++];
@@ -143,6 +174,26 @@ namespace elsa {
 				auto o2 = current_frame_->pop();
 
 				if (o1.i() != o2.i())
+					pc_ = jmp_addr;
+
+				break;
+			}
+			case br_feq: {
+				auto jmp_addr = code_[pc_++];
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+
+				if (o1.f() == o2.f())
+					pc_ = jmp_addr;
+
+				break;
+			}
+			case br_fneq: {
+				auto jmp_addr = code_[pc_++];
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+
+				if (o1.f() != o2.f())
 					pc_ = jmp_addr;
 
 				break;

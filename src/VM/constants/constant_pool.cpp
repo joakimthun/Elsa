@@ -15,7 +15,7 @@ namespace elsa {
 		{
 			for (std::size_t i = 0; i < entries_.size(); ++i)
 			{
-				auto e = (FunctionInfo*)entries_[i].get();
+				auto e = static_cast<FunctionInfo*>(entries_[i].get());
 				if (e->get_addr() == addr)
 					return e;
 			}
@@ -25,7 +25,12 @@ namespace elsa {
 
 		StructInfo* ConstantPool::get_struct_at(std::size_t index)
 		{
-			return (StructInfo*)entries_[index].get();
+			return static_cast<StructInfo*>(entries_[index].get());
+		}
+
+		FloatEntry* ConstantPool::get_float_at(std::size_t index)
+		{
+			return static_cast<FloatEntry*>(entries_[index].get());
 		}
 
 	}

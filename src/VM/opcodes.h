@@ -22,12 +22,21 @@ namespace elsa {
 			isub,
 			idiv,
 
+			// Float operations
+			fconst,
+			fadd,
+			fmul,
+			fsub,
+			fdiv,
+
 			// Char operations
 			cconst,
 
 			// Branching
 			br_ieq,
 			br_ineq,
+			br_feq,
+			br_fneq,
 
 			// Locals and arguments
 			l_arg,

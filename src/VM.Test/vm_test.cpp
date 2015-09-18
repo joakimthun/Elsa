@@ -1,4 +1,5 @@
 #include "int_opcodes_test.cpp"
+#include "float_opcodes_test.cpp"
 #include "const_test.cpp"
 #include "locals_test.cpp"
 #include "static_call_test.cpp"

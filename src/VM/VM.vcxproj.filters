@@ -21,9 +21,6 @@
     <ClInclude Include="vm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="instruction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stack_frame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -63,6 +60,9 @@
     <ClInclude Include="constants\field_info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="constants\float_entry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="elsa_vm.cpp">
@@ -93,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="constants\field_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\float_entry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
