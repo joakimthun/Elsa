@@ -76,5 +76,10 @@ namespace elsa {
 		{
 			return type_;
 		}
+
+		void Object::set_type(OType type)
+		{
+			type_ = type;
+		}
 	}
 }

@@ -5,6 +5,7 @@ namespace elsa {
 
 		enum OType {
 			Undefined,
+			Null,
 			Int,
 			Float,
 			Char,

@@ -31,6 +31,7 @@ namespace elsa {
 			bool b() const;
 			GCObject* gco() const;
 			OType get_type() const;
+			void set_type(OType type);
 
 		private:
 			OType type_;

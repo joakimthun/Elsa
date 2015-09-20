@@ -43,9 +43,15 @@ namespace elsa {
 					push_main();
 				}
 
-				while (oc_ != halt && pc_ < code_length_)
+				bool cont = false;
+
+				if (oc_ == OpCode::halt)
+					cont = true;
+
+				while ((cont || oc_ != halt) && pc_ < code_length_)
 				{
 					cycle();
+					cont = false;
 				}
 			}
 			catch (ElsaException& e)
@@ -57,11 +63,14 @@ namespace elsa {
 		void VM::execute_one()
 		{
 			if (call_stack_.size() == 0)
-			{
 				push_main();
-			}
 
 			cycle();
+		}
+
+		void VM::skip_one()
+		{
+			next_opcode();
 		}
 
 		void VM::set_program(const std::vector<int>& code)
@@ -94,7 +103,7 @@ namespace elsa {
 		void VM::cycle()
 		{
 			current_frame_ = call_stack_.current();
-			oc_ = (OpCode)code_[pc_++];
+			next_opcode();
 
 			switch (oc_)
 			{
@@ -290,6 +299,11 @@ namespace elsa {
 		{
 			// Push main on the call stack
 			call_stack_.push(new StackFrame(constant_pool_.get_func_at(entry_point_), entry_point_));
+		}
+
+		void VM::next_opcode()
+		{
+			oc_ = (OpCode)code_[pc_++];
 		}
 
 		void VM::print_line(const Object& o)

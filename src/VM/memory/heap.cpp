@@ -3,7 +3,9 @@
 namespace elsa {
 	namespace vm {
 
-		Heap::Heap() {}
+		Heap::Heap() 
+		{}
+
 		Heap::~Heap() {}
 
 		Object Heap::alloc(StructInfo* si)
@@ -15,12 +17,6 @@ namespace elsa {
 				throw RuntimeException("Memory allocation failed for type: " + si->get_name());
 			}
 
-			// Just for testing load_field()
-			//int* iptr = (int*)ptr;
-			//*iptr = 12;
-			//iptr++;
-			//*iptr = 24;
-
 			auto gco = new GCObject;
 			gco->si = si;
 			gco->ptr = ptr;
@@ -28,15 +24,16 @@ namespace elsa {
 			return Object(gco);
 		}
 
-		void Heap::dealloc(const Object& o)
+		void Heap::dealloc(Object& o)
 		{
 			if(o.get_type() != GCOPtr)
 				throw RuntimeException("Can only deallocate memory for heap allocated objects");
 
 			delete o.gco();
+			o.set_type(OType::Null);
 		}
 
-		Object Heap::load_field(const Object & instance, std::size_t field_index)
+		Object Heap::load_field(const Object& instance, std::size_t field_index)
 		{
 			assert_is_gcoptr(instance);
 
@@ -61,7 +58,7 @@ namespace elsa {
 			}
 		}
 
-		void Heap::store_field(const Object & instance, const Object & value, std::size_t field_index)
+		void Heap::store_field(const Object& instance, const Object & value, std::size_t field_index)
 		{
 			assert_is_gcoptr(instance);
 
@@ -90,7 +87,7 @@ namespace elsa {
 			}
 		}
 
-		void Heap::assert_is_gcoptr(const Object & instance)
+		void Heap::assert_is_gcoptr(const Object& instance)
 		{
 			if (instance.get_type() != GCOPtr)
 				throw RuntimeException("Can only load fields from heap allocated objects");

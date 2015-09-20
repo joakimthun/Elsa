@@ -23,13 +23,13 @@ namespace elsa {
 			~Heap();
 
 			Object alloc(StructInfo* si);
-			void dealloc(const Object& o);
+			void dealloc(Object& o);
 
 			Object load_field(const Object& instance, std::size_t field_index);
 			void store_field(const Object& instance, const Object& value, std::size_t field_index);
 
 		private:
-			void assert_is_gcoptr(const Object & instance);
+			void assert_is_gcoptr(const Object& instance);
 			byte* get_field_ptr(void* s_ptr, FieldInfo* f);
 		};
 

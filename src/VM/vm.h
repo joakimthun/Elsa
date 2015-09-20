@@ -26,6 +26,7 @@ namespace elsa {
 
 			void execute();
 			void execute_one();
+			void skip_one();
 			void set_program(const std::vector<int>& code);
 			void add_constant_entry(ConstantEntry* entry);
 			void set_entry_point(std::size_t entry_point);
@@ -35,6 +36,7 @@ namespace elsa {
 		private:
 			void cycle();
 			void push_main();
+			void next_opcode();
 			void print_line(const Object& o);
 
 			std::vector<int> code_;

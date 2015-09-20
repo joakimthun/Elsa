@@ -1,6 +1,5 @@
 #include <gtest\gtest.h>
 
-#include <memory>
 #include "vm.h"
 
 using namespace elsa::vm;
