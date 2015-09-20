@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="call_stack.h" />
+    <ClInclude Include="constants\array_info.h" />
     <ClInclude Include="constants\constant_pool.h" />
     <ClInclude Include="constants\constant_entry.h" />
     <ClInclude Include="constants\field_info.h" />

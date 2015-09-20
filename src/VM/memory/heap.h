@@ -22,7 +22,9 @@ namespace elsa {
 			Heap();
 			~Heap();
 
-			Object alloc(StructInfo* si);
+			Object alloc_struct(StructInfo* si);
+			Object alloc_array(OType type, std::size_t num_elements);
+			void realloc_array(Object& instance, std::size_t new_size);
 			void dealloc(Object& o);
 
 			Object load_field(const Object& instance, std::size_t field_index);
@@ -31,6 +33,7 @@ namespace elsa {
 		private:
 			void assert_is_gcoptr(const Object& instance);
 			byte* get_field_ptr(void* s_ptr, FieldInfo* f);
+			std::size_t get_size_of_type(OType type);
 		};
 
 	}

@@ -21,9 +21,6 @@
     <ClCompile Include="locals_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="static_call_test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="int_opcodes_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -34,6 +31,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="recursive_call_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="call_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

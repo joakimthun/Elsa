@@ -11,8 +11,7 @@ namespace elsa {
 			halt,
 
 			// Functions
-			call_inst,
-			call_static,
+			call,
 			ret,
 
 			// Integer operations
@@ -46,6 +45,8 @@ namespace elsa {
 			// Dynamic memory
 			new_struct,
 			del_struct,
+			new_arr,
+			del_arr,
 
 			// Struct operations
 			l_field,

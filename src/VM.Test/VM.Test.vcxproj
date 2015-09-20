@@ -23,7 +23,7 @@
     <ClCompile Include="locals_test.cpp" />
     <ClCompile Include="int_opcodes_test.cpp" />
     <ClCompile Include="recursive_call_test.cpp" />
-    <ClCompile Include="static_call_test.cpp" />
+    <ClCompile Include="call_test.cpp" />
     <ClCompile Include="struct_test.cpp" />
     <ClCompile Include="vm_test.cpp" />
   </ItemGroup>

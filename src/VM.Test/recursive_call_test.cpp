@@ -31,13 +31,13 @@ protected:
 			l_arg, 0,
 			iconst, 1,
 			isub,
-			call_static, 0,
+			call, 0,
 			imul,
 			ret,
 
 			// main
 			iconst, arg,
-			call_static, 0,
+			call, 0,
 			halt
 		};
 

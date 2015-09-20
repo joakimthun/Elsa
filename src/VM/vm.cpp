@@ -207,7 +207,7 @@ namespace elsa {
 
 				break;
 			}
-			case call_static: {
+			case call: {
 				auto addr = code_[pc_];
 
 				auto f = constant_pool_.get_func_at(addr);
@@ -264,7 +264,7 @@ namespace elsa {
 			case new_struct: {
 				auto i = code_[pc_++];
 				auto si = constant_pool_.get_struct_at(i);
-				current_frame_->push(heap_.alloc(si));
+				current_frame_->push(heap_.alloc_struct(si));
 				break;
 			}
 			case del_struct: {

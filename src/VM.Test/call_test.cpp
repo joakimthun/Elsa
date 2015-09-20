@@ -12,7 +12,7 @@ TEST(STATIC_CALL, RETURN_INT)
 		ret,
 
 		// Main
-		call_static, 0,
+		call, 0,
 		halt
 	};
 
