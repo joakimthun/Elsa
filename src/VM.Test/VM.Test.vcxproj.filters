@@ -36,6 +36,9 @@
     <ClCompile Include="call_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="array_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

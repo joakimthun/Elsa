@@ -284,6 +284,25 @@ namespace elsa {
 				heap_.store_field(instance, value, fi);
 				break;
 			}
+			case new_arr: {
+				auto type = (OType)code_[pc_++];
+				auto size = current_frame_->pop().i();
+				current_frame_->push(heap_.alloc_array(type, size));
+				break;
+			}
+			case l_ele: {
+				auto ei = code_[pc_++];
+				auto instance = current_frame_->pop();
+				current_frame_->push(heap_.load_element(instance, ei));
+				break;
+			}
+			case s_ele: {
+				auto ei = code_[pc_++];
+				auto value = current_frame_->pop();
+				auto instance = current_frame_->pop();
+				heap_.store_element(instance, value, ei);
+				break;
+			}
 			case halt: {
 				break;
 			}

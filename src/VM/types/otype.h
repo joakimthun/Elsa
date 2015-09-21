@@ -3,7 +3,8 @@
 namespace elsa {
 	namespace vm {
 
-		enum OType {
+		enum OType : int
+		{
 			Undefined,
 			Null,
 			Int,

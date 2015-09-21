@@ -42,15 +42,16 @@ namespace elsa {
 			l_local,
 			s_local,
 
-			// Dynamic memory
+			// Structs
 			new_struct,
 			del_struct,
-			new_arr,
-			del_arr,
-
-			// Struct operations
 			l_field,
 			s_field,
+
+			// Arrays
+			new_arr,
+			l_ele,
+			s_ele,
 
 			// Misc
 			print_ln

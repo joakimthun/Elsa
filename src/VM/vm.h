@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "opcodes.h"
+#include "types\otype.h"
 #include "types\object.h"
 #include "call_stack.h"
 #include "memory\heap.h"

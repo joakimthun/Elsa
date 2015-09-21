@@ -4,5 +4,6 @@
 #include "call_test.cpp"
 #include "recursive_call_test.cpp"
 #include "struct_test.cpp"
+#include "array_test.cpp"
 
 int vm_test_dummy() { return 0; }

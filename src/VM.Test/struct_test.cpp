@@ -30,7 +30,7 @@ protected:
 	VM vm_;
 };
 
-TEST_F(StructTest, NEW_STRUCT)
+TEST_F(StructTest, NEW)
 {
 	std::vector<int> p =
 	{
