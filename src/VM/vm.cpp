@@ -226,6 +226,20 @@ namespace elsa {
 				current_frame_->push(o1.b() != o2.b());
 				break;
 			}
+			case sconst: {
+				auto index = code_[pc_++];
+				auto str = constant_pool_.get_string_at(index)->get_value();
+				auto str_obj = heap_.alloc_array(OType::Char, str.length());
+
+				for (std::wstring::size_type i = 0; i < str.size(); ++i)
+				{
+					heap_.store_element(str_obj, Object(str[i]), i);
+				}
+
+				current_frame_->push(str_obj);
+
+				break;
+			}
 			case br_ieq: {
 				auto jmp_addr = code_[pc_++];
 				auto o1 = current_frame_->pop();

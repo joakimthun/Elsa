@@ -148,6 +148,7 @@
     <ClCompile Include="constants\field_info.cpp" />
     <ClCompile Include="constants\float_entry.cpp" />
     <ClCompile Include="constants\function_info.cpp" />
+    <ClCompile Include="constants\string_entry.cpp" />
     <ClCompile Include="constants\struct_info.cpp" />
     <ClCompile Include="elsa_vm.cpp" />
     <ClCompile Include="memory\heap.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="constants\field_info.h" />
     <ClInclude Include="constants\float_entry.h" />
     <ClInclude Include="constants\function_info.h" />
+    <ClInclude Include="constants\string_entry.h" />
     <ClInclude Include="constants\struct_info.h" />
     <ClInclude Include="exceptions\elsa_exception.h" />
     <ClInclude Include="exceptions\runtime_exception.h" />

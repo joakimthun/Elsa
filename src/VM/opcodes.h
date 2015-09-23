@@ -42,6 +42,9 @@ namespace elsa {
 			beq,
 			bneq,
 
+			// String operations
+			sconst,
+
 			// Branching
 			br_ieq,
 			br_ineq,

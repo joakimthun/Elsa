@@ -38,5 +38,10 @@ namespace elsa {
 			return static_cast<CharEntry*>(entries_[index].get());
 		}
 
+		StringEntry* ConstantPool::get_string_at(std::size_t index)
+		{
+			return static_cast<StringEntry*>(entries_[index].get());
+		}
+
 	}
 }
