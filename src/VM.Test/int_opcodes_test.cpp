@@ -212,3 +212,67 @@ TEST_F(IntOpCodesTest, BR_INEQ_NO_JUMP)
 
 	EXPECT_NE(0, vm_.get_pc());
 }
+
+TEST_F(IntOpCodesTest, IEQ_TRUE)
+{
+	std::vector<int> p =
+	{
+		iconst, 1,
+		iconst, 1,
+		ieq,
+		halt
+	};
+
+	vm_.set_program(p);
+	vm_.execute();
+
+	EXPECT_EQ(true, vm_.eval_stack_top().b());
+}
+
+TEST_F(IntOpCodesTest, IEQ_FALSE)
+{
+	std::vector<int> p =
+	{
+		iconst, 1,
+		iconst, 0,
+		ieq,
+		halt
+	};
+
+	vm_.set_program(p);
+	vm_.execute();
+
+	EXPECT_EQ(false, vm_.eval_stack_top().b());
+}
+
+TEST_F(IntOpCodesTest, INEQ_TRUE)
+{
+	std::vector<int> p =
+	{
+		iconst, 1,
+		iconst, 0,
+		ineq,
+		halt
+	};
+
+	vm_.set_program(p);
+	vm_.execute();
+
+	EXPECT_EQ(true, vm_.eval_stack_top().b());
+}
+
+TEST_F(IntOpCodesTest, INEQ_FALSE)
+{
+	std::vector<int> p =
+	{
+		iconst, 0,
+		iconst, 0,
+		ineq,
+		halt
+	};
+
+	vm_.set_program(p);
+	vm_.execute();
+
+	EXPECT_EQ(false, vm_.eval_stack_top().b());
+}

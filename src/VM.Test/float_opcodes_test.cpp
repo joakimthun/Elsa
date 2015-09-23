@@ -219,3 +219,67 @@ TEST_F(FloatOpCodesTest, BR_FNEQ_NO_JUMP)
 
 	EXPECT_NE(0, vm_.get_pc());
 }
+
+TEST_F(FloatOpCodesTest, FEQ_TRUE)
+{
+	std::vector<int> p =
+	{
+		fconst, 1,
+		fconst, 1,
+		feq,
+		halt
+	};
+
+	vm_.set_program(p);
+	vm_.execute();
+
+	EXPECT_EQ(true, vm_.eval_stack_top().b());
+}
+
+TEST_F(FloatOpCodesTest, FEQ_FALSE)
+{
+	std::vector<int> p =
+	{
+		fconst, 1,
+		fconst, 2,
+		feq,
+		halt
+	};
+
+	vm_.set_program(p);
+	vm_.execute();
+
+	EXPECT_EQ(false, vm_.eval_stack_top().b());
+}
+
+TEST_F(FloatOpCodesTest, FNEQ_TRUE)
+{
+	std::vector<int> p =
+	{
+		fconst, 1,
+		fconst, 2,
+		fneq,
+		halt
+	};
+
+	vm_.set_program(p);
+	vm_.execute();
+
+	EXPECT_EQ(true, vm_.eval_stack_top().b());
+}
+
+TEST_F(FloatOpCodesTest, FNEQ_FALSE)
+{
+	std::vector<int> p =
+	{
+		fconst, 1,
+		fconst, 1,
+		fneq,
+		halt
+	};
+
+	vm_.set_program(p);
+	vm_.execute();
+
+	EXPECT_EQ(false, vm_.eval_stack_top().b());
+}

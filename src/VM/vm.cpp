@@ -86,7 +86,7 @@ namespace elsa {
 
 		void VM::set_entry_point(std::size_t entry_point)
 		{
-			entry_point_ = entry_point;
+			entry_point_ = static_cast<int>(entry_point);
 			pc_ = entry_point_;
 		}
 
@@ -136,6 +136,18 @@ namespace elsa {
 				current_frame_->push(Object(o2.i() / o1.i()));
 				break;
 			}
+			case ieq: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.i() == o2.i()));
+				break;
+			}
+			case ineq: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.i() != o2.i()));
+				break;
+			}
 			case fconst: { 
 				auto index = code_[pc_++];
 				auto f = constant_pool_.get_float_at(index);
@@ -166,6 +178,18 @@ namespace elsa {
 				auto o2 = current_frame_->pop();
 				current_frame_->push(Object(o2.f() / o1.f()));
 				break; 
+			}
+			case feq: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.f() == o2.f()));
+				break;
+			}
+			case fneq: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.f() != o2.f()));
+				break;
 			}
 			case bconst: {
 				auto v = code_[pc_++] != 0;
@@ -253,7 +277,7 @@ namespace elsa {
 
 				if (f->get_num_args() > 0)
 				{
-					for (int i = f->get_num_args() - 1; i >= 0; --i)
+					for (int i = static_cast<int>(f->get_num_args()) - 1; i >= 0; --i)
 					{
 						sf->store_arg(i, current_frame_->pop());
 					}

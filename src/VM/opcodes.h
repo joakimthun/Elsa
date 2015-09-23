@@ -20,6 +20,8 @@ namespace elsa {
 			imul,
 			isub,
 			idiv,
+			ieq,
+			ineq,
 
 			// Float operations
 			fconst,
@@ -27,6 +29,8 @@ namespace elsa {
 			fmul,
 			fsub,
 			fdiv,
+			feq,
+			fneq,
 
 			// Char operations
 			cconst,
