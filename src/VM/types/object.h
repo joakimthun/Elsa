@@ -23,6 +23,7 @@ namespace elsa {
 			Object(int v);
 			Object(float v);
 			Object(wchar_t v);
+			Object(bool v);
 			Object(GCObject* o);
 
 			int i() const;

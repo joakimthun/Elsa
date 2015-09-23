@@ -26,6 +26,12 @@ namespace elsa {
 			type_ = Char;
 		}
 
+		Object::Object(bool v)
+		{
+			value_.b = v;
+			type_ = Bool;
+		}
+
 		Object::Object(GCObject* o)
 		{
 			value_.gco = o;

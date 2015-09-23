@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="array_test.cpp" />
+    <ClCompile Include="bool_opcodes_test.cpp" />
     <ClCompile Include="float_opcodes_test.cpp" />
     <ClCompile Include="locals_test.cpp" />
     <ClCompile Include="int_opcodes_test.cpp" />

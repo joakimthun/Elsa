@@ -31,11 +31,18 @@ namespace elsa {
 			// Char operations
 			cconst,
 
+			// Bool operations
+			bconst,
+			beq,
+			bneq,
+
 			// Branching
 			br_ieq,
 			br_ineq,
 			br_feq,
 			br_fneq,
+			br_beq,
+			br_bneq,
 
 			// Locals and arguments
 			l_arg,
