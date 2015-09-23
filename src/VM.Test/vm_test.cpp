@@ -6,5 +6,6 @@
 #include "struct_test.cpp"
 #include "array_test.cpp"
 #include "bool_opcodes_test.cpp"
+#include "char_opcodes_test.cpp"
 
 int vm_test_dummy() { return 0; }

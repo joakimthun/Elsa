@@ -42,6 +42,9 @@
     <ClCompile Include="bool_opcodes_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="char_opcodes_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

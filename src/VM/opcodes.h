@@ -34,6 +34,8 @@ namespace elsa {
 
 			// Char operations
 			cconst,
+			ceq,
+			cneq,
 
 			// Bool operations
 			bconst,
@@ -47,6 +49,8 @@ namespace elsa {
 			br_fneq,
 			br_beq,
 			br_bneq,
+			br_ceq,
+			br_cneq,
 
 			// Locals and arguments
 			l_arg,

@@ -152,7 +152,7 @@ TEST_F(FloatOpCodesTest, BR_FEQ_JUMP)
 	{
 		fconst, 1,
 		fconst, 1,
-		br_feq, 6,
+		br_feq, 10,
 		halt
 	};
 
@@ -161,7 +161,7 @@ TEST_F(FloatOpCodesTest, BR_FEQ_JUMP)
 	vm_.execute_one();
 	vm_.execute_one();
 
-	EXPECT_EQ(6, vm_.get_pc());
+	EXPECT_EQ(10, vm_.get_pc());
 }
 
 TEST_F(FloatOpCodesTest, BR_FEQ_NO_JUMP)
@@ -189,7 +189,7 @@ TEST_F(FloatOpCodesTest, BR_FNEQ_JUMP)
 	{
 		fconst, 1,
 		fconst, 2,
-		br_fneq, 6,
+		br_fneq, 10,
 		halt
 	};
 
@@ -198,7 +198,7 @@ TEST_F(FloatOpCodesTest, BR_FNEQ_JUMP)
 	vm_.execute_one();
 	vm_.execute_one();
 
-	EXPECT_EQ(6, vm_.get_pc());
+	EXPECT_EQ(10, vm_.get_pc());
 }
 
 TEST_F(FloatOpCodesTest, BR_FNEQ_NO_JUMP)

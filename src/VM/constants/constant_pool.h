@@ -9,6 +9,7 @@
 #include "function_info.h"
 #include "struct_info.h"
 #include "float_entry.h"
+#include "char_entry.h"
 
 namespace elsa {
 	namespace vm {
@@ -23,6 +24,7 @@ namespace elsa {
 			FunctionInfo* get_func_at(std::size_t addr);
 			StructInfo* get_struct_at(std::size_t index);
 			FloatEntry* get_float_at(std::size_t index);
+			CharEntry* get_char_at(std::size_t index);
 
 		private:
 			std::vector<std::unique_ptr<ConstantEntry>> entries_;

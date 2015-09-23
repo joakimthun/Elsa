@@ -191,6 +191,24 @@ namespace elsa {
 				current_frame_->push(Object(o1.f() != o2.f()));
 				break;
 			}
+			case cconst: {
+				auto index = code_[pc_++];
+				auto c = constant_pool_.get_char_at(index);
+				current_frame_->push(Object(c->get_value()));
+				break;
+			}
+			case ceq: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.c() == o2.c()));
+				break;
+			}
+			case cneq: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.c() != o2.c()));
+				break;
+			}
 			case bconst: {
 				auto v = code_[pc_++] != 0;
 				current_frame_->push(Object(v));
@@ -264,6 +282,26 @@ namespace elsa {
 				auto o2 = current_frame_->pop();
 
 				if (o1.b() != o2.b())
+					pc_ = jmp_addr;
+
+				break;
+			}
+			case br_ceq: {
+				auto jmp_addr = code_[pc_++];
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+
+				if (o1.c() == o2.c())
+					pc_ = jmp_addr;
+
+				break;
+			}
+			case br_cneq: {
+				auto jmp_addr = code_[pc_++];
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+
+				if (o1.c() != o2.c())
 					pc_ = jmp_addr;
 
 				break;

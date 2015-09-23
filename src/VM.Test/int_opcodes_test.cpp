@@ -145,7 +145,7 @@ TEST_F(IntOpCodesTest, BR_IEQ_JUMP)
 	{
 		iconst, 6,
 		iconst, 6,
-		br_ieq, 6,
+		br_ieq, 10,
 		halt
 	};
 
@@ -154,7 +154,7 @@ TEST_F(IntOpCodesTest, BR_IEQ_JUMP)
 	vm_.execute_one();
 	vm_.execute_one();
 
-	EXPECT_EQ(6, vm_.get_pc());
+	EXPECT_EQ(10, vm_.get_pc());
 }
 
 TEST_F(IntOpCodesTest, BR_IEQ_NO_JUMP)
@@ -182,7 +182,7 @@ TEST_F(IntOpCodesTest, BR_INEQ_JUMP)
 	{
 		iconst, 1,
 		iconst, 2,
-		br_ineq, 6,
+		br_ineq, 10,
 		halt
 	};
 
@@ -191,7 +191,7 @@ TEST_F(IntOpCodesTest, BR_INEQ_JUMP)
 	vm_.execute_one();
 	vm_.execute_one();
 
-	EXPECT_EQ(6, vm_.get_pc());
+	EXPECT_EQ(10, vm_.get_pc());
 }
 
 TEST_F(IntOpCodesTest, BR_INEQ_NO_JUMP)

@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="call_stack.cpp" />
+    <ClCompile Include="constants\char_entry.cpp" />
     <ClCompile Include="constants\constant_pool.cpp" />
     <ClCompile Include="constants\field_info.cpp" />
     <ClCompile Include="constants\float_entry.cpp" />
@@ -157,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="call_stack.h" />
     <ClInclude Include="constants\array_info.h" />
+    <ClInclude Include="constants\char_entry.h" />
     <ClInclude Include="constants\constant_pool.h" />
     <ClInclude Include="constants\constant_entry.h" />
     <ClInclude Include="constants\field_info.h" />

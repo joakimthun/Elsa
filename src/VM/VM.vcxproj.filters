@@ -66,6 +66,9 @@
     <ClInclude Include="constants\array_info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="constants\char_entry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="elsa_vm.cpp">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="constants\float_entry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\char_entry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
