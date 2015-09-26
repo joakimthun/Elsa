@@ -6,7 +6,8 @@ namespace elsa {
 		FieldInfo::FieldInfo(const std::string& name, OType type)
 			:
 			name_(name),
-			type_(type)
+			type_(type),
+			size_(0)
 		{
 			set_size();
 		}
@@ -52,9 +53,9 @@ namespace elsa {
 			case Bool:
 				size_ = sizeof(bool);
 				break;
-			//case GCOPtr:
-			//	size_ += sizeof(int*);
-			//	break;
+			case GCOPtr:
+				size_ += sizeof(GCObject*);
+				break;
 			default:
 				throw ElsaException("Invalid field type.");
 			}

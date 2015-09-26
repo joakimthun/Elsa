@@ -74,9 +74,8 @@ namespace elsa {
 				return Object(*(wchar_t*)field_ptr);
 			case Bool:
 				return Object(*(bool*)field_ptr);
-			//case GCOPtr:
-			//	size_ += sizeof(int*);
-			//	break;
+			case GCOPtr:
+				return Object(*(GCObject**)field_ptr);
 			default:
 				throw RuntimeException("Invalid field type.");
 			}
@@ -103,9 +102,10 @@ namespace elsa {
 			case Bool:
 				*(bool*)field_ptr = value.b();
 				break;
-				//case GCOPtr:
-				//	size_ += sizeof(int*);
-				//	break;
+			case GCOPtr: {
+				*(GCObject**)field_ptr = value.gco();
+				break;
+			}
 			default:
 				throw RuntimeException("Invalid field type.");
 			}

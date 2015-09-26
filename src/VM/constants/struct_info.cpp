@@ -36,7 +36,7 @@ namespace elsa {
 			fields_.push_back(std::unique_ptr<FieldInfo>(field));
 		}
 
-		void StructInfo::update_size(const FieldInfo & field)
+		void StructInfo::update_size(const FieldInfo& field)
 		{
 			size_ += field.get_size();
 		}

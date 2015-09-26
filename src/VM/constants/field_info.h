@@ -6,6 +6,8 @@
 #include "../exceptions/elsa_exception.h"
 #include "../types/otype.h"
 
+struct GCObject;
+
 namespace elsa {
 	namespace vm {
 
