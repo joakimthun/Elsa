@@ -72,6 +72,9 @@
     <ClInclude Include="constants\string_entry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GC\gc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="elsa_vm.cpp">
@@ -111,6 +114,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="constants\string_entry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GC\gc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

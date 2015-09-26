@@ -151,6 +151,7 @@
     <ClCompile Include="constants\string_entry.cpp" />
     <ClCompile Include="constants\struct_info.cpp" />
     <ClCompile Include="elsa_vm.cpp" />
+    <ClCompile Include="GC\gc.cpp" />
     <ClCompile Include="memory\heap.cpp" />
     <ClCompile Include="types\object.cpp" />
     <ClCompile Include="stack_frame.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="constants\struct_info.h" />
     <ClInclude Include="exceptions\elsa_exception.h" />
     <ClInclude Include="exceptions\runtime_exception.h" />
+    <ClInclude Include="GC\gc.h" />
     <ClInclude Include="memory\heap.h" />
     <ClInclude Include="opcodes.h" />
     <ClInclude Include="stack_frame.h" />
