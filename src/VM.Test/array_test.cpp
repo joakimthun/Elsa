@@ -15,6 +15,10 @@ protected:
 		vm_.add_constant_entry(new FloatEntry(99.0f));
 		vm_.add_constant_entry(new FloatEntry(-99.0f));
 
+		auto si = new StructInfo("my_struct");
+		si->add_field(new FieldInfo("field0", OType::Int));
+		vm_.add_constant_entry(si);
+
 		vm_.set_entry_point(ep);
 	}
 
@@ -146,4 +150,165 @@ TEST_F(ArrayTest, FLOAT_STORE_LOAD)
 	vm_.execute();
 
 	EXPECT_FLOAT_EQ(-99.0f, vm_.eval_stack_top().f());
+}
+
+TEST_F(ArrayTest, STRUCT_PTR_STORE_LOAD)
+{
+	std::vector<int> p =
+	{
+		iconst, 2,
+		new_arr, GCOPtr,
+		s_local, 0,
+
+		// Store a struct pointer at index 0
+		l_local, 0,
+		new_struct, 4,
+		s_ele, 0,
+
+		// Store another struct pointer at index 1
+		l_local, 0,
+		new_struct, 4,
+		s_ele, 1,
+
+		// Store the value 4 in the struct pointed to by element 0
+		l_local, 0,
+		l_ele, 0,
+		iconst, 4,
+		s_field, 0,
+
+		// Load the value(4) from the struct pointed to by element 0
+		l_local, 0,
+		l_ele, 0,
+		l_field, 0,
+		halt,
+		pop,
+
+		// Store the value -67 in the struct pointed to by element 1
+		l_local, 0,
+		l_ele, 1,
+		iconst, -67,
+		s_field, 0,
+
+		// Load the value(-67) from the struct pointed to by element 1
+		l_local, 0,
+		l_ele, 1,
+		l_field, 0,
+		halt,
+		pop,
+
+		// Load the value(4) from the struct pointed to by element 0
+		l_local, 0,
+		l_ele, 0,
+		l_field, 0,
+		halt,
+		pop,
+
+	};
+
+	vm_.set_program(p);
+
+	vm_.execute();
+	ASSERT_EQ(4, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(-67, vm_.eval_stack_top().i());
+
+	// Assert field 0 of struct ptr at index 0 is unchanged
+	vm_.execute();
+	ASSERT_EQ(4, vm_.eval_stack_top().i());
+}
+
+TEST_F(ArrayTest, ARRAY_OF_ARRAYS)
+{
+	std::vector<int> p =
+	{
+		iconst, 2,
+		new_arr, GCOPtr,
+		s_local, 0,
+
+		l_local, 0,
+		iconst, 2,
+		new_arr, Int,
+		s_ele, 0,
+
+		l_local, 0,
+		iconst, 2,
+		new_arr, Int,
+		s_ele, 1,
+
+		l_local, 0,
+		l_ele, 0,
+		iconst, 10,
+		s_ele, 0,
+
+		l_local, 0,
+		l_ele, 0,
+		iconst, 20,
+		s_ele, 1,
+
+		l_local, 0,
+		l_ele, 0,
+		l_ele, 0,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 0,
+		l_ele, 1,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 1,
+		iconst, 30,
+		s_ele, 0,
+
+		l_local, 0,
+		l_ele, 1,
+		iconst, 40,
+		s_ele, 1,
+
+		l_local, 0,
+		l_ele, 1,
+		l_ele, 0,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 1,
+		l_ele, 1,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 0,
+		l_ele, 0,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 0,
+		l_ele, 1,
+	};
+
+	vm_.set_program(p);
+
+	vm_.execute();
+	ASSERT_EQ(10, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(20, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(30, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(40, vm_.eval_stack_top().i());
+
+	// Assert the first array is unchanged after storing values in the second array
+	vm_.execute();
+	ASSERT_EQ(10, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(20, vm_.eval_stack_top().i());
 }

@@ -129,7 +129,7 @@ namespace elsa {
 			case Bool:
 				return Object(*((bool*)arr->ptr + element_index));
 			case GCOPtr:
-				//size_ += sizeof(int*);
+				return Object(*((GCObject**)arr->ptr + element_index));
 			default:
 				throw RuntimeException("Invalid array type.");
 			}
@@ -157,8 +157,8 @@ namespace elsa {
 				*((bool*)arr->ptr + element_index) = value.b();
 				break;
 			case GCOPtr:
-				//size_ += sizeof(int*);
-				//break;
+				*((GCObject**)arr->ptr + element_index) = value.gco();
+				break;
 			default:
 				throw RuntimeException("Invalid array type.");
 			}
