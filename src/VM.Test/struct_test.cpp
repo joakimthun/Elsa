@@ -9,7 +9,7 @@ protected:
 	virtual void SetUp()
 	{
 		int ep = 0;
-		vm_.add_constant_entry(new FunctionInfo("main", 0, 2, ep, FunctionType::Static));
+		vm_.add_constant_entry(new FunctionInfo("main", 0, 3, ep, FunctionType::Static));
 		vm_.set_entry_point(ep);
 
 		auto si = new StructInfo("my_struct");
@@ -25,7 +25,8 @@ protected:
 
 		auto si2 = new StructInfo("my_struct2");
 		si2->add_field(new FieldInfo("field0", OType::GCOPtr));
-		si2->add_field(new FieldInfo("field1", OType::GCOPtr));
+		si2->add_field(new FieldInfo("field1", OType::Int));
+		si2->add_field(new FieldInfo("field2", OType::GCOPtr));
 
 		vm_.add_constant_entry(si2);
 	}
@@ -184,4 +185,129 @@ TEST_F(StructTest, STRUCT_FIELD_STORE_LOAD)
 
 	vm_.execute();
 	ASSERT_EQ(77, vm_.eval_stack_top().i());
+}
+
+TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
+{
+	std::vector<int> p =
+	{
+		new_struct, 1,
+		s_local, 0,
+
+		l_local, 0,
+		iconst, 77,
+		s_field, 0,
+
+		l_local, 0,
+		fconst, 2,
+		s_field, 1,
+
+		l_local, 0,
+		iconst, 100,
+		s_field, 2,
+
+		l_local, 0,
+		fconst, 3,
+		s_field, 3,
+
+		l_local, 0,
+		iconst, -1829,
+		s_field, 4,
+
+		new_struct, 4,
+		s_local, 1,
+
+		l_local, 1,
+		l_local, 0,
+		halt,
+		s_field, 0,
+
+		l_local, 1,
+		iconst, 12378,
+		s_field, 1,
+
+		new_struct, 4,
+		halt,
+		s_local, 2,
+
+		l_local, 2,
+		l_local, 0,
+		s_field, 0,
+
+		l_local, 1,
+		l_local, 2,
+		s_field, 2,
+
+		l_local, 1,
+		l_field, 1,
+		halt,
+
+		l_local, 1,
+		l_field, 2,
+		halt, 
+
+		// Load 77(field 0) from a pointer to struct 0
+		l_local, 1,
+		l_field, 2,
+		l_field, 0,
+		l_field, 0,
+		halt,
+
+		// Load 12.0f(field 1) from a pointer to struct 0
+		l_local, 1,
+		l_field, 2,
+		l_field, 0,
+		l_field, 1,
+		halt,
+
+		// Load 100(field 2) from a pointer to struct 0
+		l_local, 1,
+		l_field, 2,
+		l_field, 0,
+		l_field, 2,
+		halt,
+
+		// Load 99.0f(field 3) from a pointer to struct 0
+		l_local, 1,
+		l_field, 2,
+		l_field, 0,
+		l_field, 3,
+		halt,
+
+		// Load -1829(field 4) from a pointer to struct 0
+		l_local, 1,
+		l_field, 2,
+		l_field, 0,
+		l_field, 4,
+		halt,
+	};
+
+	vm_.set_program(p);
+
+	vm_.execute();
+	ASSERT_EQ("my_struct", vm_.eval_stack_top().gco()->si->get_name());
+
+	vm_.execute();
+	ASSERT_EQ("my_struct2", vm_.eval_stack_top().gco()->si->get_name());
+
+	vm_.execute();
+	ASSERT_EQ(12378, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ("my_struct2", vm_.eval_stack_top().gco()->si->get_name());
+
+	vm_.execute();
+	ASSERT_EQ(77, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_FLOAT_EQ(12.0f, vm_.eval_stack_top().f());
+
+	vm_.execute();
+	ASSERT_EQ(100, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_FLOAT_EQ(99.0f, vm_.eval_stack_top().f());
+
+	vm_.execute();
+	ASSERT_EQ(-1829, vm_.eval_stack_top().i());
 }
