@@ -419,6 +419,10 @@ namespace elsa {
 			case halt: {
 				break;
 			}
+			case pop: {
+				current_frame_->pop();
+				break;
+			}
 			case nop: {
 				break;
 			}

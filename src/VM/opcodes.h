@@ -9,6 +9,7 @@ namespace elsa {
 		{
 			nop = 0,
 			halt,
+			pop,
 
 			// Functions
 			call,

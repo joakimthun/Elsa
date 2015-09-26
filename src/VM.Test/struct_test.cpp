@@ -241,10 +241,12 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 		l_local, 1,
 		l_field, 1,
 		halt,
+		pop,
 
 		l_local, 1,
 		l_field, 2,
 		halt, 
+		pop,
 
 		// Load 77(field 0) from a pointer to struct 0
 		l_local, 1,
@@ -252,6 +254,7 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 		l_field, 0,
 		l_field, 0,
 		halt,
+		pop,
 
 		// Load 12.0f(field 1) from a pointer to struct 0
 		l_local, 1,
@@ -259,6 +262,7 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 		l_field, 0,
 		l_field, 1,
 		halt,
+		pop,
 
 		// Load 100(field 2) from a pointer to struct 0
 		l_local, 1,
@@ -266,6 +270,7 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 		l_field, 0,
 		l_field, 2,
 		halt,
+		pop,
 
 		// Load 99.0f(field 3) from a pointer to struct 0
 		l_local, 1,
@@ -273,6 +278,7 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 		l_field, 0,
 		l_field, 3,
 		halt,
+		pop,
 
 		// Load -1829(field 4) from a pointer to struct 0
 		l_local, 1,
