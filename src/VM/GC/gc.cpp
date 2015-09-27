@@ -3,24 +3,36 @@
 namespace elsa {
 	namespace vm {
 
-		GC::GC() 
+		GC::GC()
 			:
 			num_marked_(0),
-			num_swept_(0)
+			num_swept_(0),
+			heap_(nullptr)
 		{}
 
-		GCResult GC::collect(StackFrame* top_frame, Heap& heap)
-		{
-			markAll(top_frame);
-			sweep(heap);
+		GC::GC(Heap* heap)
+			:
+			num_marked_(0),
+			num_swept_(0),
+			heap_(heap)
+		{}
 
-			return GCResult();
+		GCResult GC::collect(StackFrame* top_frame)
+		{
+			if (heap_ == nullptr)
+				throw RuntimeException("The GC must have a pointer to the VM's heap object");
+
+			num_marked_ = 0;
+			num_swept_ = 0;
+
+			markAll(top_frame);
+			sweep();
+
+			return GCResult(num_marked_, num_swept_);
 		}
 
 		void GC::markAll(StackFrame* top_frame)
 		{
-			num_marked_ = 0;
-
 			auto current_frame = top_frame;
 			while (current_frame != nullptr)
 			{
@@ -34,17 +46,60 @@ namespace elsa {
 					mark(current_frame->eval_stack_.at(vi));
 				}
 
+				for (auto& obj : current_frame->eval_stack_)
+				{
+					mark(obj);
+				}
+
 				current_frame = current_frame->get_parent();
 			}
 		}
 
-		void GC::sweep(Heap& heap)
+		void GC::sweep()
 		{
-			num_swept_ = 0;
+			
 		}
 
 		void GC::mark(Object& obj)
 		{
+			if (obj.get_type() != OType::GCOPtr)
+				return;
+
+			auto gco = obj.gco();
+			if (gco->marked)
+				return;
+
+			gco->marked = true;
+			num_marked_++;
+
+			if (gco->type == GCObjectType::Array)
+				mark_array(obj);
+			else if (gco->type == GCObjectType::Struct)
+				mark_struct(obj);
+			else
+				throw RuntimeException("Invalid GCObjectType.");
+		}
+
+		void GC::mark_struct(Object& obj)
+		{
+			auto gco = obj.gco();
+			for (auto& field : gco->si->get_fields())
+			{
+				if (field->get_type() != OType::GCOPtr)
+					continue;
+
+				auto field_obj = heap_->load_field(obj, field.get());
+
+				if (field_obj.gco() == nullptr)
+					continue;
+
+				mark(field_obj);
+			}
+		}
+
+		void GC::mark_array(Object& obj)
+		{
+
 		}
 	}
 }

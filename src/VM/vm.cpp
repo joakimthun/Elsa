@@ -10,6 +10,7 @@ namespace elsa {
 			entry_point_(-1),
 			oc_(nop)
 		{
+			gc_ = GC(&heap_);
 		}
 
 		VM::VM(const std::vector<int>& code)
@@ -21,6 +22,7 @@ namespace elsa {
 			oc_(nop)
 		{
 			code_length_ = code_.size();
+			gc_ = GC(&heap_);
 		}
 
 		VM::~VM()
@@ -102,7 +104,7 @@ namespace elsa {
 
 		GCResult VM::gc_collect()
 		{
-			return gc_.collect(call_stack_.current(), heap_);
+			return gc_.collect(call_stack_.current());
 		}
 
 		void VM::cycle()

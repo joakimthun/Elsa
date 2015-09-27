@@ -8,5 +8,6 @@
 #include "bool_opcodes_test.cpp"
 #include "char_opcodes_test.cpp"
 #include "string_opcodes_test.cpp"
+#include "gc_test.cpp"
 
 int vm_test_dummy() { return 0; }

@@ -23,6 +23,7 @@ namespace elsa {
 			std::string get_name() const;
 			std::size_t get_size() const;
 			FieldInfo* get_field(std::size_t index) const;
+			const std::vector<std::unique_ptr<FieldInfo>>& get_fields() const;
 
 			void add_field(FieldInfo* field);
 

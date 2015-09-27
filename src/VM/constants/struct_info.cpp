@@ -29,6 +29,11 @@ namespace elsa {
 			return fields_[index].get();
 		}
 
+		const std::vector<std::unique_ptr<FieldInfo>>& StructInfo::get_fields() const
+		{
+			return fields_;
+		}
+
 		void StructInfo::add_field(FieldInfo* field)
 		{
 			field->set_num_bytes_offset(size_);

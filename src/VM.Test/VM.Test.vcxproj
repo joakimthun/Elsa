@@ -23,6 +23,7 @@
     <ClCompile Include="bool_opcodes_test.cpp" />
     <ClCompile Include="char_opcodes_test.cpp" />
     <ClCompile Include="float_opcodes_test.cpp" />
+    <ClCompile Include="gc_test.cpp" />
     <ClCompile Include="locals_test.cpp" />
     <ClCompile Include="int_opcodes_test.cpp" />
     <ClCompile Include="recursive_call_test.cpp" />

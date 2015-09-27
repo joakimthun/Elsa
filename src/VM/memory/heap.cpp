@@ -21,7 +21,10 @@ namespace elsa {
 			gco->si = si;
 			gco->ptr = ptr;
 
-			return Object(gco);
+			auto obj =  Object(gco);
+			init_struct(obj);
+
+			return obj;
 		}
 
 		Object Heap::alloc_array(OType type, std::size_t size)
@@ -57,14 +60,13 @@ namespace elsa {
 			o.set_type(OType::Null);
 		}
 
-		Object Heap::load_field(const Object& instance, std::size_t field_index)
+		Object Heap::load_field(const Object& instance, FieldInfo* fi)
 		{
 			assert_is_struct(instance);
 
-			auto f = instance.gco()->si->get_field(field_index);
-			auto field_ptr = get_field_ptr(instance.gco()->ptr, f);
+			auto field_ptr = get_field_ptr(instance.gco()->ptr, fi);
 
-			switch (f->get_type())
+			switch (fi->get_type())
 			{
 			case Int:
 				return Object(*(int*)field_ptr);
@@ -81,14 +83,21 @@ namespace elsa {
 			}
 		}
 
-		void Heap::store_field(const Object& instance, const Object & value, std::size_t field_index)
+		Object Heap::load_field(const Object& instance, std::size_t field_index)
 		{
 			assert_is_struct(instance);
 
-			auto f = instance.gco()->si->get_field(field_index);
-			auto field_ptr = get_field_ptr(instance.gco()->ptr, f);
+			auto fi = instance.gco()->si->get_field(field_index);
+			return load_field(instance, fi);
+		}
 
-			switch (f->get_type())
+		void Heap::store_field(const Object& instance, const Object& value, FieldInfo* fi)
+		{
+			assert_is_struct(instance);
+
+			auto field_ptr = get_field_ptr(instance.gco()->ptr, fi);
+
+			switch (fi->get_type())
 			{
 			case Int:
 				*(int*)field_ptr = value.i();
@@ -109,6 +118,14 @@ namespace elsa {
 			default:
 				throw RuntimeException("Invalid field type.");
 			}
+		}
+
+		void Heap::store_field(const Object& instance, const Object & value, std::size_t field_index)
+		{
+			assert_is_struct(instance);
+
+			auto fi = instance.gco()->si->get_field(field_index);
+			store_field(instance, value, fi);
 		}
 
 		Object Heap::load_element(const Object& instance, std::size_t element_index)
@@ -211,6 +228,39 @@ namespace elsa {
 				return sizeof(GCObject*);
 			default:
 				throw RuntimeException("Invalid type.");
+			}
+		}
+
+		void Heap::init_struct(const Object& instance)
+		{
+			assert_is_struct(instance);
+
+			auto gco = instance.gco();
+			for (auto& field : gco->si->get_fields())
+			{
+				Object value;
+				switch (field->get_type())
+				{
+				case Int:
+					value = Object(0);
+					break;
+				case Float:
+					value = Object(0.0f);
+					break;
+				case Char:
+					value = Object(L'0');
+					break;
+				case Bool:
+					value = Object(false);
+					break;
+				case GCOPtr:
+					value = Object(nullptr);
+					break;
+				default:
+					throw RuntimeException("Invalid type.");
+				}
+
+				store_field(instance, value, field.get());
 			}
 		}
 	}

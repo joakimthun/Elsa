@@ -4,12 +4,19 @@
 
 #include "../memory/heap.h"
 #include "../stack_frame.h"
+#include "../exceptions/runtime_exception.h"
 
 namespace elsa {
 	namespace vm {
 
 		struct GCResult
 		{
+			inline GCResult(std::size_t num_marked, std::size_t num_swept)
+			{
+				this->num_marked = num_marked;
+				this->num_swept = num_swept;
+			};
+
 			std::size_t num_marked;
 			std::size_t num_swept;
 		};
@@ -18,15 +25,19 @@ namespace elsa {
 		{
 		public:
 			GC();
+			GC(Heap* heap);
 
-			GCResult collect(StackFrame* top_frame, Heap& heap);
+			GCResult collect(StackFrame* top_frame);
 		private:
 			void markAll(StackFrame* top_frame);
-			void sweep(Heap& heap);
+			void sweep();
 			void mark(Object& obj);
+			void mark_struct(Object& obj);
+			void mark_array(Object& obj);
 
 			std::size_t num_marked_;
 			std::size_t num_swept_;
+			Heap* heap_;
 		};
 
 	}

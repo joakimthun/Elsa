@@ -27,7 +27,9 @@ namespace elsa {
 			void realloc_array(Object& instance, std::size_t new_size);
 			void dealloc(Object& o);
 
+			Object load_field(const Object& instance, FieldInfo* fi);
 			Object load_field(const Object& instance, std::size_t field_index);
+			void store_field(const Object& instance, const Object& value, FieldInfo* fi);
 			void store_field(const Object& instance, const Object& value, std::size_t field_index);
 			Object load_element(const Object& instance, std::size_t element_index);
 			void store_element(const Object& instance, const Object& value, std::size_t element_index);
@@ -38,6 +40,7 @@ namespace elsa {
 			void assert_array_index_in_range(const Object& instance, std::size_t element_index);
 			byte* get_field_ptr(void* s_ptr, FieldInfo* f);
 			std::size_t get_size_of_type(OType type);
+			void init_struct(const Object& instance);
 		};
 
 	}
