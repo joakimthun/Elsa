@@ -3,10 +3,11 @@
 namespace elsa {
 	namespace vm {
 				
-		StackFrame::StackFrame(FunctionInfo* function, std::size_t ret_addr)
+		StackFrame::StackFrame(FunctionInfo* function, std::size_t ret_addr, StackFrame* parent)
 			:
 			function_(function),
-			ret_addr_(ret_addr)
+			ret_addr_(ret_addr),
+			parent_(parent)
 		{
 			locals_size_ = function->get_num_locals() + function->get_num_args();
 			locals_ = new Object[locals_size_];
@@ -33,7 +34,7 @@ namespace elsa {
 			return o;
 		}
 
-		Object StackFrame::dump_top()
+		Object StackFrame::dump_top() const
 		{
 			if (eval_stack_.size() == 0)
 				throw RuntimeException("Can not call pop on an empty evaluation stack.");
@@ -85,5 +86,9 @@ namespace elsa {
 			return ret_addr_;
 		}
 
+		StackFrame* StackFrame::get_parent() const
+		{
+			return parent_;
+		}
 	}
 }

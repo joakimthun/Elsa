@@ -90,14 +90,19 @@ namespace elsa {
 			pc_ = entry_point_;
 		}
 
-		Object VM::eval_stack_top()
+		Object VM::eval_stack_top() const
 		{
 			return current_frame_->dump_top();
 		}
 
-		std::size_t VM::get_pc()
+		std::size_t VM::get_pc() const
 		{
 			return pc_;
+		}
+
+		GCResult VM::gc_collect()
+		{
+			return gc_.collect(call_stack_.current(), heap_);
 		}
 
 		void VM::cycle()
@@ -324,7 +329,7 @@ namespace elsa {
 				auto addr = code_[pc_];
 
 				auto f = constant_pool_.get_func_at(addr);
-				auto sf = new StackFrame(f, pc_ + 1);
+				auto sf = new StackFrame(f, pc_ + 1, call_stack_.current());
 				call_stack_.push(sf);
 
 				if (f->get_num_args() > 0)
@@ -433,8 +438,7 @@ namespace elsa {
 
 		void VM::push_main()
 		{
-			// Push main on the call stack
-			call_stack_.push(new StackFrame(constant_pool_.get_func_at(entry_point_), entry_point_));
+			call_stack_.push(new StackFrame(constant_pool_.get_func_at(entry_point_), entry_point_, nullptr));
 		}
 
 		void VM::next_opcode()

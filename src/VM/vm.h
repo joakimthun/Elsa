@@ -14,6 +14,7 @@
 #include "constants\constant_entry.h"
 #include "constants\function_info.h"
 #include "exceptions\runtime_exception.h"
+#include "GC\gc.h"
 
 namespace elsa {
 	namespace vm {
@@ -31,8 +32,9 @@ namespace elsa {
 			void set_program(const std::vector<int>& code);
 			void add_constant_entry(ConstantEntry* entry);
 			void set_entry_point(std::size_t entry_point);
-			Object eval_stack_top();
-			std::size_t get_pc();
+			Object eval_stack_top() const;
+			std::size_t get_pc() const;
+			GCResult gc_collect();
 
 		private:
 			void cycle();
@@ -49,6 +51,7 @@ namespace elsa {
 			StackFrame* current_frame_;
 			ConstantPool constant_pool_;
 			Heap heap_;
+			GC gc_;
 		};
 
 	}
