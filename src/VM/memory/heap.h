@@ -41,6 +41,8 @@ namespace elsa {
 			byte* get_field_ptr(void* s_ptr, FieldInfo* f);
 			std::size_t get_size_of_type(OType type);
 			void init_struct(const Object& instance);
+			void init_array(const Object& instance);
+			Object get_default_value(OType type);
 		};
 
 	}

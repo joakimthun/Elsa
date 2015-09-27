@@ -43,7 +43,10 @@ namespace elsa {
 			gco->ptr = ptr;
 			gco->ai = std::unique_ptr<ArrayInfo>(new ArrayInfo(type, size, element_size));
 
-			return Object(gco);
+			auto obj = Object(gco);
+			init_array(obj);
+
+			return obj;
 		}
 
 		void Heap::realloc_array(Object& instance, std::size_t new_size)
@@ -238,29 +241,37 @@ namespace elsa {
 			auto gco = instance.gco();
 			for (auto& field : gco->si->get_fields())
 			{
-				Object value;
-				switch (field->get_type())
-				{
-				case Int:
-					value = Object(0);
-					break;
-				case Float:
-					value = Object(0.0f);
-					break;
-				case Char:
-					value = Object(L'0');
-					break;
-				case Bool:
-					value = Object(false);
-					break;
-				case GCOPtr:
-					value = Object(nullptr);
-					break;
-				default:
-					throw RuntimeException("Invalid type.");
-				}
+				store_field(instance, get_default_value(field->get_type()), field.get());
+			}
+		}
 
-				store_field(instance, value, field.get());
+		void Heap::init_array(const Object& instance)
+		{
+			assert_is_array(instance);
+
+			auto array_info = instance.gco()->ai.get();
+			for (std::size_t i = 0; i < array_info->num_elements; ++i)
+			{
+				store_element(instance, get_default_value(array_info->type), i);
+			}
+		}
+
+		Object Heap::get_default_value(OType type)
+		{
+			switch(type)
+			{
+			case Int:
+				return Object(0);
+			case Float:
+				return Object(0.0f);
+			case Char:
+				return Object(L'\0');
+			case Bool:
+				return Object(false);
+			case GCOPtr:
+				return Object(nullptr);
+			default:
+				throw RuntimeException("Invalid type.");
 			}
 		}
 	}
