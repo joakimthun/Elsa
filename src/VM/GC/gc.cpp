@@ -41,11 +41,6 @@ namespace elsa {
 					mark(current_frame->locals_[li]);
 				}
 
-				for (std::vector<Object>::size_type vi = 0; vi != current_frame->eval_stack_.size(); ++vi)
-				{
-					mark(current_frame->eval_stack_.at(vi));
-				}
-
 				for (auto& obj : current_frame->eval_stack_)
 				{
 					mark(obj);
@@ -77,7 +72,7 @@ namespace elsa {
 			else if (gco->type == GCObjectType::Struct)
 				mark_struct(obj);
 			else
-				throw RuntimeException("Invalid GCObjectType.");
+				throw RuntimeException("Invalid GCObjectType");
 		}
 
 		void GC::mark_struct(Object& obj)
@@ -99,7 +94,20 @@ namespace elsa {
 
 		void GC::mark_array(Object& obj)
 		{
+			auto gco = obj.gco();
 
+			if (gco->ai->type != OType::GCOPtr)
+				return;
+
+			for (std::size_t i = 0; i < gco->ai->num_elements; ++i)
+			{
+				auto element = heap_->load_element(obj, i);
+
+				if (element.gco() == nullptr)
+					continue;
+
+				mark(element);
+			}
 		}
 	}
 }

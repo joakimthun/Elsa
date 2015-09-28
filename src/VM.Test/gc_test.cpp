@@ -87,3 +87,50 @@ TEST_F(GCTest, BASIC_CALL_MARK_STRUCTS)
 	// Since my_func has been popped of the call stack we should only have 1 marked object for gc(the one created in main)
 	ASSERT_EQ(1, result.num_marked);
 }
+
+TEST_F(GCTest, BASIC_MARK_ARRAY)
+{
+	vm_.add_constant_entry(new FunctionInfo("main", 0, 4, 0, FunctionType::Static));
+	vm_.set_entry_point(0);
+
+	std::vector<int> p =
+	{
+		iconst, 7,
+		new_arr, Int,
+		s_local, 0,
+		
+		iconst, 2,
+		new_arr, Int,
+		s_local, 1,
+		
+		iconst, 5,
+		new_arr, GCOPtr,
+		s_local, 2,
+		
+		l_local, 2,
+		new_struct, 0,
+		s_ele, 0,
+
+		iconst, 2,
+		new_arr, Int,
+		pop,
+
+		iconst, 2,
+		new_arr, Int,
+
+		iconst, 5,
+		new_arr, GCOPtr,
+		s_local, 3,
+
+		l_local, 3,
+		iconst, 5,
+		new_arr, GCOPtr,
+		s_ele, 2,
+	};
+
+	vm_.set_program(p);
+
+	vm_.execute();
+	auto result = vm_.gc_collect();
+	ASSERT_EQ(7, result.num_marked);
+}
