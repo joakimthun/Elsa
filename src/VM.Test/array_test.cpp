@@ -10,7 +10,7 @@ protected:
 	{
 		int ep = 0;
 
-		vm_.add_constant_entry(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
+		vm_.add_constant_entry(new FunctionInfo("main", 0, 2, ep, FunctionType::Static));
 		vm_.add_constant_entry(new FloatEntry(12.0f));
 		vm_.add_constant_entry(new FloatEntry(99.0f));
 		vm_.add_constant_entry(new FloatEntry(-99.0f));
@@ -419,4 +419,54 @@ TEST_F(ArrayTest, ARRAY_OF_ARRAYS)
 
 	vm_.execute();
 	ASSERT_EQ(20, vm_.eval_stack_top().i());
+}
+
+TEST_F(ArrayTest, DEFAULT_VALUES)
+{
+	std::vector<int> p =
+	{
+		iconst, 2,
+		new_arr, Float,
+		s_local, 0,
+
+		halt,
+		iconst, 2,
+		new_arr, Char,
+		s_local, 1,
+
+		l_local, 0,
+		l_ele, 0,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 1,
+		halt,
+		pop,
+
+		l_local, 1,
+		l_ele, 0,
+		halt,
+		pop,
+
+		l_local, 1,
+		l_ele, 1,
+		halt,
+		pop,
+	};
+
+	vm_.set_program(p);
+	vm_.execute();
+
+	vm_.execute();
+	ASSERT_FLOAT_EQ(0.0f, vm_.eval_stack_top().f());
+
+	vm_.execute();
+	ASSERT_FLOAT_EQ(0.0f, vm_.eval_stack_top().f());
+
+	vm_.execute();
+	ASSERT_EQ('\0', vm_.eval_stack_top().c());
+
+	vm_.execute();
+	ASSERT_EQ('\0', vm_.eval_stack_top().c());
 }

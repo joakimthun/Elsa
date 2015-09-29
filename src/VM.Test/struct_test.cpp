@@ -29,6 +29,15 @@ protected:
 		si2->add_field(new FieldInfo("field2", OType::GCOPtr));
 
 		vm_.add_constant_entry(si2);
+
+		auto si3 = new StructInfo("my_struct3");
+		si3->add_field(new FieldInfo("field0", OType::GCOPtr));
+		si3->add_field(new FieldInfo("field1", OType::Int));
+		si3->add_field(new FieldInfo("field2", OType::Bool));
+		si3->add_field(new FieldInfo("field3", OType::Char));
+		si3->add_field(new FieldInfo("field4", OType::Float));
+
+		vm_.add_constant_entry(si3);
 	}
 
 	virtual void TearDown() {}
@@ -316,4 +325,64 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 
 	vm_.execute();
 	ASSERT_EQ(-1829, vm_.eval_stack_top().i());
+}
+
+TEST_F(StructTest, FIELD_DEFAULT_VALUES)
+{
+	/*si3->add_field(new FieldInfo("field0", OType::GCOPtr));
+	si3->add_field(new FieldInfo("field1", OType::Int));
+	si3->add_field(new FieldInfo("field2", OType::Bool));
+	si3->add_field(new FieldInfo("field3", OType::Char));
+	si3->add_field(new FieldInfo("field4", OType::Float));*/
+
+	std::vector<int> p =
+	{
+		new_struct, 5,
+		s_local, 0,
+		l_local, 0,
+		halt,
+
+		l_field, 0,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_field, 1,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_field, 2,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_field, 3,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_field, 4,
+		halt
+	};
+
+	vm_.set_program(p);
+
+	vm_.execute();
+	ASSERT_EQ("my_struct3", vm_.eval_stack_top().gco()->si->get_name());
+
+	vm_.execute();
+	ASSERT_EQ(nullptr, vm_.eval_stack_top().gco());
+
+	vm_.execute();
+	ASSERT_EQ(0, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(false, vm_.eval_stack_top().b());
+
+	vm_.execute();
+	ASSERT_EQ('\0', vm_.eval_stack_top().c());
+
+	vm_.execute();
+	ASSERT_FLOAT_EQ(0.0f, vm_.eval_stack_top().f());
 }
