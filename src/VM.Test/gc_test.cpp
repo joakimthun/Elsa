@@ -24,7 +24,7 @@ protected:
 	VM vm_;
 };
 
-TEST_F(GCTest, BASIC_MARK_STRUCTS)
+TEST_F(GCTest, COLLECT_NO_SWEEP)
 {
 	vm_.add_constant_entry(new FunctionInfo("main", 0, 1, 0, FunctionType::Static));
 	vm_.set_entry_point(0);
@@ -57,9 +57,42 @@ TEST_F(GCTest, BASIC_MARK_STRUCTS)
 	vm_.execute();
 	auto result = vm_.gc_collect();
 	ASSERT_EQ(5, result.num_marked);
+	ASSERT_EQ(0, result.num_swept);
 }
 
-TEST_F(GCTest, BASIC_CALL_MARK_STRUCTS)
+TEST_F(GCTest, COLLECT_POPPED_OBJECTS)
+{
+	vm_.add_constant_entry(new FunctionInfo("main", 0, 1, 0, FunctionType::Static));
+	vm_.set_entry_point(0);
+
+	std::vector<int> p =
+	{
+		new_struct, 0,
+		pop,
+
+		new_struct, 0,
+		pop,
+
+		new_struct, 1,
+		pop,
+
+		iconst, 7,
+		new_arr, Int,
+		pop,
+
+		new_struct, 0,
+		pop,
+	};
+
+	vm_.set_program(p);
+
+	vm_.execute();
+	auto result = vm_.gc_collect();
+	ASSERT_EQ(0, result.num_marked);
+	ASSERT_EQ(5, result.num_swept);
+}
+
+TEST_F(GCTest, SWEEP_OBJECTS_FROM_POPPED_STACK_FRAME)
 {
 	vm_.add_constant_entry(new FunctionInfo("main", 0, 1, 11, FunctionType::Static));
 	vm_.add_constant_entry(new FunctionInfo("my_func", 0, 1, 0, FunctionType::Static));
@@ -86,9 +119,10 @@ TEST_F(GCTest, BASIC_CALL_MARK_STRUCTS)
 
 	// Since my_func has been popped of the call stack we should only have 1 marked object for gc(the one created in main)
 	ASSERT_EQ(1, result.num_marked);
+	ASSERT_EQ(2, result.num_swept);
 }
 
-TEST_F(GCTest, BASIC_MARK_ARRAY)
+TEST_F(GCTest, MARK_SWEEP_ARRAYS)
 {
 	vm_.add_constant_entry(new FunctionInfo("main", 0, 4, 0, FunctionType::Static));
 	vm_.set_entry_point(0);
@@ -117,6 +151,7 @@ TEST_F(GCTest, BASIC_MARK_ARRAY)
 
 		iconst, 2,
 		new_arr, Int,
+		pop,
 
 		iconst, 5,
 		new_arr, GCOPtr,
@@ -132,5 +167,6 @@ TEST_F(GCTest, BASIC_MARK_ARRAY)
 
 	vm_.execute();
 	auto result = vm_.gc_collect();
-	ASSERT_EQ(7, result.num_marked);
+	ASSERT_EQ(6, result.num_marked);
+	ASSERT_EQ(2, result.num_swept);
 }

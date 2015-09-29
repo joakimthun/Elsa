@@ -18,9 +18,9 @@ namespace elsa {
 
 		struct GCObject
 		{
-			inline GCObject(GCObjectType t) : marked(false), ptr(nullptr), si(nullptr), type(t), ai(nullptr) {};
+			GCObject(GCObjectType t) : marked(false), ptr(nullptr), si(nullptr), type(t), ai(nullptr), next(nullptr) {};
 
-			inline ~GCObject()
+			~GCObject()
 			{
 				free(ptr);
 			};
@@ -30,6 +30,7 @@ namespace elsa {
 			StructInfo* si;
 			std::unique_ptr<ArrayInfo> ai;
 			GCObjectType type;
+			GCObject* next;
 		};
 
 	}

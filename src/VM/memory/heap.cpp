@@ -4,6 +4,9 @@ namespace elsa {
 	namespace vm {
 
 		Heap::Heap() 
+			:
+			num_objects_(0),
+			base_(nullptr)
 		{}
 
 		Heap::~Heap() {}
@@ -20,6 +23,9 @@ namespace elsa {
 			auto gco = new GCObject(GCObjectType::Struct);
 			gco->si = si;
 			gco->ptr = ptr;
+
+			link_new_object(gco);
+			increment_num_objects();
 
 			auto obj =  Object(gco);
 			init_struct(obj);
@@ -42,6 +48,9 @@ namespace elsa {
 			auto gco = new GCObject(GCObjectType::Array);
 			gco->ptr = ptr;
 			gco->ai = std::unique_ptr<ArrayInfo>(new ArrayInfo(type, size, element_size));
+
+			link_new_object(gco);
+			increment_num_objects();
 
 			auto obj = Object(gco);
 			init_array(obj);
@@ -184,6 +193,11 @@ namespace elsa {
 			}
 		}
 
+		std::size_t Heap::get_num_objects() const
+		{
+			return num_objects_;
+		}
+
 		void Heap::assert_is_struct(const Object& instance)
 		{
 			if (instance.get_type() != GCOPtr)
@@ -273,6 +287,18 @@ namespace elsa {
 			default:
 				throw RuntimeException("Invalid type.");
 			}
+		}
+
+		void Heap::link_new_object(GCObject* obj)
+		{
+			// Keep a linked list of all heap allocated objects so the gc can delete them even if they are not reachable by the vm itself
+			obj->next = base_;
+			base_ = obj;
+		}
+
+		void Heap::increment_num_objects()
+		{
+			num_objects_++;
 		}
 	}
 }

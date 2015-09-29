@@ -9,7 +9,7 @@ namespace elsa {
 		class ElsaException : public std::exception
 		{
 		public:
-			inline ElsaException(const std::string& message) : message_(message) {};
+			ElsaException(const std::string& message) : message_(message) {};
 
 			virtual const char* what() const throw()
 			{

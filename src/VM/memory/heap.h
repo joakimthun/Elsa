@@ -10,14 +10,16 @@
 #include "../types/object.h"
 #include "../constants/struct_info.h"
 #include "../exceptions/runtime_exception.h"
+#include "../types/gcobject.h"
 
 namespace elsa {
 	namespace vm {
-
+		class GC;
 		typedef int8_t byte;
 
 		class Heap
 		{
+			friend class GC;
 		public:
 			Heap();
 			~Heap();
@@ -33,6 +35,7 @@ namespace elsa {
 			void store_field(const Object& instance, const Object& value, std::size_t field_index);
 			Object load_element(const Object& instance, std::size_t element_index);
 			void store_element(const Object& instance, const Object& value, std::size_t element_index);
+			std::size_t get_num_objects() const;
 
 		private:
 			void assert_is_struct(const Object& instance);
@@ -43,6 +46,11 @@ namespace elsa {
 			void init_struct(const Object& instance);
 			void init_array(const Object& instance);
 			Object get_default_value(OType type);
+			void link_new_object(GCObject* obj);
+			void increment_num_objects();
+
+			std::size_t num_objects_;
+			GCObject* base_;
 		};
 
 	}

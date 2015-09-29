@@ -52,7 +52,26 @@ namespace elsa {
 
 		void GC::sweep()
 		{
-			
+			GCObject** obj = &heap_->base_;
+			while ((*obj) != nullptr)
+			{
+				if (!(*obj)->marked)
+				{
+					// If the object was not marked by the mark phase it is unreachable and safe to delete
+					auto unreached = *obj;
+					*obj = unreached->next;
+					delete unreached;
+
+					num_swept_++;
+					heap_->num_objects_--;
+				}
+				else 
+				{
+					// Unmark the object for the next gc cycle
+					(*obj)->marked = false;
+					obj = &(*obj)->next;
+				}
+			}
 		}
 
 		void GC::mark(Object& obj)

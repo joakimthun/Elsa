@@ -5,13 +5,14 @@
 #include "../memory/heap.h"
 #include "../stack_frame.h"
 #include "../exceptions/runtime_exception.h"
+#include "../types/gcobject.h"
 
 namespace elsa {
 	namespace vm {
 
 		struct GCResult
 		{
-			inline GCResult(std::size_t num_marked, std::size_t num_swept)
+			GCResult(std::size_t num_marked, std::size_t num_swept)
 			{
 				this->num_marked = num_marked;
 				this->num_swept = num_swept;

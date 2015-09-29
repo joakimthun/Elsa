@@ -5,7 +5,7 @@ namespace elsa {
 
 		Object::Object()
 		{
-			type_ = Undefined;
+			type_ = Null;
 		}
 
 		Object::Object(int v)
