@@ -60,16 +60,7 @@ namespace elsa {
 
 		void Heap::realloc_array(Object& instance, std::size_t new_size)
 		{
-
-		}
-
-		void Heap::dealloc(Object& o)
-		{
-			if(o.get_type() != GCOPtr)
-				throw RuntimeException("Can only deallocate memory for heap allocated objects");
-
-			delete o.gco();
-			o.set_type(OType::Null);
+			// TODO
 		}
 
 		Object Heap::load_field(const Object& instance, FieldInfo* fi)

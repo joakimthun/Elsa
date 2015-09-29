@@ -27,7 +27,6 @@ namespace elsa {
 			Object alloc_struct(StructInfo* si);
 			Object alloc_array(OType type, std::size_t size);
 			void realloc_array(Object& instance, std::size_t new_size);
-			void dealloc(Object& o);
 
 			Object load_field(const Object& instance, FieldInfo* fi);
 			Object load_field(const Object& instance, std::size_t field_index);

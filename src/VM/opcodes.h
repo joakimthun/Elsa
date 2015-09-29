@@ -63,7 +63,6 @@ namespace elsa {
 
 			// Structs
 			new_struct,
-			del_struct,
 			l_field,
 			s_field,
 

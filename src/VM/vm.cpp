@@ -387,10 +387,6 @@ namespace elsa {
 				current_frame_->push(heap_.alloc_struct(si));
 				break;
 			}
-			case del_struct: {
-				heap_.dealloc(current_frame_->pop());
-				break;
-			}
 			case l_field: {
 				auto fi = code_[pc_++];
 				auto instance = current_frame_->pop();
