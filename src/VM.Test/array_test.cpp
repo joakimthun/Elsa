@@ -44,6 +44,114 @@ TEST_F(ArrayTest, NEW)
 	EXPECT_EQ(GCObjectType::Array, vm_.eval_stack_top().gco()->type);
 }
 
+TEST_F(ArrayTest, RESIZE)
+{
+	std::vector<int> p =
+	{
+		iconst, 3,
+		new_arr, Int,
+		s_local, 0,
+
+		l_local, 0,
+		iconst, 100,
+		s_ele, 0,
+
+		l_local, 0,
+		iconst, 200,
+		s_ele, 1,
+
+		l_local, 0,
+		iconst, 300,
+		s_ele, 2,
+
+		l_local, 0,
+		l_ele, 0,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 1,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 2,
+		halt,
+		pop,
+
+		// Resize from 3 to 7 ints
+		l_local, 0,
+		iconst, 7,
+		res_arr,
+
+		l_local, 0,
+		l_ele, 0,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 1,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 2,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 3,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 4,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 5,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_ele, 6,
+		halt,
+	};
+
+	vm_.set_program(p);
+
+	vm_.execute();
+	ASSERT_EQ(100, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(200, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(300, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(100, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(200, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(300, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(0, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(0, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(0, vm_.eval_stack_top().i());
+
+	vm_.execute();
+	ASSERT_EQ(0, vm_.eval_stack_top().i());
+}
+
 TEST_F(ArrayTest, INT_STORE_LOAD)
 {
 	std::vector<int> p =

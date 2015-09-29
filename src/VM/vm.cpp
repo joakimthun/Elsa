@@ -406,6 +406,12 @@ namespace elsa {
 				current_frame_->push(heap_.alloc_array(type, size));
 				break;
 			}
+			case res_arr: {
+				auto new_size = current_frame_->pop().i();
+				auto arr = current_frame_->pop();
+				heap_.resize_array(arr, new_size);
+				break;
+			}
 			case l_ele: {
 				auto ei = code_[pc_++];
 				auto instance = current_frame_->pop();

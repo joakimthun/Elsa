@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <vector>
 #include <memory>
+#include <algorithm>
 
 #include "../types/otype.h"
 #include "../types/object.h"
@@ -26,7 +27,7 @@ namespace elsa {
 
 			Object alloc_struct(StructInfo* si);
 			Object alloc_array(OType type, std::size_t size);
-			void realloc_array(Object& instance, std::size_t new_size);
+			void resize_array(Object& instance, std::size_t new_size);
 
 			Object load_field(const Object& instance, FieldInfo* fi);
 			Object load_field(const Object& instance, std::size_t field_index);
@@ -44,6 +45,7 @@ namespace elsa {
 			std::size_t get_size_of_type(OType type);
 			void init_struct(const Object& instance);
 			void init_array(const Object& instance);
+			void copy_array(const Object& old_array, Object& new_array);
 			Object get_default_value(OType type);
 			void link_new_object(GCObject* obj);
 			void increment_num_objects();

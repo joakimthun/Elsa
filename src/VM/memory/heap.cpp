@@ -58,9 +58,18 @@ namespace elsa {
 			return obj;
 		}
 
-		void Heap::realloc_array(Object& instance, std::size_t new_size)
+		void Heap::resize_array(Object& instance, std::size_t new_size)
 		{
-			// TODO
+			assert_is_array(instance);
+
+			auto ai = instance.gco()->ai.get();
+			auto new_array = alloc_array(ai->type, new_size);
+			init_array(new_array);
+
+			copy_array(instance, new_array);
+
+			instance.gco()->ai->num_elements = new_size;
+			instance.gco()->ptr = new_array.gco()->ptr;
 		}
 
 		Object Heap::load_field(const Object& instance, FieldInfo* fi)
@@ -258,6 +267,23 @@ namespace elsa {
 			for (std::size_t i = 0; i < array_info->num_elements; ++i)
 			{
 				store_element(instance, get_default_value(array_info->type), i);
+			}
+		}
+
+		void Heap::copy_array(const Object& old_array, Object& new_array)
+		{
+			auto old_array_info = old_array.gco()->ai.get();
+			auto new_array_info = new_array.gco()->ai.get();
+
+			if(old_array_info->type != new_array_info->type)
+				throw RuntimeException("Can not copy arrays of different types.");
+
+			auto elements_to_copy = std::min(old_array_info->num_elements, new_array_info->num_elements);
+
+			for (std::size_t i = 0; i < elements_to_copy; ++i)
+			{
+				auto value = load_element(old_array, i);
+				store_element(new_array, value, i);
 			}
 		}
 
