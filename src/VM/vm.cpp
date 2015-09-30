@@ -27,7 +27,6 @@ namespace elsa {
 
 		VM::~VM()
 		{
-			delete call_stack_.pop();
 		}
 
 		void VM::execute()

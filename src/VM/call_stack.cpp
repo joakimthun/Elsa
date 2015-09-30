@@ -9,6 +9,11 @@ namespace elsa {
 
 		CallStack::~CallStack()
 		{
+			while (stack_.size() > 0)
+			{
+				delete stack_.back();
+				stack_.pop_back();
+			}
 		}
 
 		void CallStack::push(StackFrame* frame)
