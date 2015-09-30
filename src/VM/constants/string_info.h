@@ -2,15 +2,13 @@
 
 #include <string>
 
-#include "constant_entry.h"
-
 namespace elsa {
 	namespace vm {
 
-		class StringEntry : public ConstantEntry
+		class StringInfo
 		{
 		public:
-			StringEntry(const std::wstring& value);
+			StringInfo(const std::wstring& value);
 
 			std::wstring get_value() const;
 

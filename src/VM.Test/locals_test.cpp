@@ -17,7 +17,7 @@ TEST(LOCALS, STORE_LOAD_INT)
 	auto vm = VM(p);
 	int ep = 0;
 
-	vm.add_constant_entry(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
+	vm.constant_pool().add_func(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
 	vm.set_entry_point(ep);
 	vm.execute();
 

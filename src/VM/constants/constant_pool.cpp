@@ -3,44 +3,65 @@
 namespace elsa {
 	namespace vm {
 
-		ConstantPool::ConstantPool() {}
-		ConstantPool::~ConstantPool() {}
-
-		void ConstantPool::add_entry(ConstantEntry* entry) 
+		void ConstantPool::add_func(FunctionInfo* entry) 
 		{
-			entries_.push_back(std::unique_ptr<ConstantEntry>(entry));
-		}
-
-		FunctionInfo* ConstantPool::get_func_at(std::size_t addr)
-		{
-			for (std::size_t i = 0; i < entries_.size(); ++i)
+			auto result = functions_.insert(std::pair<std::size_t, std::unique_ptr<FunctionInfo>>(entry->get_addr(), std::unique_ptr<FunctionInfo>(entry)));
+			if (!result.second)
 			{
-				auto e = static_cast<FunctionInfo*>(entries_[i].get());
-				if (e->get_addr() == addr)
-					return e;
+				throw ElsaException("A function is already specified at that address");
 			}
-
-			throw ElsaException("No function found at the specified address");
 		}
 
-		StructInfo* ConstantPool::get_struct_at(std::size_t index)
+		const FunctionInfo* ConstantPool::get_func(std::size_t addr) const
 		{
-			return static_cast<StructInfo*>(entries_[index].get());
+			try
+			{
+				return functions_.at(addr).get();
+			}
+			catch (std::out_of_range)
+			{
+				throw ElsaException("No function found at the specified address");
+			}
 		}
 
-		FloatEntry* ConstantPool::get_float_at(std::size_t index)
+		void ConstantPool::add_struct(StructInfo* entry)
 		{
-			return static_cast<FloatEntry*>(entries_[index].get());
+			structs_.push_back(std::unique_ptr<StructInfo>(entry));
 		}
 
-		CharEntry* ConstantPool::get_char_at(std::size_t index)
+		const StructInfo* ConstantPool::get_struct(std::size_t index) const
 		{
-			return static_cast<CharEntry*>(entries_[index].get());
+			return structs_[index].get();
 		}
 
-		StringEntry* ConstantPool::get_string_at(std::size_t index)
+		void ConstantPool::add_float(FloatInfo* entry)
 		{
-			return static_cast<StringEntry*>(entries_[index].get());
+			floats_.push_back(std::unique_ptr<FloatInfo>(entry));
+		}
+
+		const FloatInfo* ConstantPool::get_float(std::size_t index) const
+		{
+			return floats_[index].get();
+		}
+
+		void ConstantPool::add_char(CharInfo* entry) 
+		{
+			chars_.push_back(std::unique_ptr<CharInfo>(entry));
+		}
+
+		const CharInfo* ConstantPool::get_char_at(std::size_t index) const
+		{
+			return chars_[index].get();
+		}
+
+		void ConstantPool::add_string(StringInfo* entry)
+		{
+			strings_.push_back(std::unique_ptr<StringInfo>(entry));
+		}
+
+		const StringInfo* ConstantPool::get_string(std::size_t index) const
+		{
+			return strings_[index].get();
 		}
 
 	}

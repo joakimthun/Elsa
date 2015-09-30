@@ -10,14 +10,14 @@ protected:
 	{
 		int ep = 0;
 
-		vm_.add_constant_entry(new FunctionInfo("main", 0, 2, ep, FunctionType::Static));
-		vm_.add_constant_entry(new FloatEntry(12.0f));
-		vm_.add_constant_entry(new FloatEntry(99.0f));
-		vm_.add_constant_entry(new FloatEntry(-99.0f));
+		vm_.constant_pool().add_func(new FunctionInfo("main", 0, 2, ep, FunctionType::Static));
+		vm_.constant_pool().add_float(new FloatInfo(12.0f));
+		vm_.constant_pool().add_float(new FloatInfo(99.0f));
+		vm_.constant_pool().add_float(new FloatInfo(-99.0f));
 
 		auto si = new StructInfo("my_struct");
 		si->add_field(new FieldInfo("field0", OType::Int));
-		vm_.add_constant_entry(si);
+		vm_.constant_pool().add_struct(si);
 
 		vm_.set_entry_point(ep);
 	}
@@ -216,17 +216,17 @@ TEST_F(ArrayTest, FLOAT_STORE_LOAD)
 
 		// Store 12.0 at index 0
 		l_local, 0,
-		fconst, 1,
+		fconst, 0,
 		s_ele, 0,
 
 		// Store 99.0 at index 1
 		l_local, 0,
-		fconst, 2,
+		fconst, 1,
 		s_ele, 1,
 
 		// Store -99.0 at index 2
 		l_local, 0,
-		fconst, 3,
+		fconst, 2,
 		s_ele, 2,
 
 		// Load element at index 0 (12.0)
@@ -270,12 +270,12 @@ TEST_F(ArrayTest, STRUCT_PTR_STORE_LOAD)
 
 		// Store a struct pointer at index 0
 		l_local, 0,
-		new_struct, 4,
+		new_struct, 0,
 		s_ele, 0,
 
 		// Store another struct pointer at index 1
 		l_local, 0,
-		new_struct, 4,
+		new_struct, 0,
 		s_ele, 1,
 
 		// Store the value 4 in the struct pointed to by element 0

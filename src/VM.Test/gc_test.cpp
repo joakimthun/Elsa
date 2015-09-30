@@ -12,11 +12,11 @@ protected:
 		si->add_field(new FieldInfo("field0", OType::GCOPtr));
 		si->add_field(new FieldInfo("field1", OType::GCOPtr));
 		si->add_field(new FieldInfo("field2", OType::GCOPtr));
-		vm_.add_constant_entry(si);
+		vm_.constant_pool().add_struct(si);
 
 		auto si2 = new StructInfo("my_struct2");
 		si2->add_field(new FieldInfo("field0", OType::Int));
-		vm_.add_constant_entry(si2);
+		vm_.constant_pool().add_struct(si2);
 	}
 
 	virtual void TearDown() {}
@@ -26,7 +26,7 @@ protected:
 
 TEST_F(GCTest, COLLECT_NO_SWEEP)
 {
-	vm_.add_constant_entry(new FunctionInfo("main", 0, 1, 0, FunctionType::Static));
+	vm_.constant_pool().add_func(new FunctionInfo("main", 0, 1, 0, FunctionType::Static));
 	vm_.set_entry_point(0);
 
 	std::vector<int> p =
@@ -62,7 +62,7 @@ TEST_F(GCTest, COLLECT_NO_SWEEP)
 
 TEST_F(GCTest, COLLECT_POPPED_OBJECTS)
 {
-	vm_.add_constant_entry(new FunctionInfo("main", 0, 1, 0, FunctionType::Static));
+	vm_.constant_pool().add_func(new FunctionInfo("main", 0, 1, 0, FunctionType::Static));
 	vm_.set_entry_point(0);
 
 	std::vector<int> p =
@@ -94,8 +94,8 @@ TEST_F(GCTest, COLLECT_POPPED_OBJECTS)
 
 TEST_F(GCTest, SWEEP_OBJECTS_FROM_POPPED_STACK_FRAME)
 {
-	vm_.add_constant_entry(new FunctionInfo("main", 0, 1, 11, FunctionType::Static));
-	vm_.add_constant_entry(new FunctionInfo("my_func", 0, 1, 0, FunctionType::Static));
+	vm_.constant_pool().add_func(new FunctionInfo("main", 0, 1, 11, FunctionType::Static));
+	vm_.constant_pool().add_func(new FunctionInfo("my_func", 0, 1, 0, FunctionType::Static));
 	vm_.set_entry_point(11);
 
 	std::vector<int> p =
@@ -124,7 +124,7 @@ TEST_F(GCTest, SWEEP_OBJECTS_FROM_POPPED_STACK_FRAME)
 
 TEST_F(GCTest, MARK_SWEEP_ARRAYS)
 {
-	vm_.add_constant_entry(new FunctionInfo("main", 0, 4, 0, FunctionType::Static));
+	vm_.constant_pool().add_func(new FunctionInfo("main", 0, 4, 0, FunctionType::Static));
 	vm_.set_entry_point(0);
 
 	std::vector<int> p =

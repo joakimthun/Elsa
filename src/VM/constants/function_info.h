@@ -3,8 +3,6 @@
 #include <cstddef>
 #include <string>
 
-#include "constant_entry.h"
-
 namespace elsa {
 	namespace vm {
 
@@ -14,7 +12,7 @@ namespace elsa {
 			Member
 		};
 
-		class FunctionInfo : public ConstantEntry
+		class FunctionInfo
 		{
 		public:
 			FunctionInfo(const std::string& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type);

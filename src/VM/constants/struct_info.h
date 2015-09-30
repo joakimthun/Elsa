@@ -8,13 +8,12 @@
 #include "../exceptions/elsa_exception.h"
 #include "../exceptions/runtime_exception.h"
 #include "../types/otype.h"
-#include "constant_entry.h"
 #include "field_info.h"
 
 namespace elsa {
 	namespace vm {
 
-		class StructInfo : public ConstantEntry
+		class StructInfo
 		{
 		public:
 			StructInfo(const std::string& name);

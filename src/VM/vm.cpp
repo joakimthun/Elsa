@@ -80,9 +80,9 @@ namespace elsa {
 			code_length_ = code.size();
 		}
 
-		void VM::add_constant_entry(ConstantEntry* entry)
+		ConstantPool& VM::constant_pool()
 		{
-			constant_pool_.add_entry(entry);
+			return constant_pool_;
 		}
 
 		void VM::set_entry_point(std::size_t entry_point)
@@ -156,7 +156,7 @@ namespace elsa {
 			}
 			case fconst: { 
 				auto index = code_[pc_++];
-				auto f = constant_pool_.get_float_at(index);
+				auto f = constant_pool_.get_float(index);
 				current_frame_->push(Object(f->get_value()));
 				break; 
 			}
@@ -234,7 +234,7 @@ namespace elsa {
 			}
 			case sconst: {
 				auto index = code_[pc_++];
-				auto str = constant_pool_.get_string_at(index)->get_value();
+				auto str = constant_pool_.get_string(index)->get_value();
 				auto str_obj = heap_.alloc_array(OType::Char, str.length());
 
 				for (std::wstring::size_type i = 0; i < str.size(); ++i)
@@ -329,7 +329,7 @@ namespace elsa {
 			case call: {
 				auto addr = code_[pc_];
 
-				auto f = constant_pool_.get_func_at(addr);
+				auto f = constant_pool_.get_func(addr);
 				auto sf = new StackFrame(f, pc_ + 1, call_stack_.current());
 				call_stack_.push(sf);
 
@@ -382,7 +382,7 @@ namespace elsa {
 			}
 			case new_struct: {
 				auto i = code_[pc_++];
-				auto si = constant_pool_.get_struct_at(i);
+				auto si = constant_pool_.get_struct(i);
 				current_frame_->push(heap_.alloc_struct(si));
 				break;
 			}
@@ -441,7 +441,7 @@ namespace elsa {
 
 		void VM::push_main()
 		{
-			call_stack_.push(new StackFrame(constant_pool_.get_func_at(entry_point_), entry_point_, nullptr));
+			call_stack_.push(new StackFrame(constant_pool_.get_func(entry_point_), entry_point_, nullptr));
 		}
 
 		void VM::next_opcode()

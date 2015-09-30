@@ -143,12 +143,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="call_stack.cpp" />
-    <ClCompile Include="constants\char_entry.cpp" />
+    <ClCompile Include="constants\char_info.cpp" />
     <ClCompile Include="constants\constant_pool.cpp" />
     <ClCompile Include="constants\field_info.cpp" />
-    <ClCompile Include="constants\float_entry.cpp" />
+    <ClCompile Include="constants\float_info.cpp" />
     <ClCompile Include="constants\function_info.cpp" />
-    <ClCompile Include="constants\string_entry.cpp" />
+    <ClCompile Include="constants\string_info.cpp" />
     <ClCompile Include="constants\struct_info.cpp" />
     <ClCompile Include="elsa_vm.cpp" />
     <ClCompile Include="GC\gc.cpp" />
@@ -159,14 +159,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="call_stack.h" />
-    <ClInclude Include="constants\array_info.h" />
-    <ClInclude Include="constants\char_entry.h" />
+    <ClInclude Include="types\array_info.h" />
+    <ClInclude Include="constants\char_info.h" />
     <ClInclude Include="constants\constant_pool.h" />
-    <ClInclude Include="constants\constant_entry.h" />
     <ClInclude Include="constants\field_info.h" />
-    <ClInclude Include="constants\float_entry.h" />
+    <ClInclude Include="constants\float_info.h" />
     <ClInclude Include="constants\function_info.h" />
-    <ClInclude Include="constants\string_entry.h" />
+    <ClInclude Include="constants\string_info.h" />
     <ClInclude Include="constants\struct_info.h" />
     <ClInclude Include="exceptions\elsa_exception.h" />
     <ClInclude Include="exceptions\runtime_exception.h" />

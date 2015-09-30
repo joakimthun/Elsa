@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace vm {
 				
-		StackFrame::StackFrame(FunctionInfo* function, std::size_t ret_addr, StackFrame* parent)
+		StackFrame::StackFrame(const FunctionInfo* function, std::size_t ret_addr, StackFrame* parent)
 			:
 			function_(function),
 			ret_addr_(ret_addr),

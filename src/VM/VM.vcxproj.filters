@@ -30,9 +30,6 @@
     <ClInclude Include="constants\constant_pool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="constants\constant_entry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="exceptions\elsa_exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -60,19 +57,19 @@
     <ClInclude Include="constants\field_info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="constants\float_entry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="constants\array_info.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="constants\char_entry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="constants\string_entry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GC\gc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types\array_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\float_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\char_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\string_info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -107,16 +104,16 @@
     <ClCompile Include="constants\field_info.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="constants\float_entry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="constants\char_entry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="constants\string_entry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GC\gc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\float_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\char_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\string_info.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

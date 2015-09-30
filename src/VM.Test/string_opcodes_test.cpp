@@ -10,8 +10,8 @@ protected:
 	{
 		int ep = 0;
 
-		vm_.add_constant_entry(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
-		vm_.add_constant_entry(new StringEntry(L"Hello World!"));
+		vm_.constant_pool().add_func(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
+		vm_.constant_pool().add_string(new StringInfo(L"Hello World!"));
 		vm_.set_entry_point(ep);
 	}
 
@@ -24,7 +24,7 @@ TEST_F(StringOpCodesTest, SCONST)
 {
 	std::vector<int> p =
 	{
-		sconst, 1,
+		sconst, 0,
 		s_local, 0,
 
 		// H

@@ -11,7 +11,7 @@ namespace elsa {
 
 		Heap::~Heap() {}
 
-		Object Heap::alloc_struct(StructInfo* si)
+		Object Heap::alloc_struct(const StructInfo* si)
 		{
 			auto ptr = malloc(si->get_size());
 

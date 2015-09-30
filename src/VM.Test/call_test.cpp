@@ -20,8 +20,8 @@ TEST(STATIC_CALL, RETURN_INT)
 
 	auto vm = VM(p);
 
-	vm.add_constant_entry(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
-	vm.add_constant_entry(new FunctionInfo("print", 0, 0, 0, FunctionType::Static));
+	vm.constant_pool().add_func(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+	vm.constant_pool().add_func(new FunctionInfo("print", 0, 0, 0, FunctionType::Static));
 	vm.set_entry_point(ep);
 
 	vm.execute();

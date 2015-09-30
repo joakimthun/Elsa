@@ -1,14 +1,12 @@
 #pragma once
 
-#include "constant_entry.h"
-
 namespace elsa {
 	namespace vm {
 
-		class CharEntry : public ConstantEntry
+		class CharInfo
 		{
 		public:
-			CharEntry(wchar_t value);
+			CharInfo(wchar_t value);
 
 			wchar_t get_value() const;
 

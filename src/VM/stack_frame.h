@@ -15,7 +15,7 @@ namespace elsa {
 			friend class GC;
 
 		public:
-			StackFrame(FunctionInfo* function, std::size_t ret_addr, StackFrame* parent);
+			StackFrame(const FunctionInfo* function, std::size_t ret_addr, StackFrame* parent);
 			~StackFrame();
 
 			void push(Object o);
@@ -34,7 +34,7 @@ namespace elsa {
 			Object* locals_;
 			std::size_t locals_size_;
 			std::size_t ret_addr_;
-			FunctionInfo* function_;
+			const FunctionInfo* function_;
 			StackFrame* parent_;
 		};
 

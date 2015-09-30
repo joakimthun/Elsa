@@ -5,7 +5,7 @@
 
 #include "../exceptions/runtime_exception.h"
 #include "../constants/struct_info.h"
-#include "../constants/array_info.h"
+#include "../types/array_info.h"
 
 namespace elsa {
 	namespace vm {
@@ -27,7 +27,7 @@ namespace elsa {
 
 			bool marked;
 			void* ptr;
-			StructInfo* si;
+			const StructInfo* si;
 			std::unique_ptr<ArrayInfo> ai;
 			GCObjectType type;
 			GCObject* next;

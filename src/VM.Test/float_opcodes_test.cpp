@@ -10,13 +10,13 @@ protected:
 	{
 		int ep = 0;
 
-		vm_.add_constant_entry(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
-		vm_.add_constant_entry(new FloatEntry(10.1f)); // index: 1
-		vm_.add_constant_entry(new FloatEntry(20.2f)); // index: 2
-		vm_.add_constant_entry(new FloatEntry(30.3f)); // index: 3
-		vm_.add_constant_entry(new FloatEntry(40.4f)); // index: 4
-		vm_.add_constant_entry(new FloatEntry(50.5f)); // index: 5
-		vm_.add_constant_entry(new FloatEntry(-10.6f)); // index: 6
+		vm_.constant_pool().add_func(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+		vm_.constant_pool().add_float(new FloatInfo(10.1f)); // index: 0
+		vm_.constant_pool().add_float(new FloatInfo(20.2f)); // index: 1
+		vm_.constant_pool().add_float(new FloatInfo(30.3f)); // index: 2
+		vm_.constant_pool().add_float(new FloatInfo(40.4f)); // index: 3
+		vm_.constant_pool().add_float(new FloatInfo(50.5f)); // index: 4
+		vm_.constant_pool().add_float(new FloatInfo(-10.6f)); // index: 5
 
 		vm_.set_entry_point(ep);
 	}
@@ -30,7 +30,7 @@ TEST_F(FloatOpCodesTest, FCONST)
 {
 	std::vector<int> p =
 	{
-		fconst, 2
+		fconst, 1
 	};
 
 	vm_.set_program(p);
@@ -44,8 +44,8 @@ TEST_F(FloatOpCodesTest, FADD)
 {
 	std::vector<int> p =
 	{
+		fconst, 1,
 		fconst, 2,
-		fconst, 3,
 		fadd
 	};
 
@@ -59,8 +59,8 @@ TEST_F(FloatOpCodesTest, FMUL)
 {
 	std::vector<int> p =
 	{
+		fconst, 1,
 		fconst, 2,
-		fconst, 3,
 		fmul
 	};
 
@@ -74,8 +74,8 @@ TEST_F(FloatOpCodesTest, FSUB)
 {
 	std::vector<int> p =
 	{
-		fconst, 1,
-		fconst, 1,
+		fconst, 0,
+		fconst, 0,
 		fsub
 	};
 
@@ -90,8 +90,8 @@ TEST_F(FloatOpCodesTest, FSUB_NEG_VALUE)
 
 	std::vector<int> p =
 	{
+		fconst, 2,
 		fconst, 3,
-		fconst, 4,
 		fsub
 	};
 
@@ -105,8 +105,8 @@ TEST_F(FloatOpCodesTest, FDIV)
 {
 	std::vector<int> p =
 	{
-		fconst, 4,
-		fconst, 2,
+		fconst, 3,
+		fconst, 1,
 		fdiv
 	};
 
@@ -120,8 +120,8 @@ TEST_F(FloatOpCodesTest, FDIV_SAME_VALUE)
 {
 	std::vector<int> p =
 	{
-		fconst, 2,
-		fconst, 2,
+		fconst, 1,
+		fconst, 1,
 		fdiv
 	};
 
@@ -135,8 +135,8 @@ TEST_F(FloatOpCodesTest, FDIV_GT)
 {
 	std::vector<int> p =
 	{
-		fconst, 1,
-		fconst, 4,
+		fconst, 0,
+		fconst, 3,
 		fdiv
 	};
 
@@ -150,8 +150,8 @@ TEST_F(FloatOpCodesTest, BR_FEQ_JUMP)
 {
 	std::vector<int> p =
 	{
-		fconst, 1,
-		fconst, 1,
+		fconst, 0,
+		fconst, 0,
 		br_feq, 10,
 		halt
 	};
@@ -169,8 +169,8 @@ TEST_F(FloatOpCodesTest, BR_FEQ_NO_JUMP)
 
 	std::vector<int> p =
 	{
+		fconst, 0,
 		fconst, 1,
-		fconst, 2,
 		br_feq, 0,
 		halt
 	};
@@ -187,8 +187,8 @@ TEST_F(FloatOpCodesTest, BR_FNEQ_JUMP)
 {
 	std::vector<int> p =
 	{
+		fconst, 0,
 		fconst, 1,
-		fconst, 2,
 		br_fneq, 10,
 		halt
 	};
@@ -206,8 +206,8 @@ TEST_F(FloatOpCodesTest, BR_FNEQ_NO_JUMP)
 
 	std::vector<int> p =
 	{
-		fconst, 1,
-		fconst, 1,
+		fconst, 0,
+		fconst, 0,
 		br_fneq, 0,
 		halt
 	};
@@ -224,8 +224,8 @@ TEST_F(FloatOpCodesTest, FEQ_TRUE)
 {
 	std::vector<int> p =
 	{
-		fconst, 1,
-		fconst, 1,
+		fconst, 0,
+		fconst, 0,
 		feq,
 		halt
 	};
@@ -240,8 +240,8 @@ TEST_F(FloatOpCodesTest, FEQ_FALSE)
 {
 	std::vector<int> p =
 	{
+		fconst, 0,
 		fconst, 1,
-		fconst, 2,
 		feq,
 		halt
 	};
@@ -256,8 +256,8 @@ TEST_F(FloatOpCodesTest, FNEQ_TRUE)
 {
 	std::vector<int> p =
 	{
+		fconst, 0,
 		fconst, 1,
-		fconst, 2,
 		fneq,
 		halt
 	};
@@ -272,8 +272,8 @@ TEST_F(FloatOpCodesTest, FNEQ_FALSE)
 {
 	std::vector<int> p =
 	{
-		fconst, 1,
-		fconst, 1,
+		fconst, 0,
+		fconst, 0,
 		fneq,
 		halt
 	};

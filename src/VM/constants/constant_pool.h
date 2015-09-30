@@ -3,14 +3,15 @@
 #include <memory>
 #include <vector>
 #include <cstddef>
+#include <map>
+#include <stdexcept>
 
 #include "../exceptions/elsa_exception.h"
-#include "constant_entry.h"
 #include "function_info.h"
 #include "struct_info.h"
-#include "float_entry.h"
-#include "char_entry.h"
-#include "string_entry.h"
+#include "float_info.h"
+#include "char_info.h"
+#include "string_info.h"
 
 namespace elsa {
 	namespace vm {
@@ -18,18 +19,28 @@ namespace elsa {
 		class ConstantPool
 		{
 		public:
-			ConstantPool();
-			~ConstantPool();
 
-			void add_entry(ConstantEntry* entry);
-			FunctionInfo* get_func_at(std::size_t addr);
-			StructInfo* get_struct_at(std::size_t index);
-			FloatEntry* get_float_at(std::size_t index);
-			CharEntry* get_char_at(std::size_t index);
-			StringEntry* get_string_at(std::size_t index);
+			void add_func(FunctionInfo* entry);
+			const FunctionInfo* get_func(std::size_t addr) const;
+
+			void add_struct(StructInfo* entry);
+			const StructInfo* get_struct(std::size_t index) const;
+
+			void add_float(FloatInfo* entry);
+			const FloatInfo* get_float(std::size_t index) const;
+
+			void add_char(CharInfo* entry);
+			const CharInfo* get_char_at(std::size_t index) const;
+
+			void add_string(StringInfo* entry);
+			const StringInfo* get_string(std::size_t index) const;
 
 		private:
-			std::vector<std::unique_ptr<ConstantEntry>> entries_;
+			std::map<std::size_t, std::unique_ptr<FunctionInfo>> functions_;
+			std::vector<std::unique_ptr<StructInfo>> structs_;
+			std::vector<std::unique_ptr<FloatInfo>> floats_;
+			std::vector<std::unique_ptr<CharInfo>> chars_;
+			std::vector<std::unique_ptr<StringInfo>> strings_;
 		};
 
 	}

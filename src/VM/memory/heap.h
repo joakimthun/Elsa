@@ -25,7 +25,7 @@ namespace elsa {
 			Heap();
 			~Heap();
 
-			Object alloc_struct(StructInfo* si);
+			Object alloc_struct(const StructInfo* si);
 			Object alloc_array(OType type, std::size_t size);
 			void resize_array(Object& instance, std::size_t new_size);
 

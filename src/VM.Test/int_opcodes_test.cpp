@@ -10,7 +10,7 @@ protected:
 	{
 		int ep = 0;
 
-		vm_.add_constant_entry(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+		vm_.constant_pool().add_func(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
 		vm_.set_entry_point(ep);
 	}
 

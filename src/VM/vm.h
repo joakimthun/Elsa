@@ -11,7 +11,6 @@
 #include "call_stack.h"
 #include "memory\heap.h"
 #include "constants\constant_pool.h"
-#include "constants\constant_entry.h"
 #include "constants\function_info.h"
 #include "exceptions\runtime_exception.h"
 #include "GC\gc.h"
@@ -30,7 +29,7 @@ namespace elsa {
 			void execute_one();
 			void skip_one();
 			void set_program(const std::vector<int>& code);
-			void add_constant_entry(ConstantEntry* entry);
+			ConstantPool& constant_pool();
 			void set_entry_point(std::size_t entry_point);
 			Object eval_stack_top() const;
 			std::size_t get_pc() const;

@@ -1,14 +1,12 @@
 #pragma once
 
-#include "constant_entry.h"
-
 namespace elsa {
 	namespace vm {
 
-		class FloatEntry : public ConstantEntry
+		class FloatInfo
 		{
 		public:
-			FloatEntry(float value);
+			FloatInfo(float value);
 
 			float get_value() const;
 

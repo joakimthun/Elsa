@@ -9,7 +9,7 @@ protected:
 	virtual void SetUp()
 	{
 		int ep = 0;
-		vm_.add_constant_entry(new FunctionInfo("main", 0, 3, ep, FunctionType::Static));
+		vm_.constant_pool().add_func(new FunctionInfo("main", 0, 3, ep, FunctionType::Static));
 		vm_.set_entry_point(ep);
 
 		auto si = new StructInfo("my_struct");
@@ -18,17 +18,17 @@ protected:
 		si->add_field(new FieldInfo("field2", OType::Int));
 		si->add_field(new FieldInfo("field3", OType::Float));
 		si->add_field(new FieldInfo("field4", OType::Int));
-		vm_.add_constant_entry(si);
+		vm_.constant_pool().add_struct(si);
 
-		vm_.add_constant_entry(new FloatEntry(12.0f));
-		vm_.add_constant_entry(new FloatEntry(99.0f));
+		vm_.constant_pool().add_float(new FloatInfo(12.0f));
+		vm_.constant_pool().add_float(new FloatInfo(99.0f));
 
 		auto si2 = new StructInfo("my_struct2");
 		si2->add_field(new FieldInfo("field0", OType::GCOPtr));
 		si2->add_field(new FieldInfo("field1", OType::Int));
 		si2->add_field(new FieldInfo("field2", OType::GCOPtr));
 
-		vm_.add_constant_entry(si2);
+		vm_.constant_pool().add_struct(si2);
 
 		auto si3 = new StructInfo("my_struct3");
 		si3->add_field(new FieldInfo("field0", OType::GCOPtr));
@@ -37,7 +37,7 @@ protected:
 		si3->add_field(new FieldInfo("field3", OType::Char));
 		si3->add_field(new FieldInfo("field4", OType::Float));
 
-		vm_.add_constant_entry(si3);
+		vm_.constant_pool().add_struct(si3);
 	}
 
 	virtual void TearDown() {}
@@ -49,7 +49,7 @@ TEST_F(StructTest, NEW)
 {
 	std::vector<int> p =
 	{
-		new_struct, 1
+		new_struct, 0
 	};
 
 	vm_.set_program(p);
@@ -69,7 +69,7 @@ TEST_F(StructTest, FIELD_STORE_LOAD)
 {
 	std::vector<int> p =
 	{
-		new_struct, 1,
+		new_struct, 0,
 		s_local, 0,
 
 		// Store 77 in field 0 (int)
@@ -79,7 +79,7 @@ TEST_F(StructTest, FIELD_STORE_LOAD)
 
 		// Store 12.0 in field 1 (float)
 		l_local, 0,
-		fconst, 2,
+		fconst, 0,
 		s_field, 1,
 
 		// Store 100 in field 2 (int)
@@ -89,7 +89,7 @@ TEST_F(StructTest, FIELD_STORE_LOAD)
 
 		// Store 99.0 in field 3 (float)
 		l_local, 0,
-		fconst, 3,
+		fconst, 1,
 		s_field, 3,
 
 		// Store -1829 in field 4 (int)
@@ -149,7 +149,7 @@ TEST_F(StructTest, STRUCT_FIELD_STORE_LOAD)
 {
 	std::vector<int> p =
 	{
-		new_struct, 1,
+		new_struct, 0,
 		s_local, 0,
 
 		// Store 77 in field 0 (int)
@@ -158,7 +158,7 @@ TEST_F(StructTest, STRUCT_FIELD_STORE_LOAD)
 		iconst, 77,
 		s_field, 0,
 
-		new_struct, 4,
+		new_struct, 1,
 		s_local, 1,
 
 		// Store a pointer to the fist struct in field 0 of the second struct
@@ -200,7 +200,7 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 {
 	std::vector<int> p =
 	{
-		new_struct, 1,
+		new_struct, 0,
 		s_local, 0,
 
 		l_local, 0,
@@ -208,7 +208,7 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 		s_field, 0,
 
 		l_local, 0,
-		fconst, 2,
+		fconst, 0,
 		s_field, 1,
 
 		l_local, 0,
@@ -216,14 +216,14 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 		s_field, 2,
 
 		l_local, 0,
-		fconst, 3,
+		fconst, 1,
 		s_field, 3,
 
 		l_local, 0,
 		iconst, -1829,
 		s_field, 4,
 
-		new_struct, 4,
+		new_struct, 1,
 		s_local, 1,
 
 		l_local, 1,
@@ -235,7 +235,7 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 		iconst, 12378,
 		s_field, 1,
 
-		new_struct, 4,
+		new_struct, 1,
 		halt,
 		s_local, 2,
 
@@ -329,15 +329,9 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 
 TEST_F(StructTest, FIELD_DEFAULT_VALUES)
 {
-	/*si3->add_field(new FieldInfo("field0", OType::GCOPtr));
-	si3->add_field(new FieldInfo("field1", OType::Int));
-	si3->add_field(new FieldInfo("field2", OType::Bool));
-	si3->add_field(new FieldInfo("field3", OType::Char));
-	si3->add_field(new FieldInfo("field4", OType::Float));*/
-
 	std::vector<int> p =
 	{
-		new_struct, 5,
+		new_struct, 2,
 		s_local, 0,
 		l_local, 0,
 		halt,
