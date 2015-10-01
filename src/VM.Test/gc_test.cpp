@@ -2,6 +2,7 @@
 
 #include "vm.h"
 
+using namespace elsa;
 using namespace elsa::vm;
 
 class GCTest : public testing::Test {
@@ -9,13 +10,13 @@ protected:
 	virtual void SetUp()
 	{
 		auto si = new StructInfo("my_struct");
-		si->add_field(new FieldInfo("field0", OType::GCOPtr));
-		si->add_field(new FieldInfo("field1", OType::GCOPtr));
-		si->add_field(new FieldInfo("field2", OType::GCOPtr));
+		si->add_field(new FieldInfo("field0", elsa::OType::GCOPtr));
+		si->add_field(new FieldInfo("field1", elsa::OType::GCOPtr));
+		si->add_field(new FieldInfo("field2", elsa::OType::GCOPtr));
 		vm_.constant_pool().add_struct(si);
 
 		auto si2 = new StructInfo("my_struct2");
-		si2->add_field(new FieldInfo("field0", OType::Int));
+		si2->add_field(new FieldInfo("field0", elsa::OType::Int));
 		vm_.constant_pool().add_struct(si2);
 	}
 

@@ -1,7 +1,6 @@
 #pragma once
 
 namespace elsa {
-	namespace vm {
 
 		class CharInfo
 		{
@@ -14,5 +13,4 @@ namespace elsa {
 			wchar_t value_;
 		};
 
-	}
 }

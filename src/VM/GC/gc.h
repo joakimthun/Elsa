@@ -4,7 +4,7 @@
 
 #include "../memory/heap.h"
 #include "../stack_frame.h"
-#include "../exceptions/runtime_exception.h"
+#include "exceptions/runtime_exception.h"
 #include "../types/gcobject.h"
 
 namespace elsa {

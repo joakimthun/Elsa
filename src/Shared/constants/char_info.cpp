@@ -1,7 +1,6 @@
 #include "char_info.h"
 
 namespace elsa {
-	namespace vm {
 
 		CharInfo::CharInfo(wchar_t value)
 			:
@@ -12,6 +11,5 @@ namespace elsa {
 		{
 			return value_;
 		}
-	}
 }
 

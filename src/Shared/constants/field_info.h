@@ -4,12 +4,11 @@
 #include <string>
 
 #include "../exceptions/elsa_exception.h"
-#include "../types/otype.h"
+#include "..\object_types\otype.h"
 
 struct GCObject;
 
 namespace elsa {
-	namespace vm {
 
 		class FieldInfo
 		{
@@ -32,5 +31,4 @@ namespace elsa {
 			std::size_t num_bytes_offset_;
 		};
 
-	}
 }

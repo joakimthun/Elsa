@@ -1,7 +1,6 @@
 #pragma once
 
 namespace elsa {
-	namespace vm {
 
 		enum OType : int
 		{
@@ -14,5 +13,4 @@ namespace elsa {
 			GCOPtr,
 		};
 
-	}
 }

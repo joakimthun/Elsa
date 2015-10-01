@@ -3,7 +3,6 @@
 #include <string>
 
 namespace elsa {
-	namespace vm {
 
 		class StringInfo
 		{
@@ -16,5 +15,4 @@ namespace elsa {
 			std::wstring value_;
 		};
 
-	}
 }

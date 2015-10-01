@@ -2,6 +2,7 @@
 
 #include "vm.h"
 
+using namespace elsa;
 using namespace elsa::vm;
 
 class StructTest : public testing::Test {
@@ -13,29 +14,29 @@ protected:
 		vm_.set_entry_point(ep);
 
 		auto si = new StructInfo("my_struct");
-		si->add_field(new FieldInfo("field0", OType::Int));
-		si->add_field(new FieldInfo("field1", OType::Float));
-		si->add_field(new FieldInfo("field2", OType::Int));
-		si->add_field(new FieldInfo("field3", OType::Float));
-		si->add_field(new FieldInfo("field4", OType::Int));
+		si->add_field(new FieldInfo("field0", elsa::OType::Int));
+		si->add_field(new FieldInfo("field1", elsa::OType::Float));
+		si->add_field(new FieldInfo("field2", elsa::OType::Int));
+		si->add_field(new FieldInfo("field3", elsa::OType::Float));
+		si->add_field(new FieldInfo("field4", elsa::OType::Int));
 		vm_.constant_pool().add_struct(si);
 
 		vm_.constant_pool().add_float(new FloatInfo(12.0f));
 		vm_.constant_pool().add_float(new FloatInfo(99.0f));
 
 		auto si2 = new StructInfo("my_struct2");
-		si2->add_field(new FieldInfo("field0", OType::GCOPtr));
-		si2->add_field(new FieldInfo("field1", OType::Int));
-		si2->add_field(new FieldInfo("field2", OType::GCOPtr));
+		si2->add_field(new FieldInfo("field0", elsa::OType::GCOPtr));
+		si2->add_field(new FieldInfo("field1", elsa::OType::Int));
+		si2->add_field(new FieldInfo("field2", elsa::OType::GCOPtr));
 
 		vm_.constant_pool().add_struct(si2);
 
 		auto si3 = new StructInfo("my_struct3");
-		si3->add_field(new FieldInfo("field0", OType::GCOPtr));
-		si3->add_field(new FieldInfo("field1", OType::Int));
-		si3->add_field(new FieldInfo("field2", OType::Bool));
-		si3->add_field(new FieldInfo("field3", OType::Char));
-		si3->add_field(new FieldInfo("field4", OType::Float));
+		si3->add_field(new FieldInfo("field0", elsa::OType::GCOPtr));
+		si3->add_field(new FieldInfo("field1", elsa::OType::Int));
+		si3->add_field(new FieldInfo("field2", elsa::OType::Bool));
+		si3->add_field(new FieldInfo("field3", elsa::OType::Char));
+		si3->add_field(new FieldInfo("field4", elsa::OType::Float));
 
 		vm_.constant_pool().add_struct(si3);
 	}
@@ -57,7 +58,7 @@ TEST_F(StructTest, NEW)
 
 	auto obj = vm_.eval_stack_top();
 
-	ASSERT_EQ(OType::GCOPtr, obj.get_type());
+	ASSERT_EQ(elsa::OType::GCOPtr, obj.get_type());
 
 	auto si = obj.gco()->si;
 

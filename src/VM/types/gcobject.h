@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <memory>
 
-#include "../exceptions/runtime_exception.h"
-#include "../constants/struct_info.h"
+#include "exceptions/runtime_exception.h"
+#include "constants/struct_info.h"
 #include "../types/array_info.h"
 
 namespace elsa {

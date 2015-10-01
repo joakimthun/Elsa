@@ -76,7 +76,7 @@ namespace elsa {
 
 		void GC::mark(Object& obj)
 		{
-			if (obj.get_type() != OType::GCOPtr)
+			if (obj.get_type() != elsa::OType::GCOPtr)
 				return;
 
 			auto gco = obj.gco();
@@ -99,7 +99,7 @@ namespace elsa {
 			auto gco = obj.gco();
 			for (auto& field : gco->si->get_fields())
 			{
-				if (field->get_type() != OType::GCOPtr)
+				if (field->get_type() != elsa::OType::GCOPtr)
 					continue;
 
 				auto field_obj = heap_->load_field(obj, field.get());
@@ -115,7 +115,7 @@ namespace elsa {
 		{
 			auto gco = obj.gco();
 
-			if (gco->ai->type != OType::GCOPtr)
+			if (gco->ai->type != elsa::OType::GCOPtr)
 				return;
 
 			for (std::size_t i = 0; i < gco->ai->num_elements; ++i)

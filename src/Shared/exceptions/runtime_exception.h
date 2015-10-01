@@ -3,7 +3,6 @@
 #include "elsa_exception.h"
 
 namespace elsa {
-	namespace vm {
 
 		class RuntimeException : public ElsaException
 		{
@@ -16,5 +15,4 @@ namespace elsa {
 			}
 		};
 
-	}
 }

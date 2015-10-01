@@ -1,7 +1,6 @@
 #include "field_info.h"
 
 namespace elsa {
-	namespace vm {
 
 		FieldInfo::FieldInfo(const std::string& name, OType type)
 			:
@@ -60,6 +59,5 @@ namespace elsa {
 				throw ElsaException("Invalid field type.");
 			}
 		}
-	}
 }
 

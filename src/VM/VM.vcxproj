@@ -88,6 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Dev\VS\Elsa\src\Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,6 +117,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Dev\VS\Elsa\src\Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,13 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="call_stack.cpp" />
-    <ClCompile Include="constants\char_info.cpp" />
     <ClCompile Include="constants\constant_pool.cpp" />
-    <ClCompile Include="constants\field_info.cpp" />
-    <ClCompile Include="constants\float_info.cpp" />
-    <ClCompile Include="constants\function_info.cpp" />
-    <ClCompile Include="constants\string_info.cpp" />
-    <ClCompile Include="constants\struct_info.cpp" />
     <ClCompile Include="elsa_vm.cpp" />
     <ClCompile Include="GC\gc.cpp" />
     <ClCompile Include="memory\heap.cpp" />
@@ -160,23 +156,18 @@
   <ItemGroup>
     <ClInclude Include="call_stack.h" />
     <ClInclude Include="types\array_info.h" />
-    <ClInclude Include="constants\char_info.h" />
     <ClInclude Include="constants\constant_pool.h" />
-    <ClInclude Include="constants\field_info.h" />
-    <ClInclude Include="constants\float_info.h" />
-    <ClInclude Include="constants\function_info.h" />
-    <ClInclude Include="constants\string_info.h" />
-    <ClInclude Include="constants\struct_info.h" />
-    <ClInclude Include="exceptions\elsa_exception.h" />
-    <ClInclude Include="exceptions\runtime_exception.h" />
     <ClInclude Include="GC\gc.h" />
     <ClInclude Include="memory\heap.h" />
-    <ClInclude Include="opcodes.h" />
     <ClInclude Include="stack_frame.h" />
     <ClInclude Include="types\gcobject.h" />
     <ClInclude Include="types\object.h" />
-    <ClInclude Include="types\otype.h" />
     <ClInclude Include="vm.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.vcxproj">
+      <Project>{ec7dada4-fc2a-442c-9dcf-5ba06da8d653}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

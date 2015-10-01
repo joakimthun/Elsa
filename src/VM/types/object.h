@@ -1,9 +1,9 @@
 #pragma once
 
-#include "otype.h"
+#include "object_types/otype.h"
 #include "gcobject.h"
-#include "../exceptions/runtime_exception.h"
-#include "../constants/struct_info.h"
+#include "exceptions/runtime_exception.h"
+#include "constants/struct_info.h"
 
 namespace elsa {
 	namespace vm {

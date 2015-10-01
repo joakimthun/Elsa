@@ -1,7 +1,6 @@
 #include "string_info.h"
 
 namespace elsa {
-	namespace vm {
 
 		StringInfo::StringInfo(const std::wstring& value)
 			:
@@ -13,6 +12,5 @@ namespace elsa {
 			return value_;
 		}
 
-	}
 }
 

@@ -1,7 +1,6 @@
 #include "float_info.h"
 
 namespace elsa {
-	namespace vm {
 
 		FloatInfo::FloatInfo(float value)
 			:
@@ -14,5 +13,4 @@ namespace elsa {
 			return value_;
 		}
 
-	}
 }

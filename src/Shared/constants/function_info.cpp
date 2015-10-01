@@ -1,7 +1,6 @@
 #include "function_info.h"
 
 namespace elsa {
-	namespace vm {
 
 		FunctionInfo::FunctionInfo(const std::string& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type)
 			:
@@ -39,5 +38,4 @@ namespace elsa {
 			return type_;
 		}
 
-	}
 }

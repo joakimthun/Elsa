@@ -1,7 +1,6 @@
 #pragma once
 
 namespace elsa {
-	namespace vm {
 
 		class FloatInfo
 		{
@@ -14,5 +13,4 @@ namespace elsa {
 			float value_;
 		};
 
-	}
 }

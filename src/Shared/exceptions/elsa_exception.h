@@ -4,7 +4,6 @@
 #include <string>
 
 namespace elsa {
-	namespace vm {
 
 		class ElsaException : public std::exception
 		{
@@ -20,5 +19,4 @@ namespace elsa {
 			std::string message_;
 		};
 
-	}
 }

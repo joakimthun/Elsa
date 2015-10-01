@@ -4,7 +4,6 @@
 #include <string>
 
 namespace elsa {
-	namespace vm {
 
 		enum FunctionType
 		{
@@ -32,5 +31,4 @@ namespace elsa {
 			FunctionType type_;
 		};
 
-	}
 }

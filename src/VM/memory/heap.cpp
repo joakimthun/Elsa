@@ -33,7 +33,7 @@ namespace elsa {
 			return obj;
 		}
 
-		Object Heap::alloc_array(OType type, std::size_t size)
+		Object Heap::alloc_array(elsa::OType type, std::size_t size)
 		{
 			auto element_size = get_size_of_type(type);
 			auto array_size = element_size * size;
@@ -229,7 +229,7 @@ namespace elsa {
 			return base_ptr + f->get_num_bytes_offset();
 		}
 
-		std::size_t Heap::get_size_of_type(OType type)
+		std::size_t Heap::get_size_of_type(elsa::OType type)
 		{
 			switch (type)
 			{
@@ -287,7 +287,7 @@ namespace elsa {
 			}
 		}
 
-		Object Heap::get_default_value(OType type)
+		Object Heap::get_default_value(elsa::OType type)
 		{
 			switch(type)
 			{

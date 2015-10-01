@@ -5,13 +5,11 @@
 #include <vector>
 #include <memory>
 
-#include "../exceptions/elsa_exception.h"
-#include "../exceptions/runtime_exception.h"
-#include "../types/otype.h"
+#include "..\object_types\otype.h"
 #include "field_info.h"
+#include "../exceptions/runtime_exception.h"
 
 namespace elsa {
-	namespace vm {
 
 		class StructInfo
 		{
@@ -34,5 +32,4 @@ namespace elsa {
 			std::size_t size_;
 		};
 
-	}
 }

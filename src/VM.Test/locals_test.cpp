@@ -2,6 +2,7 @@
 
 #include "vm.h"
 
+using namespace elsa;
 using namespace elsa::vm;
 
 TEST(LOCALS, STORE_LOAD_INT)

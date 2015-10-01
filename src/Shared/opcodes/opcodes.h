@@ -3,7 +3,6 @@
 #include <cstdint>
 
 namespace elsa {
-	namespace vm {
 
 		enum OpCode : int
 		{
@@ -77,5 +76,4 @@ namespace elsa {
 
 		};
 
-	}
 }

@@ -2,6 +2,7 @@
 
 #include "vm.h"
 
+using namespace elsa;
 using namespace elsa::vm;
 
 class ArrayTest : public testing::Test {
@@ -16,7 +17,7 @@ protected:
 		vm_.constant_pool().add_float(new FloatInfo(-99.0f));
 
 		auto si = new StructInfo("my_struct");
-		si->add_field(new FieldInfo("field0", OType::Int));
+		si->add_field(new FieldInfo("field0", elsa::OType::Int));
 		vm_.constant_pool().add_struct(si);
 
 		vm_.set_entry_point(ep);
@@ -40,7 +41,7 @@ TEST_F(ArrayTest, NEW)
 
 	vm_.execute();
 
-	ASSERT_EQ(OType::GCOPtr, vm_.eval_stack_top().get_type());
+	ASSERT_EQ(elsa::OType::GCOPtr, vm_.eval_stack_top().get_type());
 	EXPECT_EQ(GCObjectType::Array, vm_.eval_stack_top().gco()->type);
 }
 

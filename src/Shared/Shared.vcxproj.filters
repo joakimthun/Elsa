@@ -15,58 +15,55 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="vm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stack_frame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="call_stack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="constants\constant_pool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="memory\heap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="types\object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="types\gcobject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GC\gc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="types\array_info.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="constants\char_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\field_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\float_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\function_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\string_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constants\struct_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="elsa_vm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="vm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="call_stack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stack_frame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="constants\constant_pool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="memory\heap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="types\object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GC\gc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="constants\char_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\field_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\float_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\function_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\string_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants\struct_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="exceptions\elsa_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="exceptions\runtime_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="object_types\otype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="opcodes\opcodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

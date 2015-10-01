@@ -6,12 +6,12 @@
 #include <map>
 #include <stdexcept>
 
-#include "../exceptions/elsa_exception.h"
-#include "function_info.h"
-#include "struct_info.h"
-#include "float_info.h"
-#include "char_info.h"
-#include "string_info.h"
+#include "exceptions\elsa_exception.h"
+#include "constants\function_info.h"
+#include "constants\struct_info.h"
+#include "constants\float_info.h"
+#include "constants\char_info.h"
+#include "constants\string_info.h"
 
 namespace elsa {
 	namespace vm {

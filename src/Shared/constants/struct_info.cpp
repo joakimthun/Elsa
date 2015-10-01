@@ -1,7 +1,6 @@
 #include "struct_info.h"
 
 namespace elsa {
-	namespace vm {
 
 		StructInfo::StructInfo(const std::string& name) 
 			:
@@ -45,5 +44,4 @@ namespace elsa {
 		{
 			size_ += field.get_size();
 		}
-	}
 }
