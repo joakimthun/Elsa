@@ -1,8 +1,9 @@
 #pragma once
 
-#include <sstream>
-#include <fstream>
-#include <codecvt>
+#include <memory>
+
+#include "source_file.h"
+#include "token.h"
 
 namespace elsa {
 	namespace compiler {
@@ -10,8 +11,12 @@ namespace elsa {
 		class Lexer
 		{
 		public:
-			Lexer();
-			~Lexer();
+			Lexer(SourceFile* file);
+
+			Token next_token();
+
+		private:
+			std::unique_ptr<SourceFile> file_;
 
 		};
 

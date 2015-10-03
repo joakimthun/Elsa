@@ -38,5 +38,8 @@
     <ClCompile Include="Lexing\source_file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lexing\token.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

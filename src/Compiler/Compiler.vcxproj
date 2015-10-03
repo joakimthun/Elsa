@@ -27,6 +27,7 @@
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
+    <ClCompile Include="lexing\token.cpp" />
     <ClCompile Include="Parsing\parser.cpp" />
   </ItemGroup>
   <ItemGroup>

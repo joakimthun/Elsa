@@ -5,19 +5,11 @@
 using namespace elsa;
 using namespace elsa::compiler;
 
-class LexerTest : public testing::Test {
-protected:
-	virtual void SetUp()
-	{
-
-	}
-
-	virtual void TearDown() {}
-
-	Lexer lexer_;
-};
-
-TEST_F(LexerTest, DUMMY)
+TEST(LexerTest, DUMMY)
 {
-	ASSERT_EQ(1, 1);
+	auto lexer = Lexer(new SourceFile("..\\Compiler.Test\\test_files\\source_file.el"));
+	auto next_token = lexer.next_token();
+
+	ASSERT_EQ(next_token.get_type(), TokenType::Var);
+	ASSERT_EQ(next_token.get_value(), std::wstring(L"var"));
 }

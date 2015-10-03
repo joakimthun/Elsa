@@ -10,12 +10,12 @@ namespace elsa {
 
 		wchar_t SourceFile::next_char()
 		{
-			if (stream_.good())
-			{
-				return stream_.get();
-			}
+			return stream_.get();
+		}
 
-			return L'\0';
+		bool SourceFile::good() const
+		{
+			return stream_.good();
 		}
 
 		void SourceFile::read_file(const char* filename)

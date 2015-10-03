@@ -16,6 +16,7 @@ namespace elsa {
 			SourceFile(const char* filename);
 
 			wchar_t next_char();
+			bool good() const;
 
 		private:
 			void read_file(const char* filename);
