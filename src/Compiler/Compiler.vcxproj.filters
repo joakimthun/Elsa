@@ -21,12 +21,21 @@
     <ClInclude Include="Parsing\parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lexing\source_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lexing\token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Parsing\parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lexing\source_file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,9 @@
 #pragma once
 
+#include <sstream>
+#include <fstream>
+#include <codecvt>
+
 namespace elsa {
 	namespace compiler {
 
