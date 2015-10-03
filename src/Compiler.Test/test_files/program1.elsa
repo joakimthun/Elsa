@@ -1,0 +1,6 @@
+// This is a comments and should be skipped
+
+func int add(int x, int y)
+{
+	return x + y;
+}

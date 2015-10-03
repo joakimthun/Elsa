@@ -8,7 +8,7 @@ using namespace elsa::compiler;
 
 TEST(SOURCE_FILE, READ_ENTIRE_FILE)
 {
-	SourceFile sf("..\\Compiler.Test\\test_files\\source_file.el");
+	SourceFile sf("..\\Compiler.Test\\test_files\\sf.txt");
 	std::wstring expected = L"var x = 10;";
 	std::wstring result;
 

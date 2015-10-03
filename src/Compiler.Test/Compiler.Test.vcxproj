@@ -30,7 +30,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="test_files\source_file.el" />
+    <None Include="test_files\program1.elsa" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test_files\sf.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8DA834F5-AED0-462A-B71C-D48163207003}</ProjectGuid>

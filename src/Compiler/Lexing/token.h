@@ -16,7 +16,15 @@ namespace elsa {
 			BoolLiteral,
 			StringLiteral,
 			Equals,
-			Semicolon
+			Semicolon,
+			Comma,
+			Func,
+			Return,
+			LBracket,
+			RBracket,
+			LParen,
+			RParen,
+			Plus,
 		};
 
 

@@ -27,6 +27,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="test_files\source_file.el" />
+    <None Include="test_files\program1.elsa" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test_files\sf.txt" />
   </ItemGroup>
 </Project>
