@@ -1,0 +1,20 @@
+// This is a comments and should be skipped
+
+struct Rect
+{
+	int h;
+	int w;
+	int x;
+	int y;
+
+	func int get_x()
+	{
+		return x;		
+	}
+
+	func void set_x(int x)
+	{
+		this.x = x;
+	}
+
+}

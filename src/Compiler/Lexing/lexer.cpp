@@ -19,7 +19,7 @@ namespace elsa {
 					consume();
 					continue;
 				}
-				else if(current_char_ == L'/')
+				else if(current_char_ == L'/' && file_->peek_char() == L'/')
 				{
 					comment();
 					continue;
@@ -35,38 +35,62 @@ namespace elsa {
 
 				switch (current_char_)
 				{
+				case L'"': {
+					return string();
+				}
+				case L'\'': {
+					return char_l();
+				}
 				case L'{': {
-					match(L'{');
-					return new Token(TokenType::LBracket, L"{");
+					return match_token(L'{', TokenType::LBracket);
 				}
 				case L'}': {
-					match(L'}');
-					return new Token(TokenType::RBracket, L"}");
+					return match_token(L'}', TokenType::RBracket);
 				}
 				case L'(': {
-					match(L'(');
-					return new Token(TokenType::LParen, L"(");
+					return match_token(L'(', TokenType::LParen);
 				}
 				case L')': {
-					match(L')');
-					return new Token(TokenType::RParen, L")");
-				}
-				case L',': {
-					match(L',');
-					return new Token(TokenType::Comma, L",");
-				}
-				case L'+': {
-					match(L'+');
-					return new Token(TokenType::Plus, L"+");
+					return match_token(L')', TokenType::RParen);
 				}
 				case L';': {
-					match(L';');
-					return new Token(TokenType::Semicolon, L";");
+					return match_token(L';', TokenType::Semicolon);
 				}
 				case L'.': {
-					match(L'.');
-					return new Token(TokenType::Dot, L".");
+					return match_token(L'.', TokenType::Dot);
 				}
+				case L',': {
+					return match_token(L',', TokenType::Comma);
+				}
+				case L'=': {
+					return match_token(L'=', TokenType::Equals);
+				}
+				case L'+': {
+					return match_token(L'+', TokenType::Plus);
+				}
+				case L'-': {
+					return match_token(L'-', TokenType::Hyphen);
+				}
+				case L'*': {
+					return match_token(L'*', TokenType::Asterix);
+				}
+				case L'/': {
+					return match_token(L'/', TokenType::Slash);
+				}
+				case L'!': {
+					return match_token(L'!', TokenType::Exclamation);
+				}
+				case L'<': {
+					return match_token(L'<', TokenType::LessThan);
+				}
+				case L'>': {
+					return match_token(L'>', TokenType::GreaterThen);
+				}
+				case L'%': {
+					return match_token(L'%', TokenType::Percent);
+				}
+				//Ampersand				
+				//VerticalBar
 				default:
 					throw ElsaException("Unknown token");
 				}
@@ -91,7 +115,7 @@ namespace elsa {
 		Token* Lexer::alpha()
 		{
 			std::wstring value;
-			while (file_->good() && iswalnum(current_char_))
+			while (file_->good() && (iswalnum(current_char_) || current_char_ == L'_'))
 			{
 				value += current_char_;
 				consume();
@@ -130,6 +154,38 @@ namespace elsa {
 			return new Token(TokenType::IntegerLiteral, value);
 		}
 
+		Token* Lexer::string() 
+		{
+			std::wstring value;
+			consume();
+
+			while (file_->good() && current_char_ != L'"')
+			{
+				value += current_char_;
+				consume();
+			}
+
+			consume();
+
+			return new Token(TokenType::StringLiteral, value);
+		}
+
+		Token* Lexer::char_l()
+		{			
+			std::wstring value;
+			consume();
+
+			while (file_->good() && current_char_ != L'\'')
+			{
+				value += current_char_;
+				consume();
+			}
+
+			consume();
+
+			return new Token(TokenType::CharLiteral, value);
+		}
+
 		Token* Lexer::match_keyword(const std::wstring& value)
 		{
 			auto it = keywords_.find(value);
@@ -149,6 +205,12 @@ namespace elsa {
 			consume();
 		}
 
+		Token* Lexer::match_token(wchar_t c, TokenType type)
+		{
+			match(c);
+			return new Token(type, c);
+		}
+
 		void Lexer::register_keyword(const std::wstring keyword, TokenType type)
 		{
 			keywords_.insert(std::pair<std::wstring, Token>(keyword, Token(type, keyword)));
@@ -166,6 +228,9 @@ namespace elsa {
 			register_keyword(L"bool", TokenType::Bool);
 			register_keyword(L"true", TokenType::True);
 			register_keyword(L"false", TokenType::False);
+			register_keyword(L"struct", TokenType::Struct);
+			register_keyword(L"this", TokenType::This);
+			register_keyword(L"void", TokenType::Void);
 		}
 	}
 }

@@ -27,13 +27,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="test_files\program1.elsa" />
-    <None Include="test_files\program2.elsa" />
-    <None Include="test_files\program3.elsa" />
-    <None Include="test_files\program4.elsa" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="test_files\sf.txt" />
+    <None Include="lexing_test_files\program1.elsa" />
+    <None Include="lexing_test_files\program2.elsa" />
+    <None Include="lexing_test_files\program3.elsa" />
+    <None Include="lexing_test_files\program4.elsa" />
+    <None Include="lexing_test_files\program5.elsa" />
+    <None Include="lexing_test_files\program6.elsa" />
+    <None Include="lexing_test_files\program7.elsa" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source_file_test.h">
@@ -45,5 +45,8 @@
     <ClInclude Include="compiler_test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="lexing_test_files\sf.txt" />
   </ItemGroup>
 </Project>

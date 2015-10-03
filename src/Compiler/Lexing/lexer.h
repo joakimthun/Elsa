@@ -25,8 +25,11 @@ namespace elsa {
 			void comment();
 			Token* alpha();
 			Token* number();
+			Token* string();
+			Token* char_l();
 			Token* match_keyword(const std::wstring& value);
 			void match(wchar_t c);
+			Token* match_token(wchar_t c, TokenType type);
 			void register_keyword(const std::wstring keyword, TokenType type);
 			void init_keywords();
 

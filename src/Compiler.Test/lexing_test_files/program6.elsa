@@ -1,0 +1,16 @@
+// This is a comments and should be skipped
+
+func string func1()
+{
+	return "Hello World!";
+}
+
+func char func2()
+{
+	return 'C';
+}
+
+func char func3()
+{
+	return '&';
+}

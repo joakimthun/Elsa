@@ -29,14 +29,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="lexing_test_files\program7.elsa" />
     <None Include="packages.config" />
-    <None Include="test_files\program1.elsa" />
-    <None Include="test_files\program2.elsa" />
-    <None Include="test_files\program3.elsa" />
-    <None Include="test_files\program4.elsa" />
+    <None Include="lexing_test_files\program1.elsa" />
+    <None Include="lexing_test_files\program2.elsa" />
+    <None Include="lexing_test_files\program3.elsa" />
+    <None Include="lexing_test_files\program4.elsa" />
+    <None Include="lexing_test_files\program5.elsa" />
+    <None Include="lexing_test_files\program6.elsa" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="test_files\sf.txt" />
+    <Text Include="lexing_test_files\sf.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="compiler_test.h" />

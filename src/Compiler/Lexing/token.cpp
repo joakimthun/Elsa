@@ -10,6 +10,13 @@ namespace elsa {
 		{
 		}
 
+		Token::Token(TokenType type, wchar_t value)
+			:
+			type_(type),
+			value_(std::wstring(&value))
+		{
+		}
+
 		TokenType Token::get_type() const
 		{
 			return type_;

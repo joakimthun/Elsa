@@ -7,7 +7,7 @@ int source_file_test() { return 0; }
 
 TEST(SOURCE_FILE, READ_ENTIRE_FILE)
 {
-	SourceFile sf("..\\Compiler.Test\\test_files\\sf.txt");
+	SourceFile sf("..\\Compiler.Test\\lexing_test_files\\sf.txt");
 	std::wstring expected = L"var x = 10;";
 	std::wstring result;
 

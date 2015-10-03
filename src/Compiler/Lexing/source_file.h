@@ -16,6 +16,7 @@ namespace elsa {
 			SourceFile(const char* filename);
 
 			wchar_t next_char();
+			wchar_t peek_char();
 			bool good() const;
 
 		private:

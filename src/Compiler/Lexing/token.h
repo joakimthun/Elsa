@@ -29,10 +29,24 @@ namespace elsa {
 			Return,
 			LBracket,
 			RBracket,
+			LSBracket,
+			RSBracket,
 			LParen,
 			RParen,
-			Plus,
 			Dot,
+			Struct,
+			This,
+			Void,
+			Plus,
+			Hyphen,
+			Asterix,
+			Slash,
+			Exclamation,
+			LessThan,
+			GreaterThen,
+			Ampersand,
+			Percent,
+			VerticalBar,
 		};
 
 
@@ -40,6 +54,7 @@ namespace elsa {
 		{
 		public:
 			Token(TokenType type, const std::wstring& value);
+			Token(TokenType type, wchar_t value);
 
 			TokenType get_type() const;
 			std::wstring get_value() const;

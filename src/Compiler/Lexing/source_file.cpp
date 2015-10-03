@@ -13,6 +13,11 @@ namespace elsa {
 			return stream_.get();
 		}
 
+		wchar_t SourceFile::peek_char()
+		{
+			return stream_.peek();
+		}
+
 		bool SourceFile::good() const
 		{
 			return stream_.good();
