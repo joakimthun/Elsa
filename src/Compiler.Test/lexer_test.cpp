@@ -1,11 +1,9 @@
-#include <gtest\gtest.h>
-#include <vector>
-#include <memory>
-
-#include "lexing\lexer.h"
+#include "lexer_test.h"
 
 using namespace elsa;
 using namespace elsa::compiler;
+
+int lexer_test() { return 0; }
 
 void get_tokens(Lexer& l, std::vector<std::unique_ptr<Token>>& t)
 {

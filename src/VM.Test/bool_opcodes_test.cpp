@@ -1,9 +1,9 @@
-#include <gtest\gtest.h>
-
-#include "vm.h"
+#include "bool_opcodes_test.h"
 
 using namespace elsa;
 using namespace elsa::vm;
+
+int bool_opcodes_test() { return 0; };
 
 class BoolOpCodesTest : public testing::Test {
 protected:

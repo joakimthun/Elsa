@@ -1,10 +1,9 @@
-#include <gtest\gtest.h>
-#include <string>
-
-#include "lexing\source_file.h"
+#include "source_file_test.h"
 
 using namespace elsa;
 using namespace elsa::compiler;
+
+int source_file_test() { return 0; }
 
 TEST(SOURCE_FILE, READ_ENTIRE_FILE)
 {

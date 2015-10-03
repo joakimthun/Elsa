@@ -1,4 +1,6 @@
-#include "source_file_test.cpp"
-#include "lexer_test.cpp"
+#include "compiler_test.h"
 
-int compiler_test_dummy() { return 0; }
+int compiler_test() { return 0; }
+
+int ct1 = lexer_test();
+int ct2 = source_file_test();

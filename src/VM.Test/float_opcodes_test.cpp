@@ -1,9 +1,9 @@
-#include <gtest\gtest.h>
-
-#include "vm.h"
+#include "float_opcodes_test.h"
 
 using namespace elsa;
 using namespace elsa::vm;
+
+int float_opcodes_test() { return 0; };
 
 class FloatOpCodesTest : public testing::Test {
 protected:

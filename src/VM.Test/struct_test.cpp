@@ -1,9 +1,9 @@
-#include <gtest\gtest.h>
-
-#include "vm.h"
+#include "struct_test.h"
 
 using namespace elsa;
 using namespace elsa::vm;
+
+int struct_test() { return 0; };
 
 class StructTest : public testing::Test {
 protected:

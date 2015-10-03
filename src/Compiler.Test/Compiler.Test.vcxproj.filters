@@ -35,4 +35,15 @@
   <ItemGroup>
     <Text Include="test_files\sf.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source_file_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lexer_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compiler_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

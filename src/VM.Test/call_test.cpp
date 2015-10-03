@@ -1,9 +1,9 @@
-#include <gtest\gtest.h>
-
-#include "vm.h"
+#include "call_test.h"
 
 using namespace elsa;
 using namespace elsa::vm;
+
+int call_test() { return 0; };
 
 TEST(STATIC_CALL, RETURN_INT)
 {

@@ -1,9 +1,9 @@
-#include <gtest\gtest.h>
-
-#include "vm.h"
+#include "gc_test.h"
 
 using namespace elsa;
 using namespace elsa::vm;
+
+int gc_test() { return 0; };
 
 class GCTest : public testing::Test {
 protected:

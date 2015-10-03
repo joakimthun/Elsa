@@ -1,9 +1,9 @@
-#include <gtest\gtest.h>
-
-#include "vm.h"
+#include "string_opcodes_test.h"
 
 using namespace elsa;
 using namespace elsa::vm;
+
+int string_opcodes_test() { return 0; };
 
 class StringOpCodesTest : public testing::Test {
 protected:

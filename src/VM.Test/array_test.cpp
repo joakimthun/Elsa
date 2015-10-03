@@ -1,9 +1,9 @@
-#include <gtest\gtest.h>
-
-#include "vm.h"
+#include "array_test.h"
 
 using namespace elsa;
 using namespace elsa::vm;
+
+int array_test() { return 0; };
 
 class ArrayTest : public testing::Test {
 protected:

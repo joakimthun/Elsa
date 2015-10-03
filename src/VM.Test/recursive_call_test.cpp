@@ -1,9 +1,9 @@
-#include <gtest\gtest.h>
-
-#include "vm.h"
+#include "recursive_call_test.h"
 
 using namespace elsa;
 using namespace elsa::vm;
+
+int recursive_call_test() { return 0; };
 
 class RecursiveFactorialTest : public testing::Test {
 protected:

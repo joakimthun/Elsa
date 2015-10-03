@@ -55,4 +55,42 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="array_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bool_opcodes_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="call_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="char_opcodes_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="float_opcodes_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gc_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="int_opcodes_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="locals_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="recursive_call_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="string_opcodes_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="struct_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vm_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

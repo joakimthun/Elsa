@@ -40,6 +40,20 @@
       <Project>{f45fa80e-e6ba-4d96-831b-d5a5debbc8d9}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="array_test.h" />
+    <ClInclude Include="bool_opcodes_test.h" />
+    <ClInclude Include="call_test.h" />
+    <ClInclude Include="char_opcodes_test.h" />
+    <ClInclude Include="float_opcodes_test.h" />
+    <ClInclude Include="gc_test.h" />
+    <ClInclude Include="int_opcodes_test.h" />
+    <ClInclude Include="locals_test.h" />
+    <ClInclude Include="recursive_call_test.h" />
+    <ClInclude Include="string_opcodes_test.h" />
+    <ClInclude Include="struct_test.h" />
+    <ClInclude Include="vm_test.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8043EE2B-5919-48B4-B666-00A04AE624A1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
