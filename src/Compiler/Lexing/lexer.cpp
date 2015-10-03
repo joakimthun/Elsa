@@ -17,14 +17,20 @@ namespace elsa {
 				if (iswspace(current_char_))
 				{
 					consume();
+					continue;
 				}
 				else if(current_char_ == L'/')
 				{
 					comment();
+					continue;
 				}
 				else if(iswalpha(current_char_))
 				{
 					return alpha();
+				}
+				else if (iswdigit(current_char_))
+				{
+					return number();
 				}
 
 				switch (current_char_)
@@ -57,20 +63,16 @@ namespace elsa {
 					match(L';');
 					return new Token(TokenType::Semicolon, L";");
 				}
+				case L'.': {
+					match(L'.');
+					return new Token(TokenType::Dot, L".");
+				}
 				default:
-					//throw ElsaException("Unknown token");
-					break;
+					throw ElsaException("Unknown token");
 				}
 			}
 
 			return new Token(TokenType::END, L"");
-		}
-
-		void Lexer::init_keywords()
-		{
-			keywords_.insert(std::pair<std::wstring, Token>(L"func", Token(TokenType::Func, L"func")));
-			keywords_.insert(std::pair<std::wstring, Token>(L"return", Token(TokenType::Return, L"return")));
-			keywords_.insert(std::pair<std::wstring, Token>(L"var", Token(TokenType::Var, L"var")));
 		}
 
 		void Lexer::consume()
@@ -102,6 +104,32 @@ namespace elsa {
 			return new Token(TokenType::Identifier, value);
 		}
 
+		Token* Lexer::number()
+		{
+			std::wstring value;
+			while (file_->good() && iswdigit(current_char_))
+			{
+				value += current_char_;
+				consume();
+			}
+
+			if (current_char_ == L'.')
+			{
+				value += current_char_;
+				consume();
+
+				while (file_->good() && iswdigit(current_char_))
+				{
+					value += current_char_;
+					consume();
+				}
+
+				return new Token(TokenType::FloatLiteral, value);
+			}
+
+			return new Token(TokenType::IntegerLiteral, value);
+		}
+
 		Token* Lexer::match_keyword(const std::wstring& value)
 		{
 			auto it = keywords_.find(value);
@@ -121,5 +149,23 @@ namespace elsa {
 			consume();
 		}
 
+		void Lexer::register_keyword(const std::wstring keyword, TokenType type)
+		{
+			keywords_.insert(std::pair<std::wstring, Token>(keyword, Token(type, keyword)));
+		}
+
+		void Lexer::init_keywords()
+		{
+			register_keyword(L"func", TokenType::Func);
+			register_keyword(L"return", TokenType::Return);
+			register_keyword(L"var", TokenType::Var);
+			register_keyword(L"int", TokenType::Int);
+			register_keyword(L"float", TokenType::Float);
+			register_keyword(L"string", TokenType::String);
+			register_keyword(L"char", TokenType::Char);
+			register_keyword(L"bool", TokenType::Bool);
+			register_keyword(L"true", TokenType::True);
+			register_keyword(L"false", TokenType::False);
+		}
 	}
 }

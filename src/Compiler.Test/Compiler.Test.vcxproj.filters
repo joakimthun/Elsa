@@ -28,6 +28,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="test_files\program1.elsa" />
+    <None Include="test_files\program2.elsa" />
+    <None Include="test_files\program3.elsa" />
+    <None Include="test_files\program4.elsa" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="test_files\sf.txt" />

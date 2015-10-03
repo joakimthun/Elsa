@@ -15,6 +15,13 @@ namespace elsa {
 			CharLiteral,
 			BoolLiteral,
 			StringLiteral,
+			True,
+			False,
+			Int,
+			Float,
+			Char,
+			Bool,
+			String,
 			Equals,
 			Semicolon,
 			Comma,
@@ -25,6 +32,7 @@ namespace elsa {
 			LParen,
 			RParen,
 			Plus,
+			Dot,
 		};
 
 

@@ -21,12 +21,14 @@ namespace elsa {
 
 		private:
 
-			void init_keywords();
 			void consume();
 			void comment();
 			Token* alpha();
+			Token* number();
 			Token* match_keyword(const std::wstring& value);
 			void match(wchar_t c);
+			void register_keyword(const std::wstring keyword, TokenType type);
+			void init_keywords();
 
 			wchar_t current_char_;
 			std::unique_ptr<SourceFile> file_;
