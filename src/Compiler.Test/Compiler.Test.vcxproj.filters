@@ -48,6 +48,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="lexing_test_files\sf.txt" />
+    <Text Include="lexing_test_files\utf8wbom.txt" />
+    <Text Include="lexing_test_files\utf8wobom.txt" />
   </ItemGroup>
 </Project>

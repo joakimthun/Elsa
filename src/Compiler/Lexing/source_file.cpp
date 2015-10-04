@@ -33,6 +33,10 @@ namespace elsa {
 			f_stream.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 
 			stream_ << f_stream.rdbuf();
+
+			// If the file has a utf-8 byte order mark just skip it
+			if (stream_.peek() == 65279)
+				stream_.get();
 		}
 	}
 }

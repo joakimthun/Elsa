@@ -40,7 +40,8 @@
     <None Include="lexing_test_files\program6.elsa" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="lexing_test_files\sf.txt" />
+    <Text Include="lexing_test_files\utf8wobom.txt" />
+    <Text Include="lexing_test_files\utf8wbom.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="compiler_test.h" />
