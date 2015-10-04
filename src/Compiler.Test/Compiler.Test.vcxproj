@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="lexing_test_files\program7.elsa" />
+    <None Include="lexing_test_files\program8.elsa" />
     <None Include="packages.config" />
     <None Include="lexing_test_files\program1.elsa" />
     <None Include="lexing_test_files\program2.elsa" />

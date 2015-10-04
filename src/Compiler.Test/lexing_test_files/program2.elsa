@@ -1,9 +1,9 @@
-// This is a comments and should be skipped
-// This is a comments and should be skipped
+// This is a comment and should be skipped
+// This is a comment and should be skipped
 
 func int onePlus2()
 {
 	return 1 + 2;
 }
 
-// This is a comments and should be skipped
+// This is a commens and should be skipped

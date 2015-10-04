@@ -1,4 +1,4 @@
-// This is a comments and should be skipped
+// This is a comment and should be skipped
 
 struct Rect
 {

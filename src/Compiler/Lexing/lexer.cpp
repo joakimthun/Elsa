@@ -63,34 +63,86 @@ namespace elsa {
 					return match_token(L',', TokenType::Comma);
 				}
 				case L'=': {
+					auto t = try_match_tokens(L'=', L'=', TokenType::DoubleEquals);
+					if (t != nullptr)
+						return t;
+
 					return match_token(L'=', TokenType::Equals);
 				}
 				case L'+': {
+					auto t = try_match_tokens(L'+', L'+', TokenType::PlusPlus);
+					if (t != nullptr)
+						return t;
+
+					auto t2 = try_match_tokens(L'+', L'=', TokenType::PlusEquals);
+					if (t2 != nullptr)
+						return t2;
+
 					return match_token(L'+', TokenType::Plus);
 				}
 				case L'-': {
-					return match_token(L'-', TokenType::Hyphen);
+					auto t = try_match_tokens(L'-', L'-', TokenType::MinusMinus);
+					if (t != nullptr)
+						return t;
+
+					auto t2 = try_match_tokens(L'-', L'=', TokenType::MinusEquals);
+					if (t2 != nullptr)
+						return t2;
+
+					return match_token(L'-', TokenType::Minus);
 				}
 				case L'*': {
+					auto t = try_match_tokens(L'*', L'=', TokenType::AsterixEquals);
+					if (t != nullptr)
+						return t;
+
 					return match_token(L'*', TokenType::Asterix);
 				}
 				case L'/': {
+					auto t = try_match_tokens(L'/', L'=', TokenType::SlashEquals);
+					if (t != nullptr)
+						return t;
+
 					return match_token(L'/', TokenType::Slash);
 				}
 				case L'!': {
+					auto t = try_match_tokens(L'!', L'=', TokenType::NotEquals);
+					if (t != nullptr)
+						return t;
+
 					return match_token(L'!', TokenType::Exclamation);
 				}
 				case L'<': {
+					auto t = try_match_tokens(L'<', L'=', TokenType::LessThanEquals);
+					if (t != nullptr)
+						return t;
+
 					return match_token(L'<', TokenType::LessThan);
 				}
 				case L'>': {
+					auto t = try_match_tokens(L'>', L'=', TokenType::GreaterThenEquals);
+					if (t != nullptr)
+						return t;
+
 					return match_token(L'>', TokenType::GreaterThen);
 				}
 				case L'%': {
 					return match_token(L'%', TokenType::Percent);
 				}
-				//Ampersand				
-				//VerticalBar
+				case L'&': {
+					auto t = try_match_tokens(L'&', L'&', TokenType::DoubleAmpersand);
+					if (t != nullptr)
+						return t;
+
+					return match_token(L'&', TokenType::Ampersand);
+				}
+				case L'|': {
+					auto t = try_match_tokens(L'|', L'|', TokenType::DoubleVerticalBar);
+					if (t != nullptr)
+						return t;
+
+					return match_token(L'|', TokenType::VerticalBar);
+				}
 				default:
 					throw ElsaException("Unknown token");
 				}
@@ -209,6 +261,22 @@ namespace elsa {
 		{
 			match(c);
 			return new Token(type, c);
+		}
+
+		Token* Lexer::try_match_tokens(wchar_t first, wchar_t second, TokenType type)
+		{
+			if (current_char_ == first && file_->peek_char() == second)
+			{
+				std::wstring value;
+				value += current_char_;
+				consume();
+				value += current_char_;
+				consume();
+
+				return new Token(type, value);
+			}
+
+			return nullptr;
 		}
 
 		void Lexer::register_keyword(const std::wstring keyword, TokenType type)

@@ -30,6 +30,7 @@ namespace elsa {
 			Token* match_keyword(const std::wstring& value);
 			void match(wchar_t c);
 			Token* match_token(wchar_t c, TokenType type);
+			Token* try_match_tokens(wchar_t first, wchar_t second, TokenType type);
 			void register_keyword(const std::wstring keyword, TokenType type);
 			void init_keywords();
 

@@ -1,9 +1,9 @@
-// This is a comments and should be skipped
-// This is a comments and should be skipped
+// This is a comment and should be skipped
+// This is a comment and should be skipped
 
 func float add()
 {
 	return 1.3452 + 2.464;
 }
 
-// This is a comments and should be skipped
+// This is a comment and should be skipped
