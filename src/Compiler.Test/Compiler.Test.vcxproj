@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="lexer_test.cpp" />
     <ClCompile Include="compiler_test.cpp" />
+    <ClCompile Include="parser_test.cpp" />
     <ClCompile Include="source_file_test.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +47,7 @@
   <ItemGroup>
     <ClInclude Include="compiler_test.h" />
     <ClInclude Include="lexer_test.h" />
+    <ClInclude Include="parser_test.h" />
     <ClInclude Include="source_file_test.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
