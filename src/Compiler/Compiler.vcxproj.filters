@@ -27,10 +27,10 @@
     <ClInclude Include="lexing\token.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parsing\Program.h">
+    <ClInclude Include="parsing\ast_node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parsing\ast_node.h">
+    <ClInclude Include="parsing\program.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,7 +47,7 @@
     <ClCompile Include="lexing\token.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="parsing\Program.cpp">
+    <ClCompile Include="parsing\program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

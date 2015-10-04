@@ -7,7 +7,19 @@ namespace elsa {
 			:
 			lexer_(std::unique_ptr<Lexer>(lexer))
 		{
+		}
+
+		Program* Parser::parse()
+		{
+			program_ = new Program();
+
 			next_token();
+			while (current_token_->get_type() != TokenType::END)
+			{
+				parse_statement();
+			}
+
+			return program_;
 		}
 
 		void Parser::next_token()
@@ -18,6 +30,11 @@ namespace elsa {
 		void Parser::consume()
 		{
 			next_token();
+		}
+
+		void Parser::parse_statement()
+		{
+
 		}
 
 	}

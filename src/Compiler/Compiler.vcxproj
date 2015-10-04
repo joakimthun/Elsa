@@ -24,14 +24,14 @@
     <ClInclude Include="lexing\token.h" />
     <ClInclude Include="parsing\ast_node.h" />
     <ClInclude Include="Parsing\parser.h" />
-    <ClInclude Include="parsing\Program.h" />
+    <ClInclude Include="parsing\program.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
     <ClCompile Include="lexing\token.cpp" />
     <ClCompile Include="Parsing\parser.cpp" />
-    <ClCompile Include="parsing\Program.cpp" />
+    <ClCompile Include="parsing\program.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.vcxproj">
