@@ -22,7 +22,13 @@
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
     <ClInclude Include="lexing\token.h" />
-    <ClInclude Include="parsing\ast_node.h" />
+    <ClInclude Include="parsing\nodes\ast_node.h" />
+    <ClInclude Include="parsing\nodes\expression.h" />
+    <ClInclude Include="parsing\nodes\func_declaration_statement.h" />
+    <ClInclude Include="parsing\nodes\prefix_operator_expression.h" />
+    <ClInclude Include="parsing\nodes\statement.h" />
+    <ClInclude Include="parsing\parselets\prefix_operator_parselet.h" />
+    <ClInclude Include="parsing\parselets\prefix_parselet.h" />
     <ClInclude Include="Parsing\parser.h" />
     <ClInclude Include="parsing\program.h" />
   </ItemGroup>
@@ -30,6 +36,8 @@
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
     <ClCompile Include="lexing\token.cpp" />
+    <ClCompile Include="parsing\nodes\prefix_operator_expression.cpp" />
+    <ClCompile Include="parsing\parselets\prefix_operator_parselet.cpp" />
     <ClCompile Include="Parsing\parser.cpp" />
     <ClCompile Include="parsing\program.cpp" />
   </ItemGroup>

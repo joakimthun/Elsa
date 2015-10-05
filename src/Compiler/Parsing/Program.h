@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 
-#include "ast_node.h"
+#include "nodes\ast_node.h"
 
 namespace elsa {
 	namespace compiler {

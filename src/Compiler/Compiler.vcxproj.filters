@@ -27,10 +27,28 @@
     <ClInclude Include="lexing\token.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parsing\ast_node.h">
+    <ClInclude Include="parsing\program.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parsing\program.h">
+    <ClInclude Include="parsing\parselets\prefix_parselet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\nodes\ast_node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\nodes\expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\nodes\prefix_operator_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\nodes\statement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\nodes\func_declaration_statement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parselets\prefix_operator_parselet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -48,6 +66,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parsing\program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\nodes\prefix_operator_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parselets\prefix_operator_parselet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
