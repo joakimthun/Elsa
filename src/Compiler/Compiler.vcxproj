@@ -26,11 +26,13 @@
     <ClInclude Include="parsing\ast\func_declaration_expression.h" />
     <ClInclude Include="parsing\ast\identifier_expression.h" />
     <ClInclude Include="parsing\ast\prefix_operator_expression.h" />
+    <ClInclude Include="parsing\ast\variable_declaration_expression.h" />
     <ClInclude Include="parsing\elsa_grammar.h" />
     <ClInclude Include="parsing\parsers\identifier_parser.h" />
     <ClInclude Include="parsing\parsers\prefix_operator_parser.h" />
     <ClInclude Include="parsing\parsers\parser.h" />
     <ClInclude Include="Parsing\elsa_parser.h" />
+    <ClInclude Include="parsing\parsers\variable_declaration_parser.h" />
     <ClInclude Include="parsing\program.h" />
   </ItemGroup>
   <ItemGroup>
@@ -40,10 +42,12 @@
     <ClCompile Include="parsing\ast\func_declaration_expression.cpp" />
     <ClCompile Include="parsing\ast\identifier_expression.cpp" />
     <ClCompile Include="parsing\ast\prefix_operator_expression.cpp" />
+    <ClCompile Include="parsing\ast\variable_declaration_expression.cpp" />
     <ClCompile Include="parsing\elsa_grammar.cpp" />
     <ClCompile Include="parsing\parsers\identifier_parser.cpp" />
     <ClCompile Include="parsing\parsers\prefix_operator_parser.cpp" />
     <ClCompile Include="Parsing\elsa_parser.cpp" />
+    <ClCompile Include="parsing\parsers\variable_declaration_parser.cpp" />
     <ClCompile Include="parsing\program.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -54,6 +54,12 @@
     <ClInclude Include="parsing\ast\func_declaration_expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="parsing\ast\variable_declaration_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\variable_declaration_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp">
@@ -87,6 +93,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parsing\ast\prefix_operator_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\ast\variable_declaration_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\variable_declaration_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

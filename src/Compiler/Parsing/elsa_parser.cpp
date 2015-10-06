@@ -77,6 +77,7 @@ namespace elsa {
 		void ElsaParser::initialize_grammar()
 		{
 			register_parser(TokenType::Identifier, new IdentifierParser());
+			register_parser(TokenType::Var, new VariableDeclarationParser());
 
 			register_prefix_op(TokenType::Exclamation);
 		}

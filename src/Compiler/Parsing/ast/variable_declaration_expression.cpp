@@ -1,0 +1,30 @@
+#include "variable_declaration_expression.h"
+
+namespace elsa {
+	namespace compiler {
+
+		VariableDeclarationExpression::VariableDeclarationExpression(const std::wstring& name, const std::wstring& type, Expression* expression)
+			:
+			name_(name),
+			type_(type),
+			expression_(std::unique_ptr<Expression>(expression))
+		{}
+
+		const std::wstring& VariableDeclarationExpression::get_name() const
+		{
+			return name_;
+		}
+
+		const std::wstring& VariableDeclarationExpression::get_type() const
+		{
+			return type_;
+		}
+
+		Expression* VariableDeclarationExpression::get_expression() const
+		{
+			return expression_.get();
+		}
+
+	}
+}
+

@@ -9,10 +9,10 @@
 namespace elsa {
 	namespace compiler {
 
-		class FuncDeclarationExpression
+		class FuncDeclarationExpression : public Expression
 		{
 		public:
-			FuncDeclarationExpression::FuncDeclarationExpression(const std::wstring& name);
+			FuncDeclarationExpression(const std::wstring& name);
 
 			void add_expression(Expression* expression);
 
