@@ -9,10 +9,10 @@ namespace elsa {
 
 		class ElsaParser;
 
-		class PrefixParser
+		class Parser
 		{
 		public:
-			virtual ~PrefixParser() {};
+			virtual ~Parser() {};
 			virtual Expression* parse(ElsaParser* parser, Token* token) = 0;
 		};
 

@@ -29,7 +29,7 @@
     <ClInclude Include="parsing\nodes\prefix_operator_expression.h" />
     <ClInclude Include="parsing\nodes\statement.h" />
     <ClInclude Include="parsing\parsers\prefix_operator_parser.h" />
-    <ClInclude Include="parsing\parsers\prefix_parser.h" />
+    <ClInclude Include="parsing\parsers\parser.h" />
     <ClInclude Include="Parsing\elsa_parser.h" />
     <ClInclude Include="parsing\program.h" />
   </ItemGroup>

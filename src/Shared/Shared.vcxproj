@@ -31,6 +31,7 @@
     <ClInclude Include="constants\field_info.h" />
     <ClInclude Include="constants\float_info.h" />
     <ClInclude Include="constants\function_info.h" />
+    <ClInclude Include="exceptions\parsing_exception.h" />
     <ClInclude Include="opcodes\opcodes.h" />
     <ClInclude Include="constants\string_info.h" />
     <ClInclude Include="constants\struct_info.h" />

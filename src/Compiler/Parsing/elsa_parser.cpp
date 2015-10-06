@@ -30,8 +30,12 @@ namespace elsa {
 
 		Expression* ElsaParser::parse_expression()
 		{
-			auto prefix_parselet = grammar_->get_prefix_parser(current_token_->get_type());
+			auto parser = grammar_->get_parser(current_token_->get_type());
 
+			if (parser == nullptr)
+				throw ParsingException("Invalid token");
+
+			auto expression = parser->parse(this, current_token_.get());
 
 			return nullptr;
 		}

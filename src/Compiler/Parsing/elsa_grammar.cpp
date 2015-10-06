@@ -8,10 +8,10 @@ namespace elsa {
 			initialize_grammar();
 		}
 
-		PrefixParser* ElsaGrammar::get_prefix_parser(TokenType type)
+		Parser* ElsaGrammar::get_parser(TokenType type)
 		{
-			auto it = prefix_parsers_.find(type);
-			if (it != prefix_parsers_.end())
+			auto it = parsers_.find(type);
+			if (it != parsers_.end())
 			{
 				return it->second.get();
 			}
@@ -21,7 +21,7 @@ namespace elsa {
 
 		void ElsaGrammar::register_prefix_op(TokenType type)
 		{
-			prefix_parsers_.insert(std::pair<TokenType, std::unique_ptr<PrefixParser>>(type, std::unique_ptr<PrefixParser>(new PrefixOperatorParser())));
+			parsers_.insert(std::pair<TokenType, std::unique_ptr<Parser>>(type, std::unique_ptr<Parser>(new PrefixOperatorParser())));
 		}
 
 		void ElsaGrammar::initialize_grammar()

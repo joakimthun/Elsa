@@ -3,6 +3,7 @@
 #include <memory>
 #include <map>
 
+#include "exceptions\parsing_exception.h"
 #include "../lexing/lexer.h"
 #include "../lexing/token.h"
 #include "program.h"

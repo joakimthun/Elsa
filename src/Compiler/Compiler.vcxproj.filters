@@ -48,10 +48,10 @@
     <ClInclude Include="parsing\parsers\prefix_operator_parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parsing\parsers\prefix_parser.h">
+    <ClInclude Include="parsing\elsa_grammar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parsing\elsa_grammar.h">
+    <ClInclude Include="parsing\parsers\parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
