@@ -22,6 +22,7 @@
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
     <ClInclude Include="lexing\token.h" />
+    <ClInclude Include="parsing\elsa_grammar.h" />
     <ClInclude Include="parsing\nodes\ast_node.h" />
     <ClInclude Include="parsing\nodes\expression.h" />
     <ClInclude Include="parsing\nodes\func_declaration_statement.h" />
@@ -36,6 +37,7 @@
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
     <ClCompile Include="lexing\token.cpp" />
+    <ClCompile Include="parsing\elsa_grammar.cpp" />
     <ClCompile Include="parsing\nodes\prefix_operator_expression.cpp" />
     <ClCompile Include="parsing\parsers\prefix_operator_parser.cpp" />
     <ClCompile Include="Parsing\elsa_parser.cpp" />

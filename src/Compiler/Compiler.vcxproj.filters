@@ -51,6 +51,9 @@
     <ClInclude Include="parsing\parsers\prefix_parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="parsing\elsa_grammar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parsing\parsers\prefix_operator_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\elsa_grammar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -5,9 +5,9 @@ namespace elsa {
 
 		ElsaParser::ElsaParser(Lexer* lexer)
 			:
-			lexer_(std::unique_ptr<Lexer>(lexer))
+			lexer_(std::unique_ptr<Lexer>(lexer)),
+			grammar_(std::unique_ptr<ElsaGrammar>(new ElsaGrammar()))
 		{
-			initialize_grammar();
 		}
 
 		Program* ElsaParser::parse()
@@ -30,7 +30,7 @@ namespace elsa {
 
 		Expression* ElsaParser::parse_expression()
 		{
-			auto prefix_parselet = get_prefix_parser(current_token_->get_type());
+			auto prefix_parselet = grammar_->get_prefix_parser(current_token_->get_type());
 
 
 			return nullptr;
@@ -46,26 +46,6 @@ namespace elsa {
 			next_token();
 		}
 
-		PrefixParser* ElsaParser::get_prefix_parser(TokenType type)
-		{
-			auto it = prefix_parsers_.find(type);
-			if (it != prefix_parsers_.end())
-			{
-				return it->second.get();
-			}
-		
-			return nullptr;
-		}
-
-		void ElsaParser::initialize_grammar()
-		{
-			register_prefix_op(TokenType::Exclamation);
-		}
-
-		void ElsaParser::register_prefix_op(TokenType type)
-		{
-			prefix_parsers_.insert(std::pair<TokenType, std::unique_ptr<PrefixParser>>(type, std::unique_ptr<PrefixParser>(new PrefixOperatorParser())));
-		}
 
 	}
 }
