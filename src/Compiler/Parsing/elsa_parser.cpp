@@ -8,13 +8,13 @@ namespace elsa {
 			lexer_(std::unique_ptr<Lexer>(lexer))
 		{
 			initialize_grammar();
+			next_token();
 		}
 
 		Program* ElsaParser::parse()
 		{
 			auto program = new Program();
 
-			next_token();
 			while (current_token_->get_type() != TokenType::END)
 			{
 				parse_statement();
@@ -76,7 +76,7 @@ namespace elsa {
 
 		void ElsaParser::initialize_grammar()
 		{
-			//register_parser(TokenType::Identifier, new IdentifierParser());
+			register_parser(TokenType::Identifier, new IdentifierParser());
 
 			register_prefix_op(TokenType::Exclamation);
 		}

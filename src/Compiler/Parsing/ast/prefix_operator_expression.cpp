@@ -9,5 +9,14 @@ namespace elsa {
 				right_(right)
 			{}
 
+			TokenType PrefixOperatorExpression::get_operator() const
+			{
+				return op_;
+			}
+
+			Expression* PrefixOperatorExpression::get_right() const
+			{
+				return right_.get();
+			}
 	}
 }
