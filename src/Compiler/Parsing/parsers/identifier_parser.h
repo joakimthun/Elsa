@@ -1,13 +1,13 @@
 #pragma once
 
 #include "parser.h"
-#include "../ast/prefix_operator_expression.h"
+#include "../ast/identifier_expression.h"
 #include "../elsa_parser.h"
 
 namespace elsa {
 	namespace compiler {
 
-		class PrefixOperatorParser : public Parser
+		class IdentifierParser : public Parser
 		{
 		public:
 			Expression* parse(ElsaParser* parser, Token* token) override;

@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../nodes/expression.h"
 #include "../../lexing/token.h"
-#include "../elsa_parser.h"
 
 namespace elsa {
 	namespace compiler {
 
+		class Expression;
 		class ElsaParser;
 
 		class Parser

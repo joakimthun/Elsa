@@ -7,14 +7,14 @@
 #include "../lexing/lexer.h"
 #include "../lexing/token.h"
 #include "program.h"
-#include "elsa_grammar.h"
-#include "nodes\expression.h"
-#include "nodes\statement.h"
+#include "parsers\prefix_operator_parser.h"
+#include "parsers\identifier_parser.h"
 
 namespace elsa {
 	namespace compiler {
 
-		class ElsaGrammar;
+		class Expression;
+		class Parser;
 
 		class ElsaParser
 		{
@@ -24,15 +24,19 @@ namespace elsa {
 			Program* parse();
 			void parse_statement();
 			Expression* parse_expression();
+			void consume(TokenType type);
+			Token* current_token();
 
 		private:
 			void next_token();
-			void consume();
 
-			std::unique_ptr<ElsaGrammar> grammar_;
+			std::map<TokenType, std::unique_ptr<Parser>> parsers_;
 			std::unique_ptr<Lexer> lexer_;
 			std::unique_ptr<Token> current_token_;
-			Program* program_;
+			Parser* get_parser(TokenType type);
+			void register_parser(TokenType type, Parser* parser);
+			void register_prefix_op(TokenType type);
+			void initialize_grammar();
 		};
 
 	}

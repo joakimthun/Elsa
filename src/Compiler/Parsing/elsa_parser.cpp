@@ -5,14 +5,14 @@ namespace elsa {
 
 		ElsaParser::ElsaParser(Lexer* lexer)
 			:
-			lexer_(std::unique_ptr<Lexer>(lexer)),
-			grammar_(std::unique_ptr<ElsaGrammar>(new ElsaGrammar()))
+			lexer_(std::unique_ptr<Lexer>(lexer))
 		{
+			initialize_grammar();
 		}
 
 		Program* ElsaParser::parse()
 		{
-			program_ = new Program();
+			auto program = new Program();
 
 			next_token();
 			while (current_token_->get_type() != TokenType::END)
@@ -20,7 +20,7 @@ namespace elsa {
 				parse_statement();
 			}
 
-			return program_;
+			return program;
 		}
 
 		void ElsaParser::parse_statement()
@@ -30,14 +30,22 @@ namespace elsa {
 
 		Expression* ElsaParser::parse_expression()
 		{
-			auto parser = grammar_->get_parser(current_token_->get_type());
-
+			auto parser = get_parser(current_token_->get_type());
+			
 			if (parser == nullptr)
 				throw ParsingException("Invalid token");
+			
+			return parser->parse(this, current_token_.get());
+		}
 
-			auto expression = parser->parse(this, current_token_.get());
+		void ElsaParser::consume(TokenType type)
+		{
+			next_token();
+		}
 
-			return nullptr;
+		Token* ElsaParser::current_token()
+		{
+			return current_token_.get();
 		}
 
 		void ElsaParser::next_token()
@@ -45,11 +53,32 @@ namespace elsa {
 			current_token_ = std::unique_ptr<Token>(lexer_->next_token());
 		}
 
-		void ElsaParser::consume()
+		Parser* ElsaParser::get_parser(TokenType type)
 		{
-			next_token();
+			auto it = parsers_.find(type);
+			if (it != parsers_.end())
+			{
+				return it->second.get();
+			}
+
+			return nullptr;
 		}
 
+		void ElsaParser::register_parser(TokenType type, Parser* parser)
+		{
+			parsers_.insert(std::pair<TokenType, std::unique_ptr<Parser>>(type, std::unique_ptr<Parser>(parser)));
+		}
 
+		void ElsaParser::register_prefix_op(TokenType type)
+		{
+			register_parser(type, new PrefixOperatorParser());
+		}
+
+		void ElsaParser::initialize_grammar()
+		{
+			//register_parser(TokenType::Identifier, new IdentifierParser());
+
+			register_prefix_op(TokenType::Exclamation);
+		}
 	}
 }

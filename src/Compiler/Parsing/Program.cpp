@@ -5,9 +5,9 @@ namespace elsa {
 
 		Program::Program() {}
 
-		void Program::add_node(ASTNode* node)
+		void Program::add_expression(Expression* node)
 		{
-			nodes_.push_back(std::unique_ptr<ASTNode>(node));
+			nodes_.push_back(std::unique_ptr<Expression>(node));
 		}
 
 	}

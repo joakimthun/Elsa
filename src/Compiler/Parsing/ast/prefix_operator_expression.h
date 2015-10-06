@@ -8,12 +8,14 @@
 namespace elsa {
 	namespace compiler {
 
-		struct PrefixOperatorExpression : public Expression
+		class PrefixOperatorExpression : public Expression
 		{
+		public:
 			PrefixOperatorExpression(TokenType op, Expression* right);
 
-			TokenType op;
-			std::unique_ptr<Expression> right;
+		private:
+			TokenType op_;
+			std::unique_ptr<Expression> right_;
 		};
 
 	}

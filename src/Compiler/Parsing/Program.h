@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 
-#include "nodes\ast_node.h"
+#include "ast\expression.h"
 
 namespace elsa {
 	namespace compiler {
@@ -13,9 +13,9 @@ namespace elsa {
 		public:
 			Program();
 
-			void add_node(ASTNode* node);
+			void add_expression(Expression* node);
 		private:
-			std::vector<std::unique_ptr<ASTNode>> nodes_;
+			std::vector<std::unique_ptr<Expression>> nodes_;
 		};
 
 	}
