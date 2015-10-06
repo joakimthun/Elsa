@@ -18,9 +18,6 @@
     <ClInclude Include="Lexing\lexer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Parsing\parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="lexing\source_file.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -28,9 +25,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parsing\program.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\parselets\prefix_parselet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parsing\nodes\ast_node.h">
@@ -48,15 +42,18 @@
     <ClInclude Include="parsing\nodes\func_declaration_statement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parsing\parselets\prefix_operator_parselet.h">
+    <ClInclude Include="Parsing\elsa_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\prefix_operator_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\prefix_parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Parsing\parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Lexing\source_file.cpp">
@@ -71,7 +68,10 @@
     <ClCompile Include="parsing\nodes\prefix_operator_expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="parsing\parselets\prefix_operator_parselet.cpp">
+    <ClCompile Include="Parsing\elsa_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\prefix_operator_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

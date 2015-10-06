@@ -1,9 +1,9 @@
-#include "prefix_operator_parselet.h"
+#include "prefix_operator_parser.h"
 
 namespace elsa {
 	namespace compiler {
 
-		Expression* PrefixOperatorParselet::parse(Parser* parser, Token* token)
+		Expression* PrefixOperatorParser::parse(ElsaParser* parser, Token* token)
 		{
 			auto right = parser->parse_expression();
 			return new PrefixOperatorExpression(token->get_type(), right);

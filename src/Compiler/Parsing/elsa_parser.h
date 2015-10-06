@@ -8,18 +8,18 @@
 #include "program.h"
 #include "nodes\expression.h"
 #include "nodes\statement.h"
-#include "parselets\prefix_parselet.h"
-#include "parselets\prefix_operator_parselet.h"
+#include "parsers\prefix_parser.h"
+#include "parsers\prefix_operator_parser.h"
 
 namespace elsa {
 	namespace compiler {
 
-		class PrefixParselet;
+		class PrefixParser;
 
-		class Parser
+		class ElsaParser
 		{
 		public:
-			Parser(Lexer* lexer);
+			ElsaParser(Lexer* lexer);
 
 			Program* parse();
 			void parse_statement();
@@ -28,13 +28,13 @@ namespace elsa {
 		private:
 			void next_token();
 			void consume();
-			PrefixParselet* get_prefix_parselet(TokenType type);
+			PrefixParser* get_prefix_parser(TokenType type);
 			void initialize_grammar();
 			void register_prefix_op(TokenType type);
 
 			std::unique_ptr<Lexer> lexer_;
 			std::unique_ptr<Token> current_token_;
-			std::map<TokenType, std::unique_ptr<PrefixParselet>> prefix_parselets_;
+			std::map<TokenType, std::unique_ptr<PrefixParser>> prefix_parsers_;
 			Program* program_;
 		};
 
