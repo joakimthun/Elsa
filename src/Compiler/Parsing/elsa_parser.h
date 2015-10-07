@@ -10,6 +10,7 @@
 #include "parsers\prefix_operator_parser.h"
 #include "parsers\identifier_parser.h"
 #include "parsers\variable_declaration_parser.h"
+#include "parsers\literal_parser.h"
 
 namespace elsa {
 	namespace compiler {

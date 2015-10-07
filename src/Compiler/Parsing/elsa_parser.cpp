@@ -78,6 +78,11 @@ namespace elsa {
 		{
 			register_parser(TokenType::Identifier, new IdentifierParser());
 			register_parser(TokenType::Var, new VariableDeclarationParser());
+			register_parser(TokenType::IntegerLiteral, new LiteralParser());
+			register_parser(TokenType::FloatLiteral, new LiteralParser());
+			register_parser(TokenType::CharLiteral, new LiteralParser());
+			register_parser(TokenType::BoolLiteral, new LiteralParser());
+			register_parser(TokenType::StringLiteral, new LiteralParser());
 
 			register_prefix_op(TokenType::Exclamation);
 		}

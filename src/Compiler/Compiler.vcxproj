@@ -22,31 +22,47 @@
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
     <ClInclude Include="lexing\token.h" />
+    <ClInclude Include="parsing\ast\bool_literal_expression.h" />
+    <ClInclude Include="parsing\ast\char_literal_expression.h" />
     <ClInclude Include="parsing\ast\expression.h" />
+    <ClInclude Include="parsing\ast\float_literal_expression.h" />
     <ClInclude Include="parsing\ast\func_declaration_expression.h" />
     <ClInclude Include="parsing\ast\identifier_expression.h" />
+    <ClInclude Include="parsing\ast\integer_literal_expression.h" />
     <ClInclude Include="parsing\ast\prefix_operator_expression.h" />
+    <ClInclude Include="parsing\ast\string_literal_expression.h" />
     <ClInclude Include="parsing\ast\variable_declaration_expression.h" />
+    <ClInclude Include="parsing\parsers\literal_parser.h" />
+    <ClInclude Include="types\elsa_type.h" />
     <ClInclude Include="parsing\parsers\identifier_parser.h" />
     <ClInclude Include="parsing\parsers\prefix_operator_parser.h" />
     <ClInclude Include="parsing\parsers\parser.h" />
     <ClInclude Include="Parsing\elsa_parser.h" />
     <ClInclude Include="parsing\parsers\variable_declaration_parser.h" />
     <ClInclude Include="parsing\program.h" />
+    <ClInclude Include="types\type_checker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
     <ClCompile Include="lexing\token.cpp" />
+    <ClCompile Include="parsing\ast\bool_literal_expression.cpp" />
+    <ClCompile Include="parsing\ast\char_literal_expression.cpp" />
+    <ClCompile Include="parsing\ast\float_literal_expression.cpp" />
     <ClCompile Include="parsing\ast\func_declaration_expression.cpp" />
     <ClCompile Include="parsing\ast\identifier_expression.cpp" />
+    <ClCompile Include="parsing\ast\integer_literal_expression.cpp" />
     <ClCompile Include="parsing\ast\prefix_operator_expression.cpp" />
+    <ClCompile Include="parsing\ast\string_literal_expression.cpp" />
     <ClCompile Include="parsing\ast\variable_declaration_expression.cpp" />
     <ClCompile Include="parsing\parsers\identifier_parser.cpp" />
+    <ClCompile Include="parsing\parsers\literal_parser.cpp" />
     <ClCompile Include="parsing\parsers\prefix_operator_parser.cpp" />
     <ClCompile Include="Parsing\elsa_parser.cpp" />
     <ClCompile Include="parsing\parsers\variable_declaration_parser.cpp" />
     <ClCompile Include="parsing\program.cpp" />
+    <ClCompile Include="types\elsa_type.cpp" />
+    <ClCompile Include="types\type_checker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.vcxproj">
