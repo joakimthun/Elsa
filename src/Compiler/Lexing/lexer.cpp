@@ -294,8 +294,8 @@ namespace elsa {
 			register_keyword(L"string", TokenType::String);
 			register_keyword(L"char", TokenType::Char);
 			register_keyword(L"bool", TokenType::Bool);
-			register_keyword(L"true", TokenType::True);
-			register_keyword(L"false", TokenType::False);
+			register_keyword(L"true", TokenType::BoolLiteral);
+			register_keyword(L"false", TokenType::BoolLiteral);
 			register_keyword(L"struct", TokenType::Struct);
 			register_keyword(L"this", TokenType::This);
 			register_keyword(L"void", TokenType::Void);

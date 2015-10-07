@@ -1,0 +1,6 @@
+var x = 10;
+var x = 10.0;
+var x = "Hello World!";
+var x = true;
+var x = false;
+var x = 'X';

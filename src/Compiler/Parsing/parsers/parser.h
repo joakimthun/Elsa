@@ -12,7 +12,7 @@ namespace elsa {
 		{
 		public:
 			virtual ~Parser() {};
-			virtual Expression* parse(ElsaParser* parser, Token* token) = 0;
+			virtual Expression* parse(ElsaParser* parser) = 0;
 		};
 
 	}

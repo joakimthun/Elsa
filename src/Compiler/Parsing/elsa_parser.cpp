@@ -35,7 +35,7 @@ namespace elsa {
 			if (parser == nullptr)
 				throw ParsingException("Invalid token");
 			
-			return parser->parse(this, current_token_.get());
+			return parser->parse(this);
 		}
 
 		void ElsaParser::consume(TokenType type)

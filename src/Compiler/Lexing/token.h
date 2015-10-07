@@ -15,8 +15,6 @@ namespace elsa {
 			CharLiteral,
 			BoolLiteral,
 			StringLiteral,
-			True,
-			False,
 			Int,
 			Float,
 			Char,

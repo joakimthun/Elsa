@@ -3,9 +3,9 @@
 namespace elsa {
 	namespace compiler {
 
-		Expression* PrefixOperatorParser::parse(ElsaParser* parser, Token* token)
+		Expression* PrefixOperatorParser::parse(ElsaParser* parser)
 		{
-			auto op = token->get_type();
+			auto op = parser->current_token()->get_type();
 			parser->consume(op);
 
 			auto right = parser->parse_expression();

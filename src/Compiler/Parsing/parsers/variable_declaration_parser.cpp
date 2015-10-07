@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace compiler {
 
-		Expression* VariableDeclarationParser::parse(ElsaParser* parser, Token* token)
+		Expression* VariableDeclarationParser::parse(ElsaParser* parser)
 		{
 			parser->consume(TokenType::Var);
 
