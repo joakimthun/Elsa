@@ -39,6 +39,7 @@
     <None Include="lexing_test_files\program4.elsa" />
     <None Include="lexing_test_files\program5.elsa" />
     <None Include="lexing_test_files\program6.elsa" />
+    <None Include="parser_test_files\func_declaration.elsa" />
     <None Include="parser_test_files\literals.elsa" />
     <None Include="parser_test_files\prefix_operator.elsa" />
     <None Include="parser_test_files\variable_declaration.elsa" />

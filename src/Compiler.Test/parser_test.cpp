@@ -186,3 +186,60 @@ TEST(ParserTest, LITERALS)
 		FAIL();
 	}
 }
+
+TEST(ParserTest, FUNC_DECLARATION)
+{
+	auto lexer = new Lexer(new SourceFile("..\\Compiler.Test\\parser_test_files\\func_declaration.elsa"));
+	auto parser = ElsaParser(lexer);
+	auto exp = parser.parse_expression();
+
+	if (auto fde = dynamic_cast<FuncDeclarationExpression*>(exp))
+	{
+		ASSERT_EQ(fde->get_return_type()->get_type(), OType::Void);
+		ASSERT_EQ(fde->get_name(), L"add");
+
+		ASSERT_EQ(fde->get_body().size(), 2);
+
+		if (auto vde1 = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[0].get()))
+		{
+			ASSERT_EQ(vde1->get_name(), L"x");
+			ASSERT_EQ(vde1->get_type(), L"int");
+
+			if (auto ile = dynamic_cast<IntegerLiteralExpression*>(vde1->get_expression()))
+			{
+				ASSERT_EQ(ile->get_value(), 10);
+			}
+			else
+			{
+				FAIL();
+			}
+		}
+		else
+		{
+			FAIL();
+		}
+
+		if (auto vde2 = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[1].get()))
+		{
+			ASSERT_EQ(vde2->get_name(), L"x2");
+			ASSERT_EQ(vde2->get_type(), L"int");
+
+			if (auto ble = dynamic_cast<BoolLiteralExpression*>(vde2->get_expression()))
+			{
+				ASSERT_EQ(ble->get_value(), false);
+			}
+			else
+			{
+				FAIL();
+			}
+		}
+		else
+		{
+			FAIL();
+		}
+	}
+	else
+	{
+		FAIL();
+	}
+}

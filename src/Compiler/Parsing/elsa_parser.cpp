@@ -40,6 +40,14 @@ namespace elsa {
 
 		void ElsaParser::consume(TokenType type)
 		{
+			if(current_token()->get_type() != type)
+				throw ParsingException("Unexpected token");
+
+			next_token();
+		}
+
+		void ElsaParser::consume()
+		{
 			next_token();
 		}
 
@@ -83,6 +91,7 @@ namespace elsa {
 			register_parser(TokenType::CharLiteral, new LiteralParser());
 			register_parser(TokenType::BoolLiteral, new LiteralParser());
 			register_parser(TokenType::StringLiteral, new LiteralParser());
+			register_parser(TokenType::Func, new FuncDeclarationParser());
 
 			register_prefix_op(TokenType::Exclamation);
 		}

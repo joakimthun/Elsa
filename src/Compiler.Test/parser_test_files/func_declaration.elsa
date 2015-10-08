@@ -1,0 +1,5 @@
+func void add()
+{
+	var x = 10;
+	var x2 = false;
+}

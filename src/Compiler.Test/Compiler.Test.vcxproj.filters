@@ -41,6 +41,7 @@
     <None Include="parser_test_files\prefix_operator.elsa" />
     <None Include="parser_test_files\variable_declaration.elsa" />
     <None Include="parser_test_files\literals.elsa" />
+    <None Include="parser_test_files\func_declaration.elsa" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source_file_test.h">

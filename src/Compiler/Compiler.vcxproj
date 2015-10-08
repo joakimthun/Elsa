@@ -32,6 +32,7 @@
     <ClInclude Include="parsing\ast\prefix_operator_expression.h" />
     <ClInclude Include="parsing\ast\string_literal_expression.h" />
     <ClInclude Include="parsing\ast\variable_declaration_expression.h" />
+    <ClInclude Include="parsing\parsers\func_declaration_parser.h" />
     <ClInclude Include="parsing\parsers\literal_parser.h" />
     <ClInclude Include="types\elsa_type.h" />
     <ClInclude Include="parsing\parsers\identifier_parser.h" />
@@ -55,6 +56,7 @@
     <ClCompile Include="parsing\ast\prefix_operator_expression.cpp" />
     <ClCompile Include="parsing\ast\string_literal_expression.cpp" />
     <ClCompile Include="parsing\ast\variable_declaration_expression.cpp" />
+    <ClCompile Include="parsing\parsers\func_declaration_parser.cpp" />
     <ClCompile Include="parsing\parsers\identifier_parser.cpp" />
     <ClCompile Include="parsing\parsers\literal_parser.cpp" />
     <ClCompile Include="parsing\parsers\prefix_operator_parser.cpp" />

@@ -11,6 +11,7 @@
 #include "parsers\identifier_parser.h"
 #include "parsers\variable_declaration_parser.h"
 #include "parsers\literal_parser.h"
+#include "parsers\func_declaration_parser.h"
 
 namespace elsa {
 	namespace compiler {
@@ -27,6 +28,7 @@ namespace elsa {
 			void parse_statement();
 			Expression* parse_expression();
 			void consume(TokenType type);
+			void consume();
 			Token* current_token();
 
 		private:
