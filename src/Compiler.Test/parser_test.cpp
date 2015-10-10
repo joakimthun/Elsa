@@ -191,7 +191,7 @@ TEST(ParserTest, FUNC_DECLARATION)
 {
 	auto lexer = new Lexer(new SourceFile("..\\Compiler.Test\\parser_test_files\\func_declaration.elsa"));
 	auto parser = ElsaParser(lexer);
-	auto exp = parser.parse_expression();
+	auto exp = parser.parse_statement();
 
 	if (auto fde = dynamic_cast<FuncDeclarationExpression*>(exp))
 	{

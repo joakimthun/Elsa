@@ -23,14 +23,19 @@ namespace elsa {
 			return program;
 		}
 
-		void ElsaParser::parse_statement()
+		Expression* ElsaParser::parse_statement()
 		{
+			auto parser = get_statement_parser(current_token_->get_type());
 
+			if (parser == nullptr)
+				throw ParsingException("Invalid token");
+
+			return parser->parse(this);
 		}
 
 		Expression* ElsaParser::parse_expression()
 		{
-			auto parser = get_parser(current_token_->get_type());
+			auto parser = get_expression_parser(current_token_->get_type());
 			
 			if (parser == nullptr)
 				throw ParsingException("Invalid token");
@@ -61,10 +66,10 @@ namespace elsa {
 			current_token_ = std::unique_ptr<Token>(lexer_->next_token());
 		}
 
-		Parser* ElsaParser::get_parser(TokenType type)
+		Parser* ElsaParser::get_expression_parser(TokenType type)
 		{
-			auto it = parsers_.find(type);
-			if (it != parsers_.end())
+			auto it = expression_parsers_.find(type);
+			if (it != expression_parsers_.end())
 			{
 				return it->second.get();
 			}
@@ -72,26 +77,45 @@ namespace elsa {
 			return nullptr;
 		}
 
-		void ElsaParser::register_parser(TokenType type, Parser* parser)
+		Parser* ElsaParser::get_statement_parser(TokenType type)
 		{
-			parsers_.insert(std::pair<TokenType, std::unique_ptr<Parser>>(type, std::unique_ptr<Parser>(parser)));
+			auto it = statement_parsers_.find(type);
+			if (it != statement_parsers_.end())
+			{
+				return it->second.get();
+			}
+
+			return nullptr;
+		}
+
+		void ElsaParser::register_expression_parser(TokenType type, Parser* parser)
+		{
+			expression_parsers_.insert(std::pair<TokenType, std::unique_ptr<Parser>>(type, std::unique_ptr<Parser>(parser)));
+		}
+
+		void ElsaParser::register_statement_parser(TokenType type, Parser* parser)
+		{
+			statement_parsers_.insert(std::pair<TokenType, std::unique_ptr<Parser>>(type, std::unique_ptr<Parser>(parser)));
 		}
 
 		void ElsaParser::register_prefix_op(TokenType type)
 		{
-			register_parser(type, new PrefixOperatorParser());
+			register_expression_parser(type, new PrefixOperatorParser());
 		}
 
 		void ElsaParser::initialize_grammar()
 		{
-			register_parser(TokenType::Identifier, new IdentifierParser());
-			register_parser(TokenType::Var, new VariableDeclarationParser());
-			register_parser(TokenType::IntegerLiteral, new LiteralParser());
-			register_parser(TokenType::FloatLiteral, new LiteralParser());
-			register_parser(TokenType::CharLiteral, new LiteralParser());
-			register_parser(TokenType::BoolLiteral, new LiteralParser());
-			register_parser(TokenType::StringLiteral, new LiteralParser());
-			register_parser(TokenType::Func, new FuncDeclarationParser());
+			// Statements
+			register_statement_parser(TokenType::Func, new FuncDeclarationParser());
+
+			// Expressions
+			register_expression_parser(TokenType::Identifier, new IdentifierParser());
+			register_expression_parser(TokenType::Var, new VariableDeclarationParser());
+			register_expression_parser(TokenType::IntegerLiteral, new LiteralParser());
+			register_expression_parser(TokenType::FloatLiteral, new LiteralParser());
+			register_expression_parser(TokenType::CharLiteral, new LiteralParser());
+			register_expression_parser(TokenType::BoolLiteral, new LiteralParser());
+			register_expression_parser(TokenType::StringLiteral, new LiteralParser());
 
 			register_prefix_op(TokenType::Exclamation);
 		}

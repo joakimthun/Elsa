@@ -25,7 +25,7 @@ namespace elsa {
 			ElsaParser(Lexer* lexer);
 
 			Program* parse();
-			void parse_statement();
+			Expression* parse_statement();
 			Expression* parse_expression();
 			void consume(TokenType type);
 			void consume();
@@ -34,13 +34,17 @@ namespace elsa {
 		private:
 			void next_token();
 
-			std::map<TokenType, std::unique_ptr<Parser>> parsers_;
-			std::unique_ptr<Lexer> lexer_;
-			std::unique_ptr<Token> current_token_;
-			Parser* get_parser(TokenType type);
-			void register_parser(TokenType type, Parser* parser);
+			Parser* get_expression_parser(TokenType type);
+			Parser* get_statement_parser(TokenType type);
+			void register_expression_parser(TokenType type, Parser* parser);
+			void register_statement_parser(TokenType type, Parser* parser);
 			void register_prefix_op(TokenType type);
 			void initialize_grammar();
+
+			std::map<TokenType, std::unique_ptr<Parser>> expression_parsers_;
+			std::map<TokenType, std::unique_ptr<Parser>> statement_parsers_;
+			std::unique_ptr<Lexer> lexer_;
+			std::unique_ptr<Token> current_token_;
 		};
 
 	}
