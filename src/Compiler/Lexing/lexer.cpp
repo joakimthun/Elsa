@@ -291,7 +291,6 @@ namespace elsa {
 			register_keyword(L"var", TokenType::Var);
 			register_keyword(L"int", TokenType::Int);
 			register_keyword(L"float", TokenType::Float);
-			register_keyword(L"string", TokenType::String);
 			register_keyword(L"char", TokenType::Char);
 			register_keyword(L"bool", TokenType::Bool);
 			register_keyword(L"true", TokenType::BoolLiteral);

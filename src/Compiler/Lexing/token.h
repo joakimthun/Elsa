@@ -19,7 +19,6 @@ namespace elsa {
 			Float,
 			Char,
 			Bool,
-			String,
 			Equals,
 			DoubleEquals,
 			NotEquals,

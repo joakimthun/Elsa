@@ -1,8 +1,8 @@
 // This is a comment and should be skipped
 
-func string func1()
+func void func1()
 {
-	return "Hello World!";
+	var x = "Hello World!";
 }
 
 func char func2()

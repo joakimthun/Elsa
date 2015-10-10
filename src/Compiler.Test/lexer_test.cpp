@@ -169,38 +169,40 @@ TEST(LexerTest, PROGRAM_6_STRINGS_AND_CHARS)
 
 	get_tokens(lexer, tokens);
 
-	ASSERT_EQ(tokens.size(), 30);
+	ASSERT_EQ(tokens.size(), 32);
 
 	ASSERT_EQ(tokens[0]->get_type(), TokenType::Func);
-	ASSERT_EQ(tokens[1]->get_type(), TokenType::String);
+	ASSERT_EQ(tokens[1]->get_type(), TokenType::Void);
 	ASSERT_EQ(tokens[2]->get_type(), TokenType::Identifier);
 	ASSERT_EQ(tokens[3]->get_type(), TokenType::LParen);
 	ASSERT_EQ(tokens[4]->get_type(), TokenType::RParen);
 	ASSERT_EQ(tokens[5]->get_type(), TokenType::LBracket);
-	ASSERT_EQ(tokens[6]->get_type(), TokenType::Return);
-	ASSERT_EQ(tokens[7]->get_type(), TokenType::StringLiteral);
-	ASSERT_EQ(tokens[8]->get_type(), TokenType::Semicolon);
-	ASSERT_EQ(tokens[9]->get_type(), TokenType::RBracket);
-	ASSERT_EQ(tokens[10]->get_type(), TokenType::Func);
-	ASSERT_EQ(tokens[11]->get_type(), TokenType::Char);
-	ASSERT_EQ(tokens[12]->get_type(), TokenType::Identifier);
-	ASSERT_EQ(tokens[13]->get_type(), TokenType::LParen);
-	ASSERT_EQ(tokens[14]->get_type(), TokenType::RParen);
-	ASSERT_EQ(tokens[15]->get_type(), TokenType::LBracket);
-	ASSERT_EQ(tokens[16]->get_type(), TokenType::Return);
-	ASSERT_EQ(tokens[17]->get_type(), TokenType::CharLiteral);
-	ASSERT_EQ(tokens[18]->get_type(), TokenType::Semicolon);
-	ASSERT_EQ(tokens[19]->get_type(), TokenType::RBracket);
-	ASSERT_EQ(tokens[20]->get_type(), TokenType::Func);
-	ASSERT_EQ(tokens[21]->get_type(), TokenType::Char);
-	ASSERT_EQ(tokens[22]->get_type(), TokenType::Identifier);
-	ASSERT_EQ(tokens[23]->get_type(), TokenType::LParen);
-	ASSERT_EQ(tokens[24]->get_type(), TokenType::RParen);
-	ASSERT_EQ(tokens[25]->get_type(), TokenType::LBracket);
-	ASSERT_EQ(tokens[26]->get_type(), TokenType::Return);
-	ASSERT_EQ(tokens[27]->get_type(), TokenType::CharLiteral);
-	ASSERT_EQ(tokens[28]->get_type(), TokenType::Semicolon);
-	ASSERT_EQ(tokens[29]->get_type(), TokenType::RBracket);
+	ASSERT_EQ(tokens[6]->get_type(), TokenType::Var);
+	ASSERT_EQ(tokens[7]->get_type(), TokenType::Identifier);
+	ASSERT_EQ(tokens[8]->get_type(), TokenType::Equals);
+	ASSERT_EQ(tokens[9]->get_type(), TokenType::StringLiteral);
+	ASSERT_EQ(tokens[10]->get_type(), TokenType::Semicolon);
+	ASSERT_EQ(tokens[11]->get_type(), TokenType::RBracket);
+	ASSERT_EQ(tokens[12]->get_type(), TokenType::Func);
+	ASSERT_EQ(tokens[13]->get_type(), TokenType::Char);
+	ASSERT_EQ(tokens[14]->get_type(), TokenType::Identifier);
+	ASSERT_EQ(tokens[15]->get_type(), TokenType::LParen);
+	ASSERT_EQ(tokens[16]->get_type(), TokenType::RParen);
+	ASSERT_EQ(tokens[17]->get_type(), TokenType::LBracket);
+	ASSERT_EQ(tokens[18]->get_type(), TokenType::Return);
+	ASSERT_EQ(tokens[19]->get_type(), TokenType::CharLiteral);
+	ASSERT_EQ(tokens[20]->get_type(), TokenType::Semicolon);
+	ASSERT_EQ(tokens[21]->get_type(), TokenType::RBracket);
+	ASSERT_EQ(tokens[22]->get_type(), TokenType::Func);
+	ASSERT_EQ(tokens[23]->get_type(), TokenType::Char);
+	ASSERT_EQ(tokens[24]->get_type(), TokenType::Identifier);
+	ASSERT_EQ(tokens[25]->get_type(), TokenType::LParen);
+	ASSERT_EQ(tokens[26]->get_type(), TokenType::RParen);
+	ASSERT_EQ(tokens[27]->get_type(), TokenType::LBracket);
+	ASSERT_EQ(tokens[28]->get_type(), TokenType::Return);
+	ASSERT_EQ(tokens[29]->get_type(), TokenType::CharLiteral);
+	ASSERT_EQ(tokens[30]->get_type(), TokenType::Semicolon);
+	ASSERT_EQ(tokens[31]->get_type(), TokenType::RBracket);
 }
 
 TEST(LexerTest, PROGRAM_7_MATH_EXPRESSION)
