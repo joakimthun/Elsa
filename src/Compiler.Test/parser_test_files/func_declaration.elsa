@@ -1,5 +1,5 @@
-func void add()
+func void add(int x, float y, char c)
 {
-	var x = 10;
+	var x1 = 10;
 	var x2 = false;
 }

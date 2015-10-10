@@ -17,7 +17,20 @@ namespace elsa {
 
 			parser->consume(TokenType::LParen);
 
-			// Handle Args
+			while (parser->current_token()->get_type() != TokenType::RParen)
+			{
+				auto arg = std::make_unique<ArgumentExpression>();
+				arg->set_type(TypeChecker::get_type_from_token(parser->current_token()->get_type()));
+				parser->consume();
+
+				arg->set_name(parser->current_token()->get_value());
+				parser->consume(TokenType::Identifier);
+
+				func_dec_exp->add_args_expression(arg.release());
+
+				if(parser->current_token()->get_type() != TokenType::RParen)
+					parser->consume(TokenType::Comma);
+			}
 
 			parser->consume(TokenType::RParen);
 
@@ -25,7 +38,7 @@ namespace elsa {
 
 			while (parser->current_token()->get_type() != TokenType::RBracket)
 			{
-				func_dec_exp->add_expression(parser->parse_expression());
+				func_dec_exp->add_body_expression(parser->parse_expression());
 			}
 
 			parser->consume(TokenType::RBracket);

@@ -3,7 +3,12 @@
 namespace elsa {
 	namespace compiler {
 
-		void FuncDeclarationExpression::add_expression(Expression* expression)
+		void FuncDeclarationExpression::add_args_expression(ArgumentExpression* expression)
+		{
+			args_.push_back(std::unique_ptr<ArgumentExpression>(expression));
+		}
+
+		void FuncDeclarationExpression::add_body_expression(Expression* expression)
 		{
 			body_.push_back(std::unique_ptr<Expression>(expression));
 		}
@@ -31,6 +36,11 @@ namespace elsa {
 		const std::vector<std::unique_ptr<Expression>>& FuncDeclarationExpression::get_body() const
 		{
 			return body_;
+		}
+
+		const std::vector<std::unique_ptr<ArgumentExpression>>& FuncDeclarationExpression::get_args() const
+		{
+			return args_;
 		}
 	}
 }

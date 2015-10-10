@@ -199,10 +199,20 @@ TEST(ParserTest, FUNC_DECLARATION)
 		ASSERT_EQ(fde->get_name(), L"add");
 
 		ASSERT_EQ(fde->get_body().size(), 2);
+		ASSERT_EQ(fde->get_args().size(), 3);
+
+		ASSERT_EQ(fde->get_args()[0]->get_name(), L"x");
+		ASSERT_EQ(fde->get_args()[0]->get_type()->get_type(), OType::Int);
+
+		ASSERT_EQ(fde->get_args()[1]->get_name(), L"y");
+		ASSERT_EQ(fde->get_args()[1]->get_type()->get_type(), OType::Float);
+
+		ASSERT_EQ(fde->get_args()[2]->get_name(), L"c");
+		ASSERT_EQ(fde->get_args()[2]->get_type()->get_type(), OType::Char);
 
 		if (auto vde1 = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[0].get()))
 		{
-			ASSERT_EQ(vde1->get_name(), L"x");
+			ASSERT_EQ(vde1->get_name(), L"x1");
 			ASSERT_EQ(vde1->get_type(), L"int");
 
 			if (auto ile = dynamic_cast<IntegerLiteralExpression*>(vde1->get_expression()))

@@ -15,6 +15,18 @@ namespace elsa {
 			case TokenType::Void: {
 				return new ElsaType(OType::Void);
 			}
+			case TokenType::Int: {
+				return new ElsaType(OType::Int);
+			}
+			case TokenType::Float: {
+				return new ElsaType(OType::Float);
+			}
+			case TokenType::Char: {
+				return new ElsaType(OType::Char);
+			}
+			case TokenType::Bool: {
+				return new ElsaType(OType::Bool);
+			}
 			case TokenType::IntegerLiteral: {
 				return new ElsaType(OType::Int);
 			}
@@ -27,9 +39,6 @@ namespace elsa {
 			case TokenType::BoolLiteral: {
 				return new ElsaType(OType::Bool);
 			}
-			//case TokenType::StringLiteral: {
-			//	return new ElsaType(OType::);
-			//}
 			default:
 				throw ParsingException("Invalid type.");
 			}

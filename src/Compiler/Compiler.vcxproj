@@ -22,6 +22,7 @@
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
     <ClInclude Include="lexing\token.h" />
+    <ClInclude Include="parsing\ast\argument_expression.h" />
     <ClInclude Include="parsing\ast\bool_literal_expression.h" />
     <ClInclude Include="parsing\ast\char_literal_expression.h" />
     <ClInclude Include="parsing\ast\expression.h" />
@@ -47,6 +48,7 @@
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
     <ClCompile Include="lexing\token.cpp" />
+    <ClCompile Include="parsing\ast\argument_expression.cpp" />
     <ClCompile Include="parsing\ast\bool_literal_expression.cpp" />
     <ClCompile Include="parsing\ast\char_literal_expression.cpp" />
     <ClCompile Include="parsing\ast\float_literal_expression.cpp" />
