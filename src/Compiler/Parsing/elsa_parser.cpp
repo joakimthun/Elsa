@@ -35,12 +35,25 @@ namespace elsa {
 
 		Expression* ElsaParser::parse_expression()
 		{
+			return parse_expression(0);
+		}
+
+		Expression* ElsaParser::parse_expression(int precedence)
+		{
 			auto parser = get_expression_parser(current_token_->get_type());
-			
+
 			if (parser == nullptr)
 				throw ParsingException("Invalid token");
-			
-			return parser->parse(this);
+
+			auto left = std::unique_ptr<Expression>(parser->parse(this));
+
+			while (precedence < get_precedence())
+			{
+				auto infix_parser = get_infix_parser(current_token()->get_type());
+				left = std::unique_ptr<Expression>(infix_parser->parse(this, left.release()));
+			}
+
+			return left.release();
 		}
 
 		void ElsaParser::consume(TokenType type)
@@ -88,6 +101,26 @@ namespace elsa {
 			return nullptr;
 		}
 
+		InfixParser* ElsaParser::get_infix_parser(TokenType type)
+		{
+			auto it = infix_parsers_.find(type);
+			if (it != infix_parsers_.end())
+			{
+				return it->second.get();
+			}
+
+			return nullptr;
+		}
+
+		int ElsaParser::get_precedence()
+		{
+			auto infix_parser = get_infix_parser(current_token()->get_type());
+			if (infix_parser != nullptr)
+				return infix_parser->precedence();
+
+			return 0;
+		}
+
 		void ElsaParser::register_expression_parser(TokenType type, Parser* parser)
 		{
 			expression_parsers_.insert(std::pair<TokenType, std::unique_ptr<Parser>>(type, std::unique_ptr<Parser>(parser)));
@@ -98,7 +131,12 @@ namespace elsa {
 			statement_parsers_.insert(std::pair<TokenType, std::unique_ptr<Parser>>(type, std::unique_ptr<Parser>(parser)));
 		}
 
-		void ElsaParser::register_prefix_op(TokenType type)
+		void ElsaParser::register_infix_parser(TokenType type, InfixParser* parser)
+		{
+			infix_parsers_.insert(std::pair<TokenType, std::unique_ptr<InfixParser>>(type, std::unique_ptr<InfixParser>(parser)));
+		}
+
+		void ElsaParser::register_prefix_parser(TokenType type)
 		{
 			register_expression_parser(type, new PrefixOperatorParser());
 		}
@@ -117,7 +155,14 @@ namespace elsa {
 			register_expression_parser(TokenType::BoolLiteral, new LiteralParser());
 			register_expression_parser(TokenType::StringLiteral, new LiteralParser());
 
-			register_prefix_op(TokenType::Exclamation);
+			// Prefix
+			register_prefix_parser(TokenType::Exclamation);
+
+			// Infix
+			register_infix_parser(TokenType::Plus, new BinaryOperatorParser(Precedence::Sum));
+			register_infix_parser(TokenType::Minus, new BinaryOperatorParser(Precedence::Sum));
+			register_infix_parser(TokenType::Slash, new BinaryOperatorParser(Precedence::Product));
+			register_infix_parser(TokenType::Asterix, new BinaryOperatorParser(Precedence::Product));
 		}
 	}
 }

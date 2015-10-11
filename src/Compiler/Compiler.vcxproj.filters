@@ -87,6 +87,18 @@
     <ClInclude Include="parsing\ast\argument_expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="parsing\ast\binary_operator_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\binary_operator_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\infix_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\precedence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp">
@@ -153,6 +165,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parsing\ast\argument_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\ast\binary_operator_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\binary_operator_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,7 +4,7 @@ namespace elsa {
 
 		enum OType : int
 		{
-			Null,
+			NullPtr,
 			Void,
 			Int,
 			Float,
