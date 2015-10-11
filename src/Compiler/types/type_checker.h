@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../parsing/ast/expression.h"
+#include "../ast/expression.h"
 #include "elsa_type.h"
-#include "../lexing/token.h"
+#include "../token.h"
 #include "exceptions\parsing_exception.h"
 
 namespace elsa {

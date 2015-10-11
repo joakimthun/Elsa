@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "infix_parser.h"
-#include "../ast/binary_operator_expression.h"
+#include "../../ast/binary_operator_expression.h"
 #include "../elsa_parser.h"
 #include "../../types/type_checker.h"
 #include "./../precedence.h"

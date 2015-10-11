@@ -1,7 +1,7 @@
 #pragma once
 
 #include "parser.h"
-#include "../ast/variable_declaration_expression.h"
+#include "../../ast/variable_declaration_expression.h"
 #include "../elsa_parser.h"
 
 namespace elsa {

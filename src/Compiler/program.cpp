@@ -7,7 +7,7 @@ namespace elsa {
 
 		void Program::add_expression(Expression* node)
 		{
-			nodes_.push_back(std::unique_ptr<Expression>(node));
+			statements_.push_back(std::unique_ptr<Expression>(node));
 		}
 
 	}

@@ -21,12 +21,6 @@
     <ClInclude Include="lexing\source_file.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lexing\token.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\program.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Parsing\elsa_parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -39,21 +33,6 @@
     <ClInclude Include="parsing\parsers\identifier_parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parsing\ast\expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\ast\identifier_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\ast\prefix_operator_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\ast\func_declaration_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\ast\variable_declaration_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="parsing\parsers\variable_declaration_parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -63,31 +42,10 @@
     <ClInclude Include="types\elsa_type.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parsing\ast\bool_literal_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\ast\char_literal_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\ast\float_literal_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\ast\integer_literal_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\ast\string_literal_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="parsing\parsers\literal_parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parsing\parsers\func_declaration_parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\ast\argument_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parsing\ast\binary_operator_expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parsing\parsers\binary_operator_parser.h">
@@ -99,18 +57,54 @@
     <ClInclude Include="parsing\precedence.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\argument_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\binary_operator_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\bool_literal_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\char_literal_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\float_literal_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\func_declaration_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\identifier_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\integer_literal_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\prefix_operator_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\string_literal_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\variable_declaration_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="program.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Lexing\source_file.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lexing\token.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Parsing\elsa_parser.cpp">
@@ -122,18 +116,6 @@
     <ClCompile Include="parsing\parsers\identifier_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="parsing\ast\func_declaration_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\ast\identifier_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\ast\prefix_operator_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\ast\variable_declaration_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="parsing\parsers\variable_declaration_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -143,34 +125,52 @@
     <ClCompile Include="types\elsa_type.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="parsing\ast\bool_literal_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\ast\char_literal_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\ast\float_literal_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\ast\integer_literal_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\ast\string_literal_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="parsing\parsers\literal_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parsing\parsers\func_declaration_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="parsing\ast\argument_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parsing\ast\binary_operator_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="parsing\parsers\binary_operator_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\argument_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\binary_operator_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\bool_literal_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\char_literal_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\float_literal_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\func_declaration_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\identifier_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\integer_literal_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\prefix_operator_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\string_literal_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\variable_declaration_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="token.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

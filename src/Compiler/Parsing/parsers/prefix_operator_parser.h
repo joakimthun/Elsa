@@ -1,7 +1,7 @@
 #pragma once
 
 #include "parser.h"
-#include "../ast/prefix_operator_expression.h"
+#include "../../ast/prefix_operator_expression.h"
 #include "../elsa_parser.h"
 
 namespace elsa {

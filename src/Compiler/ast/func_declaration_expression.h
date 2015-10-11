@@ -6,7 +6,7 @@
 
 #include "expression.h"
 #include "argument_expression.h"
-#include "../../types/elsa_type.h"
+#include "../types/elsa_type.h"
 
 namespace elsa {
 	namespace compiler {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../lexing/token.h"
+#include "../../token.h"
 
 namespace elsa {
 	namespace compiler {

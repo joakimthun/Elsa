@@ -15,7 +15,7 @@ namespace elsa {
 
 			void add_expression(Expression* node);
 		private:
-			std::vector<std::unique_ptr<Expression>> nodes_;
+			std::vector<std::unique_ptr<Expression>> statements_;
 		};
 
 	}

@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "expression.h"
-#include "../../lexing/token.h"
+#include "../token.h"
 
 namespace elsa {
 	namespace compiler {

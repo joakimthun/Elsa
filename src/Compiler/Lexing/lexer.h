@@ -6,7 +6,7 @@
 #include <string>
 
 #include "source_file.h"
-#include "token.h"
+#include "../token.h"
 #include "exceptions\elsa_exception.h"
 
 namespace elsa {

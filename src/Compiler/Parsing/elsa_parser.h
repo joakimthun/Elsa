@@ -5,8 +5,8 @@
 
 #include "exceptions\parsing_exception.h"
 #include "../lexing/lexer.h"
-#include "../lexing/token.h"
-#include "program.h"
+#include "../token.h"
+#include "../program.h"
 #include "precedence.h"
 #include "parsers\prefix_operator_parser.h"
 #include "parsers\identifier_parser.h"
