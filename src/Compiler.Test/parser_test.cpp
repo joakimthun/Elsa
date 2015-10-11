@@ -269,13 +269,58 @@ TEST(ParserTest, PRECEDENCE)
 			{
 				FAIL();
 			}
-
 		}
 		else
 		{
 			FAIL();
 		}
+	}
+	else
+	{
+		FAIL();
+	}
 
+	auto exp3 = parser.parse_expression();
+	if (auto vde3 = dynamic_cast<VariableDeclarationExpression*>(exp3))
+	{
+		ASSERT_EQ(vde3->get_name(), L"x3");
+		ASSERT_EQ(vde3->get_type(), L"int");
+
+		if (auto boe = assert_is_binary_operator_expression(vde3->get_expression(), TokenType::Plus))
+		{
+			if (auto boe2 = assert_is_binary_operator_expression(boe->get_left(), TokenType::Minus))
+			{
+				assert_is_literal_expression<IntegerLiteralExpression, int>(boe2->get_left(), 1);
+
+				if (auto boe3 = assert_is_binary_operator_expression(boe2->get_right(), TokenType::Slash))
+				{
+					assert_is_literal_expression<IntegerLiteralExpression, int>(boe3->get_left(), 10);
+					assert_is_literal_expression<IntegerLiteralExpression, int>(boe3->get_right(), 2);
+				}
+				else
+				{
+					FAIL();
+				}
+			}
+			else
+			{
+				FAIL();
+			}
+
+			if (auto boe4 = assert_is_binary_operator_expression(boe->get_right(), TokenType::Asterix))
+			{
+				assert_is_literal_expression<IntegerLiteralExpression, int>(boe4->get_left(), 5);
+				assert_is_literal_expression<IntegerLiteralExpression, int>(boe4->get_right(), 10);
+			}
+			else
+			{
+				FAIL();
+			}
+		}
+		else
+		{
+			FAIL();
+		}
 	}
 	else
 	{
