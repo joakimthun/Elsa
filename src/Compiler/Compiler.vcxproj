@@ -21,6 +21,11 @@
   <ItemGroup>
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
+    <ClInclude Include="symbols\function_symbol.h" />
+    <ClInclude Include="symbols\local_symbol.h" />
+    <ClInclude Include="symbol_tables\function_table.h" />
+    <ClInclude Include="symbol_tables\local_table.h" />
+    <ClInclude Include="symbol_tables\symbol_table.h" />
     <ClInclude Include="token.h" />
     <ClInclude Include="ast\argument_expression.h" />
     <ClInclude Include="ast\binary_operator_expression.h" />
@@ -51,6 +56,8 @@
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
+    <ClCompile Include="symbols\function_symbol.cpp" />
+    <ClCompile Include="symbols\local_symbol.cpp" />
     <ClCompile Include="token.cpp" />
     <ClCompile Include="ast\argument_expression.cpp" />
     <ClCompile Include="ast\binary_operator_expression.cpp" />
