@@ -5,6 +5,31 @@ using namespace elsa::compiler;
 
 int parser_test() { return 0; }
 
+template<typename TExpression, typename TValue>
+void assert_is_literal_expression(Expression* exp, TValue value)
+{
+	if (auto e = dynamic_cast<TExpression*>(exp))
+	{
+		ASSERT_EQ(e->get_value(), value);
+
+	}
+	else
+	{
+		FAIL();
+	}
+}
+
+BinaryOperatorExpression* assert_is_binary_operator_expression(Expression* exp, TokenType op)
+{
+	if (auto boe = dynamic_cast<BinaryOperatorExpression*>(exp))
+	{
+		EXPECT_EQ(boe->get_operator(), op);
+		return boe;
+	}
+
+	return nullptr;
+}
+
 TEST(ParserTest, PREFIX_OPERATOR_IDENTIFIER)
 {
 	auto lexer = new Lexer(new SourceFile("..\\Compiler.Test\\parser_test_files\\prefix_operator.elsa"));
@@ -72,14 +97,7 @@ TEST(ParserTest, LITERALS)
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type(), L"int");
 
-		if (auto ile = dynamic_cast<IntegerLiteralExpression*>(vde->get_expression()))
-		{
-			ASSERT_EQ(ile->get_value(), 10);
-		}
-		else
-		{
-			FAIL();
-		}
+		assert_is_literal_expression<IntegerLiteralExpression, int>(vde->get_expression(), 10);
 	}
 	else
 	{
@@ -92,14 +110,7 @@ TEST(ParserTest, LITERALS)
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type(), L"int");
 
-		if (auto fle = dynamic_cast<FloatLiteralExpression*>(vde->get_expression()))
-		{
-			ASSERT_FLOAT_EQ(fle->get_value(), 10.0f);
-		}
-		else
-		{
-			FAIL();
-		}
+		assert_is_literal_expression<FloatLiteralExpression, float>(vde->get_expression(), 10.0f);
 	}
 	else
 	{
@@ -112,14 +123,7 @@ TEST(ParserTest, LITERALS)
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type(), L"int");
 
-		if (auto sle = dynamic_cast<StringLiteralExpression*>(vde->get_expression()))
-		{
-			ASSERT_EQ(sle->get_value(), L"Hello World!");
-		}
-		else
-		{
-			FAIL();
-		}
+		assert_is_literal_expression<StringLiteralExpression, std::wstring>(vde->get_expression(), L"Hello World!");
 	}
 	else
 	{
@@ -132,14 +136,7 @@ TEST(ParserTest, LITERALS)
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type(), L"int");
 
-		if (auto ble = dynamic_cast<BoolLiteralExpression*>(vde->get_expression()))
-		{
-			ASSERT_EQ(ble->get_value(), true);
-		}
-		else
-		{
-			FAIL();
-		}
+		assert_is_literal_expression<BoolLiteralExpression, bool>(vde->get_expression(), true);
 	}
 	else
 	{
@@ -152,14 +149,7 @@ TEST(ParserTest, LITERALS)
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type(), L"int");
 
-		if (auto ble = dynamic_cast<BoolLiteralExpression*>(vde->get_expression()))
-		{
-			ASSERT_EQ(ble->get_value(), false);
-		}
-		else
-		{
-			FAIL();
-		}
+		assert_is_literal_expression<BoolLiteralExpression, bool>(vde->get_expression(), false);
 	}
 	else
 	{
@@ -172,14 +162,7 @@ TEST(ParserTest, LITERALS)
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type(), L"int");
 
-		if (auto cle = dynamic_cast<CharLiteralExpression*>(vde->get_expression()))
-		{
-			ASSERT_EQ(cle->get_value(), L'X');
-		}
-		else
-		{
-			FAIL();
-		}
+		assert_is_literal_expression<CharLiteralExpression, wchar_t>(vde->get_expression(), L'X');
 	}
 	else
 	{
@@ -215,14 +198,7 @@ TEST(ParserTest, FUNC_DECLARATION)
 			ASSERT_EQ(vde1->get_name(), L"x1");
 			ASSERT_EQ(vde1->get_type(), L"int");
 
-			if (auto ile = dynamic_cast<IntegerLiteralExpression*>(vde1->get_expression()))
-			{
-				ASSERT_EQ(ile->get_value(), 10);
-			}
-			else
-			{
-				FAIL();
-			}
+			assert_is_literal_expression<IntegerLiteralExpression, int>(vde1->get_expression(), 10);
 		}
 		else
 		{
@@ -234,14 +210,7 @@ TEST(ParserTest, FUNC_DECLARATION)
 			ASSERT_EQ(vde2->get_name(), L"x2");
 			ASSERT_EQ(vde2->get_type(), L"int");
 
-			if (auto ble = dynamic_cast<BoolLiteralExpression*>(vde2->get_expression()))
-			{
-				ASSERT_EQ(ble->get_value(), false);
-			}
-			else
-			{
-				FAIL();
-			}
+			assert_is_literal_expression<BoolLiteralExpression, bool>(vde2->get_expression(), false);
 		}
 		else
 		{
@@ -258,10 +227,55 @@ TEST(ParserTest, PRECEDENCE)
 {
 	auto lexer = new Lexer(new SourceFile("..\\Compiler.Test\\parser_test_files\\precedence.elsa"));
 	auto parser = ElsaParser(lexer);
-	auto exp = parser.parse_expression();
 
-	if (auto fde = dynamic_cast<VariableDeclarationExpression*>(exp))
+	auto exp1 = parser.parse_expression();
+	if (auto vde1 = dynamic_cast<VariableDeclarationExpression*>(exp1))
 	{
+		ASSERT_EQ(vde1->get_name(), L"x1");
+		ASSERT_EQ(vde1->get_type(), L"int");
+
+		if (auto boe = assert_is_binary_operator_expression(vde1->get_expression(), TokenType::Plus))
+		{
+			assert_is_literal_expression<IntegerLiteralExpression, int>(boe->get_left(), 1);
+			assert_is_literal_expression<IntegerLiteralExpression, int>(boe->get_right(), 2);
+		}
+		else
+		{
+			FAIL();
+		}
+
+	}
+	else
+	{
+		FAIL();
+	}
+
+	auto exp2 = parser.parse_expression();
+	if (auto vde2 = dynamic_cast<VariableDeclarationExpression*>(exp2))
+	{
+		ASSERT_EQ(vde2->get_name(), L"x2");
+		ASSERT_EQ(vde2->get_type(), L"int");
+
+		if (auto boe = assert_is_binary_operator_expression(vde2->get_expression(), TokenType::Plus))
+		{
+			assert_is_literal_expression<IntegerLiteralExpression, int>(boe->get_left(), 1);
+
+			if (auto boe2 = assert_is_binary_operator_expression(boe->get_right(), TokenType::Asterix))
+			{
+				assert_is_literal_expression<IntegerLiteralExpression, int>(boe2->get_left(), 2);
+				assert_is_literal_expression<IntegerLiteralExpression, int>(boe2->get_right(), 5);
+			}
+			else
+			{
+				FAIL();
+			}
+
+		}
+		else
+		{
+			FAIL();
+		}
+
 	}
 	else
 	{

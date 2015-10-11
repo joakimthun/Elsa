@@ -22,12 +22,12 @@ namespace elsa {
 			return operator_;
 		}
 
-		const Expression* BinaryOperatorExpression::get_left() const
+		Expression* BinaryOperatorExpression::get_left() const
 		{
 			return left_.get();
 		}
 
-		const Expression* BinaryOperatorExpression::get_right() const
+		Expression* BinaryOperatorExpression::get_right() const
 		{
 			return right_.get();
 		}

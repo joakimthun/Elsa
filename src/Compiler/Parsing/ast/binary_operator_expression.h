@@ -16,8 +16,8 @@ namespace elsa {
 			void set_right(Expression* right);
 
 			TokenType get_operator() const;
-			const Expression* get_left() const;
-			const Expression* get_right() const;
+			Expression* get_left() const;
+			Expression* get_right() const;
 
 		private:
 			TokenType operator_;
