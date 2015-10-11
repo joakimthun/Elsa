@@ -12,11 +12,12 @@ namespace elsa {
 			parser->consume(TokenType::Identifier);
 			parser->consume(TokenType::Equals);
 
-			auto expression = parser->parse_expression();
+			auto expression = std::unique_ptr<Expression>(parser->parse_expression());
+			auto expression_type = TypeChecker::get_expression_type(expression.get());
 
 			parser->consume(TokenType::Semicolon);
 
-			return new VariableDeclarationExpression(name, L"int", expression);
+			return new VariableDeclarationExpression(name, expression_type, expression.release());
 		}
 
 	}
