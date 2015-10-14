@@ -19,103 +19,44 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="compiler.h" />
-    <ClInclude Include="Lexing\lexer.h" />
-    <ClInclude Include="lexing\source_file.h" />
-    <ClInclude Include="symbols\function_symbol.h" />
-    <ClInclude Include="symbols\local_symbol.h" />
-    <ClInclude Include="symbol_tables\function_table.h" />
-    <ClInclude Include="symbol_tables\local_table.h" />
-    <ClInclude Include="symbol_tables\symbol_table.h" />
-    <ClInclude Include="token.h" />
-    <ClInclude Include="ast\argument_expression.h" />
-    <ClInclude Include="ast\binary_operator_expression.h" />
-    <ClInclude Include="ast\bool_literal_expression.h" />
-    <ClInclude Include="ast\char_literal_expression.h" />
-    <ClInclude Include="ast\expression.h" />
-    <ClInclude Include="ast\float_literal_expression.h" />
-    <ClInclude Include="ast\func_declaration_expression.h" />
-    <ClInclude Include="ast\identifier_expression.h" />
-    <ClInclude Include="ast\integer_literal_expression.h" />
-    <ClInclude Include="ast\prefix_operator_expression.h" />
-    <ClInclude Include="ast\string_literal_expression.h" />
-    <ClInclude Include="ast\variable_declaration_expression.h" />
-    <ClInclude Include="parsing\parsers\binary_operator_parser.h" />
-    <ClInclude Include="parsing\parsers\func_declaration_parser.h" />
-    <ClInclude Include="parsing\parsers\infix_parser.h" />
-    <ClInclude Include="parsing\parsers\literal_parser.h" />
-    <ClInclude Include="parsing\precedence.h" />
-    <ClInclude Include="types\elsa_type.h" />
-    <ClInclude Include="parsing\parsers\identifier_parser.h" />
-    <ClInclude Include="parsing\parsers\prefix_operator_parser.h" />
-    <ClInclude Include="parsing\parsers\parser.h" />
-    <ClInclude Include="Parsing\elsa_parser.h" />
-    <ClInclude Include="parsing\parsers\variable_declaration_parser.h" />
-    <ClInclude Include="program.h" />
-    <ClInclude Include="types\type_checker.h" />
+    <ClCompile Include="elsa.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="compiler.cpp" />
-    <ClCompile Include="Lexing\lexer.cpp" />
-    <ClCompile Include="Lexing\source_file.cpp" />
-    <ClCompile Include="symbols\function_symbol.cpp" />
-    <ClCompile Include="symbols\local_symbol.cpp" />
-    <ClCompile Include="token.cpp" />
-    <ClCompile Include="ast\argument_expression.cpp" />
-    <ClCompile Include="ast\binary_operator_expression.cpp" />
-    <ClCompile Include="ast\bool_literal_expression.cpp" />
-    <ClCompile Include="ast\char_literal_expression.cpp" />
-    <ClCompile Include="ast\float_literal_expression.cpp" />
-    <ClCompile Include="ast\func_declaration_expression.cpp" />
-    <ClCompile Include="ast\identifier_expression.cpp" />
-    <ClCompile Include="ast\integer_literal_expression.cpp" />
-    <ClCompile Include="ast\prefix_operator_expression.cpp" />
-    <ClCompile Include="ast\string_literal_expression.cpp" />
-    <ClCompile Include="ast\variable_declaration_expression.cpp" />
-    <ClCompile Include="parsing\parsers\binary_operator_parser.cpp" />
-    <ClCompile Include="parsing\parsers\func_declaration_parser.cpp" />
-    <ClCompile Include="parsing\parsers\identifier_parser.cpp" />
-    <ClCompile Include="parsing\parsers\literal_parser.cpp" />
-    <ClCompile Include="parsing\parsers\prefix_operator_parser.cpp" />
-    <ClCompile Include="Parsing\elsa_parser.cpp" />
-    <ClCompile Include="parsing\parsers\variable_declaration_parser.cpp" />
-    <ClCompile Include="program.cpp" />
-    <ClCompile Include="types\elsa_type.cpp" />
-    <ClCompile Include="types\type_checker.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Shared\Shared.vcxproj">
-      <Project>{ec7dada4-fc2a-442c-9dcf-5ba06da8d653}</Project>
+    <ProjectReference Include="..\Compiler\Compiler.vcxproj">
+      <Project>{ff16959e-20f4-4016-ade6-c52e8fc1d86d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\VM\VM.vcxproj">
+      <Project>{f45fa80e-e6ba-4d96-831b-d5a5debbc8d9}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FF16959E-20F4-4016-ADE6-C52E8FC1D86D}</ProjectGuid>
+    <ProjectGuid>{1A7CC214-5115-401C-9D56-F3EF298EC342}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Compiler</RootNamespace>
+    <RootNamespace>Elsa</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -139,18 +80,29 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Dev\VS\Elsa\src\Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Dev\VS\Elsa\src\VM;C:\Dev\VS\Elsa\src\Shared;C:\Dev\VS\Elsa\src\Compiler;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -160,10 +112,10 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -175,11 +127,11 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Dev\VS\Elsa\src\Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Dev\VS\Elsa\src\VM;C:\Dev\VS\Elsa\src\Shared;C:\Dev\VS\Elsa\src\Compiler;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
@@ -193,10 +145,10 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
