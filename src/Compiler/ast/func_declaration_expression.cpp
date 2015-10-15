@@ -1,5 +1,7 @@
 #include "func_declaration_expression.h"
 
+#include "../code_gen/expression_visitor.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -41,6 +43,11 @@ namespace elsa {
 		const std::vector<std::unique_ptr<ArgumentExpression>>& FuncDeclarationExpression::get_args() const
 		{
 			return args_;
+		}
+
+		void FuncDeclarationExpression::accept(ExpressionVisitor * visitor)
+		{
+			visitor->visit(this);
 		}
 	}
 }

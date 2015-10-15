@@ -25,6 +25,8 @@ namespace elsa {
 			const std::vector<std::unique_ptr<Expression>>& get_body() const;
 			const std::vector<std::unique_ptr<ArgumentExpression>>& get_args() const;
 
+			void accept(ExpressionVisitor* visitor) override;
+
 		private:
 			std::wstring name_;
 			std::unique_ptr<ElsaType> return_type_;
