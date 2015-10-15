@@ -117,6 +117,9 @@
     <ClInclude Include="compiler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="code_gen\code_gen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp">
@@ -198,6 +201,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="compiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code_gen\code_gen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

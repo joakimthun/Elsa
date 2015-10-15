@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="code_gen\code_gen.h" />
     <ClInclude Include="compiler.h" />
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
@@ -55,6 +56,7 @@
     <ClInclude Include="types\type_checker.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="code_gen\code_gen.cpp" />
     <ClCompile Include="compiler.cpp" />
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
