@@ -14,14 +14,13 @@ namespace elsa {
 				if (left_type->get_type() == OType::Int && right_type->get_type() == OType::Int)
 					return new ElsaType(OType::Int);
 
-				if ((left_type->get_type() == OType::Float && right_type->get_type() == OType::Int) ||
-					(left_type->get_type() == OType::Int && right_type->get_type() == OType::Float))
-					return new ElsaType(OType::Int);
+				if (left_type->get_type() == OType::Float && right_type->get_type() == OType::Float)
+					return new ElsaType(OType::Float);
 
 				if (left_type->get_type() == OType::Bool && right_type->get_type() == OType::Bool)
 					return new ElsaType(OType::Bool);
 
-				throw ParsingException("Invalid binary expression.");
+				throw ParsingException("Type mismatch");
 			}
 			if (is_of_type<IdentifierExpression>(expression))
 			{
