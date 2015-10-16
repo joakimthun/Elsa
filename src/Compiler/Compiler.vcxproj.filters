@@ -126,6 +126,9 @@
     <ClInclude Include="code_gen\visitors\vm_expression_visitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="code_gen\builders\function_builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp">
@@ -213,6 +216,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code_gen\visitors\vm_expression_visitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code_gen\builders\function_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
