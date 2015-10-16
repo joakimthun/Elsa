@@ -25,6 +25,7 @@
     <ClCompile Include="constants\function_info.cpp" />
     <ClCompile Include="constants\string_info.cpp" />
     <ClCompile Include="constants\struct_info.cpp" />
+    <ClCompile Include="vm_program.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants\char_info.h" />
@@ -38,6 +39,7 @@
     <ClInclude Include="exceptions\elsa_exception.h" />
     <ClInclude Include="exceptions\runtime_exception.h" />
     <ClInclude Include="object_types\otype.h" />
+    <ClInclude Include="vm_program.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EC7DADA4-FC2A-442C-9DCF-5BA06DA8D653}</ProjectGuid>

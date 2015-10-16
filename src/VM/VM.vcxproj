@@ -145,7 +145,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="call_stack.cpp" />
-    <ClCompile Include="constants\constant_pool.cpp" />
     <ClCompile Include="elsa_vm.cpp" />
     <ClCompile Include="GC\gc.cpp" />
     <ClCompile Include="memory\heap.cpp" />
@@ -156,7 +155,6 @@
   <ItemGroup>
     <ClInclude Include="call_stack.h" />
     <ClInclude Include="types\array_info.h" />
-    <ClInclude Include="constants\constant_pool.h" />
     <ClInclude Include="GC\gc.h" />
     <ClInclude Include="memory\heap.h" />
     <ClInclude Include="stack_frame.h" />

@@ -24,9 +24,6 @@
     <ClInclude Include="call_stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="constants\constant_pool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="memory\heap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -54,9 +51,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stack_frame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="constants\constant_pool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="memory\heap.cpp">

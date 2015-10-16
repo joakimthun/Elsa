@@ -3,25 +3,14 @@
 namespace elsa {
 	namespace vm {
 
-		VM::VM()
+		VM::VM(VMProgram& program)
 			:
+			program_(program),
 			code_length_(0),
 			pc_(0),
-			entry_point_(-1),
 			oc_(nop)
 		{
-			gc_ = GC(&heap_);
-		}
-
-		VM::VM(const std::vector<int>& code)
-			:
-			code_(code),
-			code_length_(code.size()),
-			pc_(0),
-			entry_point_(-1),
-			oc_(nop)
-		{
-			code_length_ = code_.size();
+			code_length_ = program_.get_instructions().size();
 			gc_ = GC(&heap_);
 		}
 
@@ -36,8 +25,10 @@ namespace elsa {
 				if (code_length_ == 0)
 					throw RuntimeException("No program to execute.");
 
-				if (entry_point_ == -1)
+				if (program_.get_entry_point() == -1)
 					throw RuntimeException("No entry point specified.");
+
+				pc_ = program_.get_entry_point();
 
 				if (call_stack_.size() == 0)
 				{
@@ -74,23 +65,6 @@ namespace elsa {
 			next_opcode();
 		}
 
-		void VM::set_program(const std::vector<int>& code)
-		{
-			code_ = code;
-			code_length_ = code.size();
-		}
-
-		ConstantPool& VM::constant_pool()
-		{
-			return constant_pool_;
-		}
-
-		void VM::set_entry_point(std::size_t entry_point)
-		{
-			entry_point_ = static_cast<int>(entry_point);
-			pc_ = entry_point_;
-		}
-
 		Object VM::eval_stack_top() const
 		{
 			return current_frame_->dump_top();
@@ -106,6 +80,11 @@ namespace elsa {
 			return gc_.collect(call_stack_.current());
 		}
 
+		int VM::get_instruction(std::size_t pc)
+		{
+			return program_.get_instructions()[pc];
+		}
+
 		void VM::cycle()
 		{
 			current_frame_ = call_stack_.current();
@@ -114,7 +93,7 @@ namespace elsa {
 			switch (oc_)
 			{
 			case iconst: {
-				auto v = code_[pc_++];
+				auto v = get_instruction(pc_++);
 				current_frame_->push(Object(v));
 				break;
 			}
@@ -155,8 +134,8 @@ namespace elsa {
 				break;
 			}
 			case fconst: { 
-				auto index = code_[pc_++];
-				auto f = constant_pool_.get_float(index);
+				auto index = get_instruction(pc_++);
+				auto f = program_.get_float(index);
 				current_frame_->push(Object(f->get_value()));
 				break; 
 			}
@@ -198,8 +177,8 @@ namespace elsa {
 				break;
 			}
 			case cconst: {
-				auto index = code_[pc_++];
-				auto c = constant_pool_.get_char_at(index);
+				auto index = get_instruction(pc_++);
+				auto c = program_.get_char_at(index);
 				current_frame_->push(Object(c->get_value()));
 				break;
 			}
@@ -216,7 +195,7 @@ namespace elsa {
 				break;
 			}
 			case bconst: {
-				auto v = code_[pc_++] != 0;
+				auto v = get_instruction(pc_++) != 0;
 				current_frame_->push(Object(v));
 				break;
 			}
@@ -233,8 +212,8 @@ namespace elsa {
 				break;
 			}
 			case sconst: {
-				auto index = code_[pc_++];
-				auto str = constant_pool_.get_string(index)->get_value();
+				auto index = get_instruction(pc_++);
+				auto str = program_.get_string(index)->get_value();
 				auto str_obj = heap_.alloc_array(OType::Char, str.length());
 
 				for (std::wstring::size_type i = 0; i < str.size(); ++i)
@@ -247,7 +226,7 @@ namespace elsa {
 				break;
 			}
 			case br_ieq: {
-				auto jmp_addr = code_[pc_++];
+				auto jmp_addr = get_instruction(pc_++);
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 				
@@ -257,7 +236,7 @@ namespace elsa {
 				break;
 			}
 			case br_ineq: {
-				auto jmp_addr = code_[pc_++];
+				auto jmp_addr = get_instruction(pc_++);
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 
@@ -267,7 +246,7 @@ namespace elsa {
 				break;
 			}
 			case br_feq: {
-				auto jmp_addr = code_[pc_++];
+				auto jmp_addr = get_instruction(pc_++);
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 
@@ -277,7 +256,7 @@ namespace elsa {
 				break;
 			}
 			case br_fneq: {
-				auto jmp_addr = code_[pc_++];
+				auto jmp_addr = get_instruction(pc_++);
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 
@@ -287,7 +266,7 @@ namespace elsa {
 				break;
 			}
 			case br_beq: {
-				auto jmp_addr = code_[pc_++];
+				auto jmp_addr = get_instruction(pc_++);
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 
@@ -297,7 +276,7 @@ namespace elsa {
 				break;
 			}
 			case br_bneq: {
-				auto jmp_addr = code_[pc_++];
+				auto jmp_addr = get_instruction(pc_++);
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 
@@ -307,7 +286,7 @@ namespace elsa {
 				break;
 			}
 			case br_ceq: {
-				auto jmp_addr = code_[pc_++];
+				auto jmp_addr = get_instruction(pc_++);
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 
@@ -317,7 +296,7 @@ namespace elsa {
 				break;
 			}
 			case br_cneq: {
-				auto jmp_addr = code_[pc_++];
+				auto jmp_addr = get_instruction(pc_++);
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 
@@ -327,9 +306,9 @@ namespace elsa {
 				break;
 			}
 			case call: {
-				auto addr = code_[pc_];
+				auto addr = get_instruction(pc_);
 
-				auto f = constant_pool_.get_func(addr);
+				auto f = program_.get_func(addr);
 				auto sf = new StackFrame(f, pc_ + 1, call_stack_.current());
 				call_stack_.push(sf);
 
@@ -361,17 +340,17 @@ namespace elsa {
 				break;
 			}
 			case l_arg: {
-				auto a_index = code_[pc_++];
+				auto a_index = get_instruction(pc_++);
 				current_frame_->push(current_frame_->load_arg(a_index));
 				break;
 			}
 			case l_local: {
-				auto l_index = code_[pc_++];
+				auto l_index = get_instruction(pc_++);
 				current_frame_->push(current_frame_->load_local(l_index));
 				break;
 			}
 			case s_local: {
-				auto l_index = code_[pc_++];
+				auto l_index = get_instruction(pc_++);
 				auto value = current_frame_->pop();
 				current_frame_->store_local(l_index, value);
 				break;
@@ -381,26 +360,26 @@ namespace elsa {
 				break;
 			}
 			case new_struct: {
-				auto i = code_[pc_++];
-				auto si = constant_pool_.get_struct(i);
+				auto i = get_instruction(pc_++);
+				auto si = program_.get_struct(i);
 				current_frame_->push(heap_.alloc_struct(si));
 				break;
 			}
 			case l_field: {
-				auto fi = code_[pc_++];
+				auto fi = get_instruction(pc_++);
 				auto instance = current_frame_->pop();
 				current_frame_->push(heap_.load_field(instance, fi));
 				break;
 			}
 			case s_field: {
-				auto fi = code_[pc_++];
+				auto fi = get_instruction(pc_++);
 				auto value = current_frame_->pop();
 				auto instance = current_frame_->pop();
 				heap_.store_field(instance, value, fi);
 				break;
 			}
 			case new_arr: {
-				auto type = (OType)code_[pc_++];
+				auto type = (OType)get_instruction(pc_++);
 				auto size = current_frame_->pop().i();
 				current_frame_->push(heap_.alloc_array(type, size));
 				break;
@@ -412,13 +391,13 @@ namespace elsa {
 				break;
 			}
 			case l_ele: {
-				auto ei = code_[pc_++];
+				auto ei = get_instruction(pc_++);
 				auto instance = current_frame_->pop();
 				current_frame_->push(heap_.load_element(instance, ei));
 				break;
 			}
 			case s_ele: {
-				auto ei = code_[pc_++];
+				auto ei = get_instruction(pc_++);
 				auto value = current_frame_->pop();
 				auto instance = current_frame_->pop();
 				heap_.store_element(instance, value, ei);
@@ -441,12 +420,12 @@ namespace elsa {
 
 		void VM::push_main()
 		{
-			call_stack_.push(new StackFrame(constant_pool_.get_func(entry_point_), entry_point_, nullptr));
+			call_stack_.push(new StackFrame(program_.get_main(), program_.get_entry_point(), nullptr));
 		}
 
 		void VM::next_opcode()
 		{
-			oc_ = (OpCode)code_[pc_++];
+			oc_ = (OpCode)get_instruction(pc_++);
 		}
 
 		void VM::print_line(const Object& o)
