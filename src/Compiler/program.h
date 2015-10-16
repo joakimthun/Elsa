@@ -17,6 +17,7 @@ namespace elsa {
 
 			void add_statement(Expression* node);
 			void add_function(FunctionSymbol* function);
+			std::vector<std::unique_ptr<Expression>>& get_statements();
 
 		private:
 			std::vector<std::unique_ptr<Expression>> statements_;

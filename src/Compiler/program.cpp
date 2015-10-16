@@ -20,5 +20,10 @@ namespace elsa {
 			functions_.add(function->get_name(), fs.release());
 		}
 
+		std::vector<std::unique_ptr<Expression>>& Program::get_statements()
+		{
+			return statements_;
+		}
+
 	}
 }

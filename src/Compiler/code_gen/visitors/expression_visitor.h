@@ -8,9 +8,8 @@ namespace elsa {
 		class ExpressionVisitor
 		{
 		public:
-			ExpressionVisitor();
-
-			void visit(FuncDeclarationExpression* expression);
+			virtual ~ExpressionVisitor() {};
+			virtual void visit(FuncDeclarationExpression* expression) = 0;
 		};
 
 	}

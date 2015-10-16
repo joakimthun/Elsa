@@ -20,7 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code_gen\code_gen.h" />
-    <ClInclude Include="code_gen\expression_visitor.h" />
+    <ClInclude Include="code_gen\visitors\expression_visitor.h" />
+    <ClInclude Include="code_gen\visitors\vm_expression_visitor.h" />
     <ClInclude Include="compiler.h" />
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
@@ -58,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code_gen\code_gen.cpp" />
-    <ClCompile Include="code_gen\expression_visitor.cpp" />
+    <ClCompile Include="code_gen\visitors\vm_expression_visitor.cpp" />
     <ClCompile Include="compiler.cpp" />
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />

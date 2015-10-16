@@ -13,14 +13,14 @@ namespace elsa {
 
 		Program* ElsaParser::parse()
 		{
-			auto program = new Program();
+			auto program = std::make_unique<Program>();
 
 			while (current_token_->get_type() != TokenType::END)
 			{
-				parse_statement();
+				program->add_statement(parse_statement());
 			}
 
-			return program;
+			return program.release();
 		}
 
 		Expression* ElsaParser::parse_statement()

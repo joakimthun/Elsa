@@ -1,6 +1,6 @@
 #include "func_declaration_expression.h"
 
-#include "../code_gen/expression_visitor.h"
+#include "../code_gen/visitors/expression_visitor.h"
 
 namespace elsa {
 	namespace compiler {
