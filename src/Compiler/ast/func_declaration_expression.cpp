@@ -45,7 +45,7 @@ namespace elsa {
 			return args_;
 		}
 
-		void FuncDeclarationExpression::accept(ExpressionVisitor * visitor)
+		void FuncDeclarationExpression::accept(ExpressionVisitor* visitor)
 		{
 			visitor->visit(this);
 		}

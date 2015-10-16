@@ -4,6 +4,6 @@ using namespace elsa;
 
 int main(int argc, char* argv[])
 {
-	compiler::Compiler::compile("");
+	compiler::Compiler::compile("programs\\program1.elsa");
 }
 

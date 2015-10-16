@@ -1,0 +1,4 @@
+func int main()
+{
+	var x = 1 + 2;
+}
