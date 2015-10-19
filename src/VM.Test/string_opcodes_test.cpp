@@ -11,19 +11,19 @@ protected:
 	{
 		int ep = 0;
 
-		vm_.constant_pool().add_func(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
-		vm_.constant_pool().add_string(new StringInfo(L"Hello World!"));
-		vm_.set_entry_point(ep);
+		program_.add_func(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
+		program_.add_string(new StringInfo(L"Hello World!"));
+		program_.set_entry_point(ep);
 	}
 
 	virtual void TearDown() {}
 
-	VM vm_;
+	VMProgram program_;
 };
 
 TEST_F(StringOpCodesTest, SCONST)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		sconst, 0,
 		s_local, 0,
@@ -51,27 +51,27 @@ TEST_F(StringOpCodesTest, SCONST)
 		// !
 		l_local, 0,
 		l_ele, 11,
-	};
+	});
 
-	vm_.set_program(p);
+	auto vm = VM(program_);
 
-	vm_.execute();
+	vm.execute();
 
-	EXPECT_EQ('H', vm_.eval_stack_top().c());
+	ASSERT_EQ(L'H', vm.eval_stack_top().c());
 
-	vm_.execute();
+	vm.execute();
 
-	EXPECT_EQ('l', vm_.eval_stack_top().c());
+	ASSERT_EQ(L'l', vm.eval_stack_top().c());
 
-	vm_.execute();
+	vm.execute();
 
-	EXPECT_EQ(' ', vm_.eval_stack_top().c());
+	ASSERT_EQ(L' ', vm.eval_stack_top().c());
 
-	vm_.execute();
+	vm.execute();
 
-	EXPECT_EQ('W', vm_.eval_stack_top().c());
+	ASSERT_EQ(L'W', vm.eval_stack_top().c());
 
-	vm_.execute();
+	vm.execute();
 
-	EXPECT_EQ('!', vm_.eval_stack_top().c());
+	ASSERT_EQ(L'!', vm.eval_stack_top().c());
 }

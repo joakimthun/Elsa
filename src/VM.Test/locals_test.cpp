@@ -7,19 +7,22 @@ int locals_test() { return 0; };
 
 TEST(LOCALS, STORE_LOAD_INT)
 {
-	std::vector<int> p =
+	VMProgram program_;
+
+	program_.emit(
 	{
 		iconst, 10,
 		s_local, 0,
 		l_local, 0,
 		halt
-	};
+	});
 
-	auto vm = VM(p);
 	int ep = 0;
 
-	vm.constant_pool().add_func(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
-	vm.set_entry_point(ep);
+	program_.add_func(new FunctionInfo("main", 0, 1, ep, FunctionType::Static));
+	program_.set_entry_point(ep);
+
+	auto vm = VM(program_);
 	vm.execute();
 
 	EXPECT_EQ(10, vm.eval_stack_top().i());

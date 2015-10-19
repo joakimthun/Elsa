@@ -12,6 +12,14 @@ namespace elsa {
 		{
 			code_length_ = program_.get_instructions().size();
 			gc_ = GC(&heap_);
+
+			if (code_length_ == 0)
+				throw RuntimeException("No program to execute.");
+
+			if (program_.get_entry_point() < 0)
+				throw RuntimeException("No entry point specified.");
+
+			pc_ = static_cast<std::size_t>(program_.get_entry_point());
 		}
 
 		VM::~VM()
@@ -22,14 +30,6 @@ namespace elsa {
 		{
 			try 
 			{
-				if (code_length_ == 0)
-					throw RuntimeException("No program to execute.");
-
-				if (program_.get_entry_point() == -1)
-					throw RuntimeException("No entry point specified.");
-
-				pc_ = program_.get_entry_point();
-
 				if (call_stack_.size() == 0)
 				{
 					push_main();

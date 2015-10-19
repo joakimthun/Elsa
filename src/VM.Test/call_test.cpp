@@ -7,7 +7,9 @@ int call_test() { return 0; };
 
 TEST(STATIC_CALL, RETURN_INT)
 {
-	std::vector<int> p =
+	VMProgram program;
+
+	program.emit(
 	{
 		iconst, 6,
 		ret,
@@ -15,15 +17,15 @@ TEST(STATIC_CALL, RETURN_INT)
 		// Main
 		call, 0,
 		halt
-	};
+	});
 
 	int ep = 3;
 
-	auto vm = VM(p);
+	program.add_func(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+	program.add_func(new FunctionInfo("print", 0, 0, 0, FunctionType::Static));
+	program.set_entry_point(ep);
 
-	vm.constant_pool().add_func(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
-	vm.constant_pool().add_func(new FunctionInfo("print", 0, 0, 0, FunctionType::Static));
-	vm.set_entry_point(ep);
+	auto vm = VM(program);
 
 	vm.execute();
 

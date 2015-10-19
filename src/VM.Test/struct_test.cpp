@@ -10,8 +10,8 @@ protected:
 	virtual void SetUp()
 	{
 		int ep = 0;
-		vm_.constant_pool().add_func(new FunctionInfo("main", 0, 3, ep, FunctionType::Static));
-		vm_.set_entry_point(ep);
+		program_.add_func(new FunctionInfo("main", 0, 3, ep, FunctionType::Static));
+		program_.set_entry_point(ep);
 
 		auto si = new StructInfo("my_struct");
 		si->add_field(new FieldInfo("field0", elsa::OType::Int));
@@ -19,17 +19,17 @@ protected:
 		si->add_field(new FieldInfo("field2", elsa::OType::Int));
 		si->add_field(new FieldInfo("field3", elsa::OType::Float));
 		si->add_field(new FieldInfo("field4", elsa::OType::Int));
-		vm_.constant_pool().add_struct(si);
+		program_.add_struct(si);
 
-		vm_.constant_pool().add_float(new FloatInfo(12.0f));
-		vm_.constant_pool().add_float(new FloatInfo(99.0f));
+		program_.add_float(new FloatInfo(12.0f));
+		program_.add_float(new FloatInfo(99.0f));
 
 		auto si2 = new StructInfo("my_struct2");
 		si2->add_field(new FieldInfo("field0", elsa::OType::GCOPtr));
 		si2->add_field(new FieldInfo("field1", elsa::OType::Int));
 		si2->add_field(new FieldInfo("field2", elsa::OType::GCOPtr));
 
-		vm_.constant_pool().add_struct(si2);
+		program_.add_struct(si2);
 
 		auto si3 = new StructInfo("my_struct3");
 		si3->add_field(new FieldInfo("field0", elsa::OType::GCOPtr));
@@ -38,25 +38,25 @@ protected:
 		si3->add_field(new FieldInfo("field3", elsa::OType::Char));
 		si3->add_field(new FieldInfo("field4", elsa::OType::Float));
 
-		vm_.constant_pool().add_struct(si3);
+		program_.add_struct(si3);
 	}
 
 	virtual void TearDown() {}
 
-	VM vm_;
+	VMProgram program_;
 };
 
 TEST_F(StructTest, NEW)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		new_struct, 0
-	};
+	});
 
-	vm_.set_program(p);
-	vm_.execute();
+	auto vm = VM(program_);
+	vm.execute();
 
-	auto obj = vm_.eval_stack_top();
+	auto obj = vm.eval_stack_top();
 
 	ASSERT_EQ(elsa::OType::GCOPtr, obj.get_type());
 
@@ -68,7 +68,7 @@ TEST_F(StructTest, NEW)
 
 TEST_F(StructTest, FIELD_STORE_LOAD)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		new_struct, 0,
 		s_local, 0,
@@ -122,33 +122,33 @@ TEST_F(StructTest, FIELD_STORE_LOAD)
 		l_local, 0,
 		l_field, 4,
 		halt,
-	};
+	});
 
-	vm_.set_program(p);
-	vm_.execute();
+	auto vm = VM(program_);
+	vm.execute();
 	
-	ASSERT_EQ(77, vm_.eval_stack_top().i());
+	ASSERT_EQ(77, vm.eval_stack_top().i());
 
-	vm_.execute();
+	vm.execute();
 
-	ASSERT_FLOAT_EQ(12.0f, vm_.eval_stack_top().f());
+	ASSERT_FLOAT_EQ(12.0f, vm.eval_stack_top().f());
 
-	vm_.execute();
+	vm.execute();
 
-	ASSERT_EQ(100, vm_.eval_stack_top().i());
+	ASSERT_EQ(100, vm.eval_stack_top().i());
 
-	vm_.execute();
+	vm.execute();
 
-	ASSERT_FLOAT_EQ(99.0f, vm_.eval_stack_top().f());
+	ASSERT_FLOAT_EQ(99.0f, vm.eval_stack_top().f());
 
-	vm_.execute();
+	vm.execute();
 
-	ASSERT_EQ(-1829, vm_.eval_stack_top().i());
+	ASSERT_EQ(-1829, vm.eval_stack_top().i());
 }
 
 TEST_F(StructTest, STRUCT_FIELD_STORE_LOAD)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		new_struct, 0,
 		s_local, 0,
@@ -174,32 +174,32 @@ TEST_F(StructTest, STRUCT_FIELD_STORE_LOAD)
 		l_field, 0,
 		halt,
 		l_field, 0,
-	};
+	});
 
-	vm_.set_program(p);
+	auto vm = VM(program_);
 
-	vm_.execute();
-	ASSERT_EQ("my_struct", vm_.eval_stack_top().gco()->si->get_name());
+	vm.execute();
+	ASSERT_EQ("my_struct", vm.eval_stack_top().gco()->si->get_name());
 
-	vm_.execute();
-	ASSERT_EQ("my_struct2", vm_.eval_stack_top().gco()->si->get_name());
+	vm.execute();
+	ASSERT_EQ("my_struct2", vm.eval_stack_top().gco()->si->get_name());
 
-	vm_.execute();
-	ASSERT_EQ("my_struct", vm_.eval_stack_top().gco()->si->get_name());
+	vm.execute();
+	ASSERT_EQ("my_struct", vm.eval_stack_top().gco()->si->get_name());
 
-	vm_.execute();
-	ASSERT_EQ("my_struct2", vm_.eval_stack_top().gco()->si->get_name());
+	vm.execute();
+	ASSERT_EQ("my_struct2", vm.eval_stack_top().gco()->si->get_name());
 
-	vm_.execute();
-	ASSERT_EQ("my_struct", vm_.eval_stack_top().gco()->si->get_name());
+	vm.execute();
+	ASSERT_EQ("my_struct", vm.eval_stack_top().gco()->si->get_name());
 
-	vm_.execute();
-	ASSERT_EQ(77, vm_.eval_stack_top().i());
+	vm.execute();
+	ASSERT_EQ(77, vm.eval_stack_top().i());
 }
 
 TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		new_struct, 0,
 		s_local, 0,
@@ -296,41 +296,41 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 		l_field, 0,
 		l_field, 4,
 		halt,
-	};
+	});
 
-	vm_.set_program(p);
+	auto vm = VM(program_);
 
-	vm_.execute();
-	ASSERT_EQ("my_struct", vm_.eval_stack_top().gco()->si->get_name());
+	vm.execute();
+	ASSERT_EQ("my_struct", vm.eval_stack_top().gco()->si->get_name());
 
-	vm_.execute();
-	ASSERT_EQ("my_struct2", vm_.eval_stack_top().gco()->si->get_name());
+	vm.execute();
+	ASSERT_EQ("my_struct2", vm.eval_stack_top().gco()->si->get_name());
 
-	vm_.execute();
-	ASSERT_EQ(12378, vm_.eval_stack_top().i());
+	vm.execute();
+	ASSERT_EQ(12378, vm.eval_stack_top().i());
 
-	vm_.execute();
-	ASSERT_EQ("my_struct2", vm_.eval_stack_top().gco()->si->get_name());
+	vm.execute();
+	ASSERT_EQ("my_struct2", vm.eval_stack_top().gco()->si->get_name());
 
-	vm_.execute();
-	ASSERT_EQ(77, vm_.eval_stack_top().i());
+	vm.execute();
+	ASSERT_EQ(77, vm.eval_stack_top().i());
 
-	vm_.execute();
-	ASSERT_FLOAT_EQ(12.0f, vm_.eval_stack_top().f());
+	vm.execute();
+	ASSERT_FLOAT_EQ(12.0f, vm.eval_stack_top().f());
 
-	vm_.execute();
-	ASSERT_EQ(100, vm_.eval_stack_top().i());
+	vm.execute();
+	ASSERT_EQ(100, vm.eval_stack_top().i());
 
-	vm_.execute();
-	ASSERT_FLOAT_EQ(99.0f, vm_.eval_stack_top().f());
+	vm.execute();
+	ASSERT_FLOAT_EQ(99.0f, vm.eval_stack_top().f());
 
-	vm_.execute();
-	ASSERT_EQ(-1829, vm_.eval_stack_top().i());
+	vm.execute();
+	ASSERT_EQ(-1829, vm.eval_stack_top().i());
 }
 
 TEST_F(StructTest, FIELD_DEFAULT_VALUES)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		new_struct, 2,
 		s_local, 0,
@@ -359,25 +359,25 @@ TEST_F(StructTest, FIELD_DEFAULT_VALUES)
 		l_local, 0,
 		l_field, 4,
 		halt
-	};
+	});
 
-	vm_.set_program(p);
+	auto vm = VM(program_);
 
-	vm_.execute();
-	ASSERT_EQ("my_struct3", vm_.eval_stack_top().gco()->si->get_name());
+	vm.execute();
+	ASSERT_EQ("my_struct3", vm.eval_stack_top().gco()->si->get_name());
 
-	vm_.execute();
-	ASSERT_EQ(nullptr, vm_.eval_stack_top().gco());
+	vm.execute();
+	ASSERT_EQ(nullptr, vm.eval_stack_top().gco());
 
-	vm_.execute();
-	ASSERT_EQ(0, vm_.eval_stack_top().i());
+	vm.execute();
+	ASSERT_EQ(0, vm.eval_stack_top().i());
 
-	vm_.execute();
-	ASSERT_EQ(false, vm_.eval_stack_top().b());
+	vm.execute();
+	ASSERT_EQ(false, vm.eval_stack_top().b());
 
-	vm_.execute();
-	ASSERT_EQ('\0', vm_.eval_stack_top().c());
+	vm.execute();
+	ASSERT_EQ('\0', vm.eval_stack_top().c());
 
-	vm_.execute();
-	ASSERT_FLOAT_EQ(0.0f, vm_.eval_stack_top().f());
+	vm.execute();
+	ASSERT_FLOAT_EQ(0.0f, vm.eval_stack_top().f());
 }

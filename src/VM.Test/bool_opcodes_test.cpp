@@ -11,176 +11,176 @@ protected:
 	{
 		int ep = 0;
 
-		vm_.constant_pool().add_func(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
-		vm_.set_entry_point(ep);
+		program_.add_func(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
+		program_.set_entry_point(ep);
 	}
 
 	virtual void TearDown() {}
 
-	VM vm_;
+	VMProgram program_;
 };
 
 TEST_F(BoolOpCodesTest, BCONST_TRUE)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		bconst, 1
-	};
+	});
 
-	vm_.set_program(p);
+	auto vm = VM(program_);
 
-	vm_.execute();
+	vm.execute();
 
-	EXPECT_EQ(true, vm_.eval_stack_top().b());
+	EXPECT_EQ(true, vm.eval_stack_top().b());
 }
 
 TEST_F(BoolOpCodesTest, BCONST_FALSE)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		bconst, 0
-	};
+	});
 
-	vm_.set_program(p);
+	auto vm = VM(program_);
 
-	vm_.execute();
+	vm.execute();
 
-	EXPECT_EQ(false, vm_.eval_stack_top().b());
+	EXPECT_EQ(false, vm.eval_stack_top().b());
 }
 
 
 TEST_F(BoolOpCodesTest, BR_BEQ_JUMP)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		bconst, 1,
 		bconst, 1,
 		br_beq, 10,
 		halt
-	};
+	});
 
-	vm_.set_program(p);
-	vm_.execute_one();
-	vm_.execute_one();
-	vm_.execute_one();
+	auto vm = VM(program_);
+	vm.execute_one();
+	vm.execute_one();
+	vm.execute_one();
 
-	EXPECT_EQ(10, vm_.get_pc());
+	EXPECT_EQ(10, vm.get_pc());
 }
 
 TEST_F(BoolOpCodesTest, BR_BEQ_NO_JUMP)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		bconst, 1,
 		bconst, 0,
 		br_beq, 0,
 		halt
-	};
+	});
 
-	vm_.set_program(p);
-	vm_.execute_one();
-	vm_.execute_one();
-	vm_.execute_one();
+	auto vm = VM(program_);
+	vm.execute_one();
+	vm.execute_one();
+	vm.execute_one();
 
-	EXPECT_NE(0, vm_.get_pc());
+	EXPECT_NE(0, vm.get_pc());
 }
 
 TEST_F(BoolOpCodesTest, BR_BNEQ_JUMP)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		bconst, 1,
 		bconst, 0,
 		br_bneq, 10,
 		halt
-	};
+	});
 
-	vm_.set_program(p);
-	vm_.execute_one();
-	vm_.execute_one();
-	vm_.execute_one();
+	auto vm = VM(program_);
+	vm.execute_one();
+	vm.execute_one();
+	vm.execute_one();
 
-	EXPECT_EQ(10, vm_.get_pc());
+	EXPECT_EQ(10, vm.get_pc());
 }
 
 TEST_F(BoolOpCodesTest, BR_BNEQ_NO_JUMP)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		bconst, 1,
 		bconst, 1,
 		br_bneq, 0,
 		halt
-	};
+	});
 
-	vm_.set_program(p);
-	vm_.execute_one();
-	vm_.execute_one();
-	vm_.execute_one();
+	auto vm = VM(program_);
+	vm.execute_one();
+	vm.execute_one();
+	vm.execute_one();
 
-	EXPECT_NE(0, vm_.get_pc());
+	EXPECT_NE(0, vm.get_pc());
 }
 
 TEST_F(BoolOpCodesTest, BEQ_TRUE)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		bconst, 1,
 		bconst, 1,
 		beq,
 		halt
-	};
+	});
 
-	vm_.set_program(p);
-	vm_.execute();
+	auto vm = VM(program_);
+	vm.execute();
 
-	EXPECT_EQ(true, vm_.eval_stack_top().b());
+	EXPECT_EQ(true, vm.eval_stack_top().b());
 }
 
 TEST_F(BoolOpCodesTest, BEQ_FALSE)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		bconst, 1,
 		bconst, 0,
 		beq,
 		halt
-	};
+	});
 
-	vm_.set_program(p);
-	vm_.execute();
+	auto vm = VM(program_);
+	vm.execute();
 
-	EXPECT_EQ(false, vm_.eval_stack_top().b());
+	EXPECT_EQ(false, vm.eval_stack_top().b());
 }
 
 TEST_F(BoolOpCodesTest, BNEQ_TRUE)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		bconst, 1,
 		bconst, 0,
 		bneq,
 		halt
-	};
+	});
 
-	vm_.set_program(p);
-	vm_.execute();
+	auto vm = VM(program_);
+	vm.execute();
 
-	EXPECT_EQ(true, vm_.eval_stack_top().b());
+	EXPECT_EQ(true, vm.eval_stack_top().b());
 }
 
 TEST_F(BoolOpCodesTest, BNEQ_FALSE)
 {
-	std::vector<int> p =
+	program_.emit(
 	{
 		bconst, 0,
 		bconst, 0,
 		bneq,
 		halt
-	};
+	});
 
-	vm_.set_program(p);
-	vm_.execute();
+	auto vm = VM(program_);
+	vm.execute();
 
-	EXPECT_EQ(false, vm_.eval_stack_top().b());
+	EXPECT_EQ(false, vm.eval_stack_top().b());
 }

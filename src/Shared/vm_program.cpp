@@ -12,6 +12,14 @@ namespace elsa {
 		instructions_.push_back(instruction);
 	}
 
+	void VMProgram::emit(const std::vector<int>& instructions)
+	{
+		for (auto inst : instructions)
+		{
+			emit(inst);
+		}
+	}
+
 	std::vector<int>& VMProgram::get_instructions()
 	{
 		return instructions_;

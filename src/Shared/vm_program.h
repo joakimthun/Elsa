@@ -20,6 +20,7 @@ namespace elsa {
 		VMProgram();
 
 		void emit(int instruction);
+		void emit(const std::vector<int>& instructions);
 		std::vector<int>& get_instructions();
 
 		void set_entry_point(int entry_point);
