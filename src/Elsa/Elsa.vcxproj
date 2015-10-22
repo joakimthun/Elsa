@@ -25,6 +25,9 @@
     <ProjectReference Include="..\Compiler\Compiler.vcxproj">
       <Project>{ff16959e-20f4-4016-ade6-c52e8fc1d86d}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.vcxproj">
+      <Project>{ec7dada4-fc2a-442c-9dcf-5ba06da8d653}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\VM\VM.vcxproj">
       <Project>{f45fa80e-e6ba-4d96-831b-d5a5debbc8d9}</Project>
     </ProjectReference>
@@ -55,7 +58,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
