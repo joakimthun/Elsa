@@ -14,6 +14,8 @@ namespace elsa {
 
 			const std::wstring& get_value() const;
 
+			void accept(ExpressionVisitor* visitor) override;
+
 		private:
 			std::wstring value_;
 		};

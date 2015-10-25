@@ -16,8 +16,12 @@ namespace elsa {
 				program->set_entry_point(static_cast<int>(program->get_next_instruction_index()));
 			}
 
+			fi->set_addr(static_cast<int>(program->get_next_instruction_index()));
 
-
+			for (auto& exp : expression->get_body())
+			{
+				exp->accept(visitor);
+			}
 
 			program->add_func(fi.release());
 		}

@@ -13,5 +13,10 @@ namespace elsa {
 			return name_;
 		}
 
+		void IdentifierExpression::accept(ExpressionVisitor* visitor)
+		{
+			//visitor->visit(this);
+			throw ElsaException("No visit method defined for IdentifierExpression");
+		}
 	}
 }

@@ -13,6 +13,12 @@ namespace elsa {
 			return value_;
 		}
 
+		void StringLiteralExpression::accept(ExpressionVisitor* visitor)
+		{
+			//visitor->visit(this);
+			throw ElsaException("No visit method defined for StringLiteralExpression");
+		}
+
 	}
 }
 

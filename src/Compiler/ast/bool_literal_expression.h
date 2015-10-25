@@ -12,6 +12,8 @@ namespace elsa {
 
 			bool get_value() const;
 
+			void accept(ExpressionVisitor* visitor) override;
+
 		private:
 			bool value_;
 		};

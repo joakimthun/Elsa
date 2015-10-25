@@ -25,6 +25,11 @@ namespace elsa {
 			return expression_.get();
 		}
 
+		void VariableDeclarationExpression::accept(ExpressionVisitor* visitor)
+		{
+			//visitor->visit(this);
+			throw ElsaException("No visit method defined for VariableDeclarationExpression");
+		}
 	}
 }
 

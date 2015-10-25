@@ -19,6 +19,8 @@ namespace elsa {
 			Expression* get_left() const;
 			Expression* get_right() const;
 
+			void accept(ExpressionVisitor* visitor) override;
+
 		private:
 			TokenType operator_;
 			std::unique_ptr<Expression> left_;

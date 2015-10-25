@@ -15,6 +15,9 @@ namespace elsa {
 		public:
 			VMExpressionVisitor();
 			void visit(FuncDeclarationExpression* expression) override;
+			virtual void visit(VariableDeclarationExpression* expression) override;
+			virtual void visit(BinaryOperatorExpression* expression) override;
+			virtual void visit(IntegerLiteralExpression* expression) override;
 
 		private:
 			std::unique_ptr<VMProgram> vm_program_;

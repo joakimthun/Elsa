@@ -18,6 +18,8 @@ namespace elsa {
 			const ElsaType* get_type() const;
 			Expression* get_expression() const;
 
+			void accept(ExpressionVisitor* visitor) override;
+
 		private:
 			std::wstring name_;
 			std::unique_ptr<ElsaType> type_;

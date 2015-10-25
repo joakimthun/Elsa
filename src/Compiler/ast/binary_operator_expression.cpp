@@ -32,5 +32,11 @@ namespace elsa {
 			return right_.get();
 		}
 
+		void BinaryOperatorExpression::accept(ExpressionVisitor* visitor)
+		{
+			//visitor->visit(this);
+			throw ElsaException("No visit method defined for BinaryOperatorExpression");
+		}
+
 	}
 }

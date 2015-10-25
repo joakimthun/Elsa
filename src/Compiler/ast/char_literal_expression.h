@@ -12,6 +12,8 @@ namespace elsa {
 
 			wchar_t get_value() const;
 
+			void accept(ExpressionVisitor* visitor) override;
+
 		private:
 			wchar_t value_;
 		};

@@ -22,5 +22,11 @@ namespace elsa {
 		{
 			return type_.get();
 		}
+
+		void ArgumentExpression::accept(ExpressionVisitor* visitor)
+		{
+			//visitor->visit(this);
+			throw ElsaException("No visit method defined for ArgumentExpression");
+		}
 	}
 }

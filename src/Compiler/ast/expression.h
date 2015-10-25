@@ -1,5 +1,7 @@
 #pragma once
 
+#include "exceptions/elsa_exception.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -9,7 +11,7 @@ namespace elsa {
 		{
 		public:
 			virtual ~Expression() {};
-			virtual void accept(ExpressionVisitor* visitor) {}
+			virtual void accept(ExpressionVisitor* visitor) = 0;
 		};
 
 	}

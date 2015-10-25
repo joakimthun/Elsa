@@ -12,6 +12,8 @@ namespace elsa {
 
 			int get_value() const;
 
+			void accept(ExpressionVisitor* visitor) override;
+
 		private:
 			int value_;
 		};
