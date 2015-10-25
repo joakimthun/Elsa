@@ -33,5 +33,25 @@ namespace elsa {
 
 		}
 
+		void VMExpressionVisitor::push_new_scope()
+		{
+			local_table_.push_back(std::make_unique<LocalTable>());
+		}
+
+		void VMExpressionVisitor::pop_current_scope()
+		{
+			local_table_.pop_back();
+		}
+
+		void VMExpressionVisitor::push_current(LocalSymbol* symbol)
+		{
+			local_table_.back()->add(symbol->get_name(), symbol);
+		}
+
+		bool VMExpressionVisitor::has_entry(std::wstring name)
+		{
+			return local_table_.back()->has_entry(name);
+		}
+
 	}
 }
