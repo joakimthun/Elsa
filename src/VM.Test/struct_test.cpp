@@ -10,7 +10,7 @@ protected:
 	virtual void SetUp()
 	{
 		int ep = 0;
-		program_.add_func(new FunctionInfo("main", 0, 3, ep, FunctionType::Static));
+		program_.add_func(new FunctionInfo(L"main", 0, 3, ep, FunctionType::Static));
 		program_.set_entry_point(ep);
 
 		auto si = new StructInfo("my_struct");

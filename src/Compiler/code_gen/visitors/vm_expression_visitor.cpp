@@ -6,12 +6,13 @@ namespace elsa {
 	namespace compiler {
 
 		VMExpressionVisitor::VMExpressionVisitor()
+			:
+			vm_program_(std::make_unique<VMProgram>())
 		{}
 
 		void VMExpressionVisitor::visit(FuncDeclarationExpression* expression)
 		{
-			std::wcout << expression->get_name() << std::endl;
-			std::wcout << expression->get_return_type()->get_type() << std::endl;
+			
 		}
 
 	}

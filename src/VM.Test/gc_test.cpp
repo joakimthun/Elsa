@@ -27,7 +27,7 @@ protected:
 
 TEST_F(GCTest, COLLECT_NO_SWEEP)
 {
-	program_.add_func(new FunctionInfo("main", 0, 1, 0, FunctionType::Static));
+	program_.add_func(new FunctionInfo(L"main", 0, 1, 0, FunctionType::Static));
 	program_.set_entry_point(0);
 
 	program_.emit(
@@ -63,7 +63,7 @@ TEST_F(GCTest, COLLECT_NO_SWEEP)
 
 TEST_F(GCTest, COLLECT_POPPED_OBJECTS)
 {
-	program_.add_func(new FunctionInfo("main", 0, 1, 0, FunctionType::Static));
+	program_.add_func(new FunctionInfo(L"main", 0, 1, 0, FunctionType::Static));
 	program_.set_entry_point(0);
 
 	program_.emit(
@@ -95,8 +95,8 @@ TEST_F(GCTest, COLLECT_POPPED_OBJECTS)
 
 TEST_F(GCTest, SWEEP_OBJECTS_FROM_POPPED_STACK_FRAME)
 {
-	program_.add_func(new FunctionInfo("main", 0, 1, 11, FunctionType::Static));
-	program_.add_func(new FunctionInfo("my_func", 0, 1, 0, FunctionType::Static));
+	program_.add_func(new FunctionInfo(L"main", 0, 1, 11, FunctionType::Static));
+	program_.add_func(new FunctionInfo(L"my_func", 0, 1, 0, FunctionType::Static));
 	program_.set_entry_point(11);
 
 	program_.emit(
@@ -125,7 +125,7 @@ TEST_F(GCTest, SWEEP_OBJECTS_FROM_POPPED_STACK_FRAME)
 
 TEST_F(GCTest, MARK_SWEEP_ARRAYS)
 {
-	program_.add_func(new FunctionInfo("main", 0, 4, 0, FunctionType::Static));
+	program_.add_func(new FunctionInfo(L"main", 0, 4, 0, FunctionType::Static));
 	program_.set_entry_point(0);
 
 	program_.emit(

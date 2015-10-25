@@ -20,6 +20,11 @@ namespace elsa {
 		}
 	}
 
+	std::size_t VMProgram::get_next_instruction_index()
+	{
+		return instructions_.size();
+	}
+
 	std::vector<int>& VMProgram::get_instructions()
 	{
 		return instructions_;

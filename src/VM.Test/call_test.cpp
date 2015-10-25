@@ -21,8 +21,8 @@ TEST(STATIC_CALL, RETURN_INT)
 
 	int ep = 3;
 
-	program.add_func(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
-	program.add_func(new FunctionInfo("print", 0, 0, 0, FunctionType::Static));
+	program.add_func(new FunctionInfo(L"main", 0, 0, ep, FunctionType::Static));
+	program.add_func(new FunctionInfo(L"print", 0, 0, 0, FunctionType::Static));
 	program.set_entry_point(ep);
 
 	auto vm = VM(program);

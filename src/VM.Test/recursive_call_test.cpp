@@ -11,8 +11,8 @@ protected:
 	{
 		int ep = 20;
 
-		program_.add_func(new FunctionInfo("main", 0, 0, ep, FunctionType::Static));
-		program_.add_func(new FunctionInfo("factorial", 1, 0, 0, FunctionType::Static));
+		program_.add_func(new FunctionInfo(L"main", 0, 0, ep, FunctionType::Static));
+		program_.add_func(new FunctionInfo(L"factorial", 1, 0, 0, FunctionType::Static));
 		program_.set_entry_point(ep);
 	}
 

@@ -2,7 +2,7 @@
 
 namespace elsa {
 
-		FunctionInfo::FunctionInfo(const std::string& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type)
+		FunctionInfo::FunctionInfo(const std::wstring& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type)
 			:
 			name_(name),
 			num_args_(num_args),
@@ -11,9 +11,15 @@ namespace elsa {
 			type_(type)
 		{}
 
+		FunctionInfo::FunctionInfo(const std::wstring& name)
+			: 
+			name_(name)
+		{
+		}
+
 		FunctionInfo::~FunctionInfo() {}
 
-		std::string FunctionInfo::get_name() const
+		std::wstring FunctionInfo::get_name() const
 		{
 			return name_;
 		}
@@ -23,14 +29,29 @@ namespace elsa {
 			return num_args_;
 		}
 
+		void FunctionInfo::set_num_args(std::size_t num_args)
+		{
+			num_args_ = num_args;
+		}
+
 		std::size_t FunctionInfo::get_num_locals() const
 		{
 			return num_locals_;
 		}
 
+		void FunctionInfo::set_num_locals(std::size_t num_locals)
+		{
+			num_locals_ = num_locals;
+		}
+
 		std::size_t FunctionInfo::get_addr() const
 		{
 			return addr_;
+		}
+
+		void FunctionInfo::set_addr(std::size_t addr)
+		{
+			addr_ = addr;
 		}
 
 		FunctionType FunctionInfo::get_type() const

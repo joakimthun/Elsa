@@ -74,5 +74,8 @@
     <ClInclude Include="vm_program.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="exceptions\codegen_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

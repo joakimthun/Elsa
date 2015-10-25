@@ -11,7 +11,7 @@ protected:
 	{
 		int ep = 0;
 
-		program_.add_func(new FunctionInfo("main", 0, 2, ep, FunctionType::Static));
+		program_.add_func(new FunctionInfo(L"main", 0, 2, ep, FunctionType::Static));
 		program_.add_float(new FloatInfo(12.0f));
 		program_.add_float(new FloatInfo(99.0f));
 		program_.add_float(new FloatInfo(-99.0f));

@@ -21,6 +21,7 @@ namespace elsa {
 
 		void emit(int instruction);
 		void emit(const std::vector<int>& instructions);
+		std::size_t get_next_instruction_index();
 		std::vector<int>& get_instructions();
 
 		void set_entry_point(int entry_point);
