@@ -18,10 +18,14 @@ namespace elsa {
 
 			fi->set_addr(static_cast<int>(program->get_next_instruction_index()));
 
+			visitor->push_new_scope();
+
 			for (auto& exp : expression->get_body())
 			{
 				exp->accept(visitor);
 			}
+
+			visitor->pop_current_scope();
 
 			program->add_func(fi.release());
 		}
