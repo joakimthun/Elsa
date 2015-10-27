@@ -13,7 +13,11 @@ namespace elsa {
 
 		FunctionInfo::FunctionInfo(const std::wstring& name)
 			: 
-			name_(name)
+			name_(name),
+			num_args_(0),
+			num_locals_(0),
+			addr_(0),
+			type_(FunctionType::Static)
 		{
 		}
 

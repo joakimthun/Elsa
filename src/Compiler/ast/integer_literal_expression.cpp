@@ -1,5 +1,7 @@
 #include "integer_literal_expression.h"
 
+#include "../code_gen/visitors/expression_visitor.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -15,8 +17,7 @@ namespace elsa {
 
 		void IntegerLiteralExpression::accept(ExpressionVisitor* visitor)
 		{
-			//visitor->visit(this);
-			throw ElsaException("No visit method defined for IntegerLiteralExpression");
+			visitor->visit(this);
 		}
 
 	}

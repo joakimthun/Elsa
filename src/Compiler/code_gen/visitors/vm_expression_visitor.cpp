@@ -30,7 +30,7 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(IntegerLiteralExpression* expression)
 		{
-
+			LiteralExpressionBuilder::build(vm_program_.get(), expression);
 		}
 
 		void VMExpressionVisitor::push_new_scope()
@@ -67,6 +67,11 @@ namespace elsa {
 		const LocalSymbol* VMExpressionVisitor::get_from_current_scope(std::wstring name) const
 		{
 			return local_table_.back()->get(name);
+		}
+
+		VMProgram * VMExpressionVisitor::release_program()
+		{
+			return vm_program_.release();
 		}
 
 	}

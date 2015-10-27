@@ -12,6 +12,7 @@
 #include "../builders/function_builder.h"
 #include "../builders/variable_builder.h"
 #include "../builders/binary_operator_expression_builder.h"
+#include "../builders/literal_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {
@@ -30,6 +31,8 @@ namespace elsa {
 			void push_current_scope(const std::wstring& name, const ElsaType& type);
 			bool current_scope_has_entry(std::wstring name);
 			const LocalSymbol* get_from_current_scope(std::wstring name) const;
+
+			VMProgram* release_program();
 
 		private:
 			std::unique_ptr<VMProgram> vm_program_;

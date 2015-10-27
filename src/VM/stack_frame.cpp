@@ -58,7 +58,7 @@ namespace elsa {
 
 		Object StackFrame::load_arg(std::size_t i) const
 		{
-			if (i > locals_size_ - 1)
+			if (locals_size_ == 0 || i > locals_size_ - 1)
 				throw RuntimeException("Tried to access an out of range argument.");
 
 			return locals_[i];
@@ -67,7 +67,7 @@ namespace elsa {
 		void StackFrame::store_local(std::size_t i, Object local)
 		{
 			auto li = function_->get_num_args() + i;
-			if (li > locals_size_ - 1)
+			if (locals_size_ == 0 || li > locals_size_ - 1)
 				throw RuntimeException("Tried to store an out of range local.");
 
 			locals_[li] = local;
@@ -75,7 +75,7 @@ namespace elsa {
 
 		void StackFrame::store_arg(std::size_t i, Object arg)
 		{
-			if (i > locals_size_ - 1)
+			if (locals_size_ == 0 ||  i > locals_size_ - 1)
 				throw RuntimeException("Tried to store an out of range argument.");
 
 			locals_[i] = arg;

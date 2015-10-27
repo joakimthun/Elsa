@@ -14,7 +14,7 @@ namespace elsa {
 		public:
 			CodeGen(Program* program);
 
-			void generate();
+			VMProgram* generate();
 
 		private:
 

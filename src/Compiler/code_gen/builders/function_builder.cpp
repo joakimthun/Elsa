@@ -18,6 +18,9 @@ namespace elsa {
 
 			fi->set_addr(static_cast<int>(program->get_next_instruction_index()));
 
+			// Debug
+			fi->set_num_locals(10);
+
 			visitor->push_new_scope();
 
 			for (auto& exp : expression->get_body())
