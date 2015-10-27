@@ -1,5 +1,7 @@
 #include "binary_operator_expression.h"
 
+#include "../code_gen/visitors/expression_visitor.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -17,6 +19,11 @@ namespace elsa {
 			right_ = std::unique_ptr<Expression>(right);
 		}
 
+		void BinaryOperatorExpression::set_type(ElsaType * type)
+		{
+			type_ = std::unique_ptr<ElsaType>(type);
+		}
+
 		TokenType BinaryOperatorExpression::get_operator() const
 		{
 			return operator_;
@@ -32,10 +39,14 @@ namespace elsa {
 			return right_.get();
 		}
 
+		ElsaType * BinaryOperatorExpression::get_type() const
+		{
+			return type_.get();
+		}
+
 		void BinaryOperatorExpression::accept(ExpressionVisitor* visitor)
 		{
-			//visitor->visit(this);
-			throw ElsaException("No visit method defined for BinaryOperatorExpression");
+			visitor->visit(this);
 		}
 
 	}

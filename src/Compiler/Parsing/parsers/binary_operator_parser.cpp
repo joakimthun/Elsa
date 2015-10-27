@@ -18,6 +18,8 @@ namespace elsa {
 			exp->set_left(left);
 			exp->set_right(parser->parse_expression(precedence()));
 
+			exp->set_type(TypeChecker::get_expression_type(exp.get()));
+
 			return exp.release();
 		}
 
