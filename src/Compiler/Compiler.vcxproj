@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="code_gen\builders\binary_operator_expression_builder.h" />
     <ClInclude Include="code_gen\builders\function_builder.h" />
     <ClInclude Include="code_gen\builders\variable_builder.h" />
     <ClInclude Include="code_gen\code_gen.h" />
@@ -60,6 +61,7 @@
     <ClInclude Include="types\type_checker.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="code_gen\builders\binary_operator_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\function_builder.cpp" />
     <ClCompile Include="code_gen\builders\variable_builder.cpp" />
     <ClCompile Include="code_gen\code_gen.cpp" />

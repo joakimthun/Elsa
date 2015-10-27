@@ -11,6 +11,7 @@
 #include "../../symbol_tables/local_table.h"
 #include "../builders/function_builder.h"
 #include "../builders/variable_builder.h"
+#include "../builders/binary_operator_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {

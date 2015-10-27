@@ -9,6 +9,8 @@
 namespace elsa {
 	namespace compiler {
 
+		class ExpressionVisitor;
+
 		class VariableDeclarationExpression : public Expression
 		{
 		public:

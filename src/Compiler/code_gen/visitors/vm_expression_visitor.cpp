@@ -25,7 +25,7 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(BinaryOperatorExpression* expression)
 		{
-
+			BinaryOperatorExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
 		void VMExpressionVisitor::visit(IntegerLiteralExpression* expression)
