@@ -10,7 +10,8 @@ namespace elsa {
 
 		VMExpressionVisitor::VMExpressionVisitor()
 			:
-			vm_program_(std::make_unique<VMProgram>())
+			vm_program_(std::make_unique<VMProgram>()),
+			current_function_(nullptr)
 		{}
 
 		void VMExpressionVisitor::visit(FuncDeclarationExpression* expression)
@@ -52,8 +53,9 @@ namespace elsa {
 				throw CodeGenException("Push can not be called on an empty symbol table stack");
 
 			auto& current_table = local_table_.back();
+			auto local_index = current_table->get_next_index() + current_function_->get_num_args() + current_function_->get_num_locals();
 
-			local_table_.back()->add(name, new LocalSymbol(name, current_table->get_next_index(), type));
+			local_table_.back()->add(name, new LocalSymbol(name, local_index, type));
 		}
 
 		bool VMExpressionVisitor::current_scope_has_entry(std::wstring name)
@@ -72,6 +74,21 @@ namespace elsa {
 		std::unique_ptr<VMProgram> VMExpressionVisitor::release_program()
 		{
 			return std::move(vm_program_);
+		}
+
+		void VMExpressionVisitor::set_current_function(FunctionInfo* fi)
+		{
+			current_function_ = fi;
+		}
+
+		FunctionInfo * VMExpressionVisitor::get_current_function()
+		{
+			return current_function_;
+		}
+
+		void VMExpressionVisitor::reset_current_function()
+		{
+			current_function_ = nullptr;
 		}
 
 	}

@@ -1,4 +1,5 @@
 #include "function_info.h"
+#include "function_info.h"
 
 namespace elsa {
 
@@ -46,6 +47,11 @@ namespace elsa {
 		void FunctionInfo::set_num_locals(std::size_t num_locals)
 		{
 			num_locals_ = num_locals;
+		}
+
+		void FunctionInfo::increment_num_locals()
+		{
+			num_locals_++;
 		}
 
 		std::size_t FunctionInfo::get_addr() const

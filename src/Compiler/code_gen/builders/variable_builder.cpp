@@ -10,6 +10,7 @@ namespace elsa {
 				throw CodeGenException("A variable with the same name has already been declared in the current scope");
 
 			visitor->push_current_scope(expression->get_name(), *expression->get_type());
+			visitor->get_current_function()->increment_num_locals();
 
 			expression->get_expression()->accept(visitor);
 

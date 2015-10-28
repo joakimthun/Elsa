@@ -23,6 +23,7 @@ namespace elsa {
 			void set_num_args(std::size_t num_args);
 			std::size_t get_num_locals() const;
 			void set_num_locals(std::size_t num_locals);
+			void increment_num_locals();
 			std::size_t get_addr() const;
 			void set_addr(std::size_t addr);
 			FunctionType get_type() const;

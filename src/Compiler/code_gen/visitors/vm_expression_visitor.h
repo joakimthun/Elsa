@@ -34,10 +34,15 @@ namespace elsa {
 			const LocalSymbol* get_from_current_scope(std::wstring name) const;
 
 			std::unique_ptr<VMProgram> release_program();
+			void set_current_function(FunctionInfo* fi);
+			FunctionInfo* get_current_function();
+			void reset_current_function();
+
 
 		private:
 			std::unique_ptr<VMProgram> vm_program_;
 			std::vector<std::unique_ptr<LocalTable>> local_table_;
+			FunctionInfo* current_function_;
 		};
 
 	}
