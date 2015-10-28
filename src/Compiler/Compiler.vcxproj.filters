@@ -138,6 +138,12 @@
     <ClInclude Include="code_gen\builders\literal_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Parsing\parsers\elsa_invoke_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\elsa_invoke_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexing\lexer.cpp">
@@ -237,6 +243,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code_gen\builders\literal_expression_builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\elsa_invoke_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parsing\parsers\elsa_invoke_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

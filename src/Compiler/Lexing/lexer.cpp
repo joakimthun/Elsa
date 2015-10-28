@@ -298,6 +298,7 @@ namespace elsa {
 			register_keyword(L"struct", TokenType::Struct);
 			register_keyword(L"this", TokenType::This);
 			register_keyword(L"void", TokenType::Void);
+			register_keyword(L"elsa", TokenType::Elsa);
 		}
 	}
 }

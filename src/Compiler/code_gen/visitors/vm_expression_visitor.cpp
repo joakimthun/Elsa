@@ -34,6 +34,10 @@ namespace elsa {
 			LiteralExpressionBuilder::build(vm_program_.get(), expression);
 		}
 
+		void VMExpressionVisitor::visit(ElsaInvokeExpression * expression)
+		{
+		}
+
 		void VMExpressionVisitor::push_new_scope()
 		{
 			local_table_.push_back(std::make_unique<LocalTable>());

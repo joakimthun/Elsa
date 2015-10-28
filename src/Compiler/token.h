@@ -8,6 +8,7 @@ namespace elsa {
 		enum TokenType : int
 		{
 			END,
+			Elsa,
 			Identifier,
 			Var,
 			IntegerLiteral,

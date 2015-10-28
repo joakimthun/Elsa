@@ -26,6 +26,7 @@ namespace elsa {
 			void visit(VariableDeclarationExpression* expression) override;
 			void visit(BinaryOperatorExpression* expression) override;
 			void visit(IntegerLiteralExpression* expression) override;
+			void visit(ElsaInvokeExpression* expression) override;
 
 			void push_new_scope();
 			void pop_current_scope();

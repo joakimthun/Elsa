@@ -7,6 +7,7 @@ namespace elsa {
 		class VariableDeclarationExpression;
 		class BinaryOperatorExpression;
 		class IntegerLiteralExpression;
+		class ElsaInvokeExpression;
 
 		class ExpressionVisitor
 		{
@@ -16,6 +17,7 @@ namespace elsa {
 			virtual void visit(VariableDeclarationExpression* expression) = 0;
 			virtual void visit(BinaryOperatorExpression* expression) = 0;
 			virtual void visit(IntegerLiteralExpression* expression) = 0;
+			virtual void visit(ElsaInvokeExpression* expression) = 0;
 		};
 
 	}

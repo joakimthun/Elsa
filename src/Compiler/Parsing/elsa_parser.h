@@ -14,6 +14,7 @@
 #include "parsers\literal_parser.h"
 #include "parsers\func_declaration_parser.h"
 #include "parsers\binary_operator_parser.h"
+#include "parsers\elsa_invoke_parser.h"
 
 namespace elsa {
 	namespace compiler {

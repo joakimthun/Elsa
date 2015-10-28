@@ -2,6 +2,7 @@
 
 namespace elsa {
 	namespace compiler {
+
 		BinaryOperatorParser::BinaryOperatorParser(Precedence precedence)
 			:
 			precedence_(precedence)
