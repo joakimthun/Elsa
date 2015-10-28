@@ -7,7 +7,7 @@ using namespace elsa;
 
 int main(int argc, char* argv[])
 {
-	auto vm_program = std::unique_ptr<VMProgram>(compiler::Compiler::compile("programs\\program1.elsa"));
+	auto vm_program = compiler::Compiler::compile("programs\\program1.elsa");
 
 	// Debug
 	vm_program->emit(OpCode::l_local);

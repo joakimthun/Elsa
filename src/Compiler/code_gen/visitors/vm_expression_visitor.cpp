@@ -69,9 +69,9 @@ namespace elsa {
 			return local_table_.back()->get(name);
 		}
 
-		VMProgram * VMExpressionVisitor::release_program()
+		std::unique_ptr<VMProgram> VMExpressionVisitor::release_program()
 		{
-			return vm_program_.release();
+			return std::move(vm_program_);
 		}
 
 	}

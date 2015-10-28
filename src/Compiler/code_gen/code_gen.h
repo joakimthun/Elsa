@@ -14,7 +14,7 @@ namespace elsa {
 		public:
 			CodeGen(Program* program);
 
-			VMProgram* generate();
+			std::unique_ptr<VMProgram> generate();
 
 		private:
 

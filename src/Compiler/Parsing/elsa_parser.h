@@ -27,7 +27,7 @@ namespace elsa {
 		public:
 			ElsaParser(Lexer* lexer);
 
-			Program* parse();
+			std::unique_ptr<Program> parse();
 			Expression* parse_statement();
 			Expression* parse_expression();
 			Expression* parse_expression(int precedence);

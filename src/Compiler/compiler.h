@@ -13,7 +13,7 @@ namespace elsa {
 		class Compiler
 		{
 		public:
-			static VMProgram* compile(const char* filename);
+			static std::unique_ptr<VMProgram> compile(const char* filename);
 		private:
 		};
 

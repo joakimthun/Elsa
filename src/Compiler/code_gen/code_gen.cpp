@@ -8,7 +8,7 @@ namespace elsa {
 			program_(program)
 		{}
 
-		VMProgram* CodeGen::generate()
+		std::unique_ptr<VMProgram> CodeGen::generate()
 		{
 			auto visitor = std::make_unique<VMExpressionVisitor>();
 

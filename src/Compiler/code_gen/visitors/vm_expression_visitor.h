@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <utility>
 
 #include "exceptions\codegen_exception.h"
 #include "expression_visitor.h"
@@ -32,7 +33,7 @@ namespace elsa {
 			bool current_scope_has_entry(std::wstring name);
 			const LocalSymbol* get_from_current_scope(std::wstring name) const;
 
-			VMProgram* release_program();
+			std::unique_ptr<VMProgram> release_program();
 
 		private:
 			std::unique_ptr<VMProgram> vm_program_;

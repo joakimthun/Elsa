@@ -11,7 +11,7 @@ namespace elsa {
 			next_token();
 		}
 
-		Program* ElsaParser::parse()
+		std::unique_ptr<Program> ElsaParser::parse()
 		{
 			auto program = std::make_unique<Program>();
 
@@ -20,7 +20,7 @@ namespace elsa {
 				program->add_statement(parse_statement());
 			}
 
-			return program.release();
+			return program;
 		}
 
 		Expression* ElsaParser::parse_statement()
