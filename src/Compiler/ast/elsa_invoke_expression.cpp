@@ -15,6 +15,16 @@ namespace elsa {
 			return function_name_;
 		}
 
+		void ElsaInvokeExpression::add_args_expression(Expression * expression)
+		{
+			args_.push_back(std::unique_ptr<Expression>(expression));
+		}
+
+		const std::vector<std::unique_ptr<Expression>>& ElsaInvokeExpression::get_args() const
+		{
+			return args_;
+		}
+
 		void ElsaInvokeExpression::accept(ExpressionVisitor* visitor)
 		{
 			visitor->visit(this);

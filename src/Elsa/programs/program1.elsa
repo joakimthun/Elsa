@@ -1,4 +1,6 @@
 func int main()
 {
 	var x = 1 + 2 * 5;
+
+	elsa.PrintLn(x);
 }

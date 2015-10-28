@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="ast\elsa_invoke_expression.h" />
     <ClInclude Include="code_gen\builders\binary_operator_expression_builder.h" />
+    <ClInclude Include="code_gen\builders\elsa_invoke_expression_builder.h" />
     <ClInclude Include="code_gen\builders\function_builder.h" />
     <ClInclude Include="code_gen\builders\literal_expression_builder.h" />
     <ClInclude Include="code_gen\builders\variable_builder.h" />
@@ -66,6 +67,7 @@
   <ItemGroup>
     <ClCompile Include="ast\elsa_invoke_expression.cpp" />
     <ClCompile Include="code_gen\builders\binary_operator_expression_builder.cpp" />
+    <ClCompile Include="code_gen\builders\elsa_invoke_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\function_builder.cpp" />
     <ClCompile Include="code_gen\builders\literal_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\variable_builder.cpp" />
