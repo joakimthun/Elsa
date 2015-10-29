@@ -15,6 +15,7 @@
 #include "../builders/binary_operator_expression_builder.h"
 #include "../builders/literal_expression_builder.h"
 #include "../builders/elsa_invoke_expression_builder.h"
+#include "../builders/identifier_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {
@@ -28,12 +29,13 @@ namespace elsa {
 			void visit(BinaryOperatorExpression* expression) override;
 			void visit(IntegerLiteralExpression* expression) override;
 			void visit(ElsaInvokeExpression* expression) override;
+			void visit(IdentifierExpression* expression) override;
 
 			void push_new_scope();
 			void pop_current_scope();
 			void push_current_scope(const std::wstring& name, const ElsaType& type);
 			bool current_scope_has_entry(std::wstring name);
-			const LocalSymbol* get_from_current_scope(std::wstring name) const;
+			const LocalSymbol* get_local(std::wstring name) const;
 
 			std::unique_ptr<VMProgram> release_program();
 			void set_current_function(FunctionInfo* fi);

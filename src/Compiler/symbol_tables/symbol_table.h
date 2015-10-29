@@ -19,6 +19,10 @@ namespace elsa {
 			TValue* get(const TKey& key)
 			{
 				auto it = table_.find(key);
+
+				if (it == table_.end())
+					return nullptr;
+
 				return it->second.get();
 			}
 

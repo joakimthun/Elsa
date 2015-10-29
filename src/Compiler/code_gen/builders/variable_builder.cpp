@@ -16,7 +16,7 @@ namespace elsa {
 
 			program->emit(OpCode::s_local);
 
-			auto local = visitor->get_from_current_scope(expression->get_name());
+			auto local = visitor->get_local(expression->get_name());
 
 			program->emit(static_cast<int>(local->get_index()));
 		}

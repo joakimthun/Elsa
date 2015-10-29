@@ -39,6 +39,11 @@ namespace elsa {
 			ElsaInvokeExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		void VMExpressionVisitor::visit(IdentifierExpression * expression)
+		{
+			IdentifierExpressionBuilder::build(vm_program_.get(), this, expression);
+		}
+
 		void VMExpressionVisitor::push_new_scope()
 		{
 			local_table_.push_back(std::make_unique<LocalTable>());
@@ -71,9 +76,23 @@ namespace elsa {
 			return local_table_.back()->has_entry(name);
 		}
 
-		const LocalSymbol* VMExpressionVisitor::get_from_current_scope(std::wstring name) const
+		const LocalSymbol* VMExpressionVisitor::get_local(std::wstring name) const
 		{
-			return local_table_.back()->get(name);
+			//for (std::vector<std::unique_ptr<LocalTable>>::reverse_iterator it = local_table_.rbegin(); it != local_table_.rend(); ++it) 
+			//{
+			//	auto local = it->get()->get(name);
+			//	if (local != nullptr)
+			//		return local;
+			//}
+
+			for (auto& it = local_table_.rbegin(); it != local_table_.rend(); ++it)
+			{
+				auto local = it->get()->get(name);
+				if (local != nullptr)
+					return local;
+			}
+
+			throw CodeGenException("Tried to access an undefined local variable");
 		}
 
 		std::unique_ptr<VMProgram> VMExpressionVisitor::release_program()
