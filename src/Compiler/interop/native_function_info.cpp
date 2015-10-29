@@ -1,0 +1,50 @@
+#include "native_function_info.h"
+
+namespace elsa {
+	namespace compiler {
+
+		NativeFunctionInfo::NativeFunctionInfo(const std::wstring& name, OType return_type)
+			:
+			name_(name),
+			return_type_(return_type)
+		{}
+		
+		void NativeFunctionInfo::add_arg()
+		{
+			args_.push_back(std::make_unique<NativeFunctionArgument>());
+		}
+
+		void NativeFunctionInfo::add_arg_type(std::size_t index, OType type)
+		{
+			args_[index]->valid_types.push_back(type);
+		}
+		
+		OType NativeFunctionInfo::get_return_type()
+		{
+			return return_type_;
+		}
+		
+		const std::wstring& NativeFunctionInfo::get_name() const
+		{
+			return name_;
+		}
+
+		bool NativeFunctionInfo::is_valid_arg_type(std::size_t index, OType type)
+		{
+			for (const auto& arg_type : args_[index]->valid_types)
+			{
+				if (arg_type == type)
+					return true;
+			}
+
+			return false;
+		}
+
+		std::size_t NativeFunctionInfo::num_args() const
+		{
+			return args_.size();
+		}
+
+	}
+}
+

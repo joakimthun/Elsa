@@ -30,6 +30,8 @@
     <ClInclude Include="code_gen\visitors\expression_visitor.h" />
     <ClInclude Include="code_gen\visitors\vm_expression_visitor.h" />
     <ClInclude Include="compiler.h" />
+    <ClInclude Include="interop\native_function_info.h" />
+    <ClInclude Include="interop\native_function_table.h" />
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
     <ClInclude Include="Parsing\parsers\elsa_invoke_parser.h" />
@@ -76,6 +78,8 @@
     <ClCompile Include="code_gen\code_gen.cpp" />
     <ClCompile Include="code_gen\visitors\vm_expression_visitor.cpp" />
     <ClCompile Include="compiler.cpp" />
+    <ClCompile Include="interop\native_function_info.cpp" />
+    <ClCompile Include="interop\native_function_table.cpp" />
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
     <ClCompile Include="Parsing\parsers\elsa_invoke_parser.cpp" />

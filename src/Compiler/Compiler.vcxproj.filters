@@ -150,6 +150,12 @@
     <ClInclude Include="parsing\precedence.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="interop\native_function_info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interop\native_function_table.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -261,6 +267,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Parsing\elsa_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="interop\native_function_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="interop\native_function_table.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
