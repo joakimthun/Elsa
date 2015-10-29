@@ -28,27 +28,20 @@ namespace elsa {
 
 		void VM::execute()
 		{
-			try 
+			if (call_stack_.size() == 0)
 			{
-				if (call_stack_.size() == 0)
-				{
-					push_main();
-				}
-
-				bool cont = false;
-
-				if (oc_ == OpCode::halt)
-					cont = true;
-
-				while ((cont || oc_ != halt) && pc_ < code_length_)
-				{
-					cycle();
-					cont = false;
-				}
+				push_main();
 			}
-			catch (ElsaException& e)
+
+			bool cont = false;
+
+			if (oc_ == OpCode::halt)
+				cont = true;
+
+			while ((cont || oc_ != halt) && pc_ < code_length_)
 			{
-				std::cout << e.what() << std::endl;
+				cycle();
+				cont = false;
 			}
 		}
 

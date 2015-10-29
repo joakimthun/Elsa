@@ -63,7 +63,7 @@ namespace elsa {
 				throw CodeGenException("Push can not be called on an empty symbol table stack");
 
 			auto& current_table = local_table_.back();
-			auto local_index = current_table->get_next_index() + current_function_->get_num_args() + current_function_->get_num_locals();
+			auto local_index = current_function_->get_num_args() + current_function_->get_num_locals();
 
 			local_table_.back()->add(name, new LocalSymbol(name, local_index, type));
 		}
