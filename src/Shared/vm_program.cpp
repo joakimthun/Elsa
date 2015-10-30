@@ -7,6 +7,11 @@ namespace elsa {
 		entry_point_(-1)
 	{}
 
+	void VMProgram::emit(OpCode instruction)
+	{
+		instructions_.push_back(static_cast<int>(instruction));
+	}
+
 	void VMProgram::emit(int instruction)
 	{
 		instructions_.push_back(instruction);

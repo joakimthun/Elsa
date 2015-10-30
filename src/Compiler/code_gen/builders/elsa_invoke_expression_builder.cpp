@@ -22,17 +22,10 @@ namespace elsa {
 				index++;
 			}
 
-			program->emit(get_opcode(expression->get_function_name()));
-		}
+			program->emit(OpCode::elsa);
+			program->emit(static_cast<int>(OType::Int));
+			program->emit(static_cast<int>(native_function_info->get_index()));
 
-		OpCode ElsaInvokeExpressionBuilder::get_opcode(const std::wstring& function_name)
-		{
-			if (function_name == L"PrintLn")
-			{
-				return OpCode::print_ln;
-			}
-
-			throw CodeGenException("Unsupported native function name");
 		}
 
 	}

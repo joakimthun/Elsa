@@ -20,9 +20,6 @@ namespace elsa {
 		{
 		public:
 			static void build(VMProgram* program, VMExpressionVisitor* visitor, ElsaInvokeExpression* expression);
-
-		private:
-			static OpCode get_opcode(const std::wstring& function_name);
 		};
 
 	}

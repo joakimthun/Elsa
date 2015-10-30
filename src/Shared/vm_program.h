@@ -6,6 +6,7 @@
 #include <map>
 #include <stdexcept>
 
+#include "opcodes\opcodes.h"
 #include "constants\char_info.h"
 #include "constants\float_info.h"
 #include "constants\function_info.h"
@@ -19,6 +20,7 @@ namespace elsa {
 	public:
 		VMProgram();
 
+		void emit(OpCode instruction);
 		void emit(int instruction);
 		void emit(const std::vector<int>& instructions);
 		std::size_t get_next_instruction_index();

@@ -3,10 +3,11 @@
 namespace elsa {
 	namespace compiler {
 
-		NativeFunctionInfo::NativeFunctionInfo(const std::wstring& name, OType return_type)
+		NativeFunctionInfo::NativeFunctionInfo(const std::wstring& name, OType return_type, std::size_t index)
 			:
 			name_(name),
-			return_type_(return_type)
+			return_type_(return_type),
+			index_(index)
 		{}
 		
 		void NativeFunctionInfo::add_arg()
@@ -43,6 +44,11 @@ namespace elsa {
 		std::size_t NativeFunctionInfo::num_args() const
 		{
 			return args_.size();
+		}
+
+		std::size_t NativeFunctionInfo::get_index() const
+		{
+			return index_;
 		}
 
 	}

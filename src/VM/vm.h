@@ -14,6 +14,7 @@
 #include "constants\function_info.h"
 #include "exceptions\runtime_exception.h"
 #include "GC\gc.h"
+#include "interop\native_calls.h"
 
 namespace elsa {
 	namespace vm {
@@ -36,7 +37,6 @@ namespace elsa {
 			void cycle();
 			void push_main();
 			void next_opcode();
-			void print_line(const Object& o);
 
 			OpCode oc_;
 			std::size_t code_length_;
@@ -46,6 +46,7 @@ namespace elsa {
 			VMProgram& program_;
 			Heap heap_;
 			GC gc_;
+			NativeCalls native_calls_;
 		};
 
 	}

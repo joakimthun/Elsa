@@ -148,6 +148,7 @@
     <ClCompile Include="call_stack.cpp" />
     <ClCompile Include="elsa_vm.cpp" />
     <ClCompile Include="GC\gc.cpp" />
+    <ClCompile Include="interop\native_calls.cpp" />
     <ClCompile Include="memory\heap.cpp" />
     <ClCompile Include="types\object.cpp" />
     <ClCompile Include="stack_frame.cpp" />
@@ -155,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="call_stack.h" />
+    <ClInclude Include="interop\native_calls.h" />
     <ClInclude Include="types\array_info.h" />
     <ClInclude Include="GC\gc.h" />
     <ClInclude Include="memory\heap.h" />

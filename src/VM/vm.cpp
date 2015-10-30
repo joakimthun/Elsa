@@ -348,8 +348,10 @@ namespace elsa {
 				current_frame_->store_local(l_index, value);
 				break;
 			}
-			case print_ln: {
-				print_line(current_frame_->pop());
+			case elsa: {
+				auto type = static_cast<OType>(get_instruction(pc_++));
+				auto index = static_cast<std::size_t>(get_instruction(pc_++));
+				native_calls_.invoke(index, current_frame_, type);
 				break;
 			}
 			case new_struct: {
@@ -372,7 +374,7 @@ namespace elsa {
 				break;
 			}
 			case new_arr: {
-				auto type = (OType)get_instruction(pc_++);
+				auto type = static_cast<OType>(get_instruction(pc_++));
 				auto size = current_frame_->pop().i();
 				current_frame_->push(heap_.alloc_array(type, size));
 				break;
@@ -419,20 +421,6 @@ namespace elsa {
 		void VM::next_opcode()
 		{
 			oc_ = (OpCode)get_instruction(pc_++);
-		}
-
-		void VM::print_line(const Object& o)
-		{
-			if (o.get_type() == OType::Int)
-				std::cout << o.i() << std::endl;
-			else if(o.get_type() == OType::Float)
-				std::cout << o.f() << std::endl;
-			else if (o.get_type() == OType::Char)
-				std::wcout << o.c() << std::endl;
-			else if (o.get_type() == OType::Bool)
-				std::cout << o.b() << std::endl;
-			else
-				throw RuntimeException("Unsupported type: print_ln");
 		}
 	}
 }

@@ -71,8 +71,8 @@ namespace elsa {
 			l_ele,
 			s_ele,
 
-			// Misc
-			print_ln
+			// Interop
+			elsa
 
 		};
 
