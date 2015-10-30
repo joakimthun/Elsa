@@ -24,7 +24,10 @@ namespace elsa {
 			}
 			if (is_of_type<IdentifierExpression>(expression))
 			{
-				throw ParsingException("Not implemented --> IdentifierExpression");
+				//throw ParsingException("Not implemented --> IdentifierExpression");
+
+				// Debug
+				return new ElsaType(OType::Int);
 			}
 			if (is_of_type<PrefixOperatorExpression>(expression))
 			{
@@ -85,6 +88,12 @@ namespace elsa {
 			default:
 				throw ParsingException("Invalid type.");
 			}
+		}
+
+		void TypeChecker::assert_is_same_type(OType t1, OType t2)
+		{
+			if (t1 != t2)	
+				throw ParsingException("Type mismatch");
 		}
 
 		template<typename TExpression>

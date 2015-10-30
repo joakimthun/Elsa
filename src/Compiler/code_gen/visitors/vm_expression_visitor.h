@@ -10,6 +10,7 @@
 #include "expression_visitor.h"
 #include "vm_program.h"
 #include "../../symbol_tables/local_table.h"
+#include "../../interop/native_function_table.h"
 #include "../builders/function_builder.h"
 #include "../builders/variable_builder.h"
 #include "../builders/binary_operator_expression_builder.h"
@@ -42,11 +43,13 @@ namespace elsa {
 			FunctionInfo* get_current_function();
 			void reset_current_function();
 
+			NativeFunctionTable& get_native_function_table();
 
 		private:
 			std::unique_ptr<VMProgram> vm_program_;
 			std::vector<std::unique_ptr<LocalTable>> local_table_;
 			FunctionInfo* current_function_;
+			NativeFunctionTable native_function_table_;
 		};
 
 	}

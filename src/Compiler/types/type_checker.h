@@ -14,6 +14,7 @@
 #include "elsa_type.h"
 #include "../token.h"
 #include "exceptions\parsing_exception.h"
+#include "exceptions\codegen_exception.h"
 
 namespace elsa {
 	namespace compiler {
@@ -23,6 +24,7 @@ namespace elsa {
 		public:
 			static ElsaType* get_expression_type(Expression* expression);
 			static ElsaType* get_type_from_token(TokenType type);
+			static void assert_is_same_type(OType t1, OType t2);
 
 		private:
 			template<typename TExpression>

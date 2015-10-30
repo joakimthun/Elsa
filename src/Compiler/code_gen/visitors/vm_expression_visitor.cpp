@@ -115,5 +115,10 @@ namespace elsa {
 			current_function_ = nullptr;
 		}
 
+		NativeFunctionTable& VMExpressionVisitor::get_native_function_table()
+		{
+			return native_function_table_;
+		}
+
 	}
 }
