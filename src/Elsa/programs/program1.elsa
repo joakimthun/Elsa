@@ -4,6 +4,7 @@ func int main()
 	var y = 10;
 	var z = 1230120839;
 	var f = 10.89;
+	var c = 'X';
 
 	elsa.PrintLn(x);
 	elsa.PrintLn(y);
@@ -12,4 +13,5 @@ func int main()
 	elsa.PrintLn(77);
 	elsa.PrintLn(z);
 	elsa.PrintLn(f);
+	elsa.PrintLn(c);
 }

@@ -18,6 +18,13 @@ namespace elsa {
 			program->emit(static_cast<int>(index));
 		}
 
+		void LiteralExpressionBuilder::build(VMProgram* program, CharLiteralExpression* expression)
+		{
+			program->emit(OpCode::cconst);
+			auto index = program->add_char(new CharInfo(expression->get_value()));
+			program->emit(static_cast<int>(index));
+		}
+
 	}
 }
 
