@@ -37,6 +37,7 @@
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
     <ClInclude Include="Parsing\parsers\elsa_invoke_parser.h" />
+    <ClInclude Include="parsing\parsers\struct_declaration_parser.h" />
     <ClInclude Include="symbols\function_symbol.h" />
     <ClInclude Include="symbols\local_symbol.h" />
     <ClInclude Include="symbol_tables\function_table.h" />
@@ -87,6 +88,7 @@
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
     <ClCompile Include="Parsing\parsers\elsa_invoke_parser.cpp" />
+    <ClCompile Include="parsing\parsers\struct_declaration_parser.cpp" />
     <ClCompile Include="symbols\function_symbol.cpp" />
     <ClCompile Include="symbols\local_symbol.cpp" />
     <ClCompile Include="token.cpp" />

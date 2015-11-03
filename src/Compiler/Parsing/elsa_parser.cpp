@@ -145,6 +145,7 @@ namespace elsa {
 		{
 			// Statements
 			register_statement_parser(TokenType::Func, new FuncDeclarationParser());
+			register_statement_parser(TokenType::Struct, new StructDeclarationParser());
 
 			// Expressions
 			register_expression_parser(TokenType::Identifier, new IdentifierParser());
