@@ -349,9 +349,8 @@ namespace elsa {
 				break;
 			}
 			case elsa: {
-				auto type = static_cast<OType>(get_instruction(pc_++));
 				auto index = static_cast<std::size_t>(get_instruction(pc_++));
-				native_calls_.invoke(index, current_frame_, type);
+				native_calls_.invoke(index, current_frame_);
 				break;
 			}
 			case new_struct: {

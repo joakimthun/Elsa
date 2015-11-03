@@ -16,15 +16,15 @@ namespace elsa {
 		public:
 			NativeCalls();
 			
-			void invoke(std::size_t index, StackFrame* frame, OType type);
+			void invoke(std::size_t index, StackFrame* frame);
 
 		private:
 			void initialize();
-			static void print(StackFrame* frame, OType type);
-			static void print_ln(StackFrame* frame, OType type);
-			static void print_internal(StackFrame* frame, OType type);
+			static void print(StackFrame* frame);
+			static void print_ln(StackFrame* frame);
+			static void print_internal(StackFrame* frame);
 
-			std::vector<std::function<void(StackFrame*, OType)>> functions_;
+			std::vector<std::function<void(StackFrame*)>> functions_;
 		};
 
 	}

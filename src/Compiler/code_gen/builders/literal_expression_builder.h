@@ -4,6 +4,7 @@
 
 #include "exceptions\codegen_exception.h"
 #include "../../ast/integer_literal_expression.h"
+#include "../../ast/float_literal_expression.h"
 #include "opcodes\opcodes.h"
 #include "vm_program.h"
 
@@ -16,6 +17,7 @@ namespace elsa {
 		{
 		public:
 			static void build(VMProgram* program, IntegerLiteralExpression* expression);
+			static void build(VMProgram* program, FloatLiteralExpression* expression);
 		};
 
 	}

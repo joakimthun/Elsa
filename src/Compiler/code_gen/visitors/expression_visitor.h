@@ -9,6 +9,7 @@ namespace elsa {
 		class IntegerLiteralExpression;
 		class ElsaInvokeExpression;
 		class IdentifierExpression;
+		class FloatLiteralExpression;
 
 		class ExpressionVisitor
 		{
@@ -20,6 +21,7 @@ namespace elsa {
 			virtual void visit(IntegerLiteralExpression* expression) = 0;
 			virtual void visit(ElsaInvokeExpression* expression) = 0;
 			virtual void visit(IdentifierExpression* expression) = 0;
+			virtual void visit(FloatLiteralExpression* expression) = 0;
 		};
 
 	}

@@ -39,9 +39,14 @@ namespace elsa {
 			ElsaInvokeExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
-		void VMExpressionVisitor::visit(IdentifierExpression * expression)
+		void VMExpressionVisitor::visit(IdentifierExpression* expression)
 		{
 			IdentifierExpressionBuilder::build(vm_program_.get(), this, expression);
+		}
+
+		void VMExpressionVisitor::visit(FloatLiteralExpression* expression)
+		{
+			LiteralExpressionBuilder::build(vm_program_.get(), expression);
 		}
 
 		void VMExpressionVisitor::push_new_scope()

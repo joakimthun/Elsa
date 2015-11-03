@@ -11,6 +11,13 @@ namespace elsa {
 			program->emit(expression->get_value());
 		}
 
+		void LiteralExpressionBuilder::build(VMProgram* program, FloatLiteralExpression* expression)
+		{
+			program->emit(OpCode::fconst);
+			auto index = program->add_float(new FloatInfo(expression->get_value()));
+			program->emit(static_cast<int>(index));
+		}
+
 	}
 }
 

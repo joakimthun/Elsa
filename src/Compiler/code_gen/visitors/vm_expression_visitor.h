@@ -31,6 +31,7 @@ namespace elsa {
 			void visit(IntegerLiteralExpression* expression) override;
 			void visit(ElsaInvokeExpression* expression) override;
 			void visit(IdentifierExpression* expression) override;
+			void visit(FloatLiteralExpression* expression) override;
 
 			void push_new_scope();
 			void pop_current_scope();

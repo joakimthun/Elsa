@@ -23,7 +23,6 @@ namespace elsa {
 			}
 
 			program->emit(OpCode::elsa);
-			program->emit(static_cast<int>(OType::Int));
 			program->emit(static_cast<int>(native_function_info->get_index()));
 
 		}

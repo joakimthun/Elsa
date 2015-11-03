@@ -71,9 +71,10 @@ namespace elsa {
 		return get_func(entry_point_);
 	}
 	
-	void VMProgram::add_struct(StructInfo* entry)
+	std::size_t VMProgram::add_struct(StructInfo* entry)
 	{
 		structs_.push_back(std::unique_ptr<StructInfo>(entry));
+		return structs_.size() - 1;
 	}
 	
 	const StructInfo* VMProgram::get_struct(std::size_t index) const
@@ -81,9 +82,10 @@ namespace elsa {
 		return structs_[index].get();
 	}
 	
-	void VMProgram::add_float(FloatInfo* entry)
+	std::size_t VMProgram::add_float(FloatInfo* entry)
 	{
 		floats_.push_back(std::unique_ptr<FloatInfo>(entry));
+		return floats_.size() - 1;
 	}
 	
 	const FloatInfo* VMProgram::get_float(std::size_t index) const
@@ -91,9 +93,10 @@ namespace elsa {
 		return floats_[index].get();
 	}
 	
-	void VMProgram::add_char(CharInfo* entry)
+	std::size_t VMProgram::add_char(CharInfo* entry)
 	{
 		chars_.push_back(std::unique_ptr<CharInfo>(entry));
+		return chars_.size() - 1;
 	}
 	
 	const CharInfo* VMProgram::get_char_at(std::size_t index) const
@@ -101,9 +104,10 @@ namespace elsa {
 		return chars_[index].get();
 	}
 	
-	void VMProgram::add_string(StringInfo* entry)
+	std::size_t VMProgram::add_string(StringInfo* entry)
 	{
 		strings_.push_back(std::unique_ptr<StringInfo>(entry));
+		return strings_.size() - 1;
 	}
 	
 	const StringInfo* VMProgram::get_string(std::size_t index) const
