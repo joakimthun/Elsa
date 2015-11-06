@@ -13,30 +13,30 @@ protected:
 		program_.add_func(new FunctionInfo(L"main", 0, 3, ep, FunctionType::Static));
 		program_.set_entry_point(ep);
 
-		auto si = new StructInfo("my_struct");
-		si->add_field(new FieldInfo("field0", elsa::OType::Int));
-		si->add_field(new FieldInfo("field1", elsa::OType::Float));
-		si->add_field(new FieldInfo("field2", elsa::OType::Int));
-		si->add_field(new FieldInfo("field3", elsa::OType::Float));
-		si->add_field(new FieldInfo("field4", elsa::OType::Int));
+		auto si = new StructInfo(L"my_struct");
+		si->add_field(new FieldInfo(L"field0", elsa::OType::Int));
+		si->add_field(new FieldInfo(L"field1", elsa::OType::Float));
+		si->add_field(new FieldInfo(L"field2", elsa::OType::Int));
+		si->add_field(new FieldInfo(L"field3", elsa::OType::Float));
+		si->add_field(new FieldInfo(L"field4", elsa::OType::Int));
 		program_.add_struct(si);
 
 		program_.add_float(new FloatInfo(12.0f));
 		program_.add_float(new FloatInfo(99.0f));
 
-		auto si2 = new StructInfo("my_struct2");
-		si2->add_field(new FieldInfo("field0", elsa::OType::GCOPtr));
-		si2->add_field(new FieldInfo("field1", elsa::OType::Int));
-		si2->add_field(new FieldInfo("field2", elsa::OType::GCOPtr));
+		auto si2 = new StructInfo(L"my_struct2");
+		si2->add_field(new FieldInfo(L"field0", elsa::OType::GCOPtr));
+		si2->add_field(new FieldInfo(L"field1", elsa::OType::Int));
+		si2->add_field(new FieldInfo(L"field2", elsa::OType::GCOPtr));
 
 		program_.add_struct(si2);
 
-		auto si3 = new StructInfo("my_struct3");
-		si3->add_field(new FieldInfo("field0", elsa::OType::GCOPtr));
-		si3->add_field(new FieldInfo("field1", elsa::OType::Int));
-		si3->add_field(new FieldInfo("field2", elsa::OType::Bool));
-		si3->add_field(new FieldInfo("field3", elsa::OType::Char));
-		si3->add_field(new FieldInfo("field4", elsa::OType::Float));
+		auto si3 = new StructInfo(L"my_struct3");
+		si3->add_field(new FieldInfo(L"field0", elsa::OType::GCOPtr));
+		si3->add_field(new FieldInfo(L"field1", elsa::OType::Int));
+		si3->add_field(new FieldInfo(L"field2", elsa::OType::Bool));
+		si3->add_field(new FieldInfo(L"field3", elsa::OType::Char));
+		si3->add_field(new FieldInfo(L"field4", elsa::OType::Float));
 
 		program_.add_struct(si3);
 	}
@@ -62,7 +62,7 @@ TEST_F(StructTest, NEW)
 
 	auto si = obj.gco()->si;
 
-	ASSERT_EQ("my_struct", si->get_name());
+	ASSERT_EQ(L"my_struct", si->get_name());
 	ASSERT_EQ(20, si->get_size());
 }
 
@@ -179,19 +179,19 @@ TEST_F(StructTest, STRUCT_FIELD_STORE_LOAD)
 	auto vm = VM(program_);
 
 	vm.execute();
-	ASSERT_EQ("my_struct", vm.eval_stack_top().gco()->si->get_name());
+	ASSERT_EQ(L"my_struct", vm.eval_stack_top().gco()->si->get_name());
 
 	vm.execute();
-	ASSERT_EQ("my_struct2", vm.eval_stack_top().gco()->si->get_name());
+	ASSERT_EQ(L"my_struct2", vm.eval_stack_top().gco()->si->get_name());
 
 	vm.execute();
-	ASSERT_EQ("my_struct", vm.eval_stack_top().gco()->si->get_name());
+	ASSERT_EQ(L"my_struct", vm.eval_stack_top().gco()->si->get_name());
 
 	vm.execute();
-	ASSERT_EQ("my_struct2", vm.eval_stack_top().gco()->si->get_name());
+	ASSERT_EQ(L"my_struct2", vm.eval_stack_top().gco()->si->get_name());
 
 	vm.execute();
-	ASSERT_EQ("my_struct", vm.eval_stack_top().gco()->si->get_name());
+	ASSERT_EQ(L"my_struct", vm.eval_stack_top().gco()->si->get_name());
 
 	vm.execute();
 	ASSERT_EQ(77, vm.eval_stack_top().i());
@@ -301,16 +301,16 @@ TEST_F(StructTest, STRUCT_ON_STRUCT_FIELD_STORE_LOAD)
 	auto vm = VM(program_);
 
 	vm.execute();
-	ASSERT_EQ("my_struct", vm.eval_stack_top().gco()->si->get_name());
+	ASSERT_EQ(L"my_struct", vm.eval_stack_top().gco()->si->get_name());
 
 	vm.execute();
-	ASSERT_EQ("my_struct2", vm.eval_stack_top().gco()->si->get_name());
+	ASSERT_EQ(L"my_struct2", vm.eval_stack_top().gco()->si->get_name());
 
 	vm.execute();
 	ASSERT_EQ(12378, vm.eval_stack_top().i());
 
 	vm.execute();
-	ASSERT_EQ("my_struct2", vm.eval_stack_top().gco()->si->get_name());
+	ASSERT_EQ(L"my_struct2", vm.eval_stack_top().gco()->si->get_name());
 
 	vm.execute();
 	ASSERT_EQ(77, vm.eval_stack_top().i());
@@ -364,7 +364,7 @@ TEST_F(StructTest, FIELD_DEFAULT_VALUES)
 	auto vm = VM(program_);
 
 	vm.execute();
-	ASSERT_EQ("my_struct3", vm.eval_stack_top().gco()->si->get_name());
+	ASSERT_EQ(L"my_struct3", vm.eval_stack_top().gco()->si->get_name());
 
 	vm.execute();
 	ASSERT_EQ(nullptr, vm.eval_stack_top().gco());

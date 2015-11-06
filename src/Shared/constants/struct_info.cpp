@@ -2,7 +2,7 @@
 
 namespace elsa {
 
-		StructInfo::StructInfo(const std::string& name) 
+		StructInfo::StructInfo(const std::wstring& name)
 			:
 			name_(name),
 			size_(0)
@@ -10,7 +10,7 @@ namespace elsa {
 
 		StructInfo::~StructInfo() {}
 
-		std::string StructInfo::get_name() const
+		std::wstring StructInfo::get_name() const
 		{
 			return name_;
 		}

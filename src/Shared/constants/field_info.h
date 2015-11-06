@@ -13,11 +13,11 @@ namespace elsa {
 		class FieldInfo
 		{
 		public:
-			FieldInfo(const std::string& n, OType t);
+			FieldInfo(const std::wstring& n, OType t);
 
 			void set_num_bytes_offset(std::size_t offset);
 
-			std::string get_name() const;
+			std::wstring get_name() const;
 			OType get_type() const;
 			std::size_t get_size() const;
 			std::size_t get_num_bytes_offset() const;
@@ -25,7 +25,7 @@ namespace elsa {
 		private:
 			void set_size();
 
-			std::string name_;
+			std::wstring name_;
 			OType type_;
 			std::size_t size_;
 			std::size_t num_bytes_offset_;

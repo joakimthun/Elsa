@@ -15,6 +15,9 @@ namespace elsa {
 		{
 		public:
 			Expression* parse(ElsaParser* parser) override;
+
+		private:
+			FieldExpression* parse_field_expression(ElsaParser* parser);
 		};
 
 	}

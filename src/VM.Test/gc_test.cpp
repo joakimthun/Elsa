@@ -9,14 +9,14 @@ class GCTest : public testing::Test {
 protected:
 	virtual void SetUp()
 	{
-		auto si = new StructInfo("my_struct");
-		si->add_field(new FieldInfo("field0", elsa::OType::GCOPtr));
-		si->add_field(new FieldInfo("field1", elsa::OType::GCOPtr));
-		si->add_field(new FieldInfo("field2", elsa::OType::GCOPtr));
+		auto si = new StructInfo(L"my_struct");
+		si->add_field(new FieldInfo(L"field0", elsa::OType::GCOPtr));
+		si->add_field(new FieldInfo(L"field1", elsa::OType::GCOPtr));
+		si->add_field(new FieldInfo(L"field2", elsa::OType::GCOPtr));
 		program_.add_struct(si);
 
-		auto si2 = new StructInfo("my_struct2");
-		si2->add_field(new FieldInfo("field0", elsa::OType::Int));
+		auto si2 = new StructInfo(L"my_struct2");
+		si2->add_field(new FieldInfo(L"field0", elsa::OType::Int));
 		program_.add_struct(si2);
 	}
 

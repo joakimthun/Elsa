@@ -1,5 +1,7 @@
 #include "struct_declaration_expression.h"
 
+#include "../code_gen/visitors/expression_visitor.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -25,7 +27,7 @@ namespace elsa {
 
 		void StructDeclarationExpression::accept(ExpressionVisitor* visitor)
 		{
-			throw ElsaException("No visit method defined for StructDeclarationExpression");
+			visitor->visit(this);
 		}
 	}
 }

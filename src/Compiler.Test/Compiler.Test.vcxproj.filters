@@ -43,6 +43,7 @@
     <None Include="parser_test_files\literals.elsa" />
     <None Include="parser_test_files\func_declaration.elsa" />
     <None Include="parser_test_files\precedence.elsa" />
+    <None Include="parser_test_files\struct.elsa" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source_file_test.h">

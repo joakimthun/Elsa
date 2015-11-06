@@ -14,10 +14,10 @@ namespace elsa {
 		class StructInfo
 		{
 		public:
-			StructInfo(const std::string& name);
+			StructInfo(const std::wstring& name);
 			~StructInfo();
 
-			std::string get_name() const;
+			std::wstring get_name() const;
 			std::size_t get_size() const;
 			FieldInfo* get_field(std::size_t index) const;
 			const std::vector<std::unique_ptr<FieldInfo>>& get_fields() const;
@@ -27,7 +27,7 @@ namespace elsa {
 		private:
 			void update_size(const FieldInfo& field);
 
-			std::string name_;
+			std::wstring name_;
 			std::vector<std::unique_ptr<FieldInfo>> fields_;
 			std::size_t size_;
 		};

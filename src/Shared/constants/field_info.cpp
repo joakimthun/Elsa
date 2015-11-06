@@ -2,7 +2,7 @@
 
 namespace elsa {
 
-		FieldInfo::FieldInfo(const std::string& name, OType type)
+		FieldInfo::FieldInfo(const std::wstring& name, OType type)
 			:
 			name_(name),
 			type_(type),
@@ -16,7 +16,7 @@ namespace elsa {
 			num_bytes_offset_ = offset;
 		}
 
-		std::string FieldInfo::get_name() const
+		std::wstring FieldInfo::get_name() const
 		{
 			return name_;
 		}

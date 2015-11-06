@@ -43,6 +43,7 @@
     <None Include="parser_test_files\literals.elsa" />
     <None Include="parser_test_files\precedence.elsa" />
     <None Include="parser_test_files\prefix_operator.elsa" />
+    <None Include="parser_test_files\struct.elsa" />
     <None Include="parser_test_files\variable_declaration.elsa" />
   </ItemGroup>
   <ItemGroup>

@@ -314,3 +314,19 @@ TEST(ParserTest, PRECEDENCE)
 		FAIL();
 	}
 }
+
+TEST(ParserTest, STRUCT)
+{
+	auto lexer = new Lexer(new SourceFile("..\\Compiler.Test\\parser_test_files\\struct.elsa"));
+	auto parser = ElsaParser(lexer);
+
+	auto exp1 = parser.parse_statement();
+	if (auto str_exp = dynamic_cast<StructDeclarationExpression*>(exp1))
+	{
+		ASSERT_EQ(L"Test", str_exp->get_name());
+	}
+	else
+	{
+		FAIL();
+	}
+}

@@ -11,6 +11,7 @@ namespace elsa {
 		class IdentifierExpression;
 		class FloatLiteralExpression;
 		class CharLiteralExpression;
+		class StructDeclarationExpression;
 
 		class ExpressionVisitor
 		{
@@ -24,6 +25,7 @@ namespace elsa {
 			virtual void visit(IdentifierExpression* expression) = 0;
 			virtual void visit(FloatLiteralExpression* expression) = 0;
 			virtual void visit(CharLiteralExpression* expression) = 0;
+			virtual void visit(StructDeclarationExpression* expression) = 0;
 		};
 
 	}

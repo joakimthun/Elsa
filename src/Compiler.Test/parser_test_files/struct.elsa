@@ -1,0 +1,6 @@
+struct Test
+{
+	int my_int;
+	float my_float;
+	bool my_bool;
+};

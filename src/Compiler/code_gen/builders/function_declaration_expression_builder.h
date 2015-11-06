@@ -12,7 +12,7 @@ namespace elsa {
 
 		class VMExpressionVisitor;
 
-		class FunctionBuilder
+		class FunctionDeclarationExpressionBuilder
 		{
 		public:
 			static void build(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression);

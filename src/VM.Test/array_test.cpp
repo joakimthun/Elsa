@@ -16,8 +16,8 @@ protected:
 		program_.add_float(new FloatInfo(99.0f));
 		program_.add_float(new FloatInfo(-99.0f));
 
-		auto si = new StructInfo("my_struct");
-		si->add_field(new FieldInfo("field0", elsa::OType::Int));
+		auto si = new StructInfo(L"my_struct");
+		si->add_field(new FieldInfo(L"field0", elsa::OType::Int));
 		program_.add_struct(si);
 
 		program_.set_entry_point(ep);

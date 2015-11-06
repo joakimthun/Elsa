@@ -16,7 +16,7 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(FuncDeclarationExpression* expression)
 		{
-			FunctionBuilder::build(vm_program_.get(), this, expression);
+			FunctionDeclarationExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
 		void VMExpressionVisitor::visit(VariableDeclarationExpression* expression)
@@ -52,6 +52,11 @@ namespace elsa {
 		void VMExpressionVisitor::visit(CharLiteralExpression* expression)
 		{
 			LiteralExpressionBuilder::build(vm_program_.get(), expression);
+		}
+
+		void VMExpressionVisitor::visit(StructDeclarationExpression * expression)
+		{
+			StructDeclarationExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
 		void VMExpressionVisitor::push_new_scope()

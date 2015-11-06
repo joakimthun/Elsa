@@ -24,9 +24,10 @@
     <ClInclude Include="ast\struct_declaration_expression.h" />
     <ClInclude Include="code_gen\builders\binary_operator_expression_builder.h" />
     <ClInclude Include="code_gen\builders\elsa_invoke_expression_builder.h" />
-    <ClInclude Include="code_gen\builders\function_builder.h" />
+    <ClInclude Include="code_gen\builders\function_declaration_expression_builder.h" />
     <ClInclude Include="code_gen\builders\identifier_expression_builder.h" />
     <ClInclude Include="code_gen\builders\literal_expression_builder.h" />
+    <ClInclude Include="code_gen\builders\struct_declaration_expression_builder.h" />
     <ClInclude Include="code_gen\builders\variable_builder.h" />
     <ClInclude Include="code_gen\code_gen.h" />
     <ClInclude Include="code_gen\visitors\expression_visitor.h" />
@@ -76,9 +77,10 @@
     <ClCompile Include="ast\struct_declaration_expression.cpp" />
     <ClCompile Include="code_gen\builders\binary_operator_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\elsa_invoke_expression_builder.cpp" />
-    <ClCompile Include="code_gen\builders\function_builder.cpp" />
+    <ClCompile Include="code_gen\builders\function_declaration_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\identifier_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\literal_expression_builder.cpp" />
+    <ClCompile Include="code_gen\builders\struct_declaration_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\variable_builder.cpp" />
     <ClCompile Include="code_gen\code_gen.cpp" />
     <ClCompile Include="code_gen\visitors\vm_expression_visitor.cpp" />

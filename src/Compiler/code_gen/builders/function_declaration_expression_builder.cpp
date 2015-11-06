@@ -1,10 +1,11 @@
-#include "function_builder.h"
+#include "function_declaration_expression_builder.h"
+
 #include "../visitors/vm_expression_visitor.h"
 
 namespace elsa {
 	namespace compiler {
 
-		void FunctionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression)
+		void FunctionDeclarationExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression)
 		{
 			auto fi = std::make_unique<FunctionInfo>(expression->get_name());
 			visitor->set_current_function(fi.get());

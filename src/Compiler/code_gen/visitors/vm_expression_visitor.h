@@ -11,12 +11,13 @@
 #include "vm_program.h"
 #include "../../symbol_tables/local_table.h"
 #include "../../interop/native_function_table.h"
-#include "../builders/function_builder.h"
+#include "../builders/function_declaration_expression_builder.h"
 #include "../builders/variable_builder.h"
 #include "../builders/binary_operator_expression_builder.h"
 #include "../builders/literal_expression_builder.h"
 #include "../builders/elsa_invoke_expression_builder.h"
 #include "../builders/identifier_expression_builder.h"
+#include "../builders/struct_declaration_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {
@@ -33,6 +34,7 @@ namespace elsa {
 			void visit(IdentifierExpression* expression) override;
 			void visit(FloatLiteralExpression* expression) override;
 			void visit(CharLiteralExpression* expression) override;
+			void visit(StructDeclarationExpression* expression) override;
 
 			void push_new_scope();
 			void pop_current_scope();

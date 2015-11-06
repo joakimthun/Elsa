@@ -17,7 +17,7 @@ namespace elsa {
 
 			if (ptr == nullptr)
 			{
-				throw RuntimeException("Memory allocation failed for type: " + si->get_name());
+				throw RuntimeException("The struct memory allocation failed");
 			}
 
 			auto gco = new GCObject(GCObjectType::Struct);
