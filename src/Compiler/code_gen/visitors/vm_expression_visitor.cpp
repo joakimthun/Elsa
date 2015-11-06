@@ -59,6 +59,11 @@ namespace elsa {
 			StructDeclarationExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		void VMExpressionVisitor::visit(CreateStructExpression * expression)
+		{
+			CreateStructExpressionBuilder::build(vm_program_.get(), this, expression);
+		}
+
 		void VMExpressionVisitor::push_new_scope()
 		{
 			local_table_.push_back(std::make_unique<LocalTable>());
@@ -83,7 +88,7 @@ namespace elsa {
 			local_table_.back()->add(name, new LocalSymbol(name, local_index, type));
 		}
 
-		bool VMExpressionVisitor::current_scope_has_entry(std::wstring name)
+		bool VMExpressionVisitor::current_scope_has_entry(const std::wstring& name)
 		{
 			if (local_table_.size() == 0)
 				throw CodeGenException("The symbol table stack is empty");
@@ -91,15 +96,8 @@ namespace elsa {
 			return local_table_.back()->has_entry(name);
 		}
 
-		const LocalSymbol* VMExpressionVisitor::get_local(std::wstring name) const
+		const LocalSymbol* VMExpressionVisitor::get_local(const std::wstring& name) const
 		{
-			//for (std::vector<std::unique_ptr<LocalTable>>::reverse_iterator it = local_table_.rbegin(); it != local_table_.rend(); ++it) 
-			//{
-			//	auto local = it->get()->get(name);
-			//	if (local != nullptr)
-			//		return local;
-			//}
-
 			for (auto& it = local_table_.rbegin(); it != local_table_.rend(); ++it)
 			{
 				auto local = it->get()->get(name);
@@ -108,6 +106,21 @@ namespace elsa {
 			}
 
 			throw CodeGenException("Tried to access an undefined local variable");
+		}
+
+		void VMExpressionVisitor::add_struct(const std::wstring& name, std::size_t index)
+		{
+			struct_table_.add(name, new StructSymbol(name, index));
+		}
+
+		bool VMExpressionVisitor::has_struct_entry(const std::wstring& name)
+		{
+			return struct_table_.has_entry(name);
+		}
+
+		const StructSymbol* VMExpressionVisitor::get_struct(const std::wstring& name)
+		{
+			return struct_table_.get(name);
 		}
 
 		std::unique_ptr<VMProgram> VMExpressionVisitor::release_program()

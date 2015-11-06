@@ -7,14 +7,17 @@ namespace elsa {
 
 		void StructDeclarationExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, StructDeclarationExpression* expression)
 		{
-			auto struct_info = std::make_unique<StructInfo>(expression->get_name());
+			auto name = expression->get_name();
+			auto struct_info = std::make_unique<StructInfo>(name);
 
 			for (const auto& field : expression->get_fields())
 			{
 				struct_info->add_field(new FieldInfo(field->get_name(), field->get_type()->get_type()));
 			}
 
-			program->add_struct(struct_info.release());
+			auto index = program->add_struct(struct_info.release());
+
+			visitor->add_struct(name, index);
 		}
 
 	}

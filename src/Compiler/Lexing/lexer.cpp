@@ -299,6 +299,7 @@ namespace elsa {
 			register_keyword(L"this", TokenType::This);
 			register_keyword(L"void", TokenType::Void);
 			register_keyword(L"elsa", TokenType::Elsa);
+			register_keyword(L"new", TokenType::New);
 		}
 	}
 }

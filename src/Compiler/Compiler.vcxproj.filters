@@ -168,6 +168,21 @@
     <ClInclude Include="code_gen\builders\function_declaration_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\create_struct_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\create_struct_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="symbol_tables\struct_table.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="symbols\struct_symbol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code_gen\builders\create_struct_expression_builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -297,6 +312,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code_gen\builders\struct_declaration_expression_builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\create_struct_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\create_struct_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symbols\struct_symbol.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code_gen\builders\create_struct_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -57,6 +57,7 @@ namespace elsa {
 			Percent,
 			VerticalBar,
 			DoubleVerticalBar,
+			New
 		};
 
 
