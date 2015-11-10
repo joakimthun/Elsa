@@ -20,6 +20,7 @@
 #include "parsers\elsa_invoke_parser.h"
 #include "parsers\struct_declaration_parser.h"
 #include "parsers\create_struct_parser.h"
+#include "../types/type_checker.h"
 
 namespace elsa {
 	namespace compiler {
@@ -42,6 +43,7 @@ namespace elsa {
 			void reset_current_scope();
 			StructTable& struct_table();
 			FunctionTable& function_table();
+			TypeChecker& type_checker();
 			void consume(TokenType type);
 			void consume();
 			Token* current_token();
@@ -67,6 +69,7 @@ namespace elsa {
 			std::map<TokenType, std::unique_ptr<Parser>> statement_parsers_;
 			std::unique_ptr<Lexer> lexer_;
 			std::unique_ptr<Token> current_token_;
+			TypeChecker type_checker_;
 		};
 
 	}

@@ -10,6 +10,7 @@ namespace elsa {
 			Float,
 			Char,
 			Bool,
+			UserDefined,
 			GCOPtr,
 		};
 

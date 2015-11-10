@@ -6,7 +6,8 @@ namespace elsa {
 		ElsaParser::ElsaParser(Lexer* lexer)
 			:
 			lexer_(std::unique_ptr<Lexer>(lexer)),
-			current_scope_(nullptr)
+			current_scope_(nullptr),
+			type_checker_(&struct_table_)
 		{
 			initialize_grammar();
 			next_token();
@@ -83,6 +84,11 @@ namespace elsa {
 		FunctionTable& ElsaParser::function_table()
 		{
 			return function_table_;
+		}
+
+		TypeChecker & ElsaParser::type_checker()
+		{
+			return type_checker_;
 		}
 
 		void ElsaParser::consume(TokenType type)

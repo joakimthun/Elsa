@@ -12,8 +12,8 @@ struct my_struct2
 
 func int main()
 {
-	//var struct1 = new my_struct;
-	//var struct2 = new my_struct2;
+	var struct1 = new my_struct;
+	var struct2 = new my_struct2;
 	var x = 1 + 2 * 5;
 	var y = 10;
 	var z = 1230120839;

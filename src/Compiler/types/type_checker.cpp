@@ -2,6 +2,11 @@
 
 namespace elsa {
 	namespace compiler {
+		TypeChecker::TypeChecker(StructTable * struct_table)
+			:
+			struct_table_(struct_table)
+		{
+		}
 
 		ElsaType* TypeChecker::get_expression_type(Expression* expression)
 		{
@@ -49,6 +54,10 @@ namespace elsa {
 			if (is_of_type<BoolLiteralExpression>(expression))
 			{
 				return new ElsaType(OType::Bool);
+			}
+			if (is_of_type<CreateStructExpression>(expression))
+			{
+				return new ElsaType(OType::UserDefined);
 			}
 
 			throw ParsingException("Unkown expression type.");

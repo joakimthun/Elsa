@@ -19,7 +19,7 @@ namespace elsa {
 			exp->set_left(std::move(left));
 			exp->set_right(std::move(parser->parse_expression(precedence())));
 
-			exp->set_type(TypeChecker::get_expression_type(exp.get()));
+			exp->set_type(parser->type_checker().get_expression_type(exp.get()));
 
 			return std::move(exp);
 		}

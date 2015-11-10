@@ -16,7 +16,7 @@ namespace elsa {
 			parser->consume(TokenType::Equals);
 
 			auto expression = std::unique_ptr<Expression>(parser->parse_expression());
-			auto expression_type = TypeChecker::get_expression_type(expression.get());
+			auto expression_type = parser->type_checker().get_expression_type(expression.get());
 
 			parser->current_scope()->add_local(name, *expression_type);
 

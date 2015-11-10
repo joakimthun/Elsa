@@ -10,7 +10,6 @@ namespace elsa {
 			auto struct_name = parser->current_token()->get_value();
 
 			parser->consume(TokenType::Identifier);
-			parser->consume(TokenType::Semicolon);
 
 			return std::make_unique<CreateStructExpression>(struct_name);
 		}
