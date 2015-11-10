@@ -12,11 +12,6 @@ namespace elsa {
 			std::size_t index = 0;
 			for (auto& arg : expression->get_args())
 			{
-				//auto elsa_type = TypeChecker::get_expression_type(arg.get());
-
-				//if (!native_function_info->is_valid_arg_type(index, elsa_type->get_type()))
-				//	throw CodeGenException("Invalid argument type passed to native function");
-
 				arg->accept(visitor);
 
 				index++;
