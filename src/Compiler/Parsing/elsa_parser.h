@@ -8,6 +8,8 @@
 #include "../lexing/lexer.h"
 #include "../token.h"
 #include "../program.h"
+#include "../symbol_tables/struct_table.h"
+#include "../symbol_tables/function_table.h"
 #include "precedence.h"
 #include "parsers\prefix_operator_parser.h"
 #include "parsers\identifier_parser.h"
@@ -35,6 +37,10 @@ namespace elsa {
 			std::unique_ptr<Expression> parse_statement();
 			std::unique_ptr<Expression> parse_expression();
 			std::unique_ptr<Expression> parse_expression(int precedence);
+			FunctionSymbol* current_function();
+			void set_current_function(FunctionSymbol* function_symbol);
+			StructTable& struct_table();
+			FunctionTable& function_table();
 			void consume(TokenType type);
 			void consume();
 			Token* current_token();
@@ -52,6 +58,9 @@ namespace elsa {
 			void register_prefix_parser(TokenType type);
 			void initialize_grammar();
 
+			StructTable struct_table_;
+			FunctionTable function_table_;
+			FunctionSymbol* current_function_;
 			std::map<TokenType, std::unique_ptr<Parser>> expression_parsers_;
 			std::map<TokenType, std::unique_ptr<InfixParser>> infix_parsers_;
 			std::map<TokenType, std::unique_ptr<Parser>> statement_parsers_;

@@ -7,13 +7,13 @@ namespace elsa {
 
 		void CreateStructExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, CreateStructExpression* expression)
 		{
-			if (!visitor->has_struct_entry(expression->get_struct_name()))
+			auto si = program->get_struct(expression->get_struct_name());
+
+			if (si == nullptr)
 				throw CodeGenException("No struct with that name has been defined");
 
-			auto struct_entry = visitor->get_struct(expression->get_struct_name());
-
 			program->emit(OpCode::new_struct);
-			program->emit(static_cast<int>(struct_entry->get_index()));
+			program->emit(static_cast<int>(si->get_index()));
 		}
 
 	}

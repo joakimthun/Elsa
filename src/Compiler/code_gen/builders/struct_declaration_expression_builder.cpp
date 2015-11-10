@@ -16,8 +16,6 @@ namespace elsa {
 			}
 
 			auto index = program->add_struct(std::move(struct_info));
-
-			visitor->add_struct(name, index);
 		}
 
 	}

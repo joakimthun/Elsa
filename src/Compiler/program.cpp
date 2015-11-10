@@ -3,26 +3,30 @@
 namespace elsa {
 	namespace compiler {
 
-		Program::Program() {}
+		Program::Program(FunctionTable* function_table, StructTable* struct_table)
+			:
+			function_table_(function_table),
+			struct_table_(struct_table)
+		{}
 
 		void Program::add_statement(std::unique_ptr<Expression> node)
 		{
 			statements_.push_back(std::move(node));
 		}
 
-		void Program::add_function(FunctionSymbol* function)
-		{
-			auto fs = std::unique_ptr<FunctionSymbol>(function);
-
-			if (functions_.has_entry(function->get_name()))
-				throw ParsingException("A global function with the same name has already been delared");
-
-			functions_.add(function->get_name(), fs.release());
-		}
-
 		std::vector<std::unique_ptr<Expression>>& Program::get_statements()
 		{
 			return statements_;
+		}
+
+		FunctionTable * Program::function_table()
+		{
+			return function_table_;
+		}
+
+		StructTable * Program::struct_table()
+		{
+			return struct_table_;
 		}
 
 	}

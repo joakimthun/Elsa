@@ -5,7 +5,8 @@ namespace elsa {
 
 		ElsaParser::ElsaParser(Lexer* lexer)
 			:
-			lexer_(std::unique_ptr<Lexer>(lexer))
+			lexer_(std::unique_ptr<Lexer>(lexer)),
+			current_function_(nullptr)
 		{
 			initialize_grammar();
 			next_token();
@@ -13,7 +14,7 @@ namespace elsa {
 
 		std::unique_ptr<Program> ElsaParser::parse()
 		{
-			auto program = std::make_unique<Program>();
+			auto program = std::make_unique<Program>(&function_table_, &struct_table_);
 
 			while (current_token_->get_type() != TokenType::END)
 			{
@@ -54,6 +55,26 @@ namespace elsa {
 			}
 
 			return left;
+		}
+
+		FunctionSymbol* ElsaParser::current_function()
+		{
+			return current_function_;
+		}
+
+		void ElsaParser::set_current_function(FunctionSymbol* function_symbol)
+		{
+			current_function_ = function_symbol;
+		}
+
+		StructTable& ElsaParser::struct_table()
+		{
+			return struct_table_;
+		}
+
+		FunctionTable& ElsaParser::function_table()
+		{
+			return function_table_;
 		}
 
 		void ElsaParser::consume(TokenType type)

@@ -102,6 +102,9 @@
     <ClCompile Include="symbols\function_symbol.cpp" />
     <ClCompile Include="symbols\local_symbol.cpp" />
     <ClCompile Include="symbols\struct_symbol.cpp" />
+    <ClCompile Include="symbol_tables\function_table.cpp" />
+    <ClCompile Include="symbol_tables\local_table.cpp" />
+    <ClCompile Include="symbol_tables\struct_table.cpp" />
     <ClCompile Include="token.cpp" />
     <ClCompile Include="ast\argument_expression.cpp" />
     <ClCompile Include="ast\binary_operator_expression.cpp" />

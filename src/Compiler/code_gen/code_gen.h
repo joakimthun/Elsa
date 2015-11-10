@@ -17,7 +17,6 @@ namespace elsa {
 			std::unique_ptr<VMProgram> generate();
 
 		private:
-
 			Program* program_;
 		};
 

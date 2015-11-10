@@ -1,4 +1,6 @@
 #include "vm_program.h"
+#include "vm_program.h"
+#include "vm_program.h"
 
 namespace elsa {
 
@@ -66,6 +68,17 @@ namespace elsa {
 		}
 	}
 
+	const FunctionInfo * VMProgram::get_func(const std::wstring& name) const
+	{
+		for (auto& entry : functions_)
+		{
+			if (entry.second->get_name() == name)
+				return entry.second.get();
+		}
+
+		return nullptr;
+	}
+
 	const FunctionInfo * VMProgram::get_main() const
 	{
 		return get_func(entry_point_);
@@ -74,12 +87,25 @@ namespace elsa {
 	std::size_t VMProgram::add_struct(std::unique_ptr<StructInfo> entry)
 	{
 		structs_.push_back(std::move(entry));
-		return structs_.size() - 1;
+		auto index = structs_.size() - 1;
+		structs_.back()->set_index(index);
+		return index;
 	}
 	
 	const StructInfo* VMProgram::get_struct(std::size_t index) const
 	{
 		return structs_[index].get();
+	}
+
+	const StructInfo * VMProgram::get_struct(const std::wstring& name) const
+	{
+		for (auto& struct_entry : structs_)
+		{
+			if (struct_entry->get_name() == name)
+				return struct_entry.get();
+		}
+
+		return nullptr;
 	}
 	
 	std::size_t VMProgram::add_float(std::unique_ptr<FloatInfo> entry)

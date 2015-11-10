@@ -12,6 +12,9 @@ namespace elsa {
 
 		class StructTable : public SymbolTable<std::wstring, StructSymbol>
 		{
+		public:
+			StructTable();
+			void add_struct(const std::wstring& name);
 		};
 
 	}

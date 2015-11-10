@@ -3,20 +3,14 @@
 namespace elsa {
 	namespace compiler {
 
-		StructSymbol::StructSymbol(const std::wstring& name, std::size_t index)
+		StructSymbol::StructSymbol(const std::wstring& name)
 			: 
-		name_(name),
-		index_(index)
+		name_(name)
 		{}
-		
+
 		const std::wstring& StructSymbol::get_name() const
 		{
 			return name_;
-		}
-
-		std::size_t StructSymbol::get_index() const
-		{
-			return index_;
 		}
 
 	}

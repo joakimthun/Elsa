@@ -9,11 +9,16 @@ namespace elsa {
 
 			auto name = parser->current_token()->get_value();
 
+			if (parser->current_function()->locals().current_scope_has_entry(name))
+				throw ParsingException("A local variable with the same name has already been declared");
+
 			parser->consume(TokenType::Identifier);
 			parser->consume(TokenType::Equals);
 
 			auto expression = std::unique_ptr<Expression>(parser->parse_expression());
 			auto expression_type = TypeChecker::get_expression_type(expression.get());
+
+			parser->current_function()->locals().push_current_scope(name, *expression_type);
 
 			parser->consume(TokenType::Semicolon);
 

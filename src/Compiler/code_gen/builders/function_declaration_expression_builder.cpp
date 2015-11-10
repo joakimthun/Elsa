@@ -8,7 +8,6 @@ namespace elsa {
 		void FunctionDeclarationExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression)
 		{
 			auto fi = std::make_unique<FunctionInfo>(expression->get_name());
-			visitor->set_current_function(fi.get());
 
 			if (expression->get_name() == L"main")
 			{
@@ -20,17 +19,17 @@ namespace elsa {
 
 			fi->set_addr(static_cast<int>(program->get_next_instruction_index()));
 
-			visitor->push_new_scope();
+			visitor->set_current_function(expression->get_name());
+			visitor->reset_scope_nesting();
 
 			for (auto& exp : expression->get_body())
 			{
 				exp->accept(visitor);
 			}
 
-			visitor->pop_current_scope();
-			visitor->reset_current_function();
-
 			program->add_func(std::move(fi));
+
+			visitor->reset_current_function();
 		}
 
 	}

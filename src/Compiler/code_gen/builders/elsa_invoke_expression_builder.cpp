@@ -7,7 +7,7 @@ namespace elsa {
 
 		void ElsaInvokeExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, ElsaInvokeExpression* expression)
 		{
-			const auto& native_function_info = visitor->get_native_function_table().get(expression->get_function_name());
+			const auto& native_function_info = visitor->native_function_table().get(expression->get_function_name());
 
 			std::size_t index = 0;
 			for (auto& arg : expression->get_args())

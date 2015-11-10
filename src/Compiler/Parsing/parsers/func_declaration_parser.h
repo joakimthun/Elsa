@@ -7,6 +7,7 @@
 #include "../../ast/argument_expression.h"
 #include "../elsa_parser.h"
 #include "../../types/type_checker.h"
+#include "exceptions\parsing_exception.h"
 
 namespace elsa {
 	namespace compiler {

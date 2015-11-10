@@ -5,7 +5,8 @@ namespace elsa {
 		StructInfo::StructInfo(const std::wstring& name)
 			:
 			name_(name),
-			size_(0)
+			size_(0),
+			index_(0)
 		{}
 
 		StructInfo::~StructInfo() {}
@@ -26,6 +27,16 @@ namespace elsa {
 				throw RuntimeException("Field index out of range");
 
 			return fields_[index].get();
+		}
+
+		void StructInfo::set_index(std::size_t index)
+		{
+			index_ = index;
+		}
+
+		std::size_t StructInfo::get_index() const
+		{
+			return index_;
 		}
 
 		const std::vector<std::unique_ptr<FieldInfo>>& StructInfo::get_fields() const

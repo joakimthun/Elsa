@@ -8,9 +8,12 @@
 namespace elsa {
 	namespace compiler {
 
-		VMExpressionVisitor::VMExpressionVisitor()
+		VMExpressionVisitor::VMExpressionVisitor(FunctionTable* function_table, StructTable* struct_table)
 			:
+			function_table_(function_table),
+			struct_table_(struct_table),
 			vm_program_(std::make_unique<VMProgram>()),
+			scope_nesting_(0),
 			current_function_(nullptr)
 		{}
 
@@ -64,88 +67,58 @@ namespace elsa {
 			CreateStructExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
-		void VMExpressionVisitor::push_new_scope()
-		{
-			local_table_.push_back(std::make_unique<LocalTable>());
-		}
-
-		void VMExpressionVisitor::pop_current_scope()
-		{
-			if (local_table_.size() == 0)
-				throw CodeGenException("Pop can not be called on an empty symbol table stack");
-
-			local_table_.pop_back();
-		}
-
-		void VMExpressionVisitor::push_current_scope(const std::wstring& name, const ElsaType& type)
-		{
-			if (local_table_.size() == 0)
-				throw CodeGenException("Push can not be called on an empty symbol table stack");
-
-			auto& current_table = local_table_.back();
-			auto local_index = current_function_->get_num_args() + current_function_->get_num_locals();
-
-			local_table_.back()->add(name, new LocalSymbol(name, local_index, type));
-		}
-
-		bool VMExpressionVisitor::current_scope_has_entry(const std::wstring& name)
-		{
-			if (local_table_.size() == 0)
-				throw CodeGenException("The symbol table stack is empty");
-
-			return local_table_.back()->has_entry(name);
-		}
-
-		const LocalSymbol* VMExpressionVisitor::get_local(const std::wstring& name) const
-		{
-			for (auto& it = local_table_.rbegin(); it != local_table_.rend(); ++it)
-			{
-				auto local = it->get()->get(name);
-				if (local != nullptr)
-					return local;
-			}
-
-			throw CodeGenException("Tried to access an undefined local variable");
-		}
-
-		void VMExpressionVisitor::add_struct(const std::wstring& name, std::size_t index)
-		{
-			struct_table_.add(name, new StructSymbol(name, index));
-		}
-
-		bool VMExpressionVisitor::has_struct_entry(const std::wstring& name)
-		{
-			return struct_table_.has_entry(name);
-		}
-
-		const StructSymbol* VMExpressionVisitor::get_struct(const std::wstring& name)
-		{
-			return struct_table_.get(name);
-		}
-
 		std::unique_ptr<VMProgram> VMExpressionVisitor::release_program()
 		{
 			return std::move(vm_program_);
 		}
 
-		void VMExpressionVisitor::set_current_function(FunctionInfo* fi)
+		NativeFunctionTable& VMExpressionVisitor::native_function_table()
 		{
-			current_function_ = fi;
+			return native_function_table_;
 		}
 
-		FunctionInfo * VMExpressionVisitor::get_current_function()
+		StructTable* VMExpressionVisitor::struct_table()
 		{
-			return current_function_;
+			return struct_table_;
+		}
+
+		FunctionTable* VMExpressionVisitor::function_table()
+		{
+			return function_table_;
+		}
+
+		void VMExpressionVisitor::increment_scope_nesting()
+		{
+			scope_nesting_++;
+		}
+
+		void VMExpressionVisitor::reset_scope_nesting()
+		{
+			scope_nesting_ = 0;
+		}
+
+		const LocalSymbol* VMExpressionVisitor::get_local(const std::wstring& name) const
+		{
+			if (current_function_ == nullptr)
+				throw CodeGenException("No current function is defined");
+
+			if (current_function_->locals().scope_has_entry(scope_nesting_, name))
+				return current_function_->locals().get_local(scope_nesting_, name);
+
+			throw CodeGenException("No local defined with that name and scope nesting");
+		}
+
+		void VMExpressionVisitor::set_current_function(const std::wstring& name)
+		{
+			if (!function_table_->has_entry(name))
+				throw CodeGenException("No function with that name defined");
+
+			current_function_ = function_table_->get(name);
 		}
 
 		void VMExpressionVisitor::reset_current_function()
 		{
 			current_function_ = nullptr;
-		}
-
-		NativeFunctionTable& VMExpressionVisitor::get_native_function_table()
-		{
-			return native_function_table_;
 		}
 
 	}
