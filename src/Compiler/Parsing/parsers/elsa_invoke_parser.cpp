@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace compiler {
 
-		Expression* ElsaInvokeParser::parse(ElsaParser* parser)
+		std::unique_ptr<Expression> ElsaInvokeParser::parse(ElsaParser* parser)
 		{
 			parser->consume(TokenType::Elsa);
 			parser->consume(TokenType::Dot);
@@ -24,7 +24,7 @@ namespace elsa {
 			parser->consume(TokenType::RParen);
 			parser->consume(TokenType::Semicolon);
 
-			return elsa_invoke_exp.release();
+			return std::move(elsa_invoke_exp);
 		}
 
 	}

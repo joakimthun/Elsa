@@ -30,7 +30,7 @@ namespace elsa {
 			visitor->pop_current_scope();
 			visitor->reset_current_function();
 
-			program->add_func(fi.release());
+			program->add_func(std::move(fi));
 		}
 
 	}

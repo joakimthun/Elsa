@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <utility>
 #include <vector>
 #include <cstddef>
 #include <map>
@@ -29,20 +30,20 @@ namespace elsa {
 		void set_entry_point(int entry_point);
 		int get_entry_point();
 
-		void add_func(FunctionInfo* entry);
+		void add_func(std::unique_ptr<FunctionInfo> entry);
 		const FunctionInfo* get_func(std::size_t addr) const;
 		const FunctionInfo* get_main() const;
 
-		std::size_t add_struct(StructInfo* entry);
+		std::size_t add_struct(std::unique_ptr<StructInfo> entry);
 		const StructInfo* get_struct(std::size_t index) const;
 
-		std::size_t add_float(FloatInfo* entry);
+		std::size_t add_float(std::unique_ptr<FloatInfo> entry);
 		const FloatInfo* get_float(std::size_t index) const;
 
-		std::size_t add_char(CharInfo* entry);
+		std::size_t add_char(std::unique_ptr<CharInfo> entry);
 		const CharInfo* get_char_at(std::size_t index) const;
 
-		std::size_t add_string(StringInfo* entry);
+		std::size_t add_string(std::unique_ptr<StringInfo> entry);
 		const StringInfo* get_string(std::size_t index) const;
 
 	private:

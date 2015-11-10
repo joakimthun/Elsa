@@ -15,8 +15,8 @@ namespace elsa {
 		{
 		public:
 			void set_operator(TokenType op);
-			void set_left(Expression* left);
-			void set_right(Expression* right);
+			void set_left(std::unique_ptr<Expression> left);
+			void set_right(std::unique_ptr<Expression> right);
 			void set_type(ElsaType* type);
 
 			TokenType get_operator() const;

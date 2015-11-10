@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace compiler {
 
-		Expression* VariableDeclarationParser::parse(ElsaParser* parser)
+		std::unique_ptr<Expression> VariableDeclarationParser::parse(ElsaParser* parser)
 		{
 			parser->consume(TokenType::Var);
 
@@ -17,7 +17,7 @@ namespace elsa {
 
 			parser->consume(TokenType::Semicolon);
 
-			return new VariableDeclarationExpression(name, expression_type, expression.release());
+			return std::make_unique<VariableDeclarationExpression>(name, expression_type, std::move(expression));
 		}
 
 	}

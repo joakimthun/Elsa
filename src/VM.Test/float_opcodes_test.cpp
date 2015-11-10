@@ -11,13 +11,13 @@ protected:
 	{
 		int ep = 0;
 
-		program_.add_func(new FunctionInfo(L"main", 0, 0, ep, FunctionType::Static));
-		program_.add_float(new FloatInfo(10.1f)); // index: 0
-		program_.add_float(new FloatInfo(20.2f)); // index: 1
-		program_.add_float(new FloatInfo(30.3f)); // index: 2
-		program_.add_float(new FloatInfo(40.4f)); // index: 3
-		program_.add_float(new FloatInfo(50.5f)); // index: 4
-		program_.add_float(new FloatInfo(-10.6f)); // index: 5
+		program_.add_func(std::make_unique<FunctionInfo>(L"main", 0, 0, ep, FunctionType::Static));
+		program_.add_float(std::make_unique<FloatInfo>(10.1f)); // index: 0
+		program_.add_float(std::make_unique<FloatInfo>(20.2f)); // index: 1
+		program_.add_float(std::make_unique<FloatInfo>(30.3f)); // index: 2
+		program_.add_float(std::make_unique<FloatInfo>(40.4f)); // index: 3
+		program_.add_float(std::make_unique<FloatInfo>(50.5f)); // index: 4
+		program_.add_float(std::make_unique<FloatInfo>(-10.6f)); // index: 5
 
 		program_.set_entry_point(ep);
 	}

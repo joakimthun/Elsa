@@ -11,14 +11,14 @@ protected:
 	{
 		int ep = 0;
 
-		program_.add_func(new FunctionInfo(L"main", 0, 2, ep, FunctionType::Static));
-		program_.add_float(new FloatInfo(12.0f));
-		program_.add_float(new FloatInfo(99.0f));
-		program_.add_float(new FloatInfo(-99.0f));
+		program_.add_func(std::make_unique<FunctionInfo>(L"main", 0, 2, ep, FunctionType::Static));
+		program_.add_float(std::make_unique<FloatInfo>(12.0f));
+		program_.add_float(std::make_unique<FloatInfo>(99.0f));
+		program_.add_float(std::make_unique<FloatInfo>(-99.0f));
 
-		auto si = new StructInfo(L"my_struct");
-		si->add_field(new FieldInfo(L"field0", elsa::OType::Int));
-		program_.add_struct(si);
+		auto si = std::make_unique<StructInfo>(L"my_struct");
+		si->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::Int));
+		program_.add_struct(std::move(si));
 
 		program_.set_entry_point(ep);
 	}

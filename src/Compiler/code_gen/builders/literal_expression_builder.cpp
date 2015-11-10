@@ -14,14 +14,14 @@ namespace elsa {
 		void LiteralExpressionBuilder::build(VMProgram* program, FloatLiteralExpression* expression)
 		{
 			program->emit(OpCode::fconst);
-			auto index = program->add_float(new FloatInfo(expression->get_value()));
+			auto index = program->add_float(std::make_unique<FloatInfo>(expression->get_value()));
 			program->emit(static_cast<int>(index));
 		}
 
 		void LiteralExpressionBuilder::build(VMProgram* program, CharLiteralExpression* expression)
 		{
 			program->emit(OpCode::cconst);
-			auto index = program->add_char(new CharInfo(expression->get_value()));
+			auto index = program->add_char(std::make_unique<CharInfo>(expression->get_value()));
 			program->emit(static_cast<int>(index));
 		}
 

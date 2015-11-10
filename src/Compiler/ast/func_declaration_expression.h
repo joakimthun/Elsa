@@ -14,8 +14,8 @@ namespace elsa {
 		class FuncDeclarationExpression : public Expression
 		{
 		public:
-			void add_args_expression(ArgumentExpression* expression);
-			void add_body_expression(Expression* expression);
+			void add_args_expression(std::unique_ptr<ArgumentExpression> expression);
+			void add_body_expression(std::unique_ptr<Expression> expression);
 
 			void set_name(const std::wstring& name);
 			void set_return_type(ElsaType* return_type);

@@ -12,10 +12,10 @@ namespace elsa {
 
 			for (const auto& field : expression->get_fields())
 			{
-				struct_info->add_field(new FieldInfo(field->get_name(), field->get_type()->get_type()));
+				struct_info->add_field(std::make_unique<FieldInfo>(field->get_name(), field->get_type()->get_type()));
 			}
 
-			auto index = program->add_struct(struct_info.release());
+			auto index = program->add_struct(std::move(struct_info));
 
 			visitor->add_struct(name, index);
 		}

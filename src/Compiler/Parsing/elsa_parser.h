@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <map>
+#include <utility>
 
 #include "exceptions\parsing_exception.h"
 #include "../lexing/lexer.h"
@@ -31,9 +32,9 @@ namespace elsa {
 			ElsaParser(Lexer* lexer);
 
 			std::unique_ptr<Program> parse();
-			Expression* parse_statement();
-			Expression* parse_expression();
-			Expression* parse_expression(int precedence);
+			std::unique_ptr<Expression> parse_statement();
+			std::unique_ptr<Expression> parse_expression();
+			std::unique_ptr<Expression> parse_expression(int precedence);
 			void consume(TokenType type);
 			void consume();
 			Token* current_token();

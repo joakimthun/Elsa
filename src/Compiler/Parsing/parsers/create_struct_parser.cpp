@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace compiler {
 
-		Expression* CreateStructParser::parse(ElsaParser* parser)
+		std::unique_ptr<Expression> CreateStructParser::parse(ElsaParser* parser)
 		{
 			parser->consume(TokenType::New);
 
@@ -12,7 +12,7 @@ namespace elsa {
 			parser->consume(TokenType::Identifier);
 			parser->consume(TokenType::Semicolon);
 
-			return new CreateStructExpression(struct_name);
+			return std::make_unique<CreateStructExpression>(struct_name);
 		}
 
 	}

@@ -3,12 +3,12 @@
 namespace elsa {
 	namespace compiler {
 
-		Expression* IdentifierParser::parse(ElsaParser* parser)
+		std::unique_ptr<Expression> IdentifierParser::parse(ElsaParser* parser)
 		{
 			auto identifier = parser->current_token()->get_value();
 			parser->consume(TokenType::Identifier);
 
-			return new IdentifierExpression(identifier);
+			return std::make_unique<IdentifierExpression>(identifier);
 		}
 
 	}

@@ -10,7 +10,7 @@ namespace elsa {
 		class PrefixOperatorParser : public Parser
 		{
 		public:
-			Expression* parse(ElsaParser* parser) override;
+			std::unique_ptr<Expression> parse(ElsaParser* parser) override;
 		};
 
 	}

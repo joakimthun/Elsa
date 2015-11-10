@@ -23,7 +23,7 @@ namespace elsa {
 			return program;
 		}
 
-		Expression* ElsaParser::parse_statement()
+		std::unique_ptr<Expression> ElsaParser::parse_statement()
 		{
 			auto parser = get_statement_parser(current_token_->get_type());
 
@@ -33,12 +33,12 @@ namespace elsa {
 			return parser->parse(this);
 		}
 
-		Expression* ElsaParser::parse_expression()
+		std::unique_ptr<Expression> ElsaParser::parse_expression()
 		{
 			return parse_expression(0);
 		}
 
-		Expression* ElsaParser::parse_expression(int precedence)
+		std::unique_ptr<Expression> ElsaParser::parse_expression(int precedence)
 		{
 			auto parser = get_expression_parser(current_token_->get_type());
 
@@ -50,10 +50,10 @@ namespace elsa {
 			while (precedence < get_precedence())
 			{
 				auto infix_parser = get_infix_parser(current_token()->get_type());
-				left = std::unique_ptr<Expression>(infix_parser->parse(this, left.release()));
+				left = std::unique_ptr<Expression>(infix_parser->parse(this, std::move(left)));
 			}
 
-			return left.release();
+			return left;
 		}
 
 		void ElsaParser::consume(TokenType type)

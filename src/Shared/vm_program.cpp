@@ -45,9 +45,9 @@ namespace elsa {
 		return entry_point_;
 	}
 
-	void VMProgram::add_func(FunctionInfo* entry)
+	void VMProgram::add_func(std::unique_ptr<FunctionInfo> entry)
 	{
-		auto result = functions_.insert(std::pair<std::size_t, std::unique_ptr<FunctionInfo>>(entry->get_addr(), std::unique_ptr<FunctionInfo>(entry)));
+		auto result = functions_.insert(std::pair<std::size_t, std::unique_ptr<FunctionInfo>>(entry->get_addr(), std::move(entry)));
 		if (!result.second)
 		{
 			throw ElsaException("A function is already specified at that address");
@@ -71,9 +71,9 @@ namespace elsa {
 		return get_func(entry_point_);
 	}
 	
-	std::size_t VMProgram::add_struct(StructInfo* entry)
+	std::size_t VMProgram::add_struct(std::unique_ptr<StructInfo> entry)
 	{
-		structs_.push_back(std::unique_ptr<StructInfo>(entry));
+		structs_.push_back(std::move(entry));
 		return structs_.size() - 1;
 	}
 	
@@ -82,9 +82,9 @@ namespace elsa {
 		return structs_[index].get();
 	}
 	
-	std::size_t VMProgram::add_float(FloatInfo* entry)
+	std::size_t VMProgram::add_float(std::unique_ptr<FloatInfo> entry)
 	{
-		floats_.push_back(std::unique_ptr<FloatInfo>(entry));
+		floats_.push_back(std::move(entry));
 		return floats_.size() - 1;
 	}
 	
@@ -93,9 +93,9 @@ namespace elsa {
 		return floats_[index].get();
 	}
 	
-	std::size_t VMProgram::add_char(CharInfo* entry)
+	std::size_t VMProgram::add_char(std::unique_ptr<CharInfo> entry)
 	{
-		chars_.push_back(std::unique_ptr<CharInfo>(entry));
+		chars_.push_back(std::move(entry));
 		return chars_.size() - 1;
 	}
 	
@@ -104,9 +104,9 @@ namespace elsa {
 		return chars_[index].get();
 	}
 	
-	std::size_t VMProgram::add_string(StringInfo* entry)
+	std::size_t VMProgram::add_string(std::unique_ptr<StringInfo> entry)
 	{
-		strings_.push_back(std::unique_ptr<StringInfo>(entry));
+		strings_.push_back(std::move(entry));
 		return strings_.size() - 1;
 	}
 	

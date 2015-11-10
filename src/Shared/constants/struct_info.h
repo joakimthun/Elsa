@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <utility>
 
 #include "..\object_types\otype.h"
 #include "field_info.h"
@@ -22,7 +23,7 @@ namespace elsa {
 			FieldInfo* get_field(std::size_t index) const;
 			const std::vector<std::unique_ptr<FieldInfo>>& get_fields() const;
 
-			void add_field(FieldInfo* field);
+			void add_field(std::unique_ptr<FieldInfo> field);
 
 		private:
 			void update_size(const FieldInfo& field);

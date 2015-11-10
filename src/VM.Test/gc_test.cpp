@@ -9,15 +9,15 @@ class GCTest : public testing::Test {
 protected:
 	virtual void SetUp()
 	{
-		auto si = new StructInfo(L"my_struct");
-		si->add_field(new FieldInfo(L"field0", elsa::OType::GCOPtr));
-		si->add_field(new FieldInfo(L"field1", elsa::OType::GCOPtr));
-		si->add_field(new FieldInfo(L"field2", elsa::OType::GCOPtr));
-		program_.add_struct(si);
+		auto si = std::make_unique<StructInfo>(L"my_struct");
+		si->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::GCOPtr));
+		si->add_field(std::make_unique<FieldInfo>(L"field1", elsa::OType::GCOPtr));
+		si->add_field(std::make_unique<FieldInfo>(L"field2", elsa::OType::GCOPtr));
+		program_.add_struct(std::move(si));
 
-		auto si2 = new StructInfo(L"my_struct2");
-		si2->add_field(new FieldInfo(L"field0", elsa::OType::Int));
-		program_.add_struct(si2);
+		auto si2 = std::make_unique<StructInfo>(L"my_struct2");
+		si2->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::Int));
+		program_.add_struct(std::move(si2));
 	}
 
 	virtual void TearDown() {}
@@ -27,7 +27,7 @@ protected:
 
 TEST_F(GCTest, COLLECT_NO_SWEEP)
 {
-	program_.add_func(new FunctionInfo(L"main", 0, 1, 0, FunctionType::Static));
+	program_.add_func(std::make_unique<FunctionInfo>(L"main", 0, 1, 0, FunctionType::Static));
 	program_.set_entry_point(0);
 
 	program_.emit(
@@ -63,7 +63,7 @@ TEST_F(GCTest, COLLECT_NO_SWEEP)
 
 TEST_F(GCTest, COLLECT_POPPED_OBJECTS)
 {
-	program_.add_func(new FunctionInfo(L"main", 0, 1, 0, FunctionType::Static));
+	program_.add_func(std::make_unique<FunctionInfo>(L"main", 0, 1, 0, FunctionType::Static));
 	program_.set_entry_point(0);
 
 	program_.emit(
@@ -95,8 +95,8 @@ TEST_F(GCTest, COLLECT_POPPED_OBJECTS)
 
 TEST_F(GCTest, SWEEP_OBJECTS_FROM_POPPED_STACK_FRAME)
 {
-	program_.add_func(new FunctionInfo(L"main", 0, 1, 11, FunctionType::Static));
-	program_.add_func(new FunctionInfo(L"my_func", 0, 1, 0, FunctionType::Static));
+	program_.add_func(std::make_unique<FunctionInfo>(L"main", 0, 1, 11, FunctionType::Static));
+	program_.add_func(std::make_unique<FunctionInfo>(L"my_func", 0, 1, 0, FunctionType::Static));
 	program_.set_entry_point(11);
 
 	program_.emit(
@@ -125,7 +125,7 @@ TEST_F(GCTest, SWEEP_OBJECTS_FROM_POPPED_STACK_FRAME)
 
 TEST_F(GCTest, MARK_SWEEP_ARRAYS)
 {
-	program_.add_func(new FunctionInfo(L"main", 0, 4, 0, FunctionType::Static));
+	program_.add_func(std::make_unique<FunctionInfo>(L"main", 0, 4, 0, FunctionType::Static));
 	program_.set_entry_point(0);
 
 	program_.emit(

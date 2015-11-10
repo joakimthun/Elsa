@@ -17,7 +17,7 @@ namespace elsa {
 		class LiteralParser : public Parser
 		{
 		public:
-			Expression* parse(ElsaParser* parser) override;
+			std::unique_ptr<Expression> parse(ElsaParser* parser) override;
 
 		};
 

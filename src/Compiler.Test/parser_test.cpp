@@ -36,7 +36,7 @@ TEST(ParserTest, PREFIX_OPERATOR_IDENTIFIER)
 	auto parser = ElsaParser(lexer);
 	auto exp = parser.parse_expression();
 
-	if (auto poe = dynamic_cast<PrefixOperatorExpression*>(exp))
+	if (auto poe = dynamic_cast<PrefixOperatorExpression*>(exp.get()))
 	{
 		ASSERT_EQ(poe->get_operator(), TokenType::Exclamation);
 
@@ -61,7 +61,7 @@ TEST(ParserTest, VARIABLE_DECLARATION)
 	auto parser = ElsaParser(lexer);
 	auto exp = parser.parse_expression();
 
-	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp))
+	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp.get()))
 	{
 		ASSERT_EQ(vde->get_name(), L"var1");
 		ASSERT_EQ(vde->get_type()->get_type(), OType::Bool);
@@ -92,7 +92,7 @@ TEST(ParserTest, LITERALS)
 	auto parser = ElsaParser(lexer);
 
 	auto exp = parser.parse_expression();
-	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp))
+	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp.get()))
 	{
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type()->get_type(), OType::Int);
@@ -105,7 +105,7 @@ TEST(ParserTest, LITERALS)
 	}
 
 	auto exp2 = parser.parse_expression();
-	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp2))
+	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp2.get()))
 	{
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type()->get_type(), OType::Float);
@@ -118,7 +118,7 @@ TEST(ParserTest, LITERALS)
 	}
 
 	auto exp4 = parser.parse_expression();
-	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp4))
+	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp4.get()))
 	{
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type()->get_type(), OType::Bool);
@@ -131,7 +131,7 @@ TEST(ParserTest, LITERALS)
 	}
 
 	auto exp5 = parser.parse_expression();
-	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp5))
+	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp5.get()))
 	{
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type()->get_type(), OType::Bool);
@@ -144,7 +144,7 @@ TEST(ParserTest, LITERALS)
 	}
 
 	auto exp6 = parser.parse_expression();
-	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp6))
+	if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp6.get()))
 	{
 		ASSERT_EQ(vde->get_name(), L"x");
 		ASSERT_EQ(vde->get_type()->get_type(), OType::Char);
@@ -163,7 +163,7 @@ TEST(ParserTest, FUNC_DECLARATION)
 	auto parser = ElsaParser(lexer);
 	auto exp = parser.parse_statement();
 
-	if (auto fde = dynamic_cast<FuncDeclarationExpression*>(exp))
+	if (auto fde = dynamic_cast<FuncDeclarationExpression*>(exp.get()))
 	{
 		ASSERT_EQ(fde->get_return_type()->get_type(), OType::Void);
 		ASSERT_EQ(fde->get_name(), L"add");
@@ -216,7 +216,7 @@ TEST(ParserTest, PRECEDENCE)
 	auto parser = ElsaParser(lexer);
 
 	auto exp1 = parser.parse_expression();
-	if (auto vde1 = dynamic_cast<VariableDeclarationExpression*>(exp1))
+	if (auto vde1 = dynamic_cast<VariableDeclarationExpression*>(exp1.get()))
 	{
 		ASSERT_EQ(vde1->get_name(), L"x1");
 		ASSERT_EQ(vde1->get_type()->get_type(), OType::Int);
@@ -238,7 +238,7 @@ TEST(ParserTest, PRECEDENCE)
 	}
 
 	auto exp2 = parser.parse_expression();
-	if (auto vde2 = dynamic_cast<VariableDeclarationExpression*>(exp2))
+	if (auto vde2 = dynamic_cast<VariableDeclarationExpression*>(exp2.get()))
 	{
 		ASSERT_EQ(vde2->get_name(), L"x2");
 		ASSERT_EQ(vde2->get_type()->get_type(), OType::Int);
@@ -268,7 +268,7 @@ TEST(ParserTest, PRECEDENCE)
 	}
 
 	auto exp3 = parser.parse_expression();
-	if (auto vde3 = dynamic_cast<VariableDeclarationExpression*>(exp3))
+	if (auto vde3 = dynamic_cast<VariableDeclarationExpression*>(exp3.get()))
 	{
 		ASSERT_EQ(vde3->get_name(), L"x3");
 		ASSERT_EQ(vde3->get_type()->get_type(), OType::Int);
@@ -321,7 +321,7 @@ TEST(ParserTest, STRUCT)
 	auto parser = ElsaParser(lexer);
 
 	auto exp1 = parser.parse_statement();
-	if (auto str_exp = dynamic_cast<StructDeclarationExpression*>(exp1))
+	if (auto str_exp = dynamic_cast<StructDeclarationExpression*>(exp1.get()))
 	{
 		ASSERT_EQ(L"Test", str_exp->get_name());
 	}

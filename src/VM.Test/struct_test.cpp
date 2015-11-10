@@ -10,35 +10,35 @@ protected:
 	virtual void SetUp()
 	{
 		int ep = 0;
-		program_.add_func(new FunctionInfo(L"main", 0, 3, ep, FunctionType::Static));
+		program_.add_func(std::make_unique<FunctionInfo>(L"main", 0, 3, ep, FunctionType::Static));
 		program_.set_entry_point(ep);
 
-		auto si = new StructInfo(L"my_struct");
-		si->add_field(new FieldInfo(L"field0", elsa::OType::Int));
-		si->add_field(new FieldInfo(L"field1", elsa::OType::Float));
-		si->add_field(new FieldInfo(L"field2", elsa::OType::Int));
-		si->add_field(new FieldInfo(L"field3", elsa::OType::Float));
-		si->add_field(new FieldInfo(L"field4", elsa::OType::Int));
-		program_.add_struct(si);
+		auto si = std::make_unique<StructInfo>(L"my_struct");
+		si->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::Int));
+		si->add_field(std::make_unique<FieldInfo>(L"field1", elsa::OType::Float));
+		si->add_field(std::make_unique<FieldInfo>(L"field2", elsa::OType::Int));
+		si->add_field(std::make_unique<FieldInfo>(L"field3", elsa::OType::Float));
+		si->add_field(std::make_unique<FieldInfo>(L"field4", elsa::OType::Int));
+		program_.add_struct(std::move(si));
 
-		program_.add_float(new FloatInfo(12.0f));
-		program_.add_float(new FloatInfo(99.0f));
+		program_.add_float(std::make_unique<FloatInfo>(12.0f));
+		program_.add_float(std::make_unique<FloatInfo>(99.0f));
 
-		auto si2 = new StructInfo(L"my_struct2");
-		si2->add_field(new FieldInfo(L"field0", elsa::OType::GCOPtr));
-		si2->add_field(new FieldInfo(L"field1", elsa::OType::Int));
-		si2->add_field(new FieldInfo(L"field2", elsa::OType::GCOPtr));
+		auto si2 = std::make_unique<StructInfo>(L"my_struct2");
+		si2->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::GCOPtr));
+		si2->add_field(std::make_unique<FieldInfo>(L"field1", elsa::OType::Int));
+		si2->add_field(std::make_unique<FieldInfo>(L"field2", elsa::OType::GCOPtr));
 
-		program_.add_struct(si2);
+		program_.add_struct(std::move(si2));
 
-		auto si3 = new StructInfo(L"my_struct3");
-		si3->add_field(new FieldInfo(L"field0", elsa::OType::GCOPtr));
-		si3->add_field(new FieldInfo(L"field1", elsa::OType::Int));
-		si3->add_field(new FieldInfo(L"field2", elsa::OType::Bool));
-		si3->add_field(new FieldInfo(L"field3", elsa::OType::Char));
-		si3->add_field(new FieldInfo(L"field4", elsa::OType::Float));
+		auto si3 = std::make_unique<StructInfo>(L"my_struct3");
+		si3->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::GCOPtr));
+		si3->add_field(std::make_unique<FieldInfo>(L"field1", elsa::OType::Int));
+		si3->add_field(std::make_unique<FieldInfo>(L"field2", elsa::OType::Bool));
+		si3->add_field(std::make_unique<FieldInfo>(L"field3", elsa::OType::Char));
+		si3->add_field(std::make_unique<FieldInfo>(L"field4", elsa::OType::Float));
 
-		program_.add_struct(si3);
+		program_.add_struct(std::move(si3));
 	}
 
 	virtual void TearDown() {}

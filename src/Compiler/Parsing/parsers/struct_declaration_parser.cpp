@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace compiler {
 
-		Expression* StructDeclarationParser::parse(ElsaParser* parser)
+		std::unique_ptr<Expression> StructDeclarationParser::parse(ElsaParser* parser)
 		{
 			parser->consume(TokenType::Struct);
 
@@ -24,10 +24,10 @@ namespace elsa {
 			parser->consume(TokenType::RBracket);
 			parser->consume(TokenType::Semicolon);
 
-			return struct_exp.release();
+			return std::move(struct_exp);
 		}
 
-		FieldExpression * StructDeclarationParser::parse_field_expression(ElsaParser * parser)
+		std::unique_ptr<FieldExpression> StructDeclarationParser::parse_field_expression(ElsaParser* parser)
 		{
 			auto field_type = TypeChecker::get_type_from_token(parser->current_token()->get_type());
 
@@ -44,7 +44,7 @@ namespace elsa {
 
 			parser->consume(TokenType::Semicolon);
 
-			return field_expression.release();
+			return std::move(field_expression);
 		}
 
 	}

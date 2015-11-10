@@ -14,7 +14,7 @@ namespace elsa {
 		class VariableDeclarationExpression : public Expression
 		{
 		public:
-			VariableDeclarationExpression(const std::wstring& name, ElsaType* type, Expression* expression);
+			VariableDeclarationExpression(const std::wstring& name, ElsaType* type, std::unique_ptr<Expression> expression);
 
 			const std::wstring& get_name() const;
 			const ElsaType* get_type() const;

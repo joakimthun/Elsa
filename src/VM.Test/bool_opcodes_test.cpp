@@ -11,7 +11,7 @@ protected:
 	{
 		int ep = 0;
 
-		program_.add_func(new FunctionInfo(L"main", 0, 0, ep, FunctionType::Static));
+		program_.add_func(std::make_unique<FunctionInfo>(L"main", 0, 0, ep, FunctionType::Static));
 		program_.set_entry_point(ep);
 	}
 

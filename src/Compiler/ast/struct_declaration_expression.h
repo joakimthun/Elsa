@@ -15,7 +15,7 @@ namespace elsa {
 		{
 		public:
 			void set_name(const std::wstring& name);
-			void add_field_expression(FieldExpression* expression);
+			void add_field_expression(std::unique_ptr<FieldExpression> expression);
 
 			const std::wstring& get_name() const;
 			const std::vector<std::unique_ptr<FieldExpression>>& get_fields() const;

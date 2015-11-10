@@ -33,11 +33,11 @@ namespace elsa {
 			return fields_;
 		}
 
-		void StructInfo::add_field(FieldInfo* field)
+		void StructInfo::add_field(std::unique_ptr<FieldInfo> field)
 		{
 			field->set_num_bytes_offset(size_);
 			update_size(*field);
-			fields_.push_back(std::unique_ptr<FieldInfo>(field));
+			fields_.push_back(std::move(field));
 		}
 
 		void StructInfo::update_size(const FieldInfo& field)

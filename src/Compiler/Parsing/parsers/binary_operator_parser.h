@@ -16,7 +16,7 @@ namespace elsa {
 		public:
 			BinaryOperatorParser(Precedence precedence);
 
-			Expression* parse(ElsaParser* parser, Expression* left) override;
+			std::unique_ptr<Expression> parse(ElsaParser* parser, std::unique_ptr<Expression> left) override;
 			int precedence() override;
 
 		private:

@@ -3,10 +3,10 @@
 namespace elsa {
 	namespace compiler {
 
-		PrefixOperatorExpression::PrefixOperatorExpression(TokenType op, Expression* right)
+		PrefixOperatorExpression::PrefixOperatorExpression(TokenType op, std::unique_ptr<Expression> right)
 			:
 			op_(op),
-			right_(right)
+			right_(std::move(right))
 		{}
 
 		TokenType PrefixOperatorExpression::get_operator() const

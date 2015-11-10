@@ -5,11 +5,11 @@
 namespace elsa {
 	namespace compiler {
 
-		VariableDeclarationExpression::VariableDeclarationExpression(const std::wstring& name, ElsaType* type, Expression* expression)
+		VariableDeclarationExpression::VariableDeclarationExpression(const std::wstring& name, ElsaType* type, std::unique_ptr<Expression> expression)
 			:
 			name_(name),
 			type_(type),
-			expression_(std::unique_ptr<Expression>(expression))
+			expression_(std::move(expression))
 		{}
 
 		const std::wstring& VariableDeclarationExpression::get_name() const

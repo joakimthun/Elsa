@@ -5,14 +5,14 @@
 namespace elsa {
 	namespace compiler {
 
-		void FuncDeclarationExpression::add_args_expression(ArgumentExpression* expression)
+		void FuncDeclarationExpression::add_args_expression(std::unique_ptr<ArgumentExpression> expression)
 		{
-			args_.push_back(std::unique_ptr<ArgumentExpression>(expression));
+			args_.push_back(std::move(expression));
 		}
 
-		void FuncDeclarationExpression::add_body_expression(Expression* expression)
+		void FuncDeclarationExpression::add_body_expression(std::unique_ptr<Expression> expression)
 		{
-			body_.push_back(std::unique_ptr<Expression>(expression));
+			body_.push_back(std::move(expression));
 		}
 
 		void FuncDeclarationExpression::set_name(const std::wstring& name)

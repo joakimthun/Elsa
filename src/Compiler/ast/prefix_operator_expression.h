@@ -11,7 +11,7 @@ namespace elsa {
 		class PrefixOperatorExpression : public Expression
 		{
 		public:
-			PrefixOperatorExpression(TokenType op, Expression* right);
+			PrefixOperatorExpression(TokenType op, std::unique_ptr<Expression> right);
 
 			TokenType get_operator() const;
 			Expression* get_right() const;

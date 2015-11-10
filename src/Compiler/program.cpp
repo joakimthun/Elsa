@@ -5,9 +5,9 @@ namespace elsa {
 
 		Program::Program() {}
 
-		void Program::add_statement(Expression* node)
+		void Program::add_statement(std::unique_ptr<Expression> node)
 		{
-			statements_.push_back(std::unique_ptr<Expression>(node));
+			statements_.push_back(std::move(node));
 		}
 
 		void Program::add_function(FunctionSymbol* function)

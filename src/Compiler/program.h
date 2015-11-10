@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include <utility>
 
 #include "exceptions\parsing_exception.h"
 #include "ast\expression.h"
@@ -15,7 +16,7 @@ namespace elsa {
 		public:
 			Program();
 
-			void add_statement(Expression* node);
+			void add_statement(std::unique_ptr<Expression> node);
 			void add_function(FunctionSymbol* function);
 			std::vector<std::unique_ptr<Expression>>& get_statements();
 

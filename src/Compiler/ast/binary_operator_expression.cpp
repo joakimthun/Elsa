@@ -9,14 +9,14 @@ namespace elsa {
 		{
 			operator_ = op;
 		}
-		void BinaryOperatorExpression::set_left(Expression* left)
+		void BinaryOperatorExpression::set_left(std::unique_ptr<Expression> left)
 		{
-			left_ = std::unique_ptr<Expression>(left);
+			left_ = std::move(left);
 		}
 
-		void BinaryOperatorExpression::set_right(Expression* right)
+		void BinaryOperatorExpression::set_right(std::unique_ptr<Expression> right)
 		{
-			right_ = std::unique_ptr<Expression>(right);
+			right_ = std::move(right);
 		}
 
 		void BinaryOperatorExpression::set_type(ElsaType * type)

@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace compiler {
 
-		Expression* FuncDeclarationParser::parse(ElsaParser* parser)
+		std::unique_ptr<Expression> FuncDeclarationParser::parse(ElsaParser* parser)
 		{
 			parser->consume(TokenType::Func);
 
@@ -26,7 +26,7 @@ namespace elsa {
 				arg->set_name(parser->current_token()->get_value());
 				parser->consume(TokenType::Identifier);
 
-				func_dec_exp->add_args_expression(arg.release());
+				func_dec_exp->add_args_expression(std::move(arg));
 
 				if(parser->current_token()->get_type() != TokenType::RParen)
 					parser->consume(TokenType::Comma);
@@ -43,7 +43,7 @@ namespace elsa {
 
 			parser->consume(TokenType::RBracket);
 
-			return func_dec_exp.release();
+			return std::move(func_dec_exp);
 		}
 
 	}

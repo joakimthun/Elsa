@@ -13,7 +13,7 @@ namespace elsa {
 		class CreateStructParser : public Parser
 		{
 		public:
-			Expression* parse(ElsaParser* parser) override;
+			std::unique_ptr<Expression> parse(ElsaParser* parser) override;
 		};
 
 	}

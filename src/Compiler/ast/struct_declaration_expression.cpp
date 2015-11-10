@@ -10,9 +10,9 @@ namespace elsa {
 			name_ = name;
 		}
 
-		void StructDeclarationExpression::add_field_expression(FieldExpression* expression)
+		void StructDeclarationExpression::add_field_expression(std::unique_ptr<FieldExpression> expression)
 		{
-			fields_.push_back(std::unique_ptr<FieldExpression>(expression));
+			fields_.push_back(std::move(expression));
 		}
 
 		const std::wstring& StructDeclarationExpression::get_name() const

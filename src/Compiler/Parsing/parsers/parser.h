@@ -1,5 +1,8 @@
 #pragma once
 
+#include <memory>
+#include <utility>
+
 #include "../../token.h"
 
 namespace elsa {
@@ -12,7 +15,7 @@ namespace elsa {
 		{
 		public:
 			virtual ~Parser() {};
-			virtual Expression* parse(ElsaParser* parser) = 0;
+			virtual std::unique_ptr<Expression> parse(ElsaParser* parser) = 0;
 		};
 
 	}

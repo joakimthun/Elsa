@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <utility>
 
 #include "expression.h"
 #include "argument_expression.h"
@@ -19,7 +20,7 @@ namespace elsa {
 
 			const std::wstring& get_function_name() const;
 
-			void add_args_expression(Expression* expression);
+			void add_args_expression(std::unique_ptr<Expression> expression);
 			const std::vector<std::unique_ptr<Expression>>& get_args() const;
 
 			void accept(ExpressionVisitor* visitor) override;

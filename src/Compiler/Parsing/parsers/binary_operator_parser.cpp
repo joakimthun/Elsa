@@ -8,7 +8,7 @@ namespace elsa {
 			precedence_(precedence)
 		{}
 
-		Expression* BinaryOperatorParser::parse(ElsaParser* parser, Expression* left)
+		std::unique_ptr<Expression> BinaryOperatorParser::parse(ElsaParser* parser, std::unique_ptr<Expression> left)
 		{
 			auto exp = std::make_unique<BinaryOperatorExpression>();
 			exp->set_operator(parser->current_token()->get_type());
@@ -16,12 +16,12 @@ namespace elsa {
 			// Consume the operator token
 			parser->consume();
 
-			exp->set_left(left);
-			exp->set_right(parser->parse_expression(precedence()));
+			exp->set_left(std::move(left));
+			exp->set_right(std::move(parser->parse_expression(precedence())));
 
 			exp->set_type(TypeChecker::get_expression_type(exp.get()));
 
-			return exp.release();
+			return std::move(exp);
 		}
 
 		int BinaryOperatorParser::precedence()

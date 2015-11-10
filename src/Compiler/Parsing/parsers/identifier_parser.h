@@ -10,7 +10,7 @@ namespace elsa {
 		class IdentifierParser : public Parser
 		{
 		public:
-			Expression* parse(ElsaParser* parser) override;
+			std::unique_ptr<Expression> parse(ElsaParser* parser) override;
 		};
 
 	}

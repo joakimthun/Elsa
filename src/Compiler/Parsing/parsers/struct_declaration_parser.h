@@ -14,10 +14,10 @@ namespace elsa {
 		class StructDeclarationParser : public Parser
 		{
 		public:
-			Expression* parse(ElsaParser* parser) override;
+			std::unique_ptr<Expression> parse(ElsaParser* parser) override;
 
 		private:
-			FieldExpression* parse_field_expression(ElsaParser* parser);
+			std::unique_ptr<FieldExpression> parse_field_expression(ElsaParser* parser);
 		};
 
 	}
