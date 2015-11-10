@@ -183,6 +183,9 @@
     <ClInclude Include="code_gen\builders\create_struct_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\scoped_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -326,13 +329,13 @@
     <ClCompile Include="code_gen\builders\create_struct_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="symbol_tables\local_table.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="symbol_tables\struct_table.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="symbol_tables\function_table.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\scoped_expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

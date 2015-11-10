@@ -1,5 +1,8 @@
-var x = 10;
-var x = 10.0;
-var x = true;
-var x = false;
-var x = 'X';
+func int main()
+{
+	var x1 = 10;
+	var x2 = 10.0;
+	var x3 = true;
+	var x4 = false;
+	var x5 = 'X';
+}

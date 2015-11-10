@@ -6,7 +6,7 @@ namespace elsa {
 		ElsaParser::ElsaParser(Lexer* lexer)
 			:
 			lexer_(std::unique_ptr<Lexer>(lexer)),
-			current_function_(nullptr)
+			current_scope_(nullptr)
 		{
 			initialize_grammar();
 			next_token();
@@ -14,7 +14,7 @@ namespace elsa {
 
 		std::unique_ptr<Program> ElsaParser::parse()
 		{
-			auto program = std::make_unique<Program>(&function_table_, &struct_table_);
+			auto program = std::make_unique<Program>();
 
 			while (current_token_->get_type() != TokenType::END)
 			{
@@ -57,14 +57,22 @@ namespace elsa {
 			return left;
 		}
 
-		FunctionSymbol* ElsaParser::current_function()
+		ScopedExpression* ElsaParser::current_scope()
 		{
-			return current_function_;
+			if (current_scope_ == nullptr)
+				throw ParsingException("No scope defined");
+
+			return current_scope_;
 		}
 
-		void ElsaParser::set_current_function(FunctionSymbol* function_symbol)
+		void ElsaParser::set_current_scope(ScopedExpression* scope)
 		{
-			current_function_ = function_symbol;
+			current_scope_ = scope;
+		}
+
+		void ElsaParser::reset_current_scope()
+		{
+			current_scope_ = nullptr;
 		}
 
 		StructTable& ElsaParser::struct_table()

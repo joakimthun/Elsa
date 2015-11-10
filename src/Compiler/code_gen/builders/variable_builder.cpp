@@ -10,7 +10,7 @@ namespace elsa {
 
 			program->emit(OpCode::s_local);
 
-			auto local = visitor->get_local(expression->get_name());
+			auto local = visitor->current_scope()->get_local(expression->get_name());
 
 			program->emit(static_cast<int>(local->get_index()));
 		}

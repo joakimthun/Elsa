@@ -12,10 +12,5 @@ namespace elsa {
 		{
 			return name_;
 		}
-
-		LocalTable& FunctionSymbol::locals()
-		{
-			return locals_;
-		}
 	}
 }

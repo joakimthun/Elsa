@@ -49,11 +49,6 @@ namespace elsa {
 			num_locals_ = num_locals;
 		}
 
-		void FunctionInfo::increment_num_locals()
-		{
-			num_locals_++;
-		}
-
 		std::size_t FunctionInfo::get_addr() const
 		{
 			return addr_;

@@ -37,8 +37,9 @@ namespace elsa {
 			std::unique_ptr<Expression> parse_statement();
 			std::unique_ptr<Expression> parse_expression();
 			std::unique_ptr<Expression> parse_expression(int precedence);
-			FunctionSymbol* current_function();
-			void set_current_function(FunctionSymbol* function_symbol);
+			ScopedExpression* current_scope();
+			void set_current_scope(ScopedExpression* scope);
+			void reset_current_scope();
 			StructTable& struct_table();
 			FunctionTable& function_table();
 			void consume(TokenType type);
@@ -60,7 +61,7 @@ namespace elsa {
 
 			StructTable struct_table_;
 			FunctionTable function_table_;
-			FunctionSymbol* current_function_;
+			ScopedExpression* current_scope_;
 			std::map<TokenType, std::unique_ptr<Parser>> expression_parsers_;
 			std::map<TokenType, std::unique_ptr<InfixParser>> infix_parsers_;
 			std::map<TokenType, std::unique_ptr<Parser>> statement_parsers_;

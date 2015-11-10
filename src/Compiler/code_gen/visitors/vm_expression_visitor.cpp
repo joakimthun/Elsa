@@ -1,6 +1,7 @@
 #include "vm_expression_visitor.h"
 
 #include "../../ast/func_declaration_expression.h"
+#include "../../ast/scoped_expression.h"
 #include "../../ast/variable_declaration_expression.h"
 #include "../../ast/binary_operator_expression.h"
 #include "../../ast/integer_literal_expression.h"
@@ -8,13 +9,9 @@
 namespace elsa {
 	namespace compiler {
 
-		VMExpressionVisitor::VMExpressionVisitor(FunctionTable* function_table, StructTable* struct_table)
+		VMExpressionVisitor::VMExpressionVisitor()
 			:
-			function_table_(function_table),
-			struct_table_(struct_table),
-			vm_program_(std::make_unique<VMProgram>()),
-			scope_nesting_(0),
-			current_function_(nullptr)
+			vm_program_(std::make_unique<VMProgram>())
 		{}
 
 		void VMExpressionVisitor::visit(FuncDeclarationExpression* expression)
@@ -67,6 +64,24 @@ namespace elsa {
 			CreateStructExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		ScopedExpression* VMExpressionVisitor::current_scope()
+		{
+			if (current_scope_ == nullptr)
+				throw CodeGenException("No scope defined");
+
+			return current_scope_;
+		}
+
+		void VMExpressionVisitor::set_current_scope(ScopedExpression* scope)
+		{
+			current_scope_ = scope;
+		}
+
+		void VMExpressionVisitor::reset_current_scope()
+		{
+			current_scope_ = nullptr;
+		}
+
 		std::unique_ptr<VMProgram> VMExpressionVisitor::release_program()
 		{
 			return std::move(vm_program_);
@@ -75,50 +90,6 @@ namespace elsa {
 		NativeFunctionTable& VMExpressionVisitor::native_function_table()
 		{
 			return native_function_table_;
-		}
-
-		StructTable* VMExpressionVisitor::struct_table()
-		{
-			return struct_table_;
-		}
-
-		FunctionTable* VMExpressionVisitor::function_table()
-		{
-			return function_table_;
-		}
-
-		void VMExpressionVisitor::increment_scope_nesting()
-		{
-			scope_nesting_++;
-		}
-
-		void VMExpressionVisitor::reset_scope_nesting()
-		{
-			scope_nesting_ = 0;
-		}
-
-		const LocalSymbol* VMExpressionVisitor::get_local(const std::wstring& name) const
-		{
-			if (current_function_ == nullptr)
-				throw CodeGenException("No current function is defined");
-
-			if (current_function_->locals().scope_has_entry(scope_nesting_, name))
-				return current_function_->locals().get_local(scope_nesting_, name);
-
-			throw CodeGenException("No local defined with that name and scope nesting");
-		}
-
-		void VMExpressionVisitor::set_current_function(const std::wstring& name)
-		{
-			if (!function_table_->has_entry(name))
-				throw CodeGenException("No function with that name defined");
-
-			current_function_ = function_table_->get(name);
-		}
-
-		void VMExpressionVisitor::reset_current_function()
-		{
-			current_function_ = nullptr;
 		}
 
 	}

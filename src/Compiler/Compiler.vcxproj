@@ -22,6 +22,7 @@
     <ClInclude Include="ast\create_struct_expression.h" />
     <ClInclude Include="ast\elsa_invoke_expression.h" />
     <ClInclude Include="ast\field_expression.h" />
+    <ClInclude Include="ast\scoped_expression.h" />
     <ClInclude Include="ast\struct_declaration_expression.h" />
     <ClInclude Include="code_gen\builders\binary_operator_expression_builder.h" />
     <ClInclude Include="code_gen\builders\create_struct_expression_builder.h" />
@@ -80,6 +81,7 @@
     <ClCompile Include="ast\create_struct_expression.cpp" />
     <ClCompile Include="ast\elsa_invoke_expression.cpp" />
     <ClCompile Include="ast\field_expression.cpp" />
+    <ClCompile Include="ast\scoped_expression.cpp" />
     <ClCompile Include="ast\struct_declaration_expression.cpp" />
     <ClCompile Include="code_gen\builders\binary_operator_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\create_struct_expression_builder.cpp" />
@@ -103,7 +105,6 @@
     <ClCompile Include="symbols\local_symbol.cpp" />
     <ClCompile Include="symbols\struct_symbol.cpp" />
     <ClCompile Include="symbol_tables\function_table.cpp" />
-    <ClCompile Include="symbol_tables\local_table.cpp" />
     <ClCompile Include="symbol_tables\struct_table.cpp" />
     <ClCompile Include="token.cpp" />
     <ClCompile Include="ast\argument_expression.cpp" />

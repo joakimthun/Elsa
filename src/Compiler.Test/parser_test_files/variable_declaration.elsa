@@ -1,1 +1,4 @@
-var var1 = !false;
+func int main()
+{
+	var var1 = !false;
+}

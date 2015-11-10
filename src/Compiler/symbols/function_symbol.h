@@ -17,11 +17,9 @@ namespace elsa {
 			FunctionSymbol(const std::wstring& name);
 
 			const std::wstring& get_name() const;
-			LocalTable& locals();
 
 		private:
 			std::wstring name_;
-			LocalTable locals_;
 		};
 
 	}

@@ -9,12 +9,10 @@
 namespace elsa {
 	namespace compiler {
 
-		class ElsaParser;
-
 		class FunctionTable : public SymbolTable<std::wstring, FunctionSymbol>
 		{
 		public:
-			void add_function(const std::wstring& name, ElsaParser* parser);
+			void add_function(const std::wstring& name);
 		};
 
 	}
