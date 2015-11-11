@@ -133,14 +133,14 @@ namespace elsa {
 				throw ParsingException("Type mismatch");
 		}
 
-		ElsaType* TypeChecker::get_field_type(const StructDeclarationExpression* struct_expression, const FieldAccessExpression * field)
+		ElsaType* TypeChecker::get_field_type(const StructDeclarationExpression* struct_expression, const FieldAccessExpression* field)
 		{
 			if(struct_expression == nullptr)
 				throw ParsingException("The StructDeclarationExpression can not be a nullptr");
 
-			for (const auto& field : struct_expression->get_fields())
+			for (const auto& declared_field : struct_expression->get_fields())
 			{
-				if (field->get_name() == field->get_name())
+				if (declared_field->get_name() == field->get_name())
 					return new ElsaType(field->get_type());
 			}
 
