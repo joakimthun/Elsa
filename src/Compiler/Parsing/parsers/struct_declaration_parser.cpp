@@ -14,8 +14,6 @@ namespace elsa {
 			if (parser->struct_table().has_entry(name))
 				throw ParsingException("A struct with the same name has already been declared");
 
-			parser->struct_table().add_struct(name);
-
 			struct_exp->set_name(name);
 
 			parser->consume(TokenType::Identifier);
@@ -28,6 +26,8 @@ namespace elsa {
 
 			parser->consume(TokenType::RBracket);
 			parser->consume(TokenType::Semicolon);
+
+			parser->struct_table().add_struct(name, struct_exp.get());
 
 			return std::move(struct_exp);
 		}

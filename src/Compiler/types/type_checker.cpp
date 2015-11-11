@@ -1,10 +1,12 @@
 #include "type_checker.h"
 
+#include "../parsing/elsa_parser.h"
+
 namespace elsa {
 	namespace compiler {
-		TypeChecker::TypeChecker(StructTable * struct_table)
+		TypeChecker::TypeChecker(ElsaParser* parser)
 			:
-			struct_table_(struct_table)
+			parser_(parser)
 		{
 		}
 
@@ -29,10 +31,20 @@ namespace elsa {
 			}
 			if (is_of_type<IdentifierExpression>(expression))
 			{
-				//throw ParsingException("Not implemented --> IdentifierExpression");
+				auto id = static_cast<IdentifierExpression*>(expression);
 
-				// Debug
-				return new ElsaType(OType::Int);
+				if (parser_->struct_table().has_entry(id->get_name()))
+				{
+					auto si = parser_->struct_table().get(id->get_name());
+					return new ElsaType(si->get_expression());
+				}
+
+				auto local = parser_->current_scope()->get_local(id->get_name());
+
+				if (local == nullptr)
+					throw ParsingException("Unkown identifier");
+
+				return new ElsaType(local->get_type());
 			}
 			if (is_of_type<PrefixOperatorExpression>(expression))
 			{

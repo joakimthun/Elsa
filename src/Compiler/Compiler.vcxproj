@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="ast\create_struct_expression.h" />
     <ClInclude Include="ast\elsa_invoke_expression.h" />
+    <ClInclude Include="ast\field_access_expression.h" />
     <ClInclude Include="ast\field_expression.h" />
     <ClInclude Include="ast\scoped_expression.h" />
     <ClInclude Include="ast\struct_declaration_expression.h" />
@@ -80,6 +81,7 @@
   <ItemGroup>
     <ClCompile Include="ast\create_struct_expression.cpp" />
     <ClCompile Include="ast\elsa_invoke_expression.cpp" />
+    <ClCompile Include="ast\field_access_expression.cpp" />
     <ClCompile Include="ast\field_expression.cpp" />
     <ClCompile Include="ast\scoped_expression.cpp" />
     <ClCompile Include="ast\struct_declaration_expression.cpp" />

@@ -14,17 +14,17 @@
 #include "elsa_type.h"
 #include "../token.h"
 #include "exceptions\parsing_exception.h"
-#include "exceptions\codegen_exception.h"
-#include "../symbol_tables/struct_table.h"
 #include "../ast/create_struct_expression.h"
 
 namespace elsa {
 	namespace compiler {
 
+		class ElsaParser;
+
 		class TypeChecker
 		{
 		public:
-			TypeChecker(StructTable* struct_table);
+			TypeChecker(ElsaParser* parser);
 
 			ElsaType* get_expression_type(Expression* expression);
 			ElsaType* get_type_from_token(TokenType type);
@@ -33,7 +33,7 @@ namespace elsa {
 		private:
 			template<typename TExpression>
 			static bool is_of_type(Expression* exp);
-			StructTable* struct_table_;
+			ElsaParser* parser_;
 		};
 
 	}

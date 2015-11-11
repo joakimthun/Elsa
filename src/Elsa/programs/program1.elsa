@@ -20,6 +20,7 @@ func int main()
 	var f = 10.89;
 	var c = 'X';
 
+	//elsa.PrintLn(struct1);
 	elsa.PrintLn(x);
 	elsa.PrintLn(y);
 	elsa.Print(10);

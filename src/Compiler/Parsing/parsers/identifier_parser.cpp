@@ -8,7 +8,11 @@ namespace elsa {
 			auto identifier = parser->current_token()->get_value();
 			parser->consume(TokenType::Identifier);
 
-			return std::make_unique<IdentifierExpression>(identifier);
+			auto id_exp = std::make_unique<IdentifierExpression>(identifier);
+			auto id_type = parser->type_checker().get_expression_type(id_exp.get());
+			id_exp->set_type(id_type);
+
+			return std::move(id_exp);
 		}
 
 	}

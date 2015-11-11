@@ -6,9 +6,9 @@ namespace elsa {
 		StructTable::StructTable()
 		{}
 
-		void StructTable::add_struct(const std::wstring& name)
+		void StructTable::add_struct(const std::wstring& name, StructDeclarationExpression* expression)
 		{
-			add(name, new StructSymbol(name));
+			add(name, new StructSymbol(name, expression));
 		}
 
 	}

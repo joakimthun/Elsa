@@ -8,17 +8,19 @@
 namespace elsa {
 	namespace compiler {
 
+		class StructDeclarationExpression;
+
 		class ElsaType
 		{
 		public:
 			ElsaType(OType type);
-			ElsaType(OType type, StructInfo* si);
+			ElsaType(const StructDeclarationExpression* struct_declaration_expression);
 
 			OType get_type() const;
-			const StructInfo* get_struct_info() const;
+			const StructDeclarationExpression* get_struct_declaration_expression() const;
 		private:
 			OType type_;
-			StructInfo* struct_info_;
+			const StructDeclarationExpression* struct_declaration_expression_;
 		};
 
 	}

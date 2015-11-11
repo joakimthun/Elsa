@@ -7,7 +7,7 @@ namespace elsa {
 			:
 			lexer_(std::unique_ptr<Lexer>(lexer)),
 			current_scope_(nullptr),
-			type_checker_(&struct_table_)
+			type_checker_(this)
 		{
 			initialize_grammar();
 			next_token();

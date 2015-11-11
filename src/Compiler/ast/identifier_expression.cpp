@@ -10,9 +10,19 @@ namespace elsa {
 			name_(name)
 		{}
 
+		void IdentifierExpression::set_type(ElsaType * type)
+		{
+			type_ = std::unique_ptr<ElsaType>(type);
+		}
+
 		const std::wstring& IdentifierExpression::get_name() const
 		{
 			return name_;
+		}
+
+		const ElsaType* IdentifierExpression::get_type() const
+		{
+			return type_.get();
 		}
 
 		void IdentifierExpression::accept(ExpressionVisitor* visitor)

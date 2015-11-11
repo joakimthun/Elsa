@@ -14,7 +14,7 @@ namespace elsa {
 		{
 		public:
 			StructTable();
-			void add_struct(const std::wstring& name);
+			void add_struct(const std::wstring& name, StructDeclarationExpression* expression);
 		};
 
 	}
