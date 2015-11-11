@@ -186,7 +186,13 @@
     <ClInclude Include="ast\scoped_expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ast\field_access_expression.h">
+    <ClInclude Include="ast\struct_access_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\struct_access_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\ll2_entry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -341,7 +347,10 @@
     <ClCompile Include="ast\scoped_expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ast\field_access_expression.cpp">
+    <ClCompile Include="ast\struct_access_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\struct_access_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

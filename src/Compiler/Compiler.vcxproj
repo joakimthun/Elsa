@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClInclude Include="ast\create_struct_expression.h" />
     <ClInclude Include="ast\elsa_invoke_expression.h" />
-    <ClInclude Include="ast\field_access_expression.h" />
+    <ClInclude Include="ast\struct_access_expression.h" />
     <ClInclude Include="ast\field_expression.h" />
     <ClInclude Include="ast\scoped_expression.h" />
     <ClInclude Include="ast\struct_declaration_expression.h" />
@@ -41,8 +41,10 @@
     <ClInclude Include="interop\native_function_table.h" />
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
+    <ClInclude Include="parsing\ll2_entry.h" />
     <ClInclude Include="parsing\parsers\create_struct_parser.h" />
     <ClInclude Include="Parsing\parsers\elsa_invoke_parser.h" />
+    <ClInclude Include="parsing\parsers\struct_access_parser.h" />
     <ClInclude Include="parsing\parsers\struct_declaration_parser.h" />
     <ClInclude Include="symbols\function_symbol.h" />
     <ClInclude Include="symbols\local_symbol.h" />
@@ -81,7 +83,7 @@
   <ItemGroup>
     <ClCompile Include="ast\create_struct_expression.cpp" />
     <ClCompile Include="ast\elsa_invoke_expression.cpp" />
-    <ClCompile Include="ast\field_access_expression.cpp" />
+    <ClCompile Include="ast\struct_access_expression.cpp" />
     <ClCompile Include="ast\field_expression.cpp" />
     <ClCompile Include="ast\scoped_expression.cpp" />
     <ClCompile Include="ast\struct_declaration_expression.cpp" />
@@ -102,6 +104,7 @@
     <ClCompile Include="Lexing\source_file.cpp" />
     <ClCompile Include="parsing\parsers\create_struct_parser.cpp" />
     <ClCompile Include="Parsing\parsers\elsa_invoke_parser.cpp" />
+    <ClCompile Include="parsing\parsers\struct_access_parser.cpp" />
     <ClCompile Include="parsing\parsers\struct_declaration_parser.cpp" />
     <ClCompile Include="symbols\function_symbol.cpp" />
     <ClCompile Include="symbols\local_symbol.cpp" />

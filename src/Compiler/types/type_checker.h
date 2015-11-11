@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 
 #include "../ast/expression.h"
 #include "../ast/char_literal_expression.h"
@@ -29,6 +30,8 @@ namespace elsa {
 			ElsaType* get_expression_type(Expression* expression);
 			ElsaType* get_type_from_token(TokenType type);
 			void assert_is_same_type(OType t1, OType t2);
+			ElsaType* get_field_type(const StructDeclarationExpression* struct_expression, const IdentifierExpression* field);
+			ElsaType* get_struct_type(const std::wstring& name);
 
 		private:
 			template<typename TExpression>

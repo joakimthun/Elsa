@@ -18,7 +18,18 @@ namespace elsa {
 			auto expression = std::unique_ptr<Expression>(parser->parse_expression());
 			auto expression_type = parser->type_checker().get_expression_type(expression.get());
 
-			parser->current_scope()->add_local(name, *expression_type);
+			auto struct_expression = dynamic_cast<CreateStructExpression*>(expression.get());
+			if (struct_expression != nullptr && parser->struct_table().has_entry(struct_expression->get_struct_name()))
+			{
+				// Struct
+				auto si = parser->struct_table().get(struct_expression->get_struct_name());
+				parser->current_scope()->add_local(name, *expression_type, si->get_expression());
+			}
+			else
+			{
+				// Other types
+				parser->current_scope()->add_local(name, *expression_type);
+			}
 
 			parser->consume(TokenType::Semicolon);
 

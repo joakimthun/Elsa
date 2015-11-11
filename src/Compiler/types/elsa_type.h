@@ -13,6 +13,7 @@ namespace elsa {
 		class ElsaType
 		{
 		public:
+			ElsaType(const ElsaType* type);
 			ElsaType(OType type);
 			ElsaType(const StructDeclarationExpression* struct_declaration_expression);
 

@@ -5,9 +5,17 @@
 namespace elsa {
 	namespace compiler {
 
+		ElsaType::ElsaType(const ElsaType* type)
+			:
+			type_(type->get_type()),
+			struct_declaration_expression_(type->get_struct_declaration_expression())
+		{
+		}
+
 		ElsaType::ElsaType(OType type)
 			:
-			type_(type)
+			type_(type),
+			struct_declaration_expression_(nullptr)
 		{}
 
 		ElsaType::ElsaType(const StructDeclarationExpression* struct_declaration_expression)

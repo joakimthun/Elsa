@@ -39,6 +39,7 @@ namespace elsa {
 			void visit(CharLiteralExpression* expression) override;
 			void visit(StructDeclarationExpression* expression) override;
 			void visit(CreateStructExpression* expression) override;
+			void visit(StructAccessExpression* expression) override;
 
 			ScopedExpression* current_scope();
 			void set_current_scope(ScopedExpression* scope);

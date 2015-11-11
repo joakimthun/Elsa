@@ -11,7 +11,7 @@ namespace elsa {
 
 			parser->consume(TokenType::Identifier);
 
-			return std::make_unique<CreateStructExpression>(struct_name);
+			return std::make_unique<CreateStructExpression>(struct_name, parser->type_checker().get_struct_type(struct_name));
 		}
 
 	}

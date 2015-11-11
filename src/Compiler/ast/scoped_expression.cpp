@@ -23,6 +23,13 @@ namespace elsa {
 			root_->increment_num_locals();
 		}
 
+		void ScopedExpression::add_local(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression)
+		{
+			auto index = root_->get_num_args() + root_->get_num_locals();
+			locals_.add(name, new LocalSymbol(name, index, type, struct_expression));
+			root_->increment_num_locals();
+		}
+
 		const LocalSymbol* ScopedExpression::get_local(const std::wstring& name)
 		{
 			const auto local = locals_.get(name);

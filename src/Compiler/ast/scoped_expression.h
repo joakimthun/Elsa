@@ -17,6 +17,7 @@ namespace elsa {
 
 			LocalTable& locals();
 			void add_local(const std::wstring& name, const ElsaType& type);
+			void add_local(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression);
 			const LocalSymbol* get_local(const std::wstring& name);
 			bool any_scope_has_local(const std::wstring& name);
 			bool has_local(const std::wstring& name);

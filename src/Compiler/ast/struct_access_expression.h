@@ -6,14 +6,13 @@
 #include "identifier_expression.h"
 #include "../token.h"
 #include "../types/elsa_type.h"
-#include "exceptions\parsing_exception.h"
 
 namespace elsa {
 	namespace compiler {
 
 		class ExpressionVisitor;
 
-		class FieldAccessExpression : public Expression
+		class StructAccessExpression : public Expression
 		{
 		public:
 			void add_expression(std::unique_ptr<IdentifierExpression> expression);

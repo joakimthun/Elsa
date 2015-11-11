@@ -42,6 +42,10 @@ namespace elsa {
 
 		std::unique_ptr<Expression> ElsaParser::parse_expression(int precedence)
 		{
+			auto ll2_parser = get_ll2_expression_parser(current_token_->get_type(), peek_token()->get_type());
+			if (ll2_parser != nullptr)
+				return ll2_parser->parse(this);
+
 			auto parser = get_expression_parser(current_token_->get_type());
 
 			if (parser == nullptr)
@@ -114,12 +118,28 @@ namespace elsa {
 			current_token_ = lexer_->next_token();
 		}
 
+		Token* ElsaParser::peek_token()
+		{
+			return lexer_->peek_token();
+		}
+
 		Parser* ElsaParser::get_expression_parser(TokenType type)
 		{
 			auto it = expression_parsers_.find(type);
 			if (it != expression_parsers_.end())
 			{
 				return it->second.get();
+			}
+
+			return nullptr;
+		}
+
+		Parser* ElsaParser::get_ll2_expression_parser(TokenType first, TokenType second)
+		{
+			for (auto& entry : ll2_expression_parsers_)
+			{
+				if (entry->first == first && entry->second == second)
+					return entry->parser.get();
 			}
 
 			return nullptr;
@@ -161,6 +181,11 @@ namespace elsa {
 			expression_parsers_.insert(std::pair<TokenType, std::unique_ptr<Parser>>(type, std::unique_ptr<Parser>(parser)));
 		}
 
+		void ElsaParser::register_ll2_expression_parser(TokenType first, TokenType second, Parser* parser)
+		{
+			ll2_expression_parsers_.push_back(std::make_unique<LL2Entry>(first, second, parser));
+		}
+
 		void ElsaParser::register_statement_parser(TokenType type, Parser* parser)
 		{
 			statement_parsers_.insert(std::pair<TokenType, std::unique_ptr<Parser>>(type, std::unique_ptr<Parser>(parser)));
@@ -181,6 +206,9 @@ namespace elsa {
 			// Statements
 			register_statement_parser(TokenType::Func, new FuncDeclarationParser());
 			register_statement_parser(TokenType::Struct, new StructDeclarationParser());
+
+			// LL2 Expressions
+			register_ll2_expression_parser(TokenType::Identifier, TokenType::Dot, new StructAccessParser());
 
 			// Expressions
 			register_expression_parser(TokenType::Identifier, new IdentifierParser());

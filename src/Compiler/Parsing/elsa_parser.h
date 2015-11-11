@@ -3,6 +3,7 @@
 #include <memory>
 #include <map>
 #include <utility>
+#include <vector>
 
 #include "exceptions\parsing_exception.h"
 #include "../lexing/lexer.h"
@@ -20,7 +21,9 @@
 #include "parsers\elsa_invoke_parser.h"
 #include "parsers\struct_declaration_parser.h"
 #include "parsers\create_struct_parser.h"
+#include "parsers\struct_access_parser.h"
 #include "../types/type_checker.h"
+#include "ll2_entry.h"
 
 namespace elsa {
 	namespace compiler {
@@ -50,12 +53,15 @@ namespace elsa {
 
 		private:
 			void next_token();
+			Token* peek_token();
 
 			Parser* get_expression_parser(TokenType type);
+			Parser* get_ll2_expression_parser(TokenType first, TokenType second);
 			Parser* get_statement_parser(TokenType type);
 			InfixParser* get_infix_parser(TokenType type);
 			int get_precedence();
 			void register_expression_parser(TokenType type, Parser* parser);
+			void register_ll2_expression_parser(TokenType first, TokenType second, Parser* parser);
 			void register_statement_parser(TokenType type, Parser* parser);
 			void register_infix_parser(TokenType type, InfixParser* parser);
 			void register_prefix_parser(TokenType type);
@@ -65,6 +71,7 @@ namespace elsa {
 			FunctionTable function_table_;
 			ScopedExpression* current_scope_;
 			std::map<TokenType, std::unique_ptr<Parser>> expression_parsers_;
+			std::vector<std::unique_ptr<LL2Entry>> ll2_expression_parsers_;
 			std::map<TokenType, std::unique_ptr<InfixParser>> infix_parsers_;
 			std::map<TokenType, std::unique_ptr<Parser>> statement_parsers_;
 			std::unique_ptr<Lexer> lexer_;

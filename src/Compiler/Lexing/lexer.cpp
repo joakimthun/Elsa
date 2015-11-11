@@ -12,6 +12,13 @@ namespace elsa {
 
 		std::unique_ptr<Token> Lexer::next_token()
 		{
+			if (!token_buffer_.empty())
+			{
+				auto next = std::move(token_buffer_.front());
+				token_buffer_.pop();
+				return next;
+			}
+
 			while (file_->good())
 			{
 				if (iswspace(current_char_))
@@ -149,6 +156,12 @@ namespace elsa {
 			}
 
 			return std::make_unique<Token>(TokenType::END, L"");
+		}
+
+		Token* Lexer::peek_token()
+		{
+			token_buffer_.push(next_token());
+			return token_buffer_.back().get();
 		}
 
 		void Lexer::consume()

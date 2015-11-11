@@ -20,6 +20,7 @@ namespace elsa {
 			Lexer(SourceFile* file);
 
 			std::unique_ptr<Token> next_token();
+			Token* peek_token();
 
 		private:
 

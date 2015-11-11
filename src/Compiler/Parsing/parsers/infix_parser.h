@@ -4,6 +4,7 @@
 #include <utility>
 
 #include "../../token.h"
+#include "exceptions\parsing_exception.h"
 
 namespace elsa {
 	namespace compiler {

@@ -32,19 +32,19 @@ namespace elsa {
 			if (is_of_type<IdentifierExpression>(expression))
 			{
 				auto id = static_cast<IdentifierExpression*>(expression);
-
-				if (parser_->struct_table().has_entry(id->get_name()))
-				{
-					auto si = parser_->struct_table().get(id->get_name());
-					return new ElsaType(si->get_expression());
-				}
-
 				auto local = parser_->current_scope()->get_local(id->get_name());
 
 				if (local == nullptr)
 					throw ParsingException("Unkown identifier");
 
-				return new ElsaType(local->get_type());
+				if (local->get_struct_expression() != nullptr)
+				{
+					return new ElsaType(local->get_struct_expression());
+				}
+				else
+				{
+					return new ElsaType(local->get_type());
+				}
 			}
 			if (is_of_type<PrefixOperatorExpression>(expression))
 			{
@@ -115,6 +115,31 @@ namespace elsa {
 		{
 			if (t1 != t2)	
 				throw ParsingException("Type mismatch");
+		}
+
+		ElsaType* TypeChecker::get_field_type(const StructDeclarationExpression* struct_expression, const IdentifierExpression * field)
+		{
+			if(struct_expression == nullptr)
+				throw ParsingException("The StructDeclarationExpression can not be a nullptr");
+
+			for (const auto& field : struct_expression->get_fields())
+			{
+				if (field->get_name() == field->get_name())
+					return new ElsaType(field->get_type());
+			}
+
+			throw ParsingException("Invalid struct field");
+		}
+
+		ElsaType* TypeChecker::get_struct_type(const std::wstring & name)
+		{
+			if (parser_->struct_table().has_entry(name))
+			{
+				auto si = parser_->struct_table().get(name);
+				return new ElsaType(si->get_expression());
+			}
+
+			throw ParsingException("Invalid struct name");
 		}
 
 		template<typename TExpression>

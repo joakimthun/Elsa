@@ -1,19 +1,18 @@
 #pragma once
 
-#include <memory>
-
 #include "parser.h"
-#include "../../ast/variable_declaration_expression.h"
+#include "../../ast/struct_access_expression.h"
+#include "../../ast/identifier_expression.h"
 #include "../elsa_parser.h"
-#include "../../types/type_checker.h"
 
 namespace elsa {
 	namespace compiler {
 
-		class VariableDeclarationParser : public Parser
+		class StructAccessParser : public Parser
 		{
 		public:
 			std::unique_ptr<Expression> parse(ElsaParser* parser) override;
+
 		};
 
 	}
