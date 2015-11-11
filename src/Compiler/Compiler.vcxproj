@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="ast\create_struct_expression.h" />
     <ClInclude Include="ast\elsa_invoke_expression.h" />
+    <ClInclude Include="ast\field_access_expression.h" />
     <ClInclude Include="ast\struct_access_expression.h" />
     <ClInclude Include="ast\field_expression.h" />
     <ClInclude Include="ast\scoped_expression.h" />
@@ -29,6 +30,7 @@
     <ClInclude Include="code_gen\builders\create_struct_expression_builder.h" />
     <ClInclude Include="code_gen\builders\elsa_invoke_expression_builder.h" />
     <ClInclude Include="code_gen\builders\function_declaration_expression_builder.h" />
+    <ClInclude Include="code_gen\builders\struct_access_expression_builder.h" />
     <ClInclude Include="code_gen\builders\identifier_expression_builder.h" />
     <ClInclude Include="code_gen\builders\literal_expression_builder.h" />
     <ClInclude Include="code_gen\builders\struct_declaration_expression_builder.h" />
@@ -83,6 +85,7 @@
   <ItemGroup>
     <ClCompile Include="ast\create_struct_expression.cpp" />
     <ClCompile Include="ast\elsa_invoke_expression.cpp" />
+    <ClCompile Include="ast\field_access_expression.cpp" />
     <ClCompile Include="ast\struct_access_expression.cpp" />
     <ClCompile Include="ast\field_expression.cpp" />
     <ClCompile Include="ast\scoped_expression.cpp" />
@@ -93,6 +96,7 @@
     <ClCompile Include="code_gen\builders\function_declaration_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\identifier_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\literal_expression_builder.cpp" />
+    <ClCompile Include="code_gen\builders\struct_access_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\struct_declaration_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\variable_builder.cpp" />
     <ClCompile Include="code_gen\code_gen.cpp" />

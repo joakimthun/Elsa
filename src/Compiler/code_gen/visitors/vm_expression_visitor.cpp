@@ -55,19 +55,19 @@ namespace elsa {
 			LiteralExpressionBuilder::build(vm_program_.get(), expression);
 		}
 
-		void VMExpressionVisitor::visit(StructDeclarationExpression * expression)
+		void VMExpressionVisitor::visit(StructDeclarationExpression* expression)
 		{
 			StructDeclarationExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
-		void VMExpressionVisitor::visit(CreateStructExpression * expression)
+		void VMExpressionVisitor::visit(CreateStructExpression* expression)
 		{
 			CreateStructExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
-		void VMExpressionVisitor::visit(StructAccessExpression * expression)
+		void VMExpressionVisitor::visit(StructAccessExpression* expression)
 		{
-
+			StructAccessExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
 		ScopedExpression* VMExpressionVisitor::current_scope()

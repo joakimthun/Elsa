@@ -195,6 +195,12 @@
     <ClInclude Include="parsing\ll2_entry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="code_gen\builders\struct_access_expression_builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\field_access_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -351,6 +357,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parsing\parsers\struct_access_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code_gen\builders\struct_access_expression_builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\field_access_expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

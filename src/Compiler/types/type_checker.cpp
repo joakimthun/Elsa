@@ -71,6 +71,22 @@ namespace elsa {
 			{
 				return new ElsaType(OType::UserDefined);
 			}
+			if (is_of_type<FieldAccessExpression>(expression))
+			{
+				auto fae = static_cast<FieldAccessExpression*>(expression);
+				auto local = parser_->current_scope()->get_local(fae->get_name());
+
+				if (local == nullptr)
+					throw ParsingException("Invalid field name");
+
+				if (local->get_struct_expression() != nullptr)
+				{
+					return new ElsaType(local->get_struct_expression());
+				}
+				{
+					return new ElsaType(local->get_type());
+				}
+			}
 
 			throw ParsingException("Unkown expression type.");
 		}
@@ -117,7 +133,7 @@ namespace elsa {
 				throw ParsingException("Type mismatch");
 		}
 
-		ElsaType* TypeChecker::get_field_type(const StructDeclarationExpression* struct_expression, const IdentifierExpression * field)
+		ElsaType* TypeChecker::get_field_type(const StructDeclarationExpression* struct_expression, const FieldAccessExpression * field)
 		{
 			if(struct_expression == nullptr)
 				throw ParsingException("The StructDeclarationExpression can not be a nullptr");

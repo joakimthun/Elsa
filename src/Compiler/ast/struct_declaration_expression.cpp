@@ -13,6 +13,7 @@ namespace elsa {
 		void StructDeclarationExpression::add_field_expression(std::unique_ptr<FieldExpression> expression)
 		{
 			fields_.push_back(std::move(expression));
+			fields_.back()->set_index(fields_.size() - 1);
 		}
 
 		const std::wstring& StructDeclarationExpression::get_name() const

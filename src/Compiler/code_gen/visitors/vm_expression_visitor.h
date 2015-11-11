@@ -19,6 +19,7 @@
 #include "../builders/identifier_expression_builder.h"
 #include "../builders/struct_declaration_expression_builder.h"
 #include "../builders/create_struct_expression_builder.h"
+#include "../builders/struct_access_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {

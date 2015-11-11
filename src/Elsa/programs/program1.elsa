@@ -21,6 +21,11 @@ func int main()
 	var c = 'X';
 
 	elsa.PrintLn(struct1.field1);
+	elsa.PrintLn(struct1.field2);
+
+	elsa.PrintLn(struct2.field1);
+	elsa.PrintLn(struct2.field2);
+
 	elsa.PrintLn(x);
 	elsa.PrintLn(y);
 	elsa.Print(10);

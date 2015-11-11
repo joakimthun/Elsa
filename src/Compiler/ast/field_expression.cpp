@@ -13,6 +13,11 @@ namespace elsa {
 			type_ = std::unique_ptr<ElsaType>(type);
 		}
 
+		void FieldExpression::set_index(std::size_t index)
+		{
+			index_ = index;
+		}
+
 		const std::wstring& FieldExpression::get_name() const
 		{
 			return name_;
@@ -21,6 +26,11 @@ namespace elsa {
 		const ElsaType* FieldExpression::get_type() const
 		{
 			return type_.get();
+		}
+
+		std::size_t FieldExpression::get_index() const
+		{
+			return index_;
 		}
 
 		void FieldExpression::accept(ExpressionVisitor* visitor)
