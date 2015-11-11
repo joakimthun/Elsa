@@ -111,7 +111,7 @@ namespace elsa {
 
 		void ElsaParser::next_token()
 		{
-			current_token_ = std::unique_ptr<Token>(lexer_->next_token());
+			current_token_ = lexer_->next_token();
 		}
 
 		Parser* ElsaParser::get_expression_parser(TokenType type)

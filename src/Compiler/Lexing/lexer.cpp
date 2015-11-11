@@ -10,7 +10,7 @@ namespace elsa {
 			current_char_ = file_->next_char();
 		}
 
-		Token* Lexer::next_token()
+		std::unique_ptr<Token> Lexer::next_token()
 		{
 			while (file_->good())
 			{
@@ -148,7 +148,7 @@ namespace elsa {
 				}
 			}
 
-			return new Token(TokenType::END, L"");
+			return std::make_unique<Token>(TokenType::END, L"");
 		}
 
 		void Lexer::consume()
@@ -164,7 +164,7 @@ namespace elsa {
 			}
 		}
 
-		Token* Lexer::alpha()
+		std::unique_ptr<Token> Lexer::alpha()
 		{
 			std::wstring value;
 			while (file_->good() && (iswalnum(current_char_) || current_char_ == L'_'))
@@ -177,10 +177,10 @@ namespace elsa {
 			if (keyword != nullptr)
 				return keyword;
 
-			return new Token(TokenType::Identifier, value);
+			return std::make_unique<Token>(TokenType::Identifier, value);
 		}
 
-		Token* Lexer::number()
+		std::unique_ptr<Token> Lexer::number()
 		{
 			std::wstring value;
 			while (file_->good() && iswdigit(current_char_))
@@ -200,13 +200,13 @@ namespace elsa {
 					consume();
 				}
 
-				return new Token(TokenType::FloatLiteral, value);
+				return std::make_unique<Token>(TokenType::FloatLiteral, value);
 			}
 
-			return new Token(TokenType::IntegerLiteral, value);
+			return std::make_unique<Token>(TokenType::IntegerLiteral, value);
 		}
 
-		Token* Lexer::string() 
+		std::unique_ptr<Token> Lexer::string()
 		{
 			std::wstring value;
 			consume();
@@ -219,10 +219,10 @@ namespace elsa {
 
 			consume();
 
-			return new Token(TokenType::StringLiteral, value);
+			return std::make_unique<Token>(TokenType::StringLiteral, value);
 		}
 
-		Token* Lexer::char_l()
+		std::unique_ptr<Token> Lexer::char_l()
 		{			
 			std::wstring value;
 			consume();
@@ -235,15 +235,15 @@ namespace elsa {
 
 			consume();
 
-			return new Token(TokenType::CharLiteral, value);
+			return std::make_unique<Token>(TokenType::CharLiteral, value);
 		}
 
-		Token* Lexer::match_keyword(const std::wstring& value)
+		std::unique_ptr<Token> Lexer::match_keyword(const std::wstring& value)
 		{
 			auto it = keywords_.find(value);
 			if (it != keywords_.end())
 			{
-				return new Token(it->second);
+				return std::make_unique<Token>(it->second);
 			}
 
 			return nullptr;
@@ -257,13 +257,13 @@ namespace elsa {
 			consume();
 		}
 
-		Token* Lexer::match_token(wchar_t c, TokenType type)
+		std::unique_ptr<Token> Lexer::match_token(wchar_t c, TokenType type)
 		{
 			match(c);
-			return new Token(type, c);
+			return std::make_unique<Token>(type, c);
 		}
 
-		Token* Lexer::try_match_tokens(wchar_t first, wchar_t second, TokenType type)
+		std::unique_ptr<Token> Lexer::try_match_tokens(wchar_t first, wchar_t second, TokenType type)
 		{
 			if (current_char_ == first && file_->peek_char() == second)
 			{
@@ -273,7 +273,7 @@ namespace elsa {
 				value += current_char_;
 				consume();
 
-				return new Token(type, value);
+				return std::make_unique<Token>(type, value);
 			}
 
 			return nullptr;

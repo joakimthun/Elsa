@@ -4,6 +4,8 @@
 #include <wctype.h>
 #include <map>
 #include <string>
+#include <queue>
+#include <utility>
 
 #include "source_file.h"
 #include "../token.h"
@@ -17,26 +19,27 @@ namespace elsa {
 		public:
 			Lexer(SourceFile* file);
 
-			Token* next_token();
+			std::unique_ptr<Token> next_token();
 
 		private:
 
 			void consume();
 			void comment();
-			Token* alpha();
-			Token* number();
-			Token* string();
-			Token* char_l();
-			Token* match_keyword(const std::wstring& value);
+			std::unique_ptr<Token> alpha();
+			std::unique_ptr<Token> number();
+			std::unique_ptr<Token> string();
+			std::unique_ptr<Token> char_l();
+			std::unique_ptr<Token> match_keyword(const std::wstring& value);
 			void match(wchar_t c);
-			Token* match_token(wchar_t c, TokenType type);
-			Token* try_match_tokens(wchar_t first, wchar_t second, TokenType type);
+			std::unique_ptr<Token> match_token(wchar_t c, TokenType type);
+			std::unique_ptr<Token> try_match_tokens(wchar_t first, wchar_t second, TokenType type);
 			void register_keyword(const std::wstring keyword, TokenType type);
 			void init_keywords();
 
 			wchar_t current_char_;
 			std::unique_ptr<SourceFile> file_;
 			std::map<std::wstring, Token> keywords_;
+			std::queue<std::unique_ptr<Token>> token_buffer_;
 		};
 
 	}
