@@ -141,7 +141,7 @@ namespace elsa {
 			for (const auto& declared_field : struct_expression->get_fields())
 			{
 				if (declared_field->get_name() == field->get_name())
-					return new ElsaType(field->get_type());
+					return new ElsaType(declared_field->get_type());
 			}
 
 			throw ParsingException("Invalid struct field");

@@ -20,11 +20,11 @@ func int main()
 	var f = 10.89;
 	var c = 'X';
 
-	elsa.PrintLn(struct1.field3);
+	//elsa.PrintLn(struct1.field3);
 
 	elsa.PrintLn(struct1.field1);
 	elsa.PrintLn(struct1.field2);
-
+	
 	elsa.PrintLn(struct2.field1);
 	elsa.PrintLn(struct2.field2);
 
