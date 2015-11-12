@@ -11,7 +11,7 @@ namespace elsa {
 			{
 				auto identifier = parser->current_token()->get_value();
 
-				if (sa_exp->get_base() == nullptr)// || sa_exp->get_expressions().back()->get_type()->get_struct_declaration_expression() == nullptr)
+				if (sa_exp->get_base() == nullptr)
 				{
 					// Local
 					auto id_exp = std::make_unique<IdentifierExpression>(identifier);

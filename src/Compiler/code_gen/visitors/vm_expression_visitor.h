@@ -20,6 +20,7 @@
 #include "../builders/struct_declaration_expression_builder.h"
 #include "../builders/create_struct_expression_builder.h"
 #include "../builders/struct_access_expression_builder.h"
+#include "../builders/assignment_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {
@@ -41,6 +42,7 @@ namespace elsa {
 			void visit(StructDeclarationExpression* expression) override;
 			void visit(CreateStructExpression* expression) override;
 			void visit(StructAccessExpression* expression) override;
+			void visit(AssignmentExpression* expression) override;
 
 			ScopedExpression* current_scope();
 			void set_current_scope(ScopedExpression* scope);

@@ -201,6 +201,15 @@
     <ClInclude Include="ast\field_access_expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\assignment_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\assignment_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code_gen\builders\assignment_expression_builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -363,6 +372,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ast\field_access_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\assignment_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\assignment_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code_gen\builders\assignment_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

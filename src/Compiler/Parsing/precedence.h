@@ -5,8 +5,9 @@ namespace elsa {
 
 		enum Precedence : int
 		{
-			Sum = 1,		// + , -
-			Product = 2		// * , /
+			Assignment = 1,		// =
+			Sum = 2,			// + , -
+			Product = 3,		// * , /
 		};
 
 	}

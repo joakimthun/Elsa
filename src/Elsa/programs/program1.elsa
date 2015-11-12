@@ -1,32 +1,28 @@
-struct my_struct
+struct vec2D
 {
-	int field1;
-	float field2;
+	int x;
+	int y;
 };
 
-struct my_struct2
-{
-	int field1;
-	bool field2;
-};
+//struct player
+//{
+//	vec2 position;
+//};
 
 func int main()
 {
-	var struct1 = new my_struct;
-	var struct2 = new my_struct2;
+	var vec = new vec2D;
 	var x = 1 + 2 * 5;
 	var y = 10;
 	var z = 1230120839;
 	var f = 10.89;
 	var c = 'X';
 
-	//elsa.PrintLn(struct1.field3);
+	vec.x = 10;
+	vec.y = 20;
 
-	elsa.PrintLn(struct1.field1);
-	elsa.PrintLn(struct1.field2);
-	
-	elsa.PrintLn(struct2.field1);
-	elsa.PrintLn(struct2.field2);
+	elsa.PrintLn(vec.x);
+	elsa.PrintLn(vec.y);
 
 	elsa.PrintLn(x);
 	elsa.PrintLn(y);

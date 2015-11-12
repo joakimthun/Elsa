@@ -87,6 +87,22 @@ namespace elsa {
 					return new ElsaType(local->get_type());
 				}
 			}
+			if (is_of_type<StructAccessExpression>(expression))
+			{
+				auto sae = static_cast<StructAccessExpression*>(expression);
+				auto current = sae->get_base()->get_type()->get_struct_declaration_expression();
+				std::unique_ptr<ElsaType> type;
+
+				for (const auto& field_expression : sae->get_expressions())
+				{
+					type.reset(get_field_type(current, field_expression.get()));
+
+					if (field_expression->get_type()->get_type() == OType::UserDefined)
+						current = field_expression->get_type()->get_struct_declaration_expression();
+				}
+
+				return type.release();
+			}
 
 			throw ParsingException("Unkown expression type.");
 		}

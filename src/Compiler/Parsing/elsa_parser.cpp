@@ -42,11 +42,11 @@ namespace elsa {
 
 		std::unique_ptr<Expression> ElsaParser::parse_expression(int precedence)
 		{
-			auto ll2_parser = get_ll2_expression_parser(current_token_->get_type(), peek_token()->get_type());
-			if (ll2_parser != nullptr)
-				return ll2_parser->parse(this);
+			Parser* parser = nullptr;
 
-			auto parser = get_expression_parser(current_token_->get_type());
+			parser = get_ll2_expression_parser(current_token_->get_type(), peek_token()->get_type());
+			if (parser == nullptr)
+				parser = get_expression_parser(current_token_->get_type());
 
 			if (parser == nullptr)
 				throw ParsingException("Invalid token");
@@ -229,6 +229,7 @@ namespace elsa {
 			register_infix_parser(TokenType::Minus, new BinaryOperatorParser(Precedence::Sum));
 			register_infix_parser(TokenType::Slash, new BinaryOperatorParser(Precedence::Product));
 			register_infix_parser(TokenType::Asterix, new BinaryOperatorParser(Precedence::Product));
+			register_infix_parser(TokenType::Equals, new AssignmentParser());
 		}
 	}
 }

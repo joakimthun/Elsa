@@ -6,6 +6,7 @@
 #include "../../ast/binary_operator_expression.h"
 #include "../../ast/integer_literal_expression.h"
 #include "../../ast/struct_access_expression.h"
+#include "../../ast/assignment_expression.h"
 
 namespace elsa {
 	namespace compiler {
@@ -68,6 +69,11 @@ namespace elsa {
 		void VMExpressionVisitor::visit(StructAccessExpression* expression)
 		{
 			StructAccessExpressionBuilder::build(vm_program_.get(), this, expression);
+		}
+
+		void VMExpressionVisitor::visit(AssignmentExpression* expression)
+		{
+			AssignmentExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
 		ScopedExpression* VMExpressionVisitor::current_scope()

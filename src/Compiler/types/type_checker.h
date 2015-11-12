@@ -17,6 +17,7 @@
 #include "../token.h"
 #include "exceptions\parsing_exception.h"
 #include "../ast/create_struct_expression.h"
+#include "../ast/struct_access_expression.h"
 
 namespace elsa {
 	namespace compiler {
@@ -33,10 +34,10 @@ namespace elsa {
 			void assert_is_same_type(OType t1, OType t2);
 			ElsaType* get_field_type(const StructDeclarationExpression* struct_expression, const FieldAccessExpression* field);
 			ElsaType* get_struct_type(const std::wstring& name);
+			template<typename TExpression>
+			bool is_of_type(Expression* exp);
 
 		private:
-			template<typename TExpression>
-			static bool is_of_type(Expression* exp);
 			ElsaParser* parser_;
 		};
 
