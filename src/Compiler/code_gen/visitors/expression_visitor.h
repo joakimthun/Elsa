@@ -15,6 +15,7 @@ namespace elsa {
 		class CreateStructExpression;
 		class StructAccessExpression;
 		class AssignmentExpression;
+		class FuncCallExpression;
 
 		class ExpressionVisitor
 		{
@@ -32,6 +33,7 @@ namespace elsa {
 			virtual void visit(CreateStructExpression* expression) = 0;
 			virtual void visit(StructAccessExpression* expression) = 0;
 			virtual void visit(AssignmentExpression* expression) = 0;
+			virtual void visit(FuncCallExpression* expression) = 0;
 		};
 
 	}

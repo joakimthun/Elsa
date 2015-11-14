@@ -19,7 +19,8 @@ func int main(int dummy)
 {
 	var x = 1 + 2 * 6;
 
-	print_sum(10, x);
+	var arg = 100 + 300 * 10;
+	print_sum(100, arg);
 
 	var y = 10;
 	var z = 1230120839;

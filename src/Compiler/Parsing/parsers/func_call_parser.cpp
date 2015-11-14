@@ -44,7 +44,7 @@ namespace elsa {
 			parser->consume(TokenType::RParen);
 			parser->consume(TokenType::Semicolon);
 
-			return std::make_unique<FuncCallExpression>();
+			return std::move(call_exp);
 		}
 
 	}

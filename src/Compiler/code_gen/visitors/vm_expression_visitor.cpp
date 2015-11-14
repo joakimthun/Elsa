@@ -76,6 +76,11 @@ namespace elsa {
 			AssignmentExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		void VMExpressionVisitor::visit(FuncCallExpression* expression)
+		{
+			FuncCallExpressionBuilder::build(vm_program_.get(), this, expression);
+		}
+
 		ScopedExpression* VMExpressionVisitor::current_scope()
 		{
 			if (current_scope_ == nullptr)

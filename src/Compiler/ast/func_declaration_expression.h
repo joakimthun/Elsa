@@ -27,6 +27,7 @@ namespace elsa {
 
 			std::size_t get_num_args() const;
 			std::size_t get_num_locals() const;
+			void increment_num_args();
 			void increment_num_locals();
 
 			const std::wstring& get_name() const;
@@ -42,6 +43,7 @@ namespace elsa {
 			std::vector<std::unique_ptr<ArgumentExpression>> args_;
 			std::vector<std::unique_ptr<Expression>> body_;
 			std::size_t num_locals_;
+			std::size_t num_args_;
 		};
 	}
 }

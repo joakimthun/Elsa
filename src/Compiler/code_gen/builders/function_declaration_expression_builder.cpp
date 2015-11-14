@@ -10,8 +10,9 @@ namespace elsa {
 			auto fi = std::make_unique<FunctionInfo>(expression->get_name());
 			fi->set_num_args(expression->get_num_args());
 			fi->set_num_locals(expression->get_num_locals());
+			auto is_main = expression->get_name() == L"main";
 
-			if (expression->get_name() == L"main")
+			if (is_main)
 			{
 				if (program->get_entry_point() != -1)
 					throw CodeGenException("An entry point has alredy been defined");
@@ -26,6 +27,15 @@ namespace elsa {
 			for (auto& exp : expression->get_body())
 			{
 				exp->accept(visitor);
+			}
+
+			if (is_main)
+			{
+				program->emit(OpCode::halt);
+			}
+			else
+			{
+				program->emit(OpCode::ret);
 			}
 
 			program->add_func(std::move(fi));

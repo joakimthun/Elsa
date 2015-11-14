@@ -6,7 +6,8 @@ namespace elsa {
 	namespace compiler {
 		FuncDeclarationExpression::FuncDeclarationExpression()
 			: ScopedExpression(nullptr, this),
-			num_locals_(0)
+			num_locals_(0),
+			num_args_(0)
 		{
 		}
 
@@ -32,12 +33,17 @@ namespace elsa {
 
 		std::size_t FuncDeclarationExpression::get_num_args() const
 		{
-			return args_.size();
+			return num_args_;
 		}
 
 		std::size_t FuncDeclarationExpression::get_num_locals() const
 		{
 			return num_locals_;
+		}
+
+		void FuncDeclarationExpression::increment_num_args()
+		{
+			num_args_++;
 		}
 
 		void FuncDeclarationExpression::increment_num_locals()

@@ -1,5 +1,7 @@
 #include "func_call_expression.h"
 
+#include "../code_gen/visitors/expression_visitor.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -25,7 +27,7 @@ namespace elsa {
 
 		void FuncCallExpression::accept(ExpressionVisitor* visitor)
 		{
-			//throw;
+			visitor->visit(this);
 		}
 	}
 }
