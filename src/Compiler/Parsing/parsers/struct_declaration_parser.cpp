@@ -34,7 +34,7 @@ namespace elsa {
 
 		std::unique_ptr<FieldExpression> StructDeclarationParser::parse_field_expression(ElsaParser* parser)
 		{
-			auto field_type = parser->type_checker().get_type_from_token(parser->current_token()->get_type());
+			auto field_type = parser->type_checker().get_type_from_token(parser->current_token());
 
 			parser->consume();
 

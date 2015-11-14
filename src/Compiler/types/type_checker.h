@@ -30,7 +30,7 @@ namespace elsa {
 			TypeChecker(ElsaParser* parser);
 
 			ElsaType* get_expression_type(Expression* expression);
-			ElsaType* get_type_from_token(TokenType type);
+			ElsaType* get_type_from_token(Token* token);
 			void assert_is_same_type(OType t1, OType t2);
 			ElsaType* get_field_type(const StructDeclarationExpression* struct_expression, const FieldAccessExpression* field);
 			ElsaType* get_struct_type(const std::wstring& name);

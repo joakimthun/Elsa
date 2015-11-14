@@ -69,7 +69,7 @@ namespace elsa {
 			}
 			if (is_of_type<CreateStructExpression>(expression))
 			{
-				return new ElsaType(OType::UserDefined);
+				return new ElsaType(OType::GCOPtr);
 			}
 			if (is_of_type<FieldAccessExpression>(expression))
 			{
@@ -97,7 +97,7 @@ namespace elsa {
 				{
 					type.reset(get_field_type(current, field_expression.get()));
 
-					if (field_expression->get_type()->get_type() == OType::UserDefined)
+					if (field_expression->get_type()->get_type() == OType::GCOPtr)
 						current = field_expression->get_type()->get_struct_declaration_expression();
 				}
 
@@ -107,8 +107,9 @@ namespace elsa {
 			throw ParsingException("Unkown expression type.");
 		}
 
-		ElsaType* TypeChecker::get_type_from_token(TokenType type)
+		ElsaType* TypeChecker::get_type_from_token(Token* token)
 		{
+			auto type = token->get_type();
 			switch (type)
 			{
 			case TokenType::Void: {
@@ -138,6 +139,9 @@ namespace elsa {
 			case TokenType::BoolLiteral: {
 				return new ElsaType(OType::Bool);
 			}
+			case TokenType::Identifier: {
+				return get_struct_type(token->get_value());
+			}
 			default:
 				throw ParsingException("Invalid type.");
 			}
@@ -163,7 +167,7 @@ namespace elsa {
 			throw ParsingException("Invalid struct field");
 		}
 
-		ElsaType* TypeChecker::get_struct_type(const std::wstring & name)
+		ElsaType* TypeChecker::get_struct_type(const std::wstring& name)
 		{
 			if (parser_->struct_table().has_entry(name))
 			{

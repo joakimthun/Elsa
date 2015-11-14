@@ -4,25 +4,32 @@ struct vec2D
 	int y;
 };
 
-//struct player
-//{
-//	vec2 position;
-//};
+struct player
+{
+	vec2D position;
+	int speed;
+};
 
 func int main()
 {
-	var vec = new vec2D;
-	var x = 1 + 2 * 5;
+	var x = 1 + 2 * 6;
 	var y = 10;
 	var z = 1230120839;
 	var f = 10.89;
 	var c = 'X';
 
+	var vec = new vec2D;
 	vec.x = 10;
 	vec.y = 20;
 
 	elsa.PrintLn(vec.x);
 	elsa.PrintLn(vec.y);
+
+	var player = new player;
+	player.speed = 11;
+
+	//elsa.PrintLn(player.position);
+	elsa.PrintLn(player.speed);
 
 	elsa.PrintLn(x);
 	elsa.PrintLn(y);

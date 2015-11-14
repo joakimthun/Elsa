@@ -20,7 +20,7 @@ namespace elsa {
 
 		ElsaType::ElsaType(const StructDeclarationExpression* struct_declaration_expression)
 			:
-			type_(OType::UserDefined),
+			type_(OType::GCOPtr),
 			struct_declaration_expression_(struct_declaration_expression)
 		{}
 

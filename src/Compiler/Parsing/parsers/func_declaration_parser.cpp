@@ -9,7 +9,7 @@ namespace elsa {
 
 			auto func_dec_exp = std::make_unique<FuncDeclarationExpression>();
 
-			func_dec_exp->set_return_type(parser->type_checker().get_type_from_token(parser->current_token()->get_type()));
+			func_dec_exp->set_return_type(parser->type_checker().get_type_from_token(parser->current_token()));
 			parser->consume();
 
 			auto name = parser->current_token()->get_value();
@@ -27,7 +27,7 @@ namespace elsa {
 			while (parser->current_token()->get_type() != TokenType::RParen)
 			{
 				auto arg = std::make_unique<ArgumentExpression>();
-				arg->set_type(parser->type_checker().get_type_from_token(parser->current_token()->get_type()));
+				arg->set_type(parser->type_checker().get_type_from_token(parser->current_token()));
 				parser->consume();
 
 				arg->set_name(parser->current_token()->get_value());
