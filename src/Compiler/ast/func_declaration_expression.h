@@ -25,8 +25,8 @@ namespace elsa {
 			void set_name(const std::wstring& name);
 			void set_return_type(ElsaType* return_type);
 
-			std::size_t get_num_args();
-			std::size_t get_num_locals();
+			std::size_t get_num_args() const;
+			std::size_t get_num_locals() const;
 			void increment_num_locals();
 
 			const std::wstring& get_name() const;

@@ -104,6 +104,11 @@ namespace elsa {
 
 				return type.release();
 			}
+			if (is_of_type<ArgumentExpression>(expression))
+			{
+				auto ae = static_cast<ArgumentExpression*>(expression);
+				return new ElsaType(ae->get_type());
+			}
 
 			throw ParsingException("Unkown expression type.");
 		}
@@ -154,6 +159,17 @@ namespace elsa {
 				throw ParsingException("Type mismatch");
 		}
 
+		bool TypeChecker::is_same_type(Expression * first, Expression * second)
+		{
+			auto left = get_expression_type(first);
+			auto right = get_expression_type(second);
+
+			if (left->get_type() == OType::GCOPtr && right->get_type() == OType::GCOPtr)
+				return left->get_struct_declaration_expression()->get_name() == right->get_struct_declaration_expression()->get_name();
+
+			return left->get_type() == right->get_type();
+		}
+
 		ElsaType* TypeChecker::get_field_type(const StructDeclarationExpression* struct_expression, const FieldAccessExpression* field)
 		{
 			if(struct_expression == nullptr)
@@ -181,13 +197,7 @@ namespace elsa {
 
 		bool TypeChecker::valid_assignment(AssignmentExpression* assignment_expression)
 		{
-			auto left = get_expression_type(assignment_expression->get_left());
-			auto right = get_expression_type(assignment_expression->get_right());
-
-			if (left->get_type() == OType::GCOPtr && right->get_type() == OType::GCOPtr)
-				return left->get_struct_declaration_expression()->get_name() == right->get_struct_declaration_expression()->get_name();
-
-			return left->get_type() == right->get_type();
+			return is_same_type(assignment_expression->get_left(), assignment_expression->get_right());
 		}
 
 		template<typename TExpression>

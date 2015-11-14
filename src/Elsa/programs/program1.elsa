@@ -10,9 +10,17 @@ struct player
 	int speed;
 };
 
-func int main()
+func void print_sum(int a, int b)
+{
+	elsa.PrintLn(a + b);
+}
+
+func int main(int dummy)
 {
 	var x = 1 + 2 * 6;
+
+	print_sum(10, x);
+
 	var y = 10;
 	var z = 1230120839;
 	var f = 10.89;
@@ -24,15 +32,15 @@ func int main()
 	
 	elsa.PrintLn(vec.x);
 	elsa.PrintLn(vec.y);
-
+	
 	var player = new player;
 	player.speed = 11;
 	player.position = new vec2D;
 	player.position.x = 56;
-
+	
 	elsa.PrintLn(player.position.x);
 	elsa.PrintLn(player.speed);
-
+	
 	elsa.PrintLn(x);
 	elsa.PrintLn(y);
 	elsa.Print(10);

@@ -16,6 +16,8 @@ namespace elsa {
 			ScopedExpression(ScopedExpression* parent, FuncDeclarationExpression* root);
 
 			LocalTable& locals();
+			void add_arg(const std::wstring& name, const ElsaType& type);
+			void add_arg(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression);
 			void add_local(const std::wstring& name, const ElsaType& type);
 			void add_local(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression);
 			const LocalSymbol* get_local(const std::wstring& name);
@@ -23,6 +25,7 @@ namespace elsa {
 			bool has_local(const std::wstring& name);
 
 		private:
+			void add(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression);
 			FuncDeclarationExpression* root_;
 			ScopedExpression* parent_;
 			LocalTable locals_;

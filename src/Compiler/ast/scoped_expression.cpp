@@ -16,17 +16,25 @@ namespace elsa {
 			return locals_;
 		}
 
+		void ScopedExpression::add_arg(const std::wstring& name, const ElsaType& type)
+		{
+			add(name, type, nullptr);
+		}
+
+		void ScopedExpression::add_arg(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression)
+		{
+			add(name, type, struct_expression);
+		}
+
 		void ScopedExpression::add_local(const std::wstring& name, const ElsaType& type)
 		{
-			auto index = root_->get_num_args() + root_->get_num_locals();
-			locals_.add(name, new LocalSymbol(name, index, type));
+			add(name, type, nullptr);
 			root_->increment_num_locals();
 		}
 
 		void ScopedExpression::add_local(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression)
 		{
-			auto index = root_->get_num_args() + root_->get_num_locals();
-			locals_.add(name, new LocalSymbol(name, index, type, struct_expression));
+			add(name, type, struct_expression);
 			root_->increment_num_locals();
 		}
 
@@ -48,6 +56,12 @@ namespace elsa {
 		bool ScopedExpression::has_local(const std::wstring & name)
 		{
 			return locals_.has_entry(name);
+		}
+
+		void ScopedExpression::add(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression)
+		{
+			auto index = root_->get_num_locals();
+			locals_.add(name, new LocalSymbol(name, index, type, struct_expression));
 		}
 
 	}

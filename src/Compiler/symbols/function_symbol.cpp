@@ -3,14 +3,14 @@
 namespace elsa {
 	namespace compiler {
 
-		FunctionSymbol::FunctionSymbol(const std::wstring& name)
+		FunctionSymbol::FunctionSymbol(const FuncDeclarationExpression* expression)
 			:
-			name_(name)
+			expression_(expression)
 		{}
 
-		const std::wstring& FunctionSymbol::get_name() const
+		const FuncDeclarationExpression* FunctionSymbol::get_expression() const
 		{
-			return name_;
+			return expression_;
 		}
 	}
 }

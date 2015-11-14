@@ -30,12 +30,12 @@ namespace elsa {
 			return_type_ = std::unique_ptr<ElsaType>(return_type);
 		}
 
-		std::size_t FuncDeclarationExpression::get_num_args()
+		std::size_t FuncDeclarationExpression::get_num_args() const
 		{
 			return args_.size();
 		}
 
-		std::size_t FuncDeclarationExpression::get_num_locals()
+		std::size_t FuncDeclarationExpression::get_num_locals() const
 		{
 			return num_locals_;
 		}

@@ -10,7 +10,7 @@ void get_tokens(Lexer& l, std::vector<std::unique_ptr<Token>>& t)
 	auto next_token = l.next_token();
 	while (next_token->get_type() != TokenType::END)
 	{
-		t.push_back(std::unique_ptr<Token>(next_token));
+		t.push_back(std::move(next_token));
 		next_token = l.next_token();
 	}
 }

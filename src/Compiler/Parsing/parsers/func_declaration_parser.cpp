@@ -18,11 +18,13 @@ namespace elsa {
 			if (parser->function_table().has_entry(name))
 				throw ParsingException("A function with the same name has already been declared");
 
-			parser->function_table().add_function(name);
-
 			func_dec_exp->set_name(name);
 
+			parser->function_table().add_function(func_dec_exp.get());
+
 			parser->consume(TokenType::LParen);
+
+			parser->set_current_scope(func_dec_exp.get());
 
 			while (parser->current_token()->get_type() != TokenType::RParen)
 			{
@@ -30,8 +32,11 @@ namespace elsa {
 				arg->set_type(parser->type_checker().get_type_from_token(parser->current_token()));
 				parser->consume();
 
+				
 				arg->set_name(parser->current_token()->get_value());
 				parser->consume(TokenType::Identifier);
+
+				parser->current_scope()->add_arg(arg->get_name(), arg->get_type());
 
 				func_dec_exp->add_args_expression(std::move(arg));
 
@@ -42,8 +47,6 @@ namespace elsa {
 			parser->consume(TokenType::RParen);
 
 			parser->consume(TokenType::LBracket);
-
-			parser->set_current_scope(func_dec_exp.get());
 
 			while (parser->current_token()->get_type() != TokenType::RBracket)
 			{

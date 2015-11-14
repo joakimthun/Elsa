@@ -3,9 +3,9 @@
 namespace elsa {
 	namespace compiler {
 
-		void FunctionTable::add_function(const std::wstring& name)
+		void FunctionTable::add_function(const FuncDeclarationExpression* expression)
 		{
-			add(name, new FunctionSymbol(name));
+			add(expression->get_name(), new FunctionSymbol(expression));
 		}
 
 	}
