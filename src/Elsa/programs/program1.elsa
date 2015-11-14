@@ -12,36 +12,34 @@ struct player
 
 func int main()
 {
-	//var x = 1 + 2 * 6;
-	//var y = 10;
-	//var z = 1230120839;
-	//var f = 10.89;
-	//var c = 'X';
-	//
-	//var vec = new vec2D;
-	//vec.x = 10;
-	//vec.y = 20;
-	//
-	//elsa.PrintLn(vec.x);
-	//elsa.PrintLn(vec.y);
+	var x = 1 + 2 * 6;
+	var y = 10;
+	var z = 1230120839;
+	var f = 10.89;
+	var c = 'X';
+	
+	var vec = new vec2D;
+	vec.x = 10;
+	vec.y = 20;
+	
+	elsa.PrintLn(vec.x);
+	elsa.PrintLn(vec.y);
 
 	var player = new player;
-	//player.speed = 11;
-	//player.position = new vec2D;
-	player.position = 11;
+	player.speed = 11;
+	player.position = new vec2D;
+	player.position.x = 56;
 
-	//player.position.x = 56;
+	elsa.PrintLn(player.position.x);
+	elsa.PrintLn(player.speed);
 
-	//elsa.PrintLn(player.position.x);
-	//elsa.PrintLn(player.speed);
-
-	//elsa.PrintLn(x);
-	//elsa.PrintLn(y);
-	//elsa.Print(10);
-	//elsa.Print(10);
-	//elsa.PrintLn(77);
-	//elsa.PrintLn(z);
-	//elsa.PrintLn(f);
-	//elsa.PrintLn(c);
-	//elsa.PrintLn(x + y);
+	elsa.PrintLn(x);
+	elsa.PrintLn(y);
+	elsa.Print(10);
+	elsa.Print(10);
+	elsa.PrintLn(77);
+	elsa.PrintLn(z);
+	elsa.PrintLn(f);
+	elsa.PrintLn(c);
+	elsa.PrintLn(x + y);
 }

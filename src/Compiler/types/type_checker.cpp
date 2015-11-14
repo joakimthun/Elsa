@@ -69,7 +69,8 @@ namespace elsa {
 			}
 			if (is_of_type<CreateStructExpression>(expression))
 			{
-				return new ElsaType(OType::GCOPtr);
+				auto cse = static_cast<CreateStructExpression*>(expression);
+				return new ElsaType(cse->get_type()->get_struct_declaration_expression());
 			}
 			if (is_of_type<FieldAccessExpression>(expression))
 			{
