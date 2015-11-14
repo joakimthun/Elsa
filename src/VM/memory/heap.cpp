@@ -134,6 +134,7 @@ namespace elsa {
 
 		void Heap::store_field(const Object& instance, const Object & value, std::size_t field_index)
 		{
+			assert_is_not_null(instance);
 			assert_is_struct(instance);
 
 			auto fi = instance.gco()->si->get_field(field_index);
@@ -196,6 +197,15 @@ namespace elsa {
 		std::size_t Heap::get_num_objects() const
 		{
 			return num_objects_;
+		}
+
+		void Heap::assert_is_not_null(const Object& instance)
+		{
+			if (instance.get_type() != GCOPtr)
+				throw RuntimeException("The instance has to be a heap allocated object");
+
+			if (instance.gco() == nullptr)
+				throw RuntimeException("Nullptr exception");
 		}
 
 		void Heap::assert_is_struct(const Object& instance)

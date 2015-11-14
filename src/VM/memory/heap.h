@@ -38,6 +38,7 @@ namespace elsa {
 			std::size_t get_num_objects() const;
 
 		private:
+			void assert_is_not_null(const Object& instance);
 			void assert_is_struct(const Object& instance);
 			void assert_is_array(const Object& instance);
 			void assert_array_index_in_range(const Object& instance, std::size_t element_index);

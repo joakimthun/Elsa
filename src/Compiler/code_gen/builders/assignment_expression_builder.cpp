@@ -12,11 +12,10 @@ namespace elsa {
 			{
 				IdentifierExpressionBuilder::build(program, visitor, sae->get_base());
 
+				auto current_type = sae->get_base()->get_type()->get_struct_declaration_expression();
 				for (auto it = sae->get_expressions().begin(); it != sae->get_expressions().end(); ++it)
 				{
-					auto sde = sae->get_base()->get_type()->get_struct_declaration_expression();
-
-					for (const auto& field : sde->get_fields())
+					for (const auto& field : current_type->get_fields())
 					{
 						if (field->get_name() == it->get()->get_name())
 						{
@@ -29,6 +28,9 @@ namespace elsa {
 							}
 							else
 							{
+								if (field->get_type()->get_type() == OType::GCOPtr)
+									current_type = field->get_type()->get_struct_declaration_expression();
+
 								program->emit(OpCode::l_field);
 								program->emit(static_cast<int>(field->get_index()));
 							}
