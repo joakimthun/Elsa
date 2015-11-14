@@ -27,8 +27,10 @@ func int main()
 
 	var player = new player;
 	//player.speed = 11;
+	//player.position = new vec2D;
+	player.position = 11;
 
-	player.position.x = 56;
+	//player.position.x = 56;
 
 	//elsa.PrintLn(player.position.x);
 	//elsa.PrintLn(player.speed);

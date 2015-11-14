@@ -16,6 +16,9 @@ namespace elsa {
 
 			exp->set_right(std::move(parser->parse_expression(precedence())));
 
+			if(!parser->type_checker().valid_assignment(exp.get()))
+				throw ParsingException("Invalid assignment. Both sides must be of the same type");
+
 			parser->consume(TokenType::Semicolon);
 
 			return std::move(exp);

@@ -178,6 +178,17 @@ namespace elsa {
 			throw ParsingException("Invalid struct name");
 		}
 
+		bool TypeChecker::valid_assignment(AssignmentExpression* assignment_expression)
+		{
+			auto left = get_expression_type(assignment_expression->get_left());
+			auto right = get_expression_type(assignment_expression->get_right());
+
+			if (left->get_type() == OType::GCOPtr && right->get_type() == OType::GCOPtr)
+				return left->get_struct_declaration_expression()->get_name() == right->get_struct_declaration_expression()->get_name();
+
+			return left->get_type() == right->get_type();
+		}
+
 		template<typename TExpression>
 		bool TypeChecker::is_of_type(Expression* exp)
 		{
