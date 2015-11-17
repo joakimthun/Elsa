@@ -26,6 +26,10 @@ func void cond_print()
 	{
 		elsa.PrintLn(888);
 	}
+	else
+	{
+		elsa.PrintLn(999);
+	}
 }
 
 func int main(int dummy)

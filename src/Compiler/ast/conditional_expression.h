@@ -23,6 +23,7 @@ namespace elsa {
 			Expression* get_condition();
 			const std::vector<std::unique_ptr<Expression>>& get_if_body() const;
 			const std::vector<std::unique_ptr<Expression>>& get_else_body() const;
+			bool has_else_body() const;
 
 			void accept(ExpressionVisitor* visitor) override;
 

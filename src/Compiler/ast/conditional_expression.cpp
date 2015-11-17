@@ -35,6 +35,11 @@ namespace elsa {
 			return else_body_;
 		}
 
+		bool ConditionalExpression::has_else_body() const
+		{
+			return else_body_.size() > 0;
+		}
+
 		void ConditionalExpression::accept(ExpressionVisitor* visitor)
 		{
 			visitor->visit(this);

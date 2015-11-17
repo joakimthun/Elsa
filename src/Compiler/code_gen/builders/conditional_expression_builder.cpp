@@ -22,7 +22,19 @@ namespace elsa {
 				exp->accept(visitor);
 			}
 
-			program->emit(branch_addr_index, program->get_next_instruction_index());
+			if (expression->has_else_body())
+			{
+				program->emit(branch_addr_index, program->get_next_instruction_index());
+
+				for (auto& exp : expression->get_else_body())
+				{
+					exp->accept(visitor);
+				}
+			}
+			else
+			{
+				program->emit(branch_addr_index, program->get_next_instruction_index());
+			}
 		}
 
 	}

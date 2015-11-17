@@ -21,6 +21,19 @@ namespace elsa {
 
 			parser->consume(TokenType::RBracket);
 
+			if (parser->current_token()->get_type() == TokenType::Else)
+			{
+				parser->consume(TokenType::Else);
+				parser->consume(TokenType::LBracket);
+
+				while (parser->current_token()->get_type() != TokenType::RBracket)
+				{
+					cond_exp->add_to_else_body(parser->parse_expression());
+				}
+
+				parser->consume(TokenType::RBracket);
+			}
+
 			return std::move(cond_exp);
 		}
 
