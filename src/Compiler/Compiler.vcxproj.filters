@@ -219,6 +219,12 @@
     <ClInclude Include="code_gen\builders\func_call_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\conditional_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\conditional_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -399,6 +405,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code_gen\builders\func_call_expression_builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\conditional_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\conditional_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
