@@ -221,6 +221,7 @@ namespace elsa {
 			register_expression_parser(TokenType::StringLiteral, new LiteralParser());
 			register_expression_parser(TokenType::Elsa, new ElsaInvokeParser());
 			register_expression_parser(TokenType::New, new CreateStructParser());
+			register_expression_parser(TokenType::If, new ConditionalParser());
 
 			// Prefix
 			register_prefix_parser(TokenType::Exclamation);

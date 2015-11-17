@@ -57,10 +57,11 @@ namespace elsa {
 			Percent,
 			VerticalBar,
 			DoubleVerticalBar,
-			New
+			New,
+			If,
+			Else
 		};
-
-
+		
 		class Token
 		{
 		public:

@@ -24,6 +24,7 @@
 #include "parsers\struct_access_parser.h"
 #include "parsers\assignment_parser.h"
 #include "parsers\func_call_parser.h"
+#include "parsers\conditional_parser.h"
 #include "../types/type_checker.h"
 #include "ll2_entry.h"
 
