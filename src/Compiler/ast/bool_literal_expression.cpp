@@ -1,5 +1,7 @@
 #include "bool_literal_expression.h"
 
+#include "../code_gen/visitors/expression_visitor.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -15,8 +17,7 @@ namespace elsa {
 
 		void BoolLiteralExpression::accept(ExpressionVisitor* visitor)
 		{
-			//visitor->visit(this);
-			throw ElsaException("No visit method defined for BoolLiteralExpression");
+			visitor->visit(this);
 		}
 
 	}

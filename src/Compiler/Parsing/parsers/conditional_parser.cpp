@@ -5,7 +5,23 @@ namespace elsa {
 
 		std::unique_ptr<Expression> ConditionalParser::parse(ElsaParser* parser)
 		{
-			return std::make_unique<ConditionalExpression>();
+			parser->consume(TokenType::If);
+			parser->consume(TokenType::LParen);
+
+			auto cond_exp = std::make_unique<ConditionalExpression>();
+			cond_exp->set_condition(parser->parse_expression());
+
+			parser->consume(TokenType::RParen);
+			parser->consume(TokenType::LBracket);
+
+			while (parser->current_token()->get_type() != TokenType::RBracket)
+			{
+				cond_exp->add_to_if_body(parser->parse_expression());
+			}
+
+			parser->consume(TokenType::RBracket);
+
+			return std::move(cond_exp);
 		}
 
 	}

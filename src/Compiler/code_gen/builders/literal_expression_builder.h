@@ -6,6 +6,7 @@
 #include "../../ast/integer_literal_expression.h"
 #include "../../ast/float_literal_expression.h"
 #include "../../ast/char_literal_expression.h"
+#include "../../ast/bool_literal_expression.h"
 #include "opcodes\opcodes.h"
 #include "vm_program.h"
 
@@ -20,6 +21,7 @@ namespace elsa {
 			static void build(VMProgram* program, IntegerLiteralExpression* expression);
 			static void build(VMProgram* program, FloatLiteralExpression* expression);
 			static void build(VMProgram* program, CharLiteralExpression* expression);
+			static void build(VMProgram* program, BoolLiteralExpression* expression);
 		};
 
 	}

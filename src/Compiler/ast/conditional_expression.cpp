@@ -37,7 +37,7 @@ namespace elsa {
 
 		void ConditionalExpression::accept(ExpressionVisitor* visitor)
 		{
-			throw "No visit method defined for ConditionalExpression";
+			//throw "No visit method defined for ConditionalExpression";
 		}
 	}
 }

@@ -15,8 +15,18 @@ func void print_sum(int a, int b)
 	elsa.PrintLn(a + b);
 }
 
+func void cond_print()
+{
+	if(true)
+	{
+		elsa.PrintLn(1);
+	}
+}
+
 func int main(int dummy)
 {
+	cond_print();
+
 	var x = 1 + 2 * 6;
 
 	var arg = 100 + 300 * 10;
@@ -26,6 +36,7 @@ func int main(int dummy)
 	var z = 1230120839;
 	var f = 10.89;
 	var c = 'X';
+	var b = false;
 	
 	var vec = new vec2D;
 	vec.x = 10;
@@ -50,5 +61,6 @@ func int main(int dummy)
 	elsa.PrintLn(z);
 	elsa.PrintLn(f);
 	elsa.PrintLn(c);
+	elsa.PrintLn(b);
 	elsa.PrintLn(x + y);
 }

@@ -25,6 +25,13 @@ namespace elsa {
 			program->emit(static_cast<int>(index));
 		}
 
+		void LiteralExpressionBuilder::build(VMProgram* program, BoolLiteralExpression* expression)
+		{
+			program->emit(OpCode::bconst);
+			auto value = expression->get_value() == true ? 1 : 0;
+			program->emit(static_cast<int>(value));
+		}
+
 	}
 }
 
