@@ -6,8 +6,10 @@ namespace elsa {
 		enum Precedence : int
 		{
 			Assignment = 1,		// =
-			Sum = 2,			// + , -
-			Product = 3,		// * , /
+			ConditionalAnd = 2, // &&
+			ConditionalOr = 3,  // ||
+			Sum = 4,			// + , -
+			Product = 5,		// * , /
 		};
 
 	}

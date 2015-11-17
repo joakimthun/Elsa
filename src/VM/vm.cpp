@@ -403,6 +403,19 @@ namespace elsa {
 				heap_.store_element(instance, value, ei);
 				break;
 			}
+			case l_and: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.b() && o2.b()));
+				break;
+			}
+			case l_or: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.b() || o2.b()));
+				break;
+				break;
+			}
 			case halt: {
 				break;
 			}

@@ -42,6 +42,10 @@ namespace elsa {
 			beq,
 			bneq,
 
+			// Logical operations
+			l_and,
+			l_or,
+
 			// String operations
 			sconst,
 

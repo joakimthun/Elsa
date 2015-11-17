@@ -17,7 +17,7 @@ func void print_sum(int a, int b)
 
 func void cond_print()
 {
-	if(true)
+	if(true || false && true)
 	{
 		elsa.PrintLn(777);
 	}

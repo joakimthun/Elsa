@@ -29,6 +29,17 @@ namespace elsa {
 				}
 			}
 
+			if (expression->get_type()->get_type() == OType::Bool)
+			{
+				switch (expression->get_operator())
+				{
+				case TokenType::DoubleAmpersand:
+					return OpCode::l_and;
+				case TokenType::DoubleVerticalBar:
+					return OpCode::l_or;
+				}
+			}
+
 			throw CodeGenException("Unkown expression type or operator");
 		}
 
