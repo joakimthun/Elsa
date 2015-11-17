@@ -218,6 +218,12 @@ namespace elsa {
 
 				break;
 			}
+			case br: {
+				auto jmp_addr = get_instruction(pc_++);
+				pc_ = jmp_addr;
+
+				break;
+			}
 			case br_ieq: {
 				auto jmp_addr = get_instruction(pc_++);
 				auto o1 = current_frame_->pop();

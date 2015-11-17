@@ -46,6 +46,7 @@ namespace elsa {
 			sconst,
 
 			// Branching
+			br,
 			br_ieq,
 			br_ineq,
 			br_feq,

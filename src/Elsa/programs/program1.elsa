@@ -30,6 +30,15 @@ func void cond_print()
 	{
 		elsa.PrintLn(999);
 	}
+
+	if(true)
+	{
+		elsa.PrintLn(1000);
+	}
+	else
+	{
+		elsa.PrintLn(2000);
+	}
 }
 
 func int main(int dummy)

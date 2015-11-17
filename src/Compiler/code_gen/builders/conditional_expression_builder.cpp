@@ -15,25 +15,32 @@ namespace elsa {
 
 			// If not equal -> branch
 			program->emit(OpCode::br_bneq);
-			auto branch_addr_index = program->mark_index();
+			auto after_if_addr_index = program->mark_index();
 
 			for (auto& exp : expression->get_if_body())
 			{
 				exp->accept(visitor);
 			}
 
+			// If we execute the if branch we jump past the else branch(if there is one)
+			program->emit(OpCode::br);
+			auto if_end_addr_index = program->mark_index();
+
 			if (expression->has_else_body())
 			{
-				program->emit(branch_addr_index, program->get_next_instruction_index());
+				program->emit(after_if_addr_index, program->get_next_instruction_index());
 
 				for (auto& exp : expression->get_else_body())
 				{
 					exp->accept(visitor);
 				}
+
+				program->emit(if_end_addr_index, program->get_next_instruction_index());
 			}
 			else
 			{
-				program->emit(branch_addr_index, program->get_next_instruction_index());
+				program->emit(after_if_addr_index, program->get_next_instruction_index());
+				program->emit(if_end_addr_index, program->get_next_instruction_index());
 			}
 		}
 
