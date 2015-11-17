@@ -20,7 +20,7 @@ namespace elsa {
 			void add_to_if_body(std::unique_ptr<Expression> expression);
 			void add_to_else_body(std::unique_ptr<Expression> expression);
 
-			const Expression* get_condition() const;
+			Expression* get_condition();
 			const std::vector<std::unique_ptr<Expression>>& get_if_body() const;
 			const std::vector<std::unique_ptr<Expression>>& get_else_body() const;
 

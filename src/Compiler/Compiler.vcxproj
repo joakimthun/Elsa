@@ -31,6 +31,7 @@
     <ClInclude Include="ast\struct_declaration_expression.h" />
     <ClInclude Include="code_gen\builders\assignment_expression_builder.h" />
     <ClInclude Include="code_gen\builders\binary_operator_expression_builder.h" />
+    <ClInclude Include="code_gen\builders\conditional_expression_builder.h" />
     <ClInclude Include="code_gen\builders\create_struct_expression_builder.h" />
     <ClInclude Include="code_gen\builders\elsa_invoke_expression_builder.h" />
     <ClInclude Include="code_gen\builders\function_declaration_expression_builder.h" />
@@ -103,6 +104,7 @@
     <ClCompile Include="ast\struct_declaration_expression.cpp" />
     <ClCompile Include="code_gen\builders\assignment_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\binary_operator_expression_builder.cpp" />
+    <ClCompile Include="code_gen\builders\conditional_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\create_struct_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\elsa_invoke_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\function_declaration_expression_builder.cpp" />

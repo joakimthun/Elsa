@@ -20,7 +20,7 @@ namespace elsa {
 			else_body_.push_back(std::move(expression));
 		}
 
-		const Expression* ConditionalExpression::get_condition() const 
+		Expression* ConditionalExpression::get_condition() 
 		{
 			return condition_.get();
 		}
@@ -37,7 +37,7 @@ namespace elsa {
 
 		void ConditionalExpression::accept(ExpressionVisitor* visitor)
 		{
-			//throw "No visit method defined for ConditionalExpression";
+			visitor->visit(this);
 		}
 	}
 }

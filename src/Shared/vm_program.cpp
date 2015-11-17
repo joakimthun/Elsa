@@ -1,6 +1,8 @@
 #include "vm_program.h"
 #include "vm_program.h"
 #include "vm_program.h"
+#include "vm_program.h"
+#include "vm_program.h"
 
 namespace elsa {
 
@@ -14,6 +16,11 @@ namespace elsa {
 		instructions_.push_back(static_cast<int>(instruction));
 	}
 
+	void VMProgram::emit(std::size_t index, int instruction)
+	{
+		instructions_[index] = instruction;
+	}
+
 	void VMProgram::emit(int instruction)
 	{
 		instructions_.push_back(instruction);
@@ -25,6 +32,12 @@ namespace elsa {
 		{
 			emit(inst);
 		}
+	}
+
+	std::size_t VMProgram::mark_index()
+	{
+		instructions_.push_back(0);
+		return instructions_.size() - 1;
 	}
 
 	std::size_t VMProgram::get_next_instruction_index()

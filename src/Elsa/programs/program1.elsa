@@ -19,7 +19,12 @@ func void cond_print()
 {
 	if(true)
 	{
-		elsa.PrintLn(1);
+		elsa.PrintLn(777);
+	}
+
+	if(false)
+	{
+		elsa.PrintLn(888);
 	}
 }
 

@@ -1,13 +1,5 @@
 #include "vm_expression_visitor.h"
 
-#include "../../ast/func_declaration_expression.h"
-#include "../../ast/scoped_expression.h"
-#include "../../ast/variable_declaration_expression.h"
-#include "../../ast/binary_operator_expression.h"
-#include "../../ast/integer_literal_expression.h"
-#include "../../ast/struct_access_expression.h"
-#include "../../ast/assignment_expression.h"
-
 namespace elsa {
 	namespace compiler {
 
@@ -84,6 +76,11 @@ namespace elsa {
 		void VMExpressionVisitor::visit(BoolLiteralExpression * expression)
 		{
 			LiteralExpressionBuilder::build(vm_program_.get(), expression);
+		}
+
+		void VMExpressionVisitor::visit(ConditionalExpression* expression)
+		{
+			ConditionalExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
 		ScopedExpression* VMExpressionVisitor::current_scope()

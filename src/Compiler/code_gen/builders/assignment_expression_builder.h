@@ -13,6 +13,8 @@
 namespace elsa {
 	namespace compiler {
 
+		class VMExpressionVisitor;
+
 		class AssignmentExpressionBuilder
 		{
 		public:

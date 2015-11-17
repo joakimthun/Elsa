@@ -22,6 +22,7 @@
 #include "../builders/struct_access_expression_builder.h"
 #include "../builders/assignment_expression_builder.h"
 #include "../builders/func_call_expression_builder.h"
+#include "../builders/conditional_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {
@@ -46,6 +47,7 @@ namespace elsa {
 			void visit(AssignmentExpression* expression) override;
 			void visit(FuncCallExpression* expression) override;
 			void visit(BoolLiteralExpression* expression) override;
+			void visit(ConditionalExpression* expression) override;
 
 			ScopedExpression* current_scope();
 			void set_current_scope(ScopedExpression* scope);

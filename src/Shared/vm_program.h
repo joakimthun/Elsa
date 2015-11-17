@@ -23,8 +23,10 @@ namespace elsa {
 		VMProgram();
 
 		void emit(OpCode instruction);
+		void emit(std::size_t index, int instruction);
 		void emit(int instruction);
 		void emit(const std::vector<int>& instructions);
+		std::size_t mark_index();
 		std::size_t get_next_instruction_index();
 		std::vector<int>& get_instructions();
 
