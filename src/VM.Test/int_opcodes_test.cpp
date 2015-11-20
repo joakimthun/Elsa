@@ -317,9 +317,9 @@ TEST_F(IntOpCodesTest, IGT)
 	auto vm = VM(program_);
 	vm.execute();
 
-	EXPECT_EQ(1, vm.eval_stack_top().i());
+	EXPECT_EQ(0, vm.eval_stack_top().i());
 
 	vm.execute();
 
-	EXPECT_EQ(0, vm.eval_stack_top().i());
+	EXPECT_EQ(1, vm.eval_stack_top().i());
 }
