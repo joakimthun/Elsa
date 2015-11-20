@@ -14,29 +14,29 @@ protected:
 		program_.set_entry_point(ep);
 
 		auto si = std::make_unique<StructInfo>(L"my_struct");
-		si->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::Int));
-		si->add_field(std::make_unique<FieldInfo>(L"field1", elsa::OType::Float));
-		si->add_field(std::make_unique<FieldInfo>(L"field2", elsa::OType::Int));
-		si->add_field(std::make_unique<FieldInfo>(L"field3", elsa::OType::Float));
-		si->add_field(std::make_unique<FieldInfo>(L"field4", elsa::OType::Int));
+		si->add_field(std::make_unique<FieldInfo>(L"field0", elsa::VMType::Int));
+		si->add_field(std::make_unique<FieldInfo>(L"field1", elsa::VMType::Float));
+		si->add_field(std::make_unique<FieldInfo>(L"field2", elsa::VMType::Int));
+		si->add_field(std::make_unique<FieldInfo>(L"field3", elsa::VMType::Float));
+		si->add_field(std::make_unique<FieldInfo>(L"field4", elsa::VMType::Int));
 		program_.add_struct(std::move(si));
 
 		program_.add_float(std::make_unique<FloatInfo>(12.0f));
 		program_.add_float(std::make_unique<FloatInfo>(99.0f));
 
 		auto si2 = std::make_unique<StructInfo>(L"my_struct2");
-		si2->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::GCOPtr));
-		si2->add_field(std::make_unique<FieldInfo>(L"field1", elsa::OType::Int));
-		si2->add_field(std::make_unique<FieldInfo>(L"field2", elsa::OType::GCOPtr));
+		si2->add_field(std::make_unique<FieldInfo>(L"field0", elsa::VMType::GCOPtr));
+		si2->add_field(std::make_unique<FieldInfo>(L"field1", elsa::VMType::Int));
+		si2->add_field(std::make_unique<FieldInfo>(L"field2", elsa::VMType::GCOPtr));
 
 		program_.add_struct(std::move(si2));
 
 		auto si3 = std::make_unique<StructInfo>(L"my_struct3");
-		si3->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::GCOPtr));
-		si3->add_field(std::make_unique<FieldInfo>(L"field1", elsa::OType::Int));
-		si3->add_field(std::make_unique<FieldInfo>(L"field2", elsa::OType::Bool));
-		si3->add_field(std::make_unique<FieldInfo>(L"field3", elsa::OType::Char));
-		si3->add_field(std::make_unique<FieldInfo>(L"field4", elsa::OType::Float));
+		si3->add_field(std::make_unique<FieldInfo>(L"field0", elsa::VMType::GCOPtr));
+		si3->add_field(std::make_unique<FieldInfo>(L"field1", elsa::VMType::Int));
+		si3->add_field(std::make_unique<FieldInfo>(L"field2", elsa::VMType::Int));
+		si3->add_field(std::make_unique<FieldInfo>(L"field3", elsa::VMType::Char));
+		si3->add_field(std::make_unique<FieldInfo>(L"field4", elsa::VMType::Float));
 
 		program_.add_struct(std::move(si3));
 	}
@@ -58,7 +58,7 @@ TEST_F(StructTest, NEW)
 
 	auto obj = vm.eval_stack_top();
 
-	ASSERT_EQ(elsa::OType::GCOPtr, obj.get_type());
+	ASSERT_EQ(elsa::VMType::GCOPtr, obj.get_type());
 
 	auto si = obj.gco()->si;
 
@@ -373,7 +373,7 @@ TEST_F(StructTest, FIELD_DEFAULT_VALUES)
 	ASSERT_EQ(0, vm.eval_stack_top().i());
 
 	vm.execute();
-	ASSERT_EQ(false, vm.eval_stack_top().b());
+	ASSERT_EQ(0, vm.eval_stack_top().i());
 
 	vm.execute();
 	ASSERT_EQ('\0', vm.eval_stack_top().c());

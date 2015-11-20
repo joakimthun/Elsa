@@ -66,7 +66,7 @@ TEST(ParserTest, VARIABLE_DECLARATION)
 		if (auto vde = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[0].get()))
 		{
 			ASSERT_EQ(vde->get_name(), L"var1");
-			ASSERT_EQ(vde->get_type()->get_type(), OType::Bool);
+			ASSERT_EQ(vde->get_type()->get_type(), ObjectType::Bool);
 
 			if (auto poe = dynamic_cast<PrefixOperatorExpression*>(vde->get_expression()))
 			{
@@ -105,7 +105,7 @@ TEST(ParserTest, LITERALS)
 		if (auto vde = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[0].get()))
 		{
 			ASSERT_EQ(vde->get_name(), L"x1");
-			ASSERT_EQ(vde->get_type()->get_type(), OType::Int);
+			ASSERT_EQ(vde->get_type()->get_type(), ObjectType::Int);
 
 			assert_is_literal_expression<IntegerLiteralExpression, int>(vde->get_expression(), 10);
 		}
@@ -117,7 +117,7 @@ TEST(ParserTest, LITERALS)
 		if (auto vde = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[1].get()))
 		{
 			ASSERT_EQ(vde->get_name(), L"x2");
-			ASSERT_EQ(vde->get_type()->get_type(), OType::Float);
+			ASSERT_EQ(vde->get_type()->get_type(), ObjectType::Float);
 
 			assert_is_literal_expression<FloatLiteralExpression, float>(vde->get_expression(), 10.0f);
 		}
@@ -129,7 +129,7 @@ TEST(ParserTest, LITERALS)
 		if (auto vde = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[2].get()))
 		{
 			ASSERT_EQ(vde->get_name(), L"x3");
-			ASSERT_EQ(vde->get_type()->get_type(), OType::Bool);
+			ASSERT_EQ(vde->get_type()->get_type(), ObjectType::Bool);
 
 			assert_is_literal_expression<BoolLiteralExpression, bool>(vde->get_expression(), true);
 		}
@@ -141,7 +141,7 @@ TEST(ParserTest, LITERALS)
 		if (auto vde = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[3].get()))
 		{
 			ASSERT_EQ(vde->get_name(), L"x4");
-			ASSERT_EQ(vde->get_type()->get_type(), OType::Bool);
+			ASSERT_EQ(vde->get_type()->get_type(), ObjectType::Bool);
 
 			assert_is_literal_expression<BoolLiteralExpression, bool>(vde->get_expression(), false);
 		}
@@ -153,7 +153,7 @@ TEST(ParserTest, LITERALS)
 		if (auto vde = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[4].get()))
 		{
 			ASSERT_EQ(vde->get_name(), L"x5");
-			ASSERT_EQ(vde->get_type()->get_type(), OType::Char);
+			ASSERT_EQ(vde->get_type()->get_type(), ObjectType::Char);
 
 			assert_is_literal_expression<CharLiteralExpression, wchar_t>(vde->get_expression(), L'X');
 		}
@@ -176,25 +176,25 @@ TEST(ParserTest, FUNC_DECLARATION)
 
 	if (auto fde = dynamic_cast<FuncDeclarationExpression*>(exp.get()))
 	{
-		ASSERT_EQ(fde->get_return_type()->get_type(), OType::Void);
+		ASSERT_EQ(fde->get_return_type()->get_type(), ObjectType::Void);
 		ASSERT_EQ(fde->get_name(), L"add");
 
 		ASSERT_EQ(fde->get_body().size(), 2);
 		ASSERT_EQ(fde->get_args().size(), 3);
 
 		ASSERT_EQ(fde->get_args()[0]->get_name(), L"x");
-		ASSERT_EQ(fde->get_args()[0]->get_type()->get_type(), OType::Int);
+		ASSERT_EQ(fde->get_args()[0]->get_type()->get_type(), ObjectType::Int);
 
 		ASSERT_EQ(fde->get_args()[1]->get_name(), L"y");
-		ASSERT_EQ(fde->get_args()[1]->get_type()->get_type(), OType::Float);
+		ASSERT_EQ(fde->get_args()[1]->get_type()->get_type(), ObjectType::Float);
 
 		ASSERT_EQ(fde->get_args()[2]->get_name(), L"c");
-		ASSERT_EQ(fde->get_args()[2]->get_type()->get_type(), OType::Char);
+		ASSERT_EQ(fde->get_args()[2]->get_type()->get_type(), ObjectType::Char);
 
 		if (auto vde1 = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[0].get()))
 		{
 			ASSERT_EQ(vde1->get_name(), L"x1");
-			ASSERT_EQ(vde1->get_type()->get_type(), OType::Int);
+			ASSERT_EQ(vde1->get_type()->get_type(), ObjectType::Int);
 
 			assert_is_literal_expression<IntegerLiteralExpression, int>(vde1->get_expression(), 10);
 		}
@@ -206,7 +206,7 @@ TEST(ParserTest, FUNC_DECLARATION)
 		if (auto vde2 = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[1].get()))
 		{
 			ASSERT_EQ(vde2->get_name(), L"x2");
-			ASSERT_EQ(vde2->get_type()->get_type(), OType::Bool);
+			ASSERT_EQ(vde2->get_type()->get_type(), ObjectType::Bool);
 
 			assert_is_literal_expression<BoolLiteralExpression, bool>(vde2->get_expression(), false);
 		}
@@ -233,7 +233,7 @@ TEST(ParserTest, PRECEDENCE)
 		if (auto vde1 = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[0].get()))
 		{
 			ASSERT_EQ(vde1->get_name(), L"x1");
-			ASSERT_EQ(vde1->get_type()->get_type(), OType::Int);
+			ASSERT_EQ(vde1->get_type()->get_type(), ObjectType::Int);
 
 			if (auto boe = assert_is_binary_operator_expression(vde1->get_expression(), TokenType::Plus))
 			{
@@ -254,7 +254,7 @@ TEST(ParserTest, PRECEDENCE)
 		if (auto vde2 = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[1].get()))
 		{
 			ASSERT_EQ(vde2->get_name(), L"x2");
-			ASSERT_EQ(vde2->get_type()->get_type(), OType::Int);
+			ASSERT_EQ(vde2->get_type()->get_type(), ObjectType::Int);
 
 			if (auto boe = assert_is_binary_operator_expression(vde2->get_expression(), TokenType::Plus))
 			{
@@ -283,7 +283,7 @@ TEST(ParserTest, PRECEDENCE)
 		if (auto vde3 = dynamic_cast<VariableDeclarationExpression*>(fde->get_body()[2].get()))
 		{
 			ASSERT_EQ(vde3->get_name(), L"x3");
-			ASSERT_EQ(vde3->get_type()->get_type(), OType::Int);
+			ASSERT_EQ(vde3->get_type()->get_type(), ObjectType::Int);
 
 			if (auto boe = assert_is_binary_operator_expression(vde3->get_expression(), TokenType::Plus))
 			{

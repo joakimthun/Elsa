@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace compiler {
 
-		NativeFunctionInfo::NativeFunctionInfo(const std::wstring& name, OType return_type, std::size_t index)
+		NativeFunctionInfo::NativeFunctionInfo(const std::wstring& name, ObjectType return_type, std::size_t index)
 			:
 			name_(name),
 			return_type_(return_type),
@@ -15,12 +15,12 @@ namespace elsa {
 			args_.push_back(std::make_unique<NativeFunctionArgument>());
 		}
 
-		void NativeFunctionInfo::add_arg_type(std::size_t index, OType type)
+		void NativeFunctionInfo::add_arg_type(std::size_t index, ObjectType type)
 		{
 			args_[index]->valid_types.push_back(type);
 		}
 		
-		OType NativeFunctionInfo::get_return_type()
+		ObjectType NativeFunctionInfo::get_return_type()
 		{
 			return return_type_;
 		}
@@ -30,7 +30,7 @@ namespace elsa {
 			return name_;
 		}
 
-		bool NativeFunctionInfo::is_valid_arg_type(std::size_t index, OType type)
+		bool NativeFunctionInfo::is_valid_arg_type(std::size_t index, ObjectType type)
 		{
 			for (const auto& arg_type : args_[index]->valid_types)
 			{

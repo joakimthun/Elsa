@@ -27,7 +27,7 @@ namespace elsa {
 
 		void LiteralExpressionBuilder::build(VMProgram* program, BoolLiteralExpression* expression)
 		{
-			program->emit(OpCode::bconst);
+			program->emit(OpCode::iconst);
 			auto value = expression->get_value() == true ? 1 : 0;
 			program->emit(static_cast<int>(value));
 		}

@@ -6,7 +6,6 @@
 #include <memory>
 #include <utility>
 
-#include "..\object_types\otype.h"
 #include "field_info.h"
 #include "../exceptions/runtime_exception.h"
 

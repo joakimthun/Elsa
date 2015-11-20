@@ -1,6 +1,6 @@
 #pragma once
 
-#include "object_types/otype.h"
+#include "object_types\vm_type.h"
 #include "gcobject.h"
 #include "exceptions/runtime_exception.h"
 #include "constants/struct_info.h"
@@ -12,7 +12,6 @@ namespace elsa {
 			int i;
 			float f;
 			wchar_t c;
-			bool b;
 			GCObject* gco;
 		} Value;
 
@@ -23,19 +22,18 @@ namespace elsa {
 			Object(int v);
 			Object(float v);
 			Object(wchar_t v);
-			Object(bool v);
 			Object(GCObject* o);
+			Object(bool v);
 
 			int i() const;
 			float f() const;
 			wchar_t c() const;
-			bool b() const;
 			GCObject* gco() const;
-			OType get_type() const;
-			void set_type(OType type);
+			elsa::VMType get_type() const;
+			void set_type(elsa::VMType type);
 
 		private:
-			OType type_;
+			elsa::VMType type_;
 			Value value_;
 		};
 

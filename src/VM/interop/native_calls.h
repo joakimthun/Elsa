@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "../stack_frame.h"
-#include "object_types\otype.h"
+#include "object_types/vm_type.h"
 
 namespace elsa {
 	namespace vm {

@@ -7,7 +7,7 @@
 #include <memory>
 #include <algorithm>
 
-#include "object_types/otype.h"
+#include "object_types\vm_type.h"
 #include "../types/object.h"
 #include "constants/struct_info.h"
 #include "exceptions/runtime_exception.h"
@@ -26,7 +26,7 @@ namespace elsa {
 			~Heap();
 
 			Object alloc_struct(const StructInfo* si);
-			Object alloc_array(elsa::OType type, std::size_t size);
+			Object alloc_array(elsa::VMType type, std::size_t size);
 			void resize_array(Object& instance, std::size_t new_size);
 
 			Object load_field(const Object& instance, FieldInfo* fi);
@@ -43,11 +43,11 @@ namespace elsa {
 			void assert_is_array(const Object& instance);
 			void assert_array_index_in_range(const Object& instance, std::size_t element_index);
 			byte* get_field_ptr(void* s_ptr, FieldInfo* f);
-			std::size_t get_size_of_type(elsa::OType type);
+			std::size_t get_size_of_type(VMType type);
 			void init_struct(const Object& instance);
 			void init_array(const Object& instance);
 			void copy_array(const Object& old_array, Object& new_array);
-			Object get_default_value(elsa::OType type);
+			Object get_default_value(VMType type);
 			void link_new_object(GCObject* obj);
 			void increment_num_objects();
 

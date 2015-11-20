@@ -39,9 +39,6 @@
     <ClCompile Include="array_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bool_opcodes_test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="char_opcodes_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -57,9 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array_test.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bool_opcodes_test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="call_test.h">

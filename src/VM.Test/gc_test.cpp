@@ -10,13 +10,13 @@ protected:
 	virtual void SetUp()
 	{
 		auto si = std::make_unique<StructInfo>(L"my_struct");
-		si->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::GCOPtr));
-		si->add_field(std::make_unique<FieldInfo>(L"field1", elsa::OType::GCOPtr));
-		si->add_field(std::make_unique<FieldInfo>(L"field2", elsa::OType::GCOPtr));
+		si->add_field(std::make_unique<FieldInfo>(L"field0", elsa::VMType::GCOPtr));
+		si->add_field(std::make_unique<FieldInfo>(L"field1", elsa::VMType::GCOPtr));
+		si->add_field(std::make_unique<FieldInfo>(L"field2", elsa::VMType::GCOPtr));
 		program_.add_struct(std::move(si));
 
 		auto si2 = std::make_unique<StructInfo>(L"my_struct2");
-		si2->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::Int));
+		si2->add_field(std::make_unique<FieldInfo>(L"field0", elsa::VMType::Int));
 		program_.add_struct(std::move(si2));
 	}
 
@@ -78,7 +78,7 @@ TEST_F(GCTest, COLLECT_POPPED_OBJECTS)
 		pop,
 
 		iconst, 7,
-		new_arr, Int,
+		new_arr, (int)VMType::Int,
 		pop,
 
 		new_struct, 0,
@@ -131,15 +131,15 @@ TEST_F(GCTest, MARK_SWEEP_ARRAYS)
 	program_.emit(
 	{
 		iconst, 7,
-		new_arr, Int,
+		new_arr, (int)VMType::Int,
 		s_local, 0,
 		
 		iconst, 2,
-		new_arr, Int,
+		new_arr, (int)VMType::Int,
 		s_local, 1,
 		
 		iconst, 5,
-		new_arr, GCOPtr,
+		new_arr, (int)VMType::GCOPtr,
 		s_local, 2,
 		
 		l_local, 2,
@@ -147,20 +147,20 @@ TEST_F(GCTest, MARK_SWEEP_ARRAYS)
 		s_ele, 0,
 
 		iconst, 2,
-		new_arr, Int,
+		new_arr, (int)VMType::Int,
 		pop,
 
 		iconst, 2,
-		new_arr, Int,
+		new_arr, (int)VMType::Int,
 		pop,
 
 		iconst, 5,
-		new_arr, GCOPtr,
+		new_arr, (int)VMType::GCOPtr,
 		s_local, 3,
 
 		l_local, 3,
 		iconst, 5,
-		new_arr, GCOPtr,
+		new_arr, (int)VMType::GCOPtr,
 		s_ele, 2,
 	});
 

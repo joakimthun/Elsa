@@ -187,27 +187,10 @@ namespace elsa {
 				current_frame_->push(Object(o1.c() != o2.c()));
 				break;
 			}
-			case bconst: {
-				auto v = get_instruction(pc_++) != 0;
-				current_frame_->push(Object(v));
-				break;
-			}
-			case beq: {
-				auto o1 = current_frame_->pop();
-				auto o2 = current_frame_->pop();
-				current_frame_->push(o1.b() == o2.b());
-				break;
-			}
-			case bneq: {
-				auto o1 = current_frame_->pop();
-				auto o2 = current_frame_->pop();
-				current_frame_->push(o1.b() != o2.b());
-				break;
-			}
 			case sconst: {
 				auto index = get_instruction(pc_++);
 				auto str = program_.get_string(index)->get_value();
-				auto str_obj = heap_.alloc_array(OType::Char, str.length());
+				auto str_obj = heap_.alloc_array(elsa::VMType::Char, str.length());
 
 				for (std::wstring::size_type i = 0; i < str.size(); ++i)
 				{
@@ -260,26 +243,6 @@ namespace elsa {
 				auto o2 = current_frame_->pop();
 
 				if (o1.f() != o2.f())
-					pc_ = jmp_addr;
-
-				break;
-			}
-			case br_beq: {
-				auto jmp_addr = get_instruction(pc_++);
-				auto o1 = current_frame_->pop();
-				auto o2 = current_frame_->pop();
-
-				if (o1.b() == o2.b())
-					pc_ = jmp_addr;
-
-				break;
-			}
-			case br_bneq: {
-				auto jmp_addr = get_instruction(pc_++);
-				auto o1 = current_frame_->pop();
-				auto o2 = current_frame_->pop();
-
-				if (o1.b() != o2.b())
 					pc_ = jmp_addr;
 
 				break;
@@ -379,7 +342,7 @@ namespace elsa {
 				break;
 			}
 			case new_arr: {
-				auto type = static_cast<OType>(get_instruction(pc_++));
+				auto type = static_cast<elsa::VMType>(get_instruction(pc_++));
 				auto size = current_frame_->pop().i();
 				current_frame_->push(heap_.alloc_array(type, size));
 				break;
@@ -403,17 +366,16 @@ namespace elsa {
 				heap_.store_element(instance, value, ei);
 				break;
 			}
-			case l_and: {
+			case iand: {
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
-				current_frame_->push(Object(o1.b() && o2.b()));
+				current_frame_->push(Object(o1.i() & o2.i()));
 				break;
 			}
-			case l_or: {
+			case ior: {
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
-				current_frame_->push(Object(o1.b() || o2.b()));
-				break;
+				current_frame_->push(Object(o1.i() | o2.i()));
 				break;
 			}
 			case halt: {

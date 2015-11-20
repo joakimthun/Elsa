@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="array_test.cpp" />
-    <ClCompile Include="bool_opcodes_test.cpp" />
     <ClCompile Include="char_opcodes_test.cpp" />
     <ClCompile Include="float_opcodes_test.cpp" />
     <ClCompile Include="gc_test.cpp" />
@@ -42,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array_test.h" />
-    <ClInclude Include="bool_opcodes_test.h" />
     <ClInclude Include="call_test.h" />
     <ClInclude Include="char_opcodes_test.h" />
     <ClInclude Include="float_opcodes_test.h" />

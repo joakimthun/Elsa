@@ -2,7 +2,7 @@
 
 namespace elsa {
 
-		FieldInfo::FieldInfo(const std::wstring& name, OType type)
+		FieldInfo::FieldInfo(const std::wstring& name, VMType type)
 			:
 			name_(name),
 			type_(type),
@@ -21,7 +21,7 @@ namespace elsa {
 			return name_;
 		}
 
-		OType FieldInfo::get_type() const
+		VMType FieldInfo::get_type() const
 		{
 			return type_;
 		}
@@ -40,19 +40,16 @@ namespace elsa {
 		{
 			switch (type_)
 			{
-			case Int:
+			case VMType::Int:
 				size_ = sizeof(int);
 				break;
-			case Float:
+			case VMType::Float:
 				size_ = sizeof(float);
 				break;
-			case Char:
+			case VMType::Char:
 				size_ = sizeof(wchar_t);
 				break;
-			case Bool:
-				size_ = sizeof(bool);
-				break;
-			case GCOPtr:
+			case VMType::GCOPtr:
 				size_ += sizeof(GCObject*);
 				break;
 			default:

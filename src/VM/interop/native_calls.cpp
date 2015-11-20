@@ -34,14 +34,12 @@ namespace elsa {
 		{
 			auto object = frame->pop();
 
-			if (object.get_type() == OType::Int)
+			if (object.get_type() == elsa::VMType::Int)
 				std::cout << object.i();
-			else if (object.get_type() == OType::Float)
+			else if (object.get_type() == elsa::VMType::Float)
 				std::cout << object.f();
-			else if (object.get_type() == OType::Char)
+			else if (object.get_type() == elsa::VMType::Char)
 				std::wcout << object.c();
-			else if (object.get_type() == OType::Bool)
-				std::cout << object.b();
 			else
 				throw RuntimeException("Unsupported type: print_ln");
 		}

@@ -18,14 +18,14 @@ namespace elsa {
 				auto left_type = std::unique_ptr<ElsaType>(get_expression_type(be->get_left()));
 				auto right_type = std::unique_ptr<ElsaType>(get_expression_type(be->get_right()));
 
-				if (left_type->get_type() == OType::Int && right_type->get_type() == OType::Int)
-					return new ElsaType(OType::Int);
+				if (left_type->get_type() == ObjectType::Int && right_type->get_type() == ObjectType::Int)
+					return new ElsaType(ObjectType::Int);
 
-				if (left_type->get_type() == OType::Float && right_type->get_type() == OType::Float)
-					return new ElsaType(OType::Float);
+				if (left_type->get_type() == ObjectType::Float && right_type->get_type() == ObjectType::Float)
+					return new ElsaType(ObjectType::Float);
 
-				if (left_type->get_type() == OType::Bool && right_type->get_type() == OType::Bool)
-					return new ElsaType(OType::Bool);
+				if (left_type->get_type() == ObjectType::Bool && right_type->get_type() == ObjectType::Bool)
+					return new ElsaType(ObjectType::Bool);
 
 				throw ParsingException("Type mismatch");
 			}
@@ -53,19 +53,19 @@ namespace elsa {
 			}
 			if (is_of_type<IntegerLiteralExpression>(expression))
 			{
-				return new ElsaType(OType::Int);
+				return new ElsaType(ObjectType::Int);
 			}
 			if (is_of_type<FloatLiteralExpression>(expression))
 			{
-				return new ElsaType(OType::Float);
+				return new ElsaType(ObjectType::Float);
 			}
 			if (is_of_type<CharLiteralExpression>(expression))
 			{
-				return new ElsaType(OType::Char);
+				return new ElsaType(ObjectType::Char);
 			}
 			if (is_of_type<BoolLiteralExpression>(expression))
 			{
-				return new ElsaType(OType::Bool);
+				return new ElsaType(ObjectType::Bool);
 			}
 			if (is_of_type<CreateStructExpression>(expression))
 			{
@@ -98,7 +98,7 @@ namespace elsa {
 				{
 					type.reset(get_field_type(current, field_expression.get()));
 
-					if (field_expression->get_type()->get_type() == OType::GCOPtr)
+					if (field_expression->get_type()->get_type() == ObjectType::GCOPtr)
 						current = field_expression->get_type()->get_struct_declaration_expression();
 				}
 
@@ -119,31 +119,31 @@ namespace elsa {
 			switch (type)
 			{
 			case TokenType::Void: {
-				return new ElsaType(OType::Void);
+				return new ElsaType(ObjectType::Void);
 			}
 			case TokenType::Int: {
-				return new ElsaType(OType::Int);
+				return new ElsaType(ObjectType::Int);
 			}
 			case TokenType::Float: {
-				return new ElsaType(OType::Float);
+				return new ElsaType(ObjectType::Float);
 			}
 			case TokenType::Char: {
-				return new ElsaType(OType::Char);
+				return new ElsaType(ObjectType::Char);
 			}
 			case TokenType::Bool: {
-				return new ElsaType(OType::Bool);
+				return new ElsaType(ObjectType::Bool);
 			}
 			case TokenType::IntegerLiteral: {
-				return new ElsaType(OType::Int);
+				return new ElsaType(ObjectType::Int);
 			}
 			case TokenType::FloatLiteral: {
-				return new ElsaType(OType::Float);
+				return new ElsaType(ObjectType::Float);
 			}
 			case TokenType::CharLiteral: {
-				return new ElsaType(OType::Char);
+				return new ElsaType(ObjectType::Char);
 			}
 			case TokenType::BoolLiteral: {
-				return new ElsaType(OType::Bool);
+				return new ElsaType(ObjectType::Bool);
 			}
 			case TokenType::Identifier: {
 				return get_struct_type(token->get_value());
@@ -153,7 +153,7 @@ namespace elsa {
 			}
 		}
 
-		void TypeChecker::assert_is_same_type(OType t1, OType t2)
+		void TypeChecker::assert_is_same_type(ObjectType t1, ObjectType t2)
 		{
 			if (t1 != t2)	
 				throw ParsingException("Type mismatch");
@@ -164,7 +164,7 @@ namespace elsa {
 			auto left = get_expression_type(first);
 			auto right = get_expression_type(second);
 
-			if (left->get_type() == OType::GCOPtr && right->get_type() == OType::GCOPtr)
+			if (left->get_type() == ObjectType::GCOPtr && right->get_type() == ObjectType::GCOPtr)
 				return left->get_struct_declaration_expression()->get_name() == right->get_struct_declaration_expression()->get_name();
 
 			return left->get_type() == right->get_type();

@@ -225,7 +225,7 @@ TEST_F(IntOpCodesTest, IEQ_TRUE)
 	auto vm = VM(program_);
 	vm.execute();
 
-	EXPECT_EQ(true, vm.eval_stack_top().b());
+	EXPECT_EQ(1, vm.eval_stack_top().i());
 }
 
 TEST_F(IntOpCodesTest, IEQ_FALSE)
@@ -241,7 +241,7 @@ TEST_F(IntOpCodesTest, IEQ_FALSE)
 	auto vm = VM(program_);
 	vm.execute();
 
-	EXPECT_EQ(false, vm.eval_stack_top().b());
+	EXPECT_EQ(0, vm.eval_stack_top().i());
 }
 
 TEST_F(IntOpCodesTest, INEQ_TRUE)
@@ -257,7 +257,7 @@ TEST_F(IntOpCodesTest, INEQ_TRUE)
 	auto vm = VM(program_);
 	vm.execute();
 
-	EXPECT_EQ(true, vm.eval_stack_top().b());
+	EXPECT_EQ(1, vm.eval_stack_top().i());
 }
 
 TEST_F(IntOpCodesTest, INEQ_FALSE)
@@ -273,5 +273,5 @@ TEST_F(IntOpCodesTest, INEQ_FALSE)
 	auto vm = VM(program_);
 	vm.execute();
 
-	EXPECT_EQ(false, vm.eval_stack_top().b());
+	EXPECT_EQ(0, vm.eval_stack_top().i());
 }

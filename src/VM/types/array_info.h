@@ -1,16 +1,15 @@
 #pragma once
 
 #include <cstddef>
+#include "object_types\vm_type.h"
 
 namespace elsa {
 	namespace vm {
 
-		enum elsa::OType;
-
 		struct ArrayInfo
 		{
-			ArrayInfo(OType t, std::size_t ne, std::size_t es) : type(t), num_elements(ne), element_size(es) {};
-			elsa::OType type;
+			ArrayInfo(elsa::VMType t, std::size_t ne, std::size_t es) : type(t), num_elements(ne), element_size(es) {};
+			elsa::VMType type;
 			std::size_t num_elements;
 			std::size_t element_size;
 		};

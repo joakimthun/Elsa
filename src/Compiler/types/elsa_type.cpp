@@ -12,7 +12,7 @@ namespace elsa {
 		{
 		}
 
-		ElsaType::ElsaType(OType type)
+		ElsaType::ElsaType(ObjectType type)
 			:
 			type_(type),
 			struct_declaration_expression_(nullptr)
@@ -20,13 +20,35 @@ namespace elsa {
 
 		ElsaType::ElsaType(const StructDeclarationExpression* struct_declaration_expression)
 			:
-			type_(OType::GCOPtr),
+			type_(ObjectType::GCOPtr),
 			struct_declaration_expression_(struct_declaration_expression)
 		{}
 
-		OType ElsaType::get_type() const
+		ObjectType ElsaType::get_type() const
 		{
 			return type_;
+		}
+
+		VMType ElsaType::get_vm_type() const
+		{
+			switch (type_)
+			{
+			case ObjectType::Bool:
+			case ObjectType::Int: {
+				return VMType::Int;
+			}
+			case ObjectType::Float: {
+				return VMType::Float;
+			}
+			case ObjectType::Char: {
+				return VMType::Char;
+			}
+			case ObjectType::GCOPtr: {
+				return VMType::GCOPtr;
+			}
+			default:
+				throw ParsingException("Unsupported field type.");
+			}
 		}
 
 		const StructDeclarationExpression* ElsaType::get_struct_declaration_expression() const

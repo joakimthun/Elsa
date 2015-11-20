@@ -28,7 +28,7 @@ namespace elsa {
 							}
 							else
 							{
-								if (field->get_type()->get_type() == OType::GCOPtr)
+								if (field->get_type()->get_type() == ObjectType::GCOPtr)
 									current_type = field->get_type()->get_struct_declaration_expression();
 
 								program->emit(OpCode::l_field);

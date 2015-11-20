@@ -33,7 +33,7 @@ namespace elsa {
 			return obj;
 		}
 
-		Object Heap::alloc_array(elsa::OType type, std::size_t size)
+		Object Heap::alloc_array(elsa::VMType type, std::size_t size)
 		{
 			auto element_size = get_size_of_type(type);
 			auto array_size = element_size * size;
@@ -80,15 +80,13 @@ namespace elsa {
 
 			switch (fi->get_type())
 			{
-			case Int:
+			case VMType::Int:
 				return Object(*(int*)field_ptr);
-			case Float:
+			case VMType::Float:
 				return Object(*(float*)field_ptr);
-			case Char:
+			case VMType::Char:
 				return Object(*(wchar_t*)field_ptr);
-			case Bool:
-				return Object(*(bool*)field_ptr);
-			case GCOPtr:
+			case VMType::GCOPtr:
 				return Object(*(GCObject**)field_ptr);
 			default:
 				throw RuntimeException("Invalid field type.");
@@ -111,19 +109,16 @@ namespace elsa {
 
 			switch (fi->get_type())
 			{
-			case Int:
+			case VMType::Int:
 				*(int*)field_ptr = value.i();
 				break;
-			case Float:
+			case VMType::Float:
 				*(float*)field_ptr = value.f();
 				break;
-			case Char:
+			case VMType::Char:
 				*(wchar_t*)field_ptr = value.c();
 				break;
-			case Bool:
-				*(bool*)field_ptr = value.b();
-				break;
-			case GCOPtr: {
+			case VMType::GCOPtr: {
 				*(GCObject**)field_ptr = value.gco();
 				break;
 			}
@@ -150,15 +145,13 @@ namespace elsa {
 
 			switch (arr->ai->type)
 			{
-			case Int:
+			case VMType::Int:
 				return Object(*((int*)arr->ptr + element_index));
-			case Float:
+			case VMType::Float:
 				return Object(*((float*)arr->ptr + element_index));
-			case Char:
+			case VMType::Char:
 				return Object(*((wchar_t*)arr->ptr + element_index));
-			case Bool:
-				return Object(*((bool*)arr->ptr + element_index));
-			case GCOPtr:
+			case VMType::GCOPtr:
 				return Object(*((GCObject**)arr->ptr + element_index));
 			default:
 				throw RuntimeException("Invalid array type.");
@@ -174,19 +167,16 @@ namespace elsa {
 
 			switch (arr->ai->type)
 			{
-			case Int:
+			case VMType::Int:
 				*((int*)arr->ptr + element_index) = value.i();
 				break;
-			case Float:
+			case VMType::Float:
 				*((float*)arr->ptr + element_index) = value.f();
 				break;
-			case Char:
+			case VMType::Char:
 				*((wchar_t*)arr->ptr + element_index) = value.c();
 				break;
-			case Bool:
-				*((bool*)arr->ptr + element_index) = value.b();
-				break;
-			case GCOPtr:
+			case VMType::GCOPtr:
 				*((GCObject**)arr->ptr + element_index) = value.gco();
 				break;
 			default:
@@ -201,7 +191,7 @@ namespace elsa {
 
 		void Heap::assert_is_not_null(const Object& instance)
 		{
-			if (instance.get_type() != GCOPtr)
+			if (instance.get_type() != VMType::GCOPtr)
 				throw RuntimeException("The instance has to be a heap allocated object");
 
 			if (instance.gco() == nullptr)
@@ -210,7 +200,7 @@ namespace elsa {
 
 		void Heap::assert_is_struct(const Object& instance)
 		{
-			if (instance.get_type() != GCOPtr)
+			if (instance.get_type() != VMType::GCOPtr)
 				throw RuntimeException("The instance has to be a heap allocated object");
 
 			if (instance.gco()->type != GCObjectType::Struct)
@@ -219,7 +209,7 @@ namespace elsa {
 
 		void Heap::assert_is_array(const Object& instance)
 		{
-			if (instance.get_type() != GCOPtr)
+			if (instance.get_type() != VMType::GCOPtr)
 				throw RuntimeException("The instance has to be a heap allocated object");
 
 			if (instance.gco()->type != GCObjectType::Array)
@@ -239,19 +229,17 @@ namespace elsa {
 			return base_ptr + f->get_num_bytes_offset();
 		}
 
-		std::size_t Heap::get_size_of_type(elsa::OType type)
+		std::size_t Heap::get_size_of_type(elsa::VMType type)
 		{
 			switch (type)
 			{
-			case Int:
+			case VMType::Int:
 				return sizeof(int);
-			case Float:
+			case VMType::Float:
 				return sizeof(float);
-			case Char:
+			case VMType::Char:
 				return sizeof(wchar_t);
-			case Bool:
-				return sizeof(bool);
-			case GCOPtr:
+			case VMType::GCOPtr:
 				return sizeof(GCObject*);
 			default:
 				throw RuntimeException("Invalid type.");
@@ -297,19 +285,17 @@ namespace elsa {
 			}
 		}
 
-		Object Heap::get_default_value(elsa::OType type)
+		Object Heap::get_default_value(elsa::VMType type)
 		{
 			switch(type)
 			{
-			case Int:
+			case VMType::Int:
 				return Object(0);
-			case Float:
+			case VMType::Float:
 				return Object(0.0f);
-			case Char:
+			case VMType::Char:
 				return Object(L'\0');
-			case Bool:
-				return Object(false);
-			case GCOPtr:
+			case VMType::GCOPtr:
 				return Object(nullptr);
 			default:
 				throw RuntimeException("Invalid type.");

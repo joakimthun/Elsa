@@ -14,7 +14,7 @@ namespace elsa {
 
 		OpCode BinaryOperatorExpressionBuilder::get_operator(BinaryOperatorExpression* expression)
 		{
-			if (expression->get_type()->get_type() == OType::Int)
+			if (expression->get_type()->get_type() == ObjectType::Int)
 			{
 				switch (expression->get_operator())
 				{
@@ -29,14 +29,14 @@ namespace elsa {
 				}
 			}
 
-			if (expression->get_type()->get_type() == OType::Bool)
+			if (expression->get_type()->get_type() == ObjectType::Bool)
 			{
 				switch (expression->get_operator())
 				{
 				case TokenType::DoubleAmpersand:
-					return OpCode::l_and;
+					return OpCode::iand;
 				case TokenType::DoubleVerticalBar:
-					return OpCode::l_or;
+					return OpCode::ior;
 				}
 			}
 

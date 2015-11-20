@@ -5,7 +5,7 @@
 namespace elsa {
 	namespace compiler {
 
-		enum TokenType : int
+		enum class TokenType : int
 		{
 			END,
 			Elsa,

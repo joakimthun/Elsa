@@ -37,14 +37,9 @@ namespace elsa {
 			ceq,
 			cneq,
 
-			// Bool operations
-			bconst,
-			beq,
-			bneq,
-
-			// Logical operations
-			l_and,
-			l_or,
+			// Bitwise operations
+			iand,
+			ior,
 
 			// String operations
 			sconst,
@@ -55,8 +50,6 @@ namespace elsa {
 			br_ineq,
 			br_feq,
 			br_fneq,
-			br_beq,
-			br_bneq,
 			br_ceq,
 			br_cneq,
 

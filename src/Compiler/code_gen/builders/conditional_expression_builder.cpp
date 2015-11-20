@@ -10,11 +10,11 @@ namespace elsa {
 			expression->get_condition()->accept(visitor);
 
 			// Push true
-			program->emit(OpCode::bconst);
+			program->emit(OpCode::iconst);
 			program->emit(1);
 
 			// If not equal -> branch
-			program->emit(OpCode::br_bneq);
+			program->emit(OpCode::br_ineq);
 			auto after_if_addr_index = program->mark_index();
 
 			for (auto& exp : expression->get_if_body())

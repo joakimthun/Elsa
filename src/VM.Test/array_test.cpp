@@ -17,7 +17,7 @@ protected:
 		program_.add_float(std::make_unique<FloatInfo>(-99.0f));
 
 		auto si = std::make_unique<StructInfo>(L"my_struct");
-		si->add_field(std::make_unique<FieldInfo>(L"field0", elsa::OType::Int));
+		si->add_field(std::make_unique<FieldInfo>(L"field0", elsa::VMType::Int));
 		program_.add_struct(std::move(si));
 
 		program_.set_entry_point(ep);
@@ -33,14 +33,14 @@ TEST_F(ArrayTest, NEW)
 	program_.emit(
 	{
 		iconst, 3,
-		new_arr, Int,
+		new_arr, (int)VMType::Int,
 		halt
 	});
 
 	auto vm = VM(program_);
 	vm.execute();
 
-	ASSERT_EQ(elsa::OType::GCOPtr, vm.eval_stack_top().get_type());
+	ASSERT_EQ(elsa::VMType::GCOPtr, vm.eval_stack_top().get_type());
 	EXPECT_EQ(GCObjectType::Array, vm.eval_stack_top().gco()->type);
 }
 
@@ -49,7 +49,7 @@ TEST_F(ArrayTest, RESIZE)
 	program_.emit(
 	{
 		iconst, 3,
-		new_arr, Int,
+		new_arr, (int)VMType::Int,
 		s_local, 0,
 
 		l_local, 0,
@@ -157,7 +157,7 @@ TEST_F(ArrayTest, INT_STORE_LOAD)
 	program_.emit(
 	{
 		iconst, 3,
-		new_arr, Int, 
+		new_arr, (int)VMType::Int,
 		s_local, 0,
 
 		// Store 10 at index 0
@@ -211,7 +211,7 @@ TEST_F(ArrayTest, FLOAT_STORE_LOAD)
 	program_.emit(
 	{
 		iconst, 3,
-		new_arr, Float,
+		new_arr, (int)VMType::Float,
 		s_local, 0,
 
 		// Store 12.0 at index 0
@@ -265,7 +265,7 @@ TEST_F(ArrayTest, STRUCT_PTR_STORE_LOAD)
 	program_.emit(
 	{
 		iconst, 2,
-		new_arr, GCOPtr,
+		new_arr, (int)VMType::GCOPtr,
 		s_local, 0,
 
 		// Store a struct pointer at index 0
@@ -331,17 +331,17 @@ TEST_F(ArrayTest, ARRAY_OF_ARRAYS)
 	program_.emit(
 	{
 		iconst, 2,
-		new_arr, GCOPtr,
+		new_arr, (int)VMType::GCOPtr,
 		s_local, 0,
 
 		l_local, 0,
 		iconst, 2,
-		new_arr, Int,
+		new_arr, (int)VMType::Int,
 		s_ele, 0,
 
 		l_local, 0,
 		iconst, 2,
-		new_arr, Int,
+		new_arr, (int)VMType::Int,
 		s_ele, 1,
 
 		l_local, 0,
@@ -426,12 +426,12 @@ TEST_F(ArrayTest, DEFAULT_VALUES)
 	program_.emit(
 	{
 		iconst, 2,
-		new_arr, Float,
+		new_arr, (int)VMType::Float,
 		s_local, 0,
 
 		halt,
 		iconst, 2,
-		new_arr, Char,
+		new_arr, (int)VMType::Char,
 		s_local, 1,
 
 		l_local, 0,
