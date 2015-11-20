@@ -10,14 +10,27 @@ struct player
 	int speed;
 };
 
+func void cond_print()
+{
+	//if(1 > 5)
+	//{
+	//	elsa.PrintLn(5);
+	//}
+	//
+	//if(1 < 5)
+	//{
+	//	elsa.PrintLn(5);
+	//}
+}
+
 func void print_sum(int a, int b)
 {
 	elsa.PrintLn(a + b);
 }
 
-func void cond_print()
+func void cond_print2()
 {
-	if(true || false && true)
+	if(false && false || false || true)
 	{
 		elsa.PrintLn(777);
 	}
@@ -44,6 +57,7 @@ func void cond_print()
 func int main(int dummy)
 {
 	cond_print();
+	cond_print2();
 
 	var x = 1 + 2 * 6;
 

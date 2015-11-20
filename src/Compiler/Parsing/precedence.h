@@ -5,11 +5,13 @@ namespace elsa {
 
 		enum Precedence : int
 		{
-			Assignment = 1,		// =
-			ConditionalAnd = 2, // &&
-			ConditionalOr = 3,  // ||
-			Sum = 4,			// + , -
-			Product = 5,		// * , /
+			Assignment = 1,		// =, +=, -=, /=
+			ConditionalOr = 2,  // ||
+			ConditionalAnd = 3, // &&
+			Equality = 4,		// ==, !=
+			Relational = 5,		// <, >, <=, >=
+			Sum = 6,			// + , -
+			Product = 7,		// * , /
 		};
 
 	}

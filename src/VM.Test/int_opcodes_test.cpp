@@ -275,3 +275,51 @@ TEST_F(IntOpCodesTest, INEQ_FALSE)
 
 	EXPECT_EQ(0, vm.eval_stack_top().i());
 }
+
+TEST_F(IntOpCodesTest, ILT)
+{
+	program_.emit(
+	{
+		iconst, 5,
+		iconst, 10,
+		ilt,
+		halt,
+		iconst, 10,
+		iconst, 5,
+		ilt,
+		halt
+	});
+
+	auto vm = VM(program_);
+	vm.execute();
+
+	EXPECT_EQ(1, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(0, vm.eval_stack_top().i());
+}
+
+TEST_F(IntOpCodesTest, IGT)
+{
+	program_.emit(
+	{
+		iconst, 5,
+		iconst, 10,
+		igt,
+		halt,
+		iconst, 10,
+		iconst, 5,
+		igt,
+		halt
+	});
+
+	auto vm = VM(program_);
+	vm.execute();
+
+	EXPECT_EQ(1, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(0, vm.eval_stack_top().i());
+}

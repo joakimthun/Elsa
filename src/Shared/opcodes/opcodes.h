@@ -22,6 +22,8 @@ namespace elsa {
 			idiv,
 			ieq,
 			ineq,
+			ilt,
+			igt,
 
 			// Float operations
 			fconst,
