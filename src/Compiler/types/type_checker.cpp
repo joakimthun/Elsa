@@ -15,15 +15,13 @@ namespace elsa {
 			if (is_of_type<BinaryOperatorExpression>(expression))
 			{
 				auto be = static_cast<BinaryOperatorExpression*>(expression);
-				auto left_type = std::unique_ptr<ElsaType>(get_expression_type(be->get_left()));
-				auto right_type = std::unique_ptr<ElsaType>(get_expression_type(be->get_right()));
 
 				if (!is_same_type(be->get_left(), be->get_right()))
 				{
 					throw ParsingException("Type mismatch");
 				}
 
-				if (is_relational(be->get_operator()))
+				if (is_boolean_operator(be->get_operator()))
 				{
 					return new ElsaType(ObjectType::Bool);
 				}
@@ -201,7 +199,7 @@ namespace elsa {
 			return is_same_type(assignment_expression->get_left(), assignment_expression->get_right());
 		}
 
-		bool TypeChecker::is_relational(TokenType op)
+		bool TypeChecker::is_boolean_operator(TokenType op)
 		{
 			switch (op)
 			{
@@ -209,6 +207,8 @@ namespace elsa {
 			case TokenType::LessThan:
 			case TokenType::GreaterThanEquals:
 			case TokenType::LessThanEquals:
+			case TokenType::DoubleEquals:
+			case TokenType::NotEquals:
 				return true;
 			default:
 				return false;

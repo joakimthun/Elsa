@@ -14,12 +14,62 @@ func void cond_print()
 {
 	if(6 > 5 || false)
 	{
-		elsa.PrintLn(1337);
+		elsa.PrintLn(7000);
 	}
 	
 	if(4 < 5 && false)
 	{
-		elsa.PrintLn(1338);
+		elsa.PrintLn(7001);
+	}
+
+	if(99 >= 99)
+	{
+		elsa.PrintLn(7002);
+	}
+
+	if(99 >= 100)
+	{
+		elsa.PrintLn(7003);
+	}
+
+	if(99 <= 100)
+	{
+		elsa.PrintLn(7004);
+	}
+
+	if(99 <= 99)
+	{
+		elsa.PrintLn(7005);
+	}
+
+	if(99 <= 200 &&  88 >= 99)
+	{
+		elsa.PrintLn(7006);
+	}
+
+	if(99 <= 200 ||  88 >= 99)
+	{
+		elsa.PrintLn(7007);
+	}
+
+	if(100 == 2)
+	{
+		elsa.PrintLn(8000);
+	}
+
+	if(100 != 2)
+	{
+		elsa.PrintLn(8001);
+	}
+
+	if(100 == 100)
+	{
+		elsa.PrintLn(8002);
+	}
+
+	if(100 != 100)
+	{
+		elsa.PrintLn(8003);
 	}
 }
 

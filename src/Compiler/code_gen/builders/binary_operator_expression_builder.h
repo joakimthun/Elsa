@@ -15,10 +15,10 @@ namespace elsa {
 		class BinaryOperatorExpressionBuilder
 		{
 		public:
-			static void build(VMProgram* program, VMExpressionVisitor* visitor, BinaryOperatorExpression* expression);
+			static void build(VMProgram* program, VMExpressionVisitor* visitor, BinaryOperatorExpression* expression, TokenType* op_override = nullptr);
 
 		private:
-			static OpCode get_operator(BinaryOperatorExpression* expression);
+			static void build_operator(TokenType op, VMProgram* program, VMExpressionVisitor* visitor, BinaryOperatorExpression* expression);
 		};
 
 	}
