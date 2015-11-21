@@ -59,7 +59,8 @@ namespace elsa {
 			DoubleVerticalBar,
 			New,
 			If,
-			Else
+			Else,
+			Loop,
 		};
 		
 		class Token

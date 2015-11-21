@@ -228,6 +228,9 @@
     <ClInclude Include="code_gen\builders\conditional_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\loop_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -417,6 +420,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code_gen\builders\conditional_expression_builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\loop_expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
