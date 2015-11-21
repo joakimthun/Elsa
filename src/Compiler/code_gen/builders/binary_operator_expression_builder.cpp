@@ -37,6 +37,10 @@ namespace elsa {
 					return OpCode::iand;
 				case TokenType::DoubleVerticalBar:
 					return OpCode::ior;
+				case TokenType::LessThan:
+					return OpCode::ilt;
+				case TokenType::GreaterThan:
+					return OpCode::igt;
 				}
 			}
 

@@ -127,11 +127,11 @@ namespace elsa {
 					return match_token(L'<', TokenType::LessThan);
 				}
 				case L'>': {
-					auto t = try_match_tokens(L'>', L'=', TokenType::GreaterThenEquals);
+					auto t = try_match_tokens(L'>', L'=', TokenType::GreaterThanEquals);
 					if (t != nullptr)
 						return t;
 
-					return match_token(L'>', TokenType::GreaterThen);
+					return match_token(L'>', TokenType::GreaterThan);
 				}
 				case L'%': {
 					return match_token(L'%', TokenType::Percent);

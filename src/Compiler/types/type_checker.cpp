@@ -18,16 +18,17 @@ namespace elsa {
 				auto left_type = std::unique_ptr<ElsaType>(get_expression_type(be->get_left()));
 				auto right_type = std::unique_ptr<ElsaType>(get_expression_type(be->get_right()));
 
-				if (left_type->get_type() == ObjectType::Int && right_type->get_type() == ObjectType::Int)
-					return new ElsaType(ObjectType::Int);
+				if (!is_same_type(be->get_left(), be->get_right()))
+				{
+					throw ParsingException("Type mismatch");
+				}
 
-				if (left_type->get_type() == ObjectType::Float && right_type->get_type() == ObjectType::Float)
-					return new ElsaType(ObjectType::Float);
-
-				if (left_type->get_type() == ObjectType::Bool && right_type->get_type() == ObjectType::Bool)
+				if (is_relational(be->get_operator()))
+				{
 					return new ElsaType(ObjectType::Bool);
+				}
 
-				throw ParsingException("Type mismatch");
+				return get_expression_type(be->get_left());
 			}
 			if (is_of_type<IdentifierExpression>(expression))
 			{
@@ -159,7 +160,7 @@ namespace elsa {
 				throw ParsingException("Type mismatch");
 		}
 
-		bool TypeChecker::is_same_type(Expression * first, Expression * second)
+		bool TypeChecker::is_same_type(Expression* first, Expression* second)
 		{
 			auto left = get_expression_type(first);
 			auto right = get_expression_type(second);
@@ -198,6 +199,20 @@ namespace elsa {
 		bool TypeChecker::valid_assignment(AssignmentExpression* assignment_expression)
 		{
 			return is_same_type(assignment_expression->get_left(), assignment_expression->get_right());
+		}
+
+		bool TypeChecker::is_relational(TokenType op)
+		{
+			switch (op)
+			{
+			case TokenType::GreaterThan:
+			case TokenType::LessThan:
+			case TokenType::GreaterThanEquals:
+			case TokenType::LessThanEquals:
+				return true;
+			default:
+				return false;
+			}
 		}
 
 		template<typename TExpression>

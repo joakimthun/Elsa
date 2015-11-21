@@ -235,7 +235,7 @@ namespace elsa {
 			register_infix_parser(TokenType::DoubleVerticalBar, new BinaryOperatorParser(Precedence::ConditionalOr));
 
 			register_infix_parser(TokenType::LessThan, new BinaryOperatorParser(Precedence::Relational));
-			register_infix_parser(TokenType::GreaterThen, new BinaryOperatorParser(Precedence::Relational));
+			register_infix_parser(TokenType::GreaterThan, new BinaryOperatorParser(Precedence::Relational));
 
 			register_infix_parser(TokenType::Equals, new AssignmentParser());
 		}

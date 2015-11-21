@@ -12,15 +12,15 @@ struct player
 
 func void cond_print()
 {
-	//if(1 > 5)
-	//{
-	//	elsa.PrintLn(5);
-	//}
-	//
-	//if(1 < 5)
-	//{
-	//	elsa.PrintLn(5);
-	//}
+	if(6 > 5 || false)
+	{
+		elsa.PrintLn(1337);
+	}
+	
+	if(4 < 5 && false)
+	{
+		elsa.PrintLn(1338);
+	}
 }
 
 func void print_sum(int a, int b)
@@ -69,7 +69,7 @@ func int main(int dummy)
 	var f = 10.89;
 	var c = 'X';
 	var b = false;
-	
+
 	var vec = new vec2D;
 	vec.x = 10;
 	vec.y = 20;

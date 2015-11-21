@@ -41,6 +41,7 @@ namespace elsa {
 			bool valid_assignment(AssignmentExpression* assignment_expression);
 			template<typename TExpression>
 			bool is_of_type(Expression* exp);
+			bool is_relational(TokenType op);
 
 		private:
 			ElsaParser* parser_;
