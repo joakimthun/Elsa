@@ -43,9 +43,9 @@ namespace elsa {
 			return body_;
 		}
 
-		void LoopExpression::set_type()
+		void LoopExpression::set_type(LoopType type)
 		{
-
+			type_ = type;
 		}
 
 		LoopType LoopExpression::get_type()

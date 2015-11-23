@@ -25,6 +25,7 @@
 #include "parsers\assignment_parser.h"
 #include "parsers\func_call_parser.h"
 #include "parsers\conditional_parser.h"
+#include "parsers\loop_parser.h"
 #include "../types/type_checker.h"
 #include "ll2_entry.h"
 

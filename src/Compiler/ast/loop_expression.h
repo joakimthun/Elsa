@@ -34,7 +34,7 @@ namespace elsa {
 			const Expression* get_post_expression() const;
 			const std::vector<std::unique_ptr<Expression>>& get_body() const;
 
-			void set_type();
+			void set_type(LoopType type);
 			LoopType get_type();
 			
 
