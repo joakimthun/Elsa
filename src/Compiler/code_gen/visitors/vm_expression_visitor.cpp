@@ -83,6 +83,10 @@ namespace elsa {
 			ConditionalExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		void VMExpressionVisitor::visit(LoopExpression* expression)
+		{
+		}
+
 		ScopedExpression* VMExpressionVisitor::current_scope()
 		{
 			if (current_scope_ == nullptr)

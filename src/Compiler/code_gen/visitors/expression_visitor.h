@@ -18,6 +18,7 @@ namespace elsa {
 		class FuncCallExpression;
 		class BoolLiteralExpression;
 		class ConditionalExpression;
+		class LoopExpression;
 
 		class ExpressionVisitor
 		{
@@ -38,6 +39,7 @@ namespace elsa {
 			virtual void visit(FuncCallExpression* expression) = 0;
 			virtual void visit(BoolLiteralExpression* expression) = 0;
 			virtual void visit(ConditionalExpression* expression) = 0;
+			virtual void visit(LoopExpression* expression) = 0;
 		};
 
 	}

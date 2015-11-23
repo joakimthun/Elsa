@@ -1,5 +1,7 @@
 #include "loop_expression.h"
 
+#include "../code_gen/visitors/expression_visitor.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -55,7 +57,7 @@ namespace elsa {
 
 		void LoopExpression::accept(ExpressionVisitor* visitor)
 		{
-
+			visitor->visit(this);
 		}
 
 	}
