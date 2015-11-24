@@ -25,17 +25,17 @@ namespace elsa {
 			body_.push_back(std::move(expression));
 		}
 
-		const Expression* LoopExpression::get_variable_expression() const
+		Expression* LoopExpression::get_variable_expression()
 		{
 			return variable_expression_.get();
 		}
 
-		const Expression* LoopExpression::get_condition() const
+		Expression* LoopExpression::get_condition()
 		{
 			return condition_.get();
 		}
 
-		const Expression* LoopExpression::get_post_expression() const
+		Expression* LoopExpression::get_post_expression()
 		{
 			return post_expression_.get();
 		}

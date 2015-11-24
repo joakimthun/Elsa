@@ -2,6 +2,7 @@
 
 #include "parser.h"
 #include "../../ast/loop_expression.h"
+#include "../../ast/variable_declaration_expression.h"
 #include "../elsa_parser.h"
 #include "../../types/type_checker.h"
 

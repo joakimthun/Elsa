@@ -10,6 +10,14 @@ struct player
 	int speed;
 };
 
+func void loops()
+{
+	loop(var i = 0; i < 10; i++)
+	{
+		elsa.PrintLn(i);
+	}
+}
+
 func void cond_print()
 {
 	if(6 > 5 || false)

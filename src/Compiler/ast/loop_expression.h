@@ -5,6 +5,7 @@
 #include <utility>
 
 #include "expression.h"
+#include "variable_declaration_expression.h"
 #include "../token.h"
 #include "../types/elsa_type.h"
 
@@ -27,9 +28,9 @@ namespace elsa {
 			void set_post_expression(std::unique_ptr<Expression> expression);
 			void add_to_body(std::unique_ptr<Expression> expression);
 
-			const Expression* get_variable_expression() const;
-			const Expression* get_condition() const;
-			const Expression* get_post_expression() const;
+			Expression* get_variable_expression();
+			Expression* get_condition();
+			Expression* get_post_expression();
 			const std::vector<std::unique_ptr<Expression>>& get_body() const;
 
 			void set_type(LoopType type);

@@ -26,6 +26,7 @@
     <ClInclude Include="ast\field_access_expression.h" />
     <ClInclude Include="ast\func_call_expression.h" />
     <ClInclude Include="ast\loop_expression.h" />
+    <ClInclude Include="ast\postfix_operator_expression.h" />
     <ClInclude Include="ast\struct_access_expression.h" />
     <ClInclude Include="ast\field_expression.h" />
     <ClInclude Include="ast\scoped_expression.h" />
@@ -101,6 +102,7 @@
     <ClCompile Include="ast\field_access_expression.cpp" />
     <ClCompile Include="ast\func_call_expression.cpp" />
     <ClCompile Include="ast\loop_expression.cpp" />
+    <ClCompile Include="ast\postfix_operator_expression.cpp" />
     <ClCompile Include="ast\struct_access_expression.cpp" />
     <ClCompile Include="ast\field_expression.cpp" />
     <ClCompile Include="ast\scoped_expression.cpp" />
