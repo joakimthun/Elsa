@@ -27,9 +27,9 @@ func void postfix()
 	x--;
 	elsa.PrintLn(x);
 
-	var player = new player;
-	player.speed = 9999;
-	player.speed++;
+	//var player = new player;
+	//player.speed = 9999;
+	//player.speed++;
 
 	//player.position = new vec2D;
 	//player.position.x = 56;
@@ -163,7 +163,7 @@ func int main(int dummy)
 	var player = new player;
 	player.speed = 11;
 	player.position = new vec2D;
-	player.position.x = 56;
+	player.position.x = 5600;
 	
 	elsa.PrintLn(player.position.x);
 	elsa.PrintLn(player.speed);

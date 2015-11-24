@@ -6,6 +6,7 @@
 #include "../../ast/postfix_operator_expression.h"
 #include "opcodes\opcodes.h"
 #include "vm_program.h"
+#include "../helpers/store_helper.h"
 
 namespace elsa {
 	namespace compiler {

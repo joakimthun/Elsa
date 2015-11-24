@@ -10,6 +10,14 @@ namespace elsa {
 			expression->get_expression()->accept(visitor);
 			build_operator(expression->get_operator(), program, expression);
 
+			if (auto sae = dynamic_cast<StructAccessExpression*>(expression->get_expression()))
+			{
+				auto field_index = StoreHelper::store_field(program, visitor, sae);
+				program->emit(OpCode::s_field);
+				program->emit(static_cast<int>(field_index));
+				return;
+			}
+
 			if (auto ie = dynamic_cast<IdentifierExpression*>(expression->get_expression()))
 			{
 				auto local = visitor->current_scope()->get_local(ie->get_name());
