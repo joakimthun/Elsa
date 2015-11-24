@@ -85,6 +85,12 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(LoopExpression* expression)
 		{
+
+		}
+
+		void VMExpressionVisitor::visit(PostfixOperatorExpression* expression)
+		{
+
 		}
 
 		ScopedExpression* VMExpressionVisitor::current_scope()

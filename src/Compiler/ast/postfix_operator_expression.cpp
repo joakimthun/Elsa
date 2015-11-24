@@ -37,7 +37,7 @@ namespace elsa {
 
 		void PostfixOperatorExpression::accept(ExpressionVisitor* visitor)
 		{
-
+			visitor->visit(this);
 		}
 		
 	}
