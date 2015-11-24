@@ -85,7 +85,7 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(LoopExpression* expression)
 		{
-
+			LoopExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
 		void VMExpressionVisitor::visit(PostfixOperatorExpression* expression)
