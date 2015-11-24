@@ -19,6 +19,9 @@ namespace elsa {
 
 			exp->set_type(parser->type_checker().get_expression_type(exp->get_expression()));
 
+			if(parser->current_token()->get_type() == TokenType::Semicolon)
+				parser->consume(TokenType::Semicolon);
+
 			return std::move(exp);
 		}
 

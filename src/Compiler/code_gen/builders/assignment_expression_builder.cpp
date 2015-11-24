@@ -42,6 +42,17 @@ namespace elsa {
 
 				return;
 			}
+			else if (auto ie = dynamic_cast<IdentifierExpression*>(expression->get_left()))
+			{
+				IdentifierExpressionBuilder::build(program, visitor, ie);
+				expression->get_right()->accept(visitor);
+
+				auto local = visitor->current_scope()->get_local(ie->get_name());
+				program->emit(OpCode::s_local);
+				program->emit(static_cast<int>(local->get_index()));
+
+				return;
+			}
 
 			throw CodeGenException("Not supported -> AssignmentExpressionBuilder");
 		}

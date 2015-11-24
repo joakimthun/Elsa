@@ -127,6 +127,11 @@ func int main(int dummy)
 	cond_print();
 	cond_print2();
 
+	var assign_test = 1337;
+	elsa.PrintLn(assign_test);
+	assign_test = 1337 + 1000;
+	elsa.PrintLn(assign_test);
+
 	var x = 1 + 2 * 6;
 
 	var arg = 100 + 300 * 10;

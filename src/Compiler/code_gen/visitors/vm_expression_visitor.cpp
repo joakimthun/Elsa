@@ -90,7 +90,7 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(PostfixOperatorExpression* expression)
 		{
-
+			PostfixOperatorExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
 		ScopedExpression* VMExpressionVisitor::current_scope()

@@ -23,6 +23,7 @@
 #include "../builders/assignment_expression_builder.h"
 #include "../builders/func_call_expression_builder.h"
 #include "../builders/conditional_expression_builder.h"
+#include "../builders/postfix_operator_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {
