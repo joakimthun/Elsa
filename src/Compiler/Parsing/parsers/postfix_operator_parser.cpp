@@ -17,7 +17,7 @@ namespace elsa {
 			// Consume the operator token
 			parser->consume();
 
-			exp->set_type(parser->type_checker().get_expression_type(exp.get()));
+			exp->set_type(parser->type_checker().get_expression_type(exp->get_expression()));
 
 			return std::move(exp);
 		}

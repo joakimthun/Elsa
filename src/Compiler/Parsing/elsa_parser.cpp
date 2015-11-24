@@ -201,6 +201,11 @@ namespace elsa {
 			register_expression_parser(type, new PrefixOperatorParser());
 		}
 
+		void ElsaParser::register_postfix_parser(TokenType type, InfixParser* parser)
+		{
+			register_infix_parser(type, parser);
+		}
+
 		void ElsaParser::initialize_grammar()
 		{
 			// Statements
@@ -244,6 +249,10 @@ namespace elsa {
 			register_infix_parser(TokenType::GreaterThanEquals, new BinaryOperatorParser(Precedence::Relational));
 
 			register_infix_parser(TokenType::Equals, new AssignmentParser());
+
+			// Postfix
+			register_postfix_parser(TokenType::PlusPlus, new PostfixOperatorParser(Precedence::Unary));
+			register_postfix_parser(TokenType::MinusMinus, new PostfixOperatorParser(Precedence::Unary));
 		}
 	}
 }

@@ -26,6 +26,7 @@
 #include "parsers\func_call_parser.h"
 #include "parsers\conditional_parser.h"
 #include "parsers\loop_parser.h"
+#include "parsers\postfix_operator_parser.h"
 #include "../types/type_checker.h"
 #include "ll2_entry.h"
 
@@ -69,6 +70,7 @@ namespace elsa {
 			void register_statement_parser(TokenType type, Parser* parser);
 			void register_infix_parser(TokenType type, InfixParser* parser);
 			void register_prefix_parser(TokenType type);
+			void register_postfix_parser(TokenType type, InfixParser* parser);
 			void initialize_grammar();
 
 			StructTable struct_table_;
