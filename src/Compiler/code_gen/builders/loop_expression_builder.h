@@ -16,6 +16,11 @@ namespace elsa {
 		{
 		public:
 			static void build(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression);
+
+		private:
+			static void build_for_loop(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression);
+			static void build_while_loop(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression);
+			static void build_loop_body(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression);
 		};
 
 	}

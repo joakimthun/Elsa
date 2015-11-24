@@ -108,6 +108,11 @@ namespace elsa {
 				auto ae = static_cast<ArgumentExpression*>(expression);
 				return new ElsaType(ae->get_type());
 			}
+			if (is_of_type<VariableDeclarationExpression>(expression))
+			{
+				auto vde = static_cast<VariableDeclarationExpression*>(expression);
+				return new ElsaType(vde->get_type());
+			}
 
 			throw ParsingException("Unkown expression type.");
 		}

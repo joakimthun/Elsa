@@ -7,6 +7,14 @@ namespace elsa {
 
 		void LoopExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression)
 		{
+			if (expression->get_type() == LoopType::For)
+				build_for_loop(program, visitor, expression);
+			else
+				build_while_loop(program, visitor, expression);
+		}
+
+		void LoopExpressionBuilder::build_for_loop(VMProgram * program, VMExpressionVisitor * visitor, LoopExpression * expression)
+		{
 			// Declare the loop variable
 			expression->get_variable_expression()->accept(visitor);
 
@@ -24,10 +32,7 @@ namespace elsa {
 			program->emit(OpCode::br_ineq);
 			auto after_loop_addr_index = program->mark_index();
 
-			for (auto& exp : expression->get_body())
-			{
-				exp->accept(visitor);
-			}
+			build_loop_body(program, visitor, expression);
 
 			expression->get_post_expression()->accept(visitor);
 
@@ -36,6 +41,39 @@ namespace elsa {
 
 			// Set the address to jump to if the loop condition fails
 			program->emit(after_loop_addr_index, program->get_next_instruction_index());
+		}
+
+		void LoopExpressionBuilder::build_while_loop(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression)
+		{
+			// Set the address to jump to after each iteration
+			auto before_condition_addr_index = program->mark_index();
+
+			// Generate the loop condition
+			expression->get_condition()->accept(visitor);
+
+			// Push true
+			program->emit(OpCode::iconst);
+			program->emit(1);
+
+			// If not equal -> branch
+			program->emit(OpCode::br_ineq);
+			auto after_loop_addr_index = program->mark_index();
+
+			build_loop_body(program, visitor, expression);
+
+			program->emit(OpCode::br);
+			program->emit(before_condition_addr_index);
+
+			// Set the address to jump to if the loop condition fails
+			program->emit(after_loop_addr_index, program->get_next_instruction_index());
+		}
+
+		void LoopExpressionBuilder::build_loop_body(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression)
+		{
+			for (auto& exp : expression->get_body())
+			{
+				exp->accept(visitor);
+			}
 		}
 
 	}
