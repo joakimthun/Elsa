@@ -10,21 +10,31 @@ struct player
 	int speed;
 };
 
-func void postfix()
-{
-	var x = 20;
-	x++;
-	elsa.PrintLn(x);
-	x--;
-	elsa.PrintLn(x);
-}
-
 func void loops()
 {
 	loop(var i = 0; i < 10; i++)
 	{
 		elsa.PrintLn(i);
 	}
+}
+
+func void postfix()
+{
+	var x = 20;
+	x++;
+	elsa.PrintLn(x);
+	x--;
+	x--;
+	elsa.PrintLn(x);
+
+	var player = new player;
+	player.speed = 9999;
+	player.speed++;
+
+	//player.position = new vec2D;
+	//player.position.x = 56;
+	//
+	//elsa.PrintLn(player.position.x);
 }
 
 func void cond_print()

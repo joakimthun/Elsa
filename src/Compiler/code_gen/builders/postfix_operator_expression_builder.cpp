@@ -9,6 +9,17 @@ namespace elsa {
 		{
 			expression->get_expression()->accept(visitor);
 			build_operator(expression->get_operator(), program, expression);
+
+			if (auto ie = dynamic_cast<IdentifierExpression*>(expression->get_expression()))
+			{
+				auto local = visitor->current_scope()->get_local(ie->get_name());
+				program->emit(OpCode::s_local);
+				program->emit(static_cast<int>(local->get_index()));
+
+				return;
+			}
+
+			throw CodeGenException("Not supported -> PostfixOperatorExpressionBuilder");
 		}
 
 		void PostfixOperatorExpressionBuilder::build_operator(TokenType op, VMProgram* program, PostfixOperatorExpression* expression)
