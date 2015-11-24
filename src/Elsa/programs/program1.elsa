@@ -12,7 +12,7 @@ struct player
 
 func void loops()
 {
-	loop(var i = 0; i < 10; i++)
+	loop(var i = 0; i <= 200; i++)
 	{
 		elsa.PrintLn(i);
 	}
@@ -137,6 +137,7 @@ func void cond_print2()
 
 func int main(int dummy)
 {
+	loops();
 	postfix();
 	cond_print();
 	cond_print2();
