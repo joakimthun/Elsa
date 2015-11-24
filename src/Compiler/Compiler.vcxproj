@@ -38,6 +38,7 @@
     <ClInclude Include="code_gen\builders\elsa_invoke_expression_builder.h" />
     <ClInclude Include="code_gen\builders\function_declaration_expression_builder.h" />
     <ClInclude Include="code_gen\builders\func_call_expression_builder.h" />
+    <ClInclude Include="code_gen\builders\postfix_operator_expression_builder.h" />
     <ClInclude Include="code_gen\builders\struct_access_expression_builder.h" />
     <ClInclude Include="code_gen\builders\identifier_expression_builder.h" />
     <ClInclude Include="code_gen\builders\literal_expression_builder.h" />
@@ -117,6 +118,7 @@
     <ClCompile Include="code_gen\builders\func_call_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\identifier_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\literal_expression_builder.cpp" />
+    <ClCompile Include="code_gen\builders\postfix_operator_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\struct_access_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\struct_declaration_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\variable_builder.cpp" />

@@ -10,6 +10,15 @@ struct player
 	int speed;
 };
 
+func void postfix()
+{
+	var x = 20;
+	x++;
+	elsa.PrintLn(x);
+	x--;
+	elsa.PrintLn(x);
+}
+
 func void loops()
 {
 	loop(var i = 0; i < 10; i++)
@@ -114,6 +123,7 @@ func void cond_print2()
 
 func int main(int dummy)
 {
+	postfix();
 	cond_print();
 	cond_print2();
 
