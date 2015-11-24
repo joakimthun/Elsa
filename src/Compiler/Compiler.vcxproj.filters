@@ -243,7 +243,7 @@
     <ClInclude Include="code_gen\builders\postfix_operator_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code_gen\helpers\store_helper.h">
+    <ClInclude Include="code_gen\helpers\load_helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -452,7 +452,7 @@
     <ClCompile Include="code_gen\builders\postfix_operator_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code_gen\helpers\store_helper.cpp">
+    <ClCompile Include="code_gen\helpers\load_helper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

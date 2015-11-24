@@ -7,12 +7,11 @@ namespace elsa {
 
 		void PostfixOperatorExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, PostfixOperatorExpression* expression)
 		{
-			expression->get_expression()->accept(visitor);
-			build_operator(expression->get_operator(), program, expression);
-
 			if (auto sae = dynamic_cast<StructAccessExpression*>(expression->get_expression()))
 			{
-				auto field_index = StoreHelper::store_field(program, visitor, sae);
+				auto field_index = LoadHelper::load_field(program, visitor, sae);
+				LoadHelper::load_field(program, visitor, sae, true);
+				build_operator(expression->get_operator(), program, expression);
 				program->emit(OpCode::s_field);
 				program->emit(static_cast<int>(field_index));
 				return;
@@ -20,9 +19,10 @@ namespace elsa {
 
 			if (auto ie = dynamic_cast<IdentifierExpression*>(expression->get_expression()))
 			{
-				auto local = visitor->current_scope()->get_local(ie->get_name());
+				auto local_index = LoadHelper::load_local(program, visitor, ie);
+				build_operator(expression->get_operator(), program, expression);
 				program->emit(OpCode::s_local);
-				program->emit(static_cast<int>(local->get_index()));
+				program->emit(static_cast<int>(local_index));
 
 				return;
 			}

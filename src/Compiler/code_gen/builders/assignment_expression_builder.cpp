@@ -10,7 +10,7 @@ namespace elsa {
 		{
 			if (auto sae = dynamic_cast<StructAccessExpression*>(expression->get_left()))
 			{
-				auto field_index = StoreHelper::store_field(program, visitor, sae);
+				auto field_index = LoadHelper::load_field(program, visitor, sae);
 				expression->get_right()->accept(visitor);
 				program->emit(OpCode::s_field);
 				program->emit(static_cast<int>(field_index));
@@ -18,7 +18,7 @@ namespace elsa {
 			}
 			else if (auto ie = dynamic_cast<IdentifierExpression*>(expression->get_left()))
 			{
-				auto local_index = StoreHelper::store_local(program, visitor, ie);
+				auto local_index = LoadHelper::load_local(program, visitor, ie);
 				expression->get_right()->accept(visitor);
 
 				program->emit(OpCode::s_local);

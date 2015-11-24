@@ -45,7 +45,7 @@
     <ClInclude Include="code_gen\builders\struct_declaration_expression_builder.h" />
     <ClInclude Include="code_gen\builders\variable_builder.h" />
     <ClInclude Include="code_gen\code_gen.h" />
-    <ClInclude Include="code_gen\helpers\store_helper.h" />
+    <ClInclude Include="code_gen\helpers\load_helper.h" />
     <ClInclude Include="code_gen\visitors\expression_visitor.h" />
     <ClInclude Include="code_gen\visitors\vm_expression_visitor.h" />
     <ClInclude Include="compiler.h" />
@@ -124,7 +124,7 @@
     <ClCompile Include="code_gen\builders\struct_declaration_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\variable_builder.cpp" />
     <ClCompile Include="code_gen\code_gen.cpp" />
-    <ClCompile Include="code_gen\helpers\store_helper.cpp" />
+    <ClCompile Include="code_gen\helpers\load_helper.cpp" />
     <ClCompile Include="code_gen\visitors\vm_expression_visitor.cpp" />
     <ClCompile Include="compiler.cpp" />
     <ClCompile Include="interop\native_function_info.cpp" />

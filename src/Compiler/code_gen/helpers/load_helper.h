@@ -16,11 +16,14 @@ namespace elsa {
 
 		class VMExpressionVisitor;
 
-		class StoreHelper
+		class LoadHelper
 		{
 		public:
-			static std::size_t store_field(VMProgram* program, VMExpressionVisitor* visitor, StructAccessExpression* sae);
-			static std::size_t store_local(VMProgram* program, VMExpressionVisitor* visitor, IdentifierExpression* ie);
+			static std::size_t load_field(VMProgram* program, VMExpressionVisitor* visitor, StructAccessExpression* sae, bool load_target_field = false);
+			static std::size_t load_local(VMProgram* program, VMExpressionVisitor* visitor, IdentifierExpression* ie);
+
+		private:
+			static void load_field_internal(VMProgram* program, const FieldExpression* field);
 		};
 
 	}
