@@ -257,6 +257,9 @@ namespace elsa {
 				}
 			}
 
+			if (declared_return_type->get_type() != ObjectType::Void && return_expressions.size() == 0)
+				throw ParsingException("The function must return a value");
+
 			for (const auto return_exp : return_expressions)
 			{
 				auto return_expression_type = get_expression_type(return_exp);

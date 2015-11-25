@@ -25,6 +25,7 @@
 #include "../builders/conditional_expression_builder.h"
 #include "../builders/postfix_operator_expression_builder.h"
 #include "../builders/loop_expression_builder.h"
+#include "../builders/return_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {
@@ -52,6 +53,7 @@ namespace elsa {
 			void visit(ConditionalExpression* expression) override;
 			void visit(LoopExpression* expression) override;
 			void visit(PostfixOperatorExpression* expression) override;
+			void visit(ReturnExpression* expression) override;
 
 			ScopedExpression* current_scope();
 			void set_current_scope(ScopedExpression* scope);

@@ -93,6 +93,11 @@ namespace elsa {
 			PostfixOperatorExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		void VMExpressionVisitor::visit(ReturnExpression* expression)
+		{
+			ReturnExpressionBuilder::build(vm_program_.get(), this, expression);
+		}
+
 		ScopedExpression* VMExpressionVisitor::current_scope()
 		{
 			if (current_scope_ == nullptr)

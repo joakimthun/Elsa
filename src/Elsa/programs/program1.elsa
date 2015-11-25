@@ -166,10 +166,18 @@ func int return_int_test()
 	return 2015;
 }
 
+func player return_player_test()
+{
+	var player = new player;
+	player.speed = 11;
+	player.position = new vec2D;
+	player.position.x = 5600;
+
+	return player;
+}
+
 func int main(int dummy)
 {
-	var ret_int_value = return_int_test();
-
 	postfix();
 	cond_print();
 	cond_print2();
@@ -217,4 +225,13 @@ func int main(int dummy)
 	elsa.PrintLn(x + y);
 
 	loops();
+
+	var ret_int_value = return_int_test();
+	elsa.PrintLn(ret_int_value);
+
+	var ret_player_value = return_player_test();
+	elsa.PrintLn(ret_player_value.position.x);
+	elsa.PrintLn(ret_player_value.speed);
+
+	return 0;
 }

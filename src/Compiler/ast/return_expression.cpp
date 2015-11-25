@@ -1,5 +1,7 @@
 #include "return_expression.h"
 
+#include "../code_gen/visitors/expression_visitor.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -25,7 +27,7 @@ namespace elsa {
 
 		void ReturnExpression::accept(ExpressionVisitor* visitor)
 		{
-
+			visitor->visit(this);
 		}
 
 	}

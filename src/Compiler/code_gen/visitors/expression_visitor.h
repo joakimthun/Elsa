@@ -20,6 +20,7 @@ namespace elsa {
 		class ConditionalExpression;
 		class LoopExpression;
 		class PostfixOperatorExpression;
+		class ReturnExpression;
 
 		class ExpressionVisitor
 		{
@@ -42,6 +43,7 @@ namespace elsa {
 			virtual void visit(ConditionalExpression* expression) = 0;
 			virtual void visit(LoopExpression* expression) = 0;
 			virtual void visit(PostfixOperatorExpression* expression) = 0;
+			virtual void visit(ReturnExpression* expression) = 0;
 		};
 
 	}
