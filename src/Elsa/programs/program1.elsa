@@ -161,8 +161,15 @@ func void cond_print2()
 	}
 }
 
+func int return_int_test()
+{
+	return 2015;
+}
+
 func int main(int dummy)
 {
+	var ret_int_value = return_int_test();
+
 	postfix();
 	cond_print();
 	cond_print2();

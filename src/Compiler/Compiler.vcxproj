@@ -63,6 +63,7 @@
     <ClInclude Include="parsing\parsers\func_call_parser.h" />
     <ClInclude Include="parsing\parsers\loop_parser.h" />
     <ClInclude Include="parsing\parsers\postfix_operator_parser.h" />
+    <ClInclude Include="parsing\parsers\return_parser.h" />
     <ClInclude Include="parsing\parsers\struct_access_parser.h" />
     <ClInclude Include="parsing\parsers\struct_declaration_parser.h" />
     <ClInclude Include="symbols\function_symbol.h" />
@@ -142,6 +143,7 @@
     <ClCompile Include="parsing\parsers\func_call_parser.cpp" />
     <ClCompile Include="parsing\parsers\loop_parser.cpp" />
     <ClCompile Include="parsing\parsers\postfix_operator_parser.cpp" />
+    <ClCompile Include="parsing\parsers\return_parser.cpp" />
     <ClCompile Include="parsing\parsers\struct_access_parser.cpp" />
     <ClCompile Include="parsing\parsers\struct_declaration_parser.cpp" />
     <ClCompile Include="symbols\function_symbol.cpp" />

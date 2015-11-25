@@ -55,6 +55,9 @@ namespace elsa {
 
 			parser->reset_current_scope();
 
+			if (!parser->type_checker().return_type_match(func_dec_exp.get()))
+				throw ParsingException("Return type mismatch");
+
 			parser->consume(TokenType::RBracket);
 
 			return std::move(func_dec_exp);

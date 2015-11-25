@@ -10,19 +10,24 @@ namespace elsa {
 			args_.push_back(std::move(expression));
 		}
 
-		void FuncCallExpression::set_name(const std::wstring& name)
+		void FuncCallExpression::set_func_declaration_expression(const FuncDeclarationExpression* fde)
 		{
-			name_ = name;
+			fde_ = fde;
 		}
 
 		const std::wstring& FuncCallExpression::get_name() const
 		{
-			return name_;
+			return fde_->get_name();
 		}
 
 		const std::vector<std::unique_ptr<Expression>>& FuncCallExpression::get_args() const
 		{
 			return args_;
+		}
+
+		const FuncDeclarationExpression * FuncCallExpression::get_func_declaration_expression() const
+		{
+			return fde_;
 		}
 
 		void FuncCallExpression::accept(ExpressionVisitor* visitor)

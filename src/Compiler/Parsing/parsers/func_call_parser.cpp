@@ -14,10 +14,11 @@ namespace elsa {
 			parser->consume(TokenType::LParen);
 
 			auto call_exp = std::make_unique<FuncCallExpression>();
-			call_exp->set_name(func_name);
+
+			auto fde = parser->function_table().get(func_name)->get_expression();
+			call_exp->set_func_declaration_expression(fde);
 
 			auto index = 0;
-			auto fde = parser->function_table().get(func_name)->get_expression();
 			auto& fde_args = fde->get_args();
 			while (parser->current_token()->get_type() != TokenType::RParen)
 			{

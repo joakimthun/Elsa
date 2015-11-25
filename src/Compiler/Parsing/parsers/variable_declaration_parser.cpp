@@ -31,7 +31,8 @@ namespace elsa {
 				parser->current_scope()->add_local(name, *expression_type);
 			}
 
-			parser->consume(TokenType::Semicolon);
+			if(parser->current_token()->get_type() == TokenType::Semicolon)
+				parser->consume(TokenType::Semicolon);
 
 			return std::make_unique<VariableDeclarationExpression>(name, expression_type, std::move(expression));
 		}

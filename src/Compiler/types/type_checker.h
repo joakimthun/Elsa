@@ -17,6 +17,10 @@
 #include "../ast/struct_access_expression.h"
 #include "../ast/assignment_expression.h"
 #include "../ast/argument_expression.h"
+#include "../ast/conditional_expression.h"
+#include "../ast/loop_expression.h"
+#include "../ast/return_expression.h"
+#include "../ast/func_declaration_expression.h"
 #include "elsa_type.h"
 #include "../token.h"
 #include "exceptions\parsing_exception.h"
@@ -36,9 +40,12 @@ namespace elsa {
 			ElsaType* get_type_from_token(Token* token);
 			void assert_is_same_type(ObjectType t1, ObjectType t2);
 			bool is_same_type(Expression* first, Expression* second);
+			bool is_same_type(const ElsaType* first, const ElsaType* second);
 			ElsaType* get_field_type(const StructDeclarationExpression* struct_expression, const FieldAccessExpression* field);
 			ElsaType* get_struct_type(const std::wstring& name);
 			bool valid_assignment(AssignmentExpression* assignment_expression);
+			bool valid_return_expression(Expression* expression);
+			bool return_type_match(FuncDeclarationExpression* expression);
 			template<typename TExpression>
 			bool is_of_type(Expression* exp);
 			bool is_boolean_operator(TokenType op);

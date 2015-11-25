@@ -113,6 +113,16 @@ namespace elsa {
 				auto vde = static_cast<VariableDeclarationExpression*>(expression);
 				return new ElsaType(vde->get_type());
 			}
+			if (is_of_type<FuncCallExpression>(expression))
+			{
+				auto fde = static_cast<FuncCallExpression*>(expression);
+				return new ElsaType(fde->get_func_declaration_expression()->get_return_type());
+			}
+			if (is_of_type<ReturnExpression>(expression))
+			{
+				auto re = static_cast<ReturnExpression*>(expression);
+				return new ElsaType(re->get_type());
+			}
 
 			throw ParsingException("Unkown expression type.");
 		}
@@ -168,10 +178,15 @@ namespace elsa {
 			auto left = get_expression_type(first);
 			auto right = get_expression_type(second);
 
-			if (left->get_type() == ObjectType::GCOPtr && right->get_type() == ObjectType::GCOPtr)
-				return left->get_struct_declaration_expression()->get_name() == right->get_struct_declaration_expression()->get_name();
+			return is_same_type(left, right);
+		}
 
-			return left->get_type() == right->get_type();
+		bool TypeChecker::is_same_type(const ElsaType* first, const ElsaType* second)
+		{
+			if (first->get_type() == ObjectType::GCOPtr && second->get_type() == ObjectType::GCOPtr)
+				return first->get_struct_declaration_expression()->get_name() == second->get_struct_declaration_expression()->get_name();
+
+			return first->get_type() == second->get_type();
 		}
 
 		ElsaType* TypeChecker::get_field_type(const StructDeclarationExpression* struct_expression, const FieldAccessExpression* field)
@@ -202,6 +217,54 @@ namespace elsa {
 		bool TypeChecker::valid_assignment(AssignmentExpression* assignment_expression)
 		{
 			return is_same_type(assignment_expression->get_left(), assignment_expression->get_right());
+		}
+
+		bool TypeChecker::valid_return_expression(Expression* expression)
+		{
+			if (is_of_type<ConditionalExpression>(expression))
+			{
+				return false;
+			}
+
+			if (is_of_type<LoopExpression>(expression))
+			{
+				return false;
+			}
+
+			if (is_of_type<ReturnExpression>(expression))
+			{
+				return false;
+			}
+
+			if (is_of_type<VariableDeclarationExpression>(expression))
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		bool TypeChecker::return_type_match(FuncDeclarationExpression* expression)
+		{
+			auto declared_return_type = expression->get_return_type();
+			auto return_expressions = std::vector<Expression*>();
+
+			for (const auto& exp : expression->get_body())
+			{
+				if (is_of_type<ReturnExpression>(exp.get()))
+				{
+					return_expressions.push_back(exp.get());
+				}
+			}
+
+			for (const auto return_exp : return_expressions)
+			{
+				auto return_expression_type = get_expression_type(return_exp);
+				if (!is_same_type(return_expression_type, declared_return_type))
+					return false;
+			}
+
+			return true;
 		}
 
 		bool TypeChecker::is_boolean_operator(TokenType op)
