@@ -249,6 +249,9 @@
     <ClInclude Include="code_gen\builders\loop_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\return_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -459,6 +462,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code_gen\builders\loop_expression_builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\return_expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

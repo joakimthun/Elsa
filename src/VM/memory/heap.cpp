@@ -95,6 +95,7 @@ namespace elsa {
 
 		Object Heap::load_field(const Object& instance, std::size_t field_index)
 		{
+			assert_is_not_null(instance);
 			assert_is_struct(instance);
 
 			auto fi = instance.gco()->si->get_field(field_index);
