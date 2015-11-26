@@ -316,7 +316,7 @@ TEST(LexerTest, PROGRAM_8_MAX_MUNCH)
 	ASSERT_EQ(tokens[63]->get_type(), TokenType::Identifier);
 	ASSERT_EQ(tokens[64]->get_type(), TokenType::Equals);
 	ASSERT_EQ(tokens[65]->get_type(), TokenType::IntegerLiteral);
-	ASSERT_EQ(tokens[66]->get_type(), TokenType::GreaterThenEquals);
+	ASSERT_EQ(tokens[66]->get_type(), TokenType::GreaterThanEquals);
 	ASSERT_EQ(tokens[67]->get_type(), TokenType::IntegerLiteral);
 	ASSERT_EQ(tokens[68]->get_type(), TokenType::Semicolon);
 
