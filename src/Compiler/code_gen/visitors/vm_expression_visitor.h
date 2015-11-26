@@ -26,6 +26,7 @@
 #include "../builders/postfix_operator_expression_builder.h"
 #include "../builders/loop_expression_builder.h"
 #include "../builders/return_expression_builder.h"
+#include "../builders/array_declaration_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {

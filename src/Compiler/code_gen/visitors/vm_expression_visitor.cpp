@@ -100,7 +100,7 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(ArrayDeclarationExpression* expression)
 		{
-
+			ArrayDeclarationExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
 		ScopedExpression* VMExpressionVisitor::current_scope()

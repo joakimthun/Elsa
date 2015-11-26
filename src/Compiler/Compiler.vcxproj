@@ -33,6 +33,7 @@
     <ClInclude Include="ast\field_expression.h" />
     <ClInclude Include="ast\scoped_expression.h" />
     <ClInclude Include="ast\struct_declaration_expression.h" />
+    <ClInclude Include="code_gen\builders\array_declaration_expression_builder.h" />
     <ClInclude Include="code_gen\builders\assignment_expression_builder.h" />
     <ClInclude Include="code_gen\builders\binary_operator_expression_builder.h" />
     <ClInclude Include="code_gen\builders\conditional_expression_builder.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="ast\field_expression.cpp" />
     <ClCompile Include="ast\scoped_expression.cpp" />
     <ClCompile Include="ast\struct_declaration_expression.cpp" />
+    <ClCompile Include="code_gen\builders\array_declaration_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\assignment_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\binary_operator_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\conditional_expression_builder.cpp" />
