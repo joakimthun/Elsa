@@ -10,6 +10,11 @@ struct player
 	int speed;
 };
 
+arrays()
+{
+	var x = int[];
+}
+
 func void loops()
 {
 	loop(var i = 1; i <= 100; i++)
@@ -232,6 +237,8 @@ func int main(int dummy)
 	var ret_player_value = return_player_test();
 	elsa.PrintLn(ret_player_value.position.x);
 	elsa.PrintLn(ret_player_value.speed);
+
+	arrays();
 
 	return 0;
 }

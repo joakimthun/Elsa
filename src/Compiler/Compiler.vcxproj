@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ast\array_declaration_expression.h" />
     <ClInclude Include="ast\assignment_expression.h" />
     <ClInclude Include="ast\conditional_expression.h" />
     <ClInclude Include="ast\create_struct_expression.h" />
@@ -102,6 +103,7 @@
     <ClInclude Include="types\type_checker.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ast\array_declaration_expression.cpp" />
     <ClCompile Include="ast\assignment_expression.cpp" />
     <ClCompile Include="ast\conditional_expression.cpp" />
     <ClCompile Include="ast\create_struct_expression.cpp" />
