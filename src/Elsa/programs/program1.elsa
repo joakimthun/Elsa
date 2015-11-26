@@ -10,7 +10,7 @@ struct player
 	int speed;
 };
 
-arrays()
+func void arrays()
 {
 	var x = int[];
 }

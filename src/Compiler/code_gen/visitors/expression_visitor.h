@@ -21,6 +21,7 @@ namespace elsa {
 		class LoopExpression;
 		class PostfixOperatorExpression;
 		class ReturnExpression;
+		class ArrayDeclarationExpression;
 
 		class ExpressionVisitor
 		{
@@ -44,6 +45,7 @@ namespace elsa {
 			virtual void visit(LoopExpression* expression) = 0;
 			virtual void visit(PostfixOperatorExpression* expression) = 0;
 			virtual void visit(ReturnExpression* expression) = 0;
+			virtual void visit(ArrayDeclarationExpression* expression) = 0;
 		};
 
 	}

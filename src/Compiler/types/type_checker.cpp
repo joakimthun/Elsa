@@ -123,6 +123,11 @@ namespace elsa {
 				auto re = static_cast<ReturnExpression*>(expression);
 				return new ElsaType(re->get_type());
 			}
+			if (is_of_type<ArrayDeclarationExpression>(expression))
+			{
+				auto ade = static_cast<ArrayDeclarationExpression*>(expression);
+				return new ElsaType(ade->get_type());
+			}
 
 			throw ParsingException("Unkown expression type.");
 		}

@@ -215,6 +215,11 @@ namespace elsa {
 			// LL2 Expressions
 			register_ll2_expression_parser(TokenType::Identifier, TokenType::Dot, new StructAccessParser());
 			register_ll2_expression_parser(TokenType::Identifier, TokenType::LParen, new FuncCallParser());
+			register_ll2_expression_parser(TokenType::Identifier, TokenType::LSBracket, new ArrayDeclarationParser());
+			register_ll2_expression_parser(TokenType::Int, TokenType::LSBracket, new ArrayDeclarationParser());
+			register_ll2_expression_parser(TokenType::Float, TokenType::LSBracket, new ArrayDeclarationParser());
+			register_ll2_expression_parser(TokenType::Bool, TokenType::LSBracket, new ArrayDeclarationParser());
+			register_ll2_expression_parser(TokenType::Char, TokenType::LSBracket, new ArrayDeclarationParser());
 
 			// Expressions
 			register_expression_parser(TokenType::Identifier, new IdentifierParser());

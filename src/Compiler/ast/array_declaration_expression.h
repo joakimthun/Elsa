@@ -13,7 +13,7 @@ namespace elsa {
 		class ArrayDeclarationExpression : public Expression
 		{
 		public:
-			ArrayDeclarationExpression(ElsaType* type);
+			void set_type(ElsaType* type);
 			const ElsaType* get_type() const;
 
 			void accept(ExpressionVisitor* visitor) override;

@@ -54,6 +54,12 @@ namespace elsa {
 				case L'}': {
 					return match_token(L'}', TokenType::RBracket);
 				}
+				case L'[': {
+					return match_token(L'[', TokenType::LSBracket);
+				}
+				case L']': {
+					return match_token(L']', TokenType::RSBracket);
+				}
 				case L'(': {
 					return match_token(L'(', TokenType::LParen);
 				}
