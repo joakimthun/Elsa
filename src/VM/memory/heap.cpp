@@ -63,13 +63,14 @@ namespace elsa {
 			assert_is_array(instance);
 
 			auto ai = instance.gco()->ai.get();
-			auto new_array = alloc_array(ai->type, new_size);
-			init_array(new_array);
 
-			copy_array(instance, new_array);
+			auto new_array_size = new_size * ai->element_size;
+			realloc(instance.gco()->ptr, new_array_size);
 
+			auto old_size = instance.gco()->ai->num_elements;
 			instance.gco()->ai->num_elements = new_size;
-			instance.gco()->ptr = new_array.gco()->ptr;
+
+			init_array(instance, old_size - 1);
 		}
 
 		Object Heap::load_field(const Object& instance, FieldInfo* fi)
@@ -258,31 +259,14 @@ namespace elsa {
 			}
 		}
 
-		void Heap::init_array(const Object& instance)
+		void Heap::init_array(const Object& instance, std::size_t start_index)
 		{
 			assert_is_array(instance);
 
 			auto array_info = instance.gco()->ai.get();
-			for (std::size_t i = 0; i < array_info->num_elements; ++i)
+			for (std::size_t i = start_index; i < array_info->num_elements; ++i)
 			{
 				store_element(instance, get_default_value(array_info->type), i);
-			}
-		}
-
-		void Heap::copy_array(const Object& old_array, Object& new_array)
-		{
-			auto old_array_info = old_array.gco()->ai.get();
-			auto new_array_info = new_array.gco()->ai.get();
-
-			if(old_array_info->type != new_array_info->type)
-				throw RuntimeException("Can not copy arrays of different types.");
-
-			auto elements_to_copy = std::min(old_array_info->num_elements, new_array_info->num_elements);
-
-			for (std::size_t i = 0; i < elements_to_copy; ++i)
-			{
-				auto value = load_element(old_array, i);
-				store_element(new_array, value, i);
 			}
 		}
 

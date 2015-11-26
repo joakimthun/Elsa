@@ -45,8 +45,7 @@ namespace elsa {
 			byte* get_field_ptr(void* s_ptr, FieldInfo* f);
 			std::size_t get_size_of_type(VMType type);
 			void init_struct(const Object& instance);
-			void init_array(const Object& instance);
-			void copy_array(const Object& old_array, Object& new_array);
+			void init_array(const Object& instance, std::size_t start_index = 0);
 			Object get_default_value(VMType type);
 			void link_new_object(GCObject* obj);
 			void increment_num_objects();
