@@ -261,6 +261,9 @@
     <ClInclude Include="ast\array_declaration_expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="parsing\parsers\array_declaration_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -483,6 +486,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ast\array_declaration_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\array_declaration_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
