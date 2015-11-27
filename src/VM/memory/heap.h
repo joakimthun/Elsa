@@ -36,12 +36,14 @@ namespace elsa {
 			void store_element(const Object& instance, const Object& value, int element_index);
 			void add_element(Object& instance, const Object& value);
 			void remove_element(Object& instance, int element_index);
+			void copy_array(const Object& source, Object& target, int index_to_exclude = -1);
 			std::size_t get_num_objects() const;
 
 		private:
 			void assert_is_not_null(const Object& instance);
 			void assert_is_struct(const Object& instance);
 			void assert_is_array(const Object& instance);
+			void assert_arrays_are_same_type(const Object& first, const Object& second);
 			void assert_array_index_in_range(const Object& instance, int element_index);
 			byte* get_field_ptr(void* s_ptr, FieldInfo* f);
 			std::size_t get_size_of_type(VMType type);

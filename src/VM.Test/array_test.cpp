@@ -75,6 +75,20 @@ TEST_F(ArrayTest, ADD)
 		l_local, 0,
 		halt,
 		l_ele, 3,
+		halt,
+
+		l_local, 0,
+		l_ele, 2,
+		halt,
+
+		l_local, 0,
+		l_ele, 1,
+		halt,
+
+		l_local, 0,
+		l_ele, 0,
+		halt,
+
 	});
 	
 	auto vm = VM(program_);
@@ -86,6 +100,15 @@ TEST_F(ArrayTest, ADD)
 	ASSERT_EQ(4, vm.eval_stack_top().gco()->ai->next_index);
 	ASSERT_EQ(4, vm.eval_stack_top().gco()->ai->num_elements);
 
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+	
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+	
 	vm.execute();
 	ASSERT_EQ(-10, vm.eval_stack_top().i());
 }
@@ -407,4 +430,85 @@ TEST_F(ArrayTest, DEFAULT_VALUES)
 
 	vm.execute();
 	ASSERT_EQ('\0', vm.eval_stack_top().c());
+}
+
+TEST_F(ArrayTest, COPY)
+{
+	program_.emit(
+	{
+		iconst, 1,
+		new_arr, (int)VMType::Int,
+		s_local, 0,
+
+		iconst, 1,
+		new_arr, (int)VMType::Int,
+		s_local, 1,
+
+		// Add 3 elements to the source array
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		halt,
+		l_ele, 0,
+		halt,
+
+		l_local, 0,
+		l_ele, 1,
+		halt,
+
+		l_local, 0,
+		l_ele, 2,
+		halt,
+
+		// Copy the values from array 0 to to array 1
+		// Push the taget
+		l_local, 1,
+		// Push the source
+		l_local, 0,
+		c_arr,
+
+		l_local, 1,
+		l_ele, 0,
+		halt,
+
+		l_local, 1,
+		l_ele, 1,
+		halt,
+
+		l_local, 1,
+		l_ele, 2,
+		halt,
+
+	});
+
+	auto vm = VM(program_);
+
+	vm.execute();
+	ASSERT_EQ(3, vm.eval_stack_top().gco()->ai->next_index);
+
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+	
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+	
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
 }

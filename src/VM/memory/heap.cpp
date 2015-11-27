@@ -182,14 +182,33 @@ namespace elsa {
 			store_element(instance, value, ai->next_index++);
 		}
 
-		void Heap::remove_element(Object & instance, int element_index)
+		void Heap::remove_element(Object& instance, int element_index)
 		{
 			assert_is_array(instance);
 			assert_array_index_in_range(instance, element_index);
 
 			auto& ai = instance.gco()->ai;
 
+			copy_array(instance, instance, element_index);
+		}
 
+		void Heap::copy_array(const Object& source, Object& target, int index_to_exclude)
+		{
+			assert_is_array(source);
+			assert_is_array(target);
+			assert_arrays_are_same_type(source, target);
+
+			const auto& source_info = source.gco()->ai;
+			auto& target_info = target.gco()->ai;
+			target_info->next_index = 0;
+
+			for (int i = 0; i < source_info->num_elements; i++)
+			{
+				if (i == index_to_exclude)
+					continue;
+
+				add_element(target, load_element(source, i));
+			}
 		}
 
 		std::size_t Heap::get_num_objects() const
@@ -222,6 +241,12 @@ namespace elsa {
 
 			if (instance.gco()->type != GCObjectType::Array)
 				throw RuntimeException("Can only access elements on array objects");
+		}
+
+		void Heap::assert_arrays_are_same_type(const Object& first, const Object& second)
+		{
+			if(first.gco()->ai->type != second.gco()->ai->type)
+				throw RuntimeException("The passed arrays are not of the same type");
 		}
 
 		void Heap::assert_array_index_in_range(const Object& instance, int element_index)
@@ -288,7 +313,7 @@ namespace elsa {
 			auto old_size = instance.gco()->ai->num_elements;
 			instance.gco()->ai->num_elements = new_size;
 
-			init_array(instance, old_size - 1);
+			init_array(instance, old_size);
 		}
 
 		Object Heap::get_default_value(elsa::VMType type)

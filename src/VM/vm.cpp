@@ -359,6 +359,12 @@ namespace elsa {
 				current_frame_->push(heap_.alloc_array(type, size));
 				break;
 			}
+			case c_arr: {
+				auto source = current_frame_->pop();
+				auto target = current_frame_->pop();
+				heap_.copy_array(source, target);
+				break;
+			}
 			case l_ele: {
 				auto ei = get_instruction(pc_++);
 				auto instance = current_frame_->pop();
