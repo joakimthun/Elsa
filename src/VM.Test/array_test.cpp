@@ -496,9 +496,18 @@ TEST_F(ArrayTest, REMOVE)
 		l_ele, 2,
 		halt,
 		pop,
+
 		l_local, 0,
 		r_ele, 1,
 		l_local, 0,
+
+		halt,
+		l_ele, 0,
+		halt,
+		pop,
+		l_local, 0,
+		l_ele, 1,
+
 	});
 
 	auto vm = VM(program_);
@@ -519,5 +528,11 @@ TEST_F(ArrayTest, REMOVE)
 	// Remove
 	vm.execute();
 	ASSERT_EQ(2, vm.eval_stack_top().gco()->ai->next_index);
+
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
 
 }

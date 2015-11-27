@@ -25,6 +25,13 @@ namespace elsa {
 				free(ptr);
 			};
 
+			void swap_array(void* new_ptr, ArrayInfo* new_ai)
+			{
+				auto old_ptr = ptr;
+				ptr = new_ptr;
+				ai.reset(new_ai);
+			}
+
 			bool marked;
 			void* ptr;
 			const StructInfo* si;

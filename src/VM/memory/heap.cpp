@@ -189,10 +189,9 @@ namespace elsa {
 
 			auto& ai = instance.gco()->ai;
 
-			copy_array(instance, instance, element_index);
-
-			// Since we removed 1 element from the array we need to decrement the next index pointer
-			//ai->next_index--;
+			auto new_array = alloc_array(ai->type, ai->next_index);
+			copy_array(instance, new_array, element_index);
+			instance.gco()->swap_array(new_array.gco()->ptr, new_array.gco()->ai.release());
 		}
 
 		void Heap::copy_array(const Object& source, Object& target, int index_to_exclude)

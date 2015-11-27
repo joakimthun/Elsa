@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdlib.h>
+
 #include "object_types\vm_type.h"
 #include "gcobject.h"
 #include "exceptions/runtime_exception.h"
