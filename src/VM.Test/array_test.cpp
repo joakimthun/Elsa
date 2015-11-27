@@ -124,17 +124,17 @@ TEST_F(ArrayTest, INT_STORE_LOAD)
 		// Store 10 at index 0
 		l_local, 0,
 		iconst, 10,
-		s_ele, 0,
+		a_ele,
 
 		// Store -10 at index 1
 		l_local, 0,
 		iconst, -10,
-		s_ele, 1,
+		a_ele,
 
 		// Store 12939 at index 2
 		l_local, 0,
 		iconst, 12939,
-		s_ele, 2,
+		a_ele,
 
 		// Load element at index 0 (10)
 		l_local, 0,
@@ -178,17 +178,17 @@ TEST_F(ArrayTest, FLOAT_STORE_LOAD)
 		// Store 12.0 at index 0
 		l_local, 0,
 		fconst, 0,
-		s_ele, 0,
+		a_ele, 
 
 		// Store 99.0 at index 1
 		l_local, 0,
 		fconst, 1,
-		s_ele, 1,
+		a_ele,
 
 		// Store -99.0 at index 2
 		l_local, 0,
 		fconst, 2,
-		s_ele, 2,
+		a_ele,
 
 		// Load element at index 0 (12.0)
 		l_local, 0,
@@ -232,12 +232,12 @@ TEST_F(ArrayTest, STRUCT_PTR_STORE_LOAD)
 		// Store a struct pointer at index 0
 		l_local, 0,
 		new_struct, 0,
-		s_ele, 0,
+		a_ele,
 
 		// Store another struct pointer at index 1
 		l_local, 0,
 		new_struct, 0,
-		s_ele, 1,
+		a_ele,
 
 		// Store the value 4 in the struct pointed to by element 0
 		l_local, 0,
@@ -298,22 +298,22 @@ TEST_F(ArrayTest, ARRAY_OF_ARRAYS)
 		l_local, 0,
 		iconst, 2,
 		new_arr, (int)VMType::Int,
-		s_ele, 0,
+		a_ele,
 
 		l_local, 0,
 		iconst, 2,
 		new_arr, (int)VMType::Int,
-		s_ele, 1,
+		a_ele,
 
 		l_local, 0,
 		l_ele, 0,
 		iconst, 10,
-		s_ele, 0,
+		a_ele,
 
 		l_local, 0,
 		l_ele, 0,
 		iconst, 20,
-		s_ele, 1,
+		a_ele,
 
 		l_local, 0,
 		l_ele, 0,
@@ -330,12 +330,12 @@ TEST_F(ArrayTest, ARRAY_OF_ARRAYS)
 		l_local, 0,
 		l_ele, 1,
 		iconst, 30,
-		s_ele, 0,
+		a_ele,
 
 		l_local, 0,
 		l_ele, 1,
 		iconst, 40,
-		s_ele, 1,
+		a_ele,
 
 		l_local, 0,
 		l_ele, 1,
@@ -380,56 +380,6 @@ TEST_F(ArrayTest, ARRAY_OF_ARRAYS)
 
 	vm.execute();
 	ASSERT_EQ(20, vm.eval_stack_top().i());
-}
-
-TEST_F(ArrayTest, DEFAULT_VALUES)
-{
-	program_.emit(
-	{
-		iconst, 2,
-		new_arr, (int)VMType::Float,
-		s_local, 0,
-
-		halt,
-		iconst, 2,
-		new_arr, (int)VMType::Char,
-		s_local, 1,
-
-		l_local, 0,
-		l_ele, 0,
-		halt,
-		pop,
-
-		l_local, 0,
-		l_ele, 1,
-		halt,
-		pop,
-
-		l_local, 1,
-		l_ele, 0,
-		halt,
-		pop,
-
-		l_local, 1,
-		l_ele, 1,
-		halt,
-		pop,
-	});
-
-	auto vm = VM(program_);
-	vm.execute();
-
-	vm.execute();
-	ASSERT_FLOAT_EQ(0.0f, vm.eval_stack_top().f());
-
-	vm.execute();
-	ASSERT_FLOAT_EQ(0.0f, vm.eval_stack_top().f());
-
-	vm.execute();
-	ASSERT_EQ('\0', vm.eval_stack_top().c());
-
-	vm.execute();
-	ASSERT_EQ('\0', vm.eval_stack_top().c());
 }
 
 TEST_F(ArrayTest, COPY)
@@ -511,4 +461,63 @@ TEST_F(ArrayTest, COPY)
 	
 	vm.execute();
 	ASSERT_EQ(-10, vm.eval_stack_top().i());
+}
+
+TEST_F(ArrayTest, REMOVE)
+{
+	program_.emit(
+	{
+		iconst, 1,
+		new_arr, (int)VMType::Int,
+		s_local, 0,
+
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		halt,
+		l_ele, 0,
+		halt,
+		pop,
+		l_local, 0,
+		l_ele, 1,
+		halt,
+		pop,
+		l_local, 0,
+		l_ele, 2,
+		halt,
+		pop,
+		l_local, 0,
+		r_ele, 1,
+		l_local, 0,
+	});
+
+	auto vm = VM(program_);
+
+	vm.execute();
+	ASSERT_EQ(3, vm.eval_stack_top().gco()->ai->next_index);
+	ASSERT_EQ(4, vm.eval_stack_top().gco()->ai->num_elements);
+
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+
+	vm.execute();
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
+
+	// Remove
+	vm.execute();
+	ASSERT_EQ(2, vm.eval_stack_top().gco()->ai->next_index);
+
 }

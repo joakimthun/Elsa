@@ -137,6 +137,7 @@ TEST_F(GCTest, MARK_SWEEP_ARRAYS)
 		iconst, 2,
 		new_arr, (int)VMType::Int,
 		s_local, 1,
+		halt,
 		
 		iconst, 5,
 		new_arr, (int)VMType::GCOPtr,
@@ -144,16 +145,16 @@ TEST_F(GCTest, MARK_SWEEP_ARRAYS)
 		
 		l_local, 2,
 		new_struct, 0,
-		s_ele, 0,
-
+		a_ele,
+		
 		iconst, 2,
 		new_arr, (int)VMType::Int,
 		pop,
-
+		
 		iconst, 2,
 		new_arr, (int)VMType::Int,
 		pop,
-
+		
 		iconst, 5,
 		new_arr, (int)VMType::GCOPtr,
 		s_local, 3,
@@ -161,11 +162,12 @@ TEST_F(GCTest, MARK_SWEEP_ARRAYS)
 		l_local, 3,
 		iconst, 5,
 		new_arr, (int)VMType::GCOPtr,
-		s_ele, 2,
+		a_ele,
 	});
 
 	auto vm = VM(program_);
 
+	vm.execute();
 	vm.execute();
 	auto result = vm.gc_collect();
 	ASSERT_EQ(6, result.num_marked);

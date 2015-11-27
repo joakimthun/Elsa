@@ -190,6 +190,9 @@ namespace elsa {
 			auto& ai = instance.gco()->ai;
 
 			copy_array(instance, instance, element_index);
+
+			// Since we removed 1 element from the array we need to decrement the next index pointer
+			//ai->next_index--;
 		}
 
 		void Heap::copy_array(const Object& source, Object& target, int index_to_exclude)
@@ -202,7 +205,7 @@ namespace elsa {
 			auto& target_info = target.gco()->ai;
 			target_info->next_index = 0;
 
-			for (int i = 0; i < source_info->num_elements; i++)
+			for (int i = 0; i < source_info->next_index; i++)
 			{
 				if (i == index_to_exclude)
 					continue;
@@ -251,7 +254,7 @@ namespace elsa {
 
 		void Heap::assert_array_index_in_range(const Object& instance, int element_index)
 		{
-			if (element_index < 0 || element_index > instance.gco()->ai->num_elements - 1)
+			if (element_index < 0 || element_index >= instance.gco()->ai->next_index)
 				throw RuntimeException("Array index out of bounds");
 		}
 
@@ -295,7 +298,7 @@ namespace elsa {
 			assert_is_array(instance);
 
 			auto array_info = instance.gco()->ai.get();
-			for (std::size_t i = start_index; i < array_info->num_elements; ++i)
+			for (std::size_t i = start_index; i < array_info->next_index; ++i)
 			{
 				store_element(instance, get_default_value(array_info->type), i);
 			}

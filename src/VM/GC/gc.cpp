@@ -118,7 +118,7 @@ namespace elsa {
 			if (gco->ai->type != VMType::GCOPtr)
 				return;
 
-			for (std::size_t i = 0; i < gco->ai->num_elements; ++i)
+			for (std::size_t i = 0; i < gco->ai->next_index; ++i)
 			{
 				auto element = heap_->load_element(obj, i);
 

@@ -206,7 +206,7 @@ namespace elsa {
 
 				for (std::wstring::size_type i = 0; i < str.size(); ++i)
 				{
-					heap_.store_element(str_obj, Object(str[i]), i);
+					heap_.add_element(str_obj, Object(str[i]));
 				}
 
 				current_frame_->push(str_obj);
