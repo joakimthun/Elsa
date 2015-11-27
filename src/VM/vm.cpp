@@ -378,6 +378,12 @@ namespace elsa {
 				heap_.add_element(instance, value);
 				break;
 			}
+			case r_ele: {
+				auto ei = get_instruction(pc_++);
+				auto instance = current_frame_->pop();
+				heap_.remove_element(instance, ei);
+				break;
+			}
 			case iand: {
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();

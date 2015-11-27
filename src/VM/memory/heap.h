@@ -32,16 +32,17 @@ namespace elsa {
 			Object load_field(const Object& instance, std::size_t field_index);
 			void store_field(const Object& instance, const Object& value, FieldInfo* fi);
 			void store_field(const Object& instance, const Object& value, std::size_t field_index);
-			Object load_element(const Object& instance, std::size_t element_index);
-			void store_element(const Object& instance, const Object& value, std::size_t element_index);
+			Object load_element(const Object& instance, int element_index);
+			void store_element(const Object& instance, const Object& value, int element_index);
 			void add_element(Object& instance, const Object& value);
+			void remove_element(Object& instance, int element_index);
 			std::size_t get_num_objects() const;
 
 		private:
 			void assert_is_not_null(const Object& instance);
 			void assert_is_struct(const Object& instance);
 			void assert_is_array(const Object& instance);
-			void assert_array_index_in_range(const Object& instance, std::size_t element_index);
+			void assert_array_index_in_range(const Object& instance, int element_index);
 			byte* get_field_ptr(void* s_ptr, FieldInfo* f);
 			std::size_t get_size_of_type(VMType type);
 			void init_struct(const Object& instance);

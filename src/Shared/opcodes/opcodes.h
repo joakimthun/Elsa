@@ -70,6 +70,7 @@ namespace elsa {
 			l_ele,
 			s_ele,
 			a_ele,
+			r_ele,
 
 			// Interop
 			elsa

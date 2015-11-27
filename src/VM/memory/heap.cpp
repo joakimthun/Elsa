@@ -123,7 +123,7 @@ namespace elsa {
 			store_field(instance, value, fi);
 		}
 
-		Object Heap::load_element(const Object& instance, std::size_t element_index)
+		Object Heap::load_element(const Object& instance, int element_index)
 		{
 			assert_is_array(instance);
 			assert_array_index_in_range(instance, element_index);
@@ -145,7 +145,7 @@ namespace elsa {
 			}
 		}
 
-		void Heap::store_element(const Object& instance, const Object& value, std::size_t element_index)
+		void Heap::store_element(const Object& instance, const Object& value, int element_index)
 		{
 			assert_is_array(instance);
 			assert_array_index_in_range(instance, element_index);
@@ -182,6 +182,16 @@ namespace elsa {
 			store_element(instance, value, ai->next_index++);
 		}
 
+		void Heap::remove_element(Object & instance, int element_index)
+		{
+			assert_is_array(instance);
+			assert_array_index_in_range(instance, element_index);
+
+			auto& ai = instance.gco()->ai;
+
+
+		}
+
 		std::size_t Heap::get_num_objects() const
 		{
 			return num_objects_;
@@ -214,9 +224,9 @@ namespace elsa {
 				throw RuntimeException("Can only access elements on array objects");
 		}
 
-		void Heap::assert_array_index_in_range(const Object& instance, std::size_t element_index)
+		void Heap::assert_array_index_in_range(const Object& instance, int element_index)
 		{
-			if (element_index > instance.gco()->ai->num_elements - 1)
+			if (element_index < 0 || element_index > instance.gco()->ai->num_elements - 1)
 				throw RuntimeException("Array index out of bounds");
 		}
 
