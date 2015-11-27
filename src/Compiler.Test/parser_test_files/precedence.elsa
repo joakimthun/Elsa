@@ -3,4 +3,6 @@ func int main()
 	var x1 = 1 + 2;
 	var x2 = 1 + 2 * 5;
 	var x3 = 1 - 10 / 2 + 5 * 10;
+
+	return x1;
 }

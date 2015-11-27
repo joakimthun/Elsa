@@ -44,112 +44,50 @@ TEST_F(ArrayTest, NEW)
 	EXPECT_EQ(GCObjectType::Array, vm.eval_stack_top().gco()->type);
 }
 
-TEST_F(ArrayTest, RESIZE)
+TEST_F(ArrayTest, ADD)
 {
 	program_.emit(
 	{
-		iconst, 3,
+		iconst, 1,
 		new_arr, (int)VMType::Int,
 		s_local, 0,
 
 		l_local, 0,
-		iconst, 100,
-		s_ele, 0,
-
-		l_local, 0,
-		iconst, 200,
-		s_ele, 1,
-
-		l_local, 0,
-		iconst, 300,
-		s_ele, 2,
-
-		l_local, 0,
-		l_ele, 0,
 		halt,
 		pop,
+	
+		l_local, 0,
+		iconst, -10,
+		a_ele,
 
 		l_local, 0,
-		l_ele, 1,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
 		halt,
-		pop,
-
-		l_local, 0,
-		l_ele, 2,
-		halt,
-		pop,
-
-		// Resize from 3 to 7 ints
-		l_local, 0,
-		iconst, 7,
-		res_arr,
-
-		l_local, 0,
-		l_ele, 0,
-		halt,
-		pop,
-
-		l_local, 0,
-		l_ele, 1,
-		halt,
-		pop,
-
-		l_local, 0,
-		l_ele, 2,
-		halt,
-		pop,
-
-		l_local, 0,
 		l_ele, 3,
-		halt,
-		pop,
-
-		l_local, 0,
-		l_ele, 4,
-		halt,
-		pop,
-
-		l_local, 0,
-		l_ele, 5,
-		halt,
-		pop,
-
-		l_local, 0,
-		l_ele, 6,
-		halt,
 	});
-
+	
 	auto vm = VM(program_);
 
 	vm.execute();
-	ASSERT_EQ(100, vm.eval_stack_top().i());
+	ASSERT_EQ(0, vm.eval_stack_top().gco()->ai->next_index);
 
 	vm.execute();
-	ASSERT_EQ(200, vm.eval_stack_top().i());
+	ASSERT_EQ(4, vm.eval_stack_top().gco()->ai->next_index);
+	ASSERT_EQ(4, vm.eval_stack_top().gco()->ai->num_elements);
 
 	vm.execute();
-	ASSERT_EQ(300, vm.eval_stack_top().i());
-
-	vm.execute();
-	ASSERT_EQ(100, vm.eval_stack_top().i());
-
-	vm.execute();
-	ASSERT_EQ(200, vm.eval_stack_top().i());
-
-	vm.execute();
-	ASSERT_EQ(300, vm.eval_stack_top().i());
-
-	vm.execute();
-	ASSERT_EQ(0, vm.eval_stack_top().i());
-
-	vm.execute();
-	ASSERT_EQ(0, vm.eval_stack_top().i());
-
-	vm.execute();
-	ASSERT_EQ(0, vm.eval_stack_top().i());
-
-	vm.execute();
-	ASSERT_EQ(0, vm.eval_stack_top().i());
+	ASSERT_EQ(-10, vm.eval_stack_top().i());
 }
 
 TEST_F(ArrayTest, INT_STORE_LOAD)

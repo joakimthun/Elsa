@@ -67,9 +67,9 @@ namespace elsa {
 
 			// Arrays
 			new_arr,
-			res_arr,
 			l_ele,
 			s_ele,
+			a_ele,
 
 			// Interop
 			elsa

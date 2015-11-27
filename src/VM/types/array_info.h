@@ -8,10 +8,11 @@ namespace elsa {
 
 		struct ArrayInfo
 		{
-			ArrayInfo(elsa::VMType t, std::size_t ne, std::size_t es) : type(t), num_elements(ne), element_size(es) {};
+			ArrayInfo(elsa::VMType t, std::size_t ne, std::size_t es) : type(t), num_elements(ne), element_size(es), next_index(0) {};
 			elsa::VMType type;
 			std::size_t num_elements;
 			std::size_t element_size;
+			std::size_t next_index;
 		};
 
 	}

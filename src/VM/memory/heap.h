@@ -27,7 +27,6 @@ namespace elsa {
 
 			Object alloc_struct(const StructInfo* si);
 			Object alloc_array(elsa::VMType type, std::size_t size);
-			void resize_array(Object& instance, std::size_t new_size);
 
 			Object load_field(const Object& instance, FieldInfo* fi);
 			Object load_field(const Object& instance, std::size_t field_index);
@@ -35,6 +34,7 @@ namespace elsa {
 			void store_field(const Object& instance, const Object& value, std::size_t field_index);
 			Object load_element(const Object& instance, std::size_t element_index);
 			void store_element(const Object& instance, const Object& value, std::size_t element_index);
+			void add_element(Object& instance, const Object& value);
 			std::size_t get_num_objects() const;
 
 		private:
@@ -46,6 +46,7 @@ namespace elsa {
 			std::size_t get_size_of_type(VMType type);
 			void init_struct(const Object& instance);
 			void init_array(const Object& instance, std::size_t start_index = 0);
+			void resize_array(Object& instance, std::size_t new_size);
 			Object get_default_value(VMType type);
 			void link_new_object(GCObject* obj);
 			void increment_num_objects();

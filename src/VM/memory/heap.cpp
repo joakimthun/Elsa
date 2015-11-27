@@ -58,21 +58,6 @@ namespace elsa {
 			return obj;
 		}
 
-		void Heap::resize_array(Object& instance, std::size_t new_size)
-		{
-			assert_is_array(instance);
-
-			auto ai = instance.gco()->ai.get();
-
-			auto new_array_size = new_size * ai->element_size;
-			realloc(instance.gco()->ptr, new_array_size);
-
-			auto old_size = instance.gco()->ai->num_elements;
-			instance.gco()->ai->num_elements = new_size;
-
-			init_array(instance, old_size - 1);
-		}
-
 		Object Heap::load_field(const Object& instance, FieldInfo* fi)
 		{
 			assert_is_struct(instance);
@@ -186,6 +171,17 @@ namespace elsa {
 			}
 		}
 
+		void Heap::add_element(Object& instance, const Object& value)
+		{
+			assert_is_array(instance);
+
+			auto& ai = instance.gco()->ai;
+			if (ai->next_index > ai->num_elements - 1)
+				resize_array(instance, ai->num_elements * 2);
+
+			store_element(instance, value, ai->next_index++);
+		}
+
 		std::size_t Heap::get_num_objects() const
 		{
 			return num_objects_;
@@ -268,6 +264,21 @@ namespace elsa {
 			{
 				store_element(instance, get_default_value(array_info->type), i);
 			}
+		}
+
+		void Heap::resize_array(Object& instance, std::size_t new_size)
+		{
+			assert_is_array(instance);
+
+			auto ai = instance.gco()->ai.get();
+
+			auto new_array_size = new_size * ai->element_size;
+			instance.gco()->ptr = realloc(instance.gco()->ptr, new_array_size);
+
+			auto old_size = instance.gco()->ai->num_elements;
+			instance.gco()->ai->num_elements = new_size;
+
+			init_array(instance, old_size - 1);
 		}
 
 		Object Heap::get_default_value(elsa::VMType type)
