@@ -1,15 +1,19 @@
 #include "function_info.h"
 #include "function_info.h"
+#include "function_info.h"
+#include "function_info.h"
+#include "function_info.h"
 
 namespace elsa {
 
-		FunctionInfo::FunctionInfo(const std::wstring& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type)
+		FunctionInfo::FunctionInfo(const std::wstring& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type, bool builtin)
 			:
 			name_(name),
 			num_args_(num_args),
 			num_locals_(num_locals),
 			addr_(addr),
-			type_(type)
+			type_(type),
+			builtin_(builtin)
 		{}
 
 		FunctionInfo::FunctionInfo(const std::wstring& name)
@@ -62,6 +66,21 @@ namespace elsa {
 		FunctionType FunctionInfo::get_type() const
 		{
 			return type_;
+		}
+
+		bool FunctionInfo::is_builtin() const
+		{
+			return builtin_;
+		}
+
+		void FunctionInfo::emit(int instruction)
+		{
+			instructions_.push_back(instruction);
+		}
+
+		void FunctionInfo::emit(OpCode instruction)
+		{
+			instructions_.push_back(static_cast<int>(instruction));
 		}
 
 }

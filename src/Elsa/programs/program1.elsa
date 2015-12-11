@@ -13,7 +13,7 @@ struct player
 func void arrays()
 {
 	var x = int[];
-	x.
+	//x.Add(10);
 }
 
 func void loops()

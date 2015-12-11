@@ -29,6 +29,17 @@ namespace elsa {
 			return fields_[index].get();
 		}
 
+		FunctionInfo* StructInfo::get_function(std::wstring name) const
+		{
+			for (auto& f : functions_)
+			{
+				if (f->get_name() == name)
+					return f.get();
+			}
+
+			return nullptr;
+		}
+
 		void StructInfo::set_index(std::size_t index)
 		{
 			index_ = index;
@@ -49,6 +60,17 @@ namespace elsa {
 			field->set_num_bytes_offset(size_);
 			update_size(*field);
 			fields_.push_back(std::move(field));
+		}
+
+		void StructInfo::add_function(std::unique_ptr<FunctionInfo> function)
+		{
+			for (auto& f : functions_)
+			{
+				if (f->get_name() == function->get_name())
+					throw CodeGenException("A member function with that name already exists");
+			}
+
+			functions_.push_back(std::move(function));
 		}
 
 		void StructInfo::update_size(const FieldInfo& field)

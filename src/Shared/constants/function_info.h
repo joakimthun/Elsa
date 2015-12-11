@@ -2,6 +2,9 @@
 
 #include <cstddef>
 #include <string>
+#include <vector>
+
+#include "../opcodes/opcodes.h"
 
 namespace elsa {
 
@@ -14,7 +17,7 @@ namespace elsa {
 		class FunctionInfo
 		{
 		public:
-			FunctionInfo(const std::wstring& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type);
+			FunctionInfo(const std::wstring& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type, bool builtin = false);
 			FunctionInfo(const std::wstring& name);
 			~FunctionInfo();
 
@@ -26,6 +29,9 @@ namespace elsa {
 			std::size_t get_addr() const;
 			void set_addr(std::size_t addr);
 			FunctionType get_type() const;
+			bool is_builtin() const;
+			void emit(int instruction);
+			void emit(OpCode instruction);
 
 		private:
 			std::wstring name_;
@@ -33,6 +39,8 @@ namespace elsa {
 			std::size_t num_locals_;
 			std::size_t addr_;
 			FunctionType type_;
+			bool builtin_;
+			std::vector<int> instructions_;
 		};
 
 }

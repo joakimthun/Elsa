@@ -95,6 +95,7 @@
     <ClInclude Include="parsing\parsers\infix_parser.h" />
     <ClInclude Include="parsing\parsers\literal_parser.h" />
     <ClInclude Include="parsing\precedence.h" />
+    <ClInclude Include="types\builtin\builtin.h" />
     <ClInclude Include="types\elsa_type.h" />
     <ClInclude Include="parsing\parsers\identifier_parser.h" />
     <ClInclude Include="parsing\parsers\prefix_operator_parser.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="Parsing\elsa_parser.cpp" />
     <ClCompile Include="parsing\parsers\variable_declaration_parser.cpp" />
     <ClCompile Include="program.cpp" />
+    <ClCompile Include="types\builtin\builtin.cpp" />
     <ClCompile Include="types\elsa_type.cpp" />
     <ClCompile Include="types\type_checker.cpp" />
   </ItemGroup>
