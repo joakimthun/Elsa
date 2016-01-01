@@ -10,6 +10,7 @@
 #include "exceptions\codegen_exception.h"
 #include "expression_visitor.h"
 #include "vm_program.h"
+#include "../../types/builtin/builtin.h"
 #include "../../interop/native_function_table.h"
 #include "../builders/function_declaration_expression_builder.h"
 #include "../builders/variable_builder.h"

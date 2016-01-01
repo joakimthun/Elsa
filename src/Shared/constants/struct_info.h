@@ -38,6 +38,7 @@ namespace elsa {
 			std::vector<std::unique_ptr<FunctionInfo>> functions_;
 			std::size_t size_;
 			std::size_t index_;
+
 		};
 
 }

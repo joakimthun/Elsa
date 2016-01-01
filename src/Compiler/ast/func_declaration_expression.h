@@ -27,6 +27,8 @@ namespace elsa {
 
 			std::size_t get_num_args() const;
 			std::size_t get_num_locals() const;
+			void set_num_args(std::size_t num_args);
+			void set_num_locals(std::size_t num_locals);
 			void increment_num_args();
 			void increment_num_locals();
 

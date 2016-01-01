@@ -4,10 +4,11 @@
 #include <cstddef>
 
 #include "../types/elsa_type.h"
-#include "../ast/struct_declaration_expression.h"
 
 namespace elsa {
 	namespace compiler {
+
+		class StructDeclarationExpression;
 
 		enum LocalType
 		{

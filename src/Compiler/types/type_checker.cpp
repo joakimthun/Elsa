@@ -126,7 +126,7 @@ namespace elsa {
 			if (is_of_type<ArrayDeclarationExpression>(expression))
 			{
 				auto ade = static_cast<ArrayDeclarationExpression*>(expression);
-				return new ElsaType(ade->get_type());
+				return new ElsaType(ade->get_type(), true);
 			}
 
 			throw ParsingException("Unkown expression type.");
@@ -205,7 +205,13 @@ namespace elsa {
 					return new ElsaType(declared_field->get_type());
 			}
 
-			throw ParsingException("Invalid struct field");
+			for (const auto& function : struct_expression->get_functions())
+			{
+				if (function->get_name() == field->get_name())
+					return new ElsaType(ObjectType::Function);
+			}
+
+			throw ParsingException("Invalid struct field or function");
 		}
 
 		ElsaType* TypeChecker::get_struct_type(const std::wstring& name)

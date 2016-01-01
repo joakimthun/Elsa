@@ -12,6 +12,14 @@ namespace elsa {
 		{
 		}
 
+		ElsaType::ElsaType(const ElsaType* type, bool is_array)
+			:
+			type_(type->get_type()),
+			struct_declaration_expression_(nullptr),
+			is_array_(is_array)
+		{
+		}
+
 		ElsaType::ElsaType(ObjectType type)
 			:
 			type_(type),
@@ -54,6 +62,16 @@ namespace elsa {
 		const StructDeclarationExpression* ElsaType::get_struct_declaration_expression() const
 		{
 			return struct_declaration_expression_;
+		}
+
+		void ElsaType::set_is_array(bool is_array)
+		{
+			is_array_ = is_array;
+		}
+
+		bool ElsaType::get_is_array() const
+		{
+			return is_array_;
 		}
 	}
 }

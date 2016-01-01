@@ -22,7 +22,8 @@ namespace elsa {
 			num_args_(0),
 			num_locals_(0),
 			addr_(0),
-			type_(FunctionType::Static)
+			type_(FunctionType::Static),
+			builtin_(false)
 		{
 		}
 
@@ -71,16 +72,6 @@ namespace elsa {
 		bool FunctionInfo::is_builtin() const
 		{
 			return builtin_;
-		}
-
-		void FunctionInfo::emit(int instruction)
-		{
-			instructions_.push_back(instruction);
-		}
-
-		void FunctionInfo::emit(OpCode instruction)
-		{
-			instructions_.push_back(static_cast<int>(instruction));
 		}
 
 }

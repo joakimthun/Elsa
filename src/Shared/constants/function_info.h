@@ -30,8 +30,6 @@ namespace elsa {
 			void set_addr(std::size_t addr);
 			FunctionType get_type() const;
 			bool is_builtin() const;
-			void emit(int instruction);
-			void emit(OpCode instruction);
 
 		private:
 			std::wstring name_;
@@ -40,7 +38,6 @@ namespace elsa {
 			std::size_t addr_;
 			FunctionType type_;
 			bool builtin_;
-			std::vector<int> instructions_;
 		};
 
 }

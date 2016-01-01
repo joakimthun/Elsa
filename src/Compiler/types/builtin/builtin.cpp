@@ -5,13 +5,11 @@ namespace elsa {
 
 		void Builtin::init(VMProgram* program)
 		{
-			build_array(program);
+			Array::init(program);
 		}
-
-		void Builtin::build_array(VMProgram* program)
+		void Builtin::init(StructTable* table)
 		{
-			auto si = std::make_unique<StructInfo>(L"array");
+			Array::init(table);
 		}
-
 	}
 }

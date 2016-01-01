@@ -6,7 +6,9 @@ namespace elsa {
 		VMExpressionVisitor::VMExpressionVisitor()
 			:
 			vm_program_(std::make_unique<VMProgram>())
-		{}
+		{
+			Builtin::init(vm_program_.get());
+		}
 
 		void VMExpressionVisitor::visit(FuncDeclarationExpression* expression)
 		{

@@ -41,6 +41,16 @@ namespace elsa {
 			return num_locals_;
 		}
 
+		void FuncDeclarationExpression::set_num_args(std::size_t num_args)
+		{
+			num_args_ = num_args;
+		}
+
+		void FuncDeclarationExpression::set_num_locals(std::size_t num_locals)
+		{
+			num_locals_ = num_locals;
+		}
+
 		void FuncDeclarationExpression::increment_num_args()
 		{
 			num_args_++;

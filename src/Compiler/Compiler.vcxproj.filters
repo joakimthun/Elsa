@@ -270,6 +270,9 @@
     <ClInclude Include="types\builtin\builtin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="types\builtin\array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -501,6 +504,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="types\builtin\builtin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="types\builtin\array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

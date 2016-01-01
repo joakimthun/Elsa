@@ -16,6 +16,11 @@ namespace elsa {
 			fields_.back()->set_index(fields_.size() - 1);
 		}
 
+		void StructDeclarationExpression::add_member_function(std::unique_ptr<FuncDeclarationExpression> expression)
+		{
+			functions_.push_back(std::move(expression));
+		}
+
 		const std::wstring& StructDeclarationExpression::get_name() const
 		{
 			return name_;
@@ -24,6 +29,11 @@ namespace elsa {
 		const std::vector<std::unique_ptr<FieldExpression>>& StructDeclarationExpression::get_fields() const
 		{
 			return fields_;
+		}
+
+		const std::vector<std::unique_ptr<FuncDeclarationExpression>>& StructDeclarationExpression::get_functions() const
+		{
+			return functions_;
 		}
 
 		void StructDeclarationExpression::accept(ExpressionVisitor* visitor)
