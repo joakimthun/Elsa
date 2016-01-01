@@ -11,6 +11,7 @@ namespace elsa {
 		{
 			initialize_grammar();
 			next_token();
+			Builtin::init(&struct_table_);
 		}
 
 		std::unique_ptr<Program> ElsaParser::parse()

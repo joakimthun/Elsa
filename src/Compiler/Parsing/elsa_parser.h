@@ -11,6 +11,7 @@
 #include "../program.h"
 #include "../symbol_tables/struct_table.h"
 #include "../symbol_tables/function_table.h"
+#include "../types/builtin/builtin.h"
 #include "precedence.h"
 #include "parsers\prefix_operator_parser.h"
 #include "parsers\identifier_parser.h"
