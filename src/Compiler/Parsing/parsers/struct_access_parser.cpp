@@ -30,7 +30,7 @@ namespace elsa {
 					if (access_type->get_type() == ObjectType::Function)
 					{
 						auto call_exp = FuncCallParser::parse_member_call(parser, type->get_struct_declaration_expression()->get_member_function(identifier));
-						//sa_exp->add_expression(call_exp);
+						sa_exp->add_expression(dynamic_cast<TypedExpression*>(call_exp.release()));
 					}
 					else
 					{
