@@ -1,20 +1,32 @@
-struct vec2D
+struct Vec2D
 {
 	int x;
 	int y;
 };
 
-struct player
+struct Player
 {
-	vec2D position;
+	Vec2D position;
 	int speed;
 };
 
 func void arrays()
 {
 	var x = int[];
-	x.Push(10);
+	x.Push(15);
 	elsa.PrintLn(x.Pop());
+
+	x.Push(16);
+	x.Push(17);
+	x.Push(18);
+
+	var e18 = x.Pop();
+	var e17 = x.Pop();
+	var e16 = x.Pop();
+
+	elsa.PrintLn(16);
+	elsa.PrintLn(17);
+	elsa.PrintLn(18);
 }
 
 func void loops()
@@ -60,12 +72,12 @@ func void postfix()
 	x--;
 	elsa.PrintLn(x);
 
-	var player = new player;
+	var player = new Player;
 	player.speed = 9999;
 	player.speed++;
 	elsa.PrintLn(player.speed);
 
-	player.position = new vec2D;
+	player.position = new Vec2D;
 	player.position.x = 56;
 
 	player.position.x--;
@@ -173,11 +185,11 @@ func int return_int_test()
 	return 2015;
 }
 
-func player return_player_test()
+func Player return_player_test()
 {
-	var player = new player;
+	var player = new Player;
 	player.speed = 11;
-	player.position = new vec2D;
+	player.position = new Vec2D;
 	player.position.x = 5600;
 
 	return player;
@@ -205,16 +217,16 @@ func int main(int dummy)
 	var c = 'X';
 	var b = false;
 
-	var vec = new vec2D;
+	var vec = new Vec2D;
 	vec.x = 10;
 	vec.y = 20;
 	
 	elsa.PrintLn(vec.x);
 	elsa.PrintLn(vec.y);
 	
-	var player = new player;
+	var player = new Player;
 	player.speed = 11;
-	player.position = new vec2D;
+	player.position = new Vec2D;
 	player.position.x = 5600;
 	
 	elsa.PrintLn(player.position.x);
