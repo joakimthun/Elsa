@@ -40,6 +40,14 @@ namespace elsa {
 			add->set_num_locals(0);
 			add->set_return_type(new ElsaType(ObjectType::Void));
 
+			auto arg1 = std::make_unique<ArgumentExpression>();
+			arg1->set_name(L"arg1");
+			arg1->set_type(new ElsaType(ObjectType::Void));
+			// Add args exp, type checking?
+			add->add_args_expression(std::move(arg1));
+
+			struct_exp->add_member_function(std::move(add));
+
 			table->add_struct(L"Array", struct_exp.release());
 		}
 	}

@@ -23,15 +23,23 @@ namespace elsa {
 				else
 				{
 					// Field or function
-					auto fa_exp = std::make_unique<FieldAccessExpression>(identifier);
-					parser->consume(TokenType::Identifier);
+					const auto type = get_parent_type(sa_exp.get());
 
-					const auto* type = sa_exp->get_expressions().size() > 0 ?
-						sa_exp->get_expressions().back()->get_type() :
-						sa_exp->get_base()->get_type();
+					auto access_type = parser->type_checker().get_access_type(type->get_struct_declaration_expression(), identifier);
 
-					fa_exp->set_type(parser->type_checker().get_field_type(type->get_struct_declaration_expression(), fa_exp.get()));
-					sa_exp->add_expression(std::move(fa_exp));
+					if (access_type->get_type() == ObjectType::Function)
+					{
+						auto call_exp = FuncCallParser::parse_member_call(parser, type->get_struct_declaration_expression()->get_member_function(identifier));
+						//sa_exp->add_expression(call_exp);
+					}
+					else
+					{
+						parser->consume(TokenType::Identifier);
+
+						auto fa_exp = std::make_unique<FieldAccessExpression>(identifier);
+						fa_exp->set_type(access_type);
+						sa_exp->add_expression(fa_exp.release());
+					}
 				}
 
 				if (parser->current_token()->get_type() == TokenType::Dot)
@@ -41,6 +49,16 @@ namespace elsa {
 			}
 
 			return std::move(sa_exp);
+		}
+
+		const ElsaType* StructAccessParser::get_parent_type(StructAccessExpression* sa_exp)
+		{
+			if (sa_exp->get_expressions().size() > 0)
+			{
+				return sa_exp->get_expressions().back()->get_type();
+			}
+
+			return sa_exp->get_base()->get_type();
 		}
 
 	}

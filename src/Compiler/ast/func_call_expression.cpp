@@ -20,6 +20,11 @@ namespace elsa {
 			return fde_->get_name();
 		}
 
+		const ElsaType* FuncCallExpression::get_type() const
+		{
+			return fde_->get_return_type();
+		}
+
 		const std::vector<std::unique_ptr<Expression>>& FuncCallExpression::get_args() const
 		{
 			return args_;

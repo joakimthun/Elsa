@@ -21,6 +21,17 @@ namespace elsa {
 			functions_.push_back(std::move(expression));
 		}
 
+		const FuncDeclarationExpression* StructDeclarationExpression::get_member_function(const std::wstring& name) const
+		{
+			for (const auto& f : functions_)
+			{
+				if (f->get_name() == name)
+					return f.get();
+			}
+
+			throw ParsingException("Undefined member function");
+		}
+
 		const std::wstring& StructDeclarationExpression::get_name() const
 		{
 			return name_;

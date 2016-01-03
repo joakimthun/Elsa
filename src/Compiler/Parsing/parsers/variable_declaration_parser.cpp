@@ -19,10 +19,15 @@ namespace elsa {
 			auto expression_type = parser->type_checker().get_expression_type(expression.get());
 
 			auto struct_expression = dynamic_cast<CreateStructExpression*>(expression.get());
-			if (struct_expression != nullptr && parser->struct_table().has_entry(struct_expression->get_struct_name()))
+			auto array_expression = dynamic_cast<ArrayDeclarationExpression*>(expression.get());
+			if (struct_expression != nullptr || array_expression != nullptr)
 			{
+				auto entry_name = struct_expression != nullptr ? struct_expression->get_struct_name() : L"Array";
+				if (!parser->struct_table().has_entry(entry_name))
+					throw ParsingException("No struct with that name is defined");
+
 				// Struct
-				auto si = parser->struct_table().get(struct_expression->get_struct_name());
+				auto si = parser->struct_table().get(entry_name);
 				parser->current_scope()->add_local(name, *expression_type, si->get_expression());
 			}
 			else

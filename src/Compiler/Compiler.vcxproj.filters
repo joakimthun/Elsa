@@ -273,6 +273,9 @@
     <ClInclude Include="types\builtin\array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\typed_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">

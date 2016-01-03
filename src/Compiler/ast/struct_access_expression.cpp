@@ -10,9 +10,9 @@ namespace elsa {
 			base_ = std::move(expression);
 		}
 
-		void StructAccessExpression::add_expression(std::unique_ptr<FieldAccessExpression> expression)
+		void StructAccessExpression::add_expression(TypedExpression* expression)
 		{
-			expressions_.push_back(std::move(expression));
+			expressions_.push_back(std::unique_ptr<TypedExpression>(expression));
 		}
 
 		IdentifierExpression* StructAccessExpression::get_base()
@@ -20,7 +20,7 @@ namespace elsa {
 			return base_.get();
 		}
 
-		const std::vector<std::unique_ptr<FieldAccessExpression>>& StructAccessExpression::get_expressions() const
+		const std::vector<std::unique_ptr<TypedExpression>>& StructAccessExpression::get_expressions() const
 		{
 			return expressions_;
 		}

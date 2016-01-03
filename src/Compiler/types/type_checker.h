@@ -42,7 +42,7 @@ namespace elsa {
 			void assert_is_same_type(ObjectType t1, ObjectType t2);
 			bool is_same_type(Expression* first, Expression* second);
 			bool is_same_type(const ElsaType* first, const ElsaType* second);
-			ElsaType* get_field_type(const StructDeclarationExpression* struct_expression, const FieldAccessExpression* field);
+			ElsaType* get_access_type(const StructDeclarationExpression* struct_expression, const std::wstring& name);
 			ElsaType* get_struct_type(const std::wstring& name);
 			bool valid_assignment(AssignmentExpression* assignment_expression);
 			bool valid_return_expression(Expression* expression);

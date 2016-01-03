@@ -95,7 +95,7 @@ namespace elsa {
 
 				for (const auto& field_expression : sae->get_expressions())
 				{
-					type.reset(get_field_type(current, field_expression.get()));
+					type.reset(get_access_type(current, field_expression->get_name()));
 
 					if (field_expression->get_type()->get_type() == ObjectType::GCOPtr)
 						current = field_expression->get_type()->get_struct_declaration_expression();
@@ -194,20 +194,20 @@ namespace elsa {
 			return first->get_type() == second->get_type();
 		}
 
-		ElsaType* TypeChecker::get_field_type(const StructDeclarationExpression* struct_expression, const FieldAccessExpression* field)
+		ElsaType* TypeChecker::get_access_type(const StructDeclarationExpression* struct_expression, const std::wstring& name)
 		{
 			if(struct_expression == nullptr)
 				throw ParsingException("The StructDeclarationExpression can not be a nullptr");
 
 			for (const auto& declared_field : struct_expression->get_fields())
 			{
-				if (declared_field->get_name() == field->get_name())
+				if (declared_field->get_name() == name)
 					return new ElsaType(declared_field->get_type());
 			}
 
 			for (const auto& function : struct_expression->get_functions())
 			{
-				if (function->get_name() == field->get_name())
+				if (function->get_name() == name)
 					return new ElsaType(ObjectType::Function);
 			}
 
