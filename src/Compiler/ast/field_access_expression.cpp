@@ -25,6 +25,11 @@ namespace elsa {
 			return type_.get();
 		}
 
+		ExpressionType FieldAccessExpression::get_expression_type() const
+		{
+			return ExpressionType::FieldAccess;
+		}
+
 		void FieldAccessExpression::accept(ExpressionVisitor* visitor)
 		{
 			//visitor->visit(this);

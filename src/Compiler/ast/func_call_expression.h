@@ -21,6 +21,8 @@ namespace elsa {
 
 			const std::wstring& get_name() const override;
 			const ElsaType* get_type() const override;
+			ExpressionType get_expression_type() const override;
+
 			const std::vector<std::unique_ptr<Expression>>& get_args() const;
 			const FuncDeclarationExpression* get_func_declaration_expression() const;
 

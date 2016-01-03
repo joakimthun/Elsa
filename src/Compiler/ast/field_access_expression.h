@@ -19,6 +19,7 @@ namespace elsa {
 
 			const std::wstring& get_name() const override;
 			const ElsaType* get_type() const override;
+			ExpressionType get_expression_type() const override;
 
 			void accept(ExpressionVisitor* visitor) override;
 

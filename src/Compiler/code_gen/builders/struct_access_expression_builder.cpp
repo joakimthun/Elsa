@@ -10,19 +10,26 @@ namespace elsa {
 			IdentifierExpressionBuilder::build(program, visitor, expression->get_base());
 
 			auto current_type = expression->get_base()->get_type()->get_struct_declaration_expression();
-			for (const auto& field_exp : expression->get_expressions())
+			for (const auto& exp : expression->get_expressions())
 			{
-				for (const auto& field : current_type->get_fields())
+				if (exp->get_expression_type() == ExpressionType::FieldAccess)
 				{
-					if (field->get_name() == field_exp->get_name())
+					for (const auto& field : current_type->get_fields())
 					{
-						if (field->get_type()->get_type() == ObjectType::GCOPtr)
-							current_type = field->get_type()->get_struct_declaration_expression();
+						if (field->get_name() == exp->get_name())
+						{
+							if (field->get_type()->get_type() == ObjectType::GCOPtr)
+								current_type = field->get_type()->get_struct_declaration_expression();
 
-						program->emit(OpCode::l_field);
-						program->emit(static_cast<int>(field->get_index()));
-						break;
+							program->emit(OpCode::l_field);
+							program->emit(static_cast<int>(field->get_index()));
+							break;
+						}
 					}
+				}
+				else if(exp->get_expression_type() == ExpressionType::FuncCall)
+				{
+
 				}
 			}
 		}
