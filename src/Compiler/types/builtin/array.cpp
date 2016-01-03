@@ -32,9 +32,7 @@ namespace elsa {
 			auto pop = std::make_unique<FunctionInfo>(L"Pop", 1, 0, program->get_next_instruction_index(), FunctionType::Member, true);
 			program->emit(OpCode::l_arg);
 			program->emit(0);
-			program->emit(OpCode::iconst);
-			program->emit(0);
-			program->emit(OpCode::l_ele);
+			program->emit(OpCode::p_ele);
 			program->emit(OpCode::ret);
 			si->add_function(pop.get());
 			program->add_func(std::move(pop));
