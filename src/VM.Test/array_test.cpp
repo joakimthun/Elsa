@@ -536,3 +536,71 @@ TEST_F(ArrayTest, REMOVE)
 	ASSERT_EQ(-10, vm.eval_stack_top().i());
 
 }
+
+TEST_F(ArrayTest, POP)
+{
+	program_.emit(
+	{
+		iconst, 3,
+		new_arr, (int)VMType::Int,
+		s_local, 0,
+
+		// Add element 1
+		l_local, 0,
+		iconst, 10,
+		a_ele,
+
+		// Add element 2
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		// Add element 3
+		l_local, 0,
+		iconst, 12939,
+		a_ele,
+
+		// Pop element 3
+		l_local, 0,
+		p_ele,
+		halt,
+
+		// Pop element 2
+		l_local, 0,
+		p_ele,
+		halt,
+
+		// Add element 2
+		l_local, 0,
+		iconst, 678,
+		a_ele,
+
+		// Pop element 2
+		l_local, 0,
+		p_ele,
+		halt,
+
+		// Pop element 1
+		l_local, 0,
+		p_ele,
+		halt
+	});
+
+	auto vm = VM(program_);
+
+	vm.execute();
+
+	EXPECT_EQ(12939, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(-10, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(678, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(10, vm.eval_stack_top().i());
+}

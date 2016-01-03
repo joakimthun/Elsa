@@ -182,6 +182,17 @@ namespace elsa {
 			store_element(instance, value, ai->next_index++);
 		}
 
+		Object Heap::pop_element(Object& instance)
+		{
+			assert_is_array(instance);
+			auto& ai = instance.gco()->ai;
+			auto last_element_index = ai->next_index - 1;
+
+			auto popped_element = load_element(instance, last_element_index);
+			remove_element(instance, last_element_index);
+			return popped_element;
+		}
+
 		void Heap::remove_element(Object& instance, int element_index)
 		{
 			assert_is_array(instance);

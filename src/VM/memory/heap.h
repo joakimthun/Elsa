@@ -35,6 +35,7 @@ namespace elsa {
 			Object load_element(const Object& instance, int element_index);
 			void store_element(const Object& instance, const Object& value, int element_index);
 			void add_element(Object& instance, const Object& value);
+			Object pop_element(Object& instance);
 			void remove_element(Object& instance, int element_index);
 			void copy_array(const Object& source, Object& target, int index_to_exclude = -1);
 			std::size_t get_num_objects() const;

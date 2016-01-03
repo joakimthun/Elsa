@@ -366,8 +366,7 @@ namespace elsa {
 				break;
 			}
 			case l_ele: {
-				//auto ei = get_instruction(pc_++);
-				auto ei = current_frame_->pop().i();
+				auto ei = get_instruction(pc_++);
 				auto instance = current_frame_->pop();
 				current_frame_->push(heap_.load_element(instance, ei));
 				break;
@@ -383,6 +382,11 @@ namespace elsa {
 				auto value = current_frame_->pop();
 				auto instance = current_frame_->pop();
 				heap_.add_element(instance, value);
+				break;
+			}
+			case p_ele: {
+				auto instance = current_frame_->pop();
+				current_frame_->push(heap_.pop_element(instance));
 				break;
 			}
 			case r_ele: {
