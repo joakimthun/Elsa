@@ -34,7 +34,7 @@ namespace elsa {
 			for (auto& f : functions_)
 			{
 				if (f->get_name() == name)
-					return f.get();
+					return f;
 			}
 
 			return nullptr;
@@ -62,7 +62,7 @@ namespace elsa {
 			fields_.push_back(std::move(field));
 		}
 
-		void StructInfo::add_function(std::unique_ptr<FunctionInfo> function)
+		void StructInfo::add_function(FunctionInfo* function)
 		{
 			for (auto& f : functions_)
 			{
@@ -70,7 +70,7 @@ namespace elsa {
 					throw CodeGenException("A member function with that name already exists");
 			}
 
-			functions_.push_back(std::move(function));
+			functions_.push_back(function);
 		}
 
 		void StructInfo::update_size(const FieldInfo& field)

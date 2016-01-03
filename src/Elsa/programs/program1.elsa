@@ -13,7 +13,8 @@ struct player
 func void arrays()
 {
 	var x = int[];
-	x.Add(10);
+	x.Push(10);
+	elsa.PrintLn(x.Pop());
 }
 
 func void loops()

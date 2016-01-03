@@ -17,14 +17,27 @@ namespace elsa {
 		{
 			auto si = std::make_unique<StructInfo>(L"Array");
 
-			// Add element
-			auto add = std::make_unique<FunctionInfo>(L"Add", 2, 0, program->get_next_instruction_index(), FunctionType::Member, true);
+			// Push element
+			auto push = std::make_unique<FunctionInfo>(L"Push", 2, 0, program->get_next_instruction_index(), FunctionType::Member, true);
 			program->emit(OpCode::l_arg);
 			program->emit(0);
 			program->emit(OpCode::l_arg);
 			program->emit(1);
 			program->emit(OpCode::a_ele);
-			si->add_function(std::move(add));
+			program->emit(OpCode::ret);
+			si->add_function(push.get());
+			program->add_func(std::move(push));
+
+			// Pop element
+			auto pop = std::make_unique<FunctionInfo>(L"Pop", 1, 0, program->get_next_instruction_index(), FunctionType::Member, true);
+			program->emit(OpCode::l_arg);
+			program->emit(0);
+			program->emit(OpCode::iconst);
+			program->emit(0);
+			program->emit(OpCode::l_ele);
+			program->emit(OpCode::ret);
+			si->add_function(pop.get());
+			program->add_func(std::move(pop));
 
 			program->add_struct(std::move(si));
 		}
@@ -34,19 +47,33 @@ namespace elsa {
 			auto struct_exp = std::make_unique<StructDeclarationExpression>();
 			struct_exp->set_name(L"Array");
 
-			auto add = std::make_unique<FuncDeclarationExpression>();
-			add->set_name(L"Add");
-			add->set_num_args(1);
-			add->set_num_locals(0);
-			add->set_return_type(new ElsaType(ObjectType::Void));
+			auto push = std::make_unique<FuncDeclarationExpression>();
+			push->set_name(L"Push");
+			push->set_num_args(1);
+			push->set_num_locals(0);
+			push->set_return_type(new ElsaType(ObjectType::Void));
 
-			auto arg1 = std::make_unique<ArgumentExpression>();
-			arg1->set_name(L"arg1");
-			arg1->set_type(new ElsaType(ObjectType::Void));
+			auto push_arg1 = std::make_unique<ArgumentExpression>();
+			push_arg1->set_name(L"arg1");
+			push_arg1->set_type(new ElsaType(ObjectType::Void));
 			// Add args exp, type checking?
-			add->add_args_expression(std::move(arg1));
+			push->add_args_expression(std::move(push_arg1));
 
-			struct_exp->add_member_function(std::move(add));
+			struct_exp->add_member_function(std::move(push));
+
+			auto pop = std::make_unique<FuncDeclarationExpression>();
+			pop->set_name(L"Pop");
+			pop->set_num_args(0);
+			pop->set_num_locals(0);
+			pop->set_return_type(new ElsaType(ObjectType::Void));
+
+			//auto pop_arg1 = std::make_unique<ArgumentExpression>();
+			//pop_arg1->set_name(L"arg1");
+			//pop_arg1->set_type(new ElsaType(ObjectType::Void));
+			//// Add args exp, type checking?
+			//pop->add_args_expression(std::move(pop_arg1));
+
+			struct_exp->add_member_function(std::move(pop));
 
 			table->add_struct(L"Array", struct_exp.release());
 		}

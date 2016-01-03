@@ -7,6 +7,7 @@
 #include "opcodes\opcodes.h"
 #include "vm_program.h"
 #include "identifier_expression_builder.h"
+#include "func_call_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {

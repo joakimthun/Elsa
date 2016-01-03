@@ -28,14 +28,14 @@ namespace elsa {
 			const std::vector<std::unique_ptr<FieldInfo>>& get_fields() const;
 
 			void add_field(std::unique_ptr<FieldInfo> field);
-			void add_function(std::unique_ptr<FunctionInfo> function);
+			void add_function(FunctionInfo* function);
 
 		private:
 			void update_size(const FieldInfo& field);
 
 			std::wstring name_;
 			std::vector<std::unique_ptr<FieldInfo>> fields_;
-			std::vector<std::unique_ptr<FunctionInfo>> functions_;
+			std::vector<FunctionInfo*> functions_;
 			std::size_t size_;
 			std::size_t index_;
 

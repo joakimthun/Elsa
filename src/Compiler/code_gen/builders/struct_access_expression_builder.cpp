@@ -29,7 +29,19 @@ namespace elsa {
 				}
 				else if(exp->get_expression_type() == ExpressionType::FuncCall)
 				{
+					for (const auto& function : current_type->get_functions())
+					{
+						if (function->get_name() == exp->get_name())
+						{
+							const auto fi = program->get_struct(current_type->get_name())->get_function(function->get_name());
 
+							if (function->get_return_type()->get_type() == ObjectType::GCOPtr)
+								current_type = function->get_return_type()->get_struct_declaration_expression();
+
+							FuncCallExpressionBuilder::build_member(program, visitor, dynamic_cast<FuncCallExpression*>(exp.get()), fi);
+							break;
+						}
+					}
 				}
 			}
 		}
