@@ -12,13 +12,15 @@ struct Player
 
 func void arrays()
 {
-	var x = int[];
+	var x = new int[];
 	x.Push(15);
 	elsa.PrintLn(x.Pop());
 
 	x.Push(16);
 	x.Push(17);
 	x.Push(18);
+
+	//x[0] = 4362;
 
 	var e18 = x.Pop();
 	var e17 = x.Pop();

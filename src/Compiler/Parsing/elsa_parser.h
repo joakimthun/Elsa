@@ -58,10 +58,10 @@ namespace elsa {
 			void consume(TokenType type);
 			void consume();
 			Token* current_token();
+			Token* peek_token();
 
 		private:
 			void next_token();
-			Token* peek_token();
 
 			Parser* get_expression_parser(TokenType type);
 			Parser* get_ll2_expression_parser(TokenType first, TokenType second);
