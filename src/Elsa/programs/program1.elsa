@@ -14,21 +14,22 @@ func void arrays()
 {
 	var x = new int[];
 	x.Push(15);
-	//elsa.PrintLn(x.Pop());
+
+	elsa.PrintLn(x.Pop());
 	
-	//x.Push(16);
-	//x.Push(17);
-	//x.Push(18);
-	//
-	////x[0] = 4362;
-	//
-	//var x1 = x.Pop();
-	//var x2 = x.Pop();
-	//var x3 = x.Pop();
-	//
-	//elsa.PrintLn(x3);
-	//elsa.PrintLn(x2);
-	//elsa.PrintLn(x1);
+	x.Push(16);
+	x.Push(17);
+	x.Push(18);
+	
+	//x[0] = 4362;
+	
+	var x1 = x.Pop();
+	var x2 = x.Pop();
+	var x3 = x.Pop();
+	
+	elsa.PrintLn(x3);
+	elsa.PrintLn(x2);
+	elsa.PrintLn(x1);
 
 	// Array with structs
 	var players = new Player[];
@@ -43,7 +44,6 @@ func void arrays()
 	var speed = p.speed;
 	elsa.PrintLn(speed);
 	elsa.PrintLn(p.position.x);
-	elsa.PrintLn(p.position.y);
 }
 
 func void loops()
