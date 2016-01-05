@@ -22,6 +22,7 @@ namespace elsa {
 			Bool,
 			GCOPtr,
 			Function,
+			Generic,
 		};
 
 		class ElsaType
@@ -35,6 +36,7 @@ namespace elsa {
 
 			ObjectType get_type() const;
 			VMType get_vm_type() const;
+			std::wstring get_name() const;
 			const StructDeclarationExpression* get_struct_declaration_expression() const;
 			const FuncDeclarationExpression* get_func_declaration_expression() const;
 

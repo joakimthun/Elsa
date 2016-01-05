@@ -90,7 +90,7 @@ namespace elsa {
 			if (is_of_type<StructAccessExpression>(expression))
 			{
 				auto sae = static_cast<StructAccessExpression*>(expression);
-				auto current = sae->get_base()->get_type()->get_struct_declaration_expression();
+				auto current = sae->get_base()->get_type();
 				std::unique_ptr<ElsaType> type;
 
 				for (const auto& field_expression : sae->get_expressions())
@@ -98,7 +98,7 @@ namespace elsa {
 					type.reset(get_access_type(current, field_expression->get_name()));
 
 					if (field_expression->get_type()->get_type() == ObjectType::GCOPtr)
-						current = field_expression->get_type()->get_struct_declaration_expression();
+						current = field_expression->get_type();
 				}
 
 				return type.release();
@@ -194,8 +194,12 @@ namespace elsa {
 			return first->get_type() == second->get_type();
 		}
 
-		ElsaType* TypeChecker::get_access_type(const StructDeclarationExpression* struct_expression, const std::wstring& name)
+		ElsaType* TypeChecker::get_access_type(const ElsaType* type, const std::wstring& name)
 		{
+			if (type->get_type() == ObjectType::Function)
+				return new ElsaType(type->get_func_declaration_expression()->get_return_type());
+
+			auto struct_expression = type->get_struct_declaration_expression();
 			if(struct_expression == nullptr)
 				throw ParsingException("The StructDeclarationExpression can not be a nullptr");
 

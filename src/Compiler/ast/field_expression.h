@@ -13,6 +13,9 @@ namespace elsa {
 		class FieldExpression : public Expression
 		{
 		public:
+			FieldExpression();
+			FieldExpression(const std::wstring& name, const ElsaType* type, std::size_t index);
+
 			void set_name(const std::wstring& name);
 			void set_type(ElsaType* type);
 			void set_index(std::size_t index);

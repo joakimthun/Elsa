@@ -25,7 +25,7 @@ namespace elsa {
 					// Field or function
 					const auto type = get_parent_type(sa_exp.get());
 
-					auto access_type = parser->type_checker().get_access_type(type->get_struct_declaration_expression(), identifier);
+					auto access_type = parser->type_checker().get_access_type(type, identifier);
 
 					if (access_type->get_type() == ObjectType::Function)
 					{

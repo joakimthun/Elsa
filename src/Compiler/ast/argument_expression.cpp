@@ -3,6 +3,17 @@
 namespace elsa {
 	namespace compiler {
 
+		ArgumentExpression::ArgumentExpression()
+		{
+		}
+
+		ArgumentExpression::ArgumentExpression(const std::wstring & name, const ElsaType * type)
+			:
+			name_(name),
+			type_(std::make_unique<ElsaType>(type))
+		{
+		}
+
 		void ArgumentExpression::set_name(const std::wstring& name)
 		{
 			name_ = name;

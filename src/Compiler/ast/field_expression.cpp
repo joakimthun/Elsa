@@ -3,6 +3,18 @@
 namespace elsa {
 	namespace compiler {
 
+		FieldExpression::FieldExpression()
+		{
+		}
+
+		FieldExpression::FieldExpression(const std::wstring& name, const ElsaType* type, std::size_t index)
+			:
+			name_(name),
+			type_(new ElsaType(type)),
+			index_(index)
+		{
+		}
+
 		void FieldExpression::set_name(const std::wstring& name)
 		{
 			name_ = name;

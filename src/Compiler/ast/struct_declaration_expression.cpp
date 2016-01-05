@@ -1,9 +1,51 @@
 #include "struct_declaration_expression.h"
 
 #include "../code_gen/visitors/expression_visitor.h"
+#include "../parsing/elsa_parser.h"
 
 namespace elsa {
 	namespace compiler {
+
+		StructDeclarationExpression::StructDeclarationExpression()
+			:
+			is_generic_(false)
+		{
+		}
+
+		StructDeclarationExpression::StructDeclarationExpression(bool is_generic)
+			:
+			is_generic_(is_generic)
+		{
+		}
+
+		const StructDeclarationExpression* StructDeclarationExpression::create_generic(std::unique_ptr<ElsaType> type, ElsaParser* parser)
+		{
+			if (!is_generic_)
+				throw ElsaException("Not a generic type");
+
+			auto name = name_ + L"___" + type->get_name();
+
+			if (parser->struct_table().has_entry(name))
+				return parser->struct_table().get(name)->get_expression();
+
+			auto new_type = std::make_unique<StructDeclarationExpression>();
+			new_type->name_ = name;
+			new_type->is_generic_ = is_generic_;
+
+			for (const auto& field : fields_)
+			{
+				const auto field_type = field->get_type()->get_type() == ObjectType::Generic ? type.get() : field->get_type();
+				new_type->add_field_expression(std::make_unique<FieldExpression>(field->get_name(), type.get(), field->get_index()));
+			}
+
+			for (const auto& function : functions_)
+			{
+				new_type->add_member_function(function->create_generic(type.get()));
+			}
+
+			new_type->generic_type_ = std::move(type);
+			return new_type.get();
+		}
 
 		void StructDeclarationExpression::set_name(const std::wstring& name)
 		{
@@ -30,6 +72,11 @@ namespace elsa {
 			}
 
 			throw ParsingException("Undefined member function");
+		}
+
+		const ElsaType* StructDeclarationExpression::get_generic_type() const
+		{
+			return generic_type_.get();
 		}
 
 		const std::wstring& StructDeclarationExpression::get_name() const

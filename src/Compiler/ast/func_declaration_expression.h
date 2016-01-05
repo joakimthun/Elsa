@@ -5,6 +5,7 @@
 #include <memory>
 #include <cstddef>
 
+#include "exceptions\elsa_exception.h"
 #include "expression.h"
 #include "argument_expression.h"
 #include "../types/elsa_type.h"
@@ -18,6 +19,8 @@ namespace elsa {
 		{
 		public:
 			FuncDeclarationExpression();
+
+			std::unique_ptr<FuncDeclarationExpression> create_generic(const ElsaType* type);
 
 			void add_args_expression(std::unique_ptr<ArgumentExpression> expression);
 			void add_body_expression(std::unique_ptr<Expression> expression);
@@ -40,6 +43,9 @@ namespace elsa {
 			void accept(ExpressionVisitor* visitor) override;
 
 		private:
+			void assert_is_impl();
+
+			const FuncDeclarationExpression* impl_;
 			std::wstring name_;
 			std::unique_ptr<ElsaType> return_type_;
 			std::vector<std::unique_ptr<ArgumentExpression>> args_;

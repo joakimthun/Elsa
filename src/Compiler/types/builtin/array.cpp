@@ -42,19 +42,18 @@ namespace elsa {
 
 		void Array::build_symbol(StructTable* table)
 		{
-			auto struct_exp = std::make_unique<StructDeclarationExpression>();
+			auto struct_exp = std::make_unique<StructDeclarationExpression>(true);
 			struct_exp->set_name(L"Array");
 
 			auto push = std::make_unique<FuncDeclarationExpression>();
 			push->set_name(L"Push");
 			push->set_num_args(1);
 			push->set_num_locals(0);
-			push->set_return_type(new ElsaType(ObjectType::Void));
+			push->set_return_type(new ElsaType(ObjectType::Generic));
 
 			auto push_arg1 = std::make_unique<ArgumentExpression>();
 			push_arg1->set_name(L"arg1");
-			push_arg1->set_type(new ElsaType(ObjectType::Void));
-			// Add args exp, type checking?
+			push_arg1->set_type(new ElsaType(ObjectType::Generic));
 			push->add_args_expression(std::move(push_arg1));
 
 			struct_exp->add_member_function(std::move(push));

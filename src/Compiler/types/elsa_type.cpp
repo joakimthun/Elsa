@@ -84,6 +84,33 @@ namespace elsa {
 			}
 		}
 
+		std::wstring ElsaType::get_name() const
+		{
+			switch (type_)
+			{
+			case ObjectType::Void: {
+				return L"Void";
+			}
+			case ObjectType::Bool: {
+				return L"Bool";
+			}
+			case ObjectType::Int: {
+				return L"Int";
+			}
+			case ObjectType::Float: {
+				return L"Float";
+			}
+			case ObjectType::Char: {
+				return L"Char";
+			}
+			case ObjectType::GCOPtr: {
+				return struct_declaration_expression_->get_name();
+			}
+			default:
+				throw ParsingException("Can not get the type name.");
+			}
+		}
+
 		const StructDeclarationExpression* ElsaType::get_struct_declaration_expression() const
 		{
 			return struct_declaration_expression_;

@@ -12,6 +12,9 @@ namespace elsa {
 		class ArgumentExpression : public Expression
 		{
 		public:
+			ArgumentExpression();
+			ArgumentExpression(const std::wstring& name, const ElsaType* type);
+
 			void set_name(const std::wstring& name);
 			void set_type(ElsaType* type);
 
