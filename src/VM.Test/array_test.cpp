@@ -74,19 +74,23 @@ TEST_F(ArrayTest, ADD)
 
 		l_local, 0,
 		halt,
-		l_ele, 3,
+		iconst, 3,
+		l_ele,		
 		halt,
 
 		l_local, 0,
-		l_ele, 2,
+		iconst, 2,
+		l_ele,
 		halt,
 
 		l_local, 0,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 		halt,
 
 		l_local, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		halt,
 
 	});
@@ -138,17 +142,20 @@ TEST_F(ArrayTest, INT_STORE_LOAD)
 
 		// Load element at index 0 (10)
 		l_local, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		halt,
 
 		// Load element at index 1 (-10)
 		l_local, 0,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 		halt,
 
 		// Load element at index 2 (12939)
 		l_local, 0,
-		l_ele, 2,
+		iconst, 2,
+		l_ele,
 		halt
 	});
 
@@ -192,17 +199,20 @@ TEST_F(ArrayTest, FLOAT_STORE_LOAD)
 
 		// Load element at index 0 (12.0)
 		l_local, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		halt,
 
 		// Load element at index 1 (99.0)
 		l_local, 0,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 		halt,
 
 		// Load element at index 2 (-99.0)
 		l_local, 0,
-		l_ele, 2,
+		iconst, 2,
+		l_ele,
 		halt
 	});
 
@@ -241,33 +251,38 @@ TEST_F(ArrayTest, STRUCT_PTR_STORE_LOAD)
 
 		// Store the value 4 in the struct pointed to by element 0
 		l_local, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		iconst, 4,
 		s_field, 0,
 
 		// Load the value(4) from the struct pointed to by element 0
 		l_local, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		l_field, 0,
 		halt,
 		pop,
 
 		// Store the value -67 in the struct pointed to by element 1
 		l_local, 0,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 		iconst, -67,
 		s_field, 0,
 
 		// Load the value(-67) from the struct pointed to by element 1
 		l_local, 0,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 		l_field, 0,
 		halt,
 		pop,
 
 		// Load the value(4) from the struct pointed to by element 0
 		l_local, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		l_field, 0,
 		halt,
 		pop,
@@ -306,58 +321,74 @@ TEST_F(ArrayTest, ARRAY_OF_ARRAYS)
 		a_ele,
 
 		l_local, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		iconst, 10,
 		a_ele,
 
 		l_local, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele, 
 		iconst, 20,
 		a_ele,
 
 		l_local, 0,
-		l_ele, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
+		iconst, 0,
+		l_ele,
 		halt,
 		pop,
 
 		l_local, 0,
-		l_ele, 0,
-		l_ele, 1,
+		iconst, 0,
+		l_ele,
+		iconst, 1,
+		l_ele,
 		halt,
 		pop,
 
 		l_local, 0,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 		iconst, 30,
 		a_ele,
 
 		l_local, 0,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 		iconst, 40,
 		a_ele,
 
 		l_local, 0,
-		l_ele, 1,
-		l_ele, 0,
+		iconst, 1,
+		l_ele,
+		iconst, 0,
+		l_ele,
 		halt,
 		pop,
 
 		l_local, 0,
-		l_ele, 1,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
+		iconst, 1,
+		l_ele,
 		halt,
 		pop,
 
 		l_local, 0,
-		l_ele, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
+		iconst, 0,
+		l_ele,
 		halt,
 		pop,
 
 		l_local, 0,
-		l_ele, 0,
-		l_ele, 1,
+		iconst, 0,
+		l_ele,
+		iconst, 1,
+		l_ele,
 	});
 
 	auto vm = VM(program_);
@@ -409,15 +440,18 @@ TEST_F(ArrayTest, COPY)
 
 		l_local, 0,
 		halt,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		halt,
 
 		l_local, 0,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 		halt,
 
 		l_local, 0,
-		l_ele, 2,
+		iconst, 2,
+		l_ele,
 		halt,
 
 		// Copy the values from array 0 to to array 1
@@ -428,15 +462,18 @@ TEST_F(ArrayTest, COPY)
 		c_arr,
 
 		l_local, 1,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		halt,
 
 		l_local, 1,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 		halt,
 
 		l_local, 1,
-		l_ele, 2,
+		iconst, 2,
+		l_ele,
 		halt,
 
 	});
@@ -485,15 +522,18 @@ TEST_F(ArrayTest, REMOVE)
 
 		l_local, 0,
 		halt,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		halt,
 		pop,
 		l_local, 0,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 		halt,
 		pop,
 		l_local, 0,
-		l_ele, 2,
+		iconst, 2,
+		l_ele,
 		halt,
 		pop,
 
@@ -502,11 +542,13 @@ TEST_F(ArrayTest, REMOVE)
 		l_local, 0,
 
 		halt,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		halt,
 		pop,
 		l_local, 0,
-		l_ele, 1,
+		iconst, 1,
+		l_ele,
 
 	});
 

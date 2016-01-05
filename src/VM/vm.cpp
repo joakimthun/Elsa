@@ -366,13 +366,13 @@ namespace elsa {
 				break;
 			}
 			case l_ele: {
-				auto ei = get_instruction(pc_++);
+				auto ei = current_frame_->pop().i();
 				auto instance = current_frame_->pop();
 				current_frame_->push(heap_.load_element(instance, ei));
 				break;
 			}
 			case s_ele: {
-				auto ei = get_instruction(pc_++);
+				auto ei = current_frame_->pop().i();
 				auto value = current_frame_->pop();
 				auto instance = current_frame_->pop();
 				heap_.store_element(instance, value, ei);

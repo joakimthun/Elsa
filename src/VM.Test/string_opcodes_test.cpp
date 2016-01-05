@@ -30,27 +30,32 @@ TEST_F(StringOpCodesTest, SCONST)
 
 		// H
 		l_local, 0,
-		l_ele, 0,
+		iconst, 0,
+		l_ele,
 		halt,
 
 		// l
 		l_local, 0,
-		l_ele, 3,
+		iconst, 3,
+		l_ele,
 		halt,
 
 		// space
 		l_local, 0,
-		l_ele, 5,
+		iconst, 5,
+		l_ele,
 		halt,
 
 		// W
 		l_local, 0,
-		l_ele, 6,
+		iconst, 6,
+		l_ele,
 		halt,
 
 		// !
 		l_local, 0,
-		l_ele, 11,
+		iconst, 11,
+		l_ele,
 	});
 
 	auto vm = VM(program_);
