@@ -5,7 +5,7 @@
 namespace elsa {
 	namespace compiler {
 
-		void ArrayDeclarationExpression::set_type(ElsaType * type)
+		void ArrayDeclarationExpression::set_type(ElsaType* type)
 		{
 			type_ = std::unique_ptr<ElsaType>(type);
 		}

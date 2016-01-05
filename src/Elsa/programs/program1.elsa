@@ -12,10 +12,10 @@ struct Player
 
 func void arrays()
 {
-	//var x = new int[];
-	//x.Push(15);
+	var x = new int[];
+	x.Push(15);
 	//elsa.PrintLn(x.Pop());
-	//
+	
 	//x.Push(16);
 	//x.Push(17);
 	//x.Push(18);
@@ -33,14 +33,17 @@ func void arrays()
 	// Array with structs
 	var players = new Player[];
 	var player = new Player;
-	//player.speed = 11;
-	//player.position = new Vec2D;
-	//player.position.x = 5600;
-	//
+	player.speed = 8989;
+	player.position = new Vec2D;
+	player.position.x = 5600;
+	
 
 	players.Push(player);
 	var p = players.Pop();
 	var speed = p.speed;
+	elsa.PrintLn(speed);
+	elsa.PrintLn(p.position.x);
+	elsa.PrintLn(p.position.y);
 }
 
 func void loops()

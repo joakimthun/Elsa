@@ -21,10 +21,12 @@ namespace elsa {
 		{
 			auto arr_exp = std::make_unique<ArrayDeclarationExpression>();
 
-			auto type = parser->type_checker().get_type_from_token(parser->current_token());
-			type->set_is_array(true);
+			auto type = std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
 
-			arr_exp->set_type(type);
+			auto array_struct = parser->struct_table().get(L"Array")->get_expression();
+			auto array_type = array_struct->create_generic(std::move(type), parser);
+
+			arr_exp->set_type(new ElsaType(array_type));
 
 			parser->consume();
 			parser->consume(TokenType::LSBracket);

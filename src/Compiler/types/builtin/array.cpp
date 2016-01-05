@@ -62,7 +62,7 @@ namespace elsa {
 			pop->set_name(L"Pop");
 			pop->set_num_args(0);
 			pop->set_num_locals(0);
-			pop->set_return_type(new ElsaType(ObjectType::Void));
+			pop->set_return_type(new ElsaType(ObjectType::Generic));
 
 			//auto pop_arg1 = std::make_unique<ArgumentExpression>();
 			//pop_arg1->set_name(L"arg1");

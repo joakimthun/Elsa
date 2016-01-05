@@ -8,17 +8,19 @@ namespace elsa {
 
 		StructDeclarationExpression::StructDeclarationExpression()
 			:
-			is_generic_(false)
+			is_generic_(false),
+			parent_(nullptr)
 		{
 		}
 
 		StructDeclarationExpression::StructDeclarationExpression(bool is_generic)
 			:
-			is_generic_(is_generic)
+			is_generic_(is_generic),
+			parent_(nullptr)
 		{
 		}
 
-		const StructDeclarationExpression* StructDeclarationExpression::create_generic(std::unique_ptr<ElsaType> type, ElsaParser* parser)
+		const StructDeclarationExpression* StructDeclarationExpression::create_generic(std::unique_ptr<ElsaType> type, ElsaParser* parser) const
 		{
 			if (!is_generic_)
 				throw ElsaException("Not a generic type");
@@ -29,6 +31,7 @@ namespace elsa {
 				return parser->struct_table().get(name)->get_expression();
 
 			auto new_type = std::make_unique<StructDeclarationExpression>();
+			new_type->parent_ = this;
 			new_type->name_ = name;
 			new_type->is_generic_ = is_generic_;
 
@@ -44,7 +47,10 @@ namespace elsa {
 			}
 
 			new_type->generic_type_ = std::move(type);
-			return new_type.get();
+
+			parser->struct_table().add_struct(new_type->get_name(), new_type.get());
+
+			return new_type.release();
 		}
 
 		void StructDeclarationExpression::set_name(const std::wstring& name)
@@ -79,8 +85,16 @@ namespace elsa {
 			return generic_type_.get();
 		}
 
-		const std::wstring& StructDeclarationExpression::get_name() const
+		bool StructDeclarationExpression::is_generic_type() const
 		{
+			return is_generic_;
+		}
+
+		const std::wstring& StructDeclarationExpression::get_name(bool inherited) const
+		{
+			if (inherited && parent_ != nullptr)
+				return parent_->get_name(true);
+
 			return name_;
 		}
 

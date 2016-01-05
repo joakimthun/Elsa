@@ -22,7 +22,7 @@ namespace elsa {
 			auto array_expression = dynamic_cast<ArrayDeclarationExpression*>(expression.get());
 			if (struct_expression != nullptr || array_expression != nullptr)
 			{
-				auto entry_name = struct_expression != nullptr ? struct_expression->get_struct_name() : L"Array";
+				auto entry_name = struct_expression != nullptr ? struct_expression->get_struct_name() : array_expression->get_type()->get_name();
 				if (!parser->struct_table().has_entry(entry_name))
 					throw ParsingException("No struct with that name is defined");
 

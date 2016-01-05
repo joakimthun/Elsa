@@ -101,6 +101,9 @@ namespace elsa {
 						current = field_expression->get_type();
 				}
 
+				if (type->get_type() == ObjectType::Function)
+					return new ElsaType(type->get_func_declaration_expression()->get_return_type());
+
 				return type.release();
 			}
 			if (is_of_type<ArgumentExpression>(expression))

@@ -12,10 +12,15 @@
 namespace elsa {
 	namespace compiler {
 
+		class StructDeclarationExpression;
+
 		class StructAccessExpressionBuilder
 		{
 		public:
 			static void build(VMProgram* program, VMExpressionVisitor* visitor, StructAccessExpression* expression);
+
+		private:
+			static const StructDeclarationExpression* get_current_struct(const ElsaType* current_type);
 		};
 
 	}
