@@ -208,7 +208,7 @@ namespace elsa {
 			for (const auto& function : struct_expression->get_functions())
 			{
 				if (function->get_name() == name)
-					return new ElsaType(ObjectType::Function);
+					return new ElsaType(function.get());
 			}
 
 			throw ParsingException("Invalid struct field or function");
