@@ -10,6 +10,14 @@ struct Player
 	int speed;
 };
 
+func void array_length()
+{
+	var array = new char[];
+	elsa.PrintLn(array.Length());
+	array.Push('H');
+	elsa.PrintLn(array.Length());
+}
+
 func void explicit_typing()
 {
 	int x = 0;
@@ -304,6 +312,7 @@ func int main(int dummy)
 
 	arrays();
 	explicit_typing();
+	array_length();
 
 	return 0;
 }

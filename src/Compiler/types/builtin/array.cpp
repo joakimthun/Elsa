@@ -37,6 +37,15 @@ namespace elsa {
 			si->add_function(pop.get());
 			program->add_func(std::move(pop));
 
+			// Length
+			auto length = std::make_unique<FunctionInfo>(L"Length", 1, 0, program->get_next_instruction_index(), FunctionType::Member, true);
+			program->emit(OpCode::l_arg);
+			program->emit(0);
+			program->emit(OpCode::len_arr);
+			program->emit(OpCode::ret);
+			si->add_function(length.get());
+			program->add_func(std::move(length));
+
 			program->add_struct(std::move(si));
 		}
 
@@ -64,13 +73,15 @@ namespace elsa {
 			pop->set_num_locals(0);
 			pop->set_return_type(new ElsaType(ObjectType::Generic));
 
-			//auto pop_arg1 = std::make_unique<ArgumentExpression>();
-			//pop_arg1->set_name(L"arg1");
-			//pop_arg1->set_type(new ElsaType(ObjectType::Void));
-			//// Add args exp, type checking?
-			//pop->add_args_expression(std::move(pop_arg1));
-
 			struct_exp->add_member_function(std::move(pop));
+
+			auto length = std::make_unique<FuncDeclarationExpression>();
+			length->set_name(L"Length");
+			length->set_num_args(0);
+			length->set_num_locals(0);
+			length->set_return_type(new ElsaType(ObjectType::Int));
+
+			struct_exp->add_member_function(std::move(length));
 
 			table->add_struct(L"Array", struct_exp.release());
 		}
