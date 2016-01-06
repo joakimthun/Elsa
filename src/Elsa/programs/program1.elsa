@@ -25,13 +25,21 @@ func void arrays()
 	x[1] = 17;
 	x[2] = 18;
 	
-	var x1 = x.Pop();
-	var x2 = x.Pop();
-	var x3 = x.Pop();
-	
-	elsa.PrintLn(x3);
-	elsa.PrintLn(x2);
+	var x1 = x[0];
+	var x2 = x[1];
+	var x3 = x[2];
+
 	elsa.PrintLn(x1);
+	elsa.PrintLn(x2);
+	elsa.PrintLn(x3);
+
+	var x4 = x.Pop();
+	var x5 = x.Pop();
+	var x6 = x.Pop();
+	
+	elsa.PrintLn(x6);
+	elsa.PrintLn(x5);
+	elsa.PrintLn(x4);
 
 	// Array with structs
 	var players = new Player[];
