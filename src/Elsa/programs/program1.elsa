@@ -10,6 +10,22 @@ struct Player
 	int speed;
 };
 
+func void explicit_typing()
+{
+	int x = 0;
+	float x2 = 0.0;
+	char x3 = '0';
+	bool x4 = true;
+	Player p = new Player;
+	p.speed = 1337;
+
+	elsa.PrintLn(x);
+	elsa.PrintLn(x2);
+	elsa.PrintLn(x3);
+	elsa.PrintLn(x4);
+	elsa.PrintLn(p.speed);
+}
+
 func void arrays()
 {
 	var x = new int[];
@@ -287,6 +303,7 @@ func int main(int dummy)
 	elsa.PrintLn(ret_player_value.speed);
 
 	arrays();
+	explicit_typing();
 
 	return 0;
 }
