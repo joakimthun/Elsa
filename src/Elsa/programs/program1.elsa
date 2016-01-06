@@ -48,8 +48,14 @@ func void arrays()
 	player.position = new Vec2D;
 	player.position.x = 5600;
 	
-
 	players.Push(player);
+
+	var p1 = players[0];
+
+	elsa.PrintLn(p1.speed);
+	elsa.PrintLn(p1.position.x);
+	elsa.PrintLn(p1.position.y);
+
 	var p = players.Pop();
 	var speed = p.speed;
 	elsa.PrintLn(speed);
