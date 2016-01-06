@@ -3,8 +3,8 @@
 #include <memory>
 #include <utility>
 
-#include "../../token.h"
-#include "exceptions\parsing_exception.h"
+#include "..\..\token.h"
+#include "..\..\exceptions\parsing_exception.h"
 
 namespace elsa {
 	namespace compiler {

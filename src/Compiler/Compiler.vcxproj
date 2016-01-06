@@ -57,6 +57,7 @@
     <ClInclude Include="code_gen\visitors\expression_visitor.h" />
     <ClInclude Include="code_gen\visitors\vm_expression_visitor.h" />
     <ClInclude Include="compiler.h" />
+    <ClInclude Include="exceptions\parsing_exception.h" />
     <ClInclude Include="interop\native_function_info.h" />
     <ClInclude Include="interop\native_function_table.h" />
     <ClInclude Include="Lexing\lexer.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="code_gen\helpers\load_helper.cpp" />
     <ClCompile Include="code_gen\visitors\vm_expression_visitor.cpp" />
     <ClCompile Include="compiler.cpp" />
+    <ClCompile Include="exceptions\parsing_exception.cpp" />
     <ClCompile Include="interop\native_function_info.cpp" />
     <ClCompile Include="interop\native_function_table.cpp" />
     <ClCompile Include="Lexing\lexer.cpp" />

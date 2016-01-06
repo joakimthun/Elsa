@@ -5,7 +5,7 @@
 #include <utility>
 #include <vector>
 
-#include "exceptions\parsing_exception.h"
+#include "..\exceptions\parsing_exception.h"
 #include "../lexing/lexer.h"
 #include "../token.h"
 #include "../program.h"

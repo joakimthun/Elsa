@@ -66,17 +66,19 @@ namespace elsa {
 		class Token
 		{
 		public:
-			Token(TokenType type, const std::wstring& value, std::size_t line_number);
-			Token(TokenType type, wchar_t value, std::size_t line_number);
+			Token(TokenType type, const std::wstring& value, std::size_t line_number, const std::wstring& file_name);
+			Token(TokenType type, wchar_t value, std::size_t line_number, const std::wstring& file_name);
 
 			TokenType get_type() const;
 			std::wstring get_value() const;
 			std::size_t get_line_number() const;
+			const std::wstring& get_file_name() const;
 
 		private:
 			TokenType type_;
 			std::wstring value_;
 			std::size_t line_number_;
+			std::wstring file_name_;
 		};
 
 	}

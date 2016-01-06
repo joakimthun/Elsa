@@ -4,7 +4,7 @@
 
 #include "constants\struct_info.h"
 #include "object_types\vm_type.h"
-#include "exceptions\parsing_exception.h"
+#include "..\exceptions\parsing_exception.h"
 
 namespace elsa {
 	namespace compiler {

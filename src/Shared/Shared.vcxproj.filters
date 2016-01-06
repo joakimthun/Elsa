@@ -71,9 +71,6 @@
     <ClInclude Include="opcodes\opcodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="exceptions\parsing_exception.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="vm_program.h">
       <Filter>Header Files</Filter>
     </ClInclude>

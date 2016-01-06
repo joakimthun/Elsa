@@ -25,7 +25,7 @@
 #include "../ast/array_access_expression.h"
 #include "elsa_type.h"
 #include "../token.h"
-#include "exceptions\parsing_exception.h"
+#include "..\exceptions\parsing_exception.h"
 
 
 namespace elsa {

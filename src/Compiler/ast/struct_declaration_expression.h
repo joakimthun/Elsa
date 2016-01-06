@@ -6,7 +6,7 @@
 #include <utility>
 
 #include "expression.h"
-#include "exceptions\parsing_exception.h"
+#include "..\exceptions\parsing_exception.h"
 #include "field_expression.h"
 #include "func_declaration_expression.h"
 #include "../types/elsa_type.h"
