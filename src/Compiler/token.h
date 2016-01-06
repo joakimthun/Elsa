@@ -61,6 +61,7 @@ namespace elsa {
 			If,
 			Else,
 			Loop,
+			Import,
 		};
 		
 		class Token

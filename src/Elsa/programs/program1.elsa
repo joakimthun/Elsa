@@ -1,3 +1,5 @@
+import "programs\\program2";
+
 struct Vec2D
 {
 	int x;
@@ -9,6 +11,13 @@ struct Player
 	Vec2D position;
 	int speed;
 };
+
+func void import_test()
+{
+	var game = new Game;
+	game.num_players = 5464;
+	elsa.PrintLn(game.num_players);
+}
 
 func void array_length()
 {
@@ -329,6 +338,7 @@ func int main(int dummy)
 	arrays();
 	explicit_typing();
 	array_length();
+	import_test();
 
 	return 0;
 }

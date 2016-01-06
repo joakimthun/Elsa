@@ -329,6 +329,7 @@ namespace elsa {
 			register_keyword(L"if", TokenType::If);
 			register_keyword(L"else", TokenType::Else);
 			register_keyword(L"loop", TokenType::Loop);
+			register_keyword(L"import", TokenType::Import);
 		}
 	}
 }

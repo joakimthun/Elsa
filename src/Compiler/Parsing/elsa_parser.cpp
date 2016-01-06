@@ -7,7 +7,10 @@ namespace elsa {
 			:
 			lexer_(std::unique_ptr<Lexer>(lexer)),
 			current_scope_(nullptr),
-			type_checker_(this)
+			type_checker_(this),
+			program_(std::make_unique<Program>()),
+			struct_table_ext_(nullptr),
+			function_table_ext_(nullptr)
 		{
 			initialize_grammar();
 			next_token();
@@ -16,18 +19,19 @@ namespace elsa {
 
 		std::unique_ptr<Program> ElsaParser::parse()
 		{
-			auto program = std::make_unique<Program>();
-
 			while (current_token_->get_type() != TokenType::END)
 			{
-				program->add_statement(parse_statement());
+				program_->add_statement(parse_statement());
 			}
 
-			return program;
+			return std::move(program_);
 		}
 
 		std::unique_ptr<Expression> ElsaParser::parse_statement()
 		{
+			if (current_token_->get_type() == TokenType::Import)
+				parse_import_statement();
+
 			auto parser = get_statement_parser(current_token_->get_type());
 
 			if (parser == nullptr)
@@ -83,11 +87,17 @@ namespace elsa {
 
 		StructTable& ElsaParser::struct_table()
 		{
+			if (struct_table_ext_ != nullptr)
+				return *struct_table_ext_;
+
 			return struct_table_;
 		}
 
 		FunctionTable& ElsaParser::function_table()
 		{
+			if (function_table_ext_ != nullptr)
+				return *function_table_ext_;
+
 			return function_table_;
 		}
 
@@ -117,6 +127,19 @@ namespace elsa {
 		Token* ElsaParser::peek_token()
 		{
 			return lexer_->peek_token();
+		}
+
+		ElsaParser::ElsaParser(Lexer* lexer, StructTable* struct_table, FunctionTable* function_table)
+			:
+			lexer_(std::unique_ptr<Lexer>(lexer)),
+			current_scope_(nullptr),
+			type_checker_(this),
+			program_(std::make_unique<Program>()),
+			struct_table_ext_(struct_table),
+			function_table_ext_(function_table)
+		{
+			initialize_grammar();
+			next_token();
 		}
 
 		void ElsaParser::next_token()
@@ -261,6 +284,30 @@ namespace elsa {
 			// Postfix
 			register_postfix_parser(TokenType::PlusPlus, new PostfixOperatorParser(Precedence::Unary));
 			register_postfix_parser(TokenType::MinusMinus, new PostfixOperatorParser(Precedence::Unary));
+		}
+
+		void ElsaParser::parse_import_statement()
+		{
+			consume(TokenType::Import);
+			auto filename = current_token_->get_value();
+			consume(TokenType::StringLiteral);
+			consume(TokenType::Semicolon);
+			import_source_file(filename);
+		}
+
+		void ElsaParser::import_source_file(const std::wstring& filename)
+		{
+			auto filename_with_extension = filename + L".elsa";
+			auto parser = ElsaParser(new Lexer(new SourceFile(filename_with_extension.c_str())), &struct_table_, &function_table_);
+			parser.parse(program_.get());
+		}
+
+		void ElsaParser::parse(Program* program)
+		{
+			while (current_token_->get_type() != TokenType::END)
+			{
+				program->add_statement(parse_statement());
+			}
 		}
 	}
 }

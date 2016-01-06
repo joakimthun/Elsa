@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="programs\program1.elsa" />
+    <None Include="programs\program2.elsa" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1A7CC214-5115-401C-9D56-F3EF298EC342}</ProjectGuid>

@@ -1,0 +1,4 @@
+struct Game
+{
+	int num_players;
+};

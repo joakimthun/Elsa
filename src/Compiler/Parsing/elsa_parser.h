@@ -61,6 +61,8 @@ namespace elsa {
 			Token* peek_token();
 
 		private:
+			ElsaParser(Lexer* lexer, StructTable* struct_table, FunctionTable* function_table);
+
 			void next_token();
 
 			Parser* get_expression_parser(TokenType type);
@@ -75,9 +77,15 @@ namespace elsa {
 			void register_prefix_parser(TokenType type);
 			void register_postfix_parser(TokenType type, InfixParser* parser);
 			void initialize_grammar();
+			void parse_import_statement();
+			void import_source_file(const std::wstring& filename);
+			void parse(Program* program);
 
+			std::unique_ptr<Program> program_;
 			StructTable struct_table_;
 			FunctionTable function_table_;
+			StructTable* struct_table_ext_;
+			FunctionTable* function_table_ext_;
 			ScopedExpression* current_scope_;
 			std::map<TokenType, std::unique_ptr<Parser>> expression_parsers_;
 			std::vector<std::unique_ptr<LL2Entry>> ll2_expression_parsers_;
