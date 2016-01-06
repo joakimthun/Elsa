@@ -17,7 +17,7 @@ void get_tokens(Lexer& l, std::vector<std::unique_ptr<Token>>& t)
 
 TEST(LexerTest, PROGRAM_1_FUNC)
 {
-	auto lexer = Lexer(new SourceFile("..\\Compiler.Test\\lexing_test_files\\program1.elsa"));
+	auto lexer = Lexer(new SourceFile(L"..\\Compiler.Test\\lexing_test_files\\program1.elsa"));
 	std::vector<std::unique_ptr<Token>> tokens;
 
 	get_tokens(lexer, tokens);
@@ -45,7 +45,7 @@ TEST(LexerTest, PROGRAM_1_FUNC)
 
 TEST(LexerTest, PROGRAM_2_INT_FUNC)
 {
-	auto lexer = Lexer(new SourceFile("..\\Compiler.Test\\lexing_test_files\\program2.elsa"));
+	auto lexer = Lexer(new SourceFile(L"..\\Compiler.Test\\lexing_test_files\\program2.elsa"));
 	std::vector<std::unique_ptr<Token>> tokens;
 
 	get_tokens(lexer, tokens);
@@ -68,7 +68,7 @@ TEST(LexerTest, PROGRAM_2_INT_FUNC)
 
 TEST(LexerTest, PROGRAM_3_FLOAT_FUNC)
 {
-	auto lexer = Lexer(new SourceFile("..\\Compiler.Test\\lexing_test_files\\program3.elsa"));
+	auto lexer = Lexer(new SourceFile(L"..\\Compiler.Test\\lexing_test_files\\program3.elsa"));
 	std::vector<std::unique_ptr<Token>> tokens;
 
 	get_tokens(lexer, tokens);
@@ -91,7 +91,7 @@ TEST(LexerTest, PROGRAM_3_FLOAT_FUNC)
 
 TEST(LexerTest, PROGRAM_4_BOOL_FUNC)
 {
-	auto lexer = Lexer(new SourceFile("..\\Compiler.Test\\lexing_test_files\\program4.elsa"));
+	auto lexer = Lexer(new SourceFile(L"..\\Compiler.Test\\lexing_test_files\\program4.elsa"));
 	std::vector<std::unique_ptr<Token>> tokens;
 
 	get_tokens(lexer, tokens);
@@ -112,7 +112,7 @@ TEST(LexerTest, PROGRAM_4_BOOL_FUNC)
 
 TEST(LexerTest, PROGRAM_5_STRUCT)
 {
-	auto lexer = Lexer(new SourceFile("..\\Compiler.Test\\lexing_test_files\\program5.elsa"));
+	auto lexer = Lexer(new SourceFile(L"..\\Compiler.Test\\lexing_test_files\\program5.elsa"));
 	std::vector<std::unique_ptr<Token>> tokens;
 
 	get_tokens(lexer, tokens);
@@ -164,7 +164,7 @@ TEST(LexerTest, PROGRAM_5_STRUCT)
 
 TEST(LexerTest, PROGRAM_6_STRINGS_AND_CHARS)
 {
-	auto lexer = Lexer(new SourceFile("..\\Compiler.Test\\lexing_test_files\\program6.elsa"));
+	auto lexer = Lexer(new SourceFile(L"..\\Compiler.Test\\lexing_test_files\\program6.elsa"));
 	std::vector<std::unique_ptr<Token>> tokens;
 
 	get_tokens(lexer, tokens);
@@ -207,7 +207,7 @@ TEST(LexerTest, PROGRAM_6_STRINGS_AND_CHARS)
 
 TEST(LexerTest, PROGRAM_7_MATH_EXPRESSION)
 {
-	auto lexer = Lexer(new SourceFile("..\\Compiler.Test\\lexing_test_files\\program7.elsa"));
+	auto lexer = Lexer(new SourceFile(L"..\\Compiler.Test\\lexing_test_files\\program7.elsa"));
 	std::vector<std::unique_ptr<Token>> tokens;
 
 	get_tokens(lexer, tokens);
@@ -234,7 +234,7 @@ TEST(LexerTest, PROGRAM_7_MATH_EXPRESSION)
 
 TEST(LexerTest, PROGRAM_8_MAX_MUNCH)
 {
-	auto lexer = Lexer(new SourceFile("..\\Compiler.Test\\lexing_test_files\\program8.elsa"));
+	auto lexer = Lexer(new SourceFile(L"..\\Compiler.Test\\lexing_test_files\\program8.elsa"));
 	std::vector<std::unique_ptr<Token>> tokens;
 
 	get_tokens(lexer, tokens);

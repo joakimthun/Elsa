@@ -3,8 +3,9 @@
 namespace elsa {
 	namespace compiler {
 
-		SourceFile::SourceFile(const char* filename)
+		SourceFile::SourceFile(const wchar_t* filename)
 		{
+			file_name_ = std::wstring(filename);
 			read_file(filename);
 		}
 
@@ -23,7 +24,12 @@ namespace elsa {
 			return stream_.good();
 		}
 
-		void SourceFile::read_file(const char* filename)
+		const std::wstring& SourceFile::get_file_name() const
+		{
+			return file_name_;
+		}
+
+		void SourceFile::read_file(const wchar_t* filename)
 		{
 			std::wifstream f_stream(filename, std::ifstream::in);
 

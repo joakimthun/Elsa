@@ -7,7 +7,7 @@ int source_file_test() { return 0; }
 
 TEST(SOURCE_FILE, READ_ENTIRE_FILE_WO_BOM)
 {
-	SourceFile sf("..\\Compiler.Test\\lexing_test_files\\utf8wobom.txt");
+	SourceFile sf(L"..\\Compiler.Test\\lexing_test_files\\utf8wobom.txt");
 	std::wstring expected = L"var x = 10;";
 	std::wstring result;
 
@@ -31,7 +31,7 @@ TEST(SOURCE_FILE, READ_ENTIRE_FILE_WO_BOM)
 
 TEST(SOURCE_FILE, READ_ENTIRE_FILE_W_BOM)
 {
-	SourceFile sf("..\\Compiler.Test\\lexing_test_files\\utf8wbom.txt");
+	SourceFile sf(L"..\\Compiler.Test\\lexing_test_files\\utf8wbom.txt");
 	std::wstring expected = L"var x = 10;";
 	std::wstring result;
 

@@ -41,6 +41,8 @@ namespace elsa {
 			std::unique_ptr<SourceFile> file_;
 			std::map<std::wstring, Token> keywords_;
 			std::queue<std::unique_ptr<Token>> token_buffer_;
+			std::size_t line_number_;
+
 		};
 
 	}
