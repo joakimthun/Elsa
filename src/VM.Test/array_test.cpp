@@ -646,3 +646,142 @@ TEST_F(ArrayTest, POP)
 
 	EXPECT_EQ(10, vm.eval_stack_top().i());
 }
+
+TEST_F(ArrayTest, LENGTH)
+{
+	program_.emit(
+	{
+		iconst, 5,
+		new_arr, (int)VMType::Int,
+		s_local, 0,
+
+		// 1 element
+		l_local, 0,
+		iconst, 10,
+		a_ele,
+
+		l_local, 0,
+		len_arr,
+		halt,
+
+		// 2 elements
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		len_arr,
+		halt,
+
+		// 3 elements
+		l_local, 0,
+		iconst, 12939,
+		a_ele,
+
+		l_local, 0,
+		len_arr,
+		halt,
+
+		// 4 elements
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		len_arr,
+		halt,
+
+		// 5 elements
+		l_local, 0,
+		iconst, -10,
+		a_ele,
+
+		l_local, 0,
+		len_arr,
+		halt,
+
+		// Pop element 5
+		l_local, 0,
+		p_ele,
+		
+		l_local, 0,
+		len_arr,
+		halt,
+
+		// Pop element 4
+		l_local, 0,
+		p_ele,
+
+		l_local, 0,
+		len_arr,
+		halt,
+
+		// Pop element 3
+		l_local, 0,
+		p_ele,
+
+		l_local, 0,
+		len_arr,
+		halt,
+
+		// Pop element 2
+		l_local, 0,
+		p_ele,
+
+		l_local, 0,
+		len_arr,
+		halt,
+
+		// Pop element 1
+		l_local, 0,
+		p_ele,
+
+		l_local, 0,
+		len_arr,
+		halt,
+
+	});
+
+	auto vm = VM(program_);
+
+	vm.execute();
+
+	EXPECT_EQ(1, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(2, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(3, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(4, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(5, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(4, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(3, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(2, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(1, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	EXPECT_EQ(0, vm.eval_stack_top().i());
+
+}
