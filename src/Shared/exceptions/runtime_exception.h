@@ -8,6 +8,7 @@ namespace elsa {
 		{
 		public:
 			RuntimeException(const std::string& message) : ElsaException(message) {};
+			RuntimeException(const std::wstring& message) : ElsaException(message) {};
 
 			virtual const char* what() const throw()
 			{

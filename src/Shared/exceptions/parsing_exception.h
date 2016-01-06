@@ -8,6 +8,7 @@ namespace elsa {
 	{
 	public:
 		ParsingException(const std::string& message) : ElsaException(message) {};
+		ParsingException(const std::wstring& message) : ElsaException(message) {};
 
 		virtual const char* what() const throw()
 		{

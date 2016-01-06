@@ -36,6 +36,12 @@
     <ClCompile Include="vm_program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="util\string_util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exceptions\elsa_exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants\char_info.h">
@@ -75,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="object_types\vm_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\string_util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

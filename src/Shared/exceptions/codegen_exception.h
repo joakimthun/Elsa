@@ -8,6 +8,7 @@ namespace elsa {
 	{
 	public:
 		CodeGenException(const std::string& message) : ElsaException(message) {};
+		CodeGenException(const std::wstring& message) : ElsaException(message) {};
 
 		virtual const char* what() const throw()
 		{
