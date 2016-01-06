@@ -224,6 +224,12 @@ namespace elsa {
 			}
 		}
 
+		int Heap::array_length(const Object& instance)
+		{
+			assert_is_array(instance);
+			return static_cast<int>(instance.gco()->ai->next_index);
+		}
+
 		std::size_t Heap::get_num_objects() const
 		{
 			return num_objects_;

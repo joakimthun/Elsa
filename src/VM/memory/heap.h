@@ -38,6 +38,7 @@ namespace elsa {
 			Object pop_element(Object& instance);
 			void remove_element(Object& instance, int element_index);
 			void copy_array(const Object& source, Object& target, int index_to_exclude = -1);
+			int array_length(const Object& instance);
 			std::size_t get_num_objects() const;
 
 		private:
