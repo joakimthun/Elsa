@@ -22,6 +22,7 @@
 #include "../ast/return_expression.h"
 #include "../ast/func_declaration_expression.h"
 #include "../ast/array_declaration_expression.h"
+#include "../ast/array_access_expression.h"
 #include "elsa_type.h"
 #include "../token.h"
 #include "exceptions\parsing_exception.h"
@@ -50,6 +51,7 @@ namespace elsa {
 			template<typename TExpression>
 			bool is_of_type(Expression* exp);
 			bool is_boolean_operator(TokenType op);
+			bool is_assignable(Expression* expression);
 
 		private:
 			ElsaParser* parser_;

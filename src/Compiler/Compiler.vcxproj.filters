@@ -261,9 +261,6 @@
     <ClInclude Include="ast\array_declaration_expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parsing\parsers\array_declaration_parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="code_gen\builders\array_declaration_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -274,6 +271,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ast\typed_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\array_access_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\array_access_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code_gen\builders\array_access_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -500,9 +506,6 @@
     <ClCompile Include="ast\array_declaration_expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="parsing\parsers\array_declaration_parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="code_gen\builders\array_declaration_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -510,6 +513,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="types\builtin\array.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\array_access_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\array_access_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code_gen\builders\array_access_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

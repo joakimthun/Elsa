@@ -29,7 +29,7 @@
 #include "parsers\loop_parser.h"
 #include "parsers\postfix_operator_parser.h"
 #include "parsers\return_parser.h"
-#include "parsers\array_declaration_parser.h"
+#include "parsers\array_access_parser.h"
 #include "../types/type_checker.h"
 #include "ll2_entry.h"
 

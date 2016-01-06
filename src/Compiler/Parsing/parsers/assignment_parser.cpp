@@ -11,8 +11,7 @@ namespace elsa {
 
 			exp->set_left(std::move(left));
 
-			if (!parser->type_checker().is_of_type<IdentifierExpression>(exp->get_left()) && !parser->type_checker().is_of_type<StructAccessExpression>(exp->get_left()))
-				throw ParsingException("Values can only be assigned to local variables");
+			assert_valid_assignment(parser, exp->get_left());
 
 			exp->set_right(std::move(parser->parse_expression(precedence())));
 
@@ -27,6 +26,12 @@ namespace elsa {
 		int AssignmentParser::precedence()
 		{
 			return Precedence::Assignment;
+		}
+
+		void AssignmentParser::assert_valid_assignment(ElsaParser* parser, Expression* left)
+		{
+			if (!parser->type_checker().is_assignable(left))
+				throw ParsingException("Values can only be assigned to local variables");
 		}
 
 	}

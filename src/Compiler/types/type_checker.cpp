@@ -131,6 +131,11 @@ namespace elsa {
 				auto ade = static_cast<ArrayDeclarationExpression*>(expression);
 				return new ElsaType(ade->get_type(), true);
 			}
+			if (is_of_type<ArrayAccessExpression>(expression))
+			{
+				auto aae = static_cast<ArrayAccessExpression*>(expression);
+				return new ElsaType(aae->get_identifier_expression()->get_type(), true);
+			}
 
 			throw ParsingException("Unkown expression type.");
 		}
@@ -183,10 +188,17 @@ namespace elsa {
 
 		bool TypeChecker::is_same_type(Expression* first, Expression* second)
 		{
-			auto left = get_expression_type(first);
-			auto right = get_expression_type(second);
+			auto left = std::unique_ptr<ElsaType>(get_expression_type(first));
 
-			return is_same_type(left, right);
+			if (left->get_type() == ObjectType::GCOPtr && left->get_struct_declaration_expression()->is_generic_type())
+				left.reset(new ElsaType(left->get_struct_declaration_expression()->get_generic_type()));
+
+			auto right = std::unique_ptr<ElsaType>(get_expression_type(second));
+
+			if (right->get_type() == ObjectType::GCOPtr && right->get_struct_declaration_expression()->is_generic_type())
+				right.reset(new ElsaType(right->get_struct_declaration_expression()->get_generic_type()));
+
+			return is_same_type(left.get(), right.get());
 		}
 
 		bool TypeChecker::is_same_type(const ElsaType* first, const ElsaType* second)
@@ -302,6 +314,13 @@ namespace elsa {
 			default:
 				return false;
 			}
+		}
+
+		bool TypeChecker::is_assignable(Expression* expression)
+		{
+			return is_of_type<IdentifierExpression>(expression) ||
+				is_of_type<StructAccessExpression>(expression) ||
+				is_of_type<ArrayAccessExpression>(expression);
 		}
 
 		template<typename TExpression>

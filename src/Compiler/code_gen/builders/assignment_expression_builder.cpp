@@ -26,6 +26,15 @@ namespace elsa {
 
 				return;
 			}
+			else if (auto aae = dynamic_cast<ArrayAccessExpression*>(expression->get_left()))
+			{
+				auto local_index = LoadHelper::load_local(program, visitor, aae->get_identifier_expression());
+				expression->get_right()->accept(visitor);
+				aae->get_index_expression()->accept(visitor);
+				program->emit(OpCode::s_ele);
+
+				return;
+			}
 
 			throw CodeGenException("Not supported -> AssignmentExpressionBuilder");
 		}

@@ -105,6 +105,11 @@ namespace elsa {
 			ArrayDeclarationExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		void VMExpressionVisitor::visit(ArrayAccessExpression* expression)
+		{
+			ArrayAccessExpressionBuilder::build(vm_program_.get(), this, expression);
+		}
+
 		ScopedExpression* VMExpressionVisitor::current_scope()
 		{
 			if (current_scope_ == nullptr)

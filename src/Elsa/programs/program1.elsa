@@ -17,11 +17,13 @@ func void arrays()
 
 	elsa.PrintLn(x.Pop());
 	
-	x.Push(16);
-	x.Push(17);
-	x.Push(18);
+	x.Push(878);
+	x.Push(878);
+	x.Push(878);
 	
-	//x[0] = 4362;
+	x[0] = 16;
+	x[1] = 17;
+	x[2] = 18;
 	
 	var x1 = x.Pop();
 	var x2 = x.Pop();
@@ -44,6 +46,7 @@ func void arrays()
 	var speed = p.speed;
 	elsa.PrintLn(speed);
 	elsa.PrintLn(p.position.x);
+	elsa.PrintLn(p.position.y);
 }
 
 func void loops()

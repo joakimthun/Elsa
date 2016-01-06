@@ -15,6 +15,9 @@ namespace elsa {
 		public:
 			std::unique_ptr<Expression> parse(ElsaParser* parser, std::unique_ptr<Expression> left) override;
 			int precedence() override;
+
+		private:
+			void assert_valid_assignment(ElsaParser* parser, Expression* left);
 		};
 
 	}
