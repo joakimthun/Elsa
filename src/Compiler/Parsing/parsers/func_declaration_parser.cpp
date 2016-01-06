@@ -16,7 +16,7 @@ namespace elsa {
 			parser->consume(TokenType::Identifier);
 
 			if (parser->function_table().has_entry(name))
-				throw ParsingException("A function with the same name has already been declared");
+				throw ParsingException(L"A function with the same name has already been declared", parser->current_token());
 
 			func_dec_exp->set_name(name);
 
@@ -56,7 +56,7 @@ namespace elsa {
 			parser->reset_current_scope();
 
 			if (!parser->type_checker().return_type_match(func_dec_exp.get()))
-				throw ParsingException("Return type mismatch");
+				throw ParsingException(L"Return type mismatch", parser->current_token());
 
 			parser->consume(TokenType::RBracket);
 

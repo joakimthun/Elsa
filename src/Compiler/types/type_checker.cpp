@@ -18,7 +18,7 @@ namespace elsa {
 
 				if (!is_same_type(be->get_left(), be->get_right()))
 				{
-					throw ParsingException("Type mismatch");
+					throw ParsingException(L"Type mismatch", parser_->current_token());
 				}
 
 				if (is_boolean_operator(be->get_operator()))
@@ -34,7 +34,7 @@ namespace elsa {
 				auto local = parser_->current_scope()->get_local(id->get_name());
 
 				if (local == nullptr)
-					throw ParsingException("Unkown identifier");
+					throw ParsingException(L"Unkown identifier", parser_->current_token());
 
 				if (local->get_struct_expression() != nullptr)
 				{
@@ -77,7 +77,7 @@ namespace elsa {
 				auto local = parser_->current_scope()->get_local(fae->get_name());
 
 				if (local == nullptr)
-					throw ParsingException("Invalid field name");
+					throw ParsingException(L"Invalid field name", parser_->current_token());
 
 				if (local->get_struct_expression() != nullptr)
 				{
@@ -137,7 +137,7 @@ namespace elsa {
 				return new ElsaType(aae->get_identifier_expression()->get_type(), true);
 			}
 
-			throw ParsingException("Unkown expression type.");
+			throw ParsingException(L"Unkown expression type.", parser_->current_token());
 		}
 
 		ElsaType* TypeChecker::get_type_from_token(Token* token)
@@ -176,14 +176,14 @@ namespace elsa {
 				return get_struct_type(token->get_value());
 			}
 			default:
-				throw ParsingException("Invalid type.");
+				throw ParsingException(L"Invalid type.", parser_->current_token());
 			}
 		}
 
 		void TypeChecker::assert_is_same_type(ObjectType t1, ObjectType t2)
 		{
 			if (t1 != t2)	
-				throw ParsingException("Type mismatch");
+				throw ParsingException(L"Type mismatch", parser_->current_token());
 		}
 
 		bool TypeChecker::is_same_type(Expression* first, Expression* second)
@@ -216,7 +216,7 @@ namespace elsa {
 
 			auto struct_expression = type->get_struct_declaration_expression();
 			if(struct_expression == nullptr)
-				throw ParsingException("The StructDeclarationExpression can not be a nullptr");
+				throw ParsingException(L"The StructDeclarationExpression can not be a nullptr", parser_->current_token());
 
 			for (const auto& declared_field : struct_expression->get_fields())
 			{
@@ -230,7 +230,7 @@ namespace elsa {
 					return new ElsaType(function.get());
 			}
 
-			throw ParsingException("Invalid struct field or function");
+			throw ParsingException(L"Invalid struct field or function", parser_->current_token());
 		}
 
 		ElsaType* TypeChecker::get_struct_type(const std::wstring& name)
@@ -241,7 +241,7 @@ namespace elsa {
 				return new ElsaType(si->get_expression());
 			}
 
-			throw ParsingException("Invalid struct name");
+			throw ParsingException(L"Invalid struct name", parser_->current_token());
 		}
 
 		bool TypeChecker::valid_assignment(AssignmentExpression* assignment_expression)
@@ -288,7 +288,7 @@ namespace elsa {
 			}
 
 			if (declared_return_type->get_type() != ObjectType::Void && return_expressions.size() == 0)
-				throw ParsingException("The function must return a value");
+				throw ParsingException(L"The function must return a value", parser_->current_token());
 
 			for (const auto return_exp : return_expressions)
 			{

@@ -16,7 +16,7 @@ namespace elsa {
 			exp->set_right(std::move(parser->parse_expression(precedence())));
 
 			if(!parser->type_checker().valid_assignment(exp.get()))
-				throw ParsingException("Invalid assignment. Both sides must be of the same type");
+				throw ParsingException(L"Invalid assignment. Both sides must be of the same type", parser->current_token());
 
 			parser->consume(TokenType::Semicolon);
 
@@ -31,7 +31,7 @@ namespace elsa {
 		void AssignmentParser::assert_valid_assignment(ElsaParser* parser, Expression* left)
 		{
 			if (!parser->type_checker().is_assignable(left))
-				throw ParsingException("Values can only be assigned to local variables");
+				throw ParsingException(L"Values can only be assigned to local variables", parser->current_token());
 		}
 
 	}

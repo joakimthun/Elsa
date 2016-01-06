@@ -18,7 +18,7 @@ namespace elsa {
 		private:
 			bool is_explicit(ElsaParser* parser);
 			std::unique_ptr<ElsaType> get_explicit_type(ElsaParser* parser);
-			void assert_is_valid_declaration(const ElsaType* expected, const ElsaType* actual);
+			void assert_is_valid_declaration(const ElsaType* expected, const ElsaType* actual, ElsaParser* parser);
 		};
 
 	}

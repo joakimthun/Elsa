@@ -19,7 +19,7 @@ namespace elsa {
 				ret_exp->set_expression(parser->parse_expression());
 
 				if (!parser->type_checker().valid_return_expression(ret_exp->get_expression()))
-					throw ParsingException("Invalid return expression");
+					throw ParsingException(L"Invalid return expression", parser->current_token());
 
 				ret_exp->set_type(parser->type_checker().get_expression_type(ret_exp->get_expression()));
 			}

@@ -14,7 +14,7 @@ namespace elsa {
 			auto array_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(id_exp.get()));
 
 			if (array_type->get_struct_declaration_expression() == nullptr || array_type->get_struct_declaration_expression()->get_name(true) != L"Array")
-				throw ParsingException("Only arrays can be accessed by index.");
+				throw ParsingException(L"Only arrays can be accessed by index.", parser->current_token());
 
 			id_exp->set_type(new ElsaType(array_type->get_struct_declaration_expression()->get_generic_type()));
 
@@ -26,7 +26,7 @@ namespace elsa {
 			auto index_expression_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(index_expression.get()));
 
 			if (index_expression_type->get_type() != ObjectType::Int)
-				throw ParsingException("Only integers are supported when accessing array elements");
+				throw ParsingException(L"Only integers are supported when accessing array elements", parser->current_token());
 
 			arr_exp->set_index_expression(std::move(index_expression));
 

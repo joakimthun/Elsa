@@ -30,7 +30,7 @@ namespace elsa {
 				return std::make_unique<StringLiteralExpression>(token_value);
 			}
 			default:
-				throw ParsingException("Invalid token.");
+				throw ParsingException(L"Invalid token.", parser->current_token());
 			}
 		}
 	}

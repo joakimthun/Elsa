@@ -8,7 +8,7 @@ namespace elsa {
 			auto func_name = parser->current_token()->get_value();
 
 			if (!parser->function_table().has_entry(func_name))
-				throw ParsingException("Can not call undefined functions");
+				throw ParsingException(L"Can not call undefined functions", parser->current_token());
 
 			return parse(parser, parser->function_table().get(func_name)->get_expression());
 		}
@@ -34,13 +34,13 @@ namespace elsa {
 			while (parser->current_token()->get_type() != TokenType::RParen)
 			{
 				if(index >= fde->get_num_args())
-					throw ParsingException("To many arguments was passed to the function");
+					throw ParsingException(L"To many arguments was passed to the function", parser->current_token());
 
 				auto passed_arg = parser->parse_expression();
 				auto& declared_arg = fde_args[index];
 
 				if (!parser->type_checker().is_same_type(passed_arg.get(), declared_arg.get()))
-					throw ParsingException("The passed argument must be of the same type as the declared argument");
+					throw ParsingException(L"The passed argument must be of the same type as the declared argument", parser->current_token());
 
 				call_exp->add_args_expression(std::move(passed_arg));
 
@@ -51,7 +51,7 @@ namespace elsa {
 			}
 
 			if(index != fde->get_num_args())
-				throw ParsingException("To few arguments was passed to the function");
+				throw ParsingException(L"To few arguments was passed to the function", parser->current_token());
 
 			parser->consume(TokenType::RParen);
 

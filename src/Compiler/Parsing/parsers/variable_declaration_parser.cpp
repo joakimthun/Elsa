@@ -19,7 +19,7 @@ namespace elsa {
 			auto name = parser->current_token()->get_value();
 
 			if (parser->current_scope()->has_local(name))
-				throw ParsingException("A local variable with the same name has already been declared");
+				throw ParsingException(L"A local variable with the same name has already been declared", parser->current_token());
 
 			parser->consume(TokenType::Identifier);
 			parser->consume(TokenType::Equals);
@@ -28,7 +28,7 @@ namespace elsa {
 			auto expression_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(expression.get()));
 
 			if (explicit_type.get() != nullptr)
-				assert_is_valid_declaration(explicit_type.get(), expression_type.get());
+				assert_is_valid_declaration(explicit_type.get(), expression_type.get(), parser);
 
 			auto struct_expression = dynamic_cast<CreateStructExpression*>(expression.get());
 			auto array_expression = dynamic_cast<ArrayDeclarationExpression*>(expression.get());
@@ -36,7 +36,7 @@ namespace elsa {
 			{
 				auto entry_name = struct_expression != nullptr ? struct_expression->get_struct_name() : array_expression->get_type()->get_name();
 				if (!parser->struct_table().has_entry(entry_name))
-					throw ParsingException("No struct with that name is defined");
+					throw ParsingException(L"No struct with that name is defined", parser->current_token());
 
 				// Struct
 				auto si = parser->struct_table().get(entry_name);
@@ -69,19 +69,19 @@ namespace elsa {
 			return std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
 		}
 
-		void VariableDeclarationParser::assert_is_valid_declaration(const ElsaType* expected, const ElsaType* actual)
+		void VariableDeclarationParser::assert_is_valid_declaration(const ElsaType* expected, const ElsaType* actual, ElsaParser* parser)
 		{
 			if (expected->get_type() != actual->get_type())
-				throw ParsingException("Both sides of a variable declaration expression must be of the same type.");
+				throw ParsingException(L"Both sides of a variable declaration expression must be of the same type.", parser->current_token());
 
 			if (expected->get_type() == ObjectType::GCOPtr)
 			{
 				if(actual->get_type() != ObjectType::GCOPtr)
-					throw ParsingException("Both sides of a variable declaration expression must be of the same type.");
+					throw ParsingException(L"Both sides of a variable declaration expression must be of the same type.", parser->current_token());
 				else
 				{
 					if(expected->get_struct_declaration_expression()->get_name() != actual->get_struct_declaration_expression()->get_name())
-						throw ParsingException("Both sides of a variable declaration expression must be of the same type.");
+						throw ParsingException(L"Both sides of a variable declaration expression must be of the same type.", parser->current_token());
 				}
 			}
 		}

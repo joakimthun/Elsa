@@ -14,7 +14,7 @@ func void array_length()
 {
 	var array = new char[];
 	elsa.PrintLn(array.Length());
-
+	
 	array.Push('H');
 	elsa.PrintLn(array.Length());
 	array.Push('e');

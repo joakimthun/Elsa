@@ -31,7 +31,7 @@ namespace elsa {
 			auto parser = get_statement_parser(current_token_->get_type());
 
 			if (parser == nullptr)
-				throw ParsingException("Invalid token");
+				throw ParsingException(L"Invalid token", current_token_.get());
 
 			return parser->parse(this);
 		}
@@ -50,7 +50,7 @@ namespace elsa {
 				parser = get_expression_parser(current_token_->get_type());
 
 			if (parser == nullptr)
-				throw ParsingException("Invalid token");
+				throw ParsingException(L"Invalid token", current_token_.get());
 
 			auto left = std::unique_ptr<Expression>(parser->parse(this));
 
@@ -66,7 +66,7 @@ namespace elsa {
 		ScopedExpression* ElsaParser::current_scope()
 		{
 			if (current_scope_ == nullptr)
-				throw ParsingException("No scope defined");
+				throw ParsingException(L"No scope defined", current_token_.get());
 
 			return current_scope_;
 		}
@@ -99,7 +99,7 @@ namespace elsa {
 		void ElsaParser::consume(TokenType type)
 		{
 			if(current_token()->get_type() != type)
-				throw ParsingException("Unexpected token");
+				throw ParsingException(L"Unexpected token", current_token_.get());
 
 			next_token();
 		}
