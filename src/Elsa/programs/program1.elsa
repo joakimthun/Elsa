@@ -14,8 +14,24 @@ func void array_length()
 {
 	var array = new char[];
 	elsa.PrintLn(array.Length());
+
 	array.Push('H');
 	elsa.PrintLn(array.Length());
+	array.Push('e');
+	elsa.PrintLn(array.Length());
+	array.Push('l');
+	elsa.PrintLn(array.Length());
+	array.Push('l');
+	elsa.PrintLn(array.Length());
+	array.Push('o');
+	elsa.PrintLn(array.Length());
+	array.Push('!');
+	elsa.PrintLn(array.Length());
+
+	loop(var i = 0; i < array.Length(); i++)
+	{
+		elsa.PrintLn(array[i]);
+	}
 }
 
 func void explicit_typing()

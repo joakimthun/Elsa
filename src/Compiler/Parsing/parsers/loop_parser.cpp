@@ -29,7 +29,9 @@ namespace elsa {
 				if (condition_type->get_type() != ObjectType::Bool)
 					throw ParsingException("The second part of a for loop must be a boolean expression");
 
-				parser->consume(TokenType::Semicolon);
+				if(parser->current_token()->get_type() == TokenType::Semicolon)
+					parser->consume(TokenType::Semicolon);
+
 				loop_exp->set_post_expression(parser->parse_expression());
 
 				loop_exp->set_type(LoopType::For);
