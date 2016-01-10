@@ -104,6 +104,12 @@ namespace elsa {
 					if (t2 != nullptr)
 						return t2;
 
+					if (iswdigit(file_->peek_char()))
+					{
+						consume();
+						return number(true);
+					}
+
 					return match_token(L'-', TokenType::Minus);
 				}
 				case L'*': {
@@ -206,9 +212,13 @@ namespace elsa {
 			return std::make_unique<Token>(TokenType::Identifier, value, line_number_, file_->get_file_name());
 		}
 
-		std::unique_ptr<Token> Lexer::number()
+		std::unique_ptr<Token> Lexer::number(bool negative)
 		{
 			std::wstring value;
+
+			if (negative)
+				value += L'-';
+
 			while (file_->good() && iswdigit(current_char_))
 			{
 				value += current_char_;

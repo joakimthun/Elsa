@@ -27,7 +27,7 @@ namespace elsa {
 			void consume();
 			void comment();
 			std::unique_ptr<Token> alpha();
-			std::unique_ptr<Token> number();
+			std::unique_ptr<Token> number(bool negative = false);
 			std::unique_ptr<Token> string();
 			std::unique_ptr<Token> char_l();
 			std::unique_ptr<Token> match_keyword(const std::wstring& value);

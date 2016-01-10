@@ -13,6 +13,8 @@ func void update(Paddle p, int height)
 		p.y = height;
 		p.vel_y = -10;
 	}
+
+	p.y = p.y + p.vel_y;
 }
 
 func int main()
@@ -23,12 +25,14 @@ func int main()
 	var left_paddle = create_paddle(0, 0, 20, 100);
 	var right_paddle = create_paddle(0, 0, 20, 100);
 
-	elsa.PrintLn(left_paddle.width);
+	left_paddle.vel_y = 1;
 
-	//loop(true)
-	//{
-	//	
-	//}
+	loop(true)
+	{
+		update(left_paddle, height);
+
+		elsa.PrintLn(left_paddle.y);
+	}
 
 	return 0;
 }
