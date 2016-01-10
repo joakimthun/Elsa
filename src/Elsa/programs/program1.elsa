@@ -18,6 +18,29 @@ struct ArrayStruct
 	int[] numbers;
 };
 
+func void array_struct_test()
+{
+	var as = new ArrayStruct;
+
+	as.numbers = new int[];
+	as.numbers.Push(787878);
+	elsa.PrintLn(as.numbers.Length());
+	elsa.PrintLn(as.numbers[0]);
+
+	as.players = new Player[];
+	var p = new Player;
+	as.players.Push(p);
+	as.players.Push(new Player);
+	elsa.PrintLn(as.players.Length());
+	elsa.PrintLn(as.players[0].speed);
+	elsa.PrintLn(as.players[1].speed);
+
+	p.speed = 34;
+
+	elsa.PrintLn(as.players[0].speed);
+	elsa.PrintLn(as.players[1].speed);
+}
+
 func void import_test()
 {
 	var game = new Game;
@@ -345,6 +368,7 @@ func int main(int dummy)
 	explicit_typing();
 	array_length();
 	import_test();
+	array_struct_test();
 
 	return 0;
 }

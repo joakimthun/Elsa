@@ -255,6 +255,8 @@ namespace elsa {
 
 		void Heap::assert_is_array(const Object& instance)
 		{
+			assert_is_not_null(instance);
+
 			if (instance.get_type() != VMType::GCOPtr)
 				throw RuntimeException("The instance has to be a heap allocated object");
 

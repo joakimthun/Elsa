@@ -1,6 +1,8 @@
 #include "struct_access_expression_builder.h"
 
 #include "../../ast/struct_declaration_expression.h"
+#include "../../ast/array_access_expression.h"
+#include "../visitors/vm_expression_visitor.h"
 
 namespace elsa {
 	namespace compiler {
@@ -41,6 +43,23 @@ namespace elsa {
 								current_type = function->get_return_type();
 
 							FuncCallExpressionBuilder::build_member(program, visitor, dynamic_cast<FuncCallExpression*>(exp.get()), fi);
+							break;
+						}
+					}
+				}
+				else if (exp->get_expression_type() == ExpressionType::ArrayAccess)
+				{
+					for (const auto& field : current_struct->get_fields())
+					{
+						if (field->get_name() == exp->get_name())
+						{
+							current_type = field->get_type()->get_struct_declaration_expression()->get_generic_type();
+
+							program->emit(OpCode::l_field);
+							program->emit(static_cast<int>(field->get_index()));
+
+							dynamic_cast<ArrayAccessExpression*>(exp.get())->get_index_expression()->accept(visitor);
+							program->emit(OpCode::l_ele);
 							break;
 						}
 					}

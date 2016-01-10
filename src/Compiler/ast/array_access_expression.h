@@ -6,6 +6,7 @@
 #include <string>
 
 #include "identifier_expression.h"
+#include "typed_expression.h"
 #include "../types/elsa_type.h"
 
 namespace elsa {
@@ -13,7 +14,7 @@ namespace elsa {
 
 		class ExpressionVisitor;
 
-		class ArrayAccessExpression : public Expression
+		class ArrayAccessExpression : public Expression, public TypedExpression
 		{
 		public:
 			void set_identifier_expression(std::unique_ptr<IdentifierExpression> identifier_expression);
@@ -21,6 +22,10 @@ namespace elsa {
 
 			IdentifierExpression* get_identifier_expression() const;
 			Expression* get_index_expression() const;
+
+			const std::wstring& get_name() const override;
+			const ElsaType* get_type() const override;
+			ExpressionType get_expression_type() const override;
 
 			void accept(ExpressionVisitor* visitor) override;
 

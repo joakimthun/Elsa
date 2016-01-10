@@ -10,7 +10,8 @@ namespace elsa {
 			type_checker_(this),
 			program_(std::make_unique<Program>()),
 			struct_table_ext_(nullptr),
-			function_table_ext_(nullptr)
+			function_table_ext_(nullptr),
+			current_type_(nullptr)
 		{
 			initialize_grammar();
 			next_token();
@@ -129,6 +130,16 @@ namespace elsa {
 			return lexer_->peek_token();
 		}
 
+		void ElsaParser::set_current_type(const ElsaType* type)
+		{
+			current_type_ = type;
+		}
+
+		const ElsaType* ElsaParser::current_type() const
+		{
+			return current_type_;
+		}
+
 		ElsaParser::ElsaParser(Lexer* lexer, StructTable* struct_table, FunctionTable* function_table)
 			:
 			lexer_(std::unique_ptr<Lexer>(lexer)),
@@ -136,7 +147,8 @@ namespace elsa {
 			type_checker_(this),
 			program_(std::make_unique<Program>()),
 			struct_table_ext_(struct_table),
-			function_table_ext_(function_table)
+			function_table_ext_(function_table),
+			current_type_(nullptr)
 		{
 			initialize_grammar();
 			next_token();

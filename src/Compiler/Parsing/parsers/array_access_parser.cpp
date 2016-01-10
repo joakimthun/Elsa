@@ -11,7 +11,16 @@ namespace elsa {
 			parser->consume(TokenType::Identifier);
 
 			auto id_exp = std::make_unique<IdentifierExpression>(identifier);
-			auto array_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(id_exp.get()));
+
+			std::unique_ptr<ElsaType> array_type;
+			if (parser->current_type() != nullptr)
+			{
+				array_type = std::unique_ptr<ElsaType>(parser->type_checker().get_access_type(parser->current_type(), identifier));
+			}
+			else
+			{
+				array_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(id_exp.get()));
+			}
 
 			if (array_type->get_struct_declaration_expression() == nullptr || array_type->get_struct_declaration_expression()->get_name(true) != L"Array")
 				throw ParsingException(L"Only arrays can be accessed by index.", parser->current_token());

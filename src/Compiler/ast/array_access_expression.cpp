@@ -25,6 +25,20 @@ namespace elsa {
 			return index_expression_.get();
 		}
 
+		const std::wstring& ArrayAccessExpression::get_name() const
+		{
+			return identifier_expression_->get_name();
+		}
+
+		const ElsaType* ArrayAccessExpression::get_type() const
+		{
+			return identifier_expression_->get_type();
+		}
+
+		ExpressionType ArrayAccessExpression::get_expression_type() const
+		{
+			return ExpressionType::ArrayAccess;
+		}
 
 		void ArrayAccessExpression::accept(ExpressionVisitor* visitor)
 		{

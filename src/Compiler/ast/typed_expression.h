@@ -10,7 +10,8 @@ namespace elsa {
 		enum class ExpressionType 
 		{
 			FieldAccess,
-			FuncCall
+			FuncCall,
+			ArrayAccess
 		};
 
 		class TypedExpression

@@ -18,12 +18,16 @@ namespace elsa {
 					parser->consume(TokenType::Identifier);
 
 					id_exp->set_type(parser->type_checker().get_expression_type(id_exp.get()));
+
+					parser->set_current_type(id_exp->get_type());
+
 					sa_exp->set_base(std::move(id_exp));
 				}
 				else
 				{
 					// Field or function
 					const auto type = get_parent_type(sa_exp.get());
+					parser->set_current_type(type);
 
 					auto access_type = parser->type_checker().get_access_type(type, identifier);
 
@@ -31,6 +35,11 @@ namespace elsa {
 					{
 						auto call_exp = FuncCallParser::parse_member_call(parser, type->get_struct_declaration_expression()->get_member_function(identifier));
 						sa_exp->add_expression(dynamic_cast<TypedExpression*>(call_exp.release()));
+					}
+					else if (parser->peek_token()->get_type() == TokenType::LSBracket)
+					{
+						auto array_access_exp = parser->parse_expression();
+						sa_exp->add_expression(dynamic_cast<TypedExpression*>(array_access_exp.release()));
 					}
 					else
 					{
@@ -45,9 +54,13 @@ namespace elsa {
 				if (parser->current_token()->get_type() == TokenType::Dot)
 					parser->consume(TokenType::Dot);
 				else
+				{
+					parser->set_current_type(nullptr);
 					return std::move(sa_exp);
+				}
 			}
 
+			parser->set_current_type(nullptr);
 			return std::move(sa_exp);
 		}
 

@@ -34,19 +34,26 @@ namespace elsa {
 
 		std::unique_ptr<FieldExpression> StructDeclarationParser::parse_field_expression(ElsaParser* parser)
 		{
-			auto field_type = parser->type_checker().get_type_from_token(parser->current_token());
+			auto field_type = std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
 
 			parser->consume();
 
 			auto field_expression = std::make_unique<FieldExpression>();
-
-			field_expression->set_type(field_type);
 
 			if (parser->current_token()->get_type() == TokenType::LSBracket)
 			{
 				parser->consume(TokenType::LSBracket);
 				parser->consume(TokenType::RSBracket);
 				field_expression->set_is_array(true);
+
+				auto array_struct = parser->struct_table().get(L"Array")->get_expression();
+				auto array_type = array_struct->create_generic(std::move(field_type), parser);
+
+				field_expression->set_type(new ElsaType(array_type));
+			}
+			else
+			{
+				field_expression->set_type(field_type.release());
 			}
 
 			auto field_name = parser->current_token()->get_value();

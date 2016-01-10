@@ -59,6 +59,8 @@ namespace elsa {
 			void consume();
 			Token* current_token();
 			Token* peek_token();
+			void set_current_type(const ElsaType* type);
+			const ElsaType* current_type() const;
 
 		private:
 			ElsaParser(Lexer* lexer, StructTable* struct_table, FunctionTable* function_table);
@@ -94,6 +96,7 @@ namespace elsa {
 			std::unique_ptr<Lexer> lexer_;
 			std::unique_ptr<Token> current_token_;
 			TypeChecker type_checker_;
+			const ElsaType* current_type_;
 		};
 
 	}

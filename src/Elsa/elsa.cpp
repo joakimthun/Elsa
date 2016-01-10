@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 {
 	try
 	{
-		auto vm_program = compiler::Compiler::compile(L"programs\\program1.elsa");
+		auto vm_program = compiler::Compiler::compile(L"programs/program1.elsa");
 		auto vm = vm::VM(*vm_program);
 		vm.execute();
 	}
