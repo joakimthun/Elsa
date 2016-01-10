@@ -1,6 +1,34 @@
+import "examples/pong/paddle";
+
+func void update(Paddle p, int height)
+{
+	if (p.y < 0)
+	{
+		p.y = 0;
+		p.vel_y = 10;
+	}
+
+	if (p.y > height)
+	{
+		p.y = height;
+		p.vel_y = -10;
+	}
+}
+
 func int main()
 {
-	elsa.PrintLn(0);
+	var height = 600;
+	var width = 800;
+	
+	var left_paddle = create_paddle(0, 0, 20, 100);
+	var right_paddle = create_paddle(0, 0, 20, 100);
+
+	elsa.PrintLn(left_paddle.width);
+
+	//loop(true)
+	//{
+	//	
+	//}
 
 	return 0;
 }

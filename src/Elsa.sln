@@ -22,6 +22,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pong", "pong", "{FF1AACA1-3DEA-4282-8253-13B0FDCEC33B}"
 	ProjectSection(SolutionItems) = preProject
 		examples\pong\main.elsa = examples\pong\main.elsa
+		examples\pong\paddle.elsa = examples\pong\paddle.elsa
 	EndProjectSection
 EndProject
 Global

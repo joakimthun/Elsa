@@ -1,0 +1,25 @@
+struct Paddle
+{
+	int x;
+	int y;
+	int width;
+	int height;
+	int vel_y;
+};
+
+func Paddle create_paddle(int x, int y, int width, int height)
+{
+	var p = new Paddle;
+	p.x = x;
+	p.y = y;
+	p.width = width;
+	p.height = height;
+	p.vel_y = 10;
+
+	return p;
+}
+
+func void update_paddle(Paddle p)
+{
+	p.y = p.y + p.vel_y;
+}
