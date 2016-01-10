@@ -1,0 +1,6 @@
+func int main()
+{
+	elsa.PrintLn(0);
+
+	return 0;
+}

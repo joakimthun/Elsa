@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <string>
+#include <stdlib.h>
 
 namespace elsa {
 
@@ -9,6 +10,7 @@ namespace elsa {
 	{
 	public:
 		static std::string utf8_encode(const std::wstring& wstr);
+		static std::wstring to_wchar(const char* str);
 	};
 
 	

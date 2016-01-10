@@ -13,4 +13,15 @@ namespace elsa {
 		return str_to;
 	}
 
+	std::wstring StringUtil::to_wchar(const char* str)
+	{
+		size_t origsize = strlen(str) + 1;
+		const size_t newsize = 300;
+		size_t convertedChars = 0;
+		wchar_t wcstring[newsize];
+		mbstowcs_s(&convertedChars, wcstring, origsize, str, _TRUNCATE);
+		
+		return std::wstring(wcstring);
+	}
+
 }

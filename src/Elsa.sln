@@ -17,6 +17,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compiler.Test", "Compiler.T
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Elsa", "Elsa\Elsa.vcxproj", "{1A7CC214-5115-401C-9D56-F3EF298EC342}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{75B882E4-5D77-4D5A-A71E-D0DD6D0C0716}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pong", "pong", "{FF1AACA1-3DEA-4282-8253-13B0FDCEC33B}"
+	ProjectSection(SolutionItems) = preProject
+		examples\pong\main.elsa = examples\pong\main.elsa
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -84,5 +91,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FF1AACA1-3DEA-4282-8253-13B0FDCEC33B} = {75B882E4-5D77-4D5A-A71E-D0DD6D0C0716}
 	EndGlobalSection
 EndGlobal

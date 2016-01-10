@@ -11,7 +11,12 @@ int main(int argc, char* argv[])
 {
 	try
 	{
-		auto vm_program = compiler::Compiler::compile(L"programs/program1.elsa");
+		if (argc < 2)
+		{
+			throw ElsaException("No source file specified");
+		}
+
+		auto vm_program = compiler::Compiler::compile(argv[1]);
 		auto vm = vm::VM(*vm_program);
 		vm.execute();
 	}
