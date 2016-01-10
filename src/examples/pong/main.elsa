@@ -1,3 +1,4 @@
+import "std/io";
 import "examples/pong/paddle";
 
 func void update(Paddle p, int height)
@@ -31,7 +32,7 @@ func int main()
 	{
 		update(left_paddle, height);
 
-		elsa.PrintLn(left_paddle.y);
+		print_ln(left_paddle.y);
 	}
 
 	return 0;

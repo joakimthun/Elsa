@@ -25,6 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pong", "pong", "{FF1AACA1-3
 		examples\pong\paddle.elsa = examples\pong\paddle.elsa
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "std", "std", "{05674512-81E8-4FD9-98C6-A1CBA4938A71}"
+	ProjectSection(SolutionItems) = preProject
+		std\io.elsa = std\io.elsa
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
