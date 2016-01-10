@@ -30,7 +30,7 @@ namespace elsa {
 
 		std::unique_ptr<Expression> ElsaParser::parse_statement()
 		{
-			if (current_token_->get_type() == TokenType::Import)
+			while(current_token_->get_type() == TokenType::Import)
 				parse_import_statement();
 
 			auto parser = get_statement_parser(current_token_->get_type());
