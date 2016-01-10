@@ -42,6 +42,13 @@ namespace elsa {
 
 			field_expression->set_type(field_type);
 
+			if (parser->current_token()->get_type() == TokenType::LSBracket)
+			{
+				parser->consume(TokenType::LSBracket);
+				parser->consume(TokenType::RSBracket);
+				field_expression->set_is_array(true);
+			}
+
 			auto field_name = parser->current_token()->get_value();
 			parser->consume(TokenType::Identifier);
 

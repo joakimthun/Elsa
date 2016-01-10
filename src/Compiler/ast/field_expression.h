@@ -19,10 +19,12 @@ namespace elsa {
 			void set_name(const std::wstring& name);
 			void set_type(ElsaType* type);
 			void set_index(std::size_t index);
+			void set_is_array(bool is_array);
 
 			const std::wstring& get_name() const;
 			const ElsaType* get_type() const;
 			std::size_t get_index() const;
+			bool get_is_array() const;
 
 			void accept(ExpressionVisitor* visitor) override;
 
@@ -30,6 +32,7 @@ namespace elsa {
 			std::wstring name_;
 			std::unique_ptr<ElsaType> type_;
 			std::size_t index_;
+			bool is_array_;
 		};
 	}
 }

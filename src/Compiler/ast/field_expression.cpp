@@ -4,6 +4,8 @@ namespace elsa {
 	namespace compiler {
 
 		FieldExpression::FieldExpression()
+			:
+			is_array_(false)
 		{
 		}
 
@@ -11,7 +13,8 @@ namespace elsa {
 			:
 			name_(name),
 			type_(new ElsaType(type)),
-			index_(index)
+			index_(index),
+			is_array_(false)
 		{
 		}
 
@@ -30,6 +33,11 @@ namespace elsa {
 			index_ = index;
 		}
 
+		void FieldExpression::set_is_array(bool is_array)
+		{
+			is_array_ = is_array;
+		}
+
 		const std::wstring& FieldExpression::get_name() const
 		{
 			return name_;
@@ -43,6 +51,11 @@ namespace elsa {
 		std::size_t FieldExpression::get_index() const
 		{
 			return index_;
+		}
+
+		bool FieldExpression::get_is_array() const
+		{
+			return is_array_;
 		}
 
 		void FieldExpression::accept(ExpressionVisitor* visitor)

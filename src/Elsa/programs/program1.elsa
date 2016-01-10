@@ -1,4 +1,4 @@
-import "programs\\program2";
+import "programs/program2";
 
 struct Vec2D
 {
@@ -10,6 +10,12 @@ struct Player
 {
 	Vec2D position;
 	int speed;
+};
+
+struct ArrayStruct
+{
+	Player[] players;
+	int[] numbers;
 };
 
 func void import_test()
