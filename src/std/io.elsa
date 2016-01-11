@@ -1,4 +1,2 @@
-func void print_ln(int v)
-{
-	elsa.PrintLn(v);
-}
+
+native func void print_ln(int v);

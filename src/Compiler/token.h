@@ -62,6 +62,7 @@ namespace elsa {
 			Else,
 			Loop,
 			Import,
+			Native,
 		};
 		
 		class Token
