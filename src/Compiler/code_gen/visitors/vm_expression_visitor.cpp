@@ -117,6 +117,11 @@ namespace elsa {
 			ArrayAccessExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		void VMExpressionVisitor::visit(ArrayInitializerListExpression* expression)
+		{
+			ArrayInitializerListExpressionBuilder::build(vm_program_.get(), this, expression);
+		}
+
 		ScopedExpression* VMExpressionVisitor::current_scope()
 		{
 			if (current_scope_ == nullptr)

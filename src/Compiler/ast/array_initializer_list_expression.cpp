@@ -27,7 +27,7 @@ namespace elsa {
 
 		void ArrayInitializerListExpression::accept(ExpressionVisitor* visitor)
 		{
-			//visitor->visit(this);
+			visitor->visit(this);
 		}
 	}
 }

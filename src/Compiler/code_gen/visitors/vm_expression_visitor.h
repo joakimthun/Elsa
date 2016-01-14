@@ -29,6 +29,7 @@
 #include "../builders/return_expression_builder.h"
 #include "../builders/array_declaration_expression_builder.h"
 #include "../builders/array_access_expression_builder.h"
+#include "../builders/array_initializer_list_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {
@@ -58,6 +59,7 @@ namespace elsa {
 			void visit(ReturnExpression* expression) override;
 			void visit(ArrayDeclarationExpression* expression) override;
 			void visit(ArrayAccessExpression* expression) override;
+			void visit(ArrayInitializerListExpression* expression) override;
 
 			ScopedExpression* current_scope();
 			void set_current_scope(ScopedExpression* scope);
