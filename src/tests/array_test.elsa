@@ -4,5 +4,32 @@ func void ArrayTest()
 {
 	// TODO: Fix the loop index variable scoping
 
+	PrintLn('');
 	
+	var ints = new [1, 2, 3, 4, 5, 6];
+	
+	loop(var i1 = 0; i1 < ints.Length(); i1++)
+	{
+		PrintLn(ints[i1]);
+	}
+
+	PrintLn('');
+
+	var floats = new [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0];
+	
+	loop(var i2 = 0; i2 < floats.Length(); i2++)
+	{
+		PrintLn(floats[i2]);
+	}
+
+	PrintLn('');
+
+	var chars = new ['H', 'e', 'l', 'l', 'o', '!'];
+	
+	loop(var i3 = 0; i3 < chars.Length(); i3++)
+	{
+		Print(chars[i3]);
+	}
+
+	PrintLn('');
 }
