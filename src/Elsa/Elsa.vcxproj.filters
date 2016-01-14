@@ -19,8 +19,4 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="programs\program1.elsa" />
-    <None Include="programs\program2.elsa" />
-  </ItemGroup>
 </Project>
