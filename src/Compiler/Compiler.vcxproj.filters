@@ -99,9 +99,6 @@
     <ClInclude Include="code_gen\builders\literal_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ast\elsa_invoke_expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="code_gen\builders\identifier_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -112,9 +109,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parsing\parsers\binary_operator_parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Parsing\parsers\elsa_invoke_parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parsing\parsers\func_declaration_parser.h">
@@ -356,9 +350,6 @@
     <ClCompile Include="code_gen\builders\literal_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ast\elsa_invoke_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="code_gen\builders\identifier_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -369,9 +360,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parsing\parsers\binary_operator_parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Parsing\parsers\elsa_invoke_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parsing\parsers\func_declaration_parser.cpp">

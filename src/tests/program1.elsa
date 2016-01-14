@@ -1,4 +1,5 @@
-import "programs/program2";
+import "std/io";
+import "tests/program2";
 
 struct Vec2D
 {
@@ -24,51 +25,51 @@ func void array_struct_test()
 
 	as.numbers = new int[];
 	as.numbers.Push(787878);
-	elsa.PrintLn(as.numbers.Length());
-	elsa.PrintLn(as.numbers[0]);
+	PrintLn(as.numbers.Length());
+	PrintLn(as.numbers[0]);
 
 	as.players = new Player[];
 	var p = new Player;
 	as.players.Push(p);
 	as.players.Push(new Player);
-	elsa.PrintLn(as.players.Length());
-	elsa.PrintLn(as.players[0].speed);
-	elsa.PrintLn(as.players[1].speed);
+	PrintLn(as.players.Length());
+	PrintLn(as.players[0].speed);
+	PrintLn(as.players[1].speed);
 
 	p.speed = 34;
 
-	elsa.PrintLn(as.players[0].speed);
-	elsa.PrintLn(as.players[1].speed);
+	PrintLn(as.players[0].speed);
+	PrintLn(as.players[1].speed);
 }
 
 func void import_test()
 {
 	var game = new Game;
 	game.num_players = 5464;
-	elsa.PrintLn(game.num_players);
+	PrintLn(game.num_players);
 }
 
 func void array_length()
 {
 	var array = new char[];
-	elsa.PrintLn(array.Length());
+	PrintLn(array.Length());
 	
 	array.Push('H');
-	elsa.PrintLn(array.Length());
+	PrintLn(array.Length());
 	array.Push('e');
-	elsa.PrintLn(array.Length());
+	PrintLn(array.Length());
 	array.Push('l');
-	elsa.PrintLn(array.Length());
+	PrintLn(array.Length());
 	array.Push('l');
-	elsa.PrintLn(array.Length());
+	PrintLn(array.Length());
 	array.Push('o');
-	elsa.PrintLn(array.Length());
+	PrintLn(array.Length());
 	array.Push('!');
-	elsa.PrintLn(array.Length());
+	PrintLn(array.Length());
 
 	loop(var i = 0; i < array.Length(); i++)
 	{
-		elsa.PrintLn(array[i]);
+		PrintLn(array[i]);
 	}
 }
 
@@ -81,11 +82,11 @@ func void explicit_typing()
 	Player p = new Player;
 	p.speed = 1337;
 
-	elsa.PrintLn(x);
-	elsa.PrintLn(x2);
-	elsa.PrintLn(x3);
-	elsa.PrintLn(x4);
-	elsa.PrintLn(p.speed);
+	PrintLn(x);
+	PrintLn(x2);
+	PrintLn(x3);
+	PrintLn(x4);
+	PrintLn(p.speed);
 }
 
 func void arrays()
@@ -93,7 +94,7 @@ func void arrays()
 	var x = new int[];
 	x.Push(15);
 
-	elsa.PrintLn(x.Pop());
+	PrintLn(x.Pop());
 	
 	x.Push(878);
 	x.Push(878);
@@ -107,17 +108,17 @@ func void arrays()
 	var x2 = x[1];
 	var x3 = x[2];
 
-	elsa.PrintLn(x1);
-	elsa.PrintLn(x2);
-	elsa.PrintLn(x3);
+	PrintLn(x1);
+	PrintLn(x2);
+	PrintLn(x3);
 
 	var x4 = x.Pop();
 	var x5 = x.Pop();
 	var x6 = x.Pop();
 	
-	elsa.PrintLn(x6);
-	elsa.PrintLn(x5);
-	elsa.PrintLn(x4);
+	PrintLn(x6);
+	PrintLn(x5);
+	PrintLn(x4);
 
 	// Array with structs
 	var players = new Player[];
@@ -130,33 +131,33 @@ func void arrays()
 
 	var p1 = players[0];
 
-	elsa.PrintLn(p1.speed);
-	elsa.PrintLn(p1.position.x);
-	elsa.PrintLn(p1.position.y);
+	PrintLn(p1.speed);
+	PrintLn(p1.position.x);
+	PrintLn(p1.position.y);
 
 	var p = players.Pop();
 	var speed = p.speed;
-	elsa.PrintLn(speed);
-	elsa.PrintLn(p.position.x);
-	elsa.PrintLn(p.position.y);
+	PrintLn(speed);
+	PrintLn(p.position.x);
+	PrintLn(p.position.y);
 }
 
 func void loops()
 {
 	loop(var i = 1; i <= 100; i++)
 	{
-		elsa.PrintLn(i);
+		PrintLn(i);
 	}
 
 	loop(var j = 100; j >= 1; j--)
 	{
-		elsa.PrintLn(j);
+		PrintLn(j);
 	}
 
 	var x = true;
 	loop(x)
 	{
-		elsa.PrintLn(881118);
+		PrintLn(881118);
 		x = false;
 	}
 	
@@ -164,7 +165,7 @@ func void loops()
 	var c = 0;
 	loop(y || x)
 	{
-		elsa.PrintLn(1513);
+		PrintLn(1513);
 
 		if(c >= 10)
 		{
@@ -179,15 +180,15 @@ func void postfix()
 {
 	var x = 20;
 	x++;
-	elsa.PrintLn(x);
+	PrintLn(x);
 	x--;
 	x--;
-	elsa.PrintLn(x);
+	PrintLn(x);
 
 	var player = new Player;
 	player.speed = 9999;
 	player.speed++;
-	elsa.PrintLn(player.speed);
+	PrintLn(player.speed);
 
 	player.position = new Vec2D;
 	player.position.x = 56;
@@ -195,100 +196,100 @@ func void postfix()
 	player.position.x--;
 	player.position.x--;
 	
-	elsa.PrintLn(player.position.x);
+	PrintLn(player.position.x);
 }
 
 func void cond_print()
 {
 	if(6 > 5 || false)
 	{
-		elsa.PrintLn(7000);
+		PrintLn(7000);
 	}
 	
 	if(4 < 5 && false)
 	{
-		elsa.PrintLn(7001);
+		PrintLn(7001);
 	}
 
 	if(99 >= 99)
 	{
-		elsa.PrintLn(7002);
+		PrintLn(7002);
 	}
 
 	if(99 >= 100)
 	{
-		elsa.PrintLn(7003);
+		PrintLn(7003);
 	}
 
 	if(99 <= 100)
 	{
-		elsa.PrintLn(7004);
+		PrintLn(7004);
 	}
 
 	if(99 <= 99)
 	{
-		elsa.PrintLn(7005);
+		PrintLn(7005);
 	}
 
 	if(99 <= 200 &&  88 >= 99)
 	{
-		elsa.PrintLn(7006);
+		PrintLn(7006);
 	}
 
 	if(99 <= 200 ||  88 >= 99)
 	{
-		elsa.PrintLn(7007);
+		PrintLn(7007);
 	}
 
 	if(100 == 2)
 	{
-		elsa.PrintLn(8000);
+		PrintLn(8000);
 	}
 
 	if(100 != 2)
 	{
-		elsa.PrintLn(8001);
+		PrintLn(8001);
 	}
 
 	if(100 == 100)
 	{
-		elsa.PrintLn(8002);
+		PrintLn(8002);
 	}
 
 	if(100 != 100)
 	{
-		elsa.PrintLn(8003);
+		PrintLn(8003);
 	}
 }
 
 func void print_sum(int a, int b)
 {
-	elsa.PrintLn(a + b);
+	PrintLn(a + b);
 }
 
 func void cond_print2()
 {
 	if(false && false || false || true)
 	{
-		elsa.PrintLn(777);
+		PrintLn(777);
 	}
 
 	if(false)
 	{
-		elsa.PrintLn(888);
+		PrintLn(888);
 	}
 	else
 	{
-		elsa.PrintLn(999);
+		PrintLn(999);
 	}
 
 	if(true)
 	{
-		elsa.PrintLn(1000);
+		PrintLn(1000);
 	}
 	else
 	{
-		elsa.PrintLn(2000);
+		PrintLn(2000);
 	}
 }
 
@@ -314,9 +315,9 @@ func int main(int dummy)
 	cond_print2();
 
 	var assign_test = 1337;
-	elsa.PrintLn(assign_test);
+	PrintLn(assign_test);
 	assign_test = 1337 + 1000;
-	elsa.PrintLn(assign_test);
+	PrintLn(assign_test);
 
 	var x = 1 + 2 * 6;
 
@@ -333,36 +334,36 @@ func int main(int dummy)
 	vec.x = 10;
 	vec.y = 20;
 	
-	elsa.PrintLn(vec.x);
-	elsa.PrintLn(vec.y);
+	PrintLn(vec.x);
+	PrintLn(vec.y);
 	
 	var player = new Player;
 	player.speed = 11;
 	player.position = new Vec2D;
 	player.position.x = 5600;
 	
-	elsa.PrintLn(player.position.x);
-	elsa.PrintLn(player.speed);
+	PrintLn(player.position.x);
+	PrintLn(player.speed);
 	
-	elsa.PrintLn(x);
-	elsa.PrintLn(y);
+	PrintLn(x);
+	PrintLn(y);
 	elsa.Print(10);
 	elsa.Print(10);
-	elsa.PrintLn(77);
-	elsa.PrintLn(z);
-	elsa.PrintLn(f);
-	elsa.PrintLn(c);
-	elsa.PrintLn(b);
-	elsa.PrintLn(x + y);
+	PrintLn(77);
+	PrintLn(z);
+	PrintLn(f);
+	PrintLn(c);
+	PrintLn(b);
+	PrintLn(x + y);
 
 	loops();
 
 	var ret_int_value = return_int_test();
-	elsa.PrintLn(ret_int_value);
+	PrintLn(ret_int_value);
 
 	var ret_player_value = return_player_test();
-	elsa.PrintLn(ret_player_value.position.x);
-	elsa.PrintLn(ret_player_value.speed);
+	PrintLn(ret_player_value.position.x);
+	PrintLn(ret_player_value.speed);
 
 	arrays();
 	explicit_typing();
