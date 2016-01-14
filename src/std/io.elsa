@@ -1,2 +1,2 @@
 
-native func void PrintLn(int v);
+native func void PrintLn(object v);

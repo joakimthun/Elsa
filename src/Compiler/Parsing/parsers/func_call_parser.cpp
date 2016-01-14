@@ -39,7 +39,7 @@ namespace elsa {
 				auto passed_arg = parser->parse_expression();
 				auto& declared_arg = fde_args[index];
 
-				if (!parser->type_checker().is_same_type(passed_arg.get(), declared_arg.get()))
+				if (!parser->type_checker().is_same_type(passed_arg.get(), declared_arg.get()) && declared_arg->get_type()->get_type() != ObjectType::Object)
 					throw ParsingException(L"The passed argument must be of the same type as the declared argument", parser->current_token());
 
 				call_exp->add_args_expression(std::move(passed_arg));

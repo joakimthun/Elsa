@@ -172,6 +172,9 @@ namespace elsa {
 			case TokenType::BoolLiteral: {
 				return new ElsaType(ObjectType::Bool);
 			}
+			case TokenType::Object: {
+				return new ElsaType(ObjectType::Object);
+			}
 			case TokenType::Identifier: {
 				return get_struct_type(token->get_value());
 			}

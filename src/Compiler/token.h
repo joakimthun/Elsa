@@ -15,10 +15,14 @@ namespace elsa {
 			CharLiteral,
 			BoolLiteral,
 			StringLiteral,
+
+			// Types
 			Int,
 			Float,
 			Char,
 			Bool,
+			Object,
+
 			Equals,
 			DoubleEquals,
 			NotEquals,

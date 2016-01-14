@@ -347,8 +347,8 @@ func int main(int dummy)
 	
 	PrintLn(x);
 	PrintLn(y);
-	elsa.Print(10);
-	elsa.Print(10);
+	PrintLn(10);
+	PrintLn(10);
 	PrintLn(77);
 	PrintLn(z);
 	PrintLn(f);

@@ -23,6 +23,7 @@ namespace elsa {
 			GCOPtr,
 			Function,
 			Generic,
+			Object
 		};
 
 		class ElsaType

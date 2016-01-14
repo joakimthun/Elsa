@@ -10,14 +10,9 @@ namespace elsa {
 			index_(index)
 		{}
 		
-		void NativeFunctionInfo::add_arg()
+		void NativeFunctionInfo::add_arg(ElsaType* type)
 		{
-			args_.push_back(std::make_unique<NativeFunctionArgument>());
-		}
-
-		void NativeFunctionInfo::add_arg_type(std::size_t index, ObjectType type)
-		{
-			args_[index]->valid_types.push_back(type);
+			args_.push_back(std::unique_ptr<ElsaType>(type));
 		}
 		
 		ObjectType NativeFunctionInfo::get_return_type()
@@ -30,17 +25,6 @@ namespace elsa {
 			return name_;
 		}
 
-		bool NativeFunctionInfo::is_valid_arg_type(std::size_t index, ObjectType type)
-		{
-			for (const auto& arg_type : args_[index]->valid_types)
-			{
-				if (arg_type == type)
-					return true;
-			}
-
-			return false;
-		}
-
 		std::size_t NativeFunctionInfo::num_args() const
 		{
 			return args_.size();
@@ -49,6 +33,11 @@ namespace elsa {
 		std::size_t NativeFunctionInfo::get_index() const
 		{
 			return index_;
+		}
+
+		const std::vector<std::unique_ptr<ElsaType>>& NativeFunctionInfo::get_args() const
+		{
+			return args_;
 		}
 
 	}
