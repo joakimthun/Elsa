@@ -69,8 +69,10 @@ func void array_length()
 
 	loop(var i = 0; i < array.Length(); i++)
 	{
-		PrintLn(array[i]);
+		Print(array[i]);
 	}
+
+	PrintLn('');
 }
 
 func void explicit_typing()

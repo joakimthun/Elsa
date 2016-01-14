@@ -10,15 +10,8 @@ namespace elsa {
 
 		void NativeFunctionTable::initialize()
 		{
-			auto print = new NativeFunctionInfo(L"Print", ObjectType::Void, 0);
-			print->add_arg(new ElsaType(ObjectType::Object));
-
-			add(L"Print", print);
-
-			auto println = new NativeFunctionInfo(L"PrintLn", ObjectType::Void, 1);
-			print->add_arg(new ElsaType(ObjectType::Object));
-
-			add(L"PrintLn", println);
+			add(L"Print", new NativeFunctionInfo(L"Print", 0));
+			add(L"PrintLn", new NativeFunctionInfo(L"Print", 1));
 		}
 
 	}
