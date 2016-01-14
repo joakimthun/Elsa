@@ -102,9 +102,6 @@
     <ClInclude Include="ast\elsa_invoke_expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code_gen\builders\elsa_invoke_expression_builder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="code_gen\builders\identifier_expression_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -285,6 +282,9 @@
     <ClInclude Include="exceptions\parsing_exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="code_gen\builders\native_call_expression_builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -357,9 +357,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ast\elsa_invoke_expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="code_gen\builders\elsa_invoke_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code_gen\builders\identifier_expression_builder.cpp">
@@ -528,6 +525,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="exceptions\parsing_exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code_gen\builders\native_call_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

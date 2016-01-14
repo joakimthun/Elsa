@@ -5,9 +5,16 @@ namespace elsa {
 
 		std::unique_ptr<Expression> FuncDeclarationParser::parse(ElsaParser* parser)
 		{
+			bool native_function = false;
+			if (parser->current_token()->get_type() == TokenType::Native)
+			{
+				native_function = true;
+				parser->consume(TokenType::Native);
+			}
+
 			parser->consume(TokenType::Func);
 
-			auto func_dec_exp = std::make_unique<FuncDeclarationExpression>();
+			auto func_dec_exp = std::make_unique<FuncDeclarationExpression>(native_function);
 
 			func_dec_exp->set_return_type(parser->type_checker().get_type_from_token(parser->current_token()));
 			parser->consume();
@@ -45,6 +52,12 @@ namespace elsa {
 			}
 
 			parser->consume(TokenType::RParen);
+
+			if (native_function)
+			{
+				parser->consume(TokenType::Semicolon);
+				return std::move(func_dec_exp);
+			}
 
 			parser->consume(TokenType::LBracket);
 

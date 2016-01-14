@@ -32,7 +32,7 @@ func int main()
 	{
 		update(left_paddle, height);
 
-		print_ln(left_paddle.y);
+		PrintLn(left_paddle.y);
 	}
 
 	return 0;

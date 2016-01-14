@@ -16,7 +16,7 @@
 #include "../builders/variable_builder.h"
 #include "../builders/binary_operator_expression_builder.h"
 #include "../builders/literal_expression_builder.h"
-#include "../builders/elsa_invoke_expression_builder.h"
+#include "../builders/native_call_expression_builder.h"
 #include "../builders/identifier_expression_builder.h"
 #include "../builders/struct_declaration_expression_builder.h"
 #include "../builders/create_struct_expression_builder.h"
@@ -43,7 +43,6 @@ namespace elsa {
 			void visit(VariableDeclarationExpression* expression) override;
 			void visit(BinaryOperatorExpression* expression) override;
 			void visit(IntegerLiteralExpression* expression) override;
-			void visit(ElsaInvokeExpression* expression) override;
 			void visit(IdentifierExpression* expression) override;
 			void visit(FloatLiteralExpression* expression) override;
 			void visit(CharLiteralExpression* expression) override;

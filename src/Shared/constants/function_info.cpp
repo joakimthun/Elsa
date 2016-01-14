@@ -3,17 +3,17 @@
 #include "function_info.h"
 #include "function_info.h"
 #include "function_info.h"
+#include "function_info.h"
 
 namespace elsa {
 
-		FunctionInfo::FunctionInfo(const std::wstring& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type, bool builtin)
+		FunctionInfo::FunctionInfo(const std::wstring& name, std::size_t num_args, std::size_t num_locals, std::size_t addr, FunctionType type)
 			:
 			name_(name),
 			num_args_(num_args),
 			num_locals_(num_locals),
 			addr_(addr),
-			type_(type),
-			builtin_(builtin)
+			type_(type)
 		{}
 
 		FunctionInfo::FunctionInfo(const std::wstring& name)
@@ -22,12 +22,9 @@ namespace elsa {
 			num_args_(0),
 			num_locals_(0),
 			addr_(0),
-			type_(FunctionType::Static),
-			builtin_(false)
+			type_(FunctionType::Static)
 		{
 		}
-
-		FunctionInfo::~FunctionInfo() {}
 
 		std::wstring FunctionInfo::get_name() const
 		{
@@ -68,10 +65,4 @@ namespace elsa {
 		{
 			return type_;
 		}
-
-		bool FunctionInfo::is_builtin() const
-		{
-			return builtin_;
-		}
-
 }

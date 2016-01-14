@@ -5,7 +5,7 @@
 #include <cstddef>
 
 #include "exceptions\codegen_exception.h"
-#include "../../ast/elsa_invoke_expression.h"
+#include "../../ast/func_call_expression.h"
 #include "opcodes\opcodes.h"
 #include "vm_program.h"
 
@@ -14,10 +14,10 @@ namespace elsa {
 
 		class VMExpressionVisitor;
 
-		class ElsaInvokeExpressionBuilder
+		class NativeCallExpressionBuilder
 		{
 		public:
-			static void build(VMProgram* program, VMExpressionVisitor* visitor, ElsaInvokeExpression* expression);
+			static void build(VMProgram* program, VMExpressionVisitor* visitor, FuncCallExpression* expression);
 		};
 
 	}

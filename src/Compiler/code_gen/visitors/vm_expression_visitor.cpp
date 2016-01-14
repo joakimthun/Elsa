@@ -12,6 +12,11 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(FuncDeclarationExpression* expression)
 		{
+			if (expression->is_native())
+			{
+				return;
+			}
+
 			FunctionDeclarationExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
@@ -28,11 +33,6 @@ namespace elsa {
 		void VMExpressionVisitor::visit(IntegerLiteralExpression* expression)
 		{
 			LiteralExpressionBuilder::build(vm_program_.get(), expression);
-		}
-
-		void VMExpressionVisitor::visit(ElsaInvokeExpression* expression)
-		{
-			ElsaInvokeExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
 		void VMExpressionVisitor::visit(IdentifierExpression* expression)
@@ -72,7 +72,14 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(FuncCallExpression* expression)
 		{
-			FuncCallExpressionBuilder::build(vm_program_.get(), this, expression);
+			if (expression->get_func_declaration_expression()->is_native())
+			{
+				NativeCallExpressionBuilder::build(vm_program_.get(), this, expression);
+			}
+			else
+			{
+				FuncCallExpressionBuilder::build(vm_program_.get(), this, expression);
+			}
 		}
 
 		void VMExpressionVisitor::visit(BoolLiteralExpression * expression)

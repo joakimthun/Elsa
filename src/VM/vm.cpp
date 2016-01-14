@@ -329,7 +329,7 @@ namespace elsa {
 				current_frame_->store_local(l_index, value);
 				break;
 			}
-			case elsa: {
+			case ncall: {
 				auto index = static_cast<std::size_t>(get_instruction(pc_++));
 				native_calls_.invoke(index, current_frame_);
 				break;

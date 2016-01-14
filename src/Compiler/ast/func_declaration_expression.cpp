@@ -4,11 +4,12 @@
 
 namespace elsa {
 	namespace compiler {
-		FuncDeclarationExpression::FuncDeclarationExpression()
+		FuncDeclarationExpression::FuncDeclarationExpression(bool native_function)
 			: ScopedExpression(nullptr, this),
 			num_locals_(0),
 			num_args_(0),
-			impl_(nullptr)
+			impl_(nullptr),
+			native_function_(native_function)
 		{
 		}
 
@@ -86,6 +87,11 @@ namespace elsa {
 		void FuncDeclarationExpression::increment_num_locals()
 		{
 			num_locals_++;
+		}
+
+		bool FuncDeclarationExpression::is_native() const
+		{
+			return native_function_;
 		}
 
 		const std::wstring& FuncDeclarationExpression::get_name() const

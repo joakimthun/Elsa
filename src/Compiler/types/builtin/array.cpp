@@ -18,7 +18,7 @@ namespace elsa {
 			auto si = std::make_unique<StructInfo>(L"Array");
 
 			// Push element
-			auto push = std::make_unique<FunctionInfo>(L"Push", 2, 0, program->get_next_instruction_index(), FunctionType::Member, true);
+			auto push = std::make_unique<FunctionInfo>(L"Push", 2, 0, program->get_next_instruction_index(), FunctionType::Member);
 			program->emit(OpCode::l_arg);
 			program->emit(0);
 			program->emit(OpCode::l_arg);
@@ -29,7 +29,7 @@ namespace elsa {
 			program->add_func(std::move(push));
 
 			// Pop element
-			auto pop = std::make_unique<FunctionInfo>(L"Pop", 1, 0, program->get_next_instruction_index(), FunctionType::Member, true);
+			auto pop = std::make_unique<FunctionInfo>(L"Pop", 1, 0, program->get_next_instruction_index(), FunctionType::Member);
 			program->emit(OpCode::l_arg);
 			program->emit(0);
 			program->emit(OpCode::p_ele);
@@ -38,7 +38,7 @@ namespace elsa {
 			program->add_func(std::move(pop));
 
 			// Length
-			auto length = std::make_unique<FunctionInfo>(L"Length", 1, 0, program->get_next_instruction_index(), FunctionType::Member, true);
+			auto length = std::make_unique<FunctionInfo>(L"Length", 1, 0, program->get_next_instruction_index(), FunctionType::Member);
 			program->emit(OpCode::l_arg);
 			program->emit(0);
 			program->emit(OpCode::len_arr);

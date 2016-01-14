@@ -18,7 +18,7 @@ namespace elsa {
 		class FuncDeclarationExpression : public Expression, public ScopedExpression
 		{
 		public:
-			FuncDeclarationExpression();
+			FuncDeclarationExpression(bool native_function = false);
 
 			std::unique_ptr<FuncDeclarationExpression> create_generic(const ElsaType* type);
 
@@ -34,6 +34,8 @@ namespace elsa {
 			void set_num_locals(std::size_t num_locals);
 			void increment_num_args();
 			void increment_num_locals();
+
+			bool is_native() const;
 
 			const std::wstring& get_name() const;
 			const ElsaType* get_return_type() const;
@@ -52,6 +54,7 @@ namespace elsa {
 			std::vector<std::unique_ptr<Expression>> body_;
 			std::size_t num_locals_;
 			std::size_t num_args_;
+			bool native_function_;
 		};
 	}
 }
