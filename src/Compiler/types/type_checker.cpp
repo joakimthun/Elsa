@@ -136,6 +136,11 @@ namespace elsa {
 				auto aae = static_cast<ArrayAccessExpression*>(expression);
 				return new ElsaType(aae->get_identifier_expression()->get_type(), true);
 			}
+			if (is_of_type<ArrayInitializerListExpression>(expression))
+			{
+				auto ade = static_cast<ArrayInitializerListExpression*>(expression);
+				return new ElsaType(ade->get_type(), true);
+			}
 
 			throw ParsingException(L"Unkown expression type.", parser_->current_token());
 		}

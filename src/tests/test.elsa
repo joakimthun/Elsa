@@ -1,4 +1,5 @@
 import "std/io";
+import "tests/array_test";
 import "tests/program2";
 
 struct Vec2D
@@ -19,7 +20,7 @@ struct ArrayStruct
 	int[] numbers;
 };
 
-func void array_struct_test()
+func void ArrayStructTest()
 {
 	var as = new ArrayStruct;
 
@@ -42,14 +43,14 @@ func void array_struct_test()
 	PrintLn(as.players[1].speed);
 }
 
-func void import_test()
+func void ImportTest()
 {
 	var game = new Game;
 	game.num_players = 5464;
 	PrintLn(game.num_players);
 }
 
-func void array_length()
+func void ArrayLength()
 {
 	var array = new char[];
 	PrintLn(array.Length());
@@ -75,7 +76,7 @@ func void array_length()
 	PrintLn('');
 }
 
-func void explicit_typing()
+func void ExplicitTyping()
 {
 	int x = 0;
 	float x2 = 0.0;
@@ -91,7 +92,7 @@ func void explicit_typing()
 	PrintLn(p.speed);
 }
 
-func void arrays()
+func void Arrays()
 {
 	var x = new int[];
 	x.Push(15);
@@ -144,7 +145,7 @@ func void arrays()
 	PrintLn(p.position.y);
 }
 
-func void loops()
+func void Loops()
 {
 	loop(var i = 1; i <= 100; i++)
 	{
@@ -178,7 +179,7 @@ func void loops()
 	}
 }
 
-func void postfix()
+func void Postfix()
 {
 	var x = 20;
 	x++;
@@ -201,7 +202,7 @@ func void postfix()
 	PrintLn(player.position.x);
 }
 
-func void cond_print()
+func void CondPrint()
 {
 	if(6 > 5 || false)
 	{
@@ -264,12 +265,12 @@ func void cond_print()
 	}
 }
 
-func void print_sum(int a, int b)
+func void PrintSum(int a, int b)
 {
 	PrintLn(a + b);
 }
 
-func void cond_print2()
+func void CondPrint2()
 {
 	if(false && false || false || true)
 	{
@@ -295,12 +296,12 @@ func void cond_print2()
 	}
 }
 
-func int return_int_test()
+func int ReturnIntTest()
 {
 	return 2015;
 }
 
-func Player return_player_test()
+func Player ReturnPlayerTest()
 {
 	var player = new Player;
 	player.speed = 11;
@@ -312,19 +313,19 @@ func Player return_player_test()
 
 func int main(int dummy)
 {
-	postfix();
-	cond_print();
-	cond_print2();
+	Postfix();
+	CondPrint();
+	CondPrint2();
 
-	var assign_test = 1337;
-	PrintLn(assign_test);
-	assign_test = 1337 + 1000;
-	PrintLn(assign_test);
+	var assignTest = 1337;
+	PrintLn(assignTest);
+	assignTest = 1337 + 1000;
+	PrintLn(assignTest);
 
 	var x = 1 + 2 * 6;
 
 	var arg = 100 + 300 * 10;
-	print_sum(100, arg);
+	PrintSum(100, arg);
 
 	var y = 10;
 	var z = 1230120839;
@@ -358,20 +359,21 @@ func int main(int dummy)
 	PrintLn(b);
 	PrintLn(x + y);
 
-	loops();
+	Loops();
 
-	var ret_int_value = return_int_test();
-	PrintLn(ret_int_value);
+	var retIntValue = ReturnIntTest();
+	PrintLn(retIntValue);
 
-	var ret_player_value = return_player_test();
-	PrintLn(ret_player_value.position.x);
-	PrintLn(ret_player_value.speed);
+	var retPlayerValue = ReturnPlayerTest();
+	PrintLn(retPlayerValue.position.x);
+	PrintLn(retPlayerValue.speed);
 
-	arrays();
-	explicit_typing();
-	array_length();
-	import_test();
-	array_struct_test();
+	Arrays();
+	ExplicitTyping();
+	ArrayLength();
+	ImportTest();
+	ArrayStructTest();
+	ArrayTest();
 
 	return 0;
 }

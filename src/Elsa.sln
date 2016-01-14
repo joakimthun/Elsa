@@ -32,8 +32,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "std", "std", "{05674512-81E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9BEA47F1-40E2-4E41-9C7F-7D4901EBC4C2}"
 	ProjectSection(SolutionItems) = preProject
-		tests\program1.elsa = tests\program1.elsa
+		tests\array_test.elsa = tests\array_test.elsa
 		tests\program2.elsa = tests\program2.elsa
+		tests\test.elsa = tests\test.elsa
 	EndProjectSection
 EndProject
 Global
