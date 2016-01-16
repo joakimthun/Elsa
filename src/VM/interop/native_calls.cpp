@@ -83,8 +83,17 @@ namespace elsa {
 			}
 			else
 			{
-				if (memcmp(&o1.get_value(), &o2.get_value(), sizeof(Value)) != 0)
-					return false;
+				switch (o1.get_type())
+				{
+				case VMType::Int:
+					return o1.i() == o2.i();
+				case VMType::Float:
+					return o1.f() == o2.f();
+				case VMType::Char:
+					return o1.c() == o2.c();
+				default:
+					throw RuntimeException("AssertEq failed, unknown type.");
+				}
 			}
 
 			return true;
