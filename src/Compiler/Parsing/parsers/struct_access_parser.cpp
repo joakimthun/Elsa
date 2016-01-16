@@ -5,13 +5,18 @@ namespace elsa {
 
 		std::unique_ptr<Expression> StructAccessParser::parse(ElsaParser* parser)
 		{
+			return parse_static(parser);
+		}
+
+		std::unique_ptr<Expression> StructAccessParser::parse_static(ElsaParser* parser)
+		{
 			auto sa_exp = std::make_unique<StructAccessExpression>();
 
 			while (parser->current_token()->get_type() == TokenType::Identifier)
 			{
 				auto identifier = parser->current_token()->get_value();
 
-				if (sa_exp->get_base() == nullptr)
+				if (sa_exp->get_base() == nullptr && parser->current_type() == nullptr)
 				{
 					// Local
 					auto id_exp = std::make_unique<IdentifierExpression>(identifier);
@@ -26,7 +31,7 @@ namespace elsa {
 				else
 				{
 					// Field or function
-					const auto type = get_parent_type(sa_exp.get());
+					const auto type = get_parent_type(sa_exp.get(), parser);
 					parser->set_current_type(type);
 
 					auto access_type = parser->type_checker().get_access_type(type, identifier);
@@ -64,12 +69,15 @@ namespace elsa {
 			return std::move(sa_exp);
 		}
 
-		const ElsaType* StructAccessParser::get_parent_type(StructAccessExpression* sa_exp)
+		const ElsaType* StructAccessParser::get_parent_type(StructAccessExpression* sa_exp, ElsaParser* parser)
 		{
 			if (sa_exp->get_expressions().size() > 0)
 			{
 				return sa_exp->get_expressions().back()->get_type();
 			}
+
+			if (sa_exp->get_base() == nullptr && parser->current_type() != nullptr)
+				return parser->current_type();
 
 			return sa_exp->get_base()->get_type();
 		}

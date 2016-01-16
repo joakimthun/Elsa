@@ -7,11 +7,16 @@
 namespace elsa {
 	namespace compiler {
 
-		void StructAccessExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, StructAccessExpression* expression)
+		void StructAccessExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, StructAccessExpression* expression, const ElsaType* current)
 		{
-			IdentifierExpressionBuilder::build(program, visitor, expression->get_base());
+			// If we do not have a base expression we can expect the base to alreday be on the stack e.g. chained array access.
+			if(expression->get_base() != nullptr)
+				IdentifierExpressionBuilder::build(program, visitor, expression->get_base());
 
-			auto current_type = expression->get_base()->get_type();
+			auto current_type = current;
+			if(current_type == nullptr)
+				current_type = expression->get_base()->get_type();
+
 			for (const auto& exp : expression->get_expressions())
 			{
 				auto current_struct = get_current_struct(current_type);

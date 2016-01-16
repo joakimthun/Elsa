@@ -1,5 +1,7 @@
 #include "array_access_parser.h"
 
+#include "struct_access_parser.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -40,6 +42,20 @@ namespace elsa {
 			arr_exp->set_index_expression(std::move(index_expression));
 
 			parser->consume(TokenType::RSBracket);
+
+			if (parser->current_token()->get_type() == TokenType::Dot)
+			{
+				if(arr_exp->get_identifier_expression()->get_type()->get_type() != ObjectType::GCOPtr)
+					throw ParsingException(L"Only struct fields and functions can be accessed by the '.' operator", parser->current_token());
+
+				parser->consume(TokenType::Dot);
+				parser->set_current_type(arr_exp->get_identifier_expression()->get_type());
+
+				auto sae = StructAccessParser::parse_static(parser);
+				arr_exp->set_struct_access_expression(dynamic_cast<StructAccessExpression*>(sae.release()));
+
+				parser->set_current_type(nullptr);
+			}
 
 			return std::move(arr_exp);
 		}

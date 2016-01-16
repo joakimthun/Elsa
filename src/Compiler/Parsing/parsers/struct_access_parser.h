@@ -13,9 +13,10 @@ namespace elsa {
 		{
 		public:
 			std::unique_ptr<Expression> parse(ElsaParser* parser) override;
+			static std::unique_ptr<Expression> parse_static(ElsaParser* parser);
 
 		private:
-			const ElsaType* get_parent_type(StructAccessExpression* sa_exp);
+			static const ElsaType* get_parent_type(StructAccessExpression* sa_exp, ElsaParser* parser);
 		};
 
 	}

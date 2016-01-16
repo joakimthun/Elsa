@@ -15,6 +15,11 @@ namespace elsa {
 			index_expression_ = std::move(expression);
 		}
 
+		void ArrayAccessExpression::set_struct_access_expression(StructAccessExpression* expression)
+		{
+			struct_access_expression_ = std::unique_ptr<StructAccessExpression>(expression);
+		}
+
 		IdentifierExpression* ArrayAccessExpression::get_identifier_expression() const
 		{
 			return identifier_expression_.get();
@@ -23,6 +28,11 @@ namespace elsa {
 		Expression* ArrayAccessExpression::get_index_expression() const
 		{
 			return index_expression_.get();
+		}
+
+		StructAccessExpression * ArrayAccessExpression::get_struct_access_expression() const
+		{
+			return struct_access_expression_.get();
 		}
 
 		const std::wstring& ArrayAccessExpression::get_name() const

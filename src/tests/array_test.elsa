@@ -97,15 +97,13 @@ func void ArrayOfStructsTest()
 	structs.Push(at);
 	AssertEq(4, structs.Length());
 
-	var first = structs[0];
-	AssertEq(0, first.IntField);
-	AssertEq(0.0, first.FloatField);
-	AssertEq('\0', first.CharField);
-	AssertEq(false, first.BoolField);
+	AssertEq(0, structs[0].IntField);
+	AssertEq(0.0, structs[0].FloatField);
+	AssertEq('\0', structs[0].CharField);
+	AssertEq(false, structs[0].BoolField);
 
-	var last = structs[3];
-	AssertEq(10, last.IntField);
-	AssertEq(10.0, last.FloatField);
-	AssertEq('!', last.CharField);
-	AssertEq(true, last.BoolField);
+	AssertEq(10, structs[3].IntField);
+	AssertEq(10.0, structs[3].FloatField);
+	AssertEq('!', structs[3].CharField);
+	AssertEq(true, structs[3].BoolField);
 }

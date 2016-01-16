@@ -17,7 +17,7 @@ namespace elsa {
 		class StructAccessExpressionBuilder
 		{
 		public:
-			static void build(VMProgram* program, VMExpressionVisitor* visitor, StructAccessExpression* expression);
+			static void build(VMProgram* program, VMExpressionVisitor* visitor, StructAccessExpression* expression, const ElsaType* current = nullptr);
 
 		private:
 			static const StructDeclarationExpression* get_current_struct(const ElsaType* current_type);

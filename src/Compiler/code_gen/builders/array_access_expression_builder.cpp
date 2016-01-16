@@ -2,6 +2,8 @@
 
 #include "../visitors/vm_expression_visitor.h"
 
+#include "struct_access_expression_builder.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -15,6 +17,9 @@ namespace elsa {
 
 			expression->get_index_expression()->accept(visitor);
 			program->emit(OpCode::l_ele);
+
+			if (expression->get_struct_access_expression() != nullptr)
+				StructAccessExpressionBuilder::build(program, visitor, expression->get_struct_access_expression(), expression->get_type());
 		}
 
 	}
