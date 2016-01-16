@@ -1,0 +1,1 @@
+native func bool Equals(object v);

@@ -1,35 +1,78 @@
-import "std/io";
+import "std/assert";
 
-func void ArrayTest()
+struct ArrayTest
 {
-	// TODO: Fix the loop index variable scoping
+	int Field;
+};
 
-	PrintLn('');
+func void ArrayPushPopTest()
+{
+	var arr = new int[];
+	AssertEq(0, arr.Length());
 	
+	arr.Push(1);
+	AssertEq(1, arr[0]);
+	AssertEq(1, arr.Length());
+
+	arr.Push(2);
+	AssertEq(2, arr[1]);
+	AssertEq(2, arr.Length());
+
+	arr.Push(3);
+	AssertEq(3, arr[2]);
+	AssertEq(3, arr.Length());
+
+	var p1 = arr.Pop();
+	AssertEq(3, p1);
+	AssertEq(2, arr.Length());
+
+	var p2 = arr.Pop();
+	AssertEq(2, p2);
+	AssertEq(1, arr.Length());
+
+	var p3 = arr.Pop();
+	AssertEq(1, p3);
+	AssertEq(0, arr.Length());
+}
+
+func void ArrayInitializerListTest()
+{
 	var ints = new [1, 2, 3, 4, 5, 6];
 	
-	loop(var i1 = 0; i1 < ints.Length(); i1++)
-	{
-		PrintLn(ints[i1]);
-	}
-
-	PrintLn('');
+	AssertEq(1, ints[0]);
+	AssertEq(2, ints[1]);
+	AssertEq(3, ints[2]);
+	AssertEq(4, ints[3]);
+	AssertEq(5, ints[4]);
+	AssertEq(6, ints[5]);
 
 	var floats = new [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0];
 	
-	loop(var i2 = 0; i2 < floats.Length(); i2++)
-	{
-		PrintLn(floats[i2]);
-	}
-
-	PrintLn('');
+	AssertEq(1.0, floats[0]);
+	AssertEq(2.0, floats[1]);
+	AssertEq(3.0, floats[2]);
+	AssertEq(4.0, floats[3]);
+	AssertEq(5.0, floats[4]);
+	AssertEq(6.0, floats[5]);
+	AssertEq(7.0, floats[6]);
+	AssertEq(8.0, floats[7]);
+	AssertEq(9.0, floats[8]);
 
 	var chars = new ['H', 'e', 'l', 'l', 'o', '!'];
 	
-	loop(var i3 = 0; i3 < chars.Length(); i3++)
-	{
-		Print(chars[i3]);
-	}
+	AssertEq('H', chars[0]);
+	AssertEq('e', chars[1]);
+	AssertEq('l', chars[2]);
+	AssertEq('l', chars[3]);
+	AssertEq('o', chars[4]);
+	AssertEq('!', chars[5]);
 
-	PrintLn('');
+	var at = new ArrayTest;
+
+	var structs = new [at, at, at, at];
+
+	AssertEq(at, structs[0]);
+	AssertEq(at, structs[1]);
+	AssertEq(at, structs[2]);
+	AssertEq(at, structs[3]);
 }

@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pong", "pong", "{FF1AACA1-3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "std", "std", "{05674512-81E8-4FD9-98C6-A1CBA4938A71}"
 	ProjectSection(SolutionItems) = preProject
+		std\assert.elsa = std\assert.elsa
+		std\default.elsa = std\default.elsa
 		std\io.elsa = std\io.elsa
 	EndProjectSection
 EndProject

@@ -102,7 +102,7 @@ namespace elsa {
 		void NativeCalls::assert_eq(StackFrame* frame)
 		{
 			if (!are_eq_internal(frame))
-				throw RuntimeException("AssertEq failed, objects are not of the same type.");
+				throw RuntimeException("AssertEq failed.");
 		}
 
 	}

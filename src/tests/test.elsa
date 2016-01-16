@@ -1,4 +1,5 @@
 import "std/io";
+import "std/assert";
 import "tests/array_test";
 import "tests/program2";
 
@@ -313,6 +314,8 @@ func Player ReturnPlayerTest()
 
 func int main(int dummy)
 {
+	AssertEq(2, 2);
+
 	Postfix();
 	CondPrint();
 	CondPrint2();
@@ -373,7 +376,8 @@ func int main(int dummy)
 	ArrayLength();
 	ImportTest();
 	ArrayStructTest();
-	ArrayTest();
+	ArrayInitializerListTest();
+	ArrayPushPopTest();
 
 	return 0;
 }
