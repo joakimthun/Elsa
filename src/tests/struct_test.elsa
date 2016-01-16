@@ -28,10 +28,34 @@ func void NewStructTest()
 
 func void StructFieldsTest()
 {
+	var s = new MyOtherStruct;
 
-}
+	AssertEq(0, s.IntField);
+	AssertEq(0.0, s.FloatField);
+	AssertEq('\0', s.CharField);
+	AssertEq(false, s.BoolField);
 
-func void NestedFieldsTest()
-{
+	s.IntField = 10;
+	s.FloatField = 10.0;
+	s.CharField = '!';
+	s.BoolField = true;
 
+	var s2 = new MyStruct;
+	s2.IntField = 10;
+	s2.FloatField = 10.0;
+	s2.CharField = '!';
+	s2.BoolField = true;
+
+	s.StructField = s2;
+
+	AssertEq(10, s.IntField);
+	AssertEq(10.0, s.FloatField);
+	AssertEq('!', s.CharField);
+	AssertEq(true, s.BoolField);
+	AssertEq(s2, s.StructField);
+
+	AssertEq(10, s.StructField.IntField);
+	AssertEq(10.0, s.StructField.FloatField);
+	AssertEq('!', s.StructField.CharField);
+	AssertEq(true, s.StructField.BoolField);
 }

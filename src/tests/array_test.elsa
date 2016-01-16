@@ -2,7 +2,10 @@ import "std/assert";
 
 struct ArrayTest
 {
-	int Field;
+	int IntField;
+	float FloatField;
+	char CharField;
+	bool BoolField;
 };
 
 func void ArrayPushPopTest()
@@ -75,4 +78,34 @@ func void ArrayInitializerListTest()
 	AssertEq(at, structs[1]);
 	AssertEq(at, structs[2]);
 	AssertEq(at, structs[3]);
+}
+
+func void ArrayOfStructsTest()
+{
+	var structs = new [new ArrayTest, new ArrayTest]
+	AssertEq(2, structs.Length());
+
+	structs.Push(new ArrayTest);
+	AssertEq(3, structs.Length());
+
+	var at = new ArrayTest;
+	at.IntField = 10;
+	at.FloatField = 10.0;
+	at.CharField = '!';
+	at.BoolField = true;
+
+	structs.Push(at);
+	AssertEq(4, structs.Length());
+
+	var first = structs[0];
+	AssertEq(0, first.IntField);
+	AssertEq(0.0, first.FloatField);
+	AssertEq('\0', first.CharField);
+	AssertEq(false, first.BoolField);
+
+	var last = structs[3];
+	AssertEq(10, last.IntField);
+	AssertEq(10.0, last.FloatField);
+	AssertEq('!', last.CharField);
+	AssertEq(true, last.BoolField);
 }

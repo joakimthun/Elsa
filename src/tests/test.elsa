@@ -22,29 +22,6 @@ struct ArrayStruct
 	int[] numbers;
 };
 
-func void ArrayStructTest()
-{
-	var as = new ArrayStruct;
-
-	as.numbers = new int[];
-	as.numbers.Push(787878);
-	PrintLn(as.numbers.Length());
-	PrintLn(as.numbers[0]);
-
-	as.players = new Player[];
-	var p = new Player;
-	as.players.Push(p);
-	as.players.Push(new Player);
-	PrintLn(as.players.Length());
-	PrintLn(as.players[0].speed);
-	PrintLn(as.players[1].speed);
-
-	p.speed = 34;
-
-	PrintLn(as.players[0].speed);
-	PrintLn(as.players[1].speed);
-}
-
 func void ImportTest()
 {
 	var game = new Game;
@@ -378,14 +355,13 @@ func int main(int dummy)
 	ImportTest();
 
 	// Array tests
-	ArrayStructTest();
 	ArrayInitializerListTest();
 	ArrayPushPopTest();
+	ArrayOfStructsTest();
 
 	// Struct tests
 	NewStructTest();
 	StructFieldsTest();
-	NestedFieldsTest();
 
 	return 0;
 }
