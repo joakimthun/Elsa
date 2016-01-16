@@ -48,6 +48,9 @@
     <ClCompile Include="gc_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="are_eq_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vm_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="are_eq_test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

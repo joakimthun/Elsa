@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+#include <string.h>
 #include <vector>
 #include <cstddef>
 #include <functional>
@@ -23,6 +25,9 @@ namespace elsa {
 			static void print(StackFrame* frame);
 			static void print_ln(StackFrame* frame);
 			static void print_internal(StackFrame* frame);
+			static void are_eq(StackFrame* frame);
+			static bool are_eq_internal(StackFrame* frame);
+			static void assert_eq(StackFrame* frame);
 
 			std::vector<std::function<void(StackFrame*)>> functions_;
 		};

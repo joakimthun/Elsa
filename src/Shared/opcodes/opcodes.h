@@ -6,6 +6,7 @@ namespace elsa {
 
 		enum OpCode : int
 		{
+			// Misc
 			nop = 0,
 			halt,
 			pop,

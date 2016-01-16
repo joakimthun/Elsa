@@ -71,6 +71,11 @@ namespace elsa {
 			throw RuntimeException("Can not get a GCObject pointer from a non GCObject pointer type.");
 		}
 
+		const Value & Object::get_value() const
+		{
+			return value_;
+		}
+
 		elsa::VMType Object::get_type() const
 		{
 			return type_;

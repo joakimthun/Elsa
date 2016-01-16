@@ -10,5 +10,6 @@
 #include "char_opcodes_test.h"
 #include "string_opcodes_test.h"
 #include "gc_test.h"
+#include "are_eq_test.h"
 
 int vm_test();
