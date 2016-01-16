@@ -1,0 +1,37 @@
+import "std/assert";
+
+struct MyStruct
+{
+	int IntField;
+	float FloatField;
+	char CharField;
+	bool BoolField;
+};
+
+struct MyOtherStruct
+{
+	int IntField;
+	float FloatField;
+	char CharField;
+	bool BoolField;
+	MyStruct StructField;
+};
+
+func void NewStructTest()
+{
+	var s = new MyStruct;
+	AssertEq(0, s.IntField);
+	AssertEq(0.0, s.FloatField);
+	AssertEq('\0', s.CharField);
+	AssertEq(false, s.BoolField);
+}
+
+func void StructFieldsTest()
+{
+
+}
+
+func void NestedFieldsTest()
+{
+
+}

@@ -36,6 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9BEA47F1
 	ProjectSection(SolutionItems) = preProject
 		tests\array_test.elsa = tests\array_test.elsa
 		tests\program2.elsa = tests\program2.elsa
+		tests\struct_test.elsa = tests\struct_test.elsa
 		tests\test.elsa = tests\test.elsa
 	EndProjectSection
 EndProject

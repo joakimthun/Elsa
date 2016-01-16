@@ -1,6 +1,7 @@
 import "std/io";
 import "std/assert";
 import "tests/array_test";
+import "tests/struct_test";
 import "tests/program2";
 
 struct Vec2D
@@ -375,9 +376,16 @@ func int main(int dummy)
 	ExplicitTyping();
 	ArrayLength();
 	ImportTest();
+
+	// Array tests
 	ArrayStructTest();
 	ArrayInitializerListTest();
 	ArrayPushPopTest();
+
+	// Struct tests
+	NewStructTest();
+	StructFieldsTest();
+	NestedFieldsTest();
 
 	return 0;
 }

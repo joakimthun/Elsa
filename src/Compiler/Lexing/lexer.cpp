@@ -271,6 +271,9 @@ namespace elsa {
 
 			consume();
 
+			if (value == L"\\0")
+				value = L"\0";
+
 			return std::make_unique<Token>(TokenType::CharLiteral, value, line_number_, file_->get_file_name());
 		}
 
