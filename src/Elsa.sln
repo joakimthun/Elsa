@@ -28,14 +28,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "std", "std", "{05674512-81E8-4FD9-98C6-A1CBA4938A71}"
 	ProjectSection(SolutionItems) = preProject
 		std\assert.elsa = std\assert.elsa
-		std\default.elsa = std\default.elsa
 		std\io.elsa = std\io.elsa
+		std\string.elsa = std\string.elsa
+		std\system.elsa = std\system.elsa
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9BEA47F1-40E2-4E41-9C7F-7D4901EBC4C2}"
 	ProjectSection(SolutionItems) = preProject
 		tests\array_test.elsa = tests\array_test.elsa
 		tests\program2.elsa = tests\program2.elsa
+		tests\string_test.elsa = tests\string_test.elsa
 		tests\struct_test.elsa = tests\struct_test.elsa
 		tests\test.elsa = tests\test.elsa
 	EndProjectSection

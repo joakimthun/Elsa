@@ -5,12 +5,11 @@ namespace elsa {
 
 		ElsaParser::ElsaParser(Lexer* lexer)
 			:
+			parent_(nullptr),
 			lexer_(std::unique_ptr<Lexer>(lexer)),
 			current_scope_(nullptr),
 			type_checker_(this),
 			program_(std::make_unique<Program>()),
-			struct_table_ext_(nullptr),
-			function_table_ext_(nullptr),
 			current_type_(nullptr)
 		{
 			initialize_grammar();
@@ -88,18 +87,27 @@ namespace elsa {
 
 		StructTable& ElsaParser::struct_table()
 		{
-			if (struct_table_ext_ != nullptr)
-				return *struct_table_ext_;
+			if (parent_ == nullptr)
+				return struct_table_;
 
-			return struct_table_;
+			return parent_->struct_table();
+			//if (struct_table_ext_ != nullptr)
+			//	return *struct_table_ext_;
+			//
+			//return struct_table_;
 		}
 
 		FunctionTable& ElsaParser::function_table()
 		{
-			if (function_table_ext_ != nullptr)
-				return *function_table_ext_;
+			if (parent_ == nullptr)
+				return function_table_;
 
-			return function_table_;
+			return parent_->function_table();
+
+			//if (function_table_ext_ != nullptr)
+			//	return *function_table_ext_;
+			//
+			//return function_table_;
 		}
 
 		TypeChecker & ElsaParser::type_checker()
@@ -140,14 +148,12 @@ namespace elsa {
 			return current_type_;
 		}
 
-		ElsaParser::ElsaParser(Lexer* lexer, StructTable* struct_table, FunctionTable* function_table)
+		ElsaParser::ElsaParser(ElsaParser* parent, Lexer* lexer)
 			:
+			parent_(parent),
 			lexer_(std::unique_ptr<Lexer>(lexer)),
 			current_scope_(nullptr),
 			type_checker_(this),
-			program_(std::make_unique<Program>()),
-			struct_table_ext_(struct_table),
-			function_table_ext_(function_table),
 			current_type_(nullptr)
 		{
 			initialize_grammar();
@@ -304,14 +310,19 @@ namespace elsa {
 			auto filename = current_token_->get_value();
 			consume(TokenType::StringLiteral);
 			consume(TokenType::Semicolon);
+
+			if (already_imported(filename))
+				return;
+
 			import_source_file(filename);
 		}
 
 		void ElsaParser::import_source_file(const std::wstring& filename)
 		{
 			auto filename_with_extension = filename + L".elsa";
-			auto parser = ElsaParser(new Lexer(new SourceFile(filename_with_extension.c_str())), &struct_table_, &function_table_);
-			parser.parse(program_.get());
+			auto parser = ElsaParser(this, new Lexer(new SourceFile(filename_with_extension.c_str())));
+			parser.parse(get_root_program());
+			imported_files_root().push_back(filename);
 		}
 
 		void ElsaParser::parse(Program* program)
@@ -320,6 +331,29 @@ namespace elsa {
 			{
 				program->add_statement(parse_statement());
 			}
+		}
+
+		bool ElsaParser::already_imported(const std::wstring& filename)
+		{
+			const auto imported_files = imported_files_root();
+			auto it = std::find(imported_files.begin(), imported_files.end(), filename);
+			return it != imported_files.end();
+		}
+
+		std::vector<std::wstring>& ElsaParser::imported_files_root()
+		{
+			if (parent_ == nullptr)
+				return imported_files_;
+
+			return parent_->imported_files_root();
+		}
+
+		Program* ElsaParser::get_root_program()
+		{
+			if (parent_ == nullptr)
+				return program_.get();
+
+			return parent_->get_root_program();
 		}
 	}
 }

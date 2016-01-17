@@ -1,0 +1,7 @@
+import "std/string";
+import "std/assert";
+
+func void NewStringTest()
+{
+	var str = new String;
+}

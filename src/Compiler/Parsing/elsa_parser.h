@@ -4,6 +4,7 @@
 #include <map>
 #include <utility>
 #include <vector>
+#include <algorithm>
 
 #include "..\exceptions\parsing_exception.h"
 #include "../lexing/lexer.h"
@@ -62,7 +63,7 @@ namespace elsa {
 			const ElsaType* current_type() const;
 
 		private:
-			ElsaParser(Lexer* lexer, StructTable* struct_table, FunctionTable* function_table);
+			ElsaParser(ElsaParser* parent, Lexer* lexer);
 
 			void next_token();
 
@@ -81,12 +82,13 @@ namespace elsa {
 			void parse_import_statement();
 			void import_source_file(const std::wstring& filename);
 			void parse(Program* program);
+			bool already_imported(const std::wstring& filename);
+			std::vector<std::wstring>& imported_files_root();
+			Program* get_root_program();
 
 			std::unique_ptr<Program> program_;
 			StructTable struct_table_;
 			FunctionTable function_table_;
-			StructTable* struct_table_ext_;
-			FunctionTable* function_table_ext_;
 			ScopedExpression* current_scope_;
 			std::map<TokenType, std::unique_ptr<Parser>> expression_parsers_;
 			std::vector<std::unique_ptr<LL2Entry>> ll2_expression_parsers_;
@@ -96,6 +98,8 @@ namespace elsa {
 			std::unique_ptr<Token> current_token_;
 			TypeChecker type_checker_;
 			const ElsaType* current_type_;
+			std::vector<std::wstring> imported_files_;
+			ElsaParser* parent_;
 		};
 
 	}
