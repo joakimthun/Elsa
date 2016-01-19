@@ -5,6 +5,17 @@ namespace elsa {
 
 		std::unique_ptr<Expression> FuncDeclarationParser::parse(ElsaParser* parser)
 		{
+			return parse_internal(parser);
+		}
+
+		std::unique_ptr<Expression> FuncDeclarationParser::parse_static(ElsaParser* parser)
+		{
+			return parse_internal(parser);
+		}
+
+
+		std::unique_ptr<Expression> FuncDeclarationParser::parse_internal(ElsaParser* parser)
+		{
 			bool native_function = false;
 			if (parser->current_token()->get_type() == TokenType::Native)
 			{
@@ -39,7 +50,7 @@ namespace elsa {
 				arg->set_type(parser->type_checker().get_type_from_token(parser->current_token()));
 				parser->consume();
 
-				
+
 				arg->set_name(parser->current_token()->get_value());
 				parser->consume(TokenType::Identifier);
 
@@ -47,7 +58,7 @@ namespace elsa {
 
 				func_dec_exp->add_args_expression(std::move(arg));
 
-				if(parser->current_token()->get_type() != TokenType::RParen)
+				if (parser->current_token()->get_type() != TokenType::RParen)
 					parser->consume(TokenType::Comma);
 			}
 

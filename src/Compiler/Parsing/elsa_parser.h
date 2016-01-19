@@ -61,6 +61,9 @@ namespace elsa {
 			Token* peek_token();
 			void set_current_type(const ElsaType* type);
 			const ElsaType* current_type() const;
+			void set_current_struct(StructDeclarationExpression* sde);
+			const StructDeclarationExpression* current_struct() const;
+			ElsaType* current_struct_type();
 
 		private:
 			ElsaParser(ElsaParser* parent, Lexer* lexer);
@@ -85,6 +88,7 @@ namespace elsa {
 			bool already_imported(const std::wstring& filename);
 			std::vector<std::wstring>& imported_files_root();
 			Program* get_root_program();
+			bool is_member_access();
 
 			std::unique_ptr<Program> program_;
 			StructTable struct_table_;
@@ -98,6 +102,7 @@ namespace elsa {
 			std::unique_ptr<Token> current_token_;
 			TypeChecker type_checker_;
 			const ElsaType* current_type_;
+			StructDeclarationExpression* current_struct_;
 			std::vector<std::wstring> imported_files_;
 			ElsaParser* parent_;
 		};

@@ -1,5 +1,7 @@
 #include "struct_declaration_parser.h"
 
+#include "func_declaration_parser.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -19,15 +21,24 @@ namespace elsa {
 			parser->consume(TokenType::Identifier);
 			parser->consume(TokenType::LBracket);
 
+			parser->struct_table().add_struct(name, struct_exp.get());
+
 			while (parser->current_token()->get_type() != TokenType::RBracket)
 			{
-				struct_exp->add_field_expression(parse_field_expression(parser));
+				if (parser->current_token()->get_type() == TokenType::Func)
+				{
+					parser->set_current_struct(struct_exp.get());
+					struct_exp->add_member_function(parse_func_expression(parser));
+					parser->set_current_struct(nullptr);
+				}
+				else
+				{
+					struct_exp->add_field_expression(parse_field_expression(parser));
+				}
 			}
 
 			parser->consume(TokenType::RBracket);
 			parser->consume(TokenType::Semicolon);
-
-			parser->struct_table().add_struct(name, struct_exp.get());
 
 			return std::move(struct_exp);
 		}
@@ -64,6 +75,12 @@ namespace elsa {
 			parser->consume(TokenType::Semicolon);
 
 			return std::move(field_expression);
+		}
+
+		std::unique_ptr<FuncDeclarationExpression> StructDeclarationParser::parse_func_expression(ElsaParser* parser)
+		{
+			auto fde = FuncDeclarationParser::parse_static(parser);
+			return std::unique_ptr<FuncDeclarationExpression>(static_cast<FuncDeclarationExpression*>(fde.release()));
 		}
 
 	}

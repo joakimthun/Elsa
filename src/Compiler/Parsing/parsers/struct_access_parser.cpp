@@ -1,5 +1,8 @@
 #include "struct_access_parser.h"
 
+#include "func_call_parser.h"
+#include "array_access_parser.h"
+
 namespace elsa {
 	namespace compiler {
 
@@ -16,7 +19,7 @@ namespace elsa {
 			{
 				auto identifier = parser->current_token()->get_value();
 
-				if (sa_exp->get_base() == nullptr && parser->current_type() == nullptr)
+				if (sa_exp->get_base() == nullptr && parser->current_type() == nullptr && parser->current_struct() == nullptr)
 				{
 					// Local
 					auto id_exp = std::make_unique<IdentifierExpression>(identifier);
@@ -43,7 +46,7 @@ namespace elsa {
 					}
 					else if (parser->peek_token()->get_type() == TokenType::LSBracket)
 					{
-						auto array_access_exp = parser->parse_expression();
+						auto array_access_exp = ArrayAccessParser::parse_static(parser);
 						sa_exp->add_expression(dynamic_cast<TypedExpression*>(array_access_exp.release()));
 					}
 					else
@@ -78,6 +81,9 @@ namespace elsa {
 
 			if (sa_exp->get_base() == nullptr && parser->current_type() != nullptr)
 				return parser->current_type();
+
+			if (sa_exp->get_base() == nullptr && parser->current_struct() != nullptr)
+				return parser->current_struct_type();
 
 			return sa_exp->get_base()->get_type();
 		}

@@ -90,15 +90,19 @@ namespace elsa {
 			if (is_of_type<StructAccessExpression>(expression))
 			{
 				auto sae = static_cast<StructAccessExpression*>(expression);
-				auto current = sae->get_base()->get_type();
+
+				std::unique_ptr<const ElsaType> current(parser_->current_struct_type());
+				if(sae->get_base() != nullptr)
+					current.reset(sae->get_base()->get_type());
+
 				std::unique_ptr<ElsaType> type;
 
 				for (const auto& field_expression : sae->get_expressions())
 				{
-					type.reset(get_access_type(current, field_expression->get_name()));
+					type.reset(get_access_type(current.get(), field_expression->get_name()));
 
 					if (field_expression->get_type()->get_type() == ObjectType::GCOPtr)
-						current = field_expression->get_type();
+						current.reset(field_expression->get_type());
 				}
 
 				if (type->get_type() == ObjectType::Function)
@@ -140,6 +144,11 @@ namespace elsa {
 			{
 				auto ade = static_cast<ArrayInitializerListExpression*>(expression);
 				return new ElsaType(ade->get_type(), true);
+			}
+			if (is_of_type<StructDeclarationExpression>(expression))
+			{
+				auto sde = static_cast<StructDeclarationExpression*>(expression);
+				return new ElsaType(sde);
 			}
 
 			throw ParsingException(L"Unkown expression type.", parser_->current_token());
@@ -217,7 +226,7 @@ namespace elsa {
 			return first->get_type() == second->get_type();
 		}
 
-		ElsaType* TypeChecker::get_access_type(const ElsaType* type, const std::wstring& name)
+		ElsaType* TypeChecker::get_access_type(const ElsaType* type, const std::wstring& name, bool throw_invalid_exception)
 		{
 			if (type->get_type() == ObjectType::Function)
 				return new ElsaType(type->get_func_declaration_expression()->get_return_type());
@@ -238,7 +247,10 @@ namespace elsa {
 					return new ElsaType(function.get());
 			}
 
-			throw ParsingException(L"Invalid struct field or function", parser_->current_token());
+			if(throw_invalid_exception)
+				throw ParsingException(L"Invalid struct field or function", parser_->current_token());
+
+			return nullptr;
 		}
 
 		ElsaType* TypeChecker::get_struct_type(const std::wstring& name)

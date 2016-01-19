@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <utility>
+#include <algorithm>
 
 #include "expression.h"
 #include "..\exceptions\parsing_exception.h"

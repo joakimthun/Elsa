@@ -10,7 +10,8 @@ namespace elsa {
 			current_scope_(nullptr),
 			type_checker_(this),
 			program_(std::make_unique<Program>()),
-			current_type_(nullptr)
+			current_type_(nullptr),
+			current_struct_(nullptr)
 		{
 			initialize_grammar();
 			next_token();
@@ -56,6 +57,12 @@ namespace elsa {
 			if (parser == nullptr)
 				throw ParsingException(L"Invalid token", current_token_.get());
 
+			if (is_member_access())
+			{
+				// Struct access parser
+				parser = get_ll2_expression_parser(TokenType::Identifier, TokenType::Dot);
+			}
+
 			auto left = std::unique_ptr<Expression>(parser->parse(this));
 
 			while (precedence < get_precedence())
@@ -91,10 +98,6 @@ namespace elsa {
 				return struct_table_;
 
 			return parent_->struct_table();
-			//if (struct_table_ext_ != nullptr)
-			//	return *struct_table_ext_;
-			//
-			//return struct_table_;
 		}
 
 		FunctionTable& ElsaParser::function_table()
@@ -103,11 +106,6 @@ namespace elsa {
 				return function_table_;
 
 			return parent_->function_table();
-
-			//if (function_table_ext_ != nullptr)
-			//	return *function_table_ext_;
-			//
-			//return function_table_;
 		}
 
 		TypeChecker & ElsaParser::type_checker()
@@ -148,13 +146,32 @@ namespace elsa {
 			return current_type_;
 		}
 
+		void ElsaParser::set_current_struct(StructDeclarationExpression* sde)
+		{
+			current_struct_ = sde;
+		}
+
+		const StructDeclarationExpression* ElsaParser::current_struct() const
+		{
+			return current_struct_;
+		}
+
+		ElsaType* ElsaParser::current_struct_type()
+		{
+			if (current_struct_ == nullptr)
+				return nullptr;
+
+			return type_checker().get_expression_type(current_struct_);
+		}
+
 		ElsaParser::ElsaParser(ElsaParser* parent, Lexer* lexer)
 			:
 			parent_(parent),
 			lexer_(std::unique_ptr<Lexer>(lexer)),
 			current_scope_(nullptr),
 			type_checker_(this),
-			current_type_(nullptr)
+			current_type_(nullptr),
+			current_struct_(nullptr)
 		{
 			initialize_grammar();
 			next_token();
@@ -354,6 +371,18 @@ namespace elsa {
 				return program_.get();
 
 			return parent_->get_root_program();
+		}
+
+		bool ElsaParser::is_member_access()
+		{
+			if (current_struct() != nullptr && current_token_->get_type() == TokenType::Identifier)
+			{
+				auto access_type = std::unique_ptr<ElsaType>(type_checker().get_access_type(current_struct_type(), current_token_->get_value(), false));
+				if (access_type.get() != nullptr)
+					return true;
+			}
+
+			return false;
 		}
 	}
 }

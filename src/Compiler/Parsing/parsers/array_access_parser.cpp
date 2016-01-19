@@ -7,6 +7,11 @@ namespace elsa {
 
 		std::unique_ptr<Expression> ArrayAccessParser::parse(ElsaParser* parser)
 		{
+			return parse_static(parser);
+		}
+
+		std::unique_ptr<Expression> ArrayAccessParser::parse_static(ElsaParser* parser)
+		{
 			auto arr_exp = std::make_unique<ArrayAccessExpression>();
 
 			auto identifier = parser->current_token()->get_value();
@@ -45,7 +50,7 @@ namespace elsa {
 
 			if (parser->current_token()->get_type() == TokenType::Dot)
 			{
-				if(arr_exp->get_identifier_expression()->get_type()->get_type() != ObjectType::GCOPtr)
+				if (arr_exp->get_identifier_expression()->get_type()->get_type() != ObjectType::GCOPtr)
 					throw ParsingException(L"Only struct fields and functions can be accessed by the '.' operator", parser->current_token());
 
 				parser->consume(TokenType::Dot);

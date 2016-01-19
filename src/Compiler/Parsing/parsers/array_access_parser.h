@@ -12,6 +12,7 @@ namespace elsa {
 		{
 		public:
 			std::unique_ptr<Expression> parse(ElsaParser* parser) override;
+			static std::unique_ptr<Expression> parse_static(ElsaParser* parser);
 		};
 
 	}

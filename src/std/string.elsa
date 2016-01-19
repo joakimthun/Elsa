@@ -1,4 +1,11 @@
 struct String
 {
 	char[] str;
+	int test;
+
+	func char charAt(int i)
+	{
+		return str[0];
+		//return 'A';
+	}
 };
