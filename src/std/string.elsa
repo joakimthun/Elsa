@@ -5,7 +5,8 @@ struct String
 
 	func char charAt(int i)
 	{
-		return str[0];
-		//return 'A';
+		//return str[0];
+		var x = new ['A', 'B'];
+		return x[0];
 	}
 };

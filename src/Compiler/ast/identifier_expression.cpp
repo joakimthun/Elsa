@@ -20,7 +20,7 @@ namespace elsa {
 			return name_;
 		}
 
-		const ElsaType* IdentifierExpression::get_type() const
+		ElsaType* IdentifierExpression::get_type()
 		{
 			return type_.get();
 		}

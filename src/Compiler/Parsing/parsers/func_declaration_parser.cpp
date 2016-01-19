@@ -77,10 +77,10 @@ namespace elsa {
 				func_dec_exp->add_body_expression(parser->parse_expression());
 			}
 
-			parser->reset_current_scope();
-
 			if (!parser->type_checker().return_type_match(func_dec_exp.get()))
 				throw ParsingException(L"Return type mismatch", parser->current_token());
+
+			parser->reset_current_scope();
 
 			parser->consume(TokenType::RBracket);
 

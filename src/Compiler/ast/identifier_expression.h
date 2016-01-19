@@ -17,7 +17,7 @@ namespace elsa {
 			void set_type(ElsaType* type);
 
 			const std::wstring& get_name() const;
-			const ElsaType* get_type() const;
+			ElsaType* get_type();
 
 			void accept(ExpressionVisitor* visitor) override;
 

@@ -91,18 +91,33 @@ namespace elsa {
 			{
 				auto sae = static_cast<StructAccessExpression*>(expression);
 
-				std::unique_ptr<const ElsaType> current(parser_->current_struct_type());
+				const ElsaType* current = parser_->current_struct_type();
 				if(sae->get_base() != nullptr)
-					current.reset(sae->get_base()->get_type());
+					current = sae->get_base()->get_type();
 
 				std::unique_ptr<ElsaType> type;
 
 				for (const auto& field_expression : sae->get_expressions())
 				{
-					type.reset(get_access_type(current.get(), field_expression->get_name()));
+					if (field_expression->get_expression_type() == ExpressionType::ArrayAccess)
+					{
+						auto aae = static_cast<ArrayAccessExpression*>(field_expression.get());
+						type.reset(aae->get_identifier_expression()->get_type());
+					
+						if (aae->get_identifier_expression()->get_type()->get_type() == ObjectType::GCOPtr)
+							current = aae->get_identifier_expression()->get_type();
+					}
+					//else if (field_expression->get_expression_type() == ExpressionType::FuncCall)
+					//{
+					//	throw ElsaException("Not implemented, TypeChecker, StructAccessExpression -> ExpressionType::FuncCall");
+					//}
+					else
+					{
+						type.reset(get_access_type(current, field_expression->get_name()));
 
-					if (field_expression->get_type()->get_type() == ObjectType::GCOPtr)
-						current.reset(field_expression->get_type());
+						if (field_expression->get_type()->get_type() == ObjectType::GCOPtr)
+							current = field_expression->get_type();
+					}
 				}
 
 				if (type->get_type() == ObjectType::Function)
@@ -128,7 +143,8 @@ namespace elsa {
 			if (is_of_type<ReturnExpression>(expression))
 			{
 				auto re = static_cast<ReturnExpression*>(expression);
-				return new ElsaType(re->get_type());
+				// return new ElsaType(re->get_type());
+				return get_expression_type(re->get_expression());
 			}
 			if (is_of_type<ArrayDeclarationExpression>(expression))
 			{
@@ -309,6 +325,9 @@ namespace elsa {
 
 			if (declared_return_type->get_type() != ObjectType::Void && return_expressions.size() == 0)
 				throw ParsingException(L"The function must return a value", parser_->current_token());
+
+			if (declared_return_type->get_type() != ObjectType::Void && return_expressions.size() > 1)
+				throw ParsingException(L"A function can only have one return expression", parser_->current_token());
 
 			for (const auto return_exp : return_expressions)
 			{

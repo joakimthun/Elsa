@@ -292,6 +292,13 @@ func Player ReturnPlayerTest()
 	return player;
 }
 
+func char ReturnByArrIndexTest()
+{
+	var x = new ['A','B','C','!'];
+
+	return x[3];
+}
+
 func int main(int dummy)
 {
 	AssertEq(2, 2);
@@ -367,6 +374,8 @@ func int main(int dummy)
 	// Struct tests
 	NewStructTest();
 	StructFieldsTest();
+
+	PrintLn(ReturnByArrIndexTest());
 
 	return 0;
 }
