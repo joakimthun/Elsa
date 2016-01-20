@@ -90,5 +90,10 @@ namespace elsa {
 		{
 			return parent_;
 		}
+
+		const FunctionInfo* StackFrame::get_function_info() const
+		{
+			return function_;
+		}
 	}
 }

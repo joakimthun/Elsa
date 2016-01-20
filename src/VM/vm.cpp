@@ -28,20 +28,28 @@ namespace elsa {
 
 		void VM::execute()
 		{
-			if (call_stack_.size() == 0)
+			try
 			{
-				push_main();
+				if (call_stack_.size() == 0)
+				{
+					push_main();
+				}
+
+				bool cont = false;
+
+				if (oc_ == OpCode::halt)
+					cont = true;
+
+				while ((cont || oc_ != halt) && pc_ < code_length_)
+				{
+					cycle();
+					cont = false;
+				}
 			}
-
-			bool cont = false;
-
-			if (oc_ == OpCode::halt)
-				cont = true;
-
-			while ((cont || oc_ != halt) && pc_ < code_length_)
+			catch (RuntimeException& e)
 			{
-				cycle();
-				cont = false;
+				std::cout << e.what() << std::endl;
+				dump_stack_trace();
 			}
 		}
 
@@ -71,6 +79,12 @@ namespace elsa {
 		GCResult VM::gc_collect()
 		{
 			return gc_.collect(call_stack_.current());
+		}
+
+		void VM::dump_stack_trace()
+		{
+			std::wcout << L"Stack trace:" << std::endl;
+			call_stack_.dump_stack_trace();
 		}
 
 		int VM::get_instruction(std::size_t pc)

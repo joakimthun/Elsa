@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <vector>
+#include <iostream>
 
 #include "stack_frame.h"
 #include "exceptions\runtime_exception.h"
@@ -18,6 +19,8 @@ namespace elsa {
 			StackFrame* pop();
 			std::size_t size();
 			StackFrame* current();
+			void dump_stack_trace();
+
 		private:
 			std::vector<StackFrame*> stack_;
 		};

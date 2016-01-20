@@ -31,6 +31,7 @@ namespace elsa {
 			Object eval_stack_top() const;
 			std::size_t get_pc() const;
 			GCResult gc_collect();
+			void dump_stack_trace();
 
 		private:
 			int get_instruction(std::size_t pc);

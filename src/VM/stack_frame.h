@@ -28,6 +28,7 @@ namespace elsa {
 			void store_arg(std::size_t i, Object arg);
 			std::size_t get_ret_addr() const;
 			StackFrame* get_parent() const;
+			const FunctionInfo* get_function_info() const;
 
 		private:
 			std::vector<Object> eval_stack_;

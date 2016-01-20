@@ -4,6 +4,7 @@
 #include "compiler.h"
 #include "vm.h"
 #include "exceptions\elsa_exception.h"
+#include "exceptions\runtime_exception.h"
 
 using namespace elsa;
 

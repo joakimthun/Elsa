@@ -41,5 +41,14 @@ namespace elsa {
 		{
 			return stack_.back();
 		}
+
+		void CallStack::dump_stack_trace()
+		{
+			for (int i = stack_.size() - 1; i >= 0; --i)
+			{
+				const auto fi = stack_[i]->get_function_info();
+				std::wcout << fi->get_name() << L" at: " << fi->get_addr() << std::endl;
+			}
+		}
 	}
 }
