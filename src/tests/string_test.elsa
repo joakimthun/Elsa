@@ -3,8 +3,19 @@ import "std/assert";
 
 func void NewStringTest()
 {
+	var x = new [1,2,3];
+	x = new [4,5,6];
+
+	PrintLn(x.Length());
+	PrintLn(x[2]);
+
 	var str = new String;
 	str.str = new ['A', 'B', 'C'];
+
+	PrintLn(str.str.Length());
+	PrintLn(str.str[0]);
+	PrintLn(str.str[1]);
+	PrintLn(str.str[2]);
 
 	PrintLn(str.CharAt(1));
 }

@@ -20,6 +20,10 @@ namespace elsa {
 		{
 		public:
 			static void build(VMProgram* program, VMExpressionVisitor* visitor, AssignmentExpression* expression);
+
+		private:
+			static void build_initializer_list(Expression* exp, std::size_t index, VMProgram* program, VMExpressionVisitor* visitor, OpCode load_inst);
+			static bool is_initializer_list(Expression* exp);
 		};
 
 	}
