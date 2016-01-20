@@ -102,7 +102,7 @@ namespace elsa {
 					if (field_expression->get_expression_type() == ExpressionType::ArrayAccess)
 					{
 						auto aae = static_cast<ArrayAccessExpression*>(field_expression.get());
-						type.reset(aae->get_identifier_expression()->get_type());
+						type.reset(new ElsaType(aae->get_identifier_expression()->get_type()));
 					
 						if (aae->get_identifier_expression()->get_type()->get_type() == ObjectType::GCOPtr)
 							current = aae->get_identifier_expression()->get_type();

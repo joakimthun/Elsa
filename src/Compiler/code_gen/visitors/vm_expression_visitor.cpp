@@ -150,5 +150,15 @@ namespace elsa {
 			return native_function_table_;
 		}
 
+		void VMExpressionVisitor::set_current_type(const ElsaType* type)
+		{
+			current_type_ = type;
+		}
+
+		const ElsaType* VMExpressionVisitor::current_type()
+		{
+			return current_type_;
+		}
+
 	}
 }

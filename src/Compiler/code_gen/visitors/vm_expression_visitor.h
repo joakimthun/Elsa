@@ -65,6 +65,9 @@ namespace elsa {
 			void set_current_scope(ScopedExpression* scope);
 			void reset_current_scope();
 
+			void set_current_type(const ElsaType* type);
+			const ElsaType* current_type();
+
 			std::unique_ptr<VMProgram> release_program();
 			NativeFunctionTable& native_function_table();
 
@@ -72,6 +75,7 @@ namespace elsa {
 			std::unique_ptr<VMProgram> vm_program_;
 			NativeFunctionTable native_function_table_;
 			ScopedExpression* current_scope_;
+			const ElsaType* current_type_;
 		};
 
 	}

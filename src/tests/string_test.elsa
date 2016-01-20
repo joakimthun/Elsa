@@ -4,4 +4,7 @@ import "std/assert";
 func void NewStringTest()
 {
 	var str = new String;
+	str.str = new ['A', 'B', 'C'];
+
+	PrintLn(str.CharAt(1));
 }

@@ -40,6 +40,8 @@ namespace elsa {
 			parser->consume(TokenType::RBracket);
 			parser->consume(TokenType::Semicolon);
 
+			struct_exp->set_type(parser->type_checker().get_expression_type(struct_exp.get()));
+
 			return std::move(struct_exp);
 		}
 

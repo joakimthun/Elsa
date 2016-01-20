@@ -3,10 +3,10 @@ struct String
 	char[] str;
 	int test;
 
-	func char charAt(int i)
+	func char CharAt(int i)
 	{
 		//return str[0];
 		var x = new ['A', 'B'];
-		return x[0];
+		return x[i];
 	}
 };

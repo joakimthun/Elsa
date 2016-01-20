@@ -32,6 +32,9 @@ namespace elsa {
 			const ElsaType* get_generic_type() const;
 			bool is_generic_type() const;
 
+			const ElsaType* get_type() const;
+			void set_type(ElsaType* type);
+
 			const std::wstring& get_name(bool inherited = false) const;
 			const std::vector<std::unique_ptr<FieldExpression>>& get_fields() const;
 			const std::vector<std::unique_ptr<FuncDeclarationExpression>>& get_functions() const;
@@ -41,6 +44,7 @@ namespace elsa {
 		private:
 			const StructDeclarationExpression* parent_;
 			std::unique_ptr<ElsaType> generic_type_;
+			std::unique_ptr<ElsaType> type_;
 			bool is_generic_;
 			std::wstring name_;
 			std::vector<std::unique_ptr<FieldExpression>> fields_;

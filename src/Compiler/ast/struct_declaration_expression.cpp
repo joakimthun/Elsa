@@ -90,6 +90,16 @@ namespace elsa {
 			return is_generic_;
 		}
 
+		const ElsaType * StructDeclarationExpression::get_type() const
+		{
+			return type_.get();
+		}
+
+		void StructDeclarationExpression::set_type(ElsaType* type)
+		{
+			type_ = std::unique_ptr<ElsaType>(type);
+		}
+
 		const std::wstring& StructDeclarationExpression::get_name(bool inherited) const
 		{
 			if (inherited && parent_ != nullptr)

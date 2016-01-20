@@ -17,6 +17,10 @@ namespace elsa {
 		{
 		public:
 			static void build(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression);
+			static FunctionInfo* build_member(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression);
+
+		private:
+			static FunctionInfo* build_internal(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression);
 		};
 
 	}
