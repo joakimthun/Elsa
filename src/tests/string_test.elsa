@@ -3,20 +3,20 @@ import "std/assert";
 
 func void NewStringTest()
 {
-	var x = new [1,2,3];
-	x = new [4,5,6];
+	var str = "Hello World!";
 
-	PrintLn(x.Length());
-	PrintLn(x[2]);
+	AssertEq(12, str.Length());
 
-	var str = new String;
-	str.str = new ['A', 'B', 'C'];
-
-	PrintLn(str.str.Length());
-	PrintLn(str.str[0]);
-	PrintLn(str.str[1]);
-	PrintLn(str.str[2]);
-
-	PrintLn(str.Test());
-	PrintLn(str.CharAt(2));
+	AssertEq('H', str.CharAt(0));
+	AssertEq('e', str.CharAt(1));
+	AssertEq('l', str.CharAt(2));
+	AssertEq('l', str.CharAt(3));
+	AssertEq('o', str.CharAt(4));
+	AssertEq(' ', str.CharAt(5));
+	AssertEq('W', str.CharAt(6));
+	AssertEq('o', str.CharAt(7));
+	AssertEq('r', str.CharAt(8));
+	AssertEq('l', str.CharAt(9));
+	AssertEq('d', str.CharAt(10));
+	AssertEq('!', str.CharAt(11));
 }

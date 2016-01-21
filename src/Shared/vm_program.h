@@ -7,6 +7,7 @@
 #include <map>
 #include <stdexcept>
 #include <string>
+#include <algorithm>
 
 #include "opcodes\opcodes.h"
 #include "constants\char_info.h"

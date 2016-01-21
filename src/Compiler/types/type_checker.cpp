@@ -143,7 +143,6 @@ namespace elsa {
 			if (is_of_type<ReturnExpression>(expression))
 			{
 				auto re = static_cast<ReturnExpression*>(expression);
-				// return new ElsaType(re->get_type());
 				return get_expression_type(re->get_expression());
 			}
 			if (is_of_type<ArrayDeclarationExpression>(expression))
@@ -165,6 +164,12 @@ namespace elsa {
 			{
 				auto sde = static_cast<StructDeclarationExpression*>(expression);
 				return new ElsaType(sde);
+			}
+			if (is_of_type<StringLiteralExpression>(expression))
+			{
+				auto sle = static_cast<StringLiteralExpression*>(expression);
+				auto string_struct = parser_->struct_table().get(L"String");
+				return new ElsaType(string_struct->get_expression());
 			}
 
 			throw ParsingException(L"Unkown expression type.", parser_->current_token());

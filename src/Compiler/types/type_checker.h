@@ -25,6 +25,7 @@
 #include "../ast/array_access_expression.h"
 #include "../ast/array_initializer_list_expression.h"
 #include "../ast/struct_declaration_expression.h"
+#include "../ast/string_literal_expression.h"
 #include "elsa_type.h"
 #include "../token.h"
 #include "..\exceptions\parsing_exception.h"

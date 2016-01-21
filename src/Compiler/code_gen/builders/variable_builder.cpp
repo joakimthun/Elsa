@@ -25,6 +25,31 @@ namespace elsa {
 					program->emit(OpCode::a_ele);
 				}
 			}
+			else if (auto sle = dynamic_cast<StringLiteralExpression*>(expression->get_expression()))
+			{
+				program->emit(l_local);
+				program->emit(static_cast<int>(local_index));
+
+				program->emit(OpCode::iconst);
+				program->emit(sle->get_value().size());
+				program->emit(OpCode::new_arr);
+				program->emit(static_cast<int>(VMType::Char));
+
+				program->emit(OpCode::s_field);
+				program->emit(0);
+
+				for (auto c : sle->get_value())
+				{
+					program->emit(l_local);
+					program->emit(static_cast<int>(local_index));
+					program->emit(OpCode::l_field);
+					program->emit(0);
+					program->emit(OpCode::cconst);
+					auto char_index = program->add_char(std::make_unique<CharInfo>(c));
+					program->emit(static_cast<int>(char_index));
+					program->emit(OpCode::a_ele);
+				}
+			}
 		}
 
 	}

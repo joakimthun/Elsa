@@ -12,4 +12,9 @@ struct String
 	{
 		return str[i];
 	}
+
+	func int Length()
+	{
+		return str.Length();
+	}
 };

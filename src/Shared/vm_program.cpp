@@ -134,6 +134,12 @@ namespace elsa {
 	
 	std::size_t VMProgram::add_char(std::unique_ptr<CharInfo> entry)
 	{
+		for (std::size_t i = 0; i < chars_.size(); i++)
+		{
+			if (chars_[i]->get_value() == entry->get_value())
+				return i;
+		}
+
 		chars_.push_back(std::move(entry));
 		return chars_.size() - 1;
 	}

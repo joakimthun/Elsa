@@ -23,6 +23,7 @@ namespace elsa {
 		class ArrayDeclarationExpression;
 		class ArrayAccessExpression;
 		class ArrayInitializerListExpression;
+		class StringLiteralExpression;
 
 		class ExpressionVisitor
 		{
@@ -48,6 +49,7 @@ namespace elsa {
 			virtual void visit(ArrayDeclarationExpression* expression) = 0;
 			virtual void visit(ArrayAccessExpression* expression) = 0;
 			virtual void visit(ArrayInitializerListExpression* expression) = 0;
+			virtual void visit(StringLiteralExpression* expression) = 0;
 		};
 
 	}

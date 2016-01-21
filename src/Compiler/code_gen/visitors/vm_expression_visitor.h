@@ -60,6 +60,7 @@ namespace elsa {
 			void visit(ArrayDeclarationExpression* expression) override;
 			void visit(ArrayAccessExpression* expression) override;
 			void visit(ArrayInitializerListExpression* expression) override;
+			void visit(StringLiteralExpression* expression) override;
 
 			ScopedExpression* current_scope();
 			void set_current_scope(ScopedExpression* scope);

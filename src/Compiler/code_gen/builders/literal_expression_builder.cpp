@@ -32,6 +32,17 @@ namespace elsa {
 			program->emit(static_cast<int>(value));
 		}
 
+		void LiteralExpressionBuilder::build(VMProgram* program, StringLiteralExpression* expression)
+		{
+			auto si = program->get_struct(L"String");
+
+			if (si == nullptr)
+				throw CodeGenException("No string struct has been defined");
+
+			program->emit(OpCode::new_struct);
+			program->emit(static_cast<int>(si->get_index()));
+		}
+
 	}
 }
 
