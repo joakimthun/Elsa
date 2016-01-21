@@ -5,16 +5,16 @@ namespace elsa {
 
 		std::unique_ptr<Expression> FuncDeclarationParser::parse(ElsaParser* parser)
 		{
-			return parse_internal(parser);
+			return parse_internal(parser, nullptr);
 		}
 
-		std::unique_ptr<Expression> FuncDeclarationParser::parse_static(ElsaParser* parser)
+		std::unique_ptr<Expression> FuncDeclarationParser::parse_member(ElsaParser* parser, StructDeclarationExpression* parent)
 		{
-			return parse_internal(parser);
+			return parse_internal(parser, parent);
 		}
 
 
-		std::unique_ptr<Expression> FuncDeclarationParser::parse_internal(ElsaParser* parser)
+		std::unique_ptr<Expression> FuncDeclarationParser::parse_internal(ElsaParser* parser, StructDeclarationExpression* parent)
 		{
 			bool native_function = false;
 			if (parser->current_token()->get_type() == TokenType::Native)
@@ -43,6 +43,16 @@ namespace elsa {
 			parser->consume(TokenType::LParen);
 
 			parser->set_current_scope(func_dec_exp.get());
+
+			if (parent != nullptr)
+			{
+				// If we are parsing a member function we pass a reference to the struct instance as the first argument
+				auto arg = std::make_unique<ArgumentExpression>(ArgumentType::InstRef);
+				arg->set_type(parser->type_checker().get_expression_type(parent));
+				arg->set_name(L"this");
+				parser->current_scope()->add_arg(arg->get_name(), arg->get_type());
+				func_dec_exp->add_args_expression(std::move(arg));
+			}
 
 			while (parser->current_token()->get_type() != TokenType::RParen)
 			{

@@ -31,13 +31,21 @@ namespace elsa {
 
 			auto index = 0;
 			auto& fde_args = fde->get_args();
+
+			// No type checking on instance references for member functions
+			if (fde_args.size() > 0 && fde_args[0]->get_argument_type() == ArgumentType::InstRef)
+			{
+				index = 1;
+			}
+
 			while (parser->current_token()->get_type() != TokenType::RParen)
 			{
-				if(index >= fde->get_num_args())
+				if (index >= fde->get_num_args())
 					throw ParsingException(L"To many arguments was passed to the function", parser->current_token());
 
-				auto passed_arg = parser->parse_expression();
 				auto& declared_arg = fde_args[index];
+
+				auto passed_arg = parser->parse_expression();
 
 				if (!parser->type_checker().is_same_type(passed_arg.get(), declared_arg.get()) && declared_arg->get_type()->get_type() != ObjectType::Object)
 					throw ParsingException(L"The passed argument must be of the same type as the declared argument", parser->current_token());

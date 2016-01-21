@@ -294,6 +294,7 @@ namespace elsa {
 			register_expression_parser(TokenType::If, new ConditionalParser());
 			register_expression_parser(TokenType::Loop, new LoopParser());
 			register_expression_parser(TokenType::Return, new ReturnParser());
+			register_expression_parser(TokenType::This, new StructAccessParser());
 
 			// Prefix
 			register_prefix_parser(TokenType::Exclamation);

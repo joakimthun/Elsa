@@ -15,11 +15,29 @@ namespace elsa {
 		{
 			auto sa_exp = std::make_unique<StructAccessExpression>();
 
+			if (parser->current_token()->get_type() == TokenType::This)
+			{
+				auto id_exp = std::make_unique<IdentifierExpression>(parser->current_token()->get_value());
+				parser->consume(TokenType::This);
+				parser->consume(TokenType::Dot);
+
+				id_exp->set_type(parser->type_checker().get_expression_type(id_exp.get()));
+
+				parser->set_current_type(id_exp->get_type());
+
+				sa_exp->set_base(std::move(id_exp));
+			}
+
 			while (parser->current_token()->get_type() == TokenType::Identifier)
 			{
 				auto identifier = parser->current_token()->get_value();
 
-				if (sa_exp->get_base() == nullptr && parser->current_type() == nullptr && parser->current_struct() == nullptr)
+				if (is_member_access(parser))
+				{
+					//parser->current_struct()->
+				}
+
+				if (sa_exp->get_base() == nullptr && parser->current_type() == nullptr)
 				{
 					// Local
 					auto id_exp = std::make_unique<IdentifierExpression>(identifier);
@@ -86,6 +104,14 @@ namespace elsa {
 				return parser->current_struct_type();
 
 			return sa_exp->get_base()->get_type();
+		}
+
+		const bool StructAccessParser::is_member_access(ElsaParser* parser)
+		{
+			if (parser->current_struct() == nullptr)
+				return false;
+
+			return parser->type_checker().get_access_type(parser->current_struct_type(), parser->current_token()->get_value(), false) != nullptr;
 		}
 
 	}

@@ -17,5 +17,5 @@ func void NewStringTest()
 	PrintLn(str.str[1]);
 	PrintLn(str.str[2]);
 
-	PrintLn(str.CharAt(1));
+	PrintLn(str.CharAt(0));
 }

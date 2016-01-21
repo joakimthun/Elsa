@@ -18,7 +18,7 @@ namespace elsa {
 
 		private:
 			std::unique_ptr<FieldExpression> parse_field_expression(ElsaParser* parser);
-			std::unique_ptr<FuncDeclarationExpression> parse_func_expression(ElsaParser* parser);
+			std::unique_ptr<FuncDeclarationExpression> parse_func_expression(ElsaParser* parser, StructDeclarationExpression* parent);
 		};
 
 	}

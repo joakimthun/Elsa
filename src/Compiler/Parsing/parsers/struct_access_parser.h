@@ -17,6 +17,7 @@ namespace elsa {
 
 		private:
 			static const ElsaType* get_parent_type(StructAccessExpression* sa_exp, ElsaParser* parser);
+			static const bool is_member_access(ElsaParser* parser);
 		};
 
 	}

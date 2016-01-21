@@ -28,7 +28,7 @@ namespace elsa {
 				if (parser->current_token()->get_type() == TokenType::Func)
 				{
 					parser->set_current_struct(struct_exp.get());
-					struct_exp->add_member_function(parse_func_expression(parser));
+					struct_exp->add_member_function(parse_func_expression(parser, struct_exp.get()));
 					parser->set_current_struct(nullptr);
 				}
 				else
@@ -79,10 +79,9 @@ namespace elsa {
 			return std::move(field_expression);
 		}
 
-		std::unique_ptr<FuncDeclarationExpression> StructDeclarationParser::parse_func_expression(ElsaParser* parser)
+		std::unique_ptr<FuncDeclarationExpression> StructDeclarationParser::parse_func_expression(ElsaParser* parser, StructDeclarationExpression* parent)
 		{
-			auto fde = FuncDeclarationParser::parse_static(parser);
-			return std::unique_ptr<FuncDeclarationExpression>(static_cast<FuncDeclarationExpression*>(fde.release()));
+			return std::unique_ptr<FuncDeclarationExpression>(static_cast<FuncDeclarationExpression*>(FuncDeclarationParser::parse_member(parser, parent).release()));
 		}
 
 	}
