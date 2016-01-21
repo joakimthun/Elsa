@@ -21,6 +21,15 @@ namespace elsa {
 			if (parser->current_scope()->has_local(name))
 				throw ParsingException(L"A local variable with the same name has already been declared", parser->current_token());
 
+			if (parser->current_struct() != nullptr)
+			{
+				for (const auto& field : parser->current_struct()->get_fields())
+				{
+					if(field->get_name() == name)
+						throw ParsingException(L"A field with the same name has already been declared", parser->current_token());
+				}
+			}
+
 			parser->consume(TokenType::Identifier);
 			parser->consume(TokenType::Equals);
 
