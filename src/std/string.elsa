@@ -3,13 +3,13 @@ struct String
 	char[] str;
 	int test;
 
-	func char CharAt(int i)
-	{
-		return str[i];
-	}
-
 	func int Test()
 	{
 		return test;
+	}
+
+	func char CharAt(int i)
+	{
+		return str[i];
 	}
 };
