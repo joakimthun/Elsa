@@ -16,6 +16,7 @@ namespace elsa {
 			initialize_grammar();
 			next_token();
 			Builtin::init(&struct_table_);
+			initialize_default_imports();
 		}
 
 		std::unique_ptr<Program> ElsaParser::parse()
@@ -320,6 +321,11 @@ namespace elsa {
 			// Postfix
 			register_postfix_parser(TokenType::PlusPlus, new PostfixOperatorParser(Precedence::Unary));
 			register_postfix_parser(TokenType::MinusMinus, new PostfixOperatorParser(Precedence::Unary));
+		}
+
+		void ElsaParser::initialize_default_imports()
+		{
+			import_source_file(L"std/string");
 		}
 
 		void ElsaParser::parse_import_statement()

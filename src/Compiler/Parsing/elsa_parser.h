@@ -82,6 +82,7 @@ namespace elsa {
 			void register_prefix_parser(TokenType type);
 			void register_postfix_parser(TokenType type, InfixParser* parser);
 			void initialize_grammar();
+			void initialize_default_imports();
 			void parse_import_statement();
 			void import_source_file(const std::wstring& filename);
 			void parse(Program* program);
