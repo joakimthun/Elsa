@@ -1,11 +1,16 @@
 import "std/assert";
 
+struct StringTestStruct
+{
+	String Str;
+	String[] Strings;
+};
+
 func void NewStringTest()
 {
 	var str = "Hello World!";
 
 	AssertEq(12, str.Length());
-
 	AssertEq('H', str.CharAt(0));
 	AssertEq('e', str.CharAt(1));
 	AssertEq('l', str.CharAt(2));
@@ -18,4 +23,55 @@ func void NewStringTest()
 	AssertEq('l', str.CharAt(9));
 	AssertEq('d', str.CharAt(10));
 	AssertEq('!', str.CharAt(11));
+
+	str = "New string";
+	AssertEq(10, str.Length());
+	AssertEq('N', str.CharAt(0));
+	AssertEq('e', str.CharAt(1));
+	AssertEq('w', str.CharAt(2));
+	AssertEq(' ', str.CharAt(3));
+	AssertEq('s', str.CharAt(4));
+	AssertEq('t', str.CharAt(5));
+	AssertEq('r', str.CharAt(6));
+	AssertEq('i', str.CharAt(7));
+	AssertEq('n', str.CharAt(8));
+	AssertEq('g', str.CharAt(9));
+
+	var strStruct = new StringTestStruct;
+	strStruct.Str = "String field!";
+
+	AssertEq(13, strStruct.Str.Length());
+	AssertEq('S', strStruct.Str.CharAt(0));
+	AssertEq('t', strStruct.Str.CharAt(1));
+	AssertEq('r', strStruct.Str.CharAt(2));
+	AssertEq('i', strStruct.Str.CharAt(3));
+	AssertEq('n', strStruct.Str.CharAt(4));
+	AssertEq('g', strStruct.Str.CharAt(5));
+	AssertEq(' ', strStruct.Str.CharAt(6));
+	AssertEq('f', strStruct.Str.CharAt(7));
+	AssertEq('i', strStruct.Str.CharAt(8));
+	AssertEq('e', strStruct.Str.CharAt(9));
+	AssertEq('l', strStruct.Str.CharAt(10));
+	AssertEq('d', strStruct.Str.CharAt(11));
+	AssertEq('!', strStruct.Str.CharAt(12));
+}
+
+func void StringArrayTest()
+{
+	var strings = new ["String0", "String1", "String2", "String3"];
+	strings.Push("String4");
+
+	AssertEq(5, strings.Length());
+	//AssertEq(5, strings[0].Length());
+
+	//loop(var i = 0; i < strings.Length(); i++)
+	//{
+	//	AssertEq('S', strings[i].CharAt(0));
+	//	AssertEq('t', strings[i].CharAt(1));
+	//	AssertEq('r', strings[i].CharAt(2));
+	//	AssertEq('i', strings[i].CharAt(3));
+	//	AssertEq('n', strings[i].CharAt(4));
+	//	AssertEq('g', strings[i].CharAt(5));
+	//	//AssertEq(' ', strings[i].CharAt(6));
+	//}
 }

@@ -376,6 +376,7 @@ func int main(int dummy)
 
 	// String tests
 	NewStringTest();
+	StringArrayTest();
 
 	return 0;
 }
