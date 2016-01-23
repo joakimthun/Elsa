@@ -3,9 +3,10 @@
 namespace elsa {
 	namespace compiler {
 
-		VMExpressionVisitor::VMExpressionVisitor()
+		VMExpressionVisitor::VMExpressionVisitor(TypeChecker* type_checker)
 			:
-			vm_program_(std::make_unique<VMProgram>())
+			vm_program_(std::make_unique<VMProgram>()),
+			type_checker_(type_checker)
 		{
 			Builtin::init(vm_program_.get());
 		}
@@ -158,6 +159,11 @@ namespace elsa {
 		NativeFunctionTable& VMExpressionVisitor::native_function_table()
 		{
 			return native_function_table_;
+		}
+
+		TypeChecker* VMExpressionVisitor::type_checker()
+		{
+			return type_checker_;
 		}
 
 		void VMExpressionVisitor::set_current_type(const ElsaType* type)

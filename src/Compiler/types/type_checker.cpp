@@ -31,6 +31,10 @@ namespace elsa {
 			if (is_of_type<IdentifierExpression>(expression))
 			{
 				auto id = static_cast<IdentifierExpression*>(expression);
+
+				if (id->get_type() != nullptr)
+					return new ElsaType(id->get_type());
+
 				auto local = parser_->current_scope()->get_local(id->get_name());
 
 				if (local == nullptr)

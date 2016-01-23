@@ -18,7 +18,7 @@ namespace elsa {
 		{
 			auto parser = ElsaParser(new Lexer(new SourceFile(filename)));
 			auto program = parser.parse();
-			auto cg = CodeGen(program.get());
+			auto cg = CodeGen(program.get(), &parser.type_checker());
 			return cg.generate();
 		}
 

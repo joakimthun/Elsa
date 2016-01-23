@@ -3,12 +3,6 @@ import "std/io";
 struct String
 {
 	char[] str;
-	int test;
-
-	func int Test()
-	{
-		return test;
-	}
 
 	func char CharAt(int i)
 	{
@@ -26,6 +20,26 @@ struct String
 		{
 			return false;
 		}
+
+		var x = 1.0 + 2.2;
+
+		if(1.0 != 2.2)
+		{
+			return false;
+		}
+
+		if('C' != 'C')
+		{
+			return false;
+		}
+
+		//loop(var i = 0; i < Length(); i++)
+		//{
+		//	if(str[i] != other.str[i])
+		//	{
+		//		return false;
+		//	}
+		//}
 
 		return true;
 	}

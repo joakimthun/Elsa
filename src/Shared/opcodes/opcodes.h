@@ -35,6 +35,8 @@ namespace elsa {
 			fdiv,
 			feq,
 			fneq,
+			flt,
+			fgt,
 
 			// Char operations
 			cconst,

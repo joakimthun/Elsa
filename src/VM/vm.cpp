@@ -195,6 +195,18 @@ namespace elsa {
 				current_frame_->push(Object(o1.f() != o2.f()));
 				break;
 			}
+			case flt: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.f() > o2.f()));
+				break;
+			}
+			case fgt: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.f() < o2.f()));
+				break;
+			}
 			case cconst: {
 				auto index = get_instruction(pc_++);
 				auto c = program_.get_char_at(index);

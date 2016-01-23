@@ -10,6 +10,7 @@
 #include "exceptions\codegen_exception.h"
 #include "expression_visitor.h"
 #include "vm_program.h"
+#include "../../types/type_checker.h"
 #include "../../types/builtin/builtin.h"
 #include "../../interop/native_function_table.h"
 #include "../builders/function_declaration_expression_builder.h"
@@ -40,7 +41,7 @@ namespace elsa {
 		class VMExpressionVisitor : public ExpressionVisitor
 		{
 		public:
-			VMExpressionVisitor();
+			VMExpressionVisitor(TypeChecker* type_checker);
 			void visit(FuncDeclarationExpression* expression) override;
 			void visit(VariableDeclarationExpression* expression) override;
 			void visit(BinaryOperatorExpression* expression) override;
@@ -73,12 +74,14 @@ namespace elsa {
 
 			std::unique_ptr<VMProgram> release_program();
 			NativeFunctionTable& native_function_table();
+			TypeChecker* type_checker();
 
 		private:
 			std::unique_ptr<VMProgram> vm_program_;
 			NativeFunctionTable native_function_table_;
 			ScopedExpression* current_scope_;
 			const ElsaType* current_type_;
+			TypeChecker* type_checker_;
 		};
 
 	}
