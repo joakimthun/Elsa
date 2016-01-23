@@ -1,0 +1,23 @@
+import "std/assert";
+
+struct TypeCastTestStruct
+{
+	int IntField;
+	float FloatField;
+	char CharField;
+};
+
+func void TypeCastTest()
+{
+	var floatToInt = int(10.0);
+	AssertEq(10, floatToInt);
+
+	var intToFloat = float(10);
+	AssertEq(10.0, intToFloat);
+
+	var intToChar = char(33);
+	AssertEq('!', intToChar);
+
+	var charToInt = int('!');
+	AssertEq(33, charToInt);
+}

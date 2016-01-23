@@ -71,6 +71,5 @@ func void StringArrayTest()
 		AssertEq('i', strings[i].CharAt(3));
 		AssertEq('n', strings[i].CharAt(4));
 		AssertEq('g', strings[i].CharAt(5));
-		//AssertEq(' ', strings[i].CharAt(6));
 	}
 }

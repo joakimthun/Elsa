@@ -2,6 +2,7 @@ import "std/io";
 import "std/assert";
 
 import "tests/string_test";
+import "tests/type_cast_test";
 import "tests/array_test";
 import "tests/struct_test";
 import "tests/program2";
@@ -373,6 +374,9 @@ func int main(int dummy)
 	StructFieldsTest();
 
 	PrintLn(ReturnByArrIndexTest());
+
+	// Type cast tests
+	TypeCastTest();
 
 	// String tests
 	NewStringTest();

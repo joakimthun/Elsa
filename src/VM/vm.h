@@ -38,6 +38,7 @@ namespace elsa {
 			void cycle();
 			void push_main();
 			void next_opcode();
+			Object type_cast(VMType dest_type, Object& instance);
 
 			OpCode oc_;
 			std::size_t code_length_;

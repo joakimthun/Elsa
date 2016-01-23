@@ -220,7 +220,7 @@ namespace elsa {
 
 				auto str_literal_index = get_instruction(pc_++);
 				auto str = program_.get_string(str_literal_index)->get_value();
-				auto char_array = heap_.alloc_array(elsa::VMType::Char, str.length());
+				auto char_array = heap_.alloc_array(VMType::Char, str.length());
 				
 				for (std::wstring::size_type i = 0; i < str.size(); ++i)
 				{
@@ -231,6 +231,11 @@ namespace elsa {
 
 				current_frame_->push(str_inst);
 
+				break;
+			}
+			case t_cast: {
+				auto dest_type = static_cast<VMType>(get_instruction(pc_++));
+				current_frame_->push(type_cast(dest_type, current_frame_->pop()));
 				break;
 			}
 			case br: {
@@ -374,7 +379,7 @@ namespace elsa {
 				break;
 			}
 			case new_arr: {
-				auto type = static_cast<elsa::VMType>(get_instruction(pc_++));
+				auto type = static_cast<VMType>(get_instruction(pc_++));
 				auto size = current_frame_->pop().i();
 				current_frame_->push(heap_.alloc_array(type, size));
 				break;
@@ -455,6 +460,58 @@ namespace elsa {
 		void VM::next_opcode()
 		{
 			oc_ = (OpCode)get_instruction(pc_++);
+		}
+
+		Object VM::type_cast(VMType dest_type, Object& instance)
+		{
+			if (instance.get_type() == VMType::GCOPtr)
+				throw RuntimeException("Type casts are not supported for objects of type: 'GCOPtr'");
+
+			std::string unsupported_destination_type_msg("Cast: unsupported destination type");
+			switch (instance.get_type())
+			{
+			case VMType::Int: {
+				switch (dest_type)
+				{
+				case VMType::Float: {
+					return Object(static_cast<float>(instance.i()));
+				}
+				case VMType::Char: {
+					return Object(static_cast<wchar_t>(instance.i()));
+				}
+				default:
+					throw RuntimeException(unsupported_destination_type_msg);
+				}
+			}
+			case VMType::Float: {
+				switch (dest_type)
+				{
+				case VMType::Int: {
+					return Object(static_cast<int>(instance.f()));
+				}
+				case VMType::Char: {
+					return Object(static_cast<wchar_t>(instance.f()));
+				}
+				default:
+					throw RuntimeException(unsupported_destination_type_msg);
+				}
+			}
+			case VMType::Char: {
+				switch (dest_type)
+				{
+				case VMType::Int: {
+					return Object(static_cast<int>(instance.c()));
+				}
+				case VMType::Float: {
+					return Object(static_cast<float>(instance.c()));
+				}
+				default:
+					throw RuntimeException(unsupported_destination_type_msg);
+				}
+			}
+			default:
+				throw RuntimeException("Cast: unsupported object type");
+			}
 		}
 	}
 }

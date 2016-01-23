@@ -10,6 +10,7 @@ namespace elsa {
 			nop = 0,
 			halt,
 			pop,
+			t_cast,
 
 			// Functions
 			call,

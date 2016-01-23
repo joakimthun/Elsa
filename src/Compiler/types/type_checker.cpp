@@ -171,6 +171,11 @@ namespace elsa {
 				auto string_struct = parser_->struct_table().get(L"String");
 				return new ElsaType(string_struct->get_expression());
 			}
+			if (is_of_type<TypeCastExpression>(expression))
+			{
+				auto tce = static_cast<TypeCastExpression*>(expression);
+				return new ElsaType(tce->get_dest_type());
+			}
 
 			throw ParsingException(L"Unkown expression type.", parser_->current_token());
 		}
