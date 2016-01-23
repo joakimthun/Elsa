@@ -43,7 +43,7 @@ namespace elsa {
 		class ElsaParser
 		{
 		public:
-			ElsaParser(Lexer* lexer);
+			ElsaParser(Lexer* lexer, bool load_default_imports = true);
 
 			std::unique_ptr<Program> parse();
 			std::unique_ptr<Expression> parse_statement();

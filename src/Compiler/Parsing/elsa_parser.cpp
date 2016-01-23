@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace compiler {
 
-		ElsaParser::ElsaParser(Lexer* lexer)
+		ElsaParser::ElsaParser(Lexer* lexer, bool load_default_imports)
 			:
 			parent_(nullptr),
 			lexer_(std::unique_ptr<Lexer>(lexer)),
@@ -16,7 +16,9 @@ namespace elsa {
 			initialize_grammar();
 			next_token();
 			Builtin::init(&struct_table_);
-			initialize_default_imports();
+
+			if(load_default_imports)
+				initialize_default_imports();
 		}
 
 		std::unique_ptr<Program> ElsaParser::parse()

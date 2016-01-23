@@ -33,7 +33,7 @@ BinaryOperatorExpression* assert_is_binary_operator_expression(Expression* exp, 
 TEST(ParserTest, VARIABLE_DECLARATION)
 {
 	auto lexer = new Lexer(new SourceFile(L"..\\Compiler.Test\\parser_test_files\\variable_declaration.elsa"));
-	auto parser = ElsaParser(lexer);
+	auto parser = ElsaParser(lexer, false);
 	auto exp = parser.parse_statement();
 
 	if (auto fde = dynamic_cast<FuncDeclarationExpression*>(exp.get()))
@@ -71,7 +71,7 @@ TEST(ParserTest, VARIABLE_DECLARATION)
 TEST(ParserTest, LITERALS)
 {
 	auto lexer = new Lexer(new SourceFile(L"..\\Compiler.Test\\parser_test_files\\literals.elsa"));
-	auto parser = ElsaParser(lexer);
+	auto parser = ElsaParser(lexer, false);
 
 	auto exp = parser.parse_statement();
 
@@ -146,7 +146,7 @@ TEST(ParserTest, LITERALS)
 TEST(ParserTest, FUNC_DECLARATION)
 {
 	auto lexer = new Lexer(new SourceFile(L"..\\Compiler.Test\\parser_test_files\\func_declaration.elsa"));
-	auto parser = ElsaParser(lexer);
+	auto parser = ElsaParser(lexer, false);
 	auto exp = parser.parse_statement();
 
 	if (auto fde = dynamic_cast<FuncDeclarationExpression*>(exp.get()))
@@ -199,7 +199,7 @@ TEST(ParserTest, FUNC_DECLARATION)
 TEST(ParserTest, PRECEDENCE)
 {
 	auto lexer = new Lexer(new SourceFile(L"..\\Compiler.Test\\parser_test_files\\precedence.elsa"));
-	auto parser = ElsaParser(lexer);
+	auto parser = ElsaParser(lexer, false);
 
 	auto exp = parser.parse_statement();
 
@@ -310,7 +310,7 @@ TEST(ParserTest, PRECEDENCE)
 TEST(ParserTest, STRUCT)
 {
 	auto lexer = new Lexer(new SourceFile(L"..\\Compiler.Test\\parser_test_files\\struct.elsa"));
-	auto parser = ElsaParser(lexer);
+	auto parser = ElsaParser(lexer, false);
 
 	auto exp1 = parser.parse_statement();
 	if (auto str_exp = dynamic_cast<StructDeclarationExpression*>(exp1.get()))
