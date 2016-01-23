@@ -28,6 +28,8 @@ namespace elsa {
 			static void are_eq(StackFrame* frame);
 			static bool are_eq_internal(StackFrame* frame);
 			static void assert_eq(StackFrame* frame);
+			static void ref_eq(StackFrame* frame);
+			static bool ref_eq_internal(const Object& first, const Object& second);
 
 			std::vector<std::function<void(StackFrame*)>> functions_;
 		};

@@ -14,6 +14,7 @@ namespace elsa {
 			add(L"PrintLn", new NativeFunctionInfo(L"Print", 1));
 			add(L"Equals", new NativeFunctionInfo(L"Equals", 2));
 			add(L"AssertEq", new NativeFunctionInfo(L"AssertEq", 3));
+			add(L"ReferenceEquals", new NativeFunctionInfo(L"ReferenceEquals", 3));
 		}
 
 	}

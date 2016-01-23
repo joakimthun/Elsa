@@ -73,3 +73,11 @@ func void StringArrayTest()
 		AssertEq('g', strings[i].CharAt(5));
 	}
 }
+
+func void StringEqualsTest()
+{
+	var first = "ABCDabcd";
+	var second = "ABCDabcd";
+
+	AssertEq(first, first);
+}

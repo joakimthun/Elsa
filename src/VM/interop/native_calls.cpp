@@ -19,6 +19,7 @@ namespace elsa {
 			functions_.push_back(print_ln);
 			functions_.push_back(are_eq);
 			functions_.push_back(assert_eq);
+			functions_.push_back(ref_eq);
 		}
 
 		void NativeCalls::print(StackFrame* frame)
@@ -61,25 +62,7 @@ namespace elsa {
 
 			if (o1.get_type() == VMType::GCOPtr)
 			{
-				if (o1.gco()->type != o2.gco()->type)
-					return false;
-
-				if (o1.gco()->type == GCObjectType::Array)
-				{
-					if (o1.gco()->ai->type != o2.gco()->ai->type)
-						return false;
-
-					if (o1.gco()->ptr != o2.gco()->ptr)
-						return false;
-				}
-				else
-				{
-					if (o1.gco()->si->get_name() != o2.gco()->si->get_name())
-						return false;
-
-					if (o1.gco()->ptr != o2.gco()->ptr)
-						return false;
-				}
+				return ref_eq_internal(o1, o2);
 			}
 			else
 			{
@@ -92,7 +75,7 @@ namespace elsa {
 				case VMType::Char:
 					return o1.c() == o2.c();
 				default:
-					throw RuntimeException("AssertEq failed, unknown type.");
+					throw RuntimeException("Equals failed, unknown type.");
 				}
 			}
 
@@ -105,5 +88,40 @@ namespace elsa {
 				throw RuntimeException("AssertEq failed.");
 		}
 
+		void NativeCalls::ref_eq(StackFrame* frame)
+		{
+			const auto first = frame->pop();
+			const auto second = frame->pop();
+
+			if(first.get_type() != VMType::GCOPtr || second.get_type() != VMType::GCOPtr)
+				throw RuntimeException("Reference equals is only supported for reference types.");
+
+			frame->push(Object(ref_eq_internal(first, second)));
+		}
+
+		bool NativeCalls::ref_eq_internal(const Object& first, const Object& second)
+		{
+			if (first.gco()->type != second.gco()->type)
+				return false;
+
+			if (first.gco()->type == GCObjectType::Array)
+			{
+				if (first.gco()->ai->type != second.gco()->ai->type)
+					return false;
+
+				if (first.gco()->ptr != second.gco()->ptr)
+					return false;
+			}
+			else
+			{
+				if (first.gco()->si->get_name() != second.gco()->si->get_name())
+					return false;
+
+				if (first.gco()->ptr != second.gco()->ptr)
+					return false;
+			}
+
+			return true;
+		}
 	}
 }

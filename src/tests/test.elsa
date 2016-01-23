@@ -381,6 +381,7 @@ func int main(int dummy)
 	// String tests
 	NewStringTest();
 	StringArrayTest();
+	StringEqualsTest();
 
 	return 0;
 }
