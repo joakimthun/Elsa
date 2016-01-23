@@ -356,7 +356,7 @@ namespace elsa {
 			}
 			case ncall: {
 				auto index = static_cast<std::size_t>(get_instruction(pc_++));
-				native_calls_.invoke(index, current_frame_);
+				native_calls_.invoke(index, current_frame_, &heap_);
 				break;
 			}
 			case new_struct: {

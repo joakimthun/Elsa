@@ -27,20 +27,18 @@ namespace elsa {
 
 				sa_exp->set_base(std::move(id_exp));
 			}
+			else if (is_member_access(parser))
+			{
+				auto id_exp = std::make_unique<IdentifierExpression>(L"this");
 
+				id_exp->set_type(parser->type_checker().get_expression_type(id_exp.get()));
+
+				parser->set_current_type(id_exp->get_type());
+
+				sa_exp->set_base(std::move(id_exp));
+			}
 			while (parser->current_token()->get_type() == TokenType::Identifier)
 			{
-				if (is_member_access(parser))
-				{
-					auto id_exp = std::make_unique<IdentifierExpression>(L"this");
-
-					id_exp->set_type(parser->type_checker().get_expression_type(id_exp.get()));
-
-					parser->set_current_type(id_exp->get_type());
-
-					sa_exp->set_base(std::move(id_exp));
-				}
-
 				auto identifier = parser->current_token()->get_value();
 				if (sa_exp->get_base() == nullptr && parser->current_type() == nullptr)
 				{

@@ -1,4 +1,5 @@
 import "std/assert";
+import "std/io";
 
 struct StringTestStruct
 {
@@ -76,9 +77,10 @@ func void StringArrayTest()
 
 func void StringEqualsTest()
 {
-	var first = "ABCDabcd";
+	var first =  "ABCDabcd";
 	var second = "ABCDabcd";
 	
-	var test = ReferenceEquals(first, first);
-	AssertEq(true, test);
+	var test = first.Equals("asdasdadqwqwd");
+	PrintLn(test)
+	//AssertEq(true, test);
 }

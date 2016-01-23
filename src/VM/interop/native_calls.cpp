@@ -8,9 +8,9 @@ namespace elsa {
 			initialize();
 		}
 		
-		void NativeCalls::invoke(std::size_t index, StackFrame* frame)
+		void NativeCalls::invoke(std::size_t index, StackFrame* frame, Heap* heap)
 		{
-			functions_[index](frame);
+			functions_[index](frame, heap);
 		}
 		
 		void NativeCalls::initialize()
@@ -22,20 +22,32 @@ namespace elsa {
 			functions_.push_back(ref_eq);
 		}
 
-		void NativeCalls::print(StackFrame* frame)
+		void NativeCalls::print(StackFrame* frame, Heap* heap)
 		{
-			print_internal(frame);
+			print_internal(frame, heap);
 		}
 
-		void NativeCalls::print_ln(StackFrame* frame)
+		void NativeCalls::print_ln(StackFrame* frame, Heap* heap)
 		{
-			print_internal(frame);
+			print_internal(frame, heap);
 			std::cout << std::endl;
 		}
 
-		void NativeCalls::print_internal(StackFrame* frame)
+		void NativeCalls::print_internal(StackFrame* frame, Heap* heap)
 		{
 			auto object = frame->pop();
+
+			if (object.get_type() == VMType::GCOPtr && object.gco()->type == GCObjectType::Struct && object.gco()->si->get_name() == L"String")
+			{
+				auto char_arr = heap->load_field(object, static_cast<std::size_t>(0));
+				for (auto i = 0; i < char_arr.gco()->ai->next_index; i++)
+				{
+					auto c = heap->load_element(char_arr, i);
+					std::wcout << c.c();
+				}
+
+				return;
+			}
 
 			if (object.get_type() == elsa::VMType::Int)
 				std::cout << object.i();
@@ -47,7 +59,7 @@ namespace elsa {
 				throw RuntimeException("Unsupported type: print_ln");
 		}
 
-		void NativeCalls::are_eq(StackFrame* frame)
+		void NativeCalls::are_eq(StackFrame* frame, Heap* heap)
 		{
 			frame->push(Object(are_eq_internal(frame)));
 		}
@@ -82,13 +94,13 @@ namespace elsa {
 			return true;
 		}
 
-		void NativeCalls::assert_eq(StackFrame* frame)
+		void NativeCalls::assert_eq(StackFrame* frame, Heap* heap)
 		{
 			if (!are_eq_internal(frame))
 				throw RuntimeException("AssertEq failed.");
 		}
 
-		void NativeCalls::ref_eq(StackFrame* frame)
+		void NativeCalls::ref_eq(StackFrame* frame, Heap* heap)
 		{
 			const auto first = frame->pop();
 			const auto second = frame->pop();
