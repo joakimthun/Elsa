@@ -62,16 +62,15 @@ func void StringArrayTest()
 	strings.Push("String4");
 
 	AssertEq(5, strings.Length());
-	//AssertEq(5, strings[0].Length());
 
-	//loop(var i = 0; i < strings.Length(); i++)
-	//{
-	//	AssertEq('S', strings[i].CharAt(0));
-	//	AssertEq('t', strings[i].CharAt(1));
-	//	AssertEq('r', strings[i].CharAt(2));
-	//	AssertEq('i', strings[i].CharAt(3));
-	//	AssertEq('n', strings[i].CharAt(4));
-	//	AssertEq('g', strings[i].CharAt(5));
-	//	//AssertEq(' ', strings[i].CharAt(6));
-	//}
+	loop(var i = 0; i < strings.Length(); i++)
+	{
+		AssertEq('S', strings[i].CharAt(0));
+		AssertEq('t', strings[i].CharAt(1));
+		AssertEq('r', strings[i].CharAt(2));
+		AssertEq('i', strings[i].CharAt(3));
+		AssertEq('n', strings[i].CharAt(4));
+		AssertEq('g', strings[i].CharAt(5));
+		//AssertEq(' ', strings[i].CharAt(6));
+	}
 }

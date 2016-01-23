@@ -13,6 +13,12 @@ protected:
 
 		program_.add_func(std::make_unique<FunctionInfo>(L"main", 0, 1, ep, FunctionType::Static));
 		program_.add_string(std::make_unique<StringInfo>(L"Hello World!"));
+
+		auto si = std::make_unique<StructInfo>(L"String");
+		si->add_field(std::make_unique<FieldInfo>(L"str", elsa::VMType::GCOPtr));
+
+		program_.add_struct(std::move(si));
+
 		program_.set_entry_point(ep);
 	}
 
@@ -25,35 +31,40 @@ TEST_F(StringOpCodesTest, SCONST)
 {
 	program_.emit(
 	{
-		sconst, 0,
+		sconst, 0, 0,
 		s_local, 0,
 
 		// H
 		l_local, 0,
+		l_field, 0,
 		iconst, 0,
 		l_ele,
 		halt,
 
 		// l
 		l_local, 0,
+		l_field, 0,
 		iconst, 3,
 		l_ele,
 		halt,
 
 		// space
 		l_local, 0,
+		l_field, 0,
 		iconst, 5,
 		l_ele,
 		halt,
 
 		// W
 		l_local, 0,
+		l_field, 0,
 		iconst, 6,
 		l_ele,
 		halt,
 
 		// !
 		l_local, 0,
+		l_field, 0,
 		iconst, 11,
 		l_ele,
 	});

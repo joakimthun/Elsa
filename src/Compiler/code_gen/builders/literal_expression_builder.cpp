@@ -39,8 +39,11 @@ namespace elsa {
 			if (si == nullptr)
 				throw CodeGenException("No string struct has been defined");
 
-			program->emit(OpCode::new_struct);
+			auto str_index = program->add_string(std::make_unique<StringInfo>(expression->get_value()));
+
+			program->emit(OpCode::sconst);
 			program->emit(static_cast<int>(si->get_index()));
+			program->emit(static_cast<int>(str_index));
 		}
 
 	}

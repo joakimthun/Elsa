@@ -214,16 +214,22 @@ namespace elsa {
 				break;
 			}
 			case sconst: {
-				auto index = get_instruction(pc_++);
-				auto str = program_.get_string(index)->get_value();
-				auto str_obj = heap_.alloc_array(elsa::VMType::Char, str.length());
+				auto struct_index = get_instruction(pc_++);
+				auto struct_info = program_.get_struct(struct_index);
+				auto str_inst = heap_.alloc_struct(struct_info);
 
+				auto str_literal_index = get_instruction(pc_++);
+				auto str = program_.get_string(str_literal_index)->get_value();
+				auto char_array = heap_.alloc_array(elsa::VMType::Char, str.length());
+				
 				for (std::wstring::size_type i = 0; i < str.size(); ++i)
 				{
-					heap_.add_element(str_obj, Object(str[i]));
+					heap_.add_element(char_array, Object(str[i]));
 				}
 
-				current_frame_->push(str_obj);
+				heap_.store_field(str_inst, char_array, static_cast<std::size_t>(0));
+
+				current_frame_->push(str_inst);
 
 				break;
 			}

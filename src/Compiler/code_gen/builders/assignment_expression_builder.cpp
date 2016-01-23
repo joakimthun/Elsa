@@ -16,36 +16,13 @@ namespace elsa {
 				program->emit(OpCode::s_field);
 				program->emit(static_cast<int>(field_index));
 
-				// TODO: Refactor this
+				// TODO: Refactor this?
 				if (auto aie = dynamic_cast<ArrayInitializerListExpression*>(expression->get_right()))
 				{
 					for (const auto& exp : aie->get_values())
 					{
 						LoadHelper::load_field(program, visitor, sae, true);
 						exp->accept(visitor);
-						program->emit(OpCode::a_ele);
-					}
-				}
-				else if (auto sle = dynamic_cast<StringLiteralExpression*>(expression->get_right()))
-				{
-					LoadHelper::load_field(program, visitor, sae, true);
-
-					program->emit(OpCode::iconst);
-					program->emit(sle->get_value().size());
-					program->emit(OpCode::new_arr);
-					program->emit(static_cast<int>(VMType::Char));
-
-					program->emit(OpCode::s_field);
-					program->emit(0);
-
-					for (auto c : sle->get_value())
-					{
-						LoadHelper::load_field(program, visitor, sae, true);
-						program->emit(OpCode::l_field);
-						program->emit(0);
-						program->emit(OpCode::cconst);
-						auto char_index = program->add_char(std::make_unique<CharInfo>(c));
-						program->emit(static_cast<int>(char_index));
 						program->emit(OpCode::a_ele);
 					}
 				}
@@ -63,29 +40,6 @@ namespace elsa {
 				if (is_initializer_list(expression->get_right()))
 				{
 					build_initializer_list(expression->get_right(), local_index, program, visitor, l_local);
-				}
-				else if (auto sle = dynamic_cast<StringLiteralExpression*>(expression->get_right()))
-				{
-					auto local_index = LoadHelper::load_local(program, visitor, ie);
-
-					program->emit(OpCode::iconst);
-					program->emit(sle->get_value().size());
-					program->emit(OpCode::new_arr);
-					program->emit(static_cast<int>(VMType::Char));
-
-					program->emit(OpCode::s_field);
-					program->emit(0);
-
-					for (auto c : sle->get_value())
-					{
-						LoadHelper::load_local(program, visitor, ie);
-						program->emit(OpCode::l_field);
-						program->emit(0);
-						program->emit(OpCode::cconst);
-						auto char_index = program->add_char(std::make_unique<CharInfo>(c));
-						program->emit(static_cast<int>(char_index));
-						program->emit(OpCode::a_ele);
-					}
 				}
 
 				return;
