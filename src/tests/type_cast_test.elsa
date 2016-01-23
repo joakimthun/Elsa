@@ -20,4 +20,15 @@ func void TypeCastTest()
 
 	var charToInt = int('!');
 	AssertEq(33, charToInt);
+
+	int i = 88;
+	char c = 'A';
+	var s = new TypeCastTestStruct;
+	s.IntField = int(c);
+	s.FloatField = float(i);
+	s.CharField = char(i);
+
+	AssertEq(65, s.IntField);
+	AssertEq(88.00, s.FloatField);
+	AssertEq('X', s.CharField);
 }
