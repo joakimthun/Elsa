@@ -8,6 +8,7 @@ namespace elsa {
 		void ReturnExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, ReturnExpression* expression)
 		{
 			expression->get_expression()->accept(visitor);
+			program->emit(OpCode::ret);
 		}
 
 	}

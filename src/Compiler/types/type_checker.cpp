@@ -323,23 +323,25 @@ namespace elsa {
 		bool TypeChecker::return_type_match(FuncDeclarationExpression* expression)
 		{
 			auto declared_return_type = expression->get_return_type();
-			auto return_expressions = std::vector<Expression*>();
+			auto return_expressions = expression->get_return_expressions();
+
+			auto non_nested_return_expressions = std::vector<Expression*>();
 
 			for (const auto& exp : expression->get_body())
 			{
 				if (is_of_type<ReturnExpression>(exp.get()))
 				{
-					return_expressions.push_back(exp.get());
+					non_nested_return_expressions.push_back(exp.get());
 				}
 			}
 
-			if (declared_return_type->get_type() != ObjectType::Void && return_expressions.size() == 0)
+			if (declared_return_type->get_type() != ObjectType::Void && return_expressions.expressions.size() == 0)
 				throw ParsingException(L"The function must return a value", parser_->current_token());
 
-			if (declared_return_type->get_type() != ObjectType::Void && return_expressions.size() > 1)
-				throw ParsingException(L"A function can only have one return expression", parser_->current_token());
+			if (declared_return_type->get_type() != ObjectType::Void && non_nested_return_expressions.size() == 0 && !return_expressions.if_else_with_return)
+				throw ParsingException(L"All paths of the function must return a value", parser_->current_token());
 
-			for (const auto return_exp : return_expressions)
+			for (const auto return_exp : return_expressions.expressions)
 			{
 				auto return_expression_type = get_expression_type(return_exp);
 				if (!is_same_type(return_expression_type, declared_return_type))

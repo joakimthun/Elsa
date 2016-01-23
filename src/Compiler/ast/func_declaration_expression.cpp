@@ -1,6 +1,9 @@
 #include "func_declaration_expression.h"
 
 #include "../code_gen/visitors/expression_visitor.h"
+#include "return_expression.h"
+#include "conditional_expression.h"
+#include "loop_expression.h"
 
 namespace elsa {
 	namespace compiler {
@@ -117,14 +120,74 @@ namespace elsa {
 			return args_;
 		}
 
+		ReturnExpressions FuncDeclarationExpression::get_return_expressions()
+		{
+			ReturnExpressions re;
+			re.if_else_with_return = false;
+
+			for (const auto& exp : body_)
+			{
+				get_return_expressions_internal(exp.get(), re);
+			}
+
+			return re;
+		}
+
 		void FuncDeclarationExpression::accept(ExpressionVisitor* visitor)
 		{
 			visitor->visit(this);
 		}
+
 		void FuncDeclarationExpression::assert_is_impl()
 		{
 			if (impl_ != nullptr)
 				throw ElsaException("assert_is_impl");
+		}
+
+		void FuncDeclarationExpression::get_return_expressions_internal(Expression* exp, ReturnExpressions& return_expressions)
+		{
+			if (auto re = dynamic_cast<ReturnExpression*>(exp))
+			{
+				return_expressions.expressions.push_back(re);
+				return;
+			}
+			else if (auto conde_exp = dynamic_cast<ConditionalExpression*>(exp))
+			{
+				auto if_with_return = false;
+				auto else_with_return = false;
+				for (const auto& ie : conde_exp->get_if_body())
+				{
+					if (auto ier = dynamic_cast<ReturnExpression*>(ie.get()))
+					{
+						if_with_return = true;
+					}
+
+					get_return_expressions_internal(ie.get(), return_expressions);
+				}
+
+				for (const auto& ee : conde_exp->get_else_body())
+				{
+					if (auto eer = dynamic_cast<ReturnExpression*>(ee.get()))
+					{
+						else_with_return = true;
+					}
+
+					get_return_expressions_internal(ee.get(), return_expressions);
+				}
+
+				return_expressions.if_else_with_return = if_with_return && else_with_return;
+
+				return;
+			}
+			else if (auto loop_exp = dynamic_cast<LoopExpression*>(exp))
+			{
+				for (const auto& be : loop_exp->get_body())
+				{
+					get_return_expressions_internal(be.get(), return_expressions);
+				}
+
+				return;
+			}
 		}
 	}
 }

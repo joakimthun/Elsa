@@ -14,6 +14,14 @@
 
 namespace elsa {
 	namespace compiler {
+		
+		class ReturnExpression;
+
+		struct ReturnExpressions
+		{
+			std::vector<ReturnExpression*> expressions;
+			bool if_else_with_return;
+		};
 
 		class FuncDeclarationExpression : public Expression, public ScopedExpression
 		{
@@ -42,10 +50,13 @@ namespace elsa {
 			const std::vector<std::unique_ptr<Expression>>& get_body() const;
 			const std::vector<std::unique_ptr<ArgumentExpression>>& get_args() const;
 
+			ReturnExpressions get_return_expressions();
+
 			void accept(ExpressionVisitor* visitor) override;
 
 		private:
 			void assert_is_impl();
+			void get_return_expressions_internal(Expression* exp, ReturnExpressions& return_expressions);
 
 			const FuncDeclarationExpression* impl_;
 			std::wstring name_;

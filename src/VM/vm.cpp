@@ -325,6 +325,13 @@ namespace elsa {
 			case ret: {
 				{
 					std::unique_ptr<StackFrame> sf(call_stack_.pop());
+
+					if (sf->get_function_info()->get_name() == L"main")
+					{
+						oc_ = OpCode::halt;
+						return;
+					}
+
 					auto ret_addr = sf.get()->get_ret_addr();
 
 					// Push the return value on the stack (if there is one)

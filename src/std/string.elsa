@@ -22,17 +22,11 @@ struct String
 
 	func bool Equals(String other)
 	{
-		PrintLn('L');
-		PrintLn(Length());
-		PrintLn(other.Length());
-		
 		if(Length() != other.Length())
 		{
-			PrintLn("Length() != other.Length()")
 			return false;
 		}
 
-		//loop(var i = 0; i <)
-		return false;
+		return true;
 	}
 };
