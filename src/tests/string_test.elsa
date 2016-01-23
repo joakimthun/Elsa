@@ -78,6 +78,7 @@ func void StringEqualsTest()
 {
 	var first = "ABCDabcd";
 	var second = "ABCDabcd";
-
-	AssertEq(first, first);
+	
+	var test = ReferenceEquals(first, first);
+	AssertEq(true, test);
 }

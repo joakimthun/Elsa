@@ -1,2 +1,2 @@
-native func bool Equals(object first, Object second);
-native func bool ReferenceEquals(object first, Object second);
+native func bool Equals(object first, object second);
+native func bool ReferenceEquals(object first, object second);
