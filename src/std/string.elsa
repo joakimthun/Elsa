@@ -21,25 +21,13 @@ struct String
 			return false;
 		}
 
-		var x = 1.0 + 2.2;
-
-		if(1.0 != 2.2)
+		loop(var i = 0; i < Length(); i++)
 		{
-			return false;
+			if(str[i] != other.str[i])
+			{
+				return false;
+			}
 		}
-
-		if('C' != 'C')
-		{
-			return false;
-		}
-
-		//loop(var i = 0; i < Length(); i++)
-		//{
-		//	if(str[i] != other.str[i])
-		//	{
-		//		return false;
-		//	}
-		//}
 
 		return true;
 	}

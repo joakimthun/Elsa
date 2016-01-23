@@ -80,6 +80,20 @@ func void StringEqualsTest()
 	var first =  "ABCDabcd";
 	var second = "ABCDabcd";
 	
-	var test = first.Equals(second);
-	AssertEq(true, test);
+	AssertEq(true, first.Equals(second));
+
+	first =  "b";
+	second = "a";
+
+	AssertEq(false, first.Equals(second));
+
+	first =  "a";
+	second = "a";
+
+	AssertEq(true, first.Equals(second));
+
+	first =  "qjwiodjqiwojdq";
+	second = "qwodoqkwodkqkwkdokqwpd";
+
+	AssertEq(false, first.Equals(second));
 }
