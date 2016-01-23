@@ -129,6 +129,26 @@ namespace elsa {
 			return false;
 		}
 
+		void StructDeclarationExpression::assert_is_valid()
+		{
+			for (const auto& f : functions_)
+			{
+				if (f->get_name() == L"Equals")
+				{
+					if (f->get_return_type()->get_type() != ObjectType::Bool)
+					{
+						throw ParsingException(L"Invalid Equals function on type '" + name_ + L"', must return a boolean value");
+					}
+
+					const auto& args = f->get_args();
+					if (args.size() != 2 || args[1]->get_type()->get_struct_declaration_expression() == nullptr || args[1]->get_type()->get_struct_declaration_expression()->get_name() != name_)
+					{
+						throw ParsingException(L"Invalid Equals function on type '" + name_ + L"', must have one argument of type '" + name_ + L"'");
+					}
+				}
+			}
+		}
+
 		void StructDeclarationExpression::accept(ExpressionVisitor* visitor)
 		{
 			visitor->visit(this);

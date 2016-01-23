@@ -14,6 +14,7 @@ namespace elsa {
 		public:
 			ParsingException(const std::string& message);
 			ParsingException(const std::wstring& message, Token* current_token);
+			ParsingException(const std::wstring& message);
 
 			virtual const char* what() const throw();
 

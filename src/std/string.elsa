@@ -20,7 +20,7 @@ struct String
 		{
 			return false;
 		}
-
+	
 		loop(var i = 0; i < Length(); i++)
 		{
 			if(str[i] != other.str[i])
@@ -28,7 +28,7 @@ struct String
 				return false;
 			}
 		}
-
+	
 		return true;
 	}
 };

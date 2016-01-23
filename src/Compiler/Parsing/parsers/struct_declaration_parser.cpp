@@ -42,6 +42,8 @@ namespace elsa {
 
 			struct_exp->set_type(parser->type_checker().get_expression_type(struct_exp.get()));
 
+			struct_exp->assert_is_valid();
+
 			return std::move(struct_exp);
 		}
 

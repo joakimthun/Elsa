@@ -96,4 +96,6 @@ func void StringEqualsTest()
 	second = "qwodoqkwodkqkwkdokqwpd";
 
 	AssertEq(false, first.Equals(second));
+
+	AssertEq(false, first == second)
 }

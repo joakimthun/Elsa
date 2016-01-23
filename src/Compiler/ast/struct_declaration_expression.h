@@ -41,6 +41,8 @@ namespace elsa {
 
 			bool has_function(const std::wstring& name);
 
+			void assert_is_valid();
+
 			void accept(ExpressionVisitor* visitor) override;
 
 		private:
