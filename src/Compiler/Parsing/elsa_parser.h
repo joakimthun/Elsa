@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include <map>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 #include <algorithm>
@@ -95,10 +95,10 @@ namespace elsa {
 			StructTable struct_table_;
 			FunctionTable function_table_;
 			ScopedExpression* current_scope_;
-			std::map<TokenType, std::unique_ptr<Parser>> expression_parsers_;
+			std::unordered_map<TokenType, std::unique_ptr<Parser>> expression_parsers_;
 			std::vector<std::unique_ptr<LL2Entry>> ll2_expression_parsers_;
-			std::map<TokenType, std::unique_ptr<InfixParser>> infix_parsers_;
-			std::map<TokenType, std::unique_ptr<Parser>> statement_parsers_;
+			std::unordered_map<TokenType, std::unique_ptr<InfixParser>> infix_parsers_;
+			std::unordered_map<TokenType, std::unique_ptr<Parser>> statement_parsers_;
 			std::unique_ptr<Lexer> lexer_;
 			std::unique_ptr<Token> current_token_;
 			TypeChecker type_checker_;

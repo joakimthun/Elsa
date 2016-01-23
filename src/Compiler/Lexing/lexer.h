@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <wctype.h>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <queue>
 #include <utility>
@@ -39,7 +39,7 @@ namespace elsa {
 
 			wchar_t current_char_;
 			std::unique_ptr<SourceFile> file_;
-			std::map<std::wstring, Token> keywords_;
+			std::unordered_map<std::wstring, Token> keywords_;
 			std::queue<std::unique_ptr<Token>> token_buffer_;
 			std::size_t line_number_;
 

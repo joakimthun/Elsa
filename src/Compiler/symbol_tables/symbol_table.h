@@ -1,6 +1,6 @@
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <memory>
 
 namespace elsa {
@@ -32,7 +32,7 @@ namespace elsa {
 			}
 
 		private:
-			std::map<TKey, std::unique_ptr<TValue>> table_;
+			std::unordered_map<TKey, std::unique_ptr<TValue>> table_;
 		};
 
 	}

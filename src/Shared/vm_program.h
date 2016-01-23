@@ -4,7 +4,7 @@
 #include <utility>
 #include <vector>
 #include <cstddef>
-#include <map>
+#include <unordered_map>
 #include <stdexcept>
 #include <string>
 #include <algorithm>
@@ -55,7 +55,7 @@ namespace elsa {
 	private:
 		std::vector<int> instructions_;
 		int entry_point_;
-		std::map<std::size_t, std::unique_ptr<FunctionInfo>> functions_;
+		std::unordered_map<std::size_t, std::unique_ptr<FunctionInfo>> functions_;
 		std::vector<std::unique_ptr<StructInfo>> structs_;
 		std::vector<std::unique_ptr<FloatInfo>> floats_;
 		std::vector<std::unique_ptr<CharInfo>> chars_;
