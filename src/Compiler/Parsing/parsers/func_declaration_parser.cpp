@@ -33,12 +33,21 @@ namespace elsa {
 			auto name = parser->current_token()->get_value();
 			parser->consume(TokenType::Identifier);
 
-			if (parser->function_table().has_entry(name))
-				throw ParsingException(L"A function with the same name has already been declared", parser->current_token());
+			if (parent != nullptr)
+			{
+				if(parent->has_function(name))
+					throw ParsingException(L"A member function with the name '" + name + L"' has already been declared", parser->current_token());
+			}
+			else
+			{
+				if (parser->function_table().has_entry(name))
+					throw ParsingException(L"A function with the same name has already been declared", parser->current_token());
+			}
 
 			func_dec_exp->set_name(name);
 
-			parser->function_table().add_function(func_dec_exp.get());
+			if(parent == nullptr)
+				parser->function_table().add_function(func_dec_exp.get());
 
 			parser->consume(TokenType::LParen);
 

@@ -17,4 +17,9 @@ struct String
 	{
 		return str.Length();
 	}
+
+	func bool Equals(String other)
+	{
+		return true;
+	}
 };

@@ -39,6 +39,8 @@ namespace elsa {
 			const std::vector<std::unique_ptr<FieldExpression>>& get_fields() const;
 			const std::vector<std::unique_ptr<FuncDeclarationExpression>>& get_functions() const;
 
+			bool has_function(const std::wstring& name);
+
 			void accept(ExpressionVisitor* visitor) override;
 
 		private:

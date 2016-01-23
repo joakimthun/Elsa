@@ -118,6 +118,17 @@ namespace elsa {
 			return functions_;
 		}
 
+		bool StructDeclarationExpression::has_function(const std::wstring & name)
+		{
+			for (const auto& f : functions_)
+			{
+				if (f->get_name() == name)
+					return true;
+			}
+
+			return false;
+		}
+
 		void StructDeclarationExpression::accept(ExpressionVisitor* visitor)
 		{
 			visitor->visit(this);
