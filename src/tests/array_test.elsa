@@ -8,6 +8,13 @@ struct ArrayTest
 	bool BoolField;
 };
 
+func void ArrayInitialSizeTest()
+{
+	var size = 100 + 100;
+	var arr = new int[100];
+	var arr2 = new int[size];
+}
+
 func void ArrayPushPopTest()
 {
 	var arr = new int[];

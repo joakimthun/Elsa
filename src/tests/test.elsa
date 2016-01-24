@@ -365,6 +365,7 @@ func int main(int dummy)
 	ImportTest();
 
 	// Array tests
+	ArrayInitialSizeTest();
 	ArrayInitializerListTest();
 	ArrayPushPopTest();
 	ArrayOfStructsTest();

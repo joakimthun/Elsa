@@ -15,6 +15,16 @@ namespace elsa {
 			return type_.get();
 		}
 
+		void ArrayDeclarationExpression::set_size_expression(std::unique_ptr<Expression> size_expression)
+		{
+			size_expression_ = std::move(size_expression);
+		}
+
+		Expression * ArrayDeclarationExpression::get_size_expression()
+		{
+			return size_expression_.get();
+		}
+
 		void ArrayDeclarationExpression::accept(ExpressionVisitor* visitor)
 		{
 			visitor->visit(this);

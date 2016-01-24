@@ -33,6 +33,18 @@ namespace elsa {
 			arr_exp->set_type(new ElsaType(array_type));
 
 			parser->consume(TokenType::LSBracket);
+
+			if (parser->current_token()->get_type() != TokenType::RSBracket)
+			{
+				auto size_expression = parser->parse_expression();
+				auto size_expression_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(size_expression.get()));
+
+				if (size_expression_type->get_type() != ObjectType::Int)
+					throw ParsingException(L"Only integers are supported when specifying an array size", parser->current_token());
+
+				arr_exp->set_size_expression(std::move(size_expression));
+			}
+
 			parser->consume(TokenType::RSBracket);
 
 			return std::move(arr_exp);

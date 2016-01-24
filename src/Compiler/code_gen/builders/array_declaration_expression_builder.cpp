@@ -7,8 +7,16 @@ namespace elsa {
 
 		void ArrayDeclarationExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, ArrayDeclarationExpression* expression)
 		{
-			program->emit(OpCode::iconst);
-			program->emit(10);
+			if (expression->get_size_expression() != nullptr)
+			{
+				expression->get_size_expression()->accept(visitor);
+			}
+			else
+			{
+				program->emit(OpCode::iconst);
+				program->emit(10);
+			}
+
 			program->emit(OpCode::new_arr);
 
 			auto type = expression->get_type()->get_struct_declaration_expression()->get_generic_type();
