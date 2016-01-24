@@ -122,6 +122,10 @@ func void StringConcatTest()
 	var second = "_World!";
 
 	var str = first.Concat(second);
-	PrintLn(str);
 	AssertEq(true, str == "Hello__World!");
+
+	first =  "ahjsdashjdhAKHDAHDSQQJKWHEDKJAHSDAHSJDHJKAHS";
+
+	var str2 = first.Concat(first);
+	AssertEq(true, str2 == "ahjsdashjdhAKHDAHDSQQJKWHEDKJAHSDAHSJDHJKAHSahjsdashjdhAKHDAHDSQQJKWHEDKJAHSDAHSJDHJKAHS");
 }
