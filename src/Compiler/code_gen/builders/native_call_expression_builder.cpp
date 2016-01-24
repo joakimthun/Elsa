@@ -7,14 +7,9 @@ namespace elsa {
 
 		void NativeCallExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, FuncCallExpression* expression)
 		{
-			const auto& native_function_info = visitor->native_function_table().get(expression->get_name());
-
-			std::size_t index = 0;
 			for (auto& arg : expression->get_args())
 			{
 				arg->accept(visitor);
-
-				index++;
 			}
 
 			program->emit(OpCode::ncall);

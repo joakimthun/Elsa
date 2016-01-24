@@ -161,7 +161,41 @@ namespace elsa {
 					}
 				}
 				case ObjectType::GCOPtr: {
-					throw CodeGenException("Not yet supported: GCOPtr -> BinaryOperatorExpressionBuilder");
+					if (type->get_struct_declaration_expression() != nullptr)
+					{
+						const auto eq_fi = program->get_struct(type->get_struct_declaration_expression()->get_name(true))->get_function(L"Equals");
+						auto neq_fi = visitor->native_function_table().get(L"Equals");
+
+						OpCode callop;
+						int function_index;
+						if (eq_fi != nullptr)
+						{
+							callop = OpCode::call;
+							function_index = static_cast<int>(eq_fi->get_addr());
+						}
+						else
+						{
+							callop = OpCode::ncall;
+							function_index = static_cast<int>(neq_fi->get_index());
+						}
+
+						switch (op)
+						{
+						case TokenType::DoubleEquals: {
+							program->emit(callop);
+							program->emit(function_index);
+							return;
+						}
+						case TokenType::NotEquals: {
+							program->emit(callop);
+							program->emit(function_index);
+							program->emit(OpCode::iconst);
+							program->emit(0);
+							program->emit(OpCode::ieq);
+							return;
+						}
+						}
+					}
 				}
 				default:
 					break;

@@ -97,5 +97,21 @@ func void StringEqualsTest()
 
 	AssertEq(false, first.Equals(second));
 
+	first =  "qjwiodjq";
+	second = "qjwiodjq";
+	
+	AssertEq(true, first == second)
+	AssertEq(false, first != second)
+
+	first =  "qjwiodjqasdasdasdasd";
+	second = "qjwiodjq";
+	
 	AssertEq(false, first == second)
+	AssertEq(true, first != second)
+
+	first =  "QJWIODJQ";
+	second = "qjwiodjq";
+	
+	AssertEq(false, first == second)
+	AssertEq(true, first != second)
 }

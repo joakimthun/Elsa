@@ -59,3 +59,15 @@ func void StructFieldsTest()
 	AssertEq('!', s.StructField.CharField);
 	AssertEq(true, s.StructField.BoolField);
 }
+
+func void StructReferenceEqualsTest()
+{
+	var x = new MyOtherStruct;
+	var y = new MyOtherStruct;
+
+	AssertEq(true, x == x);
+	AssertEq(false, x != x);
+
+	AssertEq(false, y == x);
+	AssertEq(true, y != x);
+}
