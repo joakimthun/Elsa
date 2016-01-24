@@ -128,4 +128,10 @@ func void StringConcatTest()
 
 	var str2 = first.Concat(first);
 	AssertEq(true, str2 == "ahjsdashjdhAKHDAHDSQQJKWHEDKJAHSDAHSJDHJKAHSahjsdashjdhAKHDAHDSQQJKWHEDKJAHSDAHSJDHJKAHS");
+
+	first =  "XX";
+	second = "xx";
+
+	var str3 = first.Concat(first).Concat(first).Concat(second).Concat(first);
+	AssertEq(true, str3 == "XXXXXXxxXX");
 }
