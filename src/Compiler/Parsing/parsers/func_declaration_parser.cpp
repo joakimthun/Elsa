@@ -66,11 +66,26 @@ namespace elsa {
 			while (parser->current_token()->get_type() != TokenType::RParen)
 			{
 				auto arg = std::make_unique<ArgumentExpression>();
-				arg->set_type(parser->type_checker().get_type_from_token(parser->current_token()));
+				auto type = std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
 				parser->consume();
 
+				if (parser->current_token()->get_type() == TokenType::LSBracket)
+				{
+					auto array_struct = parser->struct_table().get(L"Array")->get_expression();
+					auto array_type = array_struct->create_generic(std::move(type), parser);
+
+					parser->consume(TokenType::LSBracket);
+					parser->consume(TokenType::RSBracket);
+
+					arg->set_type(new ElsaType(array_type));
+				}
+				else
+				{
+					arg->set_type(type.release());
+				}
 
 				arg->set_name(parser->current_token()->get_value());
+
 				parser->consume(TokenType::Identifier);
 
 				parser->current_scope()->add_arg(arg->get_name(), arg->get_type());

@@ -370,6 +370,7 @@ func int main(int dummy)
 	ArrayInitializerListTest();
 	ArrayPushPopTest();
 	ArrayOfStructsTest();
+	ArrayAsArgTest();
 
 	// Struct tests
 	NewStructTest();

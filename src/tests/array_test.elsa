@@ -134,3 +134,19 @@ func void ArrayOfStructsTest()
 	AssertEq('!', structs[3].CharField);
 	AssertEq(true, structs[3].BoolField);
 }
+
+func void ArrayAsArg(int[] arr)
+{
+	AssertEq(4, arr.Length());
+	
+	loop(var i = 0; i < arr.Length(); i++)
+	{
+		AssertEq(i, arr[i]);
+	}
+}
+
+func void ArrayAsArgTest()
+{
+	var arr = new [ 0, 1, 2, 3 ];
+	ArrayAsArg(arr);
+}
