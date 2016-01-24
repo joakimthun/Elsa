@@ -18,7 +18,8 @@ namespace elsa {
 			if(!parser->type_checker().valid_assignment(exp.get()))
 				throw ParsingException(L"Invalid assignment. Both sides must be of the same type", parser->current_token());
 
-			parser->consume(TokenType::Semicolon);
+			if(parser->current_token()->get_type() == TokenType::Semicolon)
+				parser->consume(TokenType::Semicolon);
 
 			return std::move(exp);
 		}

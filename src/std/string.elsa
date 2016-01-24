@@ -32,6 +32,21 @@ struct String
 		return newStr;
 	}
 
+	func String Substring(int startIndex, int length)
+	{
+		var newStr = new String;
+		newStr.str = new char[length];
+
+		// TODO: Error checking, validate start and length
+		int stopIndex = startIndex + length;
+		loop(var i = startIndex; i < stopIndex; i++)
+		{
+			newStr.str.Push(str[i]);
+		}
+
+		return newStr;
+	}
+
 	func bool Equals(String other)
 	{
 		if(Length() != other.Length())

@@ -135,3 +135,26 @@ func void StringConcatTest()
 	var str3 = first.Concat(first).Concat(first).Concat(second).Concat(first);
 	AssertEq(true, str3 == "XXXXXXxxXX");
 }
+
+func void SubstringTest()
+{
+	var str = "Hello Hello Hello, Hello";
+
+	var sub = str.Substring(0, str.Length());
+	AssertEq(true, sub == "Hello Hello Hello, Hello");
+
+	sub = str.Substring(6, str.Length() - 6);
+	AssertEq(true, sub == "Hello Hello, Hello");
+
+	sub = str.Substring(12, str.Length() - 12);
+	AssertEq(true, sub == "Hello, Hello");
+
+	sub = str.Substring(15, str.Length() - 15);
+	AssertEq(true, sub == "lo, Hello");
+
+	sub = str.Substring(15, 3);
+	AssertEq(true, sub == "lo,");
+
+	sub = str.Substring(str.Length() - 1, 1);
+	AssertEq(true, sub == "o");
+}
