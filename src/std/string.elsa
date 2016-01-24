@@ -14,6 +14,24 @@ struct String
 		return str.Length();
 	}
 
+	func String Concat(String other)
+	{
+		var newStr = new String;
+		newStr.str = new char[Length() + other.Length()];
+
+		loop(var i = 0; i < Length(); i++)
+		{
+			newStr.str.Push(str[i]);
+		}
+		
+		loop(var ii = 0; ii < other.Length(); ii++)
+		{
+			newStr.str.Push(other.str[ii]);
+		}
+
+		return newStr;
+	}
+
 	func bool Equals(String other)
 	{
 		if(Length() != other.Length())

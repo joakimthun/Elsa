@@ -115,3 +115,13 @@ func void StringEqualsTest()
 	AssertEq(false, first == second)
 	AssertEq(true, first != second)
 }
+
+func void StringConcatTest()
+{
+	var first =  "Hello_";
+	var second = "_World!";
+
+	var str = first.Concat(second);
+	PrintLn(str);
+	AssertEq(true, str == "Hello__World!");
+}

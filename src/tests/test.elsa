@@ -385,6 +385,7 @@ func int main(int dummy)
 	NewStringTest();
 	StringArrayTest();
 	StringEqualsTest();
+	StringConcatTest();
 
 	return 0;
 }

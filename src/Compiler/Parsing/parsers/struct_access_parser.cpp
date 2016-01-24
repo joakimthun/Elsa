@@ -40,7 +40,8 @@ namespace elsa {
 			while (parser->current_token()->get_type() == TokenType::Identifier)
 			{
 				auto identifier = parser->current_token()->get_value();
-				if (sa_exp->get_base() == nullptr && parser->current_type() == nullptr)
+				auto is_local_or_arg = parser->current_scope()->get_local(identifier) != nullptr;
+				if ((sa_exp->get_base() == nullptr && parser->current_type() == nullptr) || (sa_exp->get_base() == nullptr && is_local_or_arg))
 				{
 					// Local
 					auto id_exp = std::make_unique<IdentifierExpression>(identifier);
