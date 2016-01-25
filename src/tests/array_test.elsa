@@ -143,12 +143,23 @@ func void ArrayAsArg(int[] arr)
 	{
 		AssertEq(i, arr[i]);
 	}
+
+	arr.Push(4);
+	arr.Push(5);
+	arr.Push(6);
 }
 
 func void ArrayAsArgTest()
 {
 	var arr = new [ 0, 1, 2, 3 ];
 	ArrayAsArg(arr);
+
+	AssertEq(7, arr.Length());
+	
+	loop(var i = 0; i < arr.Length(); i++)
+	{
+		AssertEq(i, arr[i]);
+	}
 }
 
 func float[] ReturnArray()
