@@ -9,7 +9,6 @@ namespace elsa {
 			if (is_explicit(parser))
 			{
 				explicit_type = get_explicit_type(parser);
-				parser->consume();
 			}
 			else
 			{
@@ -75,7 +74,21 @@ namespace elsa {
 
 		std::unique_ptr<ElsaType> VariableDeclarationParser::get_explicit_type(ElsaParser* parser)
 		{
-			return std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
+			auto type = std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
+			parser->consume();
+
+			if (parser->current_token()->get_type() == TokenType::LSBracket)
+			{
+				auto array_struct = parser->struct_table().get(L"Array")->get_expression();
+				auto array_type = array_struct->create_generic(std::move(type), parser);
+
+				parser->consume(TokenType::LSBracket);
+				parser->consume(TokenType::RSBracket);
+
+				return std::make_unique<ElsaType>(array_type);
+			}
+
+			return type;
 		}
 
 		void VariableDeclarationParser::assert_is_valid_declaration(const ElsaType* expected, const ElsaType* actual, ElsaParser* parser)

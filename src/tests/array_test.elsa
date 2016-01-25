@@ -150,3 +150,17 @@ func void ArrayAsArgTest()
 	var arr = new [ 0, 1, 2, 3 ];
 	ArrayAsArg(arr);
 }
+
+func float[] ReturnArray()
+{
+	float[] x = new [ 1.0 , 2.0, 13.37 ];
+	return x;
+}
+
+func void ReturnArrayTest()
+{
+	var floats = ReturnArray();
+	AssertEq(1.0, floats[0]);
+	AssertEq(2.0, floats[1]);
+	AssertEq(13.37, floats[2]);
+}
