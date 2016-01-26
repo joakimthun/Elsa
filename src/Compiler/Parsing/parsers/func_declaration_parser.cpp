@@ -27,6 +27,10 @@ namespace elsa {
 
 			auto func_dec_exp = std::make_unique<FuncDeclarationExpression>(native_function);
 
+			// Local 0 is only used by the compiler to store random data e.g. when populating arrays from array initializer lists so the type does not matter here.
+			auto local_0_type = ElsaType(ObjectType::Object);
+			func_dec_exp->add_local(L"0", local_0_type);
+
 			auto ret_type = std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
 			parser->consume();
 

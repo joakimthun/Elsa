@@ -164,8 +164,7 @@ func void ArrayAsArgTest()
 
 func float[] ReturnArray()
 {
-	float[] x = new [ 1.0 , 2.0, 13.37 ];
-	return x;
+	return new [ 1.0 , 2.0, 13.37 ];
 }
 
 func void ReturnArrayTest()
