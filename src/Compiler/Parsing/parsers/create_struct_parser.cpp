@@ -17,7 +17,60 @@ namespace elsa {
 
 			parser->consume(TokenType::Identifier);
 
-			return std::make_unique<CreateStructExpression>(identifier, parser->type_checker().get_struct_type(identifier));
+			auto cse = std::make_unique<CreateStructExpression>(identifier, parser->type_checker().get_struct_type(identifier));
+
+			if (parser->current_token()->get_type() == TokenType::LBracket)
+				return parse_struct_initializer_list(std::move(cse), parser);
+
+			return std::move(cse);
+		}
+
+		std::unique_ptr<Expression> CreateStructParser::parse_struct_initializer_list(std::unique_ptr<CreateStructExpression> cse, ElsaParser* parser)
+		{
+			auto sile = std::make_unique<StructInitializerListExpression>();
+
+			sile->set_create_struct_expression(std::move(cse));
+
+			parser->consume(TokenType::LBracket);
+
+			if (parser->current_token()->get_type() != TokenType::RBracket)
+			{
+				auto sde = sile->get_create_struct_expression()->get_type()->get_struct_declaration_expression();
+
+				while (parser->current_token()->get_type() != TokenType::RBracket)
+				{
+					auto field_name = parser->current_token()->get_value();
+					parser->consume(TokenType::Identifier);
+					parser->consume(TokenType::Colon);
+
+					auto value_expression = parser->parse_expression();
+
+					auto match = false;
+					for (const auto& field : sde->get_fields())
+					{
+						if (field->get_name() == field_name)
+						{
+							auto value_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(value_expression.get()));
+							if (!parser->type_checker().is_same_type(field->get_type(), value_type.get()))
+								throw ParsingException(L"Cannot convert type '" + field->get_type()->get_name() + L"' to '" + value_type->get_name() + L"'", parser->current_token());
+
+							sile->add_value_expression(std::make_unique<FieldInitializerExpression>(std::move(value_expression), field->get_index()));
+							match = true;
+						}
+					}
+
+					if(!match)
+						throw ParsingException(L"'" + sde->get_name() + L"' does not contain a definition for '" + field_name + L"'", parser->current_token());
+
+					if(parser->current_token()->get_type() == TokenType::Comma)
+						parser->consume(TokenType::Comma);
+				}
+			}
+
+			parser->consume(TokenType::RBracket);
+			parser->consume(TokenType::Semicolon);
+
+			return std::move(sile);
 		}
 
 		std::unique_ptr<Expression> CreateStructParser::parse_array(ElsaParser* parser)

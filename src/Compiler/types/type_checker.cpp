@@ -75,6 +75,11 @@ namespace elsa {
 				auto cse = static_cast<CreateStructExpression*>(expression);
 				return new ElsaType(cse->get_type()->get_struct_declaration_expression());
 			}
+			if (is_of_type<StructInitializerListExpression>(expression))
+			{
+				auto sile = static_cast<StructInitializerListExpression*>(expression);
+				return new ElsaType(sile->get_create_struct_expression()->get_type()->get_struct_declaration_expression());
+			}
 			if (is_of_type<FieldAccessExpression>(expression))
 			{
 				auto fae = static_cast<FieldAccessExpression*>(expression);

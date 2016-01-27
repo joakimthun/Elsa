@@ -25,6 +25,7 @@ namespace elsa {
 		class ArrayInitializerListExpression;
 		class StringLiteralExpression;
 		class TypeCastExpression;
+		class StructInitializerListExpression;
 
 		class ExpressionVisitor
 		{
@@ -52,6 +53,7 @@ namespace elsa {
 			virtual void visit(ArrayInitializerListExpression* expression) = 0;
 			virtual void visit(StringLiteralExpression* expression) = 0;
 			virtual void visit(TypeCastExpression* expression) = 0;
+			virtual void visit(StructInitializerListExpression* expression) = 0;
 		};
 
 	}

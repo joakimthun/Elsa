@@ -77,6 +77,9 @@ namespace elsa {
 				case L',': {
 					return match_token(L',', TokenType::Comma);
 				}
+				case L':': {
+					return match_token(L':', TokenType::Colon);
+				}
 				case L'=': {
 					auto t = try_match_tokens(L'=', L'=', TokenType::DoubleEquals);
 					if (t != nullptr)

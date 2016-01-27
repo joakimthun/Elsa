@@ -377,6 +377,7 @@ func int main(int dummy)
 	NewStructTest();
 	StructFieldsTest();
 	StructReferenceEqualsTest();
+	StructInitializerListTest();
 
 	PrintLn(ReturnByArrIndexTest());
 

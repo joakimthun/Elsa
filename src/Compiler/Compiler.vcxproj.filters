@@ -294,6 +294,15 @@
     <ClInclude Include="parsing\parsers\type_cast_parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\struct_initializer_list_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\field_initializer_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code_gen\builders\struct_initializer_list_expression_builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -546,6 +555,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parsing\parsers\type_cast_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\struct_initializer_list_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\field_initializer_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code_gen\builders\struct_initializer_list_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

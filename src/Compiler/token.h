@@ -27,6 +27,7 @@ namespace elsa {
 			DoubleEquals,
 			NotEquals,
 			Semicolon,
+			Colon,
 			Comma,
 			Func,
 			Return,

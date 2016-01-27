@@ -34,6 +34,7 @@
     <ClInclude Include="ast\conditional_expression.h" />
     <ClInclude Include="ast\create_struct_expression.h" />
     <ClInclude Include="ast\field_access_expression.h" />
+    <ClInclude Include="ast\field_initializer_expression.h" />
     <ClInclude Include="ast\func_call_expression.h" />
     <ClInclude Include="ast\loop_expression.h" />
     <ClInclude Include="ast\postfix_operator_expression.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="ast\field_expression.h" />
     <ClInclude Include="ast\scoped_expression.h" />
     <ClInclude Include="ast\struct_declaration_expression.h" />
+    <ClInclude Include="ast\struct_initializer_list_expression.h" />
     <ClInclude Include="ast\typed_expression.h" />
     <ClInclude Include="ast\type_cast_expression.h" />
     <ClInclude Include="code_gen\builders\array_access_expression_builder.h" />
@@ -61,6 +63,7 @@
     <ClInclude Include="code_gen\builders\identifier_expression_builder.h" />
     <ClInclude Include="code_gen\builders\literal_expression_builder.h" />
     <ClInclude Include="code_gen\builders\struct_declaration_expression_builder.h" />
+    <ClInclude Include="code_gen\builders\struct_initializer_list_expression_builder.h" />
     <ClInclude Include="code_gen\builders\type_cast_expression_builder.h" />
     <ClInclude Include="code_gen\builders\variable_builder.h" />
     <ClInclude Include="code_gen\code_gen.h" />
@@ -129,6 +132,7 @@
     <ClCompile Include="ast\conditional_expression.cpp" />
     <ClCompile Include="ast\create_struct_expression.cpp" />
     <ClCompile Include="ast\field_access_expression.cpp" />
+    <ClCompile Include="ast\field_initializer_expression.cpp" />
     <ClCompile Include="ast\func_call_expression.cpp" />
     <ClCompile Include="ast\loop_expression.cpp" />
     <ClCompile Include="ast\postfix_operator_expression.cpp" />
@@ -137,6 +141,7 @@
     <ClCompile Include="ast\field_expression.cpp" />
     <ClCompile Include="ast\scoped_expression.cpp" />
     <ClCompile Include="ast\struct_declaration_expression.cpp" />
+    <ClCompile Include="ast\struct_initializer_list_expression.cpp" />
     <ClCompile Include="ast\type_cast_expression.cpp" />
     <ClCompile Include="code_gen\builders\array_access_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\array_declaration_expression_builder.cpp" />
@@ -155,6 +160,7 @@
     <ClCompile Include="code_gen\builders\return_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\struct_access_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\struct_declaration_expression_builder.cpp" />
+    <ClCompile Include="code_gen\builders\struct_initializer_list_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\type_cast_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\variable_builder.cpp" />
     <ClCompile Include="code_gen\code_gen.cpp" />

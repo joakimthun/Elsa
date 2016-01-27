@@ -32,6 +32,7 @@
 #include "../builders/array_access_expression_builder.h"
 #include "../builders/array_initializer_list_expression_builder.h"
 #include "../builders/type_cast_expression_builder.h"
+#include "../builders/struct_initializer_list_expression_builder.h"
 
 namespace elsa {
 	namespace compiler {
@@ -64,6 +65,7 @@ namespace elsa {
 			void visit(ArrayInitializerListExpression* expression) override;
 			void visit(StringLiteralExpression* expression) override;
 			void visit(TypeCastExpression* expression) override;
+			void visit(StructInitializerListExpression* expression) override;
 
 			ScopedExpression* current_scope();
 			void set_current_scope(ScopedExpression* scope);

@@ -133,6 +133,11 @@ namespace elsa {
 			TypeCastExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		void VMExpressionVisitor::visit(StructInitializerListExpression* expression)
+		{
+			StructInitializerListExpressionBuilder::build(vm_program_.get(), this, expression);
+		}
+
 		ScopedExpression* VMExpressionVisitor::current_scope()
 		{
 			if (current_scope_ == nullptr)
