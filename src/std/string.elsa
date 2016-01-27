@@ -16,8 +16,9 @@ struct String
 
 	func String Concat(String other)
 	{
-		var newStr = new String;
-		newStr.str = new char[Length() + other.Length()];
+		var newStr = new String {
+			str: new char[Length() + other.Length()]
+		};
 
 		loop(var i = 0; i < Length(); i++)
 		{
@@ -34,8 +35,9 @@ struct String
 
 	func String Substring(int startIndex, int length)
 	{
-		var newStr = new String;
-		newStr.str = new char[length];
+		var newStr = new String {
+			str: new char[length]
+		};
 
 		// TODO: Error checking, validate start and length
 		int stopIndex = startIndex + length;

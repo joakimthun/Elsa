@@ -23,6 +23,7 @@ namespace elsa {
 				program->emit(OpCode::l_local);
 				program->emit(0);
 				exp->get_value()->accept(visitor);
+
 				program->emit(OpCode::s_field);
 				program->emit(static_cast<int>(exp->get_index()));
 			}

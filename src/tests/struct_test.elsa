@@ -3,6 +3,7 @@ import "std/assert";
 struct MyStruct
 {
 	int IntField;
+	int IntFieldAgain;
 	float FloatField;
 	char CharField;
 	bool BoolField;
@@ -85,7 +86,7 @@ func void StructInitializerListTest()
 		CharField: c,
 		BoolField: b,
 	};
-
+	
 	AssertEq(i, s.IntField);
 	AssertEq(f, s.FloatField);
 	AssertEq(c, s.CharField);

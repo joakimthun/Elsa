@@ -56,6 +56,7 @@ namespace elsa {
 
 							sile->add_value_expression(std::make_unique<FieldInitializerExpression>(std::move(value_expression), field->get_index()));
 							match = true;
+							break;
 						}
 					}
 
@@ -68,7 +69,9 @@ namespace elsa {
 			}
 
 			parser->consume(TokenType::RBracket);
-			parser->consume(TokenType::Semicolon);
+
+			if (parser->current_token()->get_type() == TokenType::Semicolon)
+				parser->consume(TokenType::Semicolon);
 
 			return std::move(sile);
 		}
