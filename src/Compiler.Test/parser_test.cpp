@@ -19,7 +19,7 @@ void assert_is_literal_expression(Expression* exp, TValue value)
 	}
 }
 
-BinaryOperatorExpression* assert_is_binary_operator_expression(Expression* exp, TokenType op)
+BinaryOperatorExpression* assert_is_binary_operator_expression(Expression* exp, elsa::compiler::TokenType op)
 {
 	if (auto boe = dynamic_cast<BinaryOperatorExpression*>(exp))
 	{

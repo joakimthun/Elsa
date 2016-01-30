@@ -140,9 +140,6 @@ namespace elsa {
 
 		ScopedExpression* VMExpressionVisitor::current_scope()
 		{
-			if (current_scope_ == nullptr)
-				throw CodeGenException("No scope defined");
-
 			return current_scope_;
 		}
 

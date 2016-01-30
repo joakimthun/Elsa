@@ -2,5 +2,5 @@ import "std/assert";
 
 func void FuncCreateInvokeTest()
 {
-
+	func<int, int> f = (x) => { return x; };
 }

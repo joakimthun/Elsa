@@ -280,6 +280,7 @@ namespace elsa {
 			register_ll2_expression_parser(TokenType::Identifier, TokenType::LParen, new FuncCallParser());
 			register_ll2_expression_parser(TokenType::Identifier, TokenType::LSBracket, new ArrayAccessParser());
 			register_ll2_expression_parser(TokenType::Identifier, TokenType::Identifier, new VariableDeclarationParser());
+			register_ll2_expression_parser(TokenType::Func, TokenType::LessThan, new AnonymousFuncDeclarationParser());
 
 			register_ll2_expression_parser(TokenType::Int, TokenType::LParen, new TypeCastParser());
 			register_ll2_expression_parser(TokenType::Float, TokenType::LParen, new TypeCastParser());

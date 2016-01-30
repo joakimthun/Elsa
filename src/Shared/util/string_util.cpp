@@ -24,4 +24,16 @@ namespace elsa {
 		return std::wstring(wcstring);
 	}
 
+	std::wstring StringUtil::create_random_string(std::size_t length)
+	{
+		std::wstring str;
+		static const std::wstring chars = L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		static const auto max_index = chars.size() - 1;
+
+		for (auto i = 0; i < length; i++) {
+			str.push_back(chars[rand() % max_index]);
+		}
+
+		return str;
+	}
 }

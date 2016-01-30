@@ -12,7 +12,8 @@ namespace elsa {
 			num_locals_(0),
 			num_args_(0),
 			impl_(nullptr),
-			native_function_(native_function)
+			native_function_(native_function),
+			built_(false)
 		{
 		}
 
@@ -97,6 +98,16 @@ namespace elsa {
 			return native_function_;
 		}
 
+		bool FuncDeclarationExpression::built() const
+		{
+			return built_;
+		}
+
+		void FuncDeclarationExpression::set_built(bool built)
+		{
+			built_ = built;
+		}
+
 		const std::wstring& FuncDeclarationExpression::get_name() const
 		{
 			return name_;
@@ -133,6 +144,18 @@ namespace elsa {
 			return re;
 		}
 
+		std::vector<FuncDeclarationExpression*> FuncDeclarationExpression::get_nested_functions()
+		{
+			std::vector<FuncDeclarationExpression*> functions;
+
+			for (const auto& exp : body_)
+			{
+				get_nested_functions_internal(exp.get(), functions);
+			}
+
+			return functions;
+		}
+
 		void FuncDeclarationExpression::accept(ExpressionVisitor* visitor)
 		{
 			visitor->visit(this);
@@ -149,7 +172,6 @@ namespace elsa {
 			if (auto re = dynamic_cast<ReturnExpression*>(exp))
 			{
 				return_expressions.expressions.push_back(re);
-				return;
 			}
 			else if (auto conde_exp = dynamic_cast<ConditionalExpression*>(exp))
 			{
@@ -176,8 +198,6 @@ namespace elsa {
 				}
 
 				return_expressions.if_else_with_return = if_with_return && else_with_return;
-
-				return;
 			}
 			else if (auto loop_exp = dynamic_cast<LoopExpression*>(exp))
 			{
@@ -185,8 +205,41 @@ namespace elsa {
 				{
 					get_return_expressions_internal(be.get(), return_expressions);
 				}
+			}
+		}
 
-				return;
+		void FuncDeclarationExpression::get_nested_functions_internal(Expression* exp, std::vector<FuncDeclarationExpression*>& functions)
+		{
+			if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp))
+			{
+				if (auto fde = dynamic_cast<FuncDeclarationExpression*>(vde->get_expression()))
+				{
+					for (const auto& exp : fde->body_)
+					{
+						get_nested_functions_internal(exp.get(), functions);
+					}
+
+					functions.push_back(fde);
+				}
+			}
+			else if (auto conde_exp = dynamic_cast<ConditionalExpression*>(exp))
+			{
+				for (const auto& ie : conde_exp->get_if_body())
+				{
+					get_nested_functions_internal(ie.get(), functions);
+				}
+
+				for (const auto& ee : conde_exp->get_else_body())
+				{
+					get_nested_functions_internal(ee.get(), functions);
+				}
+			}
+			else if (auto loop_exp = dynamic_cast<LoopExpression*>(exp))
+			{
+				for (const auto& be : loop_exp->get_body())
+				{
+					get_nested_functions_internal(be.get(), functions);
+				}
 			}
 		}
 	}

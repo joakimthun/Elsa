@@ -29,7 +29,7 @@ namespace elsa {
 			return fields_[index].get();
 		}
 
-		FunctionInfo* StructInfo::get_function(std::wstring name) const
+		const FunctionInfo* StructInfo::get_function(std::wstring name) const
 		{
 			for (auto& f : functions_)
 			{
@@ -62,7 +62,7 @@ namespace elsa {
 			fields_.push_back(std::move(field));
 		}
 
-		void StructInfo::add_function(FunctionInfo* function)
+		void StructInfo::add_function(const FunctionInfo* function)
 		{
 			for (auto& f : functions_)
 			{

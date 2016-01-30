@@ -185,6 +185,11 @@ namespace elsa {
 				auto tce = static_cast<TypeCastExpression*>(expression);
 				return new ElsaType(tce->get_dest_type());
 			}
+			if (is_of_type<FuncDeclarationExpression>(expression))
+			{
+				auto fde = static_cast<FuncDeclarationExpression*>(expression);
+				return new ElsaType(fde);
+			}
 
 			throw ParsingException(L"Unkown expression type.", parser_->current_token());
 		}

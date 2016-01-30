@@ -10,13 +10,23 @@ namespace elsa {
 			build_internal(program, visitor, expression);
 		}
 
-		FunctionInfo* FunctionDeclarationExpressionBuilder::build_member(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression)
+		const FunctionInfo* FunctionDeclarationExpressionBuilder::build_member(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression)
 		{
 			return build_internal(program, visitor, expression);
 		}
 
-		FunctionInfo* FunctionDeclarationExpressionBuilder::build_internal(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression)
+		const FunctionInfo* FunctionDeclarationExpressionBuilder::build_internal(VMProgram* program, VMExpressionVisitor* visitor, FuncDeclarationExpression* expression)
 		{
+			if (expression->built())
+			{
+				return program->get_func(expression->get_name());
+			}
+
+			for (auto nested_function_expression : expression->get_nested_functions())
+			{
+				build_internal(program, visitor, nested_function_expression);
+			}
+
 			auto fi = std::make_unique<FunctionInfo>(expression->get_name());
 			fi->set_num_args(expression->get_num_args());
 			auto is_main = expression->get_name() == L"main";
@@ -31,6 +41,7 @@ namespace elsa {
 
 			fi->set_addr(static_cast<int>(program->get_next_instruction_index()));
 
+			auto parent_scope = visitor->current_scope();
 			visitor->set_current_scope(expression);
 
 			for (auto& exp : expression->get_body())
@@ -52,7 +63,8 @@ namespace elsa {
 			auto fi_ptr = fi.get();
 			program->add_func(std::move(fi));
 
-			visitor->reset_current_scope();
+			visitor->set_current_scope(parent_scope);
+			expression->set_built(true);
 
 			return fi_ptr;
 		}
