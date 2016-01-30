@@ -60,15 +60,23 @@ namespace elsa {
 			return locals_.has_entry(name);
 		}
 
-		void ScopedExpression::add(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression, LocalType local_type)
+		std::size_t ScopedExpression::create_new_local()
 		{
-			auto index = 0;
+			auto index = add(L"0", ElsaType(ObjectType::Object), nullptr, LocalType::Local);
+			root_->increment_num_locals();
+			return index;
+		}
+
+		std::size_t ScopedExpression::add(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression, LocalType local_type)
+		{
+			std::size_t index = 0;
 			if (local_type == LocalType::Local)
 				index = root_->get_num_locals();
 			else
 				index = root_->get_num_args();
 
 			locals_.add(name, new LocalSymbol(name, index, type, struct_expression, local_type));
+			return index;
 		}
 
 	}

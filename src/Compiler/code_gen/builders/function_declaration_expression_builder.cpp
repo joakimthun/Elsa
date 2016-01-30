@@ -19,7 +19,6 @@ namespace elsa {
 		{
 			auto fi = std::make_unique<FunctionInfo>(expression->get_name());
 			fi->set_num_args(expression->get_num_args());
-			fi->set_num_locals(expression->get_num_locals());
 			auto is_main = expression->get_name() == L"main";
 
 			if (is_main)
@@ -47,6 +46,8 @@ namespace elsa {
 			{
 				program->emit(OpCode::ret);
 			}
+
+			fi->set_num_locals(expression->get_num_locals());
 
 			auto fi_ptr = fi.get();
 			program->add_func(std::move(fi));

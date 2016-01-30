@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 
 #include "exceptions/codegen_exception.h"
 #include "../../ast/struct_initializer_list_expression.h"

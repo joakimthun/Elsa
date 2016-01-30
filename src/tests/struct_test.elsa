@@ -18,6 +18,13 @@ struct MyOtherStruct
 	MyStruct StructField;
 };
 
+struct MyArrayStruct
+{
+	int IntField;
+	float FloatField;
+	int[] ArrayField;
+};
+
 func void NewStructTest()
 {
 	var s = new MyStruct;
@@ -96,11 +103,38 @@ func void StructInitializerListTest()
 		IntField: 10,
 		FloatField: 10.0,
 		CharField: 'A',
-		BoolField: true
+		BoolField: true,
+		StructField: new MyStruct {
+			IntField: i,
+			FloatField: f,
+			CharField: c,
+			BoolField: b,
+		}
 	};
 
 	AssertEq(10, s2.IntField);
 	AssertEq(10.0, s2.FloatField);
 	AssertEq('A', s2.CharField);
 	AssertEq(true, s2.BoolField);
+
+	AssertEq(i, s2.StructField.IntField);
+	AssertEq(f, s2.StructField.FloatField);
+	AssertEq(c, s2.StructField.CharField);
+	AssertEq(b, s2.StructField.BoolField);
+
+	var s3 = new MyArrayStruct {
+		IntField: 10,
+		FloatField: 10.0,
+		ArrayField: new [ 1, 2, 3, 4, 5 ]
+	};
+
+	AssertEq(10, s3.IntField);
+	AssertEq(10.0, s3.FloatField);
+	AssertEq(5, s3.ArrayField.Length())
+
+	AssertEq(1, s3.ArrayField[0])
+	AssertEq(2, s3.ArrayField[1])
+	AssertEq(3, s3.ArrayField[2])
+	AssertEq(4, s3.ArrayField[3])
+	AssertEq(5, s3.ArrayField[4])
 }
