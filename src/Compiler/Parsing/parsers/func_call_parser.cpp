@@ -7,10 +7,22 @@ namespace elsa {
 		{
 			auto func_name = parser->current_token()->get_value();
 
-			if (!parser->function_table().has_entry(func_name))
-				throw ParsingException(L"Can not call undefined functions", parser->current_token());
+			auto local = parser->current_scope()->get_local(func_name);
 
-			return parse(parser, parser->function_table().get(func_name)->get_expression());
+			if (local != nullptr)
+			{
+				if(local->get_type().get_func_declaration_expression() == nullptr)
+					throw ParsingException(L"The identifier '" + func_name + L"' is not a function", parser->current_token());
+
+				return parse(parser, local->get_type().get_func_declaration_expression());
+			}
+			else
+			{
+				if (!parser->function_table().has_entry(func_name))
+					throw ParsingException(L"Can not call undefined functions", parser->current_token());
+
+				return parse(parser, parser->function_table().get(func_name)->get_expression());
+			}
 		}
 
 		std::unique_ptr<Expression> FuncCallParser::parse_member_call(ElsaParser* parser, const FuncDeclarationExpression* fde)

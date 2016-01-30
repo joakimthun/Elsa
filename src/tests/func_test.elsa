@@ -3,4 +3,8 @@ import "std/assert";
 func void FuncCreateInvokeTest()
 {
 	func<int, int> f = (x) => { return x; };
+	func<int, int> f2 = (x) => { return x + 10; };
+
+	AssertEq(3, f(3));
+	AssertEq(13, f2(3));
 }
