@@ -1,0 +1,6 @@
+import "std/assert";
+
+func void FuncCreateInvokeTest()
+{
+
+}

@@ -6,6 +6,7 @@ import "tests/type_cast_test";
 import "tests/array_test";
 import "tests/struct_test";
 import "tests/program2";
+import "tests/func_test";
 
 struct Vec2D
 {
@@ -390,6 +391,9 @@ func int main(int dummy)
 	StringEqualsTest();
 	StringConcatTest();
 	SubstringTest();
+
+	// Funcs
+	FuncCreateInvokeTest();
 
 	return 0;
 }
