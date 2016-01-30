@@ -47,6 +47,8 @@ namespace elsa {
 			bool is_native() const;
 			bool built() const;
 			void set_built(bool built);
+			bool anonymous() const;
+			void set_anonymous(bool anonymous);
 
 			const std::wstring& get_name() const;
 			const ElsaType* get_return_type() const;
@@ -73,6 +75,7 @@ namespace elsa {
 			std::size_t num_args_;
 			bool native_function_;
 			bool built_;
+			bool anonymous_;
 		};
 	}
 }

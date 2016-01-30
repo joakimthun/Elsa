@@ -13,7 +13,8 @@ namespace elsa {
 			num_args_(0),
 			impl_(nullptr),
 			native_function_(native_function),
-			built_(false)
+			built_(false),
+			anonymous_(false)
 		{
 		}
 
@@ -106,6 +107,16 @@ namespace elsa {
 		void FuncDeclarationExpression::set_built(bool built)
 		{
 			built_ = built;
+		}
+
+		bool FuncDeclarationExpression::anonymous() const
+		{
+			return anonymous_;
+		}
+
+		void FuncDeclarationExpression::set_anonymous(bool anonymous)
+		{
+			anonymous_ = anonymous;
 		}
 
 		const std::wstring& FuncDeclarationExpression::get_name() const

@@ -9,6 +9,7 @@ namespace elsa {
 			parser->consume(TokenType::LessThan);
 
 			auto func_dec_exp = std::make_unique<FuncDeclarationExpression>();
+			func_dec_exp->set_anonymous(true);
 			auto name = StringUtil::create_random_string(20);
 			func_dec_exp->set_name(name);
 

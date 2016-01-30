@@ -87,6 +87,23 @@ namespace elsa {
 			call_stack_.dump_stack_trace();
 		}
 
+		void VM::call_internal(int addr)
+		{
+			auto f = program_.get_func(addr);
+			auto sf = new StackFrame(f, pc_ + 1, call_stack_.current());
+			call_stack_.push(sf);
+
+			if (f->get_num_args() > 0)
+			{
+				for (int i = static_cast<int>(f->get_num_args()) - 1; i >= 0; --i)
+				{
+					sf->store_arg(i, current_frame_->pop());
+				}
+			}
+
+			pc_ = addr;
+		}
+
 		int VM::get_instruction(std::size_t pc)
 		{
 			return program_.get_instructions()[pc];
@@ -318,20 +335,7 @@ namespace elsa {
 			}
 			case call: {
 				auto addr = get_instruction(pc_);
-
-				auto f = program_.get_func(addr);
-				auto sf = new StackFrame(f, pc_ + 1, call_stack_.current());
-				call_stack_.push(sf);
-
-				if (f->get_num_args() > 0)
-				{
-					for (int i = static_cast<int>(f->get_num_args()) - 1; i >= 0; --i)
-					{
-						sf->store_arg(i, current_frame_->pop());
-					}
-				}
-
-				pc_ = addr;
+				call_internal(addr);
 				break;
 			}
 			case ret: {
@@ -355,6 +359,11 @@ namespace elsa {
 
 					pc_ = ret_addr;
 				}
+				break;
+			}
+			case scall: {
+				auto o = current_frame_->pop();
+				call_internal(o.i());
 				break;
 			}
 			case l_arg: {

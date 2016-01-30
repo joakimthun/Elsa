@@ -15,6 +15,7 @@ namespace elsa {
 			// Functions
 			call,
 			ret,
+			scall,
 
 			// Integer operations
 			iconst,

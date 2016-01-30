@@ -34,6 +34,7 @@ namespace elsa {
 			void dump_stack_trace();
 
 		private:
+			void call_internal(int addr);
 			int get_instruction(std::size_t pc);
 			void cycle();
 			void push_main();
