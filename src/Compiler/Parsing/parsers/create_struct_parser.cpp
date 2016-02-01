@@ -81,7 +81,6 @@ namespace elsa {
 			auto arr_exp = std::make_unique<ArrayDeclarationExpression>();
 			
 			auto type = std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
-			parser->consume();
 
 			auto array_struct = parser->struct_table().get(L"Array")->get_expression();
 			auto array_type = array_struct->create_generic(std::move(type), parser);

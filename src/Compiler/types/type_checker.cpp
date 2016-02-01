@@ -197,41 +197,53 @@ namespace elsa {
 
 		ElsaType* TypeChecker::get_type_from_token(Token* token)
 		{
-			auto type = token->get_type();
-			switch (type)
+			auto token_type = token->get_type();
+			ElsaType* type = nullptr;
+			switch (token_type)
 			{
 			case TokenType::Void: {
-				return new ElsaType(ObjectType::Void);
+				type = new ElsaType(ObjectType::Void);
+				break;
 			}
 			case TokenType::Int: {
-				return new ElsaType(ObjectType::Int);
+				type = new ElsaType(ObjectType::Int);
+				break;
 			}
 			case TokenType::Float: {
-				return new ElsaType(ObjectType::Float);
+				type = new ElsaType(ObjectType::Float);
+				break;
 			}
 			case TokenType::Char: {
-				return new ElsaType(ObjectType::Char);
+				type = new ElsaType(ObjectType::Char);
+				break;
 			}
 			case TokenType::Bool: {
-				return new ElsaType(ObjectType::Bool);
+				type = new ElsaType(ObjectType::Bool);
+				break;
 			}
 			case TokenType::IntegerLiteral: {
-				return new ElsaType(ObjectType::Int);
+				type = new ElsaType(ObjectType::Int);
+				break;
 			}
 			case TokenType::FloatLiteral: {
-				return new ElsaType(ObjectType::Float);
+				type = new ElsaType(ObjectType::Float);
+				break;
 			}
 			case TokenType::CharLiteral: {
-				return new ElsaType(ObjectType::Char);
+				type = new ElsaType(ObjectType::Char);
+				break;
 			}
 			case TokenType::BoolLiteral: {
-				return new ElsaType(ObjectType::Bool);
+				type = new ElsaType(ObjectType::Bool);
+				break;
 			}
 			case TokenType::Object: {
-				return new ElsaType(ObjectType::Object);
+				type = new ElsaType(ObjectType::Object);
+				break;
 			}
 			case TokenType::Identifier: {
-				return get_struct_type(token->get_value());
+				type = get_struct_type(token->get_value());
+				break;
 			}
 			case TokenType::Func: {
 				return get_func_type();
@@ -239,6 +251,9 @@ namespace elsa {
 			default:
 				throw ParsingException(L"Invalid type.", parser_->current_token());
 			}
+
+			parser_->consume();
+			return type;
 		}
 
 		void TypeChecker::assert_is_same_type(ObjectType t1, ObjectType t2)

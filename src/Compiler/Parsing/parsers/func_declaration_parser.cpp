@@ -28,7 +28,6 @@ namespace elsa {
 			auto func_dec_exp = std::make_unique<FuncDeclarationExpression>(native_function);
 
 			auto ret_type = std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
-			parser->consume();
 
 			if (parser->current_token()->get_type() == TokenType::LSBracket)
 			{
@@ -82,7 +81,6 @@ namespace elsa {
 			{
 				auto arg = std::make_unique<ArgumentExpression>();
 				auto type = std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
-				parser->consume();
 
 				if (parser->current_token()->get_type() == TokenType::LSBracket)
 				{

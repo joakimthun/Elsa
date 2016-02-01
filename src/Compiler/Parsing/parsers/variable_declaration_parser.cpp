@@ -75,7 +75,6 @@ namespace elsa {
 		std::unique_ptr<ElsaType> VariableDeclarationParser::get_explicit_type(ElsaParser* parser)
 		{
 			auto type = std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
-			parser->consume();
 
 			if (parser->current_token()->get_type() == TokenType::LSBracket)
 			{

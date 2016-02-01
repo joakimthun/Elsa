@@ -51,8 +51,6 @@ namespace elsa {
 		{
 			auto field_type = std::unique_ptr<ElsaType>(parser->type_checker().get_type_from_token(parser->current_token()));
 
-			parser->consume();
-
 			auto field_expression = std::make_unique<FieldExpression>();
 
 			if (parser->current_token()->get_type() == TokenType::LSBracket)
