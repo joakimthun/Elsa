@@ -48,7 +48,6 @@ namespace elsa {
 			ElsaType* get_type_from_token(Token* token);
 			void assert_is_same_type(ObjectType t1, ObjectType t2);
 			bool is_same_type(Expression* first, Expression* second);
-			bool is_same_type(const ElsaType* first, const ElsaType* second);
 			ElsaType* get_access_type(const ElsaType* type, const std::wstring& name, bool throw_invalid_exception = true);
 			ElsaType* get_struct_type(const std::wstring& name);
 			ElsaType* get_func_type();

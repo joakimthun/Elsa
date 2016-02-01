@@ -43,6 +43,7 @@ namespace elsa {
 
 			void set_is_array(bool is_array);
 			bool get_is_array() const;
+			bool are_equal(const ElsaType* other) const;
 		private:
 			void assert_is_valid();
 

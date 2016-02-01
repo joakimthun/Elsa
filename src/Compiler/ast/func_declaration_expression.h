@@ -49,6 +49,7 @@ namespace elsa {
 			void set_built(bool built);
 			bool anonymous() const;
 			void set_anonymous(bool anonymous);
+			bool are_equal(const FuncDeclarationExpression* other) const;
 
 			const std::wstring& get_name() const;
 			const ElsaType* get_return_type() const;

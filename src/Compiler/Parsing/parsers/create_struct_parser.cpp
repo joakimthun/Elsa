@@ -51,7 +51,7 @@ namespace elsa {
 						if (field->get_name() == field_name)
 						{
 							auto value_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(value_expression.get()));
-							if (!parser->type_checker().is_same_type(field->get_type(), value_type.get()))
+							if (!field->get_type()->are_equal(value_type.get()))
 								throw ParsingException(L"Cannot convert type '" + field->get_type()->get_name() + L"' to '" + value_type->get_name() + L"'", parser->current_token());
 
 							sile->add_value_expression(std::make_unique<FieldInitializerExpression>(std::move(value_expression), field->get_index()));
@@ -128,7 +128,7 @@ namespace elsa {
 			for (const auto& value : exp->get_values())
 			{
 				auto value_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(value.get()));
-				if (!parser->type_checker().is_same_type(type.get(), value_type.get()))
+				if (!type->are_equal(value_type.get()))
 					throw ParsingException(L"All expressions in the initializer list must be of the same type", parser->current_token());
 
 				type.reset(value_type.release());

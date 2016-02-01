@@ -131,6 +131,17 @@ namespace elsa {
 			return is_array_;
 		}
 
+		bool ElsaType::are_equal(const ElsaType* other) const
+		{
+			if (this->get_type() == ObjectType::GCOPtr && other->get_type() == ObjectType::GCOPtr)
+				return this->get_struct_declaration_expression()->get_name() == other->get_struct_declaration_expression()->get_name();
+
+			//if (this->get_type() == ObjectType::Function && other->get_type() == ObjectType::Function)
+			//	return this->get_func_declaration_expression()->are_equal(other->get_func_declaration_expression());
+
+			return this->get_type() == other->get_type();
+		}
+
 		void ElsaType::assert_is_valid()
 		{
 			if (type_ == ObjectType::GCOPtr && struct_declaration_expression_ == nullptr)

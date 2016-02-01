@@ -274,15 +274,7 @@ namespace elsa {
 			if (right->get_type() == ObjectType::GCOPtr && right->get_struct_declaration_expression()->is_generic_type())
 				right.reset(new ElsaType(right->get_struct_declaration_expression()->get_generic_type()));
 
-			return is_same_type(left.get(), right.get());
-		}
-
-		bool TypeChecker::is_same_type(const ElsaType* first, const ElsaType* second)
-		{
-			if (first->get_type() == ObjectType::GCOPtr && second->get_type() == ObjectType::GCOPtr)
-				return first->get_struct_declaration_expression()->get_name() == second->get_struct_declaration_expression()->get_name();
-
-			return first->get_type() == second->get_type();
+			return left->are_equal(right.get());
 		}
 
 		ElsaType* TypeChecker::get_access_type(const ElsaType* type, const std::wstring& name, bool throw_invalid_exception)
@@ -325,9 +317,10 @@ namespace elsa {
 
 		ElsaType* TypeChecker::get_func_type()
 		{
+			// TODO: Reuse functions with the same signature?
 			function_signatures_.push_back(AnonymousFuncDeclarationParser::parse_signature(parser_));
 
-			return nullptr;
+			return new ElsaType(function_signatures_.back().get());
 		}
 
 		bool TypeChecker::valid_assignment(AssignmentExpression* assignment_expression)
@@ -384,7 +377,7 @@ namespace elsa {
 			for (const auto return_exp : return_expressions.expressions)
 			{
 				auto return_expression_type = get_expression_type(return_exp);
-				if (!is_same_type(return_expression_type, declared_return_type))
+				if (!return_expression_type->are_equal(declared_return_type))
 					return false;
 			}
 

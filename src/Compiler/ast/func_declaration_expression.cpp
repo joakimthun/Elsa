@@ -119,6 +119,13 @@ namespace elsa {
 			anonymous_ = anonymous;
 		}
 
+		bool FuncDeclarationExpression::are_equal(const FuncDeclarationExpression* other) const
+		{
+			//if()
+
+			return false;
+		}
+
 		const std::wstring& FuncDeclarationExpression::get_name() const
 		{
 			return name_;
