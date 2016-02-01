@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "../ast/expression.h"
 #include "../ast/char_literal_expression.h"
@@ -30,7 +31,7 @@
 #include "../ast/struct_initializer_list_expression.h"
 #include "elsa_type.h"
 #include "../token.h"
-#include "..\exceptions\parsing_exception.h"
+#include "../exceptions\parsing_exception.h"
 
 
 namespace elsa {
@@ -50,6 +51,7 @@ namespace elsa {
 			bool is_same_type(const ElsaType* first, const ElsaType* second);
 			ElsaType* get_access_type(const ElsaType* type, const std::wstring& name, bool throw_invalid_exception = true);
 			ElsaType* get_struct_type(const std::wstring& name);
+			ElsaType* get_func_type();
 			bool valid_assignment(AssignmentExpression* assignment_expression);
 			bool valid_return_expression(Expression* expression);
 			bool return_type_match(FuncDeclarationExpression* expression);
@@ -60,6 +62,7 @@ namespace elsa {
 
 		private:
 			ElsaParser* parser_;
+			std::vector<std::unique_ptr<FuncDeclarationExpression>> function_signatures_;
 		};
 
 	}

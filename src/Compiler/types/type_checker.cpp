@@ -1,6 +1,7 @@
 #include "type_checker.h"
 
 #include "../parsing/elsa_parser.h"
+#include "../parsing/parsers/anonymous_func_declaration_parser.h"
 
 namespace elsa {
 	namespace compiler {
@@ -232,6 +233,9 @@ namespace elsa {
 			case TokenType::Identifier: {
 				return get_struct_type(token->get_value());
 			}
+			case TokenType::Func: {
+				return get_func_type();
+			}
 			default:
 				throw ParsingException(L"Invalid type.", parser_->current_token());
 			}
@@ -302,6 +306,13 @@ namespace elsa {
 			}
 
 			throw ParsingException(L"Invalid struct name", parser_->current_token());
+		}
+
+		ElsaType* TypeChecker::get_func_type()
+		{
+			function_signatures_.push_back(AnonymousFuncDeclarationParser::parse_signature(parser_));
+
+			return nullptr;
 		}
 
 		bool TypeChecker::valid_assignment(AssignmentExpression* assignment_expression)
