@@ -136,8 +136,8 @@ namespace elsa {
 			if (this->get_type() == ObjectType::GCOPtr && other->get_type() == ObjectType::GCOPtr)
 				return this->get_struct_declaration_expression()->get_name() == other->get_struct_declaration_expression()->get_name();
 
-			//if (this->get_type() == ObjectType::Function && other->get_type() == ObjectType::Function)
-			//	return this->get_func_declaration_expression()->are_equal(other->get_func_declaration_expression());
+			if (this->get_type() == ObjectType::Function && other->get_type() == ObjectType::Function)
+				return this->get_func_declaration_expression()->are_equal(other->get_func_declaration_expression());
 
 			return this->get_type() == other->get_type();
 		}

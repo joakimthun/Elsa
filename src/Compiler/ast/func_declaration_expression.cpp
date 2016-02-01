@@ -121,9 +121,19 @@ namespace elsa {
 
 		bool FuncDeclarationExpression::are_equal(const FuncDeclarationExpression* other) const
 		{
-			//if()
+			if (!this->return_type_->are_equal(other->return_type_.get()))
+				return false;
 
-			return false;
+			if (this->args_.size() != other->args_.size())
+				return false;
+
+			for (auto i = 0; i < this->args_.size(); i++)
+			{
+				if (!this->args_[i]->get_type()->are_equal(other->args_[i]->get_type()))
+					return false;
+			}
+
+			return true;
 		}
 
 		const std::wstring& FuncDeclarationExpression::get_name() const

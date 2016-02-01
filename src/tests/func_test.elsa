@@ -9,12 +9,12 @@ func void FuncCreateInvokeTest()
 	AssertEq(13, f2(3));
 }
 
-func void FuncWithFuncArg(func<int, int> f)
+func void FuncWithFuncArg(func<int, int> fnarg)
 {
 }
 
 func void FuncPassAsArgTest()
 {
-	func<char, char> fn = (x) => { return x; };
+	func<int, int> fn = (x) => { return x; };
 	FuncWithFuncArg(fn);
 }
