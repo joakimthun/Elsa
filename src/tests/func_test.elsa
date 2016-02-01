@@ -4,17 +4,18 @@ func void FuncCreateInvokeTest()
 {
 	func<int, int> f = (x) => { return x; };
 	func<int, int> f2 = (x) => { return x + 10; };
-
+	
 	AssertEq(3, f(3));
 	AssertEq(13, f2(3));
 }
 
 func void FuncWithFuncArg(func<int, int> fnarg)
 {
+	PrintLn(fnarg(3));
 }
 
 func void FuncPassAsArgTest()
 {
-	func<int, int> fn = (x) => { return x; };
+	func<int, int> fn = (x) => { return x + 20; };
 	FuncWithFuncArg(fn);
 }

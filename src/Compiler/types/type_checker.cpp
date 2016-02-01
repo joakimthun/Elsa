@@ -320,7 +320,10 @@ namespace elsa {
 			// TODO: Reuse functions with the same signature?
 			function_signatures_.push_back(AnonymousFuncDeclarationParser::parse_signature(parser_));
 
-			return new ElsaType(function_signatures_.back().get());
+			auto fde = function_signatures_.back().get();
+			fde->set_num_args(fde->get_args().size());
+
+			return new ElsaType(fde);
 		}
 
 		bool TypeChecker::valid_assignment(AssignmentExpression* assignment_expression)
