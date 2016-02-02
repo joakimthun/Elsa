@@ -1,19 +1,35 @@
 import "std/io";
 import "std/assert";
 
-func void Test(func<int, int> fn)
+struct TestStruct 
+{
+	int MyField;
+};
+
+func void Test(func (int x) : int fn)
 {
 	var x = fn(10);
 	PrintLn(x);
 }
 
+func TestStruct Test2(func(int x) : TestStruct fn)
+{
+	return fn(10);
+}
+
 func void main()
 {
-	func<int, int> f = (x) => { return x + 100; };
+	var f = func (int x) : int => { return x + 100; };
 
 	var x = f(3);
 	PrintLn(x);
 	PrintLn(11);
-
 	Test(f);
+	
+	var f2 = func(int x) : TestStruct => {
+		return new TestStruct { MyField: x }; 
+	};
+	
+	var tstr = Test2(f2);
+	PrintLn(tstr.MyField);
 }

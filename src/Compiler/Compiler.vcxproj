@@ -76,6 +76,7 @@
     <ClInclude Include="interop\native_function_table.h" />
     <ClInclude Include="Lexing\lexer.h" />
     <ClInclude Include="lexing\source_file.h" />
+    <ClInclude Include="parsing\helpers\func_parser_helper.h" />
     <ClInclude Include="parsing\ll2_entry.h" />
     <ClInclude Include="parsing\parsers\anonymous_func_declaration_parser.h" />
     <ClInclude Include="parsing\parsers\array_access_parser.h" />
@@ -173,6 +174,7 @@
     <ClCompile Include="interop\native_function_table.cpp" />
     <ClCompile Include="Lexing\lexer.cpp" />
     <ClCompile Include="Lexing\source_file.cpp" />
+    <ClCompile Include="parsing\helpers\func_parser_helper.cpp" />
     <ClCompile Include="parsing\parsers\anonymous_func_declaration_parser.cpp" />
     <ClCompile Include="parsing\parsers\array_access_parser.cpp" />
     <ClCompile Include="parsing\parsers\assignment_parser.cpp" />

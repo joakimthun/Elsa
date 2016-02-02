@@ -1,7 +1,7 @@
 #include "type_checker.h"
 
 #include "../parsing/elsa_parser.h"
-#include "../parsing/parsers/anonymous_func_declaration_parser.h"
+#include "../parsing/helpers/func_parser_helper.h"
 
 namespace elsa {
 	namespace compiler {
@@ -318,7 +318,7 @@ namespace elsa {
 		ElsaType* TypeChecker::get_func_type()
 		{
 			// TODO: Reuse functions with the same signature?
-			function_signatures_.push_back(AnonymousFuncDeclarationParser::parse_signature(parser_));
+			function_signatures_.push_back(FuncParserHelper::parse_signature(parser_, true, nullptr));
 
 			auto fde = function_signatures_.back().get();
 			fde->set_num_args(fde->get_args().size());

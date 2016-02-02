@@ -2,7 +2,6 @@
 
 #include <memory>
 
-#include "parser.h"
 #include "../../ast/func_declaration_expression.h"
 #include "../../ast/argument_expression.h"
 #include "../../ast/struct_declaration_expression.h"
@@ -13,10 +12,10 @@
 namespace elsa {
 	namespace compiler {
 
-		class AnonymousFuncDeclarationParser : public Parser
+		class FuncParserHelper
 		{
 		public:
-			std::unique_ptr<Expression> parse(ElsaParser* parser) override;
+			static std::unique_ptr<FuncDeclarationExpression> parse_signature(ElsaParser* parser, bool anonymous, StructDeclarationExpression* parent);
 		};
 
 	}
