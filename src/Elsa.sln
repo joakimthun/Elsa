@@ -41,6 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9BEA47F1
 		tests\string_test.elsa = tests\string_test.elsa
 		tests\struct_test.elsa = tests\struct_test.elsa
 		tests\test.elsa = tests\test.elsa
+		tests\test2.elsa = tests\test2.elsa
 		tests\type_cast_test.elsa = tests\type_cast_test.elsa
 	EndProjectSection
 EndProject

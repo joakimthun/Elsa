@@ -19,7 +19,15 @@ namespace elsa {
 		{
 			if (expression->built())
 			{
-				return program->get_func(expression->get_name());
+				auto function_info = program->get_func(expression->get_name());
+
+				if (expression->anonymous())
+				{
+					program->emit(OpCode::fnconst);
+					program->emit(static_cast<int>(function_info->get_addr()));
+				}
+
+				return function_info;
 			}
 
 			for (auto nested_function_expression : expression->get_nested_functions())
@@ -61,6 +69,7 @@ namespace elsa {
 			fi->set_num_locals(expression->get_num_locals());
 
 			auto fi_ptr = fi.get();
+
 			program->add_func(std::move(fi));
 
 			visitor->set_current_scope(parent_scope);

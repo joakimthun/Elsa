@@ -14,7 +14,7 @@ namespace elsa {
 				if(local->get_type().get_func_declaration_expression() == nullptr)
 					throw ParsingException(L"The identifier '" + func_name + L"' is not a function", parser->current_token());
 
-				return parse(parser, local->get_type().get_func_declaration_expression());
+				return parse(parser, local->get_type().get_func_declaration_expression(), true, local);
 			}
 			else
 			{
@@ -30,14 +30,15 @@ namespace elsa {
 			return parse(parser, fde);
 		}
 
-		std::unique_ptr<Expression> FuncCallParser::parse(ElsaParser* parser, const FuncDeclarationExpression* fde)
+		std::unique_ptr<Expression> FuncCallParser::parse(ElsaParser* parser, const FuncDeclarationExpression* fde, bool stack_invoke, const LocalSymbol* local)
 		{
 			auto func_name = parser->current_token()->get_value();
 
 			parser->consume(TokenType::Identifier);
 			parser->consume(TokenType::LParen);
 
-			auto call_exp = std::make_unique<FuncCallExpression>();
+			const auto& local_name = local != nullptr ? local->get_name() : L"";
+			auto call_exp = std::make_unique<FuncCallExpression>(stack_invoke, local_name);
 
 			call_exp->set_func_declaration_expression(fde);
 

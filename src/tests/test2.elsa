@@ -1,0 +1,19 @@
+import "std/io";
+import "std/assert";
+
+func void Test(func<int, int> fn)
+{
+	var x = fn(10);
+	PrintLn(x);
+}
+
+func void main()
+{
+	func<int, int> f = (x) => { return x + 100; };
+
+	var x = f(3);
+	PrintLn(x);
+	PrintLn(11);
+
+	Test(f);
+}

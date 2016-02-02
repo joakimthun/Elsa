@@ -87,10 +87,11 @@ namespace elsa {
 			call_stack_.dump_stack_trace();
 		}
 
-		void VM::call_internal(int addr)
+		void VM::call_internal(int addr, bool skip_next)
 		{
 			auto f = program_.get_func(addr);
-			auto sf = new StackFrame(f, pc_ + 1, call_stack_.current());
+			auto ret_addr = pc_ + (skip_next ? 1 : 0);
+			auto sf = new StackFrame(f, ret_addr, call_stack_.current());
 			call_stack_.push(sf);
 
 			if (f->get_num_args() > 0)
@@ -363,7 +364,14 @@ namespace elsa {
 			}
 			case scall: {
 				auto o = current_frame_->pop();
-				call_internal(o.i());
+				call_internal(o.addr(), false);
+				break;
+			}
+			case fnconst: {
+				auto addr = get_instruction(pc_++);
+				auto o = Object(addr);
+				o.set_type(VMType::Function);
+				current_frame_->push(o);
 				break;
 			}
 			case l_arg: {

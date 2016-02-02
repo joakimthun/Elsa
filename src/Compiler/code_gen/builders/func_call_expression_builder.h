@@ -20,6 +20,7 @@ namespace elsa {
 			static void build_member(VMProgram* program, VMExpressionVisitor* visitor, FuncCallExpression* expression, const FunctionInfo* fi);
 		private:
 			static void build(VMProgram* program, VMExpressionVisitor* visitor, FuncCallExpression* expression, const FunctionInfo* fi);
+			static void build_stack_invoke(VMProgram* program, VMExpressionVisitor* visitor, FuncCallExpression* expression);
 		};
 
 	}

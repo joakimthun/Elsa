@@ -17,7 +17,7 @@ namespace elsa {
 			static std::unique_ptr<Expression> parse_member_call(ElsaParser* parser, const FuncDeclarationExpression* fde);
 
 		private:
-			static std::unique_ptr<Expression> parse(ElsaParser* parser, const FuncDeclarationExpression* fde);
+			static std::unique_ptr<Expression> parse(ElsaParser* parser, const FuncDeclarationExpression* fde, bool stack_invoke = false, const LocalSymbol* local = nullptr);
 		};
 
 	}

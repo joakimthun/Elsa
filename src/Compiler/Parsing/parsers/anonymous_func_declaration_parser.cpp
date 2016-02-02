@@ -19,6 +19,9 @@ namespace elsa {
 
 			for (auto& arg : func_dec_exp->get_args())
 			{
+				if (parser->current_token()->get_type() != TokenType::Identifier)
+					throw ParsingException(L"Invalid number of arguments", parser->current_token());
+
 				arg->set_name(parser->current_token()->get_value());
 				parser->consume(TokenType::Identifier);
 				parser->current_scope()->add_arg(arg->get_name(), arg->get_type());

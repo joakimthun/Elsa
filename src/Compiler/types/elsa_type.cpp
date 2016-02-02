@@ -79,8 +79,11 @@ namespace elsa {
 			case ObjectType::GCOPtr: {
 				return VMType::GCOPtr;
 			}
+			case ObjectType::Function: {
+				return VMType::Function;
+			}
 			default:
-				throw ParsingException("Unsupported field type.");
+				throw ParsingException("Unsupported vm type.");
 			}
 		}
 
