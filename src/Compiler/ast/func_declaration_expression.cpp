@@ -44,6 +44,13 @@ namespace elsa {
 			args_.push_back(std::move(expression));
 		}
 
+		void FuncDeclarationExpression::add_args_expression_to_front(std::unique_ptr<ArgumentExpression> expression)
+		{
+			assert_is_impl();
+			auto it = args_.begin();
+			args_.insert(it, std::move(expression));
+		}
+
 		void FuncDeclarationExpression::add_body_expression(std::unique_ptr<Expression> expression)
 		{
 			assert_is_impl();
@@ -97,6 +104,11 @@ namespace elsa {
 		bool FuncDeclarationExpression::is_native() const
 		{
 			return native_function_;
+		}
+
+		void FuncDeclarationExpression::set_is_native(bool native)
+		{
+			native_function_ = native;
 		}
 
 		bool FuncDeclarationExpression::built() const

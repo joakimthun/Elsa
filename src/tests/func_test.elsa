@@ -1,21 +1,19 @@
 import "std/assert";
 
-func void FuncCreateInvokeTest()
+func FuncCreateInvokeTest()
 {
-	func<int, int> f = (x) => { return x; };
-	func<int, int> f2 = (x) => { return x + 10; };
-	
-	AssertEq(3, f(3));
-	AssertEq(13, f2(3));
+	var f = func (int x) : int => { return x + 100; };
+
+	AssertEq(103, f(3));
 }
 
-func void FuncWithFuncArg(func<int, int> fnarg)
+func FuncWithFuncArg(func : int fn)
 {
-	PrintLn(fnarg(3));
+	AssertEq(200, fn());
 }
 
-func void FuncPassAsArgTest()
+func FuncPassAsArgTest()
 {
-	func<int, int> fn = (x) => { return x + 20; };
-	FuncWithFuncArg(fn);
+	var f = func : int => { return 100 + 100; };
+	FuncWithFuncArg(f);
 }

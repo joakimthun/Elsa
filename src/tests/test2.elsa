@@ -6,18 +6,18 @@ struct TestStruct
 	int MyField;
 };
 
-func void Test(func (int x) : int fn)
+func Test(func (int x) : int fn)
 {
 	var x = fn(10);
 	PrintLn(x);
 }
 
-func TestStruct Test2(func(int x) : TestStruct fn)
+func Test2(func(int x) : TestStruct fn) : TestStruct
 {
 	return fn(10);
 }
 
-func void main()
+func main()
 {
 	var f = func (int x) : int => { return x + 100; };
 

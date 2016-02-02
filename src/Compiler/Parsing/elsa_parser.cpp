@@ -17,8 +17,8 @@ namespace elsa {
 			next_token();
 			Builtin::init(&struct_table_);
 
-			//if(load_default_imports)
-				//initialize_default_imports();
+			if(load_default_imports)
+				initialize_default_imports();
 		}
 
 		std::unique_ptr<Program> ElsaParser::parse()

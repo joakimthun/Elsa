@@ -4,17 +4,17 @@ struct String
 {
 	char[] str;
 
-	func char CharAt(int i)
+	func CharAt(int i) : char
 	{
 		return str[i];
 	}
 
-	func int Length()
+	func Length() : int
 	{
 		return str.Length();
 	}
 
-	func String Concat(String other)
+	func Concat(String other) : String
 	{
 		var newStr = new String {
 			str: new char[Length() + other.Length()]
@@ -33,7 +33,7 @@ struct String
 		return newStr;
 	}
 
-	func String Substring(int startIndex, int length)
+	func Substring(int startIndex, int length) : String
 	{
 		var newStr = new String {
 			str: new char[length]
@@ -49,7 +49,7 @@ struct String
 		return newStr;
 	}
 
-	func bool Equals(String other)
+	func Equals(String other) : bool
 	{
 		if(Length() != other.Length())
 		{

@@ -32,6 +32,7 @@ namespace elsa {
 			std::unique_ptr<FuncDeclarationExpression> create_generic(const ElsaType* type);
 
 			void add_args_expression(std::unique_ptr<ArgumentExpression> expression);
+			void add_args_expression_to_front(std::unique_ptr<ArgumentExpression> expression);
 			void add_body_expression(std::unique_ptr<Expression> expression);
 
 			void set_name(const std::wstring& name);
@@ -45,6 +46,7 @@ namespace elsa {
 			void increment_num_locals();
 
 			bool is_native() const;
+			void set_is_native(bool native);
 			bool built() const;
 			void set_built(bool built);
 			bool anonymous() const;
