@@ -39,7 +39,14 @@ namespace elsa {
 				auto local = parser_->current_scope()->get_local(id->get_name());
 
 				if (local == nullptr)
+				{
+					if (parser_->function_table().has_entry(id->get_name()))
+					{
+						return new ElsaType(parser_->function_table().get(id->get_name())->get_expression());
+					}
+
 					throw ParsingException(L"Unkown identifier '" + id->get_name() + L"'", parser_->current_token());
+				}
 
 				if (local->get_struct_expression() != nullptr)
 				{

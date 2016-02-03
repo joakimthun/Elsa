@@ -48,3 +48,14 @@ func PassFuncDirectlyTest()
 		AssertEq(x, y);
 	});
 }
+
+func AssignedFunc(int x) : int
+{
+	return x;
+}
+
+func FuncAssignTest()
+{
+	var f = AssignedFunc;
+	AssertEq(10, f(10));
+}
