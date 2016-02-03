@@ -281,6 +281,18 @@ namespace elsa {
 					get_nested_functions_internal(be.get(), functions);
 				}
 			}
+			else if (auto ret_exp = dynamic_cast<ReturnExpression*>(exp))
+			{
+				if (auto fde = dynamic_cast<FuncDeclarationExpression*>(ret_exp->get_expression()))
+				{
+					for (const auto& exp : fde->body_)
+					{
+						get_nested_functions_internal(exp.get(), functions);
+					}
+
+					functions.push_back(fde);
+				}
+			}
 		}
 	}
 }

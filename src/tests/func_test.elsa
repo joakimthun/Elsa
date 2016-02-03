@@ -20,8 +20,7 @@ func FuncPassAsArgTest()
 
 func ReturnAnonymousFunc() : func : int
 {
-	var f = func : int => { return 999; };
-	return f;
+	return func : int => { return 999; };
 }
 
 func FuncReturnFuncTest()
