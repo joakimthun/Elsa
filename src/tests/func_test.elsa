@@ -17,3 +17,15 @@ func FuncPassAsArgTest()
 	var f = func : int => { return 100 + 100; };
 	FuncWithFuncArg(f);
 }
+
+func ReturnAnonymousFunc() : func : int
+{
+	var f = func : int => { return 999; };
+	return f;
+}
+
+func FuncReturnFuncTest()
+{
+	var f = ReturnAnonymousFunc();
+	AssertEq(999, f());
+}

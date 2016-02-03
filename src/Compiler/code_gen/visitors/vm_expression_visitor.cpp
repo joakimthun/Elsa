@@ -73,7 +73,7 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(FuncCallExpression* expression)
 		{
-			if (expression->get_func_declaration_expression()->is_native())
+			if (!expression->stack_invoke() && expression->get_func_declaration_expression()->is_native())
 			{
 				NativeCallExpressionBuilder::build(vm_program_.get(), this, expression);
 			}

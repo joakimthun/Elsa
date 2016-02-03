@@ -27,7 +27,7 @@ namespace elsa {
 		class FuncDeclarationExpression : public Expression, public ScopedExpression
 		{
 		public:
-			FuncDeclarationExpression(bool native_function = false);
+			FuncDeclarationExpression();
 
 			std::unique_ptr<FuncDeclarationExpression> create_generic(const ElsaType* type);
 

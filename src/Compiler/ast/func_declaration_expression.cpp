@@ -7,12 +7,12 @@
 
 namespace elsa {
 	namespace compiler {
-		FuncDeclarationExpression::FuncDeclarationExpression(bool native_function)
+		FuncDeclarationExpression::FuncDeclarationExpression()
 			: ScopedExpression(nullptr, this),
 			num_locals_(0),
 			num_args_(0),
 			impl_(nullptr),
-			native_function_(native_function),
+			native_function_(false),
 			built_(false),
 			anonymous_(false)
 		{

@@ -15,7 +15,6 @@ namespace elsa {
 			return parse_internal(parser, parent);
 		}
 
-
 		std::unique_ptr<Expression> FuncDeclarationParser::parse_internal(ElsaParser* parser, StructDeclarationExpression* parent)
 		{
 			bool native_function = false;

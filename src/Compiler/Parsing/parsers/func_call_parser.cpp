@@ -40,6 +40,9 @@ namespace elsa {
 			const auto& local_name = local != nullptr ? local->get_name() : L"";
 			auto call_exp = std::make_unique<FuncCallExpression>(stack_invoke, local_name);
 
+			if (fde == nullptr)
+				throw ElsaException("FuncCallParser: The FuncDeclarationExpression can not be a nullptr");
+
 			call_exp->set_func_declaration_expression(fde);
 
 			auto index = 0;
