@@ -57,14 +57,14 @@ namespace elsa {
 			while (parser->current_token()->get_type() != TokenType::RParen)
 			{
 				if (index >= fde->get_num_args())
-					throw ParsingException(L"To many arguments was passed to the function", parser->current_token());
+					throw ParsingException(L"To many arguments was passed to the function '" + func_name + L"'", parser->current_token());
 
 				auto& declared_arg = fde_args[index];
 
 				auto passed_arg = parser->parse_expression();
 
 				if (!parser->type_checker().is_same_type(passed_arg.get(), declared_arg.get()) && declared_arg->get_type()->get_type() != ObjectType::Object)
-					throw ParsingException(L"The passed argument must be of the same type as the declared argument", parser->current_token());
+					throw ParsingException(L"The passed argument to the function '" + func_name + L"' must be of the same type(" + declared_arg->get_type()->get_name() + L") as the declared argument '" + declared_arg->get_name() + L"'", parser->current_token());
 
 				call_exp->add_args_expression(std::move(passed_arg));
 
@@ -75,7 +75,7 @@ namespace elsa {
 			}
 
 			if(index != fde->get_num_args())
-				throw ParsingException(L"To few arguments was passed to the function", parser->current_token());
+				throw ParsingException(L"To few arguments was passed to the function '" + func_name + L"'", parser->current_token());
 
 			parser->consume(TokenType::RParen);
 

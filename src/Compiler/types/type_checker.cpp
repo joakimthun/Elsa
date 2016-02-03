@@ -39,7 +39,7 @@ namespace elsa {
 				auto local = parser_->current_scope()->get_local(id->get_name());
 
 				if (local == nullptr)
-					throw ParsingException(L"Unkown identifier", parser_->current_token());
+					throw ParsingException(L"Unkown identifier '" + id->get_name() + L"'", parser_->current_token());
 
 				if (local->get_struct_expression() != nullptr)
 				{
@@ -299,7 +299,7 @@ namespace elsa {
 			}
 
 			if(throw_invalid_exception)
-				throw ParsingException(L"Invalid struct field or function", parser_->current_token());
+				throw ParsingException(L"'" + struct_expression->get_name() + L"' has no field or function with the name '" + name + L"'", parser_->current_token());
 
 			return nullptr;
 		}
