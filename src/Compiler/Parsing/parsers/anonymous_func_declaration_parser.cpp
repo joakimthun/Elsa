@@ -32,7 +32,10 @@ namespace elsa {
 			parser->set_current_scope(parent_scope);
 
 			parser->consume(TokenType::RBracket);
-			parser->consume(TokenType::Semicolon);
+
+			// If the function is passed directly no semi colon should be specified
+			if(parser->current_token()->get_type() == TokenType::Semicolon)
+				parser->consume(TokenType::Semicolon);
 
 			return std::move(func_dec_exp);
 		}

@@ -37,17 +37,13 @@ func FuncReturnFuncTest()
 
 func PassFuncDirectly(func (float x, float y) arg)
 {
-	
+	arg(1.0, 1.0);
+	arg(10.0, 10.0);
+	arg(12.0, 12.0);
 }
 
 func PassFuncDirectlyTest() 
 {
-	var f = func (float x, float y) => { 
-		AssertEq(x, y);
-	};
-
-	f(1.0, 1.0);
-
 	PassFuncDirectly(func (float x, float y) => { 
 		AssertEq(x, y);
 	});

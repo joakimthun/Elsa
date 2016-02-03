@@ -4,6 +4,7 @@
 #include "return_expression.h"
 #include "conditional_expression.h"
 #include "loop_expression.h"
+#include "func_call_expression.h"
 
 namespace elsa {
 	namespace compiler {
@@ -193,6 +194,11 @@ namespace elsa {
 				get_nested_functions_internal(exp.get(), functions);
 			}
 
+			for (const auto& exp : args_)
+			{
+				get_nested_functions_internal(exp.get(), functions);
+			}
+
 			return functions;
 		}
 
@@ -291,6 +297,22 @@ namespace elsa {
 					}
 
 					functions.push_back(fde);
+				}
+			}
+			else if (auto fde = dynamic_cast<FuncDeclarationExpression*>(exp))
+			{
+				for (const auto& exp : fde->body_)
+				{
+					get_nested_functions_internal(exp.get(), functions);
+				}
+
+				functions.push_back(fde);
+			}
+			else if (auto fc_exp = dynamic_cast<FuncCallExpression*>(exp))
+			{
+				for (const auto& arg : fc_exp->get_args())
+				{
+					get_nested_functions_internal(arg.get(), functions);
 				}
 			}
 		}
