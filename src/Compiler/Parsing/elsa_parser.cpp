@@ -118,8 +118,11 @@ namespace elsa {
 
 		void ElsaParser::consume(TokenType type)
 		{
-			if(current_token()->get_type() != type)
-				throw ParsingException(L"Unexpected token", current_token_.get());
+			if (current_token()->get_type() != type)
+			{
+
+				throw ParsingException(L"Unexpected token: Expected '" + Token::to_string(type) + L"' got '" + Token::to_string(current_token()->get_type()) + L"'", current_token_.get());
+			}
 
 			next_token();
 		}

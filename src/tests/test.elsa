@@ -396,6 +396,7 @@ func main() : int
 	FuncCreateInvokeTest();
 	FuncPassAsArgTest();
 	FuncReturnFuncTest();
+	PassFuncDirectlyTest();
 
 	return 0;
 }

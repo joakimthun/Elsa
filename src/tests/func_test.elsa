@@ -34,3 +34,21 @@ func FuncReturnFuncTest()
 	var f = ReturnAnonymousFunc();
 	AssertEq(999, f());
 }
+
+func PassFuncDirectly(func (float x, float y) arg)
+{
+	
+}
+
+func PassFuncDirectlyTest() 
+{
+	var f = func (float x, float y) => { 
+		AssertEq(x, y);
+	};
+
+	f(1.0, 1.0);
+
+	PassFuncDirectly(func (float x, float y) => { 
+		AssertEq(x, y);
+	});
+}

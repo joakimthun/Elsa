@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "exceptions\parsing_exception.h"
 
 namespace elsa {
 	namespace compiler {
@@ -79,6 +80,7 @@ namespace elsa {
 			std::wstring get_value() const;
 			std::size_t get_line_number() const;
 			const std::wstring& get_file_name() const;
+			static std::wstring to_string(TokenType token);
 
 		private:
 			TokenType type_;
