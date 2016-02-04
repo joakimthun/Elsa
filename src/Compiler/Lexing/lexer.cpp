@@ -344,7 +344,8 @@ namespace elsa {
 			register_keyword(L"new", TokenType::New);
 			register_keyword(L"if", TokenType::If);
 			register_keyword(L"else", TokenType::Else);
-			register_keyword(L"loop", TokenType::Loop);
+			register_keyword(L"for", TokenType::For);
+			register_keyword(L"while", TokenType::While);
 			register_keyword(L"import", TokenType::Import);
 			register_keyword(L"native", TokenType::Native);
 		}

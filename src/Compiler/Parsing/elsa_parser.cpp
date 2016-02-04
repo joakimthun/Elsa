@@ -305,7 +305,8 @@ namespace elsa {
 			register_expression_parser(TokenType::StringLiteral, new LiteralParser());
 			register_expression_parser(TokenType::New, new CreateStructParser());
 			register_expression_parser(TokenType::If, new ConditionalParser());
-			register_expression_parser(TokenType::Loop, new LoopParser());
+			register_expression_parser(TokenType::For, new LoopParser());
+			register_expression_parser(TokenType::While, new LoopParser());
 			register_expression_parser(TokenType::Return, new ReturnParser());
 			register_expression_parser(TokenType::This, new StructAccessParser());
 

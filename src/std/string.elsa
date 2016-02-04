@@ -20,12 +20,12 @@ struct String
 			str: new char[Length() + other.Length()]
 		};
 
-		loop(var i = 0; i < Length(); i++)
+		for(var i = 0; i < Length(); i++)
 		{
 			newStr.str.Push(str[i]);
 		}
 		
-		loop(var i = 0; i < other.Length(); i++)
+		for(var i = 0; i < other.Length(); i++)
 		{
 			newStr.str.Push(other.str[i]);
 		}
@@ -41,7 +41,7 @@ struct String
 
 		// TODO: Error checking, validate start and length
 		int stopIndex = startIndex + length;
-		loop(var i = startIndex; i < stopIndex; i++)
+		for(var i = startIndex; i < stopIndex; i++)
 		{
 			newStr.str.Push(str[i]);
 		}
@@ -56,7 +56,7 @@ struct String
 			return false;
 		}
 	
-		loop(var i = 0; i < Length(); i++)
+		for(var i = 0; i < Length(); i++)
 		{
 			if(str[i] != other.str[i])
 			{

@@ -5,7 +5,19 @@ namespace elsa {
 
 		std::unique_ptr<Expression> LoopParser::parse(ElsaParser* parser)
 		{
-			parser->consume(TokenType::Loop);
+			LoopType loop_type;
+
+			if (parser->current_token()->get_type() == TokenType::For)
+			{
+				loop_type = LoopType::For;
+				parser->consume(TokenType::For);
+			}
+			else
+			{
+				loop_type = LoopType::While;
+				parser->consume(TokenType::While);
+			}
+
 			parser->consume(TokenType::LParen);
 
 			auto loop_exp = std::make_unique<LoopExpression>(parser->current_scope());
@@ -13,7 +25,7 @@ namespace elsa {
 
 			auto first_exp = parser->parse_expression();
 			auto first_exp_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(first_exp.get()));
-			if (first_exp_type->get_type() == ObjectType::Bool)
+			if (loop_type == LoopType::While)
 			{
 				loop_exp->set_condition(std::move(first_exp));
 				loop_exp->set_type(LoopType::While);

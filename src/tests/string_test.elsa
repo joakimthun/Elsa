@@ -64,7 +64,7 @@ func StringArrayTest()
 
 	AssertEq(5, strings.Length());
 
-	loop(var i = 0; i < strings.Length(); i++)
+	for(var i = 0; i < strings.Length(); i++)
 	{
 		AssertEq('S', strings[i].CharAt(0));
 		AssertEq('t', strings[i].CharAt(1));

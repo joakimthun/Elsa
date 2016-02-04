@@ -65,7 +65,8 @@ namespace elsa {
 			New,
 			If,
 			Else,
-			Loop,
+			For,
+			While,
 			Import,
 			Native,
 		};

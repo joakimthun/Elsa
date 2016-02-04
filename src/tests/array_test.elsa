@@ -19,19 +19,19 @@ func ArrayAssignTest()
 {
 	var arr = new int[100];
 
-	loop(var i = 0; i < 100; i++)
+	for(var i = 0; i < 100; i++)
 	{
 		arr.Push(10);
 	}
 
-	loop(var ii = 0; ii < 100; ii++)
+	for(var i = 0; i < 100; i++)
 	{
-		arr[ii] = ii;
+		arr[i] = i;
 	}
 
-	loop(var iii = 0; iii < 100; iii++)
+	for(var i = 0; i < 100; i++)
 	{
-		AssertEq(iii, arr[iii]);
+		AssertEq(i, arr[i]);
 	}
 }
 
@@ -139,7 +139,7 @@ func ArrayAsArg(int[] arr)
 {
 	AssertEq(4, arr.Length());
 	
-	loop(var i = 0; i < arr.Length(); i++)
+	for(var i = 0; i < arr.Length(); i++)
 	{
 		AssertEq(i, arr[i]);
 	}
@@ -156,7 +156,7 @@ func ArrayAsArgTest()
 
 	AssertEq(7, arr.Length());
 	
-	loop(var i = 0; i < arr.Length(); i++)
+	for(var i = 0; i < arr.Length(); i++)
 	{
 		AssertEq(i, arr[i]);
 	}

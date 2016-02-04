@@ -151,8 +151,10 @@ namespace elsa {
 				return L"if";
 			case TokenType::Else:
 				return L"else";
-			case TokenType::Loop:
-				return L"loop";
+			case TokenType::For:
+				return L"for";
+			case TokenType::While:
+				return L"while";
 			case TokenType::Import:
 				return L"import";
 			case TokenType::Native:

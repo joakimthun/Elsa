@@ -51,7 +51,7 @@ func ArrayLength()
 	array.Push('!');
 	PrintLn(array.Length());
 
-	loop(var i = 0; i < array.Length(); i++)
+	for(var i = 0; i < array.Length(); i++)
 	{
 		Print(array[i]);
 	}
@@ -130,18 +130,18 @@ func Arrays()
 
 func Loops()
 {
-	loop(var i = 1; i <= 100; i++)
+	for(var i = 1; i <= 100; i++)
 	{
 		PrintLn(i);
 	}
 
-	loop(var j = 100; j >= 1; j--)
+	for(var i = 100; i >= 1; i--)
 	{
-		PrintLn(j);
+		PrintLn(i);
 	}
 
 	var x = true;
-	loop(x)
+	while(x)
 	{
 		PrintLn(881118);
 		x = false;
@@ -149,7 +149,7 @@ func Loops()
 	
 	var y = true;
 	var c = 0;
-	loop(y || x)
+	while(y || x)
 	{
 		PrintLn(1513);
 
