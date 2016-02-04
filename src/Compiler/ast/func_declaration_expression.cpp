@@ -154,6 +154,34 @@ namespace elsa {
 			return name_;
 		}
 
+		const std::wstring FuncDeclarationExpression::get_type_name() const
+		{
+			std::wstring type_name(L"func ");
+			
+			if (args_.size() > 0)
+			{
+				type_name.append(L"(");
+
+				for (auto i = 0; i < args_.size(); i++)
+				{
+					type_name.append(args_[i]->get_type()->get_name());
+
+					if(i != (args_.size() - 1))
+						type_name.append(L", ");
+				}
+
+				type_name.append(L")");
+			}
+
+			if (return_type_->get_type() != ObjectType::Void)
+			{
+				type_name.append(L" : ");
+				type_name.append(return_type_->get_name());
+			}
+
+			return type_name;
+		}
+
 		const ElsaType* FuncDeclarationExpression::get_return_type() const
 		{
 			return return_type_.get();

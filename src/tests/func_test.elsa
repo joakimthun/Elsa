@@ -67,3 +67,14 @@ func FuncAssignTest()
 	AssignedFuncAsArg(f);
 	AssignedFuncAsArg(AssignedFunc);
 }
+
+func ReturnNamedFunction() : func(int x) : int
+{
+	return AssignedFunc; 
+}
+
+func ReturnNamedFunctionTest()
+{
+	var f = ReturnNamedFunction();
+	AssertEq(99, f(99));
+}

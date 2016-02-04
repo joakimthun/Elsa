@@ -54,6 +54,7 @@ namespace elsa {
 			bool are_equal(const FuncDeclarationExpression* other) const;
 
 			const std::wstring& get_name() const;
+			const std::wstring get_type_name() const;
 			const ElsaType* get_return_type() const;
 			const std::vector<std::unique_ptr<Expression>>& get_body() const;
 			const std::vector<std::unique_ptr<ArgumentExpression>>& get_args() const;

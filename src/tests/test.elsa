@@ -398,6 +398,7 @@ func main() : int
 	FuncReturnFuncTest();
 	PassFuncDirectlyTest();
 	FuncAssignTest();
+	ReturnNamedFunctionTest();
 
 	return 0;
 }

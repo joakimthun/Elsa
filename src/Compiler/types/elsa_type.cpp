@@ -92,25 +92,28 @@ namespace elsa {
 			switch (type_)
 			{
 			case ObjectType::Void: {
-				return L"Void";
+				return L"void";
 			}
 			case ObjectType::Bool: {
-				return L"Bool";
+				return L"bool";
 			}
 			case ObjectType::Int: {
-				return L"Int";
+				return L"int";
 			}
 			case ObjectType::Float: {
-				return L"Float";
+				return L"float";
 			}
 			case ObjectType::Char: {
-				return L"Char";
+				return L"char";
 			}
 			case ObjectType::GCOPtr: {
 				return struct_declaration_expression_->get_name();
 			}
+			case ObjectType::Function: {
+				return func_declaration_expression_->get_type_name();
+			}
 			default:
-				throw ParsingException("Can not get the type name.");
+				throw ParsingException("ElsaType::get_name: Can not get the type name.");
 			}
 		}
 
