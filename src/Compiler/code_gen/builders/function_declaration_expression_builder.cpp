@@ -49,8 +49,7 @@ namespace elsa {
 
 			fi->set_addr(static_cast<int>(program->get_next_instruction_index()));
 
-			auto parent_scope = visitor->current_scope();
-			visitor->set_current_scope(expression);
+			visitor->push_new_scope(expression);
 
 			for (auto& exp : expression->get_body())
 			{
@@ -72,7 +71,7 @@ namespace elsa {
 
 			program->add_func(std::move(fi));
 
-			visitor->set_current_scope(parent_scope);
+			visitor->pop_current_scope();
 			expression->set_built(true);
 
 			return fi_ptr;

@@ -7,13 +7,17 @@ namespace elsa {
 
 		void LoopExpressionBuilder::build(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression)
 		{
+			visitor->push_new_scope(expression);
+
 			if (expression->get_type() == LoopType::For)
 				build_for_loop(program, visitor, expression);
 			else
 				build_while_loop(program, visitor, expression);
+
+			visitor->pop_current_scope();
 		}
 
-		void LoopExpressionBuilder::build_for_loop(VMProgram * program, VMExpressionVisitor * visitor, LoopExpression * expression)
+		void LoopExpressionBuilder::build_for_loop(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression)
 		{
 			// Declare the loop variable
 			expression->get_variable_expression()->accept(visitor);

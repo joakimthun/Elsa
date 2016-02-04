@@ -68,8 +68,8 @@ namespace elsa {
 			void visit(StructInitializerListExpression* expression) override;
 
 			ScopedExpression* current_scope();
-			void set_current_scope(ScopedExpression* scope);
-			void reset_current_scope();
+			void push_new_scope(ScopedExpression* scope);
+			void pop_current_scope();
 
 			void set_current_type(const ElsaType* type);
 			const ElsaType* current_type();

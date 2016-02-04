@@ -9,6 +9,7 @@ namespace elsa {
 			parser->consume(TokenType::LParen);
 
 			auto loop_exp = std::make_unique<LoopExpression>(parser->current_scope());
+			parser->push_new_scope(loop_exp.get());
 
 			auto first_exp = parser->parse_expression();
 			auto first_exp_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(first_exp.get()));
@@ -46,6 +47,8 @@ namespace elsa {
 			}
 
 			parser->consume(TokenType::RBracket);
+
+			parser->pop_current_scope();
 
 
 			return std::move(loop_exp);

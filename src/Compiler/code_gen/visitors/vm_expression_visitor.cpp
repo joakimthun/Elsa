@@ -143,14 +143,17 @@ namespace elsa {
 			return current_scope_;
 		}
 
-		void VMExpressionVisitor::set_current_scope(ScopedExpression* scope)
+		void VMExpressionVisitor::push_new_scope(ScopedExpression* scope)
 		{
 			current_scope_ = scope;
 		}
 
-		void VMExpressionVisitor::reset_current_scope()
+		void VMExpressionVisitor::pop_current_scope()
 		{
-			current_scope_ = nullptr;
+			if (current_scope_ == nullptr)
+				throw CodeGenException(L"VMExpressionVisitor::pop_current_scope: No scope to pop");
+
+			current_scope_ = current_scope_->parent();
 		}
 
 		std::unique_ptr<VMProgram> VMExpressionVisitor::release_program()
