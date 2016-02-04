@@ -54,8 +54,16 @@ func AssignedFunc(int x) : int
 	return x;
 }
 
+func AssignedFuncAsArg(func (int x) : int f)
+{
+	AssertEq(10, f(10));
+}
+
 func FuncAssignTest()
 {
 	var f = AssignedFunc;
 	AssertEq(10, f(10));
+
+	AssignedFuncAsArg(f);
+	AssignedFuncAsArg(AssignedFunc);
 }
