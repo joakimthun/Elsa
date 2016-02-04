@@ -25,7 +25,7 @@ namespace elsa {
 				for (const auto& field : parser->current_struct()->get_fields())
 				{
 					if(field->get_name() == name)
-						throw ParsingException(L"A field with the same name has already been declared", parser->current_token());
+						throw ParsingException(L"A field with the the name '" + name + L"' has already been declared", parser->current_token());
 				}
 			}
 
@@ -44,7 +44,7 @@ namespace elsa {
 			{
 				auto entry_name = struct_expression != nullptr ? struct_expression->get_struct_name() : array_expression->get_type()->get_name();
 				if (!parser->struct_table().has_entry(entry_name))
-					throw ParsingException(L"No struct with that name is defined", parser->current_token());
+					throw ParsingException(L"No struct with the name '" + name + L"' is defined", parser->current_token());
 
 				// Struct
 				auto si = parser->struct_table().get(entry_name);

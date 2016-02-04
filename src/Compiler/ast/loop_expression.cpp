@@ -5,6 +5,10 @@
 namespace elsa {
 	namespace compiler {
 
+		LoopExpression::LoopExpression(ScopedExpression* parent) : ScopedExpression(parent, parent->root())
+		{
+		}
+
 		void LoopExpression::set_variable_expression(std::unique_ptr<Expression> expression)
 		{
 			variable_expression_ = std::move(expression);

@@ -25,9 +25,9 @@ struct String
 			newStr.str.Push(str[i]);
 		}
 		
-		loop(var i = 0; i < other.Length(); i++)
+		loop(var ii = 0; ii < other.Length(); ii++)
 		{
-			newStr.str.Push(other.str[i]);
+			newStr.str.Push(other.str[ii]);
 		}
 
 		return newStr;

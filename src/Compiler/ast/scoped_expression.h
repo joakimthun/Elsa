@@ -24,7 +24,8 @@ namespace elsa {
 			bool any_scope_has_local(const std::wstring& name);
 			bool has_local(const std::wstring& name);
 			std::size_t create_new_local();
-
+			FuncDeclarationExpression* root();
+			ScopedExpression* parent();
 		private:
 			std::size_t add(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression, LocalType local_type);
 			FuncDeclarationExpression* root_;

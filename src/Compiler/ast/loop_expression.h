@@ -8,6 +8,7 @@
 #include "variable_declaration_expression.h"
 #include "../token.h"
 #include "../types/elsa_type.h"
+#include "scoped_expression.h"
 
 namespace elsa {
 	namespace compiler {
@@ -20,9 +21,11 @@ namespace elsa {
 			While
 		};
 
-		class LoopExpression : public Expression
+		class LoopExpression : public Expression, public ScopedExpression
 		{
 		public:
+			LoopExpression(ScopedExpression* parent);
+
 			void set_variable_expression(std::unique_ptr<Expression> expression);
 			void set_condition(std::unique_ptr<Expression> expression);
 			void set_post_expression(std::unique_ptr<Expression> expression);

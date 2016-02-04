@@ -8,7 +8,7 @@ namespace elsa {
 			parser->consume(TokenType::Loop);
 			parser->consume(TokenType::LParen);
 
-			auto loop_exp = std::make_unique<LoopExpression>();
+			auto loop_exp = std::make_unique<LoopExpression>(parser->current_scope());
 
 			auto first_exp = parser->parse_expression();
 			auto first_exp_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(first_exp.get()));

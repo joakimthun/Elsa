@@ -80,19 +80,22 @@ namespace elsa {
 		ScopedExpression* ElsaParser::current_scope()
 		{
 			if (current_scope_ == nullptr)
-				throw ParsingException(L"No scope defined", current_token_.get());
+				throw ParsingException(L"ElsaParser::current_scope: No scope defined", current_token_.get());
 
 			return current_scope_;
 		}
 
-		void ElsaParser::set_current_scope(ScopedExpression* scope)
+		void ElsaParser::push_new_scope(ScopedExpression* scope)
 		{
 			current_scope_ = scope;
 		}
 
-		void ElsaParser::reset_current_scope()
+		void ElsaParser::pop_current_scope()
 		{
-			current_scope_ = nullptr;
+			if (current_scope_ == nullptr)
+				throw ParsingException(L"ElsaParser::pop_current_scope: No scope to pop", current_token_.get());
+
+			current_scope_ = current_scope_->parent();
 		}
 
 		StructTable& ElsaParser::struct_table()

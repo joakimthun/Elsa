@@ -67,6 +67,16 @@ namespace elsa {
 			return index;
 		}
 
+		FuncDeclarationExpression* ScopedExpression::root()
+		{
+			return root_;
+		}
+
+		ScopedExpression* ScopedExpression::parent()
+		{
+			return parent_;
+		}
+
 		std::size_t ScopedExpression::add(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression, LocalType local_type)
 		{
 			std::size_t index = 0;

@@ -27,7 +27,7 @@ namespace elsa {
 			auto func_dec_exp = FuncParserHelper::parse_signature(parser, false, parent);
 			func_dec_exp->set_is_native(native_function);
 
-			parser->set_current_scope(func_dec_exp.get());
+			parser->push_new_scope(func_dec_exp.get());
 
 			if (parent != nullptr)
 			{
@@ -64,7 +64,7 @@ namespace elsa {
 			if (!parser->type_checker().return_type_match(func_dec_exp.get()))
 				throw ParsingException(L"Return type mismatch", parser->current_token());
 
-			parser->reset_current_scope();
+			parser->pop_current_scope();
 
 			parser->consume(TokenType::RBracket);
 

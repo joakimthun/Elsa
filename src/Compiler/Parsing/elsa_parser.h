@@ -52,8 +52,8 @@ namespace elsa {
 			std::unique_ptr<Expression> parse_expression();
 			std::unique_ptr<Expression> parse_expression(int precedence);
 			ScopedExpression* current_scope();
-			void set_current_scope(ScopedExpression* scope);
-			void reset_current_scope();
+			void push_new_scope(ScopedExpression* scope);
+			void pop_current_scope();
 			StructTable& struct_table();
 			FunctionTable& function_table();
 			TypeChecker& type_checker();

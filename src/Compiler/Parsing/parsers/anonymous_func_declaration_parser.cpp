@@ -10,7 +10,7 @@ namespace elsa {
 			auto func_dec_exp = FuncParserHelper::parse_signature(parser, true, nullptr);
 
 			auto parent_scope = parser->current_scope();
-			parser->set_current_scope(func_dec_exp.get());
+			parser->push_new_scope(func_dec_exp.get());
 
 			for (auto& arg : func_dec_exp->get_args())
 			{
@@ -29,7 +29,7 @@ namespace elsa {
 			if (!parser->type_checker().return_type_match(func_dec_exp.get()))
 				throw ParsingException(L"Return type mismatch", parser->current_token());
 
-			parser->set_current_scope(parent_scope);
+			parser->push_new_scope(parent_scope);
 
 			parser->consume(TokenType::RBracket);
 
