@@ -15,8 +15,10 @@ namespace elsa {
 
 			exp->set_right(std::move(parser->parse_expression(precedence())));
 
+			auto left_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(exp->get_left()));
+
 			if(!parser->type_checker().valid_assignment(exp.get()))
-				throw ParsingException(L"Invalid assignment. Both sides must be of the same type", parser->current_token());
+				throw ParsingException(L"Invalid assignment. The right hand side of the expression must be of type '" + left_type->get_name() + L"'", parser->current_token());
 
 			if(parser->current_token()->get_type() == TokenType::Semicolon)
 				parser->consume(TokenType::Semicolon);

@@ -17,8 +17,11 @@ namespace elsa {
 
 			auto name = parser->current_token()->get_value();
 
-			if (parser->current_scope()->has_local(name))
-				throw ParsingException(L"A local variable with the name '" + name + L"' has already been declared", parser->current_token());
+			if(parser->current_scope()->has_local(name))
+				throw ParsingException(L"A local variable or parameter with the name '" + name + L"' has already been declared in the current scope", parser->current_token());
+
+			if (parser->current_scope()->any_scope_has_local(name))
+				throw ParsingException(L"A local variable or parameter with the name '" + name + L"' has already been declared in a parent scope", parser->current_token());
 
 			if (parser->current_struct() != nullptr)
 			{
