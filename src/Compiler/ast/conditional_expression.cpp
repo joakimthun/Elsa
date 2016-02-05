@@ -40,6 +40,26 @@ namespace elsa {
 			return else_body_.size() > 0;
 		}
 
+		void ConditionalExpression::set_if_scope(std::unique_ptr<ScopedExpression> scope)
+		{
+			if_body_scope_ = std::move(scope);
+		}
+
+		void ConditionalExpression::set_else_scope(std::unique_ptr<ScopedExpression> scope)
+		{
+			else_body_scope_ = std::move(scope);
+		}
+
+		ScopedExpression* ConditionalExpression::get_if_scope()
+		{
+			return if_body_scope_.get();
+		}
+
+		ScopedExpression* ConditionalExpression::get_else_scope()
+		{
+			return else_body_scope_.get();
+		}
+
 		void ConditionalExpression::accept(ExpressionVisitor* visitor)
 		{
 			visitor->visit(this);

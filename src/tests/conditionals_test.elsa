@@ -2,5 +2,15 @@ import "std/assert";
 
 func IfElseScopingTest()
 {
+	var x = 10;
+
+	if(x == 10)
+	{
+		var y = 11;
+	}
+	else
+	{
+		var y = 11;
+	}
 
 }

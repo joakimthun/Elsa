@@ -11,6 +11,12 @@ namespace elsa {
 			parent_(parent)
 		{}
 
+		ScopedExpression::ScopedExpression(ScopedExpression* parent)
+			:
+			root_(parent->root()),
+			parent_(parent)
+		{}
+
 		LocalTable& ScopedExpression::locals()
 		{
 			return locals_;

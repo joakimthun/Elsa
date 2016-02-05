@@ -14,6 +14,7 @@ namespace elsa {
 		{
 		public:
 			ScopedExpression(ScopedExpression* parent, FuncDeclarationExpression* root);
+			ScopedExpression(ScopedExpression* parent);
 
 			LocalTable& locals();
 			void add_arg(const std::wstring& name, const ElsaType& type);

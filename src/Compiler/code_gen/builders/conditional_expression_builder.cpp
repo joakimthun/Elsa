@@ -17,10 +17,14 @@ namespace elsa {
 			program->emit(OpCode::br_ineq);
 			auto after_if_addr_index = program->mark_index();
 
+			visitor->push_new_scope(expression->get_if_scope());
+
 			for (auto& exp : expression->get_if_body())
 			{
 				exp->accept(visitor);
 			}
+
+			visitor->pop_current_scope();
 
 			// If we execute the if branch we jump past the else branch(if there is one)
 			program->emit(OpCode::br);
@@ -28,6 +32,8 @@ namespace elsa {
 
 			if (expression->has_else_body())
 			{
+				visitor->push_new_scope(expression->get_if_scope());
+
 				program->emit(after_if_addr_index, program->get_next_instruction_index());
 
 				for (auto& exp : expression->get_else_body())
@@ -36,6 +42,8 @@ namespace elsa {
 				}
 
 				program->emit(if_end_addr_index, program->get_next_instruction_index());
+
+				visitor->pop_current_scope();
 			}
 			else
 			{
