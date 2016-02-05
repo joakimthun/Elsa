@@ -256,7 +256,7 @@ namespace elsa {
 				return get_func_type();
 			}
 			default:
-				throw ParsingException(L"Invalid type.", parser_->current_token());
+				throw ParsingException(L"Expected a type, found: '" + Token::to_string(parser_->current_token()->get_type()) + L"'", parser_->current_token());
 			}
 
 			parser_->consume();
