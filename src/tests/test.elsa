@@ -7,6 +7,7 @@ import "tests/array_test";
 import "tests/struct_test";
 import "tests/program2";
 import "tests/func_test";
+import "tests/conditionals_test";
 
 struct Vec2D
 {
@@ -399,6 +400,9 @@ func main() : int
 	PassFuncDirectlyTest();
 	FuncAssignTest();
 	ReturnNamedFunctionTest();
+
+	// Conditionals
+	IfElseScopingTest();
 
 	return 0;
 }
