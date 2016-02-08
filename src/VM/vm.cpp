@@ -92,12 +92,13 @@ namespace elsa {
 			auto f = program_.get_func(addr);
 			auto ret_addr = pc_ + (skip_next ? 1 : 0);
 			auto sf = new StackFrame(f, ret_addr, call_stack_.current());
+			const auto load_scope = scope != nullptr && scope->ptr != nullptr;
 			call_stack_.push(sf);
 
 			if (f->get_num_args() > 0)
 			{
 				int stop = 0;
-				if (scope != nullptr)
+				if (load_scope)
 					stop = 1;
 
 				for (int i = static_cast<int>(f->get_num_args()) - 1; i >= stop; --i)
@@ -105,7 +106,7 @@ namespace elsa {
 					sf->store_arg(i, current_frame_->pop());
 				}
 
-				if (scope != nullptr)
+				if (load_scope)
 					sf->store_arg(0, load_function_scope(scope));
 			}
 

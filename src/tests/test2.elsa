@@ -29,6 +29,8 @@ func ReturnInt() : int
 
 func main()
 {
+	FuncCreateInvokeTest();
+	
 	var str = new MyStruct { x: 10 };
 
 	var gx = str.GetX;

@@ -3,14 +3,14 @@ import "std/assert";
 func FuncCreateInvokeTest()
 {
 	var f1 = func (int x) : int => { return x + 100; };
-	var f2 = func (int x, int y) : int => { return x + y; };
-	var f3 = func (String str) : String => { return str.Concat("World!"); };
-	var f4 = func (char c) => { AssertEq('X', c); };
+	//var f2 = func (int x, int y) : int => { return x + y; };
+	//var f3 = func (String str) : String => { return str.Concat("World!"); };
+	//var f4 = func (char c) => { AssertEq('X', c); };
 
 	AssertEq(103, f1(3));
-	AssertEq(140, f2(70, 70));
-	AssertEq(true, "Hello World!" == f3("Hello "));
-	f4('X');
+	//AssertEq(140, f2(70, 70));
+	//AssertEq(true, "Hello World!" == f3("Hello "));
+	//f4('X');
 }
 
 func FuncWithFuncArg(func : int fn)
