@@ -7,10 +7,15 @@ func IfElseScopingTest()
 	if(x == 10)
 	{
 		var y = 11;
+		y = 10;
+		AssertEq(10, y);
+		x = 23;
+		AssertEq(23, x);
 	}
 	else
 	{
 		var y = 11;
+		y = 12;
 	}
 
 }

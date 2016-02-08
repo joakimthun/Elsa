@@ -13,7 +13,8 @@ namespace elsa {
 		enum GCObjectType : int
 		{
 			Struct,
-			Array
+			Array,
+			Function
 		};
 
 		struct GCObject
@@ -34,6 +35,7 @@ namespace elsa {
 
 			bool marked;
 			void* ptr;
+			int addr;
 			const StructInfo* si;
 			std::unique_ptr<ArrayInfo> ai;
 			GCObjectType type;

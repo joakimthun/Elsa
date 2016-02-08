@@ -63,8 +63,20 @@ namespace elsa {
 
 					if (access_type->get_type() == ObjectType::Function)
 					{
-						auto call_exp = FuncCallParser::parse_member_call(parser, type->get_struct_declaration_expression()->get_member_function(identifier));
-						sa_exp->add_expression(dynamic_cast<TypedExpression*>(call_exp.release()));
+						// Member function assignment
+						if (parser->peek_token()->get_type() != TokenType::LParen)
+						{
+							parser->consume(TokenType::Identifier);
+							auto id_exp = std::make_unique<IdentifierExpression>(identifier);
+							id_exp->set_type(access_type);
+							sa_exp->add_expression(id_exp.release());
+						}
+						// Member function call
+						else
+						{
+							auto call_exp = FuncCallParser::parse_member_call(parser, type->get_struct_declaration_expression()->get_member_function(identifier));
+							sa_exp->add_expression(dynamic_cast<TypedExpression*>(call_exp.release()));
+						}
 					}
 					else if (parser->peek_token()->get_type() == TokenType::LSBracket)
 					{

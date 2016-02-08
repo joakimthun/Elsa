@@ -62,7 +62,7 @@ namespace elsa {
 			}
 
 			if (!parser->type_checker().return_type_match(func_dec_exp.get()))
-				throw ParsingException(L"Return type mismatch", parser->current_token());
+				throw ParsingException(L"Return type mismatch in function '" + func_dec_exp->get_name() + L"'", parser->current_token());
 
 			parser->pop_current_scope();
 

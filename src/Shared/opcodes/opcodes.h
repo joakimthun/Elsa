@@ -11,6 +11,7 @@ namespace elsa {
 			halt,
 			pop,
 			t_cast,
+			null,
 
 			// Functions
 			call,

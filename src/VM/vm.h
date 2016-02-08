@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <memory>
+#include <utility>
 
 #include "opcodes\opcodes.h"
 #include "object_types\vm_type.h"
@@ -34,11 +35,13 @@ namespace elsa {
 			void dump_stack_trace();
 
 		private:
-			void call_internal(int addr, bool skip_next = true);
+			void call_internal(int addr, bool skip_next = true, GCObject* scope = nullptr);
 			int get_instruction(std::size_t pc);
 			void cycle();
 			void push_main();
 			void next_opcode();
+			Object load_function_const(int addr, Object& scope);
+			Object load_function_scope(GCObject* scope);
 			Object type_cast(VMType dest_type, Object& instance);
 
 			OpCode oc_;

@@ -20,9 +20,14 @@ namespace elsa {
 			return name_;
 		}
 
-		ElsaType* IdentifierExpression::get_type()
+		const ElsaType* IdentifierExpression::get_type() const
 		{
 			return type_.get();
+		}
+
+		ExpressionType IdentifierExpression::get_expression_type() const
+		{
+			return ExpressionType::Identifier;
 		}
 
 		void IdentifierExpression::accept(ExpressionVisitor* visitor)

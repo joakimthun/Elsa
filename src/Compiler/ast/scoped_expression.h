@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include "expression.h"
 #include "../symbol_tables/local_table.h"
 #include "../types/elsa_type.h"
 
@@ -10,10 +11,9 @@ namespace elsa {
 
 		class FuncDeclarationExpression;
 
-		class ScopedExpression
+		class ScopedExpression : public Expression
 		{
 		public:
-			ScopedExpression(ScopedExpression* parent, FuncDeclarationExpression* root);
 			ScopedExpression(ScopedExpression* parent);
 
 			LocalTable& locals();
@@ -25,11 +25,13 @@ namespace elsa {
 			bool any_scope_has_local(const std::wstring& name);
 			bool has_local(const std::wstring& name);
 			std::size_t create_new_local();
-			FuncDeclarationExpression* root();
 			ScopedExpression* parent();
+
+			void accept(ExpressionVisitor* visitor) override;
+
 		private:
+			FuncDeclarationExpression* get_root_scope();
 			std::size_t add(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression, LocalType local_type);
-			FuncDeclarationExpression* root_;
 			ScopedExpression* parent_;
 			LocalTable locals_;
 		};

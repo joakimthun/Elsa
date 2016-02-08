@@ -11,7 +11,8 @@ namespace elsa {
 		{
 			FieldAccess,
 			FuncCall,
-			ArrayAccess
+			ArrayAccess,
+			Identifier
 		};
 
 		class TypedExpression

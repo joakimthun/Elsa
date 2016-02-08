@@ -74,6 +74,26 @@ namespace elsa {
 						}
 					}
 				}
+				else if (exp->get_expression_type() == ExpressionType::Identifier)
+				{
+					if (exp->get_type()->get_type() == ObjectType::Function)
+					{
+						for (const auto& function : current_struct->get_functions())
+						{
+							if (function->get_name() == exp->get_name())
+							{
+								const auto fi = program->get_struct(current_type->get_struct_declaration_expression()->get_name(true))->get_function(function->get_name());
+								program->emit(OpCode::fnconst);
+								program->emit(static_cast<int>(fi->get_addr()));
+								break;
+							}
+						}
+					}
+					else
+					{
+						throw CodeGenException("Unsupported type -> StructAccessExpressionBuilder -> ExpressionType::Identifier");
+					}
+				}
 			}
 		}
 

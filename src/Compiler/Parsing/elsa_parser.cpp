@@ -98,6 +98,16 @@ namespace elsa {
 			current_scope_ = current_scope_->parent();
 		}
 
+		void ElsaParser::save_scope()
+		{
+			saved_scope_ = current_scope_;
+		}
+
+		void ElsaParser::restore_scope()
+		{
+			current_scope_ = saved_scope_;
+		}
+
 		StructTable& ElsaParser::struct_table()
 		{
 			if (parent_ == nullptr)
@@ -339,7 +349,7 @@ namespace elsa {
 		void ElsaParser::initialize_default_imports()
 		{
 			import_source_file(L"std/system");
-			import_source_file(L"std/string");
+			//import_source_file(L"std/string");
 		}
 
 		void ElsaParser::parse_import_statement()

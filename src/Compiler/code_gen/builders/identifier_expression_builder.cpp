@@ -10,6 +10,7 @@ namespace elsa {
 			if (expression->get_type()->get_type() == ObjectType::Function && !expression->get_type()->get_func_declaration_expression()->anonymous())
 			{
 				auto function_info = program->get_func(expression->get_type()->get_func_declaration_expression()->get_name());
+				program->emit(OpCode::null);
 				program->emit(OpCode::fnconst);
 				program->emit(static_cast<int>(function_info->get_addr()));
 			}

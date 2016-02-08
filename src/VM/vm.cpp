@@ -87,7 +87,7 @@ namespace elsa {
 			call_stack_.dump_stack_trace();
 		}
 
-		void VM::call_internal(int addr, bool skip_next)
+		void VM::call_internal(int addr, bool skip_next, GCObject* scope)
 		{
 			auto f = program_.get_func(addr);
 			auto ret_addr = pc_ + (skip_next ? 1 : 0);
@@ -96,10 +96,17 @@ namespace elsa {
 
 			if (f->get_num_args() > 0)
 			{
-				for (int i = static_cast<int>(f->get_num_args()) - 1; i >= 0; --i)
+				int stop = 0;
+				if (scope != nullptr)
+					stop = 1;
+
+				for (int i = static_cast<int>(f->get_num_args()) - 1; i >= stop; --i)
 				{
 					sf->store_arg(i, current_frame_->pop());
 				}
+
+				if (scope != nullptr)
+					sf->store_arg(0, load_function_scope(scope));
 			}
 
 			pc_ = addr;
@@ -268,6 +275,10 @@ namespace elsa {
 				current_frame_->push(type_cast(dest_type, current_frame_->pop()));
 				break;
 			}
+			case null: {
+				current_frame_->push(Object(nullptr));
+				break;
+			}
 			case br: {
 				auto jmp_addr = get_instruction(pc_++);
 				pc_ = jmp_addr;
@@ -364,14 +375,13 @@ namespace elsa {
 			}
 			case scall: {
 				auto o = current_frame_->pop();
-				call_internal(o.addr(), false);
+				call_internal(o.function()->addr, false, o.function());
 				break;
 			}
 			case fnconst: {
 				auto addr = get_instruction(pc_++);
-				auto o = Object(addr);
-				o.set_type(VMType::Function);
-				current_frame_->push(o);
+				auto scope = current_frame_->pop();
+				current_frame_->push(load_function_const(addr, scope));
 				break;
 			}
 			case l_arg: {
@@ -496,6 +506,40 @@ namespace elsa {
 		void VM::next_opcode()
 		{
 			oc_ = (OpCode)get_instruction(pc_++);
+		}
+
+		Object VM::load_function_const(int addr, Object& scope)
+		{
+			if(scope.get_type() != VMType::GCOPtr)
+				throw RuntimeException("Function scopes must be of type: 'GCOPtr'");
+
+			auto gco = new GCObject(GCObjectType::Function);
+			gco->addr = addr;
+			
+			if (scope.gco() == nullptr)
+				gco->ptr = nullptr;
+			else
+			{
+				gco->ptr = scope.gco()->ptr;
+				gco->si = scope.gco()->si;
+				gco->ai = std::move(scope.gco()->ai);
+				gco->next = scope.gco()->next;
+			}
+
+			auto obj = Object(gco);
+			obj.set_type(VMType::Function);
+
+			return obj;
+		}
+
+		Object VM::load_function_scope(GCObject* scope)
+		{
+			if (scope->si != nullptr)
+				scope->type = GCObjectType::Struct;
+			else
+				scope->type = GCObjectType::Array;
+
+			return Object(scope);
 		}
 
 		Object VM::type_cast(VMType dest_type, Object& instance)

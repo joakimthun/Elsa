@@ -23,6 +23,7 @@ namespace elsa {
 
 				if (expression->anonymous())
 				{
+					program->emit(OpCode::null);
 					program->emit(OpCode::fnconst);
 					program->emit(static_cast<int>(function_info->get_addr()));
 				}

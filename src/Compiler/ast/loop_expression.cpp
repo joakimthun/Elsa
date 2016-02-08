@@ -5,7 +5,7 @@
 namespace elsa {
 	namespace compiler {
 
-		LoopExpression::LoopExpression(ScopedExpression* parent) : ScopedExpression(parent, parent->root())
+		LoopExpression::LoopExpression(ScopedExpression* parent) : ScopedExpression(parent)
 		{
 		}
 

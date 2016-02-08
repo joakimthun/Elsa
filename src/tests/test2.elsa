@@ -1,35 +1,45 @@
 import "std/io";
 import "std/assert";
 
-struct TestStruct 
+func FuncCreateInvokeTest()
 {
-	int MyField;
-};
+	var f1 = func (int x) : int => { return x + 100; };
+	var f2 = func (int x, int y) : int => { return x + y; };
+	var f4 = func (char c) => { AssertEq('X', c); };
 
-func Test(func (int x) : int fn)
-{
-	var x = fn(10);
-	PrintLn(x);
+	AssertEq(103, f1(3));
+	AssertEq(140, f2(70, 70));
+	f4('X');
 }
 
-func Test2(func(int x) : TestStruct fn) : TestStruct
+struct MyStruct
 {
-	return fn(10);
+	int x;
+
+	func GetX() : int
+	{
+		return x;
+	}
+};
+
+func ReturnInt() : int
+{
+	return 10;
 }
 
 func main()
 {
-	var f = func (int x) : int => { return x + 100; };
+	var str = new MyStruct { x: 10 };
 
-	var x = f(3);
-	PrintLn(x);
-	PrintLn(11);
-	Test(f);
-	
-	var f2 = func(int x) : TestStruct => {
-		return new TestStruct { MyField: x }; 
-	};
-	
-	var tstr = Test2(f2);
-	PrintLn(tstr.MyField);
+	var gx = str.GetX;
+	var ri = ReturnInt;
+
+	PrintLn(gx());
+	AssertEq(10, gx());
+	PrintLn(gx());
+	PrintLn(gx());
+	str.x = 20;
+	PrintLn(gx());
+	PrintLn(gx());
+	AssertEq(20, gx());
 }

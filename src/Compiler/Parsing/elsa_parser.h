@@ -54,6 +54,8 @@ namespace elsa {
 			ScopedExpression* current_scope();
 			void push_new_scope(ScopedExpression* scope);
 			void pop_current_scope();
+			void save_scope();
+			void restore_scope();
 			StructTable& struct_table();
 			FunctionTable& function_table();
 			TypeChecker& type_checker();
@@ -97,6 +99,7 @@ namespace elsa {
 			StructTable struct_table_;
 			FunctionTable function_table_;
 			ScopedExpression* current_scope_;
+			ScopedExpression* saved_scope_;
 			std::unordered_map<TokenType, std::unique_ptr<Parser>> expression_parsers_;
 			std::vector<std::unique_ptr<LL2Entry>> ll2_expression_parsers_;
 			std::unordered_map<TokenType, std::unique_ptr<InfixParser>> infix_parsers_;

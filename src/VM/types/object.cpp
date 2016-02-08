@@ -71,10 +71,10 @@ namespace elsa {
 			throw RuntimeException("Can not get a GCObject pointer from a non GCObject pointer type.");
 		}
 
-		int Object::addr() const
+		GCObject* Object::function() const
 		{
 			if (type_ == VMType::Function)
-				return value_.i;
+				return value_.gco;
 
 			throw RuntimeException("Can not get an address from a non function type.");
 		}

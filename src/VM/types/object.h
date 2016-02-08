@@ -31,7 +31,7 @@ namespace elsa {
 			float f() const;
 			wchar_t c() const;
 			GCObject* gco() const;
-			int addr() const;
+			GCObject* function() const;
 			const Value& get_value() const;
 			elsa::VMType get_type() const;
 			void set_type(elsa::VMType type);

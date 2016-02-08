@@ -9,7 +9,18 @@
 namespace elsa {
 	namespace compiler {
 		FuncDeclarationExpression::FuncDeclarationExpression()
-			: ScopedExpression(nullptr, this),
+			: ScopedExpression(nullptr),
+			num_locals_(0),
+			num_args_(0),
+			impl_(nullptr),
+			native_function_(false),
+			built_(false),
+			anonymous_(false)
+		{
+		}
+
+		FuncDeclarationExpression::FuncDeclarationExpression(ScopedExpression* parent)
+			: ScopedExpression(parent),
 			num_locals_(0),
 			num_args_(0),
 			impl_(nullptr),

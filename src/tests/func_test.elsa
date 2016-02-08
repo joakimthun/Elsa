@@ -78,3 +78,12 @@ func ReturnNamedFunctionTest()
 	var f = ReturnNamedFunction();
 	AssertEq(99, f(99));
 }
+
+func ClosureCaptureTest()
+{
+	//var x = 10;
+	//
+	//var f = func : int => { return x; };
+	//var y = f();
+	//PrintLn(y);
+}

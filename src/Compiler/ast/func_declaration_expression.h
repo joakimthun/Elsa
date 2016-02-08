@@ -24,10 +24,11 @@ namespace elsa {
 			bool if_else_with_return;
 		};
 
-		class FuncDeclarationExpression : public Expression, public ScopedExpression
+		class FuncDeclarationExpression : public ScopedExpression
 		{
 		public:
 			FuncDeclarationExpression();
+			FuncDeclarationExpression(ScopedExpression* parent);
 
 			std::unique_ptr<FuncDeclarationExpression> create_generic(const ElsaType* type);
 

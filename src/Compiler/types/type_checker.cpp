@@ -124,10 +124,10 @@ namespace elsa {
 						if (aae->get_identifier_expression()->get_type()->get_type() == ObjectType::GCOPtr)
 							current = aae->get_identifier_expression()->get_type();
 					}
-					//else if (field_expression->get_expression_type() == ExpressionType::FuncCall)
-					//{
-					//	throw ElsaException("Not implemented, TypeChecker, StructAccessExpression -> ExpressionType::FuncCall");
-					//}
+					else if (field_expression->get_expression_type() == ExpressionType::Identifier)
+					{
+						return new ElsaType(field_expression->get_type());
+					}
 					else
 					{
 						type.reset(get_access_type(current, field_expression->get_name()));

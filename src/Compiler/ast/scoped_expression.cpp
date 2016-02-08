@@ -5,15 +5,8 @@
 namespace elsa {
 	namespace compiler {
 
-		ScopedExpression::ScopedExpression(ScopedExpression* parent, FuncDeclarationExpression* root)
-			:
-			root_(root),
-			parent_(parent)
-		{}
-
 		ScopedExpression::ScopedExpression(ScopedExpression* parent)
 			:
-			root_(parent->root()),
 			parent_(parent)
 		{}
 
@@ -25,25 +18,25 @@ namespace elsa {
 		void ScopedExpression::add_arg(const std::wstring& name, const ElsaType& type)
 		{
 			add(name, type, nullptr, LocalType::Arg);
-			root_->increment_num_args();
+			get_root_scope()->increment_num_args();
 		}
 
 		void ScopedExpression::add_arg(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression)
 		{
 			add(name, type, struct_expression, LocalType::Arg);
-			root_->increment_num_args();
+			get_root_scope()->increment_num_args();
 		}
 
 		void ScopedExpression::add_local(const std::wstring& name, const ElsaType& type)
 		{
 			add(name, type, nullptr, LocalType::Local);
-			root_->increment_num_locals();
+			get_root_scope()->increment_num_locals();
 		}
 
 		void ScopedExpression::add_local(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression)
 		{
 			add(name, type, struct_expression, LocalType::Local);
-			root_->increment_num_locals();
+			get_root_scope()->increment_num_locals();
 		}
 
 		const LocalSymbol* ScopedExpression::get_local(const std::wstring& name)
@@ -69,13 +62,8 @@ namespace elsa {
 		std::size_t ScopedExpression::create_new_local()
 		{
 			auto index = add(L"0", ElsaType(ObjectType::Object), nullptr, LocalType::Local);
-			root_->increment_num_locals();
+			get_root_scope()->increment_num_locals();
 			return index;
-		}
-
-		FuncDeclarationExpression* ScopedExpression::root()
-		{
-			return root_;
 		}
 
 		ScopedExpression* ScopedExpression::parent()
@@ -83,13 +71,26 @@ namespace elsa {
 			return parent_;
 		}
 
+		void ScopedExpression::accept(ExpressionVisitor * visitor)
+		{
+			throw ElsaException("Not implemented: ScopedExpression::accept");
+		}
+
+		FuncDeclarationExpression* ScopedExpression::get_root_scope()
+		{
+			if (parent_ == nullptr)
+				return dynamic_cast<FuncDeclarationExpression*>(this);
+
+			return parent_->get_root_scope();
+		}
+
 		std::size_t ScopedExpression::add(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression, LocalType local_type)
 		{
 			std::size_t index = 0;
 			if (local_type == LocalType::Local)
-				index = root_->get_num_locals();
+				index = get_root_scope()->get_num_locals();
 			else
-				index = root_->get_num_args();
+				index = get_root_scope()->get_num_args();
 
 			locals_.add(name, new LocalSymbol(name, index, type, struct_expression, local_type));
 			return index;

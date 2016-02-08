@@ -21,7 +21,7 @@ namespace elsa {
 			While
 		};
 
-		class LoopExpression : public Expression, public ScopedExpression
+		class LoopExpression : public ScopedExpression
 		{
 		public:
 			LoopExpression(ScopedExpression* parent);
