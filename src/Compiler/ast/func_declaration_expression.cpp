@@ -148,12 +148,15 @@ namespace elsa {
 			if (!this->return_type_->are_equal(other->return_type_.get()))
 				return false;
 
-			if (this->args_.size() != other->args_.size())
+			if (get_num_args_without_this_ptr(this) != get_num_args_without_this_ptr(other))
 				return false;
 
-			for (auto i = 0; i < this->args_.size(); i++)
+			auto min_num_args = std::min(this->args_.size(), other->args_.size());
+			auto this_offset = has_this_arg(this) ? 1 : 0;
+			auto other_offset = has_this_arg(other) ? 1 : 0;
+			for (auto i = 0; i < min_num_args; i++)
 			{
-				if (!this->args_[i]->get_type()->are_equal(other->args_[i]->get_type()))
+				if (!this->args_[i + this_offset]->get_type()->are_equal(other->args_[i + other_offset]->get_type()))
 					return false;
 			}
 
@@ -354,6 +357,25 @@ namespace elsa {
 					get_nested_functions_internal(arg.get(), functions);
 				}
 			}
+		}
+
+		int FuncDeclarationExpression::get_num_args_without_this_ptr(const FuncDeclarationExpression * fde) const
+		{
+			if (fde->args_.size() == 0)
+				return fde->args_.size();
+
+			if(fde->args_[0]->get_name() == L"this")
+				return fde->args_.size() - 1;
+
+			return fde->args_.size();
+		}
+
+		bool FuncDeclarationExpression::has_this_arg(const FuncDeclarationExpression* fde) const
+		{
+			if (fde->args_.size() == 0)
+				return false;
+
+			return fde->args_[0]->get_name() == L"this";
 		}
 	}
 }

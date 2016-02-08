@@ -16,9 +16,14 @@ struct MyStruct
 {
 	int x;
 
-	func GetX() : int
+	func Get() : int
 	{
 		return x;
+	}
+	
+	func Inc()
+	{
+		x++;
 	}
 };
 
@@ -27,21 +32,40 @@ func ReturnInt() : int
 	return 10;
 }
 
+func Funky(func : int g, func i)
+{
+	PrintLn(g());
+	AssertEq(12, g());
+
+	i();
+	PrintLn(g());
+	AssertEq(13, g());
+
+	i();
+	PrintLn(g());
+	AssertEq(14, g());
+}
+
 func main()
 {
 	FuncCreateInvokeTest();
 	
 	var str = new MyStruct { x: 10 };
 
-	var gx = str.GetX;
+	var g = str.Get;
+	var i = str.Inc;
 	var ri = ReturnInt;
 
-	PrintLn(gx());
-	AssertEq(10, gx());
-	PrintLn(gx());
-	PrintLn(gx());
-	str.x = 20;
-	PrintLn(gx());
-	PrintLn(gx());
-	AssertEq(20, gx());
+	PrintLn(g());
+	AssertEq(10, g());
+
+	i();
+	PrintLn(g());
+	AssertEq(11, g());
+
+	i();
+	PrintLn(g());
+	AssertEq(12, g());
+
+	Funky(str.Get, str.Inc);
 }

@@ -61,6 +61,12 @@ namespace elsa {
 					arg->set_name(parser->current_token()->get_value());
 					parser->consume(TokenType::Identifier);
 
+					for (const auto& declared_arg : func_dec_exp->get_args())
+					{
+						if(arg->get_name() == declared_arg->get_name())
+							throw ParsingException(L"An argument with the name '" + arg->get_name() + L"' has already been declared for the function '" + func_dec_exp->get_name() + L"'", parser->current_token());
+					}
+
 					func_dec_exp->add_args_expression(std::move(arg));
 
 					if (parser->current_token()->get_type() != TokenType::RParen)
