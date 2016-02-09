@@ -39,14 +39,29 @@ namespace elsa {
 			get_root_scope()->increment_num_locals();
 		}
 
-		const LocalSymbol* ScopedExpression::get_local(const std::wstring& name)
+		const LocalSymbol* ScopedExpression::get_local(const std::wstring& name, bool include_closure)
 		{
 			const auto local = locals_.get(name);
 
-			if (local == nullptr && parent_ != nullptr)
-				return parent_->get_local(name);
+			if (local != nullptr)
+				return local;
 
-			return local;
+			if (!include_closure)
+			{
+				// If we hit a nested function and no local is found the local must be defined in an outer function scope so we return null
+				if (auto fde = dynamic_cast<FuncDeclarationExpression*>(this) && parent_ != nullptr)
+					return nullptr;
+			}
+
+			if (local == nullptr && parent_ != nullptr)
+				return parent_->get_local(name, include_closure);
+
+			return nullptr;
+		}
+
+		const LocalSymbol* ScopedExpression::get_local_from_closure(const std::wstring& name)
+		{
+			return get_local(name, true);
 		}
 
 		bool ScopedExpression::any_scope_has_local(const std::wstring & name)

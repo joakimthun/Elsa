@@ -21,7 +21,8 @@ namespace elsa {
 			void add_arg(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression);
 			void add_local(const std::wstring& name, const ElsaType& type);
 			void add_local(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression);
-			const LocalSymbol* get_local(const std::wstring& name);
+			const LocalSymbol* get_local(const std::wstring& name, bool include_closure = false);
+			const LocalSymbol* get_local_from_closure(const std::wstring& name);
 			bool any_scope_has_local(const std::wstring& name);
 			bool has_local(const std::wstring& name);
 			std::size_t create_new_local();
