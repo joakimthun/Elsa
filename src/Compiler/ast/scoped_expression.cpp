@@ -71,13 +71,27 @@ namespace elsa {
 			return parent_;
 		}
 
+		void ScopedExpression::set_parent_scope(ScopedExpression* parent)
+		{
+			if (parent_ != nullptr)
+				throw ElsaException(L"ScopedExpression::set_parent -> A parent scoped is already defined");
+
+			parent_ = parent;
+		}
+
 		void ScopedExpression::accept(ExpressionVisitor * visitor)
 		{
 			throw ElsaException("Not implemented: ScopedExpression::accept");
 		}
 
-		FuncDeclarationExpression* ScopedExpression::get_root_scope()
+		FuncDeclarationExpression* ScopedExpression::get_root_scope(bool stop_at_function)
 		{
+			if (stop_at_function)
+			{
+				if (auto fde = dynamic_cast<FuncDeclarationExpression*>(this))
+					return fde;
+			}
+
 			if (parent_ == nullptr)
 				return dynamic_cast<FuncDeclarationExpression*>(this);
 

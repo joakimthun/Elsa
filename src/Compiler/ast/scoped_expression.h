@@ -26,11 +26,12 @@ namespace elsa {
 			bool has_local(const std::wstring& name);
 			std::size_t create_new_local();
 			ScopedExpression* parent();
+			void set_parent_scope(ScopedExpression* parent);
 
 			void accept(ExpressionVisitor* visitor) override;
 
 		private:
-			FuncDeclarationExpression* get_root_scope();
+			FuncDeclarationExpression* get_root_scope(bool stop_at_function = true);
 			std::size_t add(const std::wstring& name, const ElsaType& type, const StructDeclarationExpression* struct_expression, LocalType local_type);
 			ScopedExpression* parent_;
 			LocalTable locals_;

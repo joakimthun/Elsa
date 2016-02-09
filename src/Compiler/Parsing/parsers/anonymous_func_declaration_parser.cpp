@@ -9,7 +9,7 @@ namespace elsa {
 		{
 			auto func_dec_exp = FuncParserHelper::parse_signature(parser, true, nullptr);
 
-			parser->save_scope();
+			func_dec_exp->set_parent_scope(parser->current_scope());
 			parser->push_new_scope(func_dec_exp.get());
 
 			for (auto& arg : func_dec_exp->get_args())
@@ -29,7 +29,7 @@ namespace elsa {
 			if (!parser->type_checker().return_type_match(func_dec_exp.get()))
 				throw ParsingException(L"Return type mismatch in function '" + func_dec_exp->get_name() + L"'", parser->current_token());
 
-			parser->restore_scope();
+			parser->pop_current_scope();
 
 			parser->consume(TokenType::RBracket);
 

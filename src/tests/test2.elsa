@@ -1,17 +1,6 @@
 import "std/io";
 import "std/assert";
 
-func FuncCreateInvokeTest()
-{
-	var f1 = func (int x) : int => { return x + 100; };
-	var f2 = func (int x, int y) : int => { return x + y; };
-	var f4 = func (char c) => { AssertEq('X', c); };
-
-	AssertEq(103, f1(3));
-	AssertEq(140, f2(70, 70));
-	f4('X');
-}
-
 struct MyStruct
 {
 	int x;
@@ -26,6 +15,24 @@ struct MyStruct
 		x++;
 	}
 };
+
+func Test()
+{
+	var x = 10;
+
+	//var f = func : int => { return x + 100; };
+}
+
+func FuncCreateInvokeTest()
+{
+	var f1 = func (int x) : int => { return x + 100; };
+	var f2 = func (int x, int y) : int => { return x + y; };
+	var f4 = func (char c) => { AssertEq('X', c); };
+
+	AssertEq(103, f1(3));
+	AssertEq(140, f2(70, 70));
+	f4('X');
+}
 
 func ReturnInt() : int
 {
@@ -48,6 +55,7 @@ func Funky(func : int g, func i)
 
 func main()
 {
+	Test();
 	FuncCreateInvokeTest();
 	
 	var str = new MyStruct { x: 10 };

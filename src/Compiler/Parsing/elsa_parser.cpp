@@ -98,16 +98,6 @@ namespace elsa {
 			current_scope_ = current_scope_->parent();
 		}
 
-		void ElsaParser::save_scope()
-		{
-			saved_scope_ = current_scope_;
-		}
-
-		void ElsaParser::restore_scope()
-		{
-			current_scope_ = saved_scope_;
-		}
-
 		StructTable& ElsaParser::struct_table()
 		{
 			if (parent_ == nullptr)
