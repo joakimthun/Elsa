@@ -1,6 +1,6 @@
 #include "field_access_expression.h"
 
-#include "../code_gen/visitors/expression_visitor.h"
+#include "../expression_visitor.h"
 
 namespace elsa {
 	namespace compiler {

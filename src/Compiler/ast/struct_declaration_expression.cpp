@@ -1,6 +1,6 @@
 #include "struct_declaration_expression.h"
 
-#include "../code_gen/visitors/expression_visitor.h"
+#include "../expression_visitor.h"
 #include "../parsing/elsa_parser.h"
 
 namespace elsa {

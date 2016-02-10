@@ -68,7 +68,7 @@
     <ClInclude Include="code_gen\builders\variable_builder.h" />
     <ClInclude Include="code_gen\code_gen.h" />
     <ClInclude Include="code_gen\helpers\load_helper.h" />
-    <ClInclude Include="code_gen\visitors\expression_visitor.h" />
+    <ClInclude Include="expression_visitor.h" />
     <ClInclude Include="code_gen\visitors\vm_expression_visitor.h" />
     <ClInclude Include="compiler.h" />
     <ClInclude Include="exceptions\parsing_exception.h" />

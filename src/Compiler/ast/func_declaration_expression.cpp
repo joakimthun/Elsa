@@ -1,6 +1,6 @@
 #include "func_declaration_expression.h"
 
-#include "../code_gen/visitors/expression_visitor.h"
+#include "../expression_visitor.h"
 #include "return_expression.h"
 #include "conditional_expression.h"
 #include "loop_expression.h"

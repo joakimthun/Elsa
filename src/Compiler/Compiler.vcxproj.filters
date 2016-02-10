@@ -87,9 +87,6 @@
     <ClInclude Include="code_gen\visitors\vm_expression_visitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code_gen\visitors\expression_visitor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="code_gen\builders\variable_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -310,6 +307,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="helpers\nested_expression_helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="expression_visitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

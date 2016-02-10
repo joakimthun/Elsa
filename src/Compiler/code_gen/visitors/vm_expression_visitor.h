@@ -8,7 +8,7 @@
 #include <cstddef>
 
 #include "exceptions\codegen_exception.h"
-#include "expression_visitor.h"
+#include "../../expression_visitor.h"
 #include "vm_program.h"
 #include "../../types/type_checker.h"
 #include "../../types/builtin/builtin.h"
