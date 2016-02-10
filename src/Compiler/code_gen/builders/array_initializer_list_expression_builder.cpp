@@ -20,18 +20,18 @@ namespace elsa {
 			auto local_index = visitor->current_scope()->create_new_local();
 
 			program->emit(OpCode::s_local);
-			program->emit(local_index);
+			program->emit(static_cast<int>(local_index));
 
 			for (const auto& exp : expression->get_values())
 			{
 				program->emit(OpCode::l_local);
-				program->emit(local_index);
+				program->emit(static_cast<int>(local_index));
 				exp->accept(visitor);
 				program->emit(OpCode::a_ele);
 			}
 
 			program->emit(OpCode::l_local);
-			program->emit(local_index);
+			program->emit(static_cast<int>(local_index));
 		}
 
 	}

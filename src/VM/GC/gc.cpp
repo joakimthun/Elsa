@@ -120,7 +120,7 @@ namespace elsa {
 
 			for (std::size_t i = 0; i < gco->ai->next_index; ++i)
 			{
-				auto element = heap_->load_element(obj, i);
+				auto element = heap_->load_element(obj, static_cast<int>(i));
 
 				if (element.gco() == nullptr)
 					continue;

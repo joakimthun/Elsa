@@ -298,13 +298,15 @@ namespace elsa {
 
 		int FuncDeclarationExpression::get_num_args_without_this_ptr(const FuncDeclarationExpression * fde) const
 		{
+			auto args_size = static_cast<int>(fde->args_.size());
+
 			if (fde->args_.size() == 0)
-				return fde->args_.size();
+				return args_size;
 
 			if(fde->args_[0]->get_name() == L"this")
-				return fde->args_.size() - 1;
+				return args_size - 1;
 
-			return fde->args_.size();
+			return args_size;
 		}
 
 		bool FuncDeclarationExpression::has_this_arg(const FuncDeclarationExpression* fde) const

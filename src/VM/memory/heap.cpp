@@ -179,7 +179,7 @@ namespace elsa {
 			if (ai->next_index > ai->num_elements - 1)
 				resize_array(instance, ai->num_elements * 2);
 
-			store_element(instance, value, ai->next_index++);
+			store_element(instance, value, static_cast<int>(ai->next_index++));
 		}
 
 		Object Heap::pop_element(Object& instance)
@@ -188,8 +188,8 @@ namespace elsa {
 			auto& ai = instance.gco()->ai;
 			auto last_element_index = ai->next_index - 1;
 
-			auto popped_element = load_element(instance, last_element_index);
-			remove_element(instance, last_element_index);
+			auto popped_element = load_element(instance, static_cast<int>(last_element_index));
+			remove_element(instance, static_cast<int>(last_element_index));
 			return popped_element;
 		}
 
@@ -318,7 +318,7 @@ namespace elsa {
 			auto array_info = instance.gco()->ai.get();
 			for (std::size_t i = start_index; i < array_info->next_index; ++i)
 			{
-				store_element(instance, get_default_value(array_info->type), i);
+				store_element(instance, get_default_value(array_info->type), static_cast<int>(i));
 			}
 		}
 

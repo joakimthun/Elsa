@@ -34,21 +34,21 @@ namespace elsa {
 			{
 				visitor->push_new_scope(expression->get_if_scope());
 
-				program->emit(after_if_addr_index, program->get_next_instruction_index());
+				program->emit(after_if_addr_index, static_cast<int>(program->get_next_instruction_index()));
 
 				for (auto& exp : expression->get_else_body())
 				{
 					exp->accept(visitor);
 				}
 
-				program->emit(if_end_addr_index, program->get_next_instruction_index());
+				program->emit(if_end_addr_index, static_cast<int>(program->get_next_instruction_index()));
 
 				visitor->pop_current_scope();
 			}
 			else
 			{
-				program->emit(after_if_addr_index, program->get_next_instruction_index());
-				program->emit(if_end_addr_index, program->get_next_instruction_index());
+				program->emit(after_if_addr_index, static_cast<int>(program->get_next_instruction_index()));
+				program->emit(if_end_addr_index, static_cast<int>(program->get_next_instruction_index()));
 			}
 		}
 

@@ -41,10 +41,10 @@ namespace elsa {
 			expression->get_post_expression()->accept(visitor);
 
 			program->emit(OpCode::br);
-			program->emit(before_condition_addr_index);
+			program->emit(static_cast<int>(before_condition_addr_index));
 
 			// Set the address to jump to if the loop condition fails
-			program->emit(after_loop_addr_index, program->get_next_instruction_index());
+			program->emit(after_loop_addr_index, static_cast<int>(program->get_next_instruction_index()));
 		}
 
 		void LoopExpressionBuilder::build_while_loop(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression)
@@ -66,10 +66,10 @@ namespace elsa {
 			build_loop_body(program, visitor, expression);
 
 			program->emit(OpCode::br);
-			program->emit(before_condition_addr_index);
+			program->emit(static_cast<int>(before_condition_addr_index));
 
 			// Set the address to jump to if the loop condition fails
-			program->emit(after_loop_addr_index, program->get_next_instruction_index());
+			program->emit(after_loop_addr_index, static_cast<int>(program->get_next_instruction_index()));
 		}
 
 		void LoopExpressionBuilder::build_loop_body(VMProgram* program, VMExpressionVisitor* visitor, LoopExpression* expression)
