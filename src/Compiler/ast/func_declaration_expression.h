@@ -12,6 +12,7 @@
 #include "variable_declaration_expression.h"
 #include "../types/elsa_type.h"
 #include "scoped_expression.h"
+#include "../helpers/nested_expression_helper.h"
 
 
 namespace elsa {
@@ -70,7 +71,6 @@ namespace elsa {
 		private:
 			void assert_is_impl();
 			void get_return_expressions_internal(Expression* exp, ReturnExpressions& return_expressions);
-			void get_nested_functions_internal(Expression* exp, std::vector<FuncDeclarationExpression*>& functions);
 			int get_num_args_without_this_ptr(const FuncDeclarationExpression* fde) const;
 			bool has_this_arg(const FuncDeclarationExpression* fde) const;
 

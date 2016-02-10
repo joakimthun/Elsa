@@ -20,7 +20,7 @@ func Test()
 {
 	var x = 10;
 
-	var f = func : int => { return x + 100; };
+	//var f = func : int => { return x + 100; };
 }
 
 func FuncCreateInvokeTest()

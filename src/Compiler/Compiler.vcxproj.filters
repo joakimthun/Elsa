@@ -309,6 +309,9 @@
     <ClInclude Include="parsing\helpers\func_parser_helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="helpers\nested_expression_helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">

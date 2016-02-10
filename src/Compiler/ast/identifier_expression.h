@@ -21,11 +21,15 @@ namespace elsa {
 			const ElsaType* get_type() const;
 			ExpressionType get_expression_type() const override;
 
+			void set_from_closure(bool from_closure);
+			bool get_from_closure() const;
+
 			void accept(ExpressionVisitor* visitor) override;
 
 		private:
 			std::wstring name_;
 			std::unique_ptr<ElsaType> type_;
+			bool from_closure_;
 		};
 
 	}

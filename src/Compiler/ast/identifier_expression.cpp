@@ -7,7 +7,8 @@ namespace elsa {
 
 		IdentifierExpression::IdentifierExpression(const std::wstring& name)
 			:
-			name_(name)
+			name_(name),
+			from_closure_(false)
 		{}
 
 		void IdentifierExpression::set_type(ElsaType * type)
@@ -28,6 +29,16 @@ namespace elsa {
 		ExpressionType IdentifierExpression::get_expression_type() const
 		{
 			return ExpressionType::Identifier;
+		}
+
+		void IdentifierExpression::set_from_closure(bool from_closure)
+		{
+			from_closure_ = from_closure;
+		}
+
+		bool IdentifierExpression::get_from_closure() const
+		{
+			return from_closure_;
 		}
 
 		void IdentifierExpression::accept(ExpressionVisitor* visitor)

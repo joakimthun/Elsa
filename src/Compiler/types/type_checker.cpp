@@ -45,6 +45,21 @@ namespace elsa {
 						return new ElsaType(parser_->function_table().get(id->get_name())->get_expression());
 					}
 
+					local = parser_->current_scope()->get_local_from_closure(id->get_name());
+					if (local != nullptr)
+					{
+						id->set_from_closure(true);
+
+						if (local->get_struct_expression() != nullptr)
+						{
+							return new ElsaType(local->get_struct_expression());
+						}
+						else
+						{
+							return new ElsaType(local->get_type());
+						}
+					}
+
 					throw ParsingException(L"Unkown identifier '" + id->get_name() + L"'", parser_->current_token());
 				}
 

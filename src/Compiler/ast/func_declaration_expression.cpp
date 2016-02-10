@@ -230,17 +230,17 @@ namespace elsa {
 		std::vector<FuncDeclarationExpression*> FuncDeclarationExpression::get_nested_functions()
 		{
 			std::vector<FuncDeclarationExpression*> functions;
-
+			
 			for (const auto& exp : body_)
 			{
-				get_nested_functions_internal(exp.get(), functions);
+				NestedExpressionHelper::get_nested_expressions<FuncDeclarationExpression>(exp.get(), functions);
 			}
-
+			
 			for (const auto& exp : args_)
 			{
-				get_nested_functions_internal(exp.get(), functions);
+				NestedExpressionHelper::get_nested_expressions<FuncDeclarationExpression>(exp.get(), functions);
 			}
-
+			
 			return functions;
 		}
 
@@ -292,69 +292,6 @@ namespace elsa {
 				for (const auto& be : loop_exp->get_body())
 				{
 					get_return_expressions_internal(be.get(), return_expressions);
-				}
-			}
-		}
-
-		void FuncDeclarationExpression::get_nested_functions_internal(Expression* exp, std::vector<FuncDeclarationExpression*>& functions)
-		{
-			if (auto vde = dynamic_cast<VariableDeclarationExpression*>(exp))
-			{
-				if (auto fde = dynamic_cast<FuncDeclarationExpression*>(vde->get_expression()))
-				{
-					for (const auto& exp : fde->body_)
-					{
-						get_nested_functions_internal(exp.get(), functions);
-					}
-
-					functions.push_back(fde);
-				}
-			}
-			else if (auto conde_exp = dynamic_cast<ConditionalExpression*>(exp))
-			{
-				for (const auto& ie : conde_exp->get_if_body())
-				{
-					get_nested_functions_internal(ie.get(), functions);
-				}
-
-				for (const auto& ee : conde_exp->get_else_body())
-				{
-					get_nested_functions_internal(ee.get(), functions);
-				}
-			}
-			else if (auto loop_exp = dynamic_cast<LoopExpression*>(exp))
-			{
-				for (const auto& be : loop_exp->get_body())
-				{
-					get_nested_functions_internal(be.get(), functions);
-				}
-			}
-			else if (auto ret_exp = dynamic_cast<ReturnExpression*>(exp))
-			{
-				if (auto fde = dynamic_cast<FuncDeclarationExpression*>(ret_exp->get_expression()))
-				{
-					for (const auto& exp : fde->body_)
-					{
-						get_nested_functions_internal(exp.get(), functions);
-					}
-
-					functions.push_back(fde);
-				}
-			}
-			else if (auto fde = dynamic_cast<FuncDeclarationExpression*>(exp))
-			{
-				for (const auto& exp : fde->body_)
-				{
-					get_nested_functions_internal(exp.get(), functions);
-				}
-
-				functions.push_back(fde);
-			}
-			else if (auto fc_exp = dynamic_cast<FuncCallExpression*>(exp))
-			{
-				for (const auto& arg : fc_exp->get_args())
-				{
-					get_nested_functions_internal(arg.get(), functions);
 				}
 			}
 		}
