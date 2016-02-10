@@ -69,7 +69,7 @@
     <ClInclude Include="code_gen\code_gen.h" />
     <ClInclude Include="code_gen\helpers\load_helper.h" />
     <ClInclude Include="expression_visitor.h" />
-    <ClInclude Include="code_gen\visitors\vm_expression_visitor.h" />
+    <ClInclude Include="code_gen\vm_expression_visitor.h" />
     <ClInclude Include="compiler.h" />
     <ClInclude Include="exceptions\parsing_exception.h" />
     <ClInclude Include="helpers\nested_expression_helper.h" />
@@ -168,7 +168,7 @@
     <ClCompile Include="code_gen\builders\variable_builder.cpp" />
     <ClCompile Include="code_gen\code_gen.cpp" />
     <ClCompile Include="code_gen\helpers\load_helper.cpp" />
-    <ClCompile Include="code_gen\visitors\vm_expression_visitor.cpp" />
+    <ClCompile Include="code_gen\vm_expression_visitor.cpp" />
     <ClCompile Include="compiler.cpp" />
     <ClCompile Include="exceptions\parsing_exception.cpp" />
     <ClCompile Include="interop\native_function_info.cpp" />

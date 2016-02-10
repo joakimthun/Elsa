@@ -84,9 +84,6 @@
     <ClInclude Include="code_gen\code_gen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code_gen\visitors\vm_expression_visitor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="code_gen\builders\variable_builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -312,6 +309,9 @@
     <ClInclude Include="expression_visitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="code_gen\vm_expression_visitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -369,9 +369,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code_gen\code_gen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="code_gen\visitors\vm_expression_visitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code_gen\builders\variable_builder.cpp">
@@ -579,6 +576,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="parsing\helpers\func_parser_helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code_gen\vm_expression_visitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

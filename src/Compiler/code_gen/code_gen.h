@@ -4,7 +4,7 @@
 
 #include "../program.h"
 #include "vm_program.h"
-#include "visitors\vm_expression_visitor.h"
+#include "vm_expression_visitor.h"
 #include "../types/type_checker.h"
 
 namespace elsa {

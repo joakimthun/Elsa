@@ -1,6 +1,6 @@
 #include "struct_declaration_expression_builder.h"
 
-#include "../visitors/vm_expression_visitor.h"
+#include "../vm_expression_visitor.h"
 #include "function_declaration_expression_builder.h"
 
 namespace elsa {

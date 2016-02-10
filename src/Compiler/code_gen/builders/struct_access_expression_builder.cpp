@@ -2,7 +2,7 @@
 
 #include "../../ast/struct_declaration_expression.h"
 #include "../../ast/array_access_expression.h"
-#include "../visitors/vm_expression_visitor.h"
+#include "../vm_expression_visitor.h"
 
 namespace elsa {
 	namespace compiler {

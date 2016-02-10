@@ -1,7 +1,7 @@
 #include "assignment_expression_builder.h"
 
 #include "../../ast/struct_declaration_expression.h"
-#include "../visitors/vm_expression_visitor.h"
+#include "../vm_expression_visitor.h"
 
 namespace elsa {
 	namespace compiler {
