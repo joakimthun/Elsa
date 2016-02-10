@@ -18,6 +18,14 @@ namespace elsa {
 		{
 			auto parser = ElsaParser(new Lexer(new SourceFile(filename)));
 			auto program = parser.parse();
+
+			auto visitor = std::make_unique<ASTRewriteExpressionVisitor>(&parser);
+
+			for (auto& statement : program->get_statements())
+			{
+				statement->accept(visitor.get());
+			}
+
 			auto cg = CodeGen(program.get(), &parser.type_checker());
 			return cg.generate();
 		}

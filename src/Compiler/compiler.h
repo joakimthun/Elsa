@@ -7,6 +7,7 @@
 #include "parsing\elsa_parser.h"
 #include "code_gen\code_gen.h"
 #include "util\string_util.h"
+#include "ast_rewrite\ast_rewrite_expression_visitor.h"
 
 namespace elsa {
 	namespace compiler {
