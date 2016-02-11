@@ -69,6 +69,13 @@ namespace elsa {
 			body_.push_back(std::move(expression));
 		}
 
+		void FuncDeclarationExpression::add_body_expression_front(std::unique_ptr<Expression> expression)
+		{
+			assert_is_impl();
+			auto it = body_.begin();
+			body_.insert(it, std::move(expression));
+		}
+
 		void FuncDeclarationExpression::set_name(const std::wstring& name)
 		{
 			assert_is_impl();

@@ -22,6 +22,8 @@ namespace elsa {
 			add_anonymous_functions_as_members(nested_functions, struct_expression.get(), visitor);
 
 			visitor->add_statement(std::move(struct_expression));
+
+			expression->add_body_expression_front(std::make_unique<CreateStructExpression>(struct_expression->get_name(), visitor->parser()->type_checker().get_struct_type(struct_expression->get_name())));
 		}
 
 		void ClosureRewriter::add_capured_identifiers_as_fields(std::vector<ExpressionPair<IdentifierExpression>>& identifiers, StructDeclarationExpression* struct_exp)

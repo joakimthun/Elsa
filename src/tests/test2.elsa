@@ -62,13 +62,14 @@ func Funky(func : int g, func i)
 
 func main()
 {
-	Test();
-	FuncCreateInvokeTest();
-	
 	var str = new MyStruct { x: 10 };
 
 	var g = str.Get;
 	var i = str.Inc;
+
+	Test();
+	FuncCreateInvokeTest();
+	
 	var ri = ReturnInt;
 
 	PrintLn(g());
