@@ -339,7 +339,7 @@ namespace elsa {
 		void ElsaParser::initialize_default_imports()
 		{
 			import_source_file(L"std/system");
-			import_source_file(L"std/string");
+			//import_source_file(L"std/string");
 		}
 
 		void ElsaParser::parse_import_statement()

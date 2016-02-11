@@ -26,6 +26,11 @@ namespace elsa {
 				statement->accept(visitor.get());
 			}
 
+			for (auto& statement : visitor->get_statements())
+			{
+				program->add_statement_front(std::move(statement));
+			}
+
 			auto cg = CodeGen(program.get(), &parser.type_checker());
 			return cg.generate();
 		}

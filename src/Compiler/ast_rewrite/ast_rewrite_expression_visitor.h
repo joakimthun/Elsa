@@ -7,9 +7,11 @@
 #include <utility>
 #include <cstddef>
 
+#include "../ast/expression.h"
 #include "../exceptions/parsing_exception.h"
 #include "../parsing/elsa_parser.h"
 #include "../expression_visitor.h"
+#include "rewriters\closure_rewriter.h"
 
 namespace elsa {
 	namespace compiler {
@@ -44,8 +46,14 @@ namespace elsa {
 			void visit(TypeCastExpression* expression) override;
 			void visit(StructInitializerListExpression* expression) override;
 
+			ElsaParser* parser();
+			void add_statement(std::unique_ptr<Expression> node);
+			std::vector<std::unique_ptr<Expression>>& get_statements();
+
 		private:
+			Program* program_;
 			ElsaParser* parser_;
+			std::vector<std::unique_ptr<Expression>> statements_;
 		};
 
 	}

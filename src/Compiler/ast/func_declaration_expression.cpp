@@ -201,7 +201,7 @@ namespace elsa {
 			return return_type_.get();
 		}
 
-		const std::vector<std::unique_ptr<Expression>>& FuncDeclarationExpression::get_body() const
+		std::vector<std::unique_ptr<Expression>>& FuncDeclarationExpression::get_body()
 		{
 			if (impl_ != nullptr)
 				return impl_->get_body();
@@ -229,16 +229,22 @@ namespace elsa {
 
 		std::vector<FuncDeclarationExpression*> FuncDeclarationExpression::get_nested_functions()
 		{
-			std::vector<FuncDeclarationExpression*> functions;
+			std::vector<ExpressionPair<FuncDeclarationExpression>> pairs;
 			
 			for (const auto& exp : body_)
 			{
-				NestedExpressionHelper::get_nested_expressions<FuncDeclarationExpression>(exp.get(), functions);
+				NestedExpressionHelper::get_nested_expressions<FuncDeclarationExpression>(exp.get(), pairs, this);
 			}
 			
 			for (const auto& exp : args_)
 			{
-				NestedExpressionHelper::get_nested_expressions<FuncDeclarationExpression>(exp.get(), functions);
+				NestedExpressionHelper::get_nested_expressions<FuncDeclarationExpression>(exp.get(), pairs, this);
+			}
+
+			std::vector<FuncDeclarationExpression*> functions;
+			for (auto pair : pairs)
+			{
+				functions.push_back(pair.expression);
 			}
 			
 			return functions;

@@ -11,7 +11,7 @@ namespace elsa {
 
 		void ASTRewriteExpressionVisitor::visit(FuncDeclarationExpression* expression)
 		{
-			
+			ClosureRewriter::rewrite(this, expression);
 		}
 
 		void ASTRewriteExpressionVisitor::visit(VariableDeclarationExpression* expression)
@@ -100,6 +100,21 @@ namespace elsa {
 
 		void ASTRewriteExpressionVisitor::visit(StructInitializerListExpression* expression)
 		{
+		}
+
+		ElsaParser* ASTRewriteExpressionVisitor::parser()
+		{
+			return parser_;
+		}
+
+		void ASTRewriteExpressionVisitor::add_statement(std::unique_ptr<Expression> node)
+		{
+			statements_.push_back(std::move(node));
+		}
+
+		std::vector<std::unique_ptr<Expression>>& ASTRewriteExpressionVisitor::get_statements()
+		{
+			return statements_;
 		}
 
 	}

@@ -1,6 +1,13 @@
 import "std/io";
 import "std/assert";
 
+func ClosureTest()
+{
+	var x = 10;
+	//var f1 = func : int => { return x + 100; };
+	//PrintLn(f1());
+}
+
 struct MyStruct
 {
 	int x;
@@ -76,4 +83,5 @@ func main()
 	AssertEq(12, g());
 
 	Funky(str.Get, str.Inc);
+	ClosureTest();
 }

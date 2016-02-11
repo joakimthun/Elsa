@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include <utility>
 
 #include "expression.h"
 #include "../types/elsa_type.h"
@@ -19,6 +20,8 @@ namespace elsa {
 			const std::wstring& get_name() const;
 			const ElsaType* get_type() const;
 			Expression* get_expression() const;
+			void set_expression(std::unique_ptr<Expression> expression);
+			Expression* release_expression();
 
 			void accept(ExpressionVisitor* visitor) override;
 

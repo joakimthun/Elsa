@@ -14,6 +14,7 @@ namespace elsa {
 		{
 		public:
 			void add_statement(std::unique_ptr<Expression> node);
+			void add_statement_front(std::unique_ptr<Expression> node);
 			std::vector<std::unique_ptr<Expression>>& get_statements();
 
 		private:

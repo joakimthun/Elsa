@@ -59,7 +59,7 @@ namespace elsa {
 			const std::wstring& get_name() const;
 			const std::wstring get_type_name() const;
 			const ElsaType* get_return_type() const;
-			const std::vector<std::unique_ptr<Expression>>& get_body() const;
+			std::vector<std::unique_ptr<Expression>>& get_body();
 			const std::vector<std::unique_ptr<ArgumentExpression>>& get_args() const;
 
 			ReturnExpressions get_return_expressions();
@@ -74,7 +74,7 @@ namespace elsa {
 			int get_num_args_without_this_ptr(const FuncDeclarationExpression* fde) const;
 			bool has_this_arg(const FuncDeclarationExpression* fde) const;
 
-			const FuncDeclarationExpression* impl_;
+			FuncDeclarationExpression* impl_;
 			std::wstring name_;
 			std::unique_ptr<ElsaType> return_type_;
 			std::vector<std::unique_ptr<ArgumentExpression>> args_;
