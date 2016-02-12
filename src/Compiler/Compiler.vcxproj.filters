@@ -312,13 +312,16 @@
     <ClInclude Include="code_gen\vm_expression_visitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ast_rewrite\ast_rewrite_expression_visitor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ast_rewrite\rewriters\closure_rewriter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="helpers\struct_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast_rewrite\ast_rewriters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast_rewrite\ast_rewriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast_rewrite\closure\closure_rewrite_visitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -590,13 +593,13 @@
     <ClCompile Include="code_gen\vm_expression_visitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ast_rewrite\ast_rewrite_expression_visitor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ast_rewrite\rewriters\closure_rewriter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="helpers\struct_factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast_rewrite\ast_rewriters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast_rewrite\closure\closure_rewrite_visitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

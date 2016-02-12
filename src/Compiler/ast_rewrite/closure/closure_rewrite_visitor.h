@@ -7,21 +7,25 @@
 #include <utility>
 #include <cstddef>
 
-#include "../ast/expression.h"
-#include "../exceptions/parsing_exception.h"
-#include "../parsing/elsa_parser.h"
-#include "../expression_visitor.h"
-#include "rewriters\closure_rewriter.h"
+#include "../../ast/expression.h"
+#include "../../exceptions/parsing_exception.h"
+#include "../../parsing/elsa_parser.h"
+#include "../../expression_visitor.h"
+#include "../ast_rewriter.h"
 
 namespace elsa {
 	namespace compiler {
 
 		class ScopedExpression;
 
-		class ASTRewriteExpressionVisitor : public ExpressionVisitor
+		class ClosureRewriteVisitor : public ExpressionVisitor, public ASTRewriter
 		{
 		public:
-			ASTRewriteExpressionVisitor(ElsaParser* parser);
+			ClosureRewriteVisitor(Program* program, ElsaParser* parser);
+
+			void rewrite() override;
+			std::vector<std::unique_ptr<Expression>>& get_new_statements() override;
+
 			void visit(FuncDeclarationExpression* expression) override;
 			void visit(VariableDeclarationExpression* expression) override;
 			void visit(BinaryOperatorExpression* expression) override;
@@ -48,9 +52,13 @@ namespace elsa {
 
 			ElsaParser* parser();
 			void add_statement(std::unique_ptr<Expression> node);
-			std::vector<std::unique_ptr<Expression>>& get_statements();
 
 		private:
+			void add_capured_identifiers_as_fields(std::vector<ExpressionPair<IdentifierExpression>>& identifiers, StructDeclarationExpression* struct_exp);
+			void add_anonymous_functions_as_members(std::vector<ExpressionPair<FuncDeclarationExpression>>& pairs, StructDeclarationExpression* struct_exp);
+			std::vector<ExpressionPair<IdentifierExpression>> identifier_expressions_in_closure(FuncDeclarationExpression* expression);
+			void rewrite_as_member_function(ExpressionPair<FuncDeclarationExpression> pair, StructDeclarationExpression* struct_exp);
+
 			Program* program_;
 			ElsaParser* parser_;
 			std::vector<std::unique_ptr<Expression>> statements_;

@@ -46,8 +46,9 @@
     <ClInclude Include="ast\struct_initializer_list_expression.h" />
     <ClInclude Include="ast\typed_expression.h" />
     <ClInclude Include="ast\type_cast_expression.h" />
-    <ClInclude Include="ast_rewrite\ast_rewrite_expression_visitor.h" />
-    <ClInclude Include="ast_rewrite\rewriters\closure_rewriter.h" />
+    <ClInclude Include="ast_rewrite\ast_rewriter.h" />
+    <ClInclude Include="ast_rewrite\ast_rewriters.h" />
+    <ClInclude Include="ast_rewrite\closure\closure_rewrite_visitor.h" />
     <ClInclude Include="code_gen\builders\array_access_expression_builder.h" />
     <ClInclude Include="code_gen\builders\array_declaration_expression_builder.h" />
     <ClInclude Include="code_gen\builders\array_initializer_list_expression_builder.h" />
@@ -149,8 +150,8 @@
     <ClCompile Include="ast\struct_declaration_expression.cpp" />
     <ClCompile Include="ast\struct_initializer_list_expression.cpp" />
     <ClCompile Include="ast\type_cast_expression.cpp" />
-    <ClCompile Include="ast_rewrite\ast_rewrite_expression_visitor.cpp" />
-    <ClCompile Include="ast_rewrite\rewriters\closure_rewriter.cpp" />
+    <ClCompile Include="ast_rewrite\ast_rewriters.cpp" />
+    <ClCompile Include="ast_rewrite\closure\closure_rewrite_visitor.cpp" />
     <ClCompile Include="code_gen\builders\array_access_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\array_declaration_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\array_initializer_list_expression_builder.cpp" />
