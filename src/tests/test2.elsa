@@ -4,8 +4,8 @@ import "std/assert";
 func ClosureTest()
 {
 	var x = 10;
-	//var f1 = func : int => { return x + 100; };
-	//PrintLn(f1());
+	var f1 = func : int => { return x + 100; };
+	PrintLn(f1());
 }
 
 struct MyStruct

@@ -54,14 +54,18 @@ namespace elsa {
 			void add_statement(std::unique_ptr<Expression> node);
 
 		private:
-			void add_capured_identifiers_as_fields(std::vector<ExpressionPair<IdentifierExpression>>& identifiers, StructDeclarationExpression* struct_exp);
-			void add_anonymous_functions_as_members(std::vector<ExpressionPair<FuncDeclarationExpression>>& pairs, StructDeclarationExpression* struct_exp);
+			void create_capture_struct(FuncDeclarationExpression* fde, std::vector<ExpressionPair<IdentifierExpression>>& identifier_expressions);
+			void add_capured_identifiers_as_fields(std::vector<ExpressionPair<IdentifierExpression>>& identifiers);
 			std::vector<ExpressionPair<IdentifierExpression>> identifier_expressions_in_closure(FuncDeclarationExpression* expression);
-			void rewrite_as_member_function(ExpressionPair<FuncDeclarationExpression> pair, StructDeclarationExpression* struct_exp);
+			FuncDeclarationExpression* rewrite_as_member_function(VariableDeclarationExpression* vde, FuncDeclarationExpression* fde);
+			void point_variable_expression_to_member_func(VariableDeclarationExpression* vde, FuncDeclarationExpression* member_fde);
+			void rewrite_captured_identifier_expression(IdentifierExpression* identifier_expression, Expression* parent);
 
 			Program* program_;
 			ElsaParser* parser_;
 			std::vector<std::unique_ptr<Expression>> statements_;
+			StructDeclarationExpression* capture_struct_;
+			std::wstring capture_variable_name_;
 		};
 
 	}
