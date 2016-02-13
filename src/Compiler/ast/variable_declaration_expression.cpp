@@ -37,6 +37,11 @@ namespace elsa {
 			return expression_.release();
 		}
 
+		std::unique_ptr<Expression> VariableDeclarationExpression::move_expression()
+		{
+			return std::move(expression_);
+		}
+
 		void VariableDeclarationExpression::accept(ExpressionVisitor* visitor)
 		{
 			visitor->visit(this);

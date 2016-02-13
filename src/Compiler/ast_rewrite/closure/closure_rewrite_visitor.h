@@ -54,18 +54,26 @@ namespace elsa {
 			void add_statement(std::unique_ptr<Expression> node);
 
 		private:
-			void create_capture_struct(FuncDeclarationExpression* fde, std::vector<ExpressionPair<IdentifierExpression>>& identifier_expressions);
-			void add_capured_identifiers_as_fields(std::vector<ExpressionPair<IdentifierExpression>>& identifiers);
-			std::vector<ExpressionPair<IdentifierExpression>> identifier_expressions_in_closure(FuncDeclarationExpression* expression);
-			FuncDeclarationExpression* rewrite_as_member_function(VariableDeclarationExpression* vde, FuncDeclarationExpression* fde);
+			void create_capture_struct(FuncDeclarationExpression* fde);
+			void add_capured_identifiers_as_fields();
+			void set_captured_identifier_expressions(FuncDeclarationExpression* expression);
+			FuncDeclarationExpression* rewrite_as_member_function(VariableDeclarationExpression* vde);
 			void point_variable_expression_to_member_func(VariableDeclarationExpression* vde, FuncDeclarationExpression* member_fde);
-			void rewrite_captured_identifier_expression(IdentifierExpression* identifier_expression, Expression* parent);
+			void rewrite_captured_identifier_expression(IdentifierExpression* identifier_expression);
+			void rewrite_as_assignment_expression(VariableDeclarationExpression* vde);
+			bool rewrite_identifier_child();
+			bool rewrite_variable_child();
+			void reset_state();
+			bool captured_in_closure(VariableDeclarationExpression* vde);
 
 			Program* program_;
 			ElsaParser* parser_;
+			std::vector<ExpressionPair<IdentifierExpression>> captured_identifier_expressions_;
 			std::vector<std::unique_ptr<Expression>> statements_;
 			StructDeclarationExpression* capture_struct_;
 			std::wstring capture_variable_name_;
+			std::unique_ptr<StructAccessExpression> next_identifier_rewrite_;
+			std::unique_ptr<AssignmentExpression> next_variable_rewrite_;
 		};
 
 	}

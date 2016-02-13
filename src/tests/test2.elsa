@@ -1,13 +1,6 @@
 import "std/io";
 import "std/assert";
 
-func ClosureTest()
-{
-	var x = 10;
-	var f1 = func : int => { return x + 100; };
-	PrintLn(f1());
-}
-
 struct MyStruct
 {
 	int x;
@@ -23,66 +16,28 @@ struct MyStruct
 	}
 };
 
-func Test()
+func IncX2(func inc)
 {
-	var x = 10;
-
-	//var f = func : int => { return x + 100; };
-}
-
-func FuncCreateInvokeTest()
-{
-	var f1 = func (int x) : int => { return x + 100; };
-	var f2 = func (int x, int y) : int => { return x + y; };
-	var f4 = func (char c) => { AssertEq('X', c); };
-
-	AssertEq(103, f1(3));
-	AssertEq(140, f2(70, 70));
-	f4('X');
-}
-
-func ReturnInt() : int
-{
-	return 10;
-}
-
-func Funky(func : int g, func i)
-{
-	PrintLn(g());
-	AssertEq(12, g());
-
-	i();
-	PrintLn(g());
-	AssertEq(13, g());
-
-	i();
-	PrintLn(g());
-	AssertEq(14, g());
+	inc();
+	inc();
 }
 
 func main()
 {
-	var str = new MyStruct { x: 10 };
+	var x = 10;
 
-	var g = str.Get;
-	var i = str.Inc;
+	var ret = func : int => { return x; };
+	var inc = func => { x = x + 1; };
 
-	Test();
-	FuncCreateInvokeTest();
-	
-	var ri = ReturnInt;
+	AssertEq(10, ret());
+	inc();
+	AssertEq(11, ret());
+	inc();
+	AssertEq(12, ret());
 
-	PrintLn(g());
-	AssertEq(10, g());
+	IncX2(inc);
 
-	i();
-	PrintLn(g());
-	AssertEq(11, g());
+	AssertEq(14, ret());
 
-	i();
-	PrintLn(g());
-	AssertEq(12, g());
-
-	Funky(str.Get, str.Inc);
-	ClosureTest();
+	PrintLn(":)");
 }

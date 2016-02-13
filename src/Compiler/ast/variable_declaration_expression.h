@@ -22,6 +22,7 @@ namespace elsa {
 			Expression* get_expression() const;
 			void set_expression(std::unique_ptr<Expression> expression);
 			Expression* release_expression();
+			std::unique_ptr<Expression> move_expression();
 
 			void accept(ExpressionVisitor* visitor) override;
 

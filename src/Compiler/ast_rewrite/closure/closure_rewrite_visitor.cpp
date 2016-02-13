@@ -7,6 +7,7 @@
 #include "../../ast/struct_access_expression.h"
 #include "../../ast/create_struct_expression.h"
 #include "../../ast/struct_declaration_expression.h"
+//#include "../../ast/assignment_expression.h"
 
 namespace elsa {
 	namespace compiler {
@@ -25,22 +26,34 @@ namespace elsa {
 			
 			for (auto function : functions)
 			{
-				auto identifier_expressions = identifier_expressions_in_closure(function);
-				if (identifier_expressions.size() == 0)
+				// Reset state for each function
+				captured_identifier_expressions_.clear();
+				reset_state();
+
+				set_captured_identifier_expressions(function);
+				if (captured_identifier_expressions_.size() == 0)
 					continue;
-				
+
 				auto struct_expression = StructFactory::create(parser_);
 				capture_struct_ = struct_expression.get();
-				create_capture_struct(function, identifier_expressions);
+				create_capture_struct(function);
 
 				for (auto& expression : function->get_body())
 				{
 					expression->accept(this);
+
+					if (rewrite_variable_child())
+					{
+						expression.reset(next_variable_rewrite_.release());
+					}
 				}
 
-				for (auto pair : identifier_expressions)
+				for (auto& member_func : struct_expression->get_functions())
 				{
-					rewrite_captured_identifier_expression(pair.expression, pair.parent);
+					for (auto& body_exp : member_func->get_body())
+					{
+						body_exp->accept(this);
+					}
 				}
 			
 				add_statement(std::move(struct_expression));
@@ -54,23 +67,44 @@ namespace elsa {
 
 		void ClosureRewriteVisitor::visit(FuncDeclarationExpression* expression)
 		{
-			//for (auto& exp : expression->get_body())
-			//{
-			//
-			//}
+			for (auto& exp : expression->get_body())
+			{
+				exp->accept(this);
+				
+				if (rewrite_variable_child())
+				{
+					exp.reset(next_variable_rewrite_.release());
+				}
+			}
 		}
 
 		void ClosureRewriteVisitor::visit(VariableDeclarationExpression* expression)
 		{
-			if (auto fde = dynamic_cast<FuncDeclarationExpression*>(expression->get_expression()))
+			if (dynamic_cast<FuncDeclarationExpression*>(expression->get_expression()))
 			{
-				auto member_fde = rewrite_as_member_function(expression, fde);
+				auto member_fde = rewrite_as_member_function(expression);
 				point_variable_expression_to_member_func(expression, member_fde);
+			}
+
+			if (captured_in_closure(expression))
+			{
+				rewrite_as_assignment_expression(expression);
 			}
 		}
 
 		void ClosureRewriteVisitor::visit(BinaryOperatorExpression* expression)
 		{
+			expression->get_left()->accept(this);
+			if (rewrite_identifier_child())
+			{
+				expression->set_left(std::move(next_identifier_rewrite_));
+			}
+
+			expression->get_right()->accept(this);
+			if (rewrite_identifier_child())
+			{
+				expression->set_right(std::move(next_identifier_rewrite_));
+			}
 		}
 
 		void ClosureRewriteVisitor::visit(IntegerLiteralExpression* expression)
@@ -79,8 +113,10 @@ namespace elsa {
 
 		void ClosureRewriteVisitor::visit(IdentifierExpression* expression)
 		{
-			//if(expression->get_from_closure())
-			//	rewrite_captured_identifier_expression(expression);
+			if (expression->get_from_closure())
+			{
+				rewrite_captured_identifier_expression(expression);
+			}
 		}
 
 		void ClosureRewriteVisitor::visit(FloatLiteralExpression* expression)
@@ -105,6 +141,17 @@ namespace elsa {
 
 		void ClosureRewriteVisitor::visit(AssignmentExpression* expression)
 		{
+			expression->get_left()->accept(this);
+			if (rewrite_identifier_child())
+			{
+				expression->set_left(std::move(next_identifier_rewrite_));
+			}
+
+			expression->get_right()->accept(this);
+			if (rewrite_identifier_child())
+			{
+				expression->set_right(std::move(next_identifier_rewrite_));
+			}
 		}
 
 		void ClosureRewriteVisitor::visit(FuncCallExpression* expression)
@@ -129,6 +176,11 @@ namespace elsa {
 
 		void ClosureRewriteVisitor::visit(ReturnExpression* expression)
 		{
+			expression->get_expression()->accept(this);
+			if (rewrite_identifier_child())
+			{
+				expression->set_expression(std::move(next_identifier_rewrite_));
+			}
 		}
 
 		void ClosureRewriteVisitor::visit(ArrayDeclarationExpression* expression)
@@ -165,11 +217,11 @@ namespace elsa {
 			statements_.push_back(std::move(node));
 		}
 
-		void ClosureRewriteVisitor::create_capture_struct(FuncDeclarationExpression* fde, std::vector<ExpressionPair<IdentifierExpression>>& identifier_expressions)
+		void ClosureRewriteVisitor::create_capture_struct(FuncDeclarationExpression* fde)
 		{
 			capture_variable_name_ = StringUtil::create_random_string(25);
 
-			add_capured_identifiers_as_fields(identifier_expressions);
+			add_capured_identifiers_as_fields();
 
 			auto create_capture_struct = std::make_unique<CreateStructExpression>(capture_struct_->get_name(), parser_->type_checker().get_struct_type(capture_struct_->get_name()));
 
@@ -180,32 +232,29 @@ namespace elsa {
 			fde->add_body_expression_front(std::move(capture_varaible));
 		}
 
-		void ClosureRewriteVisitor::add_capured_identifiers_as_fields(std::vector<ExpressionPair<IdentifierExpression>>& identifiers)
+		void ClosureRewriteVisitor::add_capured_identifiers_as_fields()
 		{
 			std::size_t field_index = 0;
-			for (auto identifier : identifiers)
+			for (auto identifier : captured_identifier_expressions_)
 			{
 				capture_struct_->add_field_expression(std::make_unique<FieldExpression>(identifier.expression->get_name(), new ElsaType(identifier.expression->get_type()), field_index++));
 			}
 		}
 
-		std::vector<ExpressionPair<IdentifierExpression>> ClosureRewriteVisitor::identifier_expressions_in_closure(FuncDeclarationExpression* expression)
+		void ClosureRewriteVisitor::set_captured_identifier_expressions(FuncDeclarationExpression* expression)
 		{
 			auto identifier_expressions = NestedExpressionHelper::get_nested_expressions<IdentifierExpression>(expression);
-			auto in_closure = std::vector<ExpressionPair<IdentifierExpression>>();
 
 			for (auto pair : identifier_expressions)
 			{
 				if (pair.expression->get_from_closure())
 				{
-					in_closure.push_back(pair);
+					captured_identifier_expressions_.push_back(pair);
 				}
 			}
-
-			return in_closure;
 		}
 
-		FuncDeclarationExpression* ClosureRewriteVisitor::rewrite_as_member_function(VariableDeclarationExpression* vde, FuncDeclarationExpression* fde)
+		FuncDeclarationExpression* ClosureRewriteVisitor::rewrite_as_member_function(VariableDeclarationExpression* vde)
 		{
 			auto member_func = std::unique_ptr<FuncDeclarationExpression>(static_cast<FuncDeclarationExpression*>(vde->release_expression()));
 
@@ -238,7 +287,7 @@ namespace elsa {
 			vde->set_expression(std::move(sa_exp));
 		}
 
-		void ClosureRewriteVisitor::rewrite_captured_identifier_expression(IdentifierExpression* identifier_expression, Expression* parent)
+		void ClosureRewriteVisitor::rewrite_captured_identifier_expression(IdentifierExpression* identifier_expression)
 		{
 			auto sa_exp = std::make_unique<StructAccessExpression>();
 			auto id_exp = std::make_unique<IdentifierExpression>(L"this");
@@ -250,10 +299,51 @@ namespace elsa {
 			fa_exp->set_type(new ElsaType(identifier_expression->get_type()));
 			sa_exp->add_expression(fa_exp.release());
 
-			if (auto boe = dynamic_cast<BinaryOperatorExpression*>(parent))
+			next_identifier_rewrite_ = std::move(sa_exp);
+		}
+
+		void ClosureRewriteVisitor::rewrite_as_assignment_expression(VariableDeclarationExpression* vde)
+		{
+			auto sa_exp = std::make_unique<StructAccessExpression>();
+
+			auto id_exp = std::make_unique<IdentifierExpression>(capture_variable_name_);
+			id_exp->set_type(parser_->type_checker().get_expression_type(capture_struct_));
+			sa_exp->set_base(std::move(id_exp));
+
+			auto fa_exp = std::make_unique<FieldAccessExpression>(vde->get_name());
+			fa_exp->set_type(new ElsaType(vde->get_type()));
+			sa_exp->add_expression(fa_exp.release());
+
+			next_variable_rewrite_ = std::make_unique<AssignmentExpression>();
+			next_variable_rewrite_->set_left(std::move(sa_exp));
+			next_variable_rewrite_->set_right(vde->move_expression());
+		}
+
+		bool ClosureRewriteVisitor::rewrite_identifier_child()
+		{
+			return next_identifier_rewrite_.get() != nullptr;
+		}
+
+		bool ClosureRewriteVisitor::rewrite_variable_child()
+		{
+			return next_variable_rewrite_.get() != nullptr;
+		}
+
+		void ClosureRewriteVisitor::reset_state()
+		{
+			next_identifier_rewrite_.reset(nullptr);
+			next_variable_rewrite_.reset(nullptr);
+		}
+
+		bool ClosureRewriteVisitor::captured_in_closure(VariableDeclarationExpression* vde)
+		{
+			for (auto& id_exp : captured_identifier_expressions_)
 			{
-				boe->set_left(std::move(sa_exp));
+				if (id_exp.expression->get_name() == vde->get_name())
+					return true;
 			}
+
+			return false;
 		}
 	}
 }
