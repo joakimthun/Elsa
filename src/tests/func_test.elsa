@@ -1,65 +1,65 @@
 import "std/assert";
 
-func FuncCreateInvokeTest()
+fn FuncCreateInvokeTest()
 {
-	var f1 = func (int x) : int => { return x + 100; };
-	//var f2 = func (int x, int y) : int => { return x + y; };
-	//var f3 = func (String str) : String => { return str.Concat("World!"); };
-	//var f4 = func (char c) => { AssertEq('X', c); };
+	var f1 = fn (int x) : int => { return x + 100; };
+	var f2 = fn (int x, int y) : int => { return x + y; };
+	var f3 = fn (String str) : String => { return str.Concat("World!"); };
+	var f4 = fn (char c) => { AssertEq('X', c); };
 
 	AssertEq(103, f1(3));
-	//AssertEq(140, f2(70, 70));
-	//AssertEq(true, "Hello World!" == f3("Hello "));
-	//f4('X');
+	AssertEq(140, f2(70, 70));
+	AssertEq(true, "Hello World!" == f3("Hello "));
+	f4('X');
 }
 
-func FuncWithFuncArg(func : int fn)
+fn FuncWithFuncArg(fn : int f)
 {
-	AssertEq(200, fn());
+	AssertEq(200, f());
 }
 
-func FuncPassAsArgTest()
+fn FuncPassAsArgTest()
 {
-	var f = func : int => { return 100 + 100; };
+	var f = fn : int => { return 100 + 100; };
 	FuncWithFuncArg(f);
 }
 
-func ReturnAnonymousFunc() : func : int
+fn ReturnAnonymousFunc() : fn : int
 {
-	return func : int => { return 999; };
+	return fn : int => { return 999; };
 }
 
-func FuncReturnFuncTest()
+fn FuncReturnFuncTest()
 {
 	var f = ReturnAnonymousFunc();
 	AssertEq(999, f());
 }
 
-func PassFuncDirectly(func (float x, float y) arg)
+fn PassFuncDirectly(fn (float x, float y) arg)
 {
 	arg(1.0, 1.0);
 	arg(10.0, 10.0);
 	arg(12.0, 12.0);
 }
 
-func PassFuncDirectlyTest() 
+fn PassFuncDirectlyTest() 
 {
-	PassFuncDirectly(func (float x, float y) => { 
+	PassFuncDirectly(fn (float x, float y) => { 
 		AssertEq(x, y);
 	});
 }
 
-func AssignedFunc(int x) : int
+fn AssignedFunc(int x) : int
 {
 	return x;
 }
 
-func AssignedFuncAsArg(func (int x) : int f)
+fn AssignedFuncAsArg(fn (int x) : int f)
 {
 	AssertEq(10, f(10));
 }
 
-func FuncAssignTest()
+fn FuncAssignTest()
 {
 	var f = AssignedFunc;
 	AssertEq(10, f(10));
@@ -68,22 +68,22 @@ func FuncAssignTest()
 	AssignedFuncAsArg(AssignedFunc);
 }
 
-func ReturnNamedFunction() : func(int x) : int
+fn ReturnNamedFunction() : fn(int x) : int
 {
 	return AssignedFunc; 
 }
 
-func ReturnNamedFunctionTest()
+fn ReturnNamedFunctionTest()
 {
 	var f = ReturnNamedFunction();
 	AssertEq(99, f(99));
 }
 
-func ClosureCaptureTest()
+fn ClosureCaptureTest()
 {
 	//var x = 10;
 	//
-	//var f = func : int => { return x; };
+	//var f = fn : int => { return x; };
 	//var y = f();
 	//PrintLn(y);
 }

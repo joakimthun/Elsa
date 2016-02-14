@@ -1,1 +1,1 @@
-native func AssertEq(object expected, object actual);
+native fn AssertEq(object expected, object actual);

@@ -1,6 +1,6 @@
 // This is a comment and should be skipped
 
-func int add(int x, int y)
+fn int add(int x, int y)
 {
 	return x + y;
 }

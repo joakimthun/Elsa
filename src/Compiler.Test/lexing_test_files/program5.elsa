@@ -7,12 +7,12 @@ struct Rect
 	int x;
 	int y;
 
-	func int get_x()
+	fn int get_x()
 	{
 		return x;		
 	}
 
-	func void set_x(int x)
+	fn void set_x(int x)
 	{
 		this.x = x;
 	}

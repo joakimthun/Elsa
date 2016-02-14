@@ -7,7 +7,7 @@ struct StringTestStruct
 	String[] Strings;
 };
 
-func NewStringTest()
+fn NewStringTest()
 {
 	var str = "Hello World!";
 
@@ -57,7 +57,7 @@ func NewStringTest()
 	AssertEq('!', strStruct.Str.CharAt(12));
 }
 
-func StringArrayTest()
+fn StringArrayTest()
 {
 	var strings = new ["String0", "String1", "String2", "String3"];
 	strings.Push("String4");
@@ -75,7 +75,7 @@ func StringArrayTest()
 	}
 }
 
-func StringEqualsTest()
+fn StringEqualsTest()
 {
 	var first =  "ABCDabcd";
 	var second = "ABCDabcd";
@@ -116,7 +116,7 @@ func StringEqualsTest()
 	AssertEq(true, first != second)
 }
 
-func StringConcatTest()
+fn StringConcatTest()
 {
 	var first =  "Hello_";
 	var second = "_World!";
@@ -136,7 +136,7 @@ func StringConcatTest()
 	AssertEq(true, str3 == "XXXXXXxxXX");
 }
 
-func SubstringTest()
+fn SubstringTest()
 {
 	var str = "Hello Hello Hello, Hello";
 

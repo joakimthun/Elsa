@@ -25,7 +25,7 @@ struct MyArrayStruct
 	int[] ArrayField;
 };
 
-func NewStructTest()
+fn NewStructTest()
 {
 	var s = new MyStruct;
 	AssertEq(0, s.IntField);
@@ -34,7 +34,7 @@ func NewStructTest()
 	AssertEq(false, s.BoolField);
 }
 
-func StructFieldsTest()
+fn StructFieldsTest()
 {
 	var s = new MyOtherStruct;
 
@@ -68,7 +68,7 @@ func StructFieldsTest()
 	AssertEq(true, s.StructField.BoolField);
 }
 
-func StructReferenceEqualsTest()
+fn StructReferenceEqualsTest()
 {
 	var x = new MyOtherStruct;
 	var y = new MyOtherStruct;
@@ -80,7 +80,7 @@ func StructReferenceEqualsTest()
 	AssertEq(true, y != x);
 }
 
-func StructInitializerListTest()
+fn StructInitializerListTest()
 {
 	var i = 10;
 	var b = true;

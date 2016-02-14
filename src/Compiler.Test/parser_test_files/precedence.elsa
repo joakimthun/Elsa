@@ -1,4 +1,4 @@
-func int main()
+fn int main()
 {
 	var x1 = 1 + 2;
 	var x2 = 1 + 2 * 5;

@@ -27,14 +27,14 @@ struct ArrayStruct
 	int[] numbers;
 };
 
-func ImportTest()
+fn ImportTest()
 {
 	var game = new Game;
 	game.num_players = 5464;
 	PrintLn(game.num_players);
 }
 
-func ArrayLength()
+fn ArrayLength()
 {
 	var array = new char[];
 	PrintLn(array.Length());
@@ -60,7 +60,7 @@ func ArrayLength()
 	PrintLn('');
 }
 
-func ExplicitTyping()
+fn ExplicitTyping()
 {
 	int x = 0;
 	float x2 = 0.0;
@@ -76,7 +76,7 @@ func ExplicitTyping()
 	PrintLn(p.speed);
 }
 
-func Arrays()
+fn Arrays()
 {
 	var x = new int[];
 	x.Push(15);
@@ -129,7 +129,7 @@ func Arrays()
 	PrintLn(p.position.y);
 }
 
-func Loops()
+fn Loops()
 {
 	for(var i = 1; i <= 100; i++)
 	{
@@ -163,7 +163,7 @@ func Loops()
 	}
 }
 
-func Postfix()
+fn Postfix()
 {
 	var x = 20;
 	x++;
@@ -186,7 +186,7 @@ func Postfix()
 	PrintLn(player.position.x);
 }
 
-func CondPrint()
+fn CondPrint()
 {
 	if(6 > 5 || false)
 	{
@@ -249,12 +249,12 @@ func CondPrint()
 	}
 }
 
-func PrintSum(int a, int b)
+fn PrintSum(int a, int b)
 {
 	PrintLn(a + b);
 }
 
-func CondPrint2()
+fn CondPrint2()
 {
 	if(false && false || false || true)
 	{
@@ -280,12 +280,12 @@ func CondPrint2()
 	}
 }
 
-func ReturnIntTest() : int
+fn ReturnIntTest() : int
 {
 	return 2015;
 }
 
-func ReturnPlayerTest() : Player
+fn ReturnPlayerTest() : Player
 {
 	var player = new Player;
 	player.speed = 11;
@@ -295,14 +295,14 @@ func ReturnPlayerTest() : Player
 	return player;
 }
 
-func ReturnByArrIndexTest() : char
+fn ReturnByArrIndexTest() : char
 {
 	var x = new ['A','B','C','!'];
 
 	return x[3];
 }
 
-func main() : int
+fn main() : int
 {
 	AssertEq(2, 2);
 

@@ -1,7 +1,7 @@
 // This is a comment and should be skipped
 // This is a comment and should be skipped
 
-func int onePlus2()
+fn int onePlus2()
 {
 	return 1 + 2;
 }

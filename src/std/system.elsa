@@ -1,2 +1,2 @@
-native func Equals(object first, object second) : bool;
-native func ReferenceEquals(object first, object second) : bool;
+native fn Equals(object first, object second) : bool;
+native fn ReferenceEquals(object first, object second) : bool;

@@ -1,7 +1,7 @@
 // This is a comment and should be skipped
 // This is a comment and should be skipped
 
-func float add()
+fn float add()
 {
 	return 1.3452 + 2.464;
 }

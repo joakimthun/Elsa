@@ -7,7 +7,7 @@ struct Paddle
 	int vel_y;
 };
 
-func Paddle create_paddle(int x, int y, int width, int height)
+fn Paddle create_paddle(int x, int y, int width, int height)
 {
 	var p = new Paddle;
 	p.x = x;

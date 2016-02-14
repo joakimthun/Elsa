@@ -1,6 +1,6 @@
 import "std/assert";
 
-func IfElseScopingTest()
+fn IfElseScopingTest()
 {
 	var x = 10;
 

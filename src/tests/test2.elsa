@@ -5,29 +5,29 @@ struct MyStruct
 {
 	int x;
 
-	func Get() : int
+	fn Get() : int
 	{
 		return x;
 	}
 	
-	func Inc()
+	fn Inc()
 	{
 		x++;
 	}
 };
 
-func IncX2(func inc)
+fn IncX2(fn inc)
 {
 	inc();
 	inc();
 }
 
-func main()
+fn main()
 {
 	var x = 10;
 
-	var ret = func : int => { return x; };
-	var inc = func => { x = x + 1; };
+	var ret = fn : int => { return x; };
+	var inc = fn => { x = x + 1; };
 
 	AssertEq(10, ret());
 	inc();

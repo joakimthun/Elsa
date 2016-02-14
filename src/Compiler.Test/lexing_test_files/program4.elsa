@@ -1,6 +1,6 @@
 // This is a comment and should be skipped
 
-func bool boolean()
+fn bool boolean()
 {
 	return true;
 }

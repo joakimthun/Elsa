@@ -7,7 +7,7 @@ struct TypeCastTestStruct
 	char CharField;
 };
 
-func TypeCastTest()
+fn TypeCastTest()
 {
 	var floatToInt = int(10.0);
 	AssertEq(10, floatToInt);

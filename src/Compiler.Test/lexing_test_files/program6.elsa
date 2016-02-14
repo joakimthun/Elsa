@@ -1,16 +1,16 @@
 // This is a comment and should be skipped
 
-func void func1()
+fn void fn1()
 {
 	var x = "Hello World!";
 }
 
-func char func2()
+fn char fn2()
 {
 	return 'C';
 }
 
-func char func3()
+fn char fn3()
 {
 	return '&';
 }

@@ -1,7 +1,7 @@
 import "std/io";
 import "examples/pong/paddle";
 
-func void update(Paddle p, int height)
+fn void update(Paddle p, int height)
 {
 	if (p.y < 0)
 	{
@@ -18,7 +18,7 @@ func void update(Paddle p, int height)
 	p.y = p.y + p.vel_y;
 }
 
-func int main()
+fn int main()
 {
 	var height = 600;
 	var width = 800;

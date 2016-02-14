@@ -8,14 +8,14 @@ struct ArrayTest
 	bool BoolField;
 };
 
-func ArrayInitialSizeParsingTest()
+fn ArrayInitialSizeParsingTest()
 {
 	var size = 100 + 100;
 	var arr = new int[100];
 	var arr2 = new int[size];
 }
 
-func ArrayAssignTest()
+fn ArrayAssignTest()
 {
 	var arr = new int[100];
 
@@ -35,7 +35,7 @@ func ArrayAssignTest()
 	}
 }
 
-func ArrayPushPopTest()
+fn ArrayPushPopTest()
 {
 	var arr = new int[];
 	AssertEq(0, arr.Length());
@@ -65,7 +65,7 @@ func ArrayPushPopTest()
 	AssertEq(0, arr.Length());
 }
 
-func ArrayInitializerListTest()
+fn ArrayInitializerListTest()
 {
 	var ints = new [1, 2, 3, 4, 5, 6];
 	
@@ -107,7 +107,7 @@ func ArrayInitializerListTest()
 	AssertEq(at, structs[3]);
 }
 
-func ArrayOfStructsTest()
+fn ArrayOfStructsTest()
 {
 	var structs = new [new ArrayTest, new ArrayTest]
 	AssertEq(2, structs.Length());
@@ -135,7 +135,7 @@ func ArrayOfStructsTest()
 	AssertEq(true, structs[3].BoolField);
 }
 
-func ArrayAsArg(int[] arr)
+fn ArrayAsArg(int[] arr)
 {
 	AssertEq(4, arr.Length());
 	
@@ -149,7 +149,7 @@ func ArrayAsArg(int[] arr)
 	arr.Push(6);
 }
 
-func ArrayAsArgTest()
+fn ArrayAsArgTest()
 {
 	var arr = new [ 0, 1, 2, 3 ];
 	ArrayAsArg(arr);
@@ -162,12 +162,12 @@ func ArrayAsArgTest()
 	}
 }
 
-func ReturnArray() : float[]
+fn ReturnArray() : float[]
 {
 	return new [ 1.0 , 2.0, 13.37 ];
 }
 
-func ReturnArrayTest()
+fn ReturnArrayTest()
 {
 	var floats = ReturnArray();
 	AssertEq(1.0, floats[0]);

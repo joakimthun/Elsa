@@ -1,4 +1,4 @@
-func void add(int x, float y, char c)
+fn void add(int x, float y, char c)
 {
 	var x1 = 10;
 	var x2 = false;

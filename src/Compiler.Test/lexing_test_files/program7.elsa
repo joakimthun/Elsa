@@ -1,6 +1,6 @@
 // This is a comment and should be skipped
 
-func int func1()
+fn int fn1()
 {
 	// This is a comment and should be skipped
 	return 1 + 5 * 8 / 10;

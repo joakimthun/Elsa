@@ -1,3 +1,3 @@
 
-native func PrintLn(object v);
-native func Print(object v);
+native fn PrintLn(object v);
+native fn Print(object v);

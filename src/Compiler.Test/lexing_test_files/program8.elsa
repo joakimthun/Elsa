@@ -1,6 +1,6 @@
 // This is a comment and should be skipped
 
-func void MY_func()
+fn void MY_fn()
 {
 	// This is a comment and should be skipped
 	var x1 = true && true;

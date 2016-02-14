@@ -328,7 +328,7 @@ namespace elsa {
 
 		void Lexer::init_keywords()
 		{
-			register_keyword(L"func", TokenType::Func);
+			register_keyword(L"fn", TokenType::Func);
 			register_keyword(L"return", TokenType::Return);
 			register_keyword(L"var", TokenType::Var);
 			register_keyword(L"int", TokenType::Int);
