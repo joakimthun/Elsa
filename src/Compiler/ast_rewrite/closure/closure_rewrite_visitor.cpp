@@ -7,7 +7,6 @@
 #include "../../ast/struct_access_expression.h"
 #include "../../ast/create_struct_expression.h"
 #include "../../ast/struct_declaration_expression.h"
-//#include "../../ast/assignment_expression.h"
 
 namespace elsa {
 	namespace compiler {
@@ -28,10 +27,12 @@ namespace elsa {
 			{
 				// Reset state for each function
 				captured_identifier_expressions_.clear();
+				captured_struct_access_expressions_.clear();
 				reset_state();
 
 				set_captured_identifier_expressions(function);
-				if (captured_identifier_expressions_.size() == 0)
+				set_captured_struct_access_expressions(function);
+				if (captured_identifier_expressions_.size() == 0 && captured_struct_access_expressions_.size() == 0)
 					continue;
 
 				auto struct_expression = StructFactory::create(parser_);
@@ -221,7 +222,8 @@ namespace elsa {
 		{
 			capture_variable_name_ = StringUtil::create_random_string(25);
 
-			add_capured_identifiers_as_fields();
+			auto field_index = add_capured_identifiers_as_fields();
+			add_capured_structs_as_fields(field_index);
 
 			auto create_capture_struct = std::make_unique<CreateStructExpression>(capture_struct_->get_name(), parser_->type_checker().get_struct_type(capture_struct_->get_name()));
 
@@ -232,12 +234,22 @@ namespace elsa {
 			fde->add_body_expression_front(std::move(capture_varaible));
 		}
 
-		void ClosureRewriteVisitor::add_capured_identifiers_as_fields()
+		std::size_t ClosureRewriteVisitor::add_capured_identifiers_as_fields()
 		{
 			std::size_t field_index = 0;
 			for (auto identifier : captured_identifier_expressions_)
 			{
 				capture_struct_->add_field_expression(std::make_unique<FieldExpression>(identifier.expression->get_name(), new ElsaType(identifier.expression->get_type()), field_index++));
+			}
+
+			return field_index;
+		}
+
+		void ClosureRewriteVisitor::add_capured_structs_as_fields(std::size_t field_index)
+		{
+			for (auto struct_access : captured_struct_access_expressions_)
+			{
+				capture_struct_->add_field_expression(std::make_unique<FieldExpression>(struct_access.expression->get_base()->get_name(), new ElsaType(struct_access.expression->get_base()->get_type()), field_index++));
 			}
 		}
 
@@ -250,6 +262,19 @@ namespace elsa {
 				if (pair.expression->get_from_closure())
 				{
 					captured_identifier_expressions_.push_back(pair);
+				}
+			}
+		}
+
+		void ClosureRewriteVisitor::set_captured_struct_access_expressions(FuncDeclarationExpression* expression)
+		{
+			auto struct_access_expressions = NestedExpressionHelper::get_nested_expressions<StructAccessExpression>(expression);
+
+			for (auto pair : struct_access_expressions)
+			{
+				if (pair.expression->get_base() != nullptr && pair.expression->get_base()->get_from_closure())
+				{
+					captured_struct_access_expressions_.push_back(pair);
 				}
 			}
 		}

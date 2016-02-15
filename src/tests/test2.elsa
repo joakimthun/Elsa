@@ -16,28 +16,31 @@ struct MyStruct
 	}
 };
 
-fn IncX2(fn inc)
-{
-	inc();
-	inc();
-}
+//fn IncX2(fn inc)
+//{
+//	inc();
+//	inc();
+//}
 
 fn main()
 {
-	var x = 10;
+	var str = new MyStruct { x: 20 };
+	//var ret_str = fn : int => { return str.x; };
 
-	var ret = fn : int => { return x; };
-	var inc = fn => { x = x + 1; };
-
-	AssertEq(10, ret());
-	inc();
-	AssertEq(11, ret());
-	inc();
-	AssertEq(12, ret());
-
-	IncX2(inc);
-
-	AssertEq(14, ret());
+	//var x = 10;
+	//
+	//var ret = fn : int => { return x; };
+	//var inc = fn => { x = x + 1; };
+	//
+	//AssertEq(10, ret());
+	//inc();
+	//AssertEq(11, ret());
+	//inc();
+	//AssertEq(12, ret());
+	//
+	//IncX2(inc);
+	//
+	//AssertEq(14, ret());
 
 	PrintLn(":)");
 }

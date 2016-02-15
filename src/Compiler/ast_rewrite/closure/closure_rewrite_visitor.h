@@ -55,8 +55,10 @@ namespace elsa {
 
 		private:
 			void create_capture_struct(FuncDeclarationExpression* fde);
-			void add_capured_identifiers_as_fields();
+			std::size_t add_capured_identifiers_as_fields();
+			void add_capured_structs_as_fields(std::size_t field_index);
 			void set_captured_identifier_expressions(FuncDeclarationExpression* expression);
+			void set_captured_struct_access_expressions(FuncDeclarationExpression* expression);
 			FuncDeclarationExpression* rewrite_as_member_function(VariableDeclarationExpression* vde);
 			void point_variable_expression_to_member_func(VariableDeclarationExpression* vde, FuncDeclarationExpression* member_fde);
 			void rewrite_captured_identifier_expression(IdentifierExpression* identifier_expression);
@@ -69,6 +71,7 @@ namespace elsa {
 			Program* program_;
 			ElsaParser* parser_;
 			std::vector<ExpressionPair<IdentifierExpression>> captured_identifier_expressions_;
+			std::vector<ExpressionPair<StructAccessExpression>> captured_struct_access_expressions_;
 			std::vector<std::unique_ptr<Expression>> statements_;
 			StructDeclarationExpression* capture_struct_;
 			std::wstring capture_variable_name_;
