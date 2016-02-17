@@ -1,7 +1,6 @@
 import "std/assert";
 
-fn FuncCreateInvokeTest()
-{
+fn FuncCreateInvokeTest() {
 	var f1 = fn (int x) : int => { return x + 100; };
 	var f2 = fn (int x, int y) : int => { return x + y; };
 	var f3 = fn (String str) : String => { return str.Concat("World!"); };
@@ -13,54 +12,45 @@ fn FuncCreateInvokeTest()
 	f4('X');
 }
 
-fn FuncWithFuncArg(fn : int f)
-{
+fn FuncWithFuncArg(fn : int f) {
 	AssertEq(200, f());
 }
 
-fn FuncPassAsArgTest()
-{
+fn FuncPassAsArgTest() {
 	var f = fn : int => { return 100 + 100; };
 	FuncWithFuncArg(f);
 }
 
-fn ReturnAnonymousFunc() : fn : int
-{
+fn ReturnAnonymousFunc() : fn : int {
 	return fn : int => { return 999; };
 }
 
-fn FuncReturnFuncTest()
-{
+fn FuncReturnFuncTest() {
 	var f = ReturnAnonymousFunc();
 	AssertEq(999, f());
 }
 
-fn PassFuncDirectly(fn (float x, float y) arg)
-{
+fn PassFuncDirectly(fn (float x, float y) arg) {
 	arg(1.0, 1.0);
 	arg(10.0, 10.0);
 	arg(12.0, 12.0);
 }
 
-fn PassFuncDirectlyTest() 
-{
+fn PassFuncDirectlyTest()  {
 	PassFuncDirectly(fn (float x, float y) => { 
 		AssertEq(x, y);
 	});
 }
 
-fn AssignedFunc(int x) : int
-{
+fn AssignedFunc(int x) : int {
 	return x;
 }
 
-fn AssignedFuncAsArg(fn (int x) : int f)
-{
+fn AssignedFuncAsArg(fn (int x) : int f) {
 	AssertEq(10, f(10));
 }
 
-fn FuncAssignTest()
-{
+fn FuncAssignTest() {
 	var f = AssignedFunc;
 	AssertEq(10, f(10));
 
@@ -68,22 +58,11 @@ fn FuncAssignTest()
 	AssignedFuncAsArg(AssignedFunc);
 }
 
-fn ReturnNamedFunction() : fn(int x) : int
-{
+fn ReturnNamedFunction() : fn(int x) : int {
 	return AssignedFunc; 
 }
 
-fn ReturnNamedFunctionTest()
-{
+fn ReturnNamedFunctionTest() {
 	var f = ReturnNamedFunction();
 	AssertEq(99, f(99));
-}
-
-fn ClosureCaptureTest()
-{
-	//var x = 10;
-	//
-	//var f = fn : int => { return x; };
-	//var y = f();
-	//PrintLn(y);
 }

@@ -1,14 +1,12 @@
 import "std/assert";
 import "std/io";
 
-struct StringTestStruct
-{
+struct StringTestStruct {
 	String Str;
 	String[] Strings;
 };
 
-fn NewStringTest()
-{
+fn NewStringTest() {
 	var str = "Hello World!";
 
 	AssertEq(12, str.Length());
@@ -57,8 +55,7 @@ fn NewStringTest()
 	AssertEq('!', strStruct.Str.CharAt(12));
 }
 
-fn StringArrayTest()
-{
+fn StringArrayTest() {
 	var strings = new ["String0", "String1", "String2", "String3"];
 	strings.Push("String4");
 
@@ -75,8 +72,7 @@ fn StringArrayTest()
 	}
 }
 
-fn StringEqualsTest()
-{
+fn StringEqualsTest() {
 	var first =  "ABCDabcd";
 	var second = "ABCDabcd";
 	
@@ -116,8 +112,7 @@ fn StringEqualsTest()
 	AssertEq(true, first != second)
 }
 
-fn StringConcatTest()
-{
+fn StringConcatTest() {
 	var first =  "Hello_";
 	var second = "_World!";
 
@@ -136,8 +131,7 @@ fn StringConcatTest()
 	AssertEq(true, str3 == "XXXXXXxxXX");
 }
 
-fn SubstringTest()
-{
+fn SubstringTest() {
 	var str = "Hello Hello Hello, Hello";
 
 	var sub = str.Substring(0, str.Length());

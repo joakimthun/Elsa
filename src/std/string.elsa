@@ -4,62 +4,51 @@ struct String
 {
 	char[] str;
 
-	fn CharAt(int i) : char
-	{
+	fn CharAt(int i) : char {
 		return str[i];
 	}
 
-	fn Length() : int
-	{
+	fn Length() : int {
 		return str.Length();
 	}
 
-	fn Concat(String other) : String
-	{
+	fn Concat(String other) : String {
 		var newStr = new String {
 			str: new char[Length() + other.Length()]
 		};
 
-		for(var i = 0; i < Length(); i++)
-		{
+		for(var i = 0; i < Length(); i++) {
 			newStr.str.Push(str[i]);
 		}
 		
-		for(var i = 0; i < other.Length(); i++)
-		{
+		for(var i = 0; i < other.Length(); i++) {
 			newStr.str.Push(other.str[i]);
 		}
 
 		return newStr;
 	}
 
-	fn Substring(int startIndex, int length) : String
-	{
+	fn Substring(int startIndex, int length) : String {
 		var newStr = new String {
 			str: new char[length]
 		};
 
 		// TODO: Error checking, validate start and length
 		int stopIndex = startIndex + length;
-		for(var i = startIndex; i < stopIndex; i++)
-		{
+		for(var i = startIndex; i < stopIndex; i++) {
 			newStr.str.Push(str[i]);
 		}
 
 		return newStr;
 	}
 
-	fn Equals(String other) : bool
-	{
-		if(Length() != other.Length())
-		{
+	fn Equals(String other) : bool {
+		if(Length() != other.Length()) {
 			return false;
 		}
 	
-		for(var i = 0; i < Length(); i++)
-		{
-			if(str[i] != other.str[i])
-			{
+		for(var i = 0; i < Length(); i++) {
+			if(str[i] != other.str[i]) {
 				return false;
 			}
 		}

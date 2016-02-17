@@ -1,4 +1,3 @@
-struct Game
-{
+struct Game {
 	int num_players;
 };

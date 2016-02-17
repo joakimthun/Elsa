@@ -1,14 +1,12 @@
 import "std/assert";
 
-struct TypeCastTestStruct
-{
+struct TypeCastTestStruct {
 	int IntField;
 	float FloatField;
 	char CharField;
 };
 
-fn TypeCastTest()
-{
+fn TypeCastTest() {
 	var floatToInt = int(10.0);
 	AssertEq(10, floatToInt);
 

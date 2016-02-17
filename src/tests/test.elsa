@@ -10,33 +10,28 @@ import "tests/func_test";
 import "tests/conditionals_test";
 import "tests/closure_test";
 
-struct Vec2D
-{
+struct Vec2D {
 	int x;
 	int y;
 };
 
-struct Player
-{
+struct Player {
 	Vec2D position;
 	int speed;
 };
 
-struct ArrayStruct
-{
+struct ArrayStruct {
 	Player[] players;
 	int[] numbers;
 };
 
-fn ImportTest()
-{
+fn ImportTest() {
 	var game = new Game;
 	game.num_players = 5464;
 	PrintLn(game.num_players);
 }
 
-fn ArrayLength()
-{
+fn ArrayLength() {
 	var array = new char[];
 	PrintLn(array.Length());
 	
@@ -53,16 +48,14 @@ fn ArrayLength()
 	array.Push('!');
 	PrintLn(array.Length());
 
-	for(var i = 0; i < array.Length(); i++)
-	{
+	for(var i = 0; i < array.Length(); i++) {
 		Print(array[i]);
 	}
 
 	PrintLn('');
 }
 
-fn ExplicitTyping()
-{
+fn ExplicitTyping() {
 	int x = 0;
 	float x2 = 0.0;
 	char x3 = '0';
@@ -77,8 +70,7 @@ fn ExplicitTyping()
 	PrintLn(p.speed);
 }
 
-fn Arrays()
-{
+fn Arrays() {
 	var x = new int[];
 	x.Push(15);
 
@@ -130,29 +122,27 @@ fn Arrays()
 	PrintLn(p.position.y);
 }
 
-fn Loops()
-{
-	for(var i = 1; i <= 100; i++)
-	{
+fn Loops() {
+
+	for(var i = 1; i <= 100; i++) {
 		PrintLn(i);
 	}
 
-	for(var i = 100; i >= 1; i--)
-	{
+	for(var i = 100; i >= 1; i--) {
 		PrintLn(i);
 	}
 
 	var x = true;
-	while(x)
-	{
+	while(x) {
+
 		PrintLn(881118);
 		x = false;
 	}
 	
 	var y = true;
 	var c = 0;
-	while(y || x)
-	{
+	while(y || x) {
+
 		PrintLn(1513);
 
 		if(c >= 10)
@@ -164,8 +154,7 @@ fn Loops()
 	}
 }
 
-fn Postfix()
-{
+fn Postfix() {
 	var x = 20;
 	x++;
 	PrintLn(x);
@@ -187,78 +176,64 @@ fn Postfix()
 	PrintLn(player.position.x);
 }
 
-fn CondPrint()
-{
-	if(6 > 5 || false)
-	{
+fn CondPrint() {
+
+	if(6 > 5 || false) {
 		PrintLn(7000);
 	}
 	
-	if(4 < 5 && false)
-	{
+	if(4 < 5 && false) {
 		PrintLn(7001);
 	}
 
-	if(99 >= 99)
-	{
+	if(99 >= 99) {
 		PrintLn(7002);
 	}
 
-	if(99 >= 100)
-	{
+	if(99 >= 100) {
 		PrintLn(7003);
 	}
 
-	if(99 <= 100)
-	{
+	if(99 <= 100) {
 		PrintLn(7004);
 	}
 
-	if(99 <= 99)
-	{
+	if(99 <= 99) {
 		PrintLn(7005);
 	}
 
-	if(99 <= 200 &&  88 >= 99)
-	{
+	if(99 <= 200 &&  88 >= 99) {
 		PrintLn(7006);
 	}
 
-	if(99 <= 200 ||  88 >= 99)
-	{
+	if(99 <= 200 ||  88 >= 99) {
 		PrintLn(7007);
 	}
 
-	if(100 == 2)
-	{
+	if(100 == 2) {
 		PrintLn(8000);
 	}
 
-	if(100 != 2)
-	{
+	if(100 != 2) {
 		PrintLn(8001);
 	}
 
-	if(100 == 100)
-	{
+	if(100 == 100) {
 		PrintLn(8002);
 	}
 
-	if(100 != 100)
-	{
+	if(100 != 100) {
 		PrintLn(8003);
 	}
 }
 
-fn PrintSum(int a, int b)
-{
+fn PrintSum(int a, int b) {
 	PrintLn(a + b);
 }
 
 fn CondPrint2()
 {
-	if(false && false || false || true)
-	{
+	if(false && false || false || true) {
 		PrintLn(777);
 	}
 
@@ -393,7 +368,6 @@ fn main() : int {
 	PassFuncDirectlyTest();
 	FuncAssignTest();
 	ReturnNamedFunctionTest();
-	ClosureCaptureTest();
 
 	// Conditionals
 	IfElseScopingTest();

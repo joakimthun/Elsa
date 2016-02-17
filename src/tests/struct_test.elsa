@@ -1,7 +1,6 @@
 import "std/assert";
 
-struct MyStruct
-{
+struct MyStruct {
 	int IntField;
 	int IntFieldAgain;
 	float FloatField;
@@ -9,8 +8,7 @@ struct MyStruct
 	bool BoolField;
 };
 
-struct MyOtherStruct
-{
+struct MyOtherStruct {
 	int IntField;
 	float FloatField;
 	char CharField;
@@ -18,15 +16,13 @@ struct MyOtherStruct
 	MyStruct StructField;
 };
 
-struct MyArrayStruct
-{
+struct MyArrayStruct {
 	int IntField;
 	float FloatField;
 	int[] ArrayField;
 };
 
-fn NewStructTest()
-{
+fn NewStructTest() {
 	var s = new MyStruct;
 	AssertEq(0, s.IntField);
 	AssertEq(0.0, s.FloatField);
@@ -34,8 +30,7 @@ fn NewStructTest()
 	AssertEq(false, s.BoolField);
 }
 
-fn StructFieldsTest()
-{
+fn StructFieldsTest() {
 	var s = new MyOtherStruct;
 
 	AssertEq(0, s.IntField);
@@ -68,8 +63,7 @@ fn StructFieldsTest()
 	AssertEq(true, s.StructField.BoolField);
 }
 
-fn StructReferenceEqualsTest()
-{
+fn StructReferenceEqualsTest() {
 	var x = new MyOtherStruct;
 	var y = new MyOtherStruct;
 
@@ -80,8 +74,7 @@ fn StructReferenceEqualsTest()
 	AssertEq(true, y != x);
 }
 
-fn StructInitializerListTest()
-{
+fn StructInitializerListTest() {
 	var i = 10;
 	var b = true;
 	var c = 'X';
