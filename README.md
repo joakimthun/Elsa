@@ -1,7 +1,11 @@
 ##The Elsa Programming Language
 
-####VM (In progress) 
-####Compiler (TODO)
+#### Hello World!
+```
+    fn main() {
+        PrintLn("Hello world!");
+    }
+``` 
 
 ######Example VM-program:
 ```
