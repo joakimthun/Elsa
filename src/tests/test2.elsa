@@ -1,5 +1,5 @@
-import "std/io";
-import "std/assert";
+use "std/io";
+use "std/assert";
 
 struct MyStruct {
 	int x;

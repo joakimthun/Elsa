@@ -1,4 +1,4 @@
-import "std/assert";
+use "std/assert";
 
 fn FuncCreateInvokeTest() {
 	var f1 = fn (int x) : int => { return x + 100; };

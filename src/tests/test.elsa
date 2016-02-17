@@ -1,14 +1,14 @@
-import "std/io";
-import "std/assert";
+use "std/io";
+use "std/assert";
 
-import "tests/string_test";
-import "tests/type_cast_test";
-import "tests/array_test";
-import "tests/struct_test";
-import "tests/program2";
-import "tests/func_test";
-import "tests/conditionals_test";
-import "tests/closure_test";
+use "tests/string_test";
+use "tests/type_cast_test";
+use "tests/array_test";
+use "tests/struct_test";
+use "tests/program2";
+use "tests/func_test";
+use "tests/conditionals_test";
+use "tests/closure_test";
 
 struct Vec2D {
 	int x;

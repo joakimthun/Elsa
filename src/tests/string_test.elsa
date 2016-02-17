@@ -1,5 +1,5 @@
-import "std/assert";
-import "std/io";
+use "std/assert";
+use "std/io";
 
 struct StringTestStruct {
 	String Str;

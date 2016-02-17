@@ -1,4 +1,4 @@
-import "std/assert";
+use "std/assert";
 
 struct ArrayTest {
 	int IntField;

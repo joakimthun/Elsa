@@ -346,7 +346,7 @@ namespace elsa {
 			register_keyword(L"else", TokenType::Else);
 			register_keyword(L"for", TokenType::For);
 			register_keyword(L"while", TokenType::While);
-			register_keyword(L"import", TokenType::Import);
+			register_keyword(L"use", TokenType::Import);
 			register_keyword(L"native", TokenType::Native);
 		}
 	}
