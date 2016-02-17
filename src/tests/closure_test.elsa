@@ -1,0 +1,41 @@
+import "std/assert";
+
+struct ClosureTestStruct {
+	int x;
+};
+
+fn CallTwice(fn f) {
+	f();
+	f();
+}
+
+fn CaptureIntTest() {
+	var x = 10;
+	x = 11;
+	var ret = fn : int => { return x; };
+	var inc = fn => { x = x + 1; };
+	
+	AssertEq(11, ret());
+	inc();
+	AssertEq(12, ret());
+	inc();
+	AssertEq(13, ret());
+	
+	CallTwice(inc);
+	
+	AssertEq(15, ret());
+}
+
+fn CaptureStructTest() {
+	var str = new ClosureTestStruct { x: 20 };
+	var ret_str = fn : int => { return str.x; };
+	var inc_str = fn => { str.x = str.x + 10; };
+	
+	AssertEq(20, ret_str());
+	str.x = 30;
+	AssertEq(30, ret_str());
+	inc_str();
+	AssertEq(40, ret_str());
+	CallTwice(inc_str);
+	AssertEq(60, ret_str());
+}

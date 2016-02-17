@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VM", "VM\VM.vcxproj", "{F45FA80E-E6BA-4D96-831B-D5A5DEBBC8D9}"
 EndProject
@@ -36,6 +36,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9BEA47F1-40E2-4E41-9C7F-7D4901EBC4C2}"
 	ProjectSection(SolutionItems) = preProject
 		tests\array_test.elsa = tests\array_test.elsa
+		tests\closure_test.elsa = tests\closure_test.elsa
 		tests\conditionals_test.elsa = tests\conditionals_test.elsa
 		tests\func_test.elsa = tests\func_test.elsa
 		tests\program2.elsa = tests\program2.elsa

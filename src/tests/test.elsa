@@ -8,6 +8,7 @@ import "tests/struct_test";
 import "tests/program2";
 import "tests/func_test";
 import "tests/conditionals_test";
+import "tests/closure_test";
 
 struct Vec2D
 {
@@ -261,32 +262,26 @@ fn CondPrint2()
 		PrintLn(777);
 	}
 
-	if(false)
-	{
+	if(false) {
 		PrintLn(888);
 	}
-	else
-	{
+	else {
 		PrintLn(999);
 	}
 
-	if(true)
-	{
+	if(true) {
 		PrintLn(1000);
 	}
-	else
-	{
+	else {
 		PrintLn(2000);
 	}
 }
 
-fn ReturnIntTest() : int
-{
+fn ReturnIntTest() : int {
 	return 2015;
 }
 
-fn ReturnPlayerTest() : Player
-{
+fn ReturnPlayerTest() : Player {
 	var player = new Player;
 	player.speed = 11;
 	player.position = new Vec2D;
@@ -295,15 +290,13 @@ fn ReturnPlayerTest() : Player
 	return player;
 }
 
-fn ReturnByArrIndexTest() : char
-{
+fn ReturnByArrIndexTest() : char {
 	var x = new ['A','B','C','!'];
 
 	return x[3];
 }
 
-fn main() : int
-{
+fn main() : int {
 	AssertEq(2, 2);
 
 	Postfix();
@@ -404,6 +397,10 @@ fn main() : int
 
 	// Conditionals
 	IfElseScopingTest();
+
+	// Closures
+	CaptureIntTest();
+	CaptureStructTest();
 
 	return 0;
 }
