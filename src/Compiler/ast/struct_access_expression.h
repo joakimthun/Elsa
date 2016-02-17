@@ -20,7 +20,7 @@ namespace elsa {
 			void add_expression(TypedExpression* expression);
 
 			IdentifierExpression* get_base();
-			const std::vector<std::unique_ptr<TypedExpression>>& get_expressions() const;
+			std::vector<std::unique_ptr<TypedExpression>>& get_expressions();
 
 			void accept(ExpressionVisitor* visitor) override;
 

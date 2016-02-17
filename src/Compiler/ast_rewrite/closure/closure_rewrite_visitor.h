@@ -59,24 +59,31 @@ namespace elsa {
 			void add_capured_structs_as_fields(std::size_t field_index);
 			void set_captured_identifier_expressions(FuncDeclarationExpression* expression);
 			void set_captured_struct_access_expressions(FuncDeclarationExpression* expression);
+			void set_captured_identifiers();
 			FuncDeclarationExpression* rewrite_as_member_function(VariableDeclarationExpression* vde);
 			void point_variable_expression_to_member_func(VariableDeclarationExpression* vde, FuncDeclarationExpression* member_fde);
 			void rewrite_captured_identifier_expression(IdentifierExpression* identifier_expression);
+			void rewrite_captured_struct_access_expression(StructAccessExpression* struct_access_expression);
 			void rewrite_as_assignment_expression(VariableDeclarationExpression* vde);
 			bool rewrite_identifier_child();
 			bool rewrite_variable_child();
+			bool rewrite_struct_access_child();
 			void reset_state();
-			bool captured_in_closure(VariableDeclarationExpression* vde);
+			bool captured_in_closure(const std::wstring& name);
+			std::wstring get_base_identifier_name();
 
 			Program* program_;
 			ElsaParser* parser_;
 			std::vector<ExpressionPair<IdentifierExpression>> captured_identifier_expressions_;
 			std::vector<ExpressionPair<StructAccessExpression>> captured_struct_access_expressions_;
+			std::vector<std::wstring> captured_identifiers_;
 			std::vector<std::unique_ptr<Expression>> statements_;
 			StructDeclarationExpression* capture_struct_;
 			std::wstring capture_variable_name_;
 			std::unique_ptr<StructAccessExpression> next_identifier_rewrite_;
 			std::unique_ptr<AssignmentExpression> next_variable_rewrite_;
+			std::unique_ptr<StructAccessExpression> next_struct_access_rewrite_;
+			bool inside_nested_func_;
 		};
 
 	}

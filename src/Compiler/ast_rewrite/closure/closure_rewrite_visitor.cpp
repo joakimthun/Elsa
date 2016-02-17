@@ -26,14 +26,14 @@ namespace elsa {
 			for (auto function : functions)
 			{
 				// Reset state for each function
-				captured_identifier_expressions_.clear();
-				captured_struct_access_expressions_.clear();
 				reset_state();
 
 				set_captured_identifier_expressions(function);
 				set_captured_struct_access_expressions(function);
 				if (captured_identifier_expressions_.size() == 0 && captured_struct_access_expressions_.size() == 0)
 					continue;
+
+				set_captured_identifiers();
 
 				auto struct_expression = StructFactory::create(parser_);
 				capture_struct_ = struct_expression.get();
@@ -51,10 +51,14 @@ namespace elsa {
 
 				for (auto& member_func : struct_expression->get_functions())
 				{
+					inside_nested_func_ = true;
+
 					for (auto& body_exp : member_func->get_body())
 					{
 						body_exp->accept(this);
 					}
+
+					inside_nested_func_ = false;
 				}
 			
 				add_statement(std::move(struct_expression));
@@ -76,6 +80,10 @@ namespace elsa {
 				{
 					exp.reset(next_variable_rewrite_.release());
 				}
+				else if (rewrite_struct_access_child())
+				{
+					exp.reset(next_struct_access_rewrite_.release());
+				}
 			}
 		}
 
@@ -87,7 +95,7 @@ namespace elsa {
 				point_variable_expression_to_member_func(expression, member_fde);
 			}
 
-			if (captured_in_closure(expression))
+			if (captured_in_closure(expression->get_name()))
 			{
 				rewrite_as_assignment_expression(expression);
 			}
@@ -100,11 +108,19 @@ namespace elsa {
 			{
 				expression->set_left(std::move(next_identifier_rewrite_));
 			}
+			else if (rewrite_struct_access_child())
+			{
+				expression->set_left(std::move(next_struct_access_rewrite_));
+			}
 
 			expression->get_right()->accept(this);
 			if (rewrite_identifier_child())
 			{
 				expression->set_right(std::move(next_identifier_rewrite_));
+			}
+			else if (rewrite_struct_access_child())
+			{
+				expression->set_right(std::move(next_struct_access_rewrite_));
 			}
 		}
 
@@ -114,7 +130,7 @@ namespace elsa {
 
 		void ClosureRewriteVisitor::visit(IdentifierExpression* expression)
 		{
-			if (expression->get_from_closure())
+			if (captured_in_closure(expression->get_name()))
 			{
 				rewrite_captured_identifier_expression(expression);
 			}
@@ -138,6 +154,10 @@ namespace elsa {
 
 		void ClosureRewriteVisitor::visit(StructAccessExpression* expression)
 		{
+			if (expression->get_base() != nullptr && captured_in_closure(expression->get_base()->get_name()))
+			{
+				rewrite_captured_struct_access_expression(expression);
+			}
 		}
 
 		void ClosureRewriteVisitor::visit(AssignmentExpression* expression)
@@ -147,11 +167,19 @@ namespace elsa {
 			{
 				expression->set_left(std::move(next_identifier_rewrite_));
 			}
+			else if (rewrite_struct_access_child())
+			{
+				expression->set_left(std::move(next_struct_access_rewrite_));
+			}
 
 			expression->get_right()->accept(this);
 			if (rewrite_identifier_child())
 			{
 				expression->set_right(std::move(next_identifier_rewrite_));
+			}
+			else if (rewrite_struct_access_child())
+			{
+				expression->set_right(std::move(next_struct_access_rewrite_));
 			}
 		}
 
@@ -181,6 +209,10 @@ namespace elsa {
 			if (rewrite_identifier_child())
 			{
 				expression->set_expression(std::move(next_identifier_rewrite_));
+			}
+			else if (rewrite_struct_access_child())
+			{
+				expression->set_expression(std::move(next_struct_access_rewrite_));
 			}
 		}
 
@@ -279,6 +311,22 @@ namespace elsa {
 			}
 		}
 
+		void ClosureRewriteVisitor::set_captured_identifiers()
+		{
+			for (auto& id_exp : captured_identifier_expressions_)
+			{
+				captured_identifiers_.push_back(id_exp.expression->get_name());
+			}
+
+			for (auto& str_exp : captured_struct_access_expressions_)
+			{
+				if (str_exp.expression->get_base() != nullptr)
+				{
+					captured_identifiers_.push_back(str_exp.expression->get_base()->get_name());
+				}
+			}
+		}
+
 		FuncDeclarationExpression* ClosureRewriteVisitor::rewrite_as_member_function(VariableDeclarationExpression* vde)
 		{
 			auto member_func = std::unique_ptr<FuncDeclarationExpression>(static_cast<FuncDeclarationExpression*>(vde->release_expression()));
@@ -315,7 +363,7 @@ namespace elsa {
 		void ClosureRewriteVisitor::rewrite_captured_identifier_expression(IdentifierExpression* identifier_expression)
 		{
 			auto sa_exp = std::make_unique<StructAccessExpression>();
-			auto id_exp = std::make_unique<IdentifierExpression>(L"this");
+			auto id_exp = std::make_unique<IdentifierExpression>(get_base_identifier_name());
 
 			id_exp->set_type(parser_->type_checker().get_expression_type(capture_struct_));
 			sa_exp->set_base(std::move(id_exp));
@@ -325,6 +373,26 @@ namespace elsa {
 			sa_exp->add_expression(fa_exp.release());
 
 			next_identifier_rewrite_ = std::move(sa_exp);
+		}
+
+		void ClosureRewriteVisitor::rewrite_captured_struct_access_expression(StructAccessExpression* struct_access_expression)
+		{
+			auto sa_exp = std::make_unique<StructAccessExpression>();
+			auto id_exp = std::make_unique<IdentifierExpression>(get_base_identifier_name());
+
+			id_exp->set_type(parser_->type_checker().get_expression_type(capture_struct_));
+			sa_exp->set_base(std::move(id_exp));
+
+			auto fa_exp = std::make_unique<FieldAccessExpression>(struct_access_expression->get_base()->get_name());
+			fa_exp->set_type(new ElsaType(struct_access_expression->get_base()->get_type()));
+			sa_exp->add_expression(fa_exp.release());
+
+			for (auto& exp : struct_access_expression->get_expressions())
+			{
+				sa_exp->add_expression(exp.release());
+			}
+
+			next_struct_access_rewrite_ = std::move(sa_exp);
 		}
 
 		void ClosureRewriteVisitor::rewrite_as_assignment_expression(VariableDeclarationExpression* vde)
@@ -354,21 +422,38 @@ namespace elsa {
 			return next_variable_rewrite_.get() != nullptr;
 		}
 
-		void ClosureRewriteVisitor::reset_state()
+		bool ClosureRewriteVisitor::rewrite_struct_access_child()
 		{
-			next_identifier_rewrite_.reset(nullptr);
-			next_variable_rewrite_.reset(nullptr);
+			return next_struct_access_rewrite_.get() != nullptr;
 		}
 
-		bool ClosureRewriteVisitor::captured_in_closure(VariableDeclarationExpression* vde)
+		void ClosureRewriteVisitor::reset_state()
 		{
-			for (auto& id_exp : captured_identifier_expressions_)
+			captured_identifier_expressions_.clear();
+			captured_struct_access_expressions_.clear();
+			next_identifier_rewrite_.reset(nullptr);
+			next_variable_rewrite_.reset(nullptr);
+			next_struct_access_rewrite_.reset(nullptr);
+			inside_nested_func_ = false;
+		}
+
+		bool ClosureRewriteVisitor::captured_in_closure(const std::wstring& name)
+		{
+			for (const auto& id : captured_identifiers_)
 			{
-				if (id_exp.expression->get_name() == vde->get_name())
+				if (id == name)
 					return true;
 			}
 
 			return false;
+		}
+
+		std::wstring ClosureRewriteVisitor::get_base_identifier_name()
+		{
+			if (inside_nested_func_)
+				return L"this";
+
+			return capture_variable_name_;
 		}
 	}
 }

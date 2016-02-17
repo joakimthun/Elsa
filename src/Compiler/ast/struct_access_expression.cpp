@@ -20,7 +20,7 @@ namespace elsa {
 			return base_.get();
 		}
 
-		const std::vector<std::unique_ptr<TypedExpression>>& StructAccessExpression::get_expressions() const
+		std::vector<std::unique_ptr<TypedExpression>>& StructAccessExpression::get_expressions()
 		{
 			return expressions_;
 		}
