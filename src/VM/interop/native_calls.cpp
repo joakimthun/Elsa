@@ -1,5 +1,7 @@
 #include "native_calls.h"
 
+#include "windows\window.h"
+
 namespace elsa {
 	namespace vm {
 
@@ -20,6 +22,9 @@ namespace elsa {
 			functions_.push_back(are_eq);
 			functions_.push_back(assert_eq);
 			functions_.push_back(ref_eq);
+			functions_.push_back(create_window);
+			functions_.push_back(open_window);
+			functions_.push_back(close_window);
 		}
 
 		void NativeCalls::print(StackFrame* frame, Heap* heap)
@@ -134,6 +139,29 @@ namespace elsa {
 			}
 
 			return true;
+		}
+
+		void NativeCalls::create_window(StackFrame* frame, Heap* heap)
+		{
+			frame->push(heap->allocate_resource_handle(new Window()));
+		}
+
+		void NativeCalls::open_window(StackFrame* frame, Heap* heap)
+		{
+			auto o = frame->pop();
+			auto gco = o.gco();
+			if (gco != nullptr && gco->type == GCObjectType::RHandle && gco->resource_handle_->get_type() == ResourceHandleType::Window)
+			{
+				auto w = static_cast<Window*>(gco->resource_handle_);
+				w->Open();
+				return;
+			}
+
+			throw RuntimeException("Invalid window handle passed to open window");
+		}
+
+		void NativeCalls::close_window(StackFrame* frame, Heap* heap)
+		{
 		}
 	}
 }

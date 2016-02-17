@@ -76,7 +76,7 @@ namespace elsa {
 
 		void GC::mark(Object& obj)
 		{
-			if (obj.get_type() != VMType::GCOPtr)
+			if (obj.get_type() != VMType::GCOPtr && (obj.get_type() == VMType::Function && obj.gco() != nullptr))
 				return;
 
 			auto gco = obj.gco();
@@ -90,6 +90,8 @@ namespace elsa {
 				mark_array(obj);
 			else if (gco->type == GCObjectType::Struct)
 				mark_struct(obj);
+			else if (gco->type == GCObjectType::RHandle)
+				return;
 			else
 				throw RuntimeException("Invalid GCObjectType");
 		}

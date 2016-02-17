@@ -30,6 +30,8 @@ namespace elsa {
 		{
 			try
 			{
+				//auto window = Window();
+
 				if (call_stack_.size() == 0)
 				{
 					push_main();

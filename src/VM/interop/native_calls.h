@@ -31,6 +31,9 @@ namespace elsa {
 			static void assert_eq(StackFrame* frame, Heap* heap);
 			static void ref_eq(StackFrame* frame, Heap* heap);
 			static bool ref_eq_internal(const Object& first, const Object& second);
+			static void create_window(StackFrame* frame, Heap* heap);
+			static void open_window(StackFrame* frame, Heap* heap);
+			static void close_window(StackFrame* frame, Heap* heap);
 
 			std::vector<std::function<void(StackFrame*, Heap*)>> functions_;
 			Heap* heap_;

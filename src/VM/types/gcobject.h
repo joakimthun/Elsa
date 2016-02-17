@@ -6,6 +6,7 @@
 #include "exceptions/runtime_exception.h"
 #include "constants/struct_info.h"
 #include "../types/array_info.h"
+#include "../interop/resource_handle.h"
 
 namespace elsa {
 	namespace vm {
@@ -14,16 +15,21 @@ namespace elsa {
 		{
 			Struct,
 			Array,
-			Function
+			Function,
+			RHandle
 		};
 
 		struct GCObject
 		{
-			GCObject(GCObjectType t) : marked(false), ptr(nullptr), si(nullptr), type(t), ai(nullptr), next(nullptr) {};
+			GCObject(GCObjectType t) : marked(false), ptr(nullptr), si(nullptr), type(t), ai(nullptr), next(nullptr), resource_handle_(nullptr) {};
 
 			~GCObject()
 			{
-				free(ptr);
+				if(ptr != nullptr)
+					free(ptr);
+
+				if (resource_handle_ != nullptr)
+					delete resource_handle_;
 			};
 
 			void swap_array(void* new_ptr, ArrayInfo* new_ai)
@@ -40,6 +46,7 @@ namespace elsa {
 			std::unique_ptr<ArrayInfo> ai;
 			GCObjectType type;
 			GCObject* next;
+			ResourceHandle* resource_handle_;
 		};
 
 	}

@@ -17,6 +17,7 @@ namespace elsa {
 	namespace vm {
 		class GC;
 		typedef int8_t byte;
+		class ResourceHandle;
 
 		class Heap
 		{
@@ -40,6 +41,7 @@ namespace elsa {
 			void copy_array(const Object& source, Object& target, int index_to_exclude = -1);
 			int array_length(const Object& instance);
 			std::size_t get_num_objects() const;
+			Object allocate_resource_handle(ResourceHandle* handle);
 
 		private:
 			void assert_is_not_null(const Object& instance);

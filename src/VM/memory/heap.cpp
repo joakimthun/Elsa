@@ -235,6 +235,13 @@ namespace elsa {
 			return num_objects_;
 		}
 
+		Object Heap::allocate_resource_handle(ResourceHandle* handle)
+		{
+			auto gco = new GCObject(GCObjectType::RHandle);
+			gco->resource_handle_ = handle;
+			return Object(gco);
+		}
+
 		void Heap::assert_is_not_null(const Object& instance)
 		{
 			if (instance.get_type() != VMType::GCOPtr)
