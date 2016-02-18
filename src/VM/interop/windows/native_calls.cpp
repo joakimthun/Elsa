@@ -1,6 +1,6 @@
 #include "native_calls.h"
 
-#include "windows\window.h"
+#include "window.h"
 
 namespace elsa {
 	namespace vm {
@@ -25,6 +25,7 @@ namespace elsa {
 			functions_.push_back(create_window);
 			functions_.push_back(open_window);
 			functions_.push_back(close_window);
+			functions_.push_back(peek_message);
 		}
 
 		void NativeCalls::print(StackFrame* frame, Heap* heap)
@@ -161,6 +162,23 @@ namespace elsa {
 
 		void NativeCalls::close_window(StackFrame* frame, Heap* heap)
 		{
+
+		}
+
+		void NativeCalls::peek_message(StackFrame* frame, Heap* heap)
+		{
+			MSG msg;
+			if (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+				
+				frame->push(Object((int)msg.message));
+			}
+			else
+			{
+				frame->push(Object(-1));
+			}
 		}
 
 		std::wstring NativeCalls::read_string(Object& object, Heap* heap)

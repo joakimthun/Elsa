@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Windows.h>
 #include <string>
 #include <string.h>
 #include <vector>
@@ -7,9 +8,9 @@
 #include <functional>
 #include <iostream>
 
-#include "../stack_frame.h"
+#include "../../stack_frame.h"
 #include "object_types/vm_type.h"
-#include "../memory/heap.h"
+#include "../../memory/heap.h"
 
 namespace elsa {
 	namespace vm {
@@ -34,6 +35,7 @@ namespace elsa {
 			static void create_window(StackFrame* frame, Heap* heap);
 			static void open_window(StackFrame* frame, Heap* heap);
 			static void close_window(StackFrame* frame, Heap* heap);
+			static void peek_message(StackFrame* frame, Heap* heap);
 			static std::wstring NativeCalls::read_string(Object& object, Heap* heap);
 			static bool is_string(Object& object);
 

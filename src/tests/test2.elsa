@@ -7,6 +7,10 @@ fn main() {
 	OpenWindowHandle(w);
 	
 	while(true) {
-	
+		var msg = PeekMessage();
+		while(msg != -1) {
+			PrintLn(msg);
+			msg = PeekMessage();
+		}
 	}
 }

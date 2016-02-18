@@ -39,13 +39,13 @@
     <ClInclude Include="types\array_info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interop\native_calls.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="interop\windows\window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="interop\resource_handle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interop\windows\native_calls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,10 +71,10 @@
     <ClCompile Include="GC\gc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="interop\native_calls.cpp">
+    <ClCompile Include="interop\windows\window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="interop\windows\window.cpp">
+    <ClCompile Include="interop\windows\native_calls.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

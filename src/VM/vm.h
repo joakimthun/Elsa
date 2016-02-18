@@ -6,17 +6,16 @@
 #include <memory>
 #include <utility>
 
-#include "opcodes\opcodes.h"
-#include "object_types\vm_type.h"
-#include "types\object.h"
+#include "opcodes/opcodes.h"
+#include "object_types/vm_type.h"
+#include "types/object.h"
 #include "call_stack.h"
-#include "memory\heap.h"
+#include "memory/heap.h"
 #include "vm_program.h"
-#include "constants\function_info.h"
-#include "exceptions\runtime_exception.h"
-#include "GC\gc.h"
-#include "interop\native_calls.h"
-#include "interop\windows\window.h"
+#include "constants/function_info.h"
+#include "exceptions/runtime_exception.h"
+#include "GC/gc.h"
+#include "interop/windows/native_calls.h"
 
 namespace elsa {
 	namespace vm {
