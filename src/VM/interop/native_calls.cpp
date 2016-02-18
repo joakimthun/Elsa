@@ -42,14 +42,9 @@ namespace elsa {
 		{
 			auto object = frame->pop();
 
-			if (object.get_type() == VMType::GCOPtr && object.gco()->type == GCObjectType::Struct && object.gco()->si->get_name() == L"String")
+			if (is_string(object))
 			{
-				auto char_arr = heap->load_field(object, static_cast<std::size_t>(0));
-				for (auto i = 0; i < char_arr.gco()->ai->next_index; i++)
-				{
-					auto c = heap->load_element(char_arr, i);
-					std::wcout << c.c();
-				}
+				std::wcout << read_string(object, heap);
 
 				return;
 			}
@@ -162,6 +157,31 @@ namespace elsa {
 
 		void NativeCalls::close_window(StackFrame* frame, Heap* heap)
 		{
+		}
+
+		std::wstring NativeCalls::read_string(Object& object, Heap* heap)
+		{
+			std::wstring str;
+
+			if (is_string(object))
+			{
+				auto char_arr = heap->load_field(object, static_cast<std::size_t>(0));
+				for (auto i = 0; i < char_arr.gco()->ai->next_index; i++)
+				{
+					str.push_back(heap->load_element(char_arr, i).c());
+				}
+
+				return str;
+			}
+			else
+			{
+				throw RuntimeException("NativeCalls::read_string: Invalid string object");
+			}
+		}
+
+		bool NativeCalls::is_string(Object & object)
+		{
+			return object.get_type() == VMType::GCOPtr && object.gco()->type == GCObjectType::Struct && object.gco()->si->get_name() == L"String";
 		}
 	}
 }

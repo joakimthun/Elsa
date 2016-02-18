@@ -34,6 +34,8 @@ namespace elsa {
 			static void create_window(StackFrame* frame, Heap* heap);
 			static void open_window(StackFrame* frame, Heap* heap);
 			static void close_window(StackFrame* frame, Heap* heap);
+			static std::wstring NativeCalls::read_string(Object& object, Heap* heap);
+			static bool is_string(Object& object);
 
 			std::vector<std::function<void(StackFrame*, Heap*)>> functions_;
 			Heap* heap_;

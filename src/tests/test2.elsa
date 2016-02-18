@@ -3,10 +3,10 @@ use "std/assert";
 use "std/window";
 
 fn main() {
-	var w = CreateWindow();
-	OpenWindow(w);
-
+	var w = CreateWindowHandle("Test", 800, 600);
+	OpenWindowHandle(w);
+	
 	while(true) {
-
+	
 	}
 }

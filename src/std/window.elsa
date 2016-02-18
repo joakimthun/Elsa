@@ -1,5 +1,5 @@
 struct WindowHandle {};
 
-native fn CreateWindow() : WindowHandle;
-native fn OpenWindow(WindowHandle w);
-native fn CloseWindow(WindowHandle w);
+native fn CreateWindowHandle(String title, int width, int height) : WindowHandle;
+native fn OpenWindowHandle(WindowHandle w);
+native fn CloseWindowHandle(WindowHandle w);
