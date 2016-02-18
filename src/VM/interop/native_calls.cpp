@@ -138,7 +138,11 @@ namespace elsa {
 
 		void NativeCalls::create_window(StackFrame* frame, Heap* heap)
 		{
-			frame->push(heap->allocate_resource_handle(new Window()));
+			auto height = frame->pop().i();
+			auto width = frame->pop().i();
+			auto title = read_string(frame->pop(), heap);
+
+			frame->push(heap->allocate_resource_handle(new Window(title, width, height)));
 		}
 
 		void NativeCalls::open_window(StackFrame* frame, Heap* heap)

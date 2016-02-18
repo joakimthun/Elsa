@@ -3,7 +3,7 @@
 namespace elsa {
 	namespace vm {
 
-		Window::Window() 
+		Window::Window(const std::wstring& title, int width, int height)
 		{
 			hinstance_ = GetModuleHandle(NULL);
 
@@ -29,10 +29,10 @@ namespace elsa {
 
 			hwnd_ = CreateWindow(
 				L"ElsaWindow",
-				L"ElsaWindow",
+				title.c_str(),
 				WS_OVERLAPPEDWINDOW,
 				CW_USEDEFAULT, CW_USEDEFAULT,
-				800, 600,
+				width, height,
 				NULL,
 				NULL,
 				hinstance_,
