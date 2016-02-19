@@ -3,9 +3,9 @@ use "std/assert";
 use "std/window";
 
 fn main() {
-	var w = CreateWindowHandle("Test", 800, 600);
-	OpenWindowHandle(w);
-	
+	var w = CreateWindow("Test", 800, 600);
+	w.Open();
+
 	while(true) {
 		var msg = PeekMessage();
 		while(msg != -1) {
@@ -13,11 +13,10 @@ fn main() {
 			msg = PeekMessage();
 		}
 
-		FillRect(w, 100, 100, 100, 450);
-		FillRect(w, 200, 250, 100, 100);
-
-		FillRect(w, 5, 5, 100, 100);
-		FillRect(w, 695, 495, 100, 100);
-		UpdateWindowHandle(w);
+		w.FillRect(100, 100, 100, 450);
+		w.FillRect(200, 250, 100, 100);
+		w.FillRect(5, 5, 100, 100);
+		w.FillRect(695, 495, 100, 100);
+		w.Update();
 	}
 }

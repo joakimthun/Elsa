@@ -5,3 +5,24 @@ native fn OpenWindowHandle(WindowHandle w);
 native fn CloseWindowHandle(WindowHandle w);
 native fn UpdateWindowHandle(WindowHandle w);
 native fn FillRect(WindowHandle w, int x, int y, int width, int height);
+
+struct Window
+{
+	WindowHandle handle;
+
+	fn Open() {
+		OpenWindowHandle(handle);
+	}
+
+	fn Update() {
+		UpdateWindowHandle(handle);
+	}
+
+	fn FillRect(int x, int y, int width, int height) {
+		FillRect(handle, x, y, width, height);
+	}
+};
+
+fn CreateWindow(String title, int width, int height) : Window {
+	return new Window { handle: CreateWindowHandle(title, width, height) };
+}
