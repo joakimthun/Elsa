@@ -19,6 +19,8 @@ namespace elsa {
 			add(L"OpenWindowHandle", new NativeFunctionInfo(L"OpenWindowHandle", 6));
 			add(L"CloseWindowHandle", new NativeFunctionInfo(L"CloseWindowHandle", 7));
 			add(L"PeekMessage", new NativeFunctionInfo(L"PeekMessage", 8));
+			add(L"UpdateWindowHandle", new NativeFunctionInfo(L"UpdateWindowHandle", 9));
+			add(L"FillRect", new NativeFunctionInfo(L"FillRect", 10));
 		}
 
 	}

@@ -26,6 +26,8 @@ namespace elsa {
 			functions_.push_back(open_window);
 			functions_.push_back(close_window);
 			functions_.push_back(peek_message);
+			functions_.push_back(update_window);
+			functions_.push_back(fill_rect);
 		}
 
 		void NativeCalls::print(StackFrame* frame, Heap* heap)
@@ -148,21 +150,29 @@ namespace elsa {
 
 		void NativeCalls::open_window(StackFrame* frame, Heap* heap)
 		{
-			auto o = frame->pop();
-			auto gco = o.gco();
-			if (gco != nullptr && gco->type == GCObjectType::RHandle && gco->resource_handle_->get_type() == ResourceHandleType::Window)
-			{
-				auto w = static_cast<Window*>(gco->resource_handle_);
-				w->Open();
-				return;
-			}
-
-			throw RuntimeException("Invalid window handle passed to open window");
+			auto w = get_window_handle(frame->pop());
+			w->open();
 		}
 
 		void NativeCalls::close_window(StackFrame* frame, Heap* heap)
 		{
 
+		}
+
+		void NativeCalls::update_window(StackFrame* frame, Heap* heap)
+		{
+			auto w = get_window_handle(frame->pop());
+			w->update();
+		}
+
+		void NativeCalls::fill_rect(StackFrame * frame, Heap * heap)
+		{
+			auto height = frame->pop().i();
+			auto width = frame->pop().i();
+			auto y = frame->pop().i();
+			auto x = frame->pop().i();
+			auto w = get_window_handle(frame->pop());
+			w->fill_rect(x, y, width, height);
 		}
 
 		void NativeCalls::peek_message(StackFrame* frame, Heap* heap)
@@ -204,6 +214,19 @@ namespace elsa {
 		bool NativeCalls::is_string(Object & object)
 		{
 			return object.get_type() == VMType::GCOPtr && object.gco()->type == GCObjectType::Struct && object.gco()->si->get_name() == L"String";
+		}
+
+		Window* NativeCalls::get_window_handle(Object& object)
+		{
+			auto gco = object.gco();
+			if (gco != nullptr && gco->type == GCObjectType::RHandle && gco->resource_handle_->get_type() == ResourceHandleType::Window)
+			{
+				return static_cast<Window*>(gco->resource_handle_);
+			}
+			else
+			{
+				throw RuntimeException("NativeCalls::get_window_handle: Invalid window handle");
+			}
 		}
 	}
 }

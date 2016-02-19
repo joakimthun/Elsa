@@ -3,3 +3,5 @@ struct WindowHandle {};
 native fn CreateWindowHandle(String title, int width, int height) : WindowHandle;
 native fn OpenWindowHandle(WindowHandle w);
 native fn CloseWindowHandle(WindowHandle w);
+native fn UpdateWindowHandle(WindowHandle w);
+native fn FillRect(WindowHandle w, int x, int y, int width, int height);

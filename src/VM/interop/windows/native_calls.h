@@ -15,6 +15,8 @@
 namespace elsa {
 	namespace vm {
 
+		class Window;
+
 		class NativeCalls
 		{
 		public:
@@ -35,9 +37,12 @@ namespace elsa {
 			static void create_window(StackFrame* frame, Heap* heap);
 			static void open_window(StackFrame* frame, Heap* heap);
 			static void close_window(StackFrame* frame, Heap* heap);
+			static void update_window(StackFrame* frame, Heap* heap);
+			static void fill_rect(StackFrame* frame, Heap* heap);
 			static void peek_message(StackFrame* frame, Heap* heap);
 			static std::wstring NativeCalls::read_string(Object& object, Heap* heap);
 			static bool is_string(Object& object);
+			static Window* get_window_handle(Object& object);
 
 			std::vector<std::function<void(StackFrame*, Heap*)>> functions_;
 			Heap* heap_;

@@ -12,5 +12,9 @@ fn main() {
 			PrintLn(msg);
 			msg = PeekMessage();
 		}
+
+		FillRect(w, 100, 100, 100, 450);
+		FillRect(w, 200, 250, 100, 100);
+		UpdateWindowHandle(w);
 	}
 }

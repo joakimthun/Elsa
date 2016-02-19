@@ -3,6 +3,8 @@
 namespace elsa {
 	namespace vm {
 
+		std::vector<Renderable> render_queue;
+
 		Window::Window(const std::wstring& title, int width, int height)
 		{
 			hinstance_ = GetModuleHandle(NULL);
@@ -54,6 +56,18 @@ namespace elsa {
 		{
 			switch (message)
 			{
+			case WM_PAINT: {
+				PAINTSTRUCT ps;
+				HDC hdc = BeginPaint(hWnd, &ps);
+				for (const auto& r : render_queue)
+				{
+					FillRect(hdc, &r.rect, r.brush);
+					DeleteObject(r.brush);
+				}
+				EndPaint(hWnd, &ps);
+				render_queue.clear();
+				break;
+			}
 			case WM_DESTROY:
 				PostQuitMessage(0);
 				break;
@@ -70,10 +84,26 @@ namespace elsa {
 			return ResourceHandleType::Window;
 		}
 
-		void Window::Open()
+		void Window::open()
 		{
 			ShowWindow(hwnd_, SW_SHOW);
 			UpdateWindow(hwnd_);
+		}
+
+		void Window::update()
+		{
+			RedrawWindow(hwnd_, NULL, NULL, RDW_INVALIDATE);
+		}
+
+		void Window::fill_rect(int x, int y, int width, int height)
+		{
+			Renderable r;
+			r.brush = CreateSolidBrush(RGB(50, 151, 151));
+			r.rect.left = x;
+			r.rect.right = x + width;
+			r.rect.top = y;
+			r.rect.bottom = y + height;
+			render_queue.push_back(r);
 		}
 	}
 }

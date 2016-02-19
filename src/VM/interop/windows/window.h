@@ -2,12 +2,19 @@
 
 #include <Windows.h>
 #include <string>
+#include <vector>
 
 #include "../resource_handle.h"
 #include "exceptions\runtime_exception.h"
 
 namespace elsa {
 	namespace vm {
+
+		struct Renderable
+		{
+			HBRUSH brush;
+			RECT rect;
+		};
 
 		class Window : public ResourceHandle
 		{
@@ -18,7 +25,9 @@ namespace elsa {
 			static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 			ResourceHandleType get_type() override;
 
-			void Open();
+			void open();
+			void update();
+			void fill_rect(int x, int y, int width, int height);
 		private:
 			WNDCLASSEX wcex_;
 			HINSTANCE hinstance_;
