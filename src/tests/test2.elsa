@@ -15,6 +15,9 @@ fn main() {
 
 		FillRect(w, 100, 100, 100, 450);
 		FillRect(w, 200, 250, 100, 100);
+
+		FillRect(w, 5, 5, 100, 100);
+		FillRect(w, 695, 495, 100, 100);
 		UpdateWindowHandle(w);
 	}
 }

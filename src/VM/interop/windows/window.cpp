@@ -29,17 +29,36 @@ namespace elsa {
 				throw RuntimeException("Could not create window, call to RegisterClassEx failed");
 			}
 
+			DWORD window_style = WS_OVERLAPPEDWINDOW;
+			RECT client_rect = { 0, 0, width, height };
+			if (!AdjustWindowRectEx(&client_rect, window_style, false, NULL))
+			{
+				throw RuntimeException("Could not create window, call to AdjustWindowRectEx failed");
+			}
+
 			hwnd_ = CreateWindow(
 				L"ElsaWindow",
 				title.c_str(),
-				WS_OVERLAPPEDWINDOW,
-				CW_USEDEFAULT, CW_USEDEFAULT,
-				width, height,
+				window_style,
+				CW_USEDEFAULT, 
+				CW_USEDEFAULT,
+				// width
+				client_rect.right - client_rect.left, 
+				// height
+				client_rect.bottom - client_rect.top,
 				NULL,
 				NULL,
 				hinstance_,
 				NULL
 				);
+
+#ifdef _DEBUG
+			GetClientRect(hwnd_, &client_rect);
+			if (client_rect.right != width || client_rect.bottom != height)
+			{
+				throw RuntimeException("Invalid client area size");
+			}
+#endif
 
 			if (!hwnd_)
 			{
