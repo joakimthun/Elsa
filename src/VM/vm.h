@@ -16,6 +16,7 @@
 #include "exceptions/runtime_exception.h"
 #include "GC/gc.h"
 #include "interop/windows/native_calls.h"
+#include "interop/windows/windows.h"
 
 namespace elsa {
 	namespace vm {

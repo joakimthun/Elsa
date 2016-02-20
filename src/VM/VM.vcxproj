@@ -210,6 +210,7 @@
     <ClCompile Include="GC\gc.cpp" />
     <ClCompile Include="interop\windows\native_calls.cpp" />
     <ClCompile Include="interop\windows\window.cpp" />
+    <ClCompile Include="interop\windows\windows.cpp" />
     <ClCompile Include="memory\heap.cpp" />
     <ClCompile Include="types\object.cpp" />
     <ClCompile Include="stack_frame.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="interop\windows\native_calls.h" />
     <ClInclude Include="interop\resource_handle.h" />
     <ClInclude Include="interop\windows\window.h" />
+    <ClInclude Include="interop\windows\windows.h" />
     <ClInclude Include="types\array_info.h" />
     <ClInclude Include="GC\gc.h" />
     <ClInclude Include="memory\heap.h" />

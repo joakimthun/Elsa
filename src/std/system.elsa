@@ -4,9 +4,6 @@ native fn Equals(object first, object second) : bool;
 // Determines whether the specified struct instances are the same instance
 native fn ReferenceEquals(object first, object second) : bool;
 
-// Retrieves a message from the windows message queue
-native fn PeekMessage() : int;
-
 // Pause the application for the specified number of milliseconds
 native fn Sleep(int ms);
 

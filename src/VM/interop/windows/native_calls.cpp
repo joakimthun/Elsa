@@ -32,7 +32,6 @@ namespace elsa {
 			functions_.push_back(create_window);
 			functions_.push_back(open_window);
 			functions_.push_back(close_window);
-			functions_.push_back(peek_message);
 			functions_.push_back(update_window);
 			functions_.push_back(fill_rect);
 			functions_.push_back(sleep);
@@ -185,22 +184,6 @@ namespace elsa {
 			auto x = frame->pop().i();
 			auto w = get_window_handle(frame->pop());
 			w->fill_rect(x, y, width, height, r, g, b);
-		}
-
-		void NativeCalls::peek_message(StackFrame* frame, Heap* heap)
-		{
-			MSG msg;
-			if (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
-			{
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-				
-				frame->push(Object((int)msg.message));
-			}
-			else
-			{
-				frame->push(Object(-1));
-			}
 		}
 
 		void NativeCalls::sleep(StackFrame* frame, Heap* heap)

@@ -17,6 +17,7 @@ namespace elsa {
 			~Window();
 
 			static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+			
 			ResourceHandleType get_type() override;
 
 			void open();

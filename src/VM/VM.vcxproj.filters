@@ -48,6 +48,9 @@
     <ClInclude Include="interop\windows\native_calls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="interop\windows\windows.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="elsa_vm.cpp">
@@ -75,6 +78,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="interop\windows\native_calls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="interop\windows\windows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

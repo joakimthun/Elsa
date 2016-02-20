@@ -44,6 +44,8 @@ namespace elsa {
 
 				while ((cont || oc_ != halt) && pc_ < code_length_)
 				{
+					peek_message();
+
 					cycle();
 					cont = false;
 				}
