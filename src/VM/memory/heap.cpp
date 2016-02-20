@@ -123,6 +123,19 @@ namespace elsa {
 			store_field(instance, value, fi);
 		}
 
+		const wchar_t* Heap::load_string(const Object& instance)
+		{
+			assert_is_array(instance);
+			auto arr = instance.gco();
+
+			if (arr->ai->type != VMType::Char)
+			{
+				throw RuntimeException("Heap::load_string: not a string");
+			}
+
+			return (wchar_t*)arr->ptr;
+		}
+
 		Object Heap::load_element(const Object& instance, int element_index)
 		{
 			assert_is_array(instance);

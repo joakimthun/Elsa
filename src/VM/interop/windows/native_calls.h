@@ -43,6 +43,7 @@ namespace elsa {
 			static void sleep(StackFrame* frame, Heap* heap);
 			static void get_ticks(StackFrame* frame, Heap* heap);
 			static void key_down(StackFrame* frame, Heap* heap);
+			static void render_text(StackFrame* frame, Heap* heap);
 
 			static std::wstring NativeCalls::read_string(Object& object, Heap* heap);
 			static bool is_string(Object& object);

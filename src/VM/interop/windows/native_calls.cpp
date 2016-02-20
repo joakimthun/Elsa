@@ -225,19 +225,20 @@ namespace elsa {
 			frame->push(Object(w->key_down(static_cast<WPARAM>(keycode))));
 		}
 
+		void NativeCalls::render_text(StackFrame* frame, Heap* heap)
+		{
+			auto keycode = frame->pop().i();
+			auto w = get_window_handle(frame->pop());
+			frame->push(Object(w->key_down(static_cast<WPARAM>(keycode))));
+		}
+
 		std::wstring NativeCalls::read_string(Object& object, Heap* heap)
 		{
-			std::wstring str;
-
 			if (is_string(object))
 			{
 				auto char_arr = heap->load_field(object, static_cast<std::size_t>(0));
-				for (auto i = 0; i < char_arr.gco()->ai->next_index; i++)
-				{
-					str.push_back(heap->load_element(char_arr, i).c());
-				}
-
-				return str;
+				auto chars = heap->load_string(char_arr);
+				return std::wstring(chars, char_arr.gco()->ai->next_index);
 			}
 			else
 			{
