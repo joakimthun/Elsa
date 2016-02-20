@@ -1,3 +1,4 @@
 native fn Equals(object first, object second) : bool;
 native fn ReferenceEquals(object first, object second) : bool;
 native fn PeekMessage() : int;
+native fn Sleep(int ms);

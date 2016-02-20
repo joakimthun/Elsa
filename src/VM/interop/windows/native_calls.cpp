@@ -28,6 +28,7 @@ namespace elsa {
 			functions_.push_back(peek_message);
 			functions_.push_back(update_window);
 			functions_.push_back(fill_rect);
+			functions_.push_back(sleep);
 		}
 
 		void NativeCalls::print(StackFrame* frame, Heap* heap)
@@ -192,6 +193,12 @@ namespace elsa {
 			{
 				frame->push(Object(-1));
 			}
+		}
+
+		void NativeCalls::sleep(StackFrame* frame, Heap* heap)
+		{
+			auto sleep_time = frame->pop().i();
+			Sleep(static_cast<DWORD>(sleep_time));
 		}
 
 		std::wstring NativeCalls::read_string(Object& object, Heap* heap)

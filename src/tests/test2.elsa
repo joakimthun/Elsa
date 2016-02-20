@@ -6,14 +6,15 @@ fn main() {
 	var w = CreateWindow("Test", 800, 600);
 	w.Open();
 
+	var x = 0;
+
 	while(true) {
 		while(PeekMessage()) {}
 
 		w.Clear();
-		w.FillRect(100, 100, 100, 450, 50, 151, 151);
-		w.FillRect(200, 250, 100, 100, 50, 151, 151);
-		w.FillRect(5, 5, 100, 100, 50, 151, 151);
-		w.FillRect(695, 495, 100, 100, 50, 151, 151);
+		w.FillRect(x, 100, 100, 450, 50, 151, 151);
 		w.Update();
+		x = x + 1;
+		Sleep(10);
 	}
 }

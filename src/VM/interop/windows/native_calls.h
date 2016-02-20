@@ -40,6 +40,8 @@ namespace elsa {
 			static void update_window(StackFrame* frame, Heap* heap);
 			static void fill_rect(StackFrame* frame, Heap* heap);
 			static void peek_message(StackFrame* frame, Heap* heap);
+			static void sleep(StackFrame* frame, Heap* heap);
+
 			static std::wstring NativeCalls::read_string(Object& object, Heap* heap);
 			static bool is_string(Object& object);
 			static Window* get_window_handle(Object& object);

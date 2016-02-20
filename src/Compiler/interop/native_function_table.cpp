@@ -21,6 +21,7 @@ namespace elsa {
 			add(L"PeekMessage", new NativeFunctionInfo(L"PeekMessage", 8));
 			add(L"UpdateWindowHandle", new NativeFunctionInfo(L"UpdateWindowHandle", 9));
 			add(L"FillRect", new NativeFunctionInfo(L"FillRect", 10));
+			add(L"Sleep", new NativeFunctionInfo(L"Sleep", 11));
 		}
 
 	}
