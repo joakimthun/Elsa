@@ -7,16 +7,13 @@ fn main() {
 	w.Open();
 
 	while(true) {
-		var msg = PeekMessage();
-		while(msg != -1) {
-			PrintLn(msg);
-			msg = PeekMessage();
-		}
+		while(PeekMessage()) {}
 
-		w.FillRect(100, 100, 100, 450);
-		w.FillRect(200, 250, 100, 100);
-		w.FillRect(5, 5, 100, 100);
-		w.FillRect(695, 495, 100, 100);
+		w.Clear();
+		w.FillRect(100, 100, 100, 450, 50, 151, 151);
+		w.FillRect(200, 250, 100, 100, 50, 151, 151);
+		w.FillRect(5, 5, 100, 100, 50, 151, 151);
+		w.FillRect(695, 495, 100, 100, 50, 151, 151);
 		w.Update();
 	}
 }

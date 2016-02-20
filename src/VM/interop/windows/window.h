@@ -10,12 +10,6 @@
 namespace elsa {
 	namespace vm {
 
-		struct Renderable
-		{
-			HBRUSH brush;
-			RECT rect;
-		};
-
 		class Window : public ResourceHandle
 		{
 		public:
@@ -27,7 +21,7 @@ namespace elsa {
 
 			void open();
 			void update();
-			void fill_rect(int x, int y, int width, int height);
+			void fill_rect(int x, int y, int width, int height, int r, int g, int b);
 		private:
 			WNDCLASSEX wcex_;
 			HINSTANCE hinstance_;

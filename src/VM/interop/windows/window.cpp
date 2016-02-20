@@ -3,7 +3,9 @@
 namespace elsa {
 	namespace vm {
 
-		std::vector<Renderable> render_queue;
+		// Refactor this if support for multiple windows is added
+		HDC mem_hdc;
+		HBITMAP bitmap;
 
 		Window::Window(const std::wstring& title, int width, int height)
 		{
@@ -64,6 +66,12 @@ namespace elsa {
 			{
 				throw RuntimeException("Could not create window, call to CreateWindow failed");
 			}
+
+			HDC hdc = GetDC(hwnd_);
+			mem_hdc = CreateCompatibleDC(hdc);
+			bitmap = CreateCompatibleBitmap(hdc, width, height);
+
+			SelectObject(mem_hdc, bitmap);
 		}
 
 		Window::~Window() 
@@ -78,13 +86,10 @@ namespace elsa {
 			case WM_PAINT: {
 				PAINTSTRUCT ps;
 				HDC hdc = BeginPaint(hWnd, &ps);
-				for (const auto& r : render_queue)
-				{
-					FillRect(hdc, &r.rect, r.brush);
-					DeleteObject(r.brush);
-				}
+				auto width = ps.rcPaint.right;
+				auto height = ps.rcPaint.bottom;
+				BitBlt(hdc, 0, 0, width, height, mem_hdc, 0, 0, SRCCOPY);
 				EndPaint(hWnd, &ps);
-				render_queue.clear();
 				break;
 			}
 			case WM_DESTROY:
@@ -114,15 +119,16 @@ namespace elsa {
 			RedrawWindow(hwnd_, NULL, NULL, RDW_INVALIDATE);
 		}
 
-		void Window::fill_rect(int x, int y, int width, int height)
+		void Window::fill_rect(int x, int y, int width, int height, int r, int g, int b)
 		{
-			Renderable r;
-			r.brush = CreateSolidBrush(RGB(50, 151, 151));
-			r.rect.left = x;
-			r.rect.right = x + width;
-			r.rect.top = y;
-			r.rect.bottom = y + height;
-			render_queue.push_back(r);
+			auto brush = CreateSolidBrush(RGB(r, b, b));
+			RECT rect;
+			rect.left = x;
+			rect.right = x + width;
+			rect.top = y;
+			rect.bottom = y + height;
+			FillRect(mem_hdc, &rect, brush);
+			DeleteObject(brush);
 		}
 	}
 }

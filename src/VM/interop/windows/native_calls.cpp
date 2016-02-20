@@ -167,12 +167,15 @@ namespace elsa {
 
 		void NativeCalls::fill_rect(StackFrame * frame, Heap * heap)
 		{
+			auto b = frame->pop().i();
+			auto g = frame->pop().i();
+			auto r = frame->pop().i();
 			auto height = frame->pop().i();
 			auto width = frame->pop().i();
 			auto y = frame->pop().i();
 			auto x = frame->pop().i();
 			auto w = get_window_handle(frame->pop());
-			w->fill_rect(x, y, width, height);
+			w->fill_rect(x, y, width, height, r, g, b);
 		}
 
 		void NativeCalls::peek_message(StackFrame* frame, Heap* heap)
