@@ -72,6 +72,8 @@ namespace elsa {
 			bitmap = CreateCompatibleBitmap(hdc, width, height);
 
 			SelectObject(mem_hdc, bitmap);
+
+			DeleteObject(hdc);
 		}
 
 		Window::~Window() 
@@ -93,6 +95,8 @@ namespace elsa {
 				break;
 			}
 			case WM_DESTROY:
+				DeleteObject(mem_hdc);
+				DeleteObject(bitmap);
 				PostQuitMessage(0);
 				break;
 			default:
