@@ -22,6 +22,9 @@ native fn FillCircle(WindowHandle w, int x, int y, int diameter, int r, int g, i
 // Checks if a key is currently down(pressed) for the specified window, returns true if it is otherwise false
 native fn KeyDown(WindowHandle w, int keycode) : bool;
 
+// Renders the specified text to the specified window
+native fn RenderText(WindowHandle w, int x, int y, String text);
+
 struct Window
 {
 	WindowHandle handle;
@@ -48,6 +51,10 @@ struct Window
 
 	fn KeyDown(int keycode) : bool {
 		return KeyDown(handle, keycode);
+	}
+
+	fn RenderText(int x, int y, String text) {
+		RenderText(handle, x, y, text);
 	}
 };
 

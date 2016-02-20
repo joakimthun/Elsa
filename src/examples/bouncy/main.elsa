@@ -50,14 +50,15 @@ fn main() {
 	var player2 = CreatePlayer(275, 300);
 
 	var lastTime = GetTicks();
+	var numFrames = 0;
 
 	while(true) {
 		w.Clear();
 
 		player1.Update(w);
-		
+
 		if(player1.Intersects(player2)) {
-			PrintLn("Intersects");
+			w.RenderText(10, 10, "Intersects");
 		}
 
 		player1.Render(w);
@@ -73,7 +74,20 @@ fn main() {
 
 		// Lock down the fps to 60
 		if(deltaTime < 16) {
-			Sleep(16 - deltaTime);
+			var sleepTime = 16 - deltaTime;
+			Sleep(sleepTime);
 		}
+
+
+		var temp = float(now) / 1000.0;
+		float avgFps = float(numFrames) / temp;
+		if(avgFps > float(2000000)) {
+			// The first couple of frames the elapsed time count is tiny and will spike the fps
+			avgFps = 0.0;
+		}
+
+		PrintLn(avgFps);
+
+		numFrames = numFrames + 1;
 	}
 }

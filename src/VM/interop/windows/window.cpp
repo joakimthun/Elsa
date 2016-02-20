@@ -168,5 +168,10 @@ namespace elsa {
 
 			return false;
 		}
+
+		void Window::render_text(int x, int y, const std::wstring& str)
+		{
+			TextOut(mem_hdc, x, y, str.c_str(), str.size());
+		}
 	}
 }

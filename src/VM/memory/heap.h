@@ -6,6 +6,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include <string>
 
 #include "object_types\vm_type.h"
 #include "../types/object.h"
@@ -33,7 +34,7 @@ namespace elsa {
 			Object load_field(const Object& instance, std::size_t field_index);
 			void store_field(const Object& instance, const Object& value, FieldInfo* fi);
 			void store_field(const Object& instance, const Object& value, std::size_t field_index);
-			const wchar_t* load_string(const Object& instance);
+			std::wstring load_string(const Object& instance);
 			Object load_element(const Object& instance, int element_index);
 			void store_element(const Object& instance, const Object& value, int element_index);
 			void add_element(Object& instance, const Object& value);

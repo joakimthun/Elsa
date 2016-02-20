@@ -24,6 +24,7 @@ namespace elsa {
 			add(L"GetTicks", new NativeFunctionInfo(L"GetTicks", 11));
 			add(L"KeyDown", new NativeFunctionInfo(L"KeyDown", 12));
 			add(L"FillCircle", new NativeFunctionInfo(L"FillCircle", 13));
+			add(L"RenderText", new NativeFunctionInfo(L"RenderText", 14));
 		}
 
 	}

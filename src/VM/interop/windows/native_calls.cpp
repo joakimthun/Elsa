@@ -38,6 +38,7 @@ namespace elsa {
 			functions_.push_back(get_ticks);
 			functions_.push_back(key_down);
 			functions_.push_back(fill_circle);
+			functions_.push_back(render_text);
 		}
 
 		void NativeCalls::print(StackFrame* frame, Heap* heap)
@@ -227,9 +228,11 @@ namespace elsa {
 
 		void NativeCalls::render_text(StackFrame* frame, Heap* heap)
 		{
-			auto keycode = frame->pop().i();
+			auto str = read_string(frame->pop(), heap);
+			auto y = frame->pop().i();
+			auto x = frame->pop().i();
 			auto w = get_window_handle(frame->pop());
-			frame->push(Object(w->key_down(static_cast<WPARAM>(keycode))));
+			w->render_text(x, y, str);
 		}
 
 		std::wstring NativeCalls::read_string(Object& object, Heap* heap)
@@ -237,8 +240,7 @@ namespace elsa {
 			if (is_string(object))
 			{
 				auto char_arr = heap->load_field(object, static_cast<std::size_t>(0));
-				auto chars = heap->load_string(char_arr);
-				return std::wstring(chars, char_arr.gco()->ai->next_index);
+				return heap->load_string(char_arr);
 			}
 			else
 			{

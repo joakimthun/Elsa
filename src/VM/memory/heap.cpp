@@ -123,7 +123,7 @@ namespace elsa {
 			store_field(instance, value, fi);
 		}
 
-		const wchar_t* Heap::load_string(const Object& instance)
+		std::wstring Heap::load_string(const Object& instance)
 		{
 			assert_is_array(instance);
 			auto arr = instance.gco();
@@ -133,7 +133,7 @@ namespace elsa {
 				throw RuntimeException("Heap::load_string: not a string");
 			}
 
-			return (wchar_t*)arr->ptr;
+			return std::wstring((wchar_t*)arr->ptr, arr->ai->next_index);
 		}
 
 		Object Heap::load_element(const Object& instance, int element_index)
