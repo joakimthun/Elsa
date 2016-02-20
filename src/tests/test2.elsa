@@ -1,27 +1,3 @@
-use "std/io";
-use "std/assert";
-use "std/window";
-
 fn main() {
-	var w = CreateWindow("Test", 800, 600);
-	w.Open();
-
-	var x = 0;
-	var lastTime = GetTicks();
-
-	while(true) {
-		w.Clear();
-		w.FillRect(x, 100, 100, 450, 50, 151, 151);
-		w.Update();
-		x = x + 1;
-
-		var now = GetTicks();
-		var deltaTime = now - lastTime;
-		lastTime = now;
-
-		// Lock down the fps to 60
-		if(deltaTime < 16) {
-			Sleep(16 - deltaTime);
-		}
-	}
+	
 }

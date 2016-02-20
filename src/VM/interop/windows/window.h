@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 #include "../resource_handle.h"
 #include "exceptions\runtime_exception.h"
@@ -23,6 +24,7 @@ namespace elsa {
 			void open();
 			void update();
 			void fill_rect(int x, int y, int width, int height, int r, int g, int b);
+			bool key_down(WPARAM keycode);
 		private:
 			WNDCLASSEX wcex_;
 			HINSTANCE hinstance_;

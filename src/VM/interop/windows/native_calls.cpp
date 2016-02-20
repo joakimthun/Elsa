@@ -36,6 +36,7 @@ namespace elsa {
 			functions_.push_back(fill_rect);
 			functions_.push_back(sleep);
 			functions_.push_back(get_ticks);
+			functions_.push_back(key_down);
 		}
 
 		void NativeCalls::print(StackFrame* frame, Heap* heap)
@@ -202,6 +203,13 @@ namespace elsa {
 			now.QuadPart /= frequency.QuadPart;
 
 			frame->push(Object(static_cast<int>(now.QuadPart)));
+		}
+
+		void NativeCalls::key_down(StackFrame* frame, Heap* heap)
+		{
+			auto keycode = frame->pop().i();
+			auto w = get_window_handle(frame->pop());
+			frame->push(Object(w->key_down(static_cast<WPARAM>(keycode))));
 		}
 
 		std::wstring NativeCalls::read_string(Object& object, Heap* heap)

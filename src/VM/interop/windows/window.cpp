@@ -6,6 +6,7 @@ namespace elsa {
 		// Refactor this if support for multiple windows is added
 		static HDC mem_hdc;
 		static HBITMAP bitmap;
+		static std::unordered_map<WPARAM, bool> key_states;
 
 		Window::Window(const std::wstring& title, int width, int height)
 		{
@@ -99,6 +100,12 @@ namespace elsa {
 				DeleteObject(bitmap);
 				PostQuitMessage(0);
 				break;
+			case WM_KEYDOWN:
+				key_states[wParam] = true;
+				break;
+			case WM_KEYUP:
+				key_states[wParam] = false;
+				break;
 			default:
 				return DefWindowProc(hWnd, message, wParam, lParam);
 				break;
@@ -133,6 +140,17 @@ namespace elsa {
 			rect.bottom = y + height;
 			FillRect(mem_hdc, &rect, brush);
 			DeleteObject(brush);
+		}
+
+		bool Window::key_down(WPARAM keycode)
+		{
+			auto it = key_states.find(keycode);
+			if (it != key_states.end())
+			{
+				return it->second;
+			}
+
+			return false;
 		}
 	}
 }

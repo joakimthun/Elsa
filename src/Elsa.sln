@@ -19,11 +19,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Elsa", "Elsa\Elsa.vcxproj",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{75B882E4-5D77-4D5A-A71E-D0DD6D0C0716}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pong", "pong", "{FF1AACA1-3DEA-4282-8253-13B0FDCEC33B}"
-	ProjectSection(SolutionItems) = preProject
-		examples\pong\main.elsa = examples\pong\main.elsa
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "std", "std", "{05674512-81E8-4FD9-98C6-A1CBA4938A71}"
 	ProjectSection(SolutionItems) = preProject
 		std\assert.elsa = std\assert.elsa
@@ -45,6 +40,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9BEA47F1
 		tests\test.elsa = tests\test.elsa
 		tests\test2.elsa = tests\test2.elsa
 		tests\type_cast_test.elsa = tests\type_cast_test.elsa
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bouncy", "bouncy", "{CF11D6EE-3341-4A89-A849-B68EEE6826AB}"
+	ProjectSection(SolutionItems) = preProject
+		examples\bouncy\main.elsa = examples\bouncy\main.elsa
 	EndProjectSection
 EndProject
 Global
@@ -146,6 +146,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{FF1AACA1-3DEA-4282-8253-13B0FDCEC33B} = {75B882E4-5D77-4D5A-A71E-D0DD6D0C0716}
+		{CF11D6EE-3341-4A89-A849-B68EEE6826AB} = {75B882E4-5D77-4D5A-A71E-D0DD6D0C0716}
 	EndGlobalSection
 EndGlobal
