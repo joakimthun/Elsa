@@ -394,10 +394,10 @@ namespace elsa {
 			}
 
 			if (declared_return_type->get_type() != ObjectType::Void && return_expressions.expressions.size() == 0)
-				throw ParsingException(L"The function must return a value", parser_->current_token());
+				throw ParsingException(L"The function '" + expression->get_name() + L"' must return a value", parser_->current_token());
 
 			if (declared_return_type->get_type() != ObjectType::Void && non_nested_return_expressions.size() == 0 && !return_expressions.if_else_with_return)
-				throw ParsingException(L"All paths of the function must return a value", parser_->current_token());
+				throw ParsingException(L"All paths of the function '" + expression->get_name() + L"' must return a value", parser_->current_token());
 
 			for (const auto return_exp : return_expressions.expressions)
 			{

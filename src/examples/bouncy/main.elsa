@@ -1,28 +1,71 @@
 use "std/io";
 use "std/assert";
 use "std/window";
+use "std/rectangle";
 
-fn main() {
-	var w = CreateWindow("Test", 800, 600);
-	w.Open();
+struct Player {
+	Rectangle rect_;
 
-	var x = 0;
-	var lastTime = GetTicks();
-
-	while(true) {
-		w.Clear();
-		w.FillRect(x, 100, 100, 450, 50, 151, 151);
-		w.Update();
-
+	fn Update(Window w) {
 		// A is pressed
 		if(w.KeyDown(65)) {
-			x = x - 1;
+			rect_.x_ = rect_.x_ - 1;
 		}
 
 		// D is pressed
 		if(w.KeyDown(68)) {
-			x = x + 1;
+			rect_.x_ = rect_.x_ + 1;
 		}
+
+		// W is pressed
+		if(w.KeyDown(87)) {
+			rect_.y_ = rect_.y_ - 1;
+		}
+
+		// S is pressed
+		if(w.KeyDown(83)) {
+			rect_.y_ = rect_.y_ + 1;
+		}
+	}
+
+	fn Intersects(Player other) : bool {
+		return rect_.Intersects(other.rect_);
+	}
+
+	fn Render(Window w) {
+		w.FillRect(rect_.x_, rect_.y_, rect_.w_, rect_.h_, 50, 151, 151);
+	}
+};
+
+fn CreatePlayer(int x, int y) : Player {
+	var rect = CreateRectangle(x, y, 200, 50);
+	return new Player { rect_: rect };
+}
+
+fn main() {
+	var w = CreateWindow("Bouncy", 800, 600);
+	w.Open();
+
+	var player1 = CreatePlayer(100, 100);
+	var player2 = CreatePlayer(275, 300);
+
+	var lastTime = GetTicks();
+
+	while(true) {
+		w.Clear();
+
+		player1.Update(w);
+		
+		if(player1.Intersects(player2)) {
+			PrintLn("Intersects");
+		}
+
+		player1.Render(w);
+		player2.Render(w);
+
+		//w.FillCircle(350, 250, 100, 50, 151, 151);
+	
+		w.Update();
 
 		var now = GetTicks();
 		var deltaTime = now - lastTime;

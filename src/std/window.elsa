@@ -13,8 +13,11 @@ native fn CloseWindowHandle(WindowHandle w);
 // Forces the specified window to update
 native fn UpdateWindowHandle(WindowHandle w);
 
-// Draws a rectangle in the specified window
+// Draws a filled rectangle in the specified window
 native fn FillRect(WindowHandle w, int x, int y, int width, int height, int r, int g, int b);
+
+// Draws a filled circle in the specified window
+native fn FillCircle(WindowHandle w, int x, int y, int diameter, int r, int g, int b);
 
 // Checks if a key is currently down(pressed) for the specified window, returns true if it is otherwise false
 native fn KeyDown(WindowHandle w, int keycode) : bool;
@@ -33,6 +36,10 @@ struct Window
 
 	fn FillRect(int x, int y, int width, int height, int r, int g, int b) {
 		FillRect(handle, x, y, width, height, r, g, b);
+	}
+
+	fn FillCircle(int x, int y, int diameter, int r, int g, int b) {
+		FillCircle(handle, x, y, diameter, r, g, b);
 	}
 
 	fn Clear() {

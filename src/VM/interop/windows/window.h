@@ -24,6 +24,7 @@ namespace elsa {
 			void open();
 			void update();
 			void fill_rect(int x, int y, int width, int height, int r, int g, int b);
+			void fill_circle(int x, int y, int diameter, int r, int g, int b);
 			bool key_down(WPARAM keycode);
 		private:
 			WNDCLASSEX wcex_;

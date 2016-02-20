@@ -37,6 +37,7 @@ namespace elsa {
 			functions_.push_back(sleep);
 			functions_.push_back(get_ticks);
 			functions_.push_back(key_down);
+			functions_.push_back(fill_circle);
 		}
 
 		void NativeCalls::print(StackFrame* frame, Heap* heap)
@@ -185,6 +186,18 @@ namespace elsa {
 			auto x = frame->pop().i();
 			auto w = get_window_handle(frame->pop());
 			w->fill_rect(x, y, width, height, r, g, b);
+		}
+
+		void NativeCalls::fill_circle(StackFrame * frame, Heap * heap)
+		{
+			auto b = frame->pop().i();
+			auto g = frame->pop().i();
+			auto r = frame->pop().i();
+			auto d = frame->pop().i();
+			auto y = frame->pop().i();
+			auto x = frame->pop().i();
+			auto w = get_window_handle(frame->pop());
+			w->fill_circle(x, y, d, r, g, b);
 		}
 
 		void NativeCalls::sleep(StackFrame* frame, Heap* heap)

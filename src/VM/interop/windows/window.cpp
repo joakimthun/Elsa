@@ -142,6 +142,22 @@ namespace elsa {
 			DeleteObject(brush);
 		}
 
+		void Window::fill_circle(int x, int y, int diameter, int r, int g, int b)
+		{
+			auto brush = CreateSolidBrush(RGB(r, b, b));
+			SelectObject(mem_hdc, brush);
+
+			RECT rect;
+			rect.left = x;
+			rect.right = x + diameter;
+			rect.top = y;
+			rect.bottom = y + diameter;
+
+			Ellipse(mem_hdc, rect.left, rect.top, rect.right, rect.bottom);
+
+			DeleteObject(brush);
+		}
+
 		bool Window::key_down(WPARAM keycode)
 		{
 			auto it = key_states.find(keycode);

@@ -23,6 +23,7 @@ namespace elsa {
 			add(L"Sleep", new NativeFunctionInfo(L"Sleep", 10));
 			add(L"GetTicks", new NativeFunctionInfo(L"GetTicks", 11));
 			add(L"KeyDown", new NativeFunctionInfo(L"KeyDown", 12));
+			add(L"FillCircle", new NativeFunctionInfo(L"FillCircle", 13));
 		}
 
 	}

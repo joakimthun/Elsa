@@ -39,6 +39,7 @@ namespace elsa {
 			static void close_window(StackFrame* frame, Heap* heap);
 			static void update_window(StackFrame* frame, Heap* heap);
 			static void fill_rect(StackFrame* frame, Heap* heap);
+			static void fill_circle(StackFrame* frame, Heap* heap);
 			static void sleep(StackFrame* frame, Heap* heap);
 			static void get_ticks(StackFrame* frame, Heap* heap);
 			static void key_down(StackFrame* frame, Heap* heap);
