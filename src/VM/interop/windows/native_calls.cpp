@@ -5,9 +5,16 @@
 namespace elsa {
 	namespace vm {
 
+		static LARGE_INTEGER frequency;
+		static LARGE_INTEGER start_time;
+
 		NativeCalls::NativeCalls()
 		{
 			initialize();
+			if (!QueryPerformanceFrequency(&frequency))
+				throw RuntimeException("NativeCalls::get_time: Call to QueryPerformanceFrequency failed");
+
+			QueryPerformanceCounter(&start_time);
 		}
 		
 		void NativeCalls::invoke(std::size_t index, StackFrame* frame, Heap* heap)
@@ -29,6 +36,7 @@ namespace elsa {
 			functions_.push_back(update_window);
 			functions_.push_back(fill_rect);
 			functions_.push_back(sleep);
+			functions_.push_back(get_ticks);
 		}
 
 		void NativeCalls::print(StackFrame* frame, Heap* heap)
@@ -199,6 +207,18 @@ namespace elsa {
 		{
 			auto sleep_time = frame->pop().i();
 			Sleep(static_cast<DWORD>(sleep_time));
+		}
+
+		void NativeCalls::get_ticks(StackFrame* frame, Heap* heap)
+		{
+			LARGE_INTEGER now;
+			QueryPerformanceCounter(&now);
+
+			now.QuadPart -= start_time.QuadPart;
+			now.QuadPart *= 1000;
+			now.QuadPart /= frequency.QuadPart;
+
+			frame->push(Object(static_cast<int>(now.QuadPart)));
 		}
 
 		std::wstring NativeCalls::read_string(Object& object, Heap* heap)

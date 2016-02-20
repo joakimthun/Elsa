@@ -7,6 +7,7 @@ fn main() {
 	w.Open();
 
 	var x = 0;
+	var lastTime = GetTicks();
 
 	while(true) {
 		while(PeekMessage()) {}
@@ -15,6 +16,13 @@ fn main() {
 		w.FillRect(x, 100, 100, 450, 50, 151, 151);
 		w.Update();
 		x = x + 1;
-		Sleep(10);
+
+		var now = GetTicks();
+		var deltaTime = now - lastTime;
+		lastTime = now;
+
+		if(deltaTime < 16) {
+			Sleep(16 - deltaTime);
+		}
 	}
 }

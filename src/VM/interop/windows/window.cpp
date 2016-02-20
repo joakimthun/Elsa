@@ -4,8 +4,8 @@ namespace elsa {
 	namespace vm {
 
 		// Refactor this if support for multiple windows is added
-		HDC mem_hdc;
-		HBITMAP bitmap;
+		static HDC mem_hdc;
+		static HBITMAP bitmap;
 
 		Window::Window(const std::wstring& title, int width, int height)
 		{
