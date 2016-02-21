@@ -33,9 +33,6 @@ fn main() {
 		}
 	}
 
-	var lastTime = GetTicks();
-	var numFrames = 0;
-
 	while(true) {
 		w.Clear();
 
@@ -48,27 +45,6 @@ fn main() {
 		for(var i = 0; i < bricks.Length(); i++) {
 			bricks[i].HandleBallCollision(ball);
 			bricks[i].Render(w);
-		}
-
-		var now = GetTicks();
-		var deltaTime = now - lastTime;
-		lastTime = now;
-
-		var temp = float(now) / 1000.0;
-		float avgFps = float(numFrames) / temp;
-		if(avgFps > float(2000000)) {
-			// The first couple of frames the elapsed time count is tiny and will spike the fps
-			avgFps = 0.0;
-		}
-
-		//PrintLn(avgFps);
-
-		numFrames = numFrames + 1;
-
-		// Lock down the fps
-		if(deltaTime < 16) {
-			var sleepTime = 16 - deltaTime;
-			Sleep(sleepTime);
 		}
 
 		w.Update();
