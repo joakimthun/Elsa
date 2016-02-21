@@ -27,9 +27,7 @@ fn main() {
 
 		if(i == 9) {
 			brickX = 3;
-			PrintLn(brickY);
 			brickY = brickY + brickHeight + brickPadding;
-			PrintLn(brickY);
 		}
 	}
 
