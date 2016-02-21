@@ -28,6 +28,9 @@ native fn RenderText(WindowHandle w, int x, int y, String text);
 struct Window
 {
 	WindowHandle handle;
+	int w;
+	int h;
+
 
 	fn Open() {
 		OpenWindowHandle(handle);
@@ -46,7 +49,7 @@ struct Window
 	}
 
 	fn Clear() {
-		FillRect(0, 0, 800, 600, 255, 255, 255);
+		FillRect(0, 0, w, h, 255, 255, 255);
 	}
 
 	fn KeyDown(int keycode) : bool {
@@ -59,5 +62,5 @@ struct Window
 };
 
 fn CreateWindow(String title, int width, int height) : Window {
-	return new Window { handle: CreateWindowHandle(title, width, height) };
+	return new Window { handle: CreateWindowHandle(title, width, height), w: width, h: height };
 }

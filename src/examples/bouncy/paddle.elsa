@@ -1,0 +1,43 @@
+use "std/window";
+use "std/rectangle";
+
+struct Paddle {
+	Rectangle rect;
+
+	fn Update(Window w) {
+		var speed = 4;
+
+		// A is pressed
+		if(w.KeyDown(65)) {
+			rect.x = rect.x - speed;
+		}
+
+		// D is pressed
+		if(w.KeyDown(68)) {
+			rect.x = rect.x + speed;
+		}
+
+		// W is pressed
+		if(w.KeyDown(87)) {
+			rect.y = rect.y - speed;
+		}
+
+		// S is pressed
+		if(w.KeyDown(83)) {
+			rect.y = rect.y + speed;
+		}
+	}
+
+	fn Intersects(Rectangle other) : bool {
+		return rect.Intersects(other);
+	}
+
+	fn Render(Window w) {
+		w.FillRect(rect.x, rect.y, rect.w, rect.h, 50, 151, 151);
+	}
+};
+
+fn CreatePaddle(int x, int y, int width, int height) : Paddle {
+	var r = CreateRectangle(x, y, width, height);
+	return new Paddle { rect: r };
+}

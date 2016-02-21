@@ -45,7 +45,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9BEA47F1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bouncy", "bouncy", "{CF11D6EE-3341-4A89-A849-B68EEE6826AB}"
 	ProjectSection(SolutionItems) = preProject
+		examples\bouncy\ball.elsa = examples\bouncy\ball.elsa
+		examples\bouncy\brick.elsa = examples\bouncy\brick.elsa
 		examples\bouncy\main.elsa = examples\bouncy\main.elsa
+		examples\bouncy\paddle.elsa = examples\bouncy\paddle.elsa
 	EndProjectSection
 EndProject
 Global

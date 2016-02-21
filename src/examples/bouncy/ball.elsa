@@ -1,0 +1,53 @@
+use "std/window";
+use "std/rectangle";
+
+struct Ball {
+	Window w;
+	Rectangle rect;
+	int diameter;
+	int velX;
+	int velY;
+
+	fn IntersectsPaddle(Paddle paddle) : bool {
+		return rect.Intersects(paddle.rect);
+	}
+
+	fn Update(Paddle paddle) {
+		var topY = rect.y;
+		var bottomY = rect.y + rect.h;
+		var left = rect.x;
+		var right = rect.x + rect.w;
+
+		if(topY <= 0) {
+			velY = velY * -1;
+		}
+
+		if(bottomY >= w.h) {
+			velY = velY * -1;
+		}
+
+		if(left <= 0) {
+			velX = velX * -1;
+		}
+
+		if(right >= w.w) {
+			velX = velX * -1;
+		}
+
+		rect.x = rect.x + velX;
+		rect.y = rect.y + velY;
+
+		if(IntersectsPaddle(paddle)) {
+			velY = velY * -1;
+		}
+	}
+
+	fn Render(Window w) {
+		w.FillCircle(rect.x, rect.y, diameter, 0, 0, 0);
+	}
+};
+
+fn CreateBall(Window w, int x, int y, int diameter, int velX, int velY) : Ball {
+	var rect = CreateRectangle(x, y, diameter, diameter);
+	return new Ball { w: w, rect: rect, diameter: diameter, velX: velX, velY: velY };
+}

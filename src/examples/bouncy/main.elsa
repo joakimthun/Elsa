@@ -1,53 +1,37 @@
 use "std/io";
-use "std/assert";
 use "std/window";
 use "std/rectangle";
-
-struct Player {
-	Rectangle rect_;
-
-	fn Update(Window w) {
-		// A is pressed
-		if(w.KeyDown(65)) {
-			rect_.x_ = rect_.x_ - 1;
-		}
-
-		// D is pressed
-		if(w.KeyDown(68)) {
-			rect_.x_ = rect_.x_ + 1;
-		}
-
-		// W is pressed
-		if(w.KeyDown(87)) {
-			rect_.y_ = rect_.y_ - 1;
-		}
-
-		// S is pressed
-		if(w.KeyDown(83)) {
-			rect_.y_ = rect_.y_ + 1;
-		}
-	}
-
-	fn Intersects(Player other) : bool {
-		return rect_.Intersects(other.rect_);
-	}
-
-	fn Render(Window w) {
-		w.FillRect(rect_.x_, rect_.y_, rect_.w_, rect_.h_, 50, 151, 151);
-	}
-};
-
-fn CreatePlayer(int x, int y) : Player {
-	var rect = CreateRectangle(x, y, 200, 50);
-	return new Player { rect_: rect };
-}
+use "examples/bouncy/paddle";
+use "examples/bouncy/ball";
+use "examples/bouncy/brick";
 
 fn main() {
-	var w = CreateWindow("Bouncy", 800, 600);
+	var windowWidth = 800;
+	var windowHeight = 600;
+
+	var w = CreateWindow("Bouncy", windowWidth, windowHeight);
 	w.Open();
 
-	var player1 = CreatePlayer(100, 100);
-	var player2 = CreatePlayer(275, 300);
+	var paddle = CreatePaddle(windowWidth / 2, windowHeight - 35, 200, 30);
+	var ball = CreateBall(w, windowWidth / 2, windowHeight / 2, 30, 1, -2);
+
+	var bricks = new Brick[20];
+	var brickX = 3;
+	var brickY = 0;
+	var brickWidth = 75;
+	var brickHeight = 30;
+	var brickPadding = 5;
+	for(var i = 0; i < 20; i++) {
+		bricks.Push(CreateBrick(brickX, brickY, brickWidth, brickHeight));
+		brickX = brickX + brickWidth + brickPadding;
+
+		if(i == 9) {
+			brickX = 3;
+			PrintLn(brickY);
+			brickY = brickY + brickHeight + brickPadding;
+			PrintLn(brickY);
+		}
+	}
 
 	var lastTime = GetTicks();
 	var numFrames = 0;
@@ -55,29 +39,20 @@ fn main() {
 	while(true) {
 		w.Clear();
 
-		player1.Update(w);
+		paddle.Update(w);
+		ball.Update(paddle);
 
-		if(player1.Intersects(player2)) {
-			w.RenderText(10, 10, "Intersects");
+		paddle.Render(w);
+		ball.Render(w);
+
+		for(var i = 0; i < bricks.Length(); i++) {
+			bricks[i].HandleBallCollision(ball);
+			bricks[i].Render(w);
 		}
-
-		player1.Render(w);
-		player2.Render(w);
-
-		//w.FillCircle(350, 250, 100, 50, 151, 151);
-	
-		w.Update();
 
 		var now = GetTicks();
 		var deltaTime = now - lastTime;
 		lastTime = now;
-
-		// Lock down the fps to 60
-		if(deltaTime < 16) {
-			var sleepTime = 16 - deltaTime;
-			Sleep(sleepTime);
-		}
-
 
 		var temp = float(now) / 1000.0;
 		float avgFps = float(numFrames) / temp;
@@ -86,8 +61,16 @@ fn main() {
 			avgFps = 0.0;
 		}
 
-		PrintLn(avgFps);
+		//PrintLn(avgFps);
 
 		numFrames = numFrames + 1;
+
+		// Lock down the fps
+		if(deltaTime < 16) {
+			var sleepTime = 16 - deltaTime;
+			Sleep(sleepTime);
+		}
+
+		w.Update();
 	}
 }

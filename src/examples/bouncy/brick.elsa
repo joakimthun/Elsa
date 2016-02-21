@@ -1,0 +1,26 @@
+use "std/window";
+use "std/rectangle";
+use "examples/bouncy/ball";
+
+struct Brick {
+	Rectangle rect;
+	bool visible;
+
+	fn HandleBallCollision(Ball ball) {
+		if(visible && rect.Intersects(ball.rect)) {
+			ball.velY = ball.velY * -1;
+			visible = false;
+		}
+	}
+
+	fn Render(Window w) {
+		if(visible) {
+			w.FillRect(rect.x, rect.y, rect.w, rect.h, 255, 0, 0);
+		}
+	}
+};
+
+fn CreateBrick(int x, int y, int width, int height) : Brick {
+	var r = CreateRectangle(x, y, width, height);
+	return new Brick { rect: r, visible: true };
+}

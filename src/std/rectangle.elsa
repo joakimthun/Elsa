@@ -1,9 +1,9 @@
 struct Rectangle
 {
-	int x_;
-	int y_;
-	int w_;
-	int h_;
+	int x;
+	int y;
+	int w;
+	int h;
 
 	fn Intersects(Rectangle other) : bool {
 		int min = 0;
@@ -12,10 +12,10 @@ struct Rectangle
 		int bmax = 0;
 
 		// Horizontal intersection
-		min = x_;
-		max = min + w_;
-		bmin = other.x_;
-		bmax = bmin + other.w_;
+		min = x;
+		max = min + w;
+		bmin = other.x;
+		bmax = bmin + other.w;
 
 		if (bmin > min) {
 		    min = bmin;
@@ -30,10 +30,10 @@ struct Rectangle
 		}
 		
 		// Vertical intersection
-		min = y_;
-		max = min + h_;
-		bmin = other.y_;
-		bmax = bmin + other.h_;
+		min = y;
+		max = min + h;
+		bmin = other.y;
+		bmax = bmin + other.h;
 
 		if (bmin > min) {
 		    min = bmin;
@@ -52,5 +52,5 @@ struct Rectangle
 };
 
 fn CreateRectangle(int x, int y, int width, int height) : Rectangle {
-	return new Rectangle { x_: x, y_: y, w_: width, h_: height };
+	return new Rectangle { x: x, y: y, w: width, h: height };
 }
