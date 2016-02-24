@@ -20,6 +20,7 @@ namespace elsa {
 			Float,
 			Char,
 			Bool,
+			Byte,
 			GCOPtr,
 			Function,
 			Generic,

@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClCompile Include="are_eq_test.cpp" />
     <ClCompile Include="array_test.cpp" />
+    <ClCompile Include="byte_opcodes_test.cpp" />
     <ClCompile Include="char_opcodes_test.cpp" />
     <ClCompile Include="float_opcodes_test.cpp" />
     <ClCompile Include="gc_test.cpp" />
@@ -51,6 +52,7 @@
   <ItemGroup>
     <ClInclude Include="are_eq_test.h" />
     <ClInclude Include="array_test.h" />
+    <ClInclude Include="byte_opcodes_test.h" />
     <ClInclude Include="call_test.h" />
     <ClInclude Include="char_opcodes_test.h" />
     <ClInclude Include="float_opcodes_test.h" />

@@ -39,6 +39,12 @@ namespace elsa {
 			type_ = VMType::Int;
 		}
 
+		Object::Object(uint8_t b)
+		{
+			value_.b = b;
+			type_ = VMType::Byte;
+		}
+
 		int Object::i() const
 		{
 			if (type_ == VMType::Int)
@@ -61,6 +67,14 @@ namespace elsa {
 				return value_.c;
 
 			throw RuntimeException("Can not get a char value from a non char type.");
+		}
+
+		uint8_t Object::b() const
+		{
+			if (type_ == VMType::Byte)
+				return value_.b;
+
+			throw RuntimeException("Can not get a byte value from a non byte type.");
 		}
 
 		GCObject* Object::gco() const

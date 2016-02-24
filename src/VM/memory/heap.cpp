@@ -74,6 +74,8 @@ namespace elsa {
 				return Object(*(wchar_t*)field_ptr);
 			case VMType::GCOPtr:
 				return Object(*(GCObject**)field_ptr);
+			case VMType::Byte:
+				return Object(*(uint8_t*)field_ptr);
 			default:
 				throw RuntimeException("Invalid field type.");
 			}
@@ -107,6 +109,9 @@ namespace elsa {
 				break;
 			case VMType::GCOPtr: {
 				*(GCObject**)field_ptr = value.gco();
+				break;
+			case VMType::Byte:
+				*(uint8_t*)field_ptr = value.b();
 				break;
 			}
 			default:
@@ -153,6 +158,8 @@ namespace elsa {
 				return Object(*((wchar_t*)arr->ptr + element_index));
 			case VMType::GCOPtr:
 				return Object(*((GCObject**)arr->ptr + element_index));
+			case VMType::Byte:
+				return Object(*((uint8_t*)arr->ptr + element_index));
 			default:
 				throw RuntimeException("Invalid array type.");
 			}
@@ -178,6 +185,9 @@ namespace elsa {
 				break;
 			case VMType::GCOPtr:
 				*((GCObject**)arr->ptr + element_index) = value.gco();
+				break;
+			case VMType::Byte:
+				*((uint8_t*)arr->ptr + element_index) = value.b();
 				break;
 			default:
 				throw RuntimeException("Invalid array type.");
@@ -252,6 +262,7 @@ namespace elsa {
 		{
 			auto gco = new GCObject(GCObjectType::RHandle);
 			gco->resource_handle_ = handle;
+			link_new_object(gco);
 			return Object(gco);
 		}
 
@@ -315,6 +326,8 @@ namespace elsa {
 				return sizeof(wchar_t);
 			case VMType::GCOPtr:
 				return sizeof(GCObject*);
+			case VMType::Byte:
+				return sizeof(uint8_t);
 			default:
 				throw RuntimeException("Invalid type.");
 			}
@@ -369,6 +382,8 @@ namespace elsa {
 				return Object(L'\0');
 			case VMType::GCOPtr:
 				return Object(nullptr);
+			case VMType::Byte:
+				return Object(static_cast<uint8_t>(0));
 			default:
 				throw RuntimeException("Invalid type.");
 			}

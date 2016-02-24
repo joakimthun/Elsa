@@ -13,3 +13,4 @@ int vmt9 = recursive_call_test();
 int vmt10 = string_opcodes_test();
 int vmt11 = struct_test();
 int vmt12 = are_eq_test();
+int vmt14 = byte_opcodes_test();

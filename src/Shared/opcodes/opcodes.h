@@ -30,6 +30,17 @@ namespace elsa {
 			ilt,
 			igt,
 
+			// Byte operations
+			bconst,
+			badd,
+			bmul,
+			bsub,
+			bdiv,
+			beq,
+			bneq,
+			blt,
+			bgt,
+
 			// Float operations
 			fconst,
 			fadd,
@@ -49,6 +60,8 @@ namespace elsa {
 			// Bitwise operations
 			iand,
 			ior,
+			band,
+			bor,
 
 			// String operations
 			sconst,
@@ -61,6 +74,8 @@ namespace elsa {
 			br_fneq,
 			br_ceq,
 			br_cneq,
+			br_beq,
+			br_bneq,
 
 			// Locals and arguments
 			l_arg,

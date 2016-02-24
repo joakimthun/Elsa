@@ -9,7 +9,8 @@ namespace elsa {
 		Float,
 		Char,
 		GCOPtr,
-		Function
+		Function,
+		Byte
 	};
 
 }

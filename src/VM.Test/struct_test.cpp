@@ -19,6 +19,7 @@ protected:
 		si->add_field(std::make_unique<FieldInfo>(L"field2", elsa::VMType::Int));
 		si->add_field(std::make_unique<FieldInfo>(L"field3", elsa::VMType::Float));
 		si->add_field(std::make_unique<FieldInfo>(L"field4", elsa::VMType::Int));
+		si->add_field(std::make_unique<FieldInfo>(L"field5", elsa::VMType::Byte));
 		program_.add_struct(std::move(si));
 
 		program_.add_float(std::make_unique<FloatInfo>(12.0f));
@@ -37,8 +38,18 @@ protected:
 		si3->add_field(std::make_unique<FieldInfo>(L"field2", elsa::VMType::Int));
 		si3->add_field(std::make_unique<FieldInfo>(L"field3", elsa::VMType::Char));
 		si3->add_field(std::make_unique<FieldInfo>(L"field4", elsa::VMType::Float));
+		si3->add_field(std::make_unique<FieldInfo>(L"field5", elsa::VMType::Byte));
 
 		program_.add_struct(std::move(si3));
+
+		auto si4 = std::make_unique<StructInfo>(L"my_struct4");
+		si4->add_field(std::make_unique<FieldInfo>(L"field0", elsa::VMType::GCOPtr));
+		si4->add_field(std::make_unique<FieldInfo>(L"field1", elsa::VMType::Int));
+		si4->add_field(std::make_unique<FieldInfo>(L"field2", elsa::VMType::Byte));
+		si4->add_field(std::make_unique<FieldInfo>(L"field3", elsa::VMType::Char));
+		si4->add_field(std::make_unique<FieldInfo>(L"field4", elsa::VMType::Float));
+
+		program_.add_struct(std::move(si4));
 	}
 
 	virtual void TearDown() {}
@@ -63,7 +74,7 @@ TEST_F(StructTest, NEW)
 	auto si = obj.gco()->si;
 
 	ASSERT_EQ(L"my_struct", si->get_name());
-	ASSERT_EQ(20, si->get_size());
+	ASSERT_EQ(21, si->get_size());
 }
 
 TEST_F(StructTest, FIELD_STORE_LOAD)
@@ -98,6 +109,11 @@ TEST_F(StructTest, FIELD_STORE_LOAD)
 		iconst, -1829,
 		s_field, 4,
 
+		// Store 255 in field 5 (byte)
+		l_local, 0,
+		bconst, 255,
+		s_field, 5,
+
 		// Load field 0
 		l_local, 0,
 		l_field, 0,
@@ -122,6 +138,11 @@ TEST_F(StructTest, FIELD_STORE_LOAD)
 		l_local, 0,
 		l_field, 4,
 		halt,
+
+		// Load field 4
+		l_local, 0,
+		l_field, 5,
+		halt,
 	});
 
 	auto vm = VM(program_);
@@ -144,6 +165,10 @@ TEST_F(StructTest, FIELD_STORE_LOAD)
 	vm.execute();
 
 	ASSERT_EQ(-1829, vm.eval_stack_top().i());
+
+	vm.execute();
+
+	ASSERT_EQ(255, vm.eval_stack_top().b());
 }
 
 TEST_F(StructTest, STRUCT_FIELD_STORE_LOAD)
@@ -358,6 +383,11 @@ TEST_F(StructTest, FIELD_DEFAULT_VALUES)
 
 		l_local, 0,
 		l_field, 4,
+		halt,
+		pop,
+
+		l_local, 0,
+		l_field, 5,
 		halt
 	});
 
@@ -380,4 +410,7 @@ TEST_F(StructTest, FIELD_DEFAULT_VALUES)
 
 	vm.execute();
 	ASSERT_FLOAT_EQ(0.0f, vm.eval_stack_top().f());
+
+	vm.execute();
+	ASSERT_FLOAT_EQ(0, vm.eval_stack_top().b());
 }

@@ -76,7 +76,7 @@ namespace elsa {
 
 		void GC::mark(Object& obj)
 		{
-			if (obj.get_type() != VMType::GCOPtr && (obj.get_type() == VMType::Function && obj.gco() != nullptr))
+			if (obj.get_type() != VMType::GCOPtr || (obj.get_type() == VMType::Function && obj.gco() == nullptr))
 				return;
 
 			auto gco = obj.gco();

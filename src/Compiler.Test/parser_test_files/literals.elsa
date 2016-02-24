@@ -1,4 +1,4 @@
-fn int main()
+fn main() : int
 {
 	var x1 = 10;
 	var x2 = 10.0;

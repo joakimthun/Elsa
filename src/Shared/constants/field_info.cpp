@@ -50,7 +50,10 @@ namespace elsa {
 				size_ = sizeof(wchar_t);
 				break;
 			case VMType::GCOPtr:
-				size_ += sizeof(GCObject*);
+				size_ = sizeof(GCObject*);
+				break;
+			case VMType::Byte:
+				size_ = sizeof(uint8_t);
 				break;
 			default:
 				throw ElsaException("Invalid field type.");

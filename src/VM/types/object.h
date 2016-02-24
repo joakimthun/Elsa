@@ -15,6 +15,7 @@ namespace elsa {
 			float f;
 			wchar_t c;
 			GCObject* gco;
+			uint8_t b;
 		} Value;
 
 		class Object
@@ -26,10 +27,12 @@ namespace elsa {
 			Object(wchar_t v);
 			Object(GCObject* o);
 			Object(bool v);
+			Object(uint8_t b);
 
 			int i() const;
 			float f() const;
 			wchar_t c() const;
+			uint8_t b() const;
 			GCObject* gco() const;
 			GCObject* function() const;
 			const Value& get_value() const;

@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <string>
+#include <stdint.h>
 
 #include "../exceptions/elsa_exception.h"
 #include "../object_types/vm_type.h"

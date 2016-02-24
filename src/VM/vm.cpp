@@ -182,6 +182,59 @@ namespace elsa {
 				current_frame_->push(Object(o1.i() < o2.i()));
 				break;
 			}
+			case bconst: {
+				auto v = get_instruction(pc_++);
+				current_frame_->push(Object(static_cast<uint8_t>(v)));
+				break;
+			}
+			case badd: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(static_cast<uint8_t>(o1.b() + o2.b())));
+				break;
+			}
+			case bmul: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(static_cast<uint8_t>(o1.b() * o2.b())));
+				break;
+			}
+			case bsub: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(static_cast<uint8_t>(o2.b() - o1.b())));
+				break;
+			}
+			case bdiv: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(static_cast<uint8_t>(o2.b() / o1.b())));
+				break;
+			}
+			case beq: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.b() == o2.b()));
+				break;
+			}
+			case bneq: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.b() != o2.b()));
+				break;
+			}
+			case blt: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.b() > o2.b()));
+				break;
+			}
+			case bgt: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o1.b() < o2.b()));
+				break;
+			}
 			case fconst: { 
 				auto index = get_instruction(pc_++);
 				auto f = program_.get_float(index);
@@ -350,6 +403,26 @@ namespace elsa {
 
 				break;
 			}
+			case br_beq: {
+				auto jmp_addr = get_instruction(pc_++);
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+
+				if (o1.b() == o2.b())
+					pc_ = jmp_addr;
+
+				break;
+			}
+			case br_bneq: {
+				auto jmp_addr = get_instruction(pc_++);
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+
+				if (o1.b() != o2.b())
+					pc_ = jmp_addr;
+
+				break;
+			}
 			case call: {
 				auto addr = get_instruction(pc_);
 				call_internal(addr);
@@ -488,6 +561,18 @@ namespace elsa {
 				current_frame_->push(Object(o1.i() | o2.i()));
 				break;
 			}
+			case band: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(static_cast<uint8_t>(o1.b() & o2.b())));
+				break;
+			}
+			case bor: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(static_cast<uint8_t>(o1.b() | o2.b())));
+				break;
+			}
 			case halt: {
 				break;
 			}
@@ -564,6 +649,9 @@ namespace elsa {
 				case VMType::Char: {
 					return Object(static_cast<wchar_t>(instance.i()));
 				}
+				case VMType::Byte: {
+					return Object(static_cast<uint8_t>(instance.i()));
+				}
 				default:
 					throw RuntimeException(unsupported_destination_type_msg);
 				}
@@ -577,6 +665,9 @@ namespace elsa {
 				case VMType::Char: {
 					return Object(static_cast<wchar_t>(instance.f()));
 				}
+				case VMType::Byte: {
+					return Object(static_cast<uint8_t>(instance.f()));
+				}
 				default:
 					throw RuntimeException(unsupported_destination_type_msg);
 				}
@@ -589,6 +680,25 @@ namespace elsa {
 				}
 				case VMType::Float: {
 					return Object(static_cast<float>(instance.c()));
+				}
+				case VMType::Byte: {
+					return Object(static_cast<uint8_t>(instance.c()));
+				}
+				default:
+					throw RuntimeException(unsupported_destination_type_msg);
+				}
+			}
+			case VMType::Byte: {
+				switch (dest_type)
+				{
+				case VMType::Int: {
+					return Object(static_cast<int>(instance.b()));
+				}
+				case VMType::Float: {
+					return Object(static_cast<float>(instance.b()));
+				}
+				case VMType::Char: {
+					return Object(static_cast<wchar_t>(instance.b()));
 				}
 				default:
 					throw RuntimeException(unsupported_destination_type_msg);

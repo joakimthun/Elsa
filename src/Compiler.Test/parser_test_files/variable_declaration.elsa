@@ -1,4 +1,4 @@
-fn int main()
+fn main() : int
 {
 	var var1 = false;
 

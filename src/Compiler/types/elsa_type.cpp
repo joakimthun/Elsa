@@ -76,6 +76,9 @@ namespace elsa {
 			case ObjectType::Char: {
 				return VMType::Char;
 			}
+			case ObjectType::Byte: {
+				return VMType::Byte;
+			}
 			case ObjectType::GCOPtr: {
 				return VMType::GCOPtr;
 			}
