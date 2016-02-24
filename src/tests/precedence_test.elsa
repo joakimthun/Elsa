@@ -1,0 +1,19 @@
+use "std/assert";
+
+fn PrecedenceTest() {
+	var x1 = (3 + 5) * 6;										// 48
+    var x2 = (3 + 5) * (6 + 8);									// 112
+    var x3 = (3 + 5 * 6) * 6;									// 198
+    var x4 = (3 + 5  / (1 * 6)) * (6 + 8 * (2 - 1));			// 42
+    var x5 = true || (true && false);							// true
+    var x6 = (true && false) || (false || false);				// false
+    var x7 = (1 == 1 && 2 == 2) && (7 == 8 || 0 != 8);			// true
+
+	AssertEq(48, x1);
+	AssertEq(112, x2);
+	AssertEq(198, x3);
+	AssertEq(42, x4);
+	AssertEq(true, x5);
+	AssertEq(false, x6);
+	AssertEq(true, x7);
+}

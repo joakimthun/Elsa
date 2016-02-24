@@ -9,6 +9,7 @@ use "tests/program2";
 use "tests/func_test";
 use "tests/conditionals_test";
 use "tests/closure_test";
+use "tests/precedence_test";
 
 struct Vec2D {
 	int x;
@@ -375,6 +376,9 @@ fn main() : int {
 	// Closures
 	CaptureIntTest();
 	CaptureStructTest();
+
+	// Precedence
+	PrecedenceTest();
 
 	return 0;
 }
