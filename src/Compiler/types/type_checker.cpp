@@ -213,6 +213,11 @@ namespace elsa {
 				auto fde = static_cast<FuncDeclarationExpression*>(expression);
 				return new ElsaType(fde);
 			}
+			if (is_of_type<GroupedExpression>(expression))
+			{
+				auto grp = static_cast<GroupedExpression*>(expression);
+				return new ElsaType(grp->get_type());
+			}
 
 			throw ParsingException(L"Unkown expression type.", parser_->current_token());
 		}

@@ -324,6 +324,15 @@
     <ClInclude Include="ast_rewrite\closure\closure_rewrite_visitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="parsing\parsers\grouped_expression_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\grouped_expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code_gen\builders\grouped_expression_builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -600,6 +609,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ast_rewrite\closure\closure_rewrite_visitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\grouped_expression_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ast\grouped_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code_gen\builders\grouped_expression_builder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

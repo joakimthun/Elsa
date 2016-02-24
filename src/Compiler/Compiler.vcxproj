@@ -36,6 +36,7 @@
     <ClInclude Include="ast\field_access_expression.h" />
     <ClInclude Include="ast\field_initializer_expression.h" />
     <ClInclude Include="ast\func_call_expression.h" />
+    <ClInclude Include="ast\grouped_expression.h" />
     <ClInclude Include="ast\loop_expression.h" />
     <ClInclude Include="ast\postfix_operator_expression.h" />
     <ClInclude Include="ast\return_expression.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="code_gen\builders\binary_operator_expression_builder.h" />
     <ClInclude Include="code_gen\builders\conditional_expression_builder.h" />
     <ClInclude Include="code_gen\builders\create_struct_expression_builder.h" />
+    <ClInclude Include="code_gen\builders\grouped_expression_builder.h" />
     <ClInclude Include="code_gen\builders\native_call_expression_builder.h" />
     <ClInclude Include="code_gen\builders\function_declaration_expression_builder.h" />
     <ClInclude Include="code_gen\builders\func_call_expression_builder.h" />
@@ -89,6 +91,7 @@
     <ClInclude Include="parsing\parsers\conditional_parser.h" />
     <ClInclude Include="parsing\parsers\create_struct_parser.h" />
     <ClInclude Include="parsing\parsers\func_call_parser.h" />
+    <ClInclude Include="parsing\parsers\grouped_expression_parser.h" />
     <ClInclude Include="parsing\parsers\loop_parser.h" />
     <ClInclude Include="parsing\parsers\postfix_operator_parser.h" />
     <ClInclude Include="parsing\parsers\return_parser.h" />
@@ -141,6 +144,7 @@
     <ClCompile Include="ast\field_access_expression.cpp" />
     <ClCompile Include="ast\field_initializer_expression.cpp" />
     <ClCompile Include="ast\func_call_expression.cpp" />
+    <ClCompile Include="ast\grouped_expression.cpp" />
     <ClCompile Include="ast\loop_expression.cpp" />
     <ClCompile Include="ast\postfix_operator_expression.cpp" />
     <ClCompile Include="ast\return_expression.cpp" />
@@ -159,6 +163,7 @@
     <ClCompile Include="code_gen\builders\binary_operator_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\conditional_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\create_struct_expression_builder.cpp" />
+    <ClCompile Include="code_gen\builders\grouped_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\native_call_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\function_declaration_expression_builder.cpp" />
     <ClCompile Include="code_gen\builders\func_call_expression_builder.cpp" />
@@ -189,6 +194,7 @@
     <ClCompile Include="parsing\parsers\conditional_parser.cpp" />
     <ClCompile Include="parsing\parsers\create_struct_parser.cpp" />
     <ClCompile Include="parsing\parsers\func_call_parser.cpp" />
+    <ClCompile Include="parsing\parsers\grouped_expression_parser.cpp" />
     <ClCompile Include="parsing\parsers\loop_parser.cpp" />
     <ClCompile Include="parsing\parsers\postfix_operator_parser.cpp" />
     <ClCompile Include="parsing\parsers\return_parser.cpp" />

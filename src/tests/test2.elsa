@@ -1,3 +1,23 @@
+use "std/io";
+use "std/assert";
+
 fn main() {
 	
+	var x1 = (3 + 5) * 6;
+    var x2 = (3 + 5) * (6 + 8);
+    var x3 = (3 + 5 * 6) * 6;
+    var x4 = (3 + 5  / (1 * 6)) * (6 + 8 * (2 - 1));
+    var x5 = true || (true && false);
+    var x6 = (3 + 5) * 6;
+    var x7 = (true && false) || (false || false);
+    var x8 = (1 == 1 && 2 == 2) && (7 == 8 || 0 != 8);
+
+	PrintLn(x1);
+	PrintLn(x2);
+	PrintLn(x3);
+	PrintLn(x4);
+	PrintLn(x5);
+	PrintLn(x6);
+	PrintLn(x7);
+	PrintLn(x8);
 }

@@ -240,6 +240,10 @@ namespace elsa {
 		{
 		}
 
+		void ClosureRewriteVisitor::visit(GroupedExpression* expression)
+		{
+		}
+
 		ElsaParser* ClosureRewriteVisitor::parser()
 		{
 			return parser_;

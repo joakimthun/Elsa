@@ -49,6 +49,7 @@ namespace elsa {
 			void visit(StringLiteralExpression* expression) override;
 			void visit(TypeCastExpression* expression) override;
 			void visit(StructInitializerListExpression* expression) override;
+			void visit(GroupedExpression* expression) override;
 
 			ElsaParser* parser();
 			void add_statement(std::unique_ptr<Expression> node);

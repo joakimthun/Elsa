@@ -32,6 +32,7 @@
 #include "parsers\array_access_parser.h"
 #include "parsers\type_cast_parser.h"
 #include "parsers\anonymous_func_declaration_parser.h"
+#include "parsers/grouped_expression_parser.h"
 #include "../types/type_checker.h"
 #include "ll2_entry.h"
 

@@ -138,6 +138,11 @@ namespace elsa {
 			StructInitializerListExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		void VMExpressionVisitor::visit(GroupedExpression* expression)
+		{
+			GroupedExpressionBuilder::build(vm_program_.get(), this, expression);
+		}
+
 		ScopedExpression* VMExpressionVisitor::current_scope()
 		{
 			return current_scope_;
