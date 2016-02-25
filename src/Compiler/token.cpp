@@ -61,6 +61,8 @@ namespace elsa {
 				return L"string literal";
 			case TokenType::Int:
 				return L"int";
+			case TokenType::Byte:
+				return L"byte";
 			case TokenType::Float:
 				return L"float";
 			case TokenType::Char:
@@ -82,7 +84,7 @@ namespace elsa {
 			case TokenType::Comma:
 				return L",";
 			case TokenType::Func:
-				return L"func";
+				return L"fn";
 			case TokenType::Return:
 				return L"return";
 			case TokenType::LBracket:

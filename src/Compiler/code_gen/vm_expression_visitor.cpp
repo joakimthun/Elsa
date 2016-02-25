@@ -143,6 +143,11 @@ namespace elsa {
 			GroupedExpressionBuilder::build(vm_program_.get(), this, expression);
 		}
 
+		void VMExpressionVisitor::visit(ByteLiteralExpression* expression)
+		{
+
+		}
+
 		ScopedExpression* VMExpressionVisitor::current_scope()
 		{
 			return current_scope_;

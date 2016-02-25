@@ -46,6 +46,12 @@ namespace elsa {
 			program->emit(static_cast<int>(str_index));
 		}
 
+		void LiteralExpressionBuilder::build(VMProgram* program, ByteLiteralExpression* expression)
+		{
+			program->emit(OpCode::bconst);
+			program->emit(static_cast<int>(expression->get_value()));
+		}
+
 	}
 }
 

@@ -48,6 +48,22 @@ namespace elsa {
 					return;
 				}
 			}
+			else if (expression->get_type()->get_type() == ObjectType::Byte)
+			{
+				switch (op)
+				{
+				case TokenType::PlusPlus:
+					program->emit(OpCode::bconst);
+					program->emit(1);
+					program->emit(OpCode::badd);
+					return;
+				case TokenType::MinusMinus:
+					program->emit(OpCode::bconst);
+					program->emit(1);
+					program->emit(OpCode::bsub);
+					return;
+				}
+			}
 
 			throw CodeGenException("Unkown expression type or operator");
 		}

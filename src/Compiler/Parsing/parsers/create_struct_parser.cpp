@@ -149,7 +149,8 @@ namespace elsa {
 				parser->current_token()->get_type() == TokenType::Int ||
 				parser->current_token()->get_type() == TokenType::Float ||
 				parser->current_token()->get_type() == TokenType::Bool ||
-				parser->current_token()->get_type() == TokenType::Char)
+				parser->current_token()->get_type() == TokenType::Char ||
+				parser->current_token()->get_type() == TokenType::Byte)
 				&& parser->peek_token()->get_type() == TokenType::LSBracket;
 		}
 

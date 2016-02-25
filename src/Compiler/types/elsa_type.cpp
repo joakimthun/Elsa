@@ -109,6 +109,9 @@ namespace elsa {
 			case ObjectType::Char: {
 				return L"char";
 			}
+			case ObjectType::Byte: {
+				return L"byte";
+			}
 			case ObjectType::GCOPtr: {
 				return struct_declaration_expression_->get_name();
 			}

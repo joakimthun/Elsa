@@ -68,6 +68,7 @@ namespace elsa {
 			void visit(TypeCastExpression* expression) override;
 			void visit(StructInitializerListExpression* expression) override;
 			void visit(GroupedExpression* expression) override;
+			void visit(ByteLiteralExpression* expression) override;
 
 			ScopedExpression* current_scope();
 			void push_new_scope(ScopedExpression* scope);

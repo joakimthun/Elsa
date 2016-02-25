@@ -244,6 +244,10 @@ namespace elsa {
 		{
 		}
 
+		void ClosureRewriteVisitor::visit(ByteLiteralExpression* expression)
+		{
+		}
+
 		ElsaParser* ClosureRewriteVisitor::parser()
 		{
 			return parser_;

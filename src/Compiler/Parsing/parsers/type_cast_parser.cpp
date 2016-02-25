@@ -30,6 +30,8 @@ namespace elsa {
 				return new ElsaType(ObjectType::Char);
 			case TokenType::Float:
 				return new ElsaType(ObjectType::Float);
+			case TokenType::Byte:
+				return new ElsaType(ObjectType::Byte);
 			default:
 				throw ParsingException(L"Cast: unsupported destination type", parser->current_token());
 			}

@@ -31,6 +31,7 @@
     <ClInclude Include="ast\array_declaration_expression.h" />
     <ClInclude Include="ast\array_initializer_list_expression.h" />
     <ClInclude Include="ast\assignment_expression.h" />
+    <ClInclude Include="ast\byte_literal_expression.h" />
     <ClInclude Include="ast\conditional_expression.h" />
     <ClInclude Include="ast\create_struct_expression.h" />
     <ClInclude Include="ast\field_access_expression.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="ast\array_declaration_expression.cpp" />
     <ClCompile Include="ast\array_initializer_list_expression.cpp" />
     <ClCompile Include="ast\assignment_expression.cpp" />
+    <ClCompile Include="ast\byte_literal_expression.cpp" />
     <ClCompile Include="ast\conditional_expression.cpp" />
     <ClCompile Include="ast\create_struct_expression.cpp" />
     <ClCompile Include="ast\field_access_expression.cpp" />

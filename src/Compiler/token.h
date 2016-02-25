@@ -23,6 +23,7 @@ namespace elsa {
 			Char,
 			Bool,
 			Object,
+			Byte,
 
 			Equals,
 			DoubleEquals,

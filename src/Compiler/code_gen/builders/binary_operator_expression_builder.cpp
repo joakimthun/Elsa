@@ -38,8 +38,25 @@ namespace elsa {
 					return;
 				}
 			}
-
-			if (expression->get_type()->get_type() == ObjectType::Float)
+			else if (expression->get_type()->get_type() == ObjectType::Byte)
+			{
+				switch (op)
+				{
+				case TokenType::Plus:
+					program->emit(OpCode::badd);
+					return;
+				case TokenType::Minus:
+					program->emit(OpCode::bsub);
+					return;
+				case TokenType::Asterix:
+					program->emit(OpCode::bmul);
+					return;
+				case TokenType::Slash:
+					program->emit(OpCode::bdiv);
+					return;
+				}
+			}
+			else if (expression->get_type()->get_type() == ObjectType::Float)
 			{
 				switch (op)
 				{
@@ -57,8 +74,7 @@ namespace elsa {
 					return;
 				}
 			}
-
-			if (expression->get_type()->get_type() == ObjectType::Bool)
+			else if (expression->get_type()->get_type() == ObjectType::Bool)
 			{
 				// We expect the left and right expressions to be of the same type here, if they are not, we are missing some type checking
 				auto type = std::unique_ptr<ElsaType>(visitor->type_checker()->get_expression_type(expression->get_left()));
@@ -98,6 +114,43 @@ namespace elsa {
 						auto op_override = TokenType::DoubleEquals;
 						build(program, visitor, expression, &op_override);
 						program->emit(OpCode::ior);
+						return;
+					}
+					}
+				}
+				case ObjectType::Byte: {
+					switch (op)
+					{
+					case TokenType::DoubleEquals:
+						program->emit(OpCode::beq);
+						return;
+					case TokenType::NotEquals:
+						program->emit(OpCode::bneq);
+						return;
+					case TokenType::DoubleAmpersand:
+						program->emit(OpCode::band);
+						return;
+					case TokenType::DoubleVerticalBar:
+						program->emit(OpCode::bor);
+						return;
+					case TokenType::LessThan:
+						program->emit(OpCode::blt);
+						return;
+					case TokenType::GreaterThan:
+						program->emit(OpCode::bgt);
+						return;
+					case TokenType::LessThanEquals: {
+						program->emit(OpCode::blt);
+						auto op_override = TokenType::DoubleEquals;
+						build(program, visitor, expression, &op_override);
+						program->emit(OpCode::bor);
+						return;
+					}
+					case TokenType::GreaterThanEquals: {
+						program->emit(OpCode::bgt);
+						auto op_override = TokenType::DoubleEquals;
+						build(program, visitor, expression, &op_override);
+						program->emit(OpCode::bor);
 						return;
 					}
 					}

@@ -72,6 +72,7 @@ namespace elsa {
 				current_token_type == TokenType::Float || 
 				current_token_type == TokenType::Char || 
 				current_token_type == TokenType::Bool ||
+				current_token_type == TokenType::Byte ||
 				current_token_type == TokenType::Identifier;
 		}
 

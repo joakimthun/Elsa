@@ -161,3 +161,19 @@ fn ReturnArrayTest() {
 	AssertEq(2.0, floats[1]);
 	AssertEq(13.37, floats[2]);
 }
+
+fn ByteArrayTest() {
+	var arr = new byte[100];
+
+	for(byte i = byte(0); i < byte(100); i++) {
+		arr.Push(byte(10));
+	}
+
+	for(var i = 0; i < 100; i++) {
+		arr[i] = byte(i);
+	}
+
+	for(var i = 0; i < 100; i++) {
+		AssertEq(byte(i), arr[i]);
+	}
+}

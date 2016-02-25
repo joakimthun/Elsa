@@ -248,6 +248,10 @@ namespace elsa {
 				type = new ElsaType(ObjectType::Bool);
 				break;
 			}
+			case TokenType::Byte: {
+				type = new ElsaType(ObjectType::Byte);
+				break;
+			}
 			case TokenType::IntegerLiteral: {
 				type = new ElsaType(ObjectType::Int);
 				break;

@@ -61,6 +61,7 @@ fn ExplicitTyping() {
 	float x2 = 0.0;
 	char x3 = '0';
 	bool x4 = true;
+	byte x5 = byte(0);
 	Player p = new Player;
 	p.speed = 1337;
 
@@ -68,6 +69,7 @@ fn ExplicitTyping() {
 	PrintLn(x2);
 	PrintLn(x3);
 	PrintLn(x4);
+	PrintLn(x5);
 	PrintLn(p.speed);
 }
 
@@ -225,6 +227,26 @@ fn CondPrint() {
 
 	if(100 != 100) {
 		PrintLn(8003);
+	}
+
+	byte b1 = byte(10);
+	byte b2 = byte(10);
+	byte b3 = byte(255);
+
+	if(b1 == b2) {
+		PrintLn("b1 == b2");
+	}
+
+	if(b1 != b2) {
+		PrintLn("b1 != b2");
+	}
+
+	if(b1 == b3) {
+		PrintLn("b1 == b3");
+	}
+
+	if(b1 != b3) {
+		PrintLn("b1 != b3");
 	}
 }
 

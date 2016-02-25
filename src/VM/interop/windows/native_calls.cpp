@@ -69,6 +69,8 @@ namespace elsa {
 				std::cout << object.f();
 			else if (object.get_type() == elsa::VMType::Char)
 				std::wcout << object.c();
+			else if (object.get_type() == elsa::VMType::Byte)
+				std::wcout << object.b();
 			else
 				throw RuntimeException("Unsupported type: print_ln");
 		}
