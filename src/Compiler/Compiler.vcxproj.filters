@@ -339,6 +339,12 @@
     <ClInclude Include="ast\enum_declaration_expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="parsing\parsers\enum_declaration_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parsing\parsers\enum_access_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -630,6 +636,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ast\enum_declaration_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\enum_declaration_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parsing\parsers\enum_access_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

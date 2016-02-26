@@ -17,7 +17,7 @@ namespace elsa {
 		public:
 			void set_name(const std::wstring& name);
 			void add_value(const std::wstring& name, int value);
-			int get_value(const std::wstring& name) const;
+			bool get_value(const std::wstring& name, int& value_out) const;
 			const ElsaType* get_type() const;
 			void set_type(ElsaType* type);
 

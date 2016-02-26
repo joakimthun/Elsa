@@ -30,6 +30,7 @@ namespace elsa {
 			NotEquals,
 			Semicolon,
 			Colon,
+			DoubleColon,
 			Comma,
 			Func,
 			Return,
@@ -70,6 +71,7 @@ namespace elsa {
 			While,
 			Import,
 			Native,
+			Enum,
 		};
 		
 		class Token

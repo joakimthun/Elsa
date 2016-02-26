@@ -172,6 +172,26 @@ namespace elsa {
 			return type_checker().get_expression_type(current_struct_);
 		}
 
+		const EnumDeclarationExpression* ElsaParser::get_enum(const std::wstring& name) const
+		{
+			auto it = enum_declarations_.find(name);
+			if (it != enum_declarations_.end())
+			{
+				return it->second;
+			}
+
+			return nullptr;
+		}
+
+		void ElsaParser::add_enum(const EnumDeclarationExpression* enum_exp)
+		{
+			auto exists = get_enum(enum_exp->get_name());
+			if (exists != nullptr)
+				throw ParsingException(L"An enum with the name '" + enum_exp->get_name() + L"' has already been declared", current_token_.get());
+
+			enum_declarations_.insert(std::pair<std::wstring, const EnumDeclarationExpression*>(enum_exp->get_name(), enum_exp));
+		}
+
 		ElsaParser::ElsaParser(ElsaParser* parent, Lexer* lexer)
 			:
 			parent_(parent),
@@ -279,12 +299,14 @@ namespace elsa {
 			register_statement_parser(TokenType::Func, new FuncDeclarationParser());
 			register_statement_parser(TokenType::Native, new FuncDeclarationParser());
 			register_statement_parser(TokenType::Struct, new StructDeclarationParser());
+			register_statement_parser(TokenType::Enum, new EnumDeclarationParser());
 
 			// LL2 Expressions
 			register_ll2_expression_parser(TokenType::Identifier, TokenType::Dot, new StructAccessParser());
 			register_ll2_expression_parser(TokenType::Identifier, TokenType::LParen, new FuncCallParser());
 			register_ll2_expression_parser(TokenType::Identifier, TokenType::LSBracket, new ArrayAccessParser());
 			register_ll2_expression_parser(TokenType::Identifier, TokenType::Identifier, new VariableDeclarationParser());
+			register_ll2_expression_parser(TokenType::Identifier, TokenType::DoubleColon, new EnumAccessParser());
 
 			register_ll2_expression_parser(TokenType::Int, TokenType::LParen, new TypeCastParser());
 			register_ll2_expression_parser(TokenType::Float, TokenType::LParen, new TypeCastParser());

@@ -15,15 +15,16 @@ namespace elsa {
 			members_.insert(std::pair<std::wstring, int>(name, value));
 		}
 
-		int EnumDeclarationExpression::get_value(const std::wstring& name) const
+		bool EnumDeclarationExpression::get_value(const std::wstring& name, int& value_out) const
 		{
 			auto it = members_.find(name);
 			if (it != members_.end())
 			{
-				return it->second;
+				value_out = it->second;
+				return true;
 			}
 
-			throw ParsingException(L"The enum '" + name_ + L"' has no member with the name '" + name + L"'");
+			return false;
 		}
 
 		const ElsaType* EnumDeclarationExpression::get_type() const

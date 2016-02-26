@@ -150,7 +150,7 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(EnumDeclarationExpression* expression)
 		{
-			throw ElsaException("Not implemented: VMExpressionVisitor::visit -> EnumDeclarationExpression");
+			// Do nothing, enums are just converted to integer constants
 		}
 
 		ScopedExpression* VMExpressionVisitor::current_scope()

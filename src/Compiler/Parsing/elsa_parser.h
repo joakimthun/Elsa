@@ -6,7 +6,7 @@
 #include <vector>
 #include <algorithm>
 
-#include "..\exceptions\parsing_exception.h"
+#include "../exceptions/parsing_exception.h"
 #include "../lexing/lexer.h"
 #include "../token.h"
 #include "../program.h"
@@ -14,25 +14,27 @@
 #include "../symbol_tables/function_table.h"
 #include "../types/builtin/builtin.h"
 #include "precedence.h"
-#include "parsers\prefix_operator_parser.h"
-#include "parsers\identifier_parser.h"
-#include "parsers\variable_declaration_parser.h"
-#include "parsers\literal_parser.h"
-#include "parsers\func_declaration_parser.h"
-#include "parsers\binary_operator_parser.h"
-#include "parsers\struct_declaration_parser.h"
-#include "parsers\create_struct_parser.h"
-#include "parsers\struct_access_parser.h"
-#include "parsers\assignment_parser.h"
-#include "parsers\func_call_parser.h"
-#include "parsers\conditional_parser.h"
-#include "parsers\loop_parser.h"
-#include "parsers\postfix_operator_parser.h"
-#include "parsers\return_parser.h"
-#include "parsers\array_access_parser.h"
-#include "parsers\type_cast_parser.h"
-#include "parsers\anonymous_func_declaration_parser.h"
+#include "parsers/prefix_operator_parser.h"
+#include "parsers/identifier_parser.h"
+#include "parsers/variable_declaration_parser.h"
+#include "parsers/literal_parser.h"
+#include "parsers/func_declaration_parser.h"
+#include "parsers/binary_operator_parser.h"
+#include "parsers/struct_declaration_parser.h"
+#include "parsers/create_struct_parser.h"
+#include "parsers/struct_access_parser.h"
+#include "parsers/assignment_parser.h"
+#include "parsers/func_call_parser.h"
+#include "parsers/conditional_parser.h"
+#include "parsers/loop_parser.h"
+#include "parsers/postfix_operator_parser.h"
+#include "parsers/return_parser.h"
+#include "parsers/array_access_parser.h"
+#include "parsers/type_cast_parser.h"
+#include "parsers/anonymous_func_declaration_parser.h"
 #include "parsers/grouped_expression_parser.h"
+#include "parsers/enum_declaration_parser.h"
+#include "parsers/enum_access_parser.h"
 #include "../types/type_checker.h"
 #include "ll2_entry.h"
 
@@ -67,6 +69,8 @@ namespace elsa {
 			void set_current_struct(StructDeclarationExpression* sde);
 			const StructDeclarationExpression* current_struct() const;
 			ElsaType* current_struct_type();
+			const EnumDeclarationExpression* get_enum(const std::wstring& name) const;
+			void add_enum(const EnumDeclarationExpression* enum_exp);
 
 		private:
 			ElsaParser(ElsaParser* parent, Lexer* lexer);
@@ -109,6 +113,7 @@ namespace elsa {
 			StructDeclarationExpression* current_struct_;
 			std::vector<std::wstring> imported_files_;
 			ElsaParser* parent_;
+			std::unordered_map<std::wstring, const EnumDeclarationExpression*> enum_declarations_;
 		};
 
 	}

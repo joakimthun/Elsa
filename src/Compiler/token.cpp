@@ -161,6 +161,8 @@ namespace elsa {
 				return L"import";
 			case TokenType::Native:
 				return L"native";
+			case TokenType::Enum:
+				return L"enum";
 			default:
 				throw ParsingException(L"Token.to_string: Unsupported token type");
 			}

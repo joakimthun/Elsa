@@ -92,6 +92,8 @@
     <ClInclude Include="parsing\parsers\assignment_parser.h" />
     <ClInclude Include="parsing\parsers\conditional_parser.h" />
     <ClInclude Include="parsing\parsers\create_struct_parser.h" />
+    <ClInclude Include="parsing\parsers\enum_access_parser.h" />
+    <ClInclude Include="parsing\parsers\enum_declaration_parser.h" />
     <ClInclude Include="parsing\parsers\func_call_parser.h" />
     <ClInclude Include="parsing\parsers\grouped_expression_parser.h" />
     <ClInclude Include="parsing\parsers\loop_parser.h" />
@@ -197,6 +199,8 @@
     <ClCompile Include="parsing\parsers\assignment_parser.cpp" />
     <ClCompile Include="parsing\parsers\conditional_parser.cpp" />
     <ClCompile Include="parsing\parsers\create_struct_parser.cpp" />
+    <ClCompile Include="parsing\parsers\enum_access_parser.cpp" />
+    <ClCompile Include="parsing\parsers\enum_declaration_parser.cpp" />
     <ClCompile Include="parsing\parsers\func_call_parser.cpp" />
     <ClCompile Include="parsing\parsers\grouped_expression_parser.cpp" />
     <ClCompile Include="parsing\parsers\loop_parser.cpp" />

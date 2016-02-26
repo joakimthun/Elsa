@@ -78,6 +78,10 @@ namespace elsa {
 					return match_token(L',', TokenType::Comma);
 				}
 				case L':': {
+					auto t = try_match_tokens(L':', L':', TokenType::DoubleColon);
+					if (t != nullptr)
+						return t;
+
 					return match_token(L':', TokenType::Colon);
 				}
 				case L'=': {
@@ -349,6 +353,7 @@ namespace elsa {
 			register_keyword(L"while", TokenType::While);
 			register_keyword(L"use", TokenType::Import);
 			register_keyword(L"native", TokenType::Native);
+			register_keyword(L"enum", TokenType::Enum);
 		}
 	}
 }
