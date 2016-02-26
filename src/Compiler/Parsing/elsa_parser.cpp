@@ -174,6 +174,9 @@ namespace elsa {
 
 		const EnumDeclarationExpression* ElsaParser::get_enum(const std::wstring& name) const
 		{
+			if (parent_ != nullptr)
+				return parent_->get_enum(name);
+
 			auto it = enum_declarations_.find(name);
 			if (it != enum_declarations_.end())
 			{
@@ -185,13 +188,20 @@ namespace elsa {
 
 		void ElsaParser::add_enum(const EnumDeclarationExpression* enum_exp)
 		{
-			auto exists = get_enum(enum_exp->get_name());
-			if (exists != nullptr)
-				throw ParsingException(L"An enum with the name '" + enum_exp->get_name() + L"' has already been declared", current_token_.get());
+			if (parent_ == nullptr)
+			{
+				auto exists = get_enum(enum_exp->get_name());
+				if (exists != nullptr)
+					throw ParsingException(L"An enum with the name '" + enum_exp->get_name() + L"' has already been declared", current_token_.get());
 
-			assert_unambiguous_type_name(enum_exp->get_name());
+				assert_unambiguous_type_name(enum_exp->get_name());
 
-			enum_declarations_.insert(std::pair<std::wstring, const EnumDeclarationExpression*>(enum_exp->get_name(), enum_exp));
+				enum_declarations_.insert(std::pair<std::wstring, const EnumDeclarationExpression*>(enum_exp->get_name(), enum_exp));
+			}
+			else
+			{
+				parent_->add_enum(enum_exp);
+			}
 		}
 
 		void ElsaParser::assert_unambiguous_type_name(const std::wstring& name)

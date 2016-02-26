@@ -8,22 +8,22 @@ struct Paddle {
 		var speed = 4;
 
 		// A is pressed
-		if(w.KeyDown(65)) {
+		if(w.KeyDown(KeyCodes::A)) {
 			rect.x = rect.x - speed;
 		}
 
 		// D is pressed
-		if(w.KeyDown(68)) {
+		if(w.KeyDown(KeyCodes::D)) {
 			rect.x = rect.x + speed;
 		}
 
 		// W is pressed
-		if(w.KeyDown(87)) {
+		if(w.KeyDown(KeyCodes::W)) {
 			rect.y = rect.y - speed;
 		}
 
 		// S is pressed
-		if(w.KeyDown(83)) {
+		if(w.KeyDown(KeyCodes::S)) {
 			rect.y = rect.y + speed;
 		}
 	}

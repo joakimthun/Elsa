@@ -178,6 +178,9 @@ namespace elsa {
 			if (this->get_type() == ObjectType::Enum && other->get_type() == ObjectType::Enum)
 				return this->enum_declaration_expression_->get_name() == other->enum_declaration_expression_->get_name();
 
+			if (this->get_type() == ObjectType::Enum && other->get_type() == ObjectType::Int || other->get_type() == ObjectType::Enum && this->get_type() == ObjectType::Int)
+				return true;
+
 			return this->get_type() == other->get_type();
 		}
 

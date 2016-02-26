@@ -25,6 +25,13 @@ native fn KeyDown(WindowHandle w, int keycode) : bool;
 // Renders the specified text to the specified window
 native fn RenderText(WindowHandle w, int x, int y, String text);
 
+enum KeyCodes {
+	A = 65,
+	D = 68,
+	W = 87,
+	S = 83,
+};
+
 struct Window
 {
 	WindowHandle handle;
