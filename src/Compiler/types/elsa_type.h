@@ -24,7 +24,8 @@ namespace elsa {
 			GCOPtr,
 			Function,
 			Generic,
-			Object
+			Object,
+			Enum
 		};
 
 		class ElsaType

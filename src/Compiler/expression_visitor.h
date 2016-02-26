@@ -28,6 +28,7 @@ namespace elsa {
 		class StructInitializerListExpression;
 		class GroupedExpression;
 		class ByteLiteralExpression;
+		class EnumDeclarationExpression;
 
 		class ExpressionVisitor
 		{
@@ -58,6 +59,7 @@ namespace elsa {
 			virtual void visit(StructInitializerListExpression* expression) = 0;
 			virtual void visit(GroupedExpression* expression) = 0;
 			virtual void visit(ByteLiteralExpression* expression) = 0;
+			virtual void visit(EnumDeclarationExpression* expression) = 0;
 		};
 
 	}

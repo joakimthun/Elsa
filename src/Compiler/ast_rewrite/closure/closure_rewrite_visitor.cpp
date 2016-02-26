@@ -248,6 +248,10 @@ namespace elsa {
 		{
 		}
 
+		void ClosureRewriteVisitor::visit(EnumDeclarationExpression* expression)
+		{
+		}
+
 		ElsaParser* ClosureRewriteVisitor::parser()
 		{
 			return parser_;

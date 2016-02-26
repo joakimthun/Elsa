@@ -145,7 +145,12 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(ByteLiteralExpression* expression)
 		{
+			throw ElsaException("Not implemented: VMExpressionVisitor::visit -> ByteLiteralExpression");
+		}
 
+		void VMExpressionVisitor::visit(EnumDeclarationExpression* expression)
+		{
+			throw ElsaException("Not implemented: VMExpressionVisitor::visit -> EnumDeclarationExpression");
 		}
 
 		ScopedExpression* VMExpressionVisitor::current_scope()

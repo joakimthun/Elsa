@@ -69,6 +69,7 @@ namespace elsa {
 			void visit(StructInitializerListExpression* expression) override;
 			void visit(GroupedExpression* expression) override;
 			void visit(ByteLiteralExpression* expression) override;
+			void visit(EnumDeclarationExpression* expression) override;
 
 			ScopedExpression* current_scope();
 			void push_new_scope(ScopedExpression* scope);
