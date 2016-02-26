@@ -218,6 +218,11 @@ namespace elsa {
 				auto grp = static_cast<GroupedExpression*>(expression);
 				return new ElsaType(grp->get_type());
 			}
+			if (is_of_type<EnumValueExpression>(expression))
+			{
+				auto eve = static_cast<EnumValueExpression*>(expression);
+				return new ElsaType(eve->get_type());
+			}
 
 			throw ParsingException(L"Unkown expression type.", parser_->current_token());
 		}
@@ -273,7 +278,7 @@ namespace elsa {
 				break;
 			}
 			case TokenType::Identifier: {
-				type = get_struct_type(token->get_value());
+				type = get_struct_or_enum_type(token->get_value());
 				break;
 			}
 			case TokenType::Func: {
@@ -335,7 +340,7 @@ namespace elsa {
 			return nullptr;
 		}
 
-		ElsaType* TypeChecker::get_struct_type(const std::wstring& name)
+		ElsaType* TypeChecker::get_struct_or_enum_type(const std::wstring& name)
 		{
 			if (parser_->struct_table().has_entry(name))
 			{
@@ -343,7 +348,11 @@ namespace elsa {
 				return new ElsaType(si->get_expression());
 			}
 
-			throw ParsingException(L"Invalid struct name", parser_->current_token());
+			auto enum_exp = parser_->get_enum(name);
+			if (enum_exp != nullptr)
+				return new ElsaType(enum_exp);
+			
+			throw ParsingException(L"Invalid struct or enum name", parser_->current_token());
 		}
 
 		ElsaType* TypeChecker::get_func_type()

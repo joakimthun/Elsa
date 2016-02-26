@@ -9,6 +9,7 @@
 #include "../../ast/bool_literal_expression.h"
 #include "../../ast/string_literal_expression.h"
 #include "../../ast/byte_literal_expression.h"
+#include "../../ast/enum_value_expression.h"
 #include "opcodes\opcodes.h"
 #include "vm_program.h"
 
@@ -26,6 +27,7 @@ namespace elsa {
 			static void build(VMProgram* program, BoolLiteralExpression* expression);
 			static void build(VMProgram* program, StringLiteralExpression* expression);
 			static void build(VMProgram* program, ByteLiteralExpression* expression);
+			static void build(VMProgram* program, EnumValueExpression* expression);
 		};
 
 	}

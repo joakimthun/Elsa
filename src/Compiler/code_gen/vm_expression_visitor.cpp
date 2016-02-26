@@ -153,6 +153,11 @@ namespace elsa {
 			// Do nothing, enums are just converted to integer constants
 		}
 
+		void VMExpressionVisitor::visit(EnumValueExpression* expression)
+		{
+			LiteralExpressionBuilder::build(vm_program_.get(), expression);
+		}
+
 		ScopedExpression* VMExpressionVisitor::current_scope()
 		{
 			return current_scope_;

@@ -22,6 +22,12 @@ enum Third {
 	Four
 };
 
+struct EnumStruct {
+	First First;
+	Second Second;
+	Third Third;
+};
+
 fn main() {
 	
 	AssertEq(0, First::One);
@@ -38,4 +44,8 @@ fn main() {
 	AssertEq(3, Third::Two);
 	AssertEq(5, Third::Three);
 	AssertEq(6, Third::Four);
+
+	var es = new EnumStruct;
+	es.Third = Third::Three;
+	PrintLn(es.Third);
 }

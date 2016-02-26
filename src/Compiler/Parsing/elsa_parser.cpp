@@ -189,7 +189,15 @@ namespace elsa {
 			if (exists != nullptr)
 				throw ParsingException(L"An enum with the name '" + enum_exp->get_name() + L"' has already been declared", current_token_.get());
 
+			assert_unambiguous_type_name(enum_exp->get_name());
+
 			enum_declarations_.insert(std::pair<std::wstring, const EnumDeclarationExpression*>(enum_exp->get_name(), enum_exp));
+		}
+
+		void ElsaParser::assert_unambiguous_type_name(const std::wstring& name)
+		{
+			if (get_enum(name) != nullptr || struct_table_.has_entry(name))
+				throw ParsingException(L"Ambiguous type name '" + name + L"' a struct or enum with the same name has already been declared", current_token_.get());
 		}
 
 		ElsaParser::ElsaParser(ElsaParser* parent, Lexer* lexer)
@@ -364,7 +372,7 @@ namespace elsa {
 		void ElsaParser::initialize_default_imports()
 		{
 			import_source_file(L"std/system");
-			import_source_file(L"std/string");
+			//import_source_file(L"std/string");
 		}
 
 		void ElsaParser::parse_import_statement()
@@ -430,5 +438,6 @@ namespace elsa {
 
 			return false;
 		}
+
 	}
 }

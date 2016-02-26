@@ -30,6 +30,7 @@
 #include "../ast/type_cast_expression.h"
 #include "../ast/struct_initializer_list_expression.h"
 #include "../ast/grouped_expression.h"
+#include "../ast/enum_value_expression.h"
 #include "elsa_type.h"
 #include "../token.h"
 #include "../exceptions\parsing_exception.h"
@@ -50,7 +51,7 @@ namespace elsa {
 			void assert_is_same_type(ObjectType t1, ObjectType t2);
 			bool is_same_type(Expression* first, Expression* second);
 			ElsaType* get_access_type(const ElsaType* type, const std::wstring& name, bool throw_invalid_exception = true);
-			ElsaType* get_struct_type(const std::wstring& name);
+			ElsaType* get_struct_or_enum_type(const std::wstring& name);
 			ElsaType* get_func_type();
 			bool valid_assignment(AssignmentExpression* assignment_expression);
 			bool valid_return_expression(Expression* expression);

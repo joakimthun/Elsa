@@ -11,6 +11,7 @@ namespace elsa {
 
 		class StructDeclarationExpression;
 		class FuncDeclarationExpression;
+		class EnumDeclarationExpression;
 
 		enum class ObjectType : int
 		{
@@ -36,12 +37,14 @@ namespace elsa {
 			ElsaType(ObjectType type);
 			ElsaType(const StructDeclarationExpression* struct_declaration_expression);
 			ElsaType(const FuncDeclarationExpression* func_declaration_expression);
+			ElsaType(const EnumDeclarationExpression* enum_declaration_expression);
 
 			ObjectType get_type() const;
 			VMType get_vm_type() const;
 			std::wstring get_name() const;
 			const StructDeclarationExpression* get_struct_declaration_expression() const;
 			const FuncDeclarationExpression* get_func_declaration_expression() const;
+			const EnumDeclarationExpression* get_enum_declaration_expression() const;
 
 			void set_is_array(bool is_array);
 			bool get_is_array() const;
@@ -52,6 +55,7 @@ namespace elsa {
 			ObjectType type_;
 			const StructDeclarationExpression* struct_declaration_expression_;
 			const FuncDeclarationExpression* func_declaration_expression_;
+			const EnumDeclarationExpression* enum_declaration_expression_;
 			bool is_array_ = false;
 		};
 

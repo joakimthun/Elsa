@@ -1,7 +1,7 @@
 #pragma once
 
 #include "parser.h"
-#include "../../ast/integer_literal_expression.h"
+#include "../../ast/enum_value_expression.h"
 #include "../elsa_parser.h"
 
 namespace elsa {

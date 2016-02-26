@@ -35,6 +35,7 @@
     <ClInclude Include="ast\conditional_expression.h" />
     <ClInclude Include="ast\create_struct_expression.h" />
     <ClInclude Include="ast\enum_declaration_expression.h" />
+    <ClInclude Include="ast\enum_value_expression.h" />
     <ClInclude Include="ast\field_access_expression.h" />
     <ClInclude Include="ast\field_initializer_expression.h" />
     <ClInclude Include="ast\func_call_expression.h" />
@@ -147,6 +148,7 @@
     <ClCompile Include="ast\conditional_expression.cpp" />
     <ClCompile Include="ast\create_struct_expression.cpp" />
     <ClCompile Include="ast\enum_declaration_expression.cpp" />
+    <ClCompile Include="ast\enum_value_expression.cpp" />
     <ClCompile Include="ast\field_access_expression.cpp" />
     <ClCompile Include="ast\field_initializer_expression.cpp" />
     <ClCompile Include="ast\func_call_expression.cpp" />

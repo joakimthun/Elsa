@@ -252,6 +252,10 @@ namespace elsa {
 		{
 		}
 
+		void ClosureRewriteVisitor::visit(EnumValueExpression* expression)
+		{
+		}
+
 		ElsaParser* ClosureRewriteVisitor::parser()
 		{
 			return parser_;
@@ -269,7 +273,9 @@ namespace elsa {
 			auto field_index = add_capured_identifiers_as_fields();
 			add_capured_structs_as_fields(field_index);
 
-			auto create_capture_struct = std::make_unique<CreateStructExpression>(capture_struct_->get_name(), parser_->type_checker().get_struct_type(capture_struct_->get_name()));
+			auto create_capture_struct = std::make_unique<CreateStructExpression>(capture_struct_->get_name(), parser_->type_checker().get_struct_or_enum_type(capture_struct_->get_name()));
+			if (create_capture_struct->get_type()->get_type() == ObjectType::Enum)
+				throw ParsingException(L"The type '" + capture_struct_->get_name() + L"' is an enum, not a struct");
 
 			auto capture_struct_type = std::unique_ptr<ElsaType>(parser_->type_checker().get_expression_type(create_capture_struct.get()));
 			fde->add_local(capture_variable_name_, *capture_struct_type, capture_struct_);

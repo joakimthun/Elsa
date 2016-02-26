@@ -17,7 +17,9 @@ namespace elsa {
 
 			parser->consume(TokenType::Identifier);
 
-			auto cse = std::make_unique<CreateStructExpression>(identifier, parser->type_checker().get_struct_type(identifier));
+			auto cse = std::make_unique<CreateStructExpression>(identifier, parser->type_checker().get_struct_or_enum_type(identifier));
+			if(cse->get_type()->get_type() == ObjectType::Enum)
+				throw ParsingException(L"The type '" + identifier + L"' is an enum, not a struct", parser->current_token());
 
 			if (parser->current_token()->get_type() == TokenType::LBracket)
 				return parse_struct_initializer_list(std::move(cse), parser);

@@ -52,6 +52,12 @@ namespace elsa {
 			program->emit(static_cast<int>(expression->get_value()));
 		}
 
+		void LiteralExpressionBuilder::build(VMProgram* program, EnumValueExpression* expression)
+		{
+			program->emit(OpCode::iconst);
+			program->emit(expression->get_value());
+		}
+
 	}
 }
 

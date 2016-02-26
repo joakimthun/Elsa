@@ -2,6 +2,7 @@
 
 #include "../ast/struct_declaration_expression.h"
 #include "../ast/func_declaration_expression.h"
+#include "../ast/enum_declaration_expression.h"
 
 namespace elsa {
 	namespace compiler {
@@ -11,6 +12,7 @@ namespace elsa {
 			type_(type->get_type()),
 			struct_declaration_expression_(type->get_struct_declaration_expression()),
 			func_declaration_expression_(type->get_func_declaration_expression()),
+			enum_declaration_expression_(type->get_enum_declaration_expression()),
 			is_array_(type->get_is_array())
 		{
 			assert_is_valid();
@@ -21,6 +23,7 @@ namespace elsa {
 			type_(type->get_type()),
 			struct_declaration_expression_(type->get_struct_declaration_expression()),
 			func_declaration_expression_(type->get_func_declaration_expression()),
+			enum_declaration_expression_(type->get_enum_declaration_expression()),
 			is_array_(is_array)
 		{
 			assert_is_valid();
@@ -31,6 +34,7 @@ namespace elsa {
 			type_(type),
 			struct_declaration_expression_(nullptr),
 			func_declaration_expression_(nullptr),
+			enum_declaration_expression_(nullptr),
 			is_array_(false)
 
 		{
@@ -57,6 +61,17 @@ namespace elsa {
 			assert_is_valid();
 		}
 
+		ElsaType::ElsaType(const EnumDeclarationExpression* enum_declaration_expression)
+			:
+			type_(ObjectType::Enum),
+			func_declaration_expression_(nullptr),
+			struct_declaration_expression_(nullptr),
+			enum_declaration_expression_(enum_declaration_expression),
+			is_array_(false)
+		{
+			assert_is_valid();
+		}
+
 		ObjectType ElsaType::get_type() const
 		{
 			return type_;
@@ -67,7 +82,8 @@ namespace elsa {
 			switch (type_)
 			{
 			case ObjectType::Bool:
-			case ObjectType::Int: {
+			case ObjectType::Int:
+			case ObjectType::Enum: {
 				return VMType::Int;
 			}
 			case ObjectType::Float: {
@@ -118,6 +134,9 @@ namespace elsa {
 			case ObjectType::Function: {
 				return func_declaration_expression_->get_type_name();
 			}
+			case ObjectType::Enum: {
+				return enum_declaration_expression_->get_name();
+			}
 			default:
 				throw ParsingException("ElsaType::get_name: Can not get the type name.");
 			}
@@ -131,6 +150,11 @@ namespace elsa {
 		const FuncDeclarationExpression* ElsaType::get_func_declaration_expression() const
 		{
 			return func_declaration_expression_;
+		}
+
+		const EnumDeclarationExpression* ElsaType::get_enum_declaration_expression() const
+		{
+			return enum_declaration_expression_;
 		}
 
 		void ElsaType::set_is_array(bool is_array)
@@ -151,6 +175,9 @@ namespace elsa {
 			if (this->get_type() == ObjectType::Function && other->get_type() == ObjectType::Function)
 				return this->get_func_declaration_expression()->are_equal(other->get_func_declaration_expression());
 
+			if (this->get_type() == ObjectType::Enum && other->get_type() == ObjectType::Enum)
+				return this->enum_declaration_expression_->get_name() == other->enum_declaration_expression_->get_name();
+
 			return this->get_type() == other->get_type();
 		}
 
@@ -161,6 +188,9 @@ namespace elsa {
 
 			if (type_ == ObjectType::Function && func_declaration_expression_ == nullptr)
 				throw ElsaException("Function types must have a FuncDeclarationExpression");
+
+			if (type_ == ObjectType::Enum && enum_declaration_expression_ == nullptr)
+				throw ElsaException("Enum types must have a EnumDeclarationExpression");
 		}
 	}
 }

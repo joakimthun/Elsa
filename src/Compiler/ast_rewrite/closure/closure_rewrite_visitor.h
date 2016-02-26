@@ -52,6 +52,7 @@ namespace elsa {
 			void visit(GroupedExpression* expression) override;
 			void visit(ByteLiteralExpression* expression) override;
 			void visit(EnumDeclarationExpression* expression) override;
+			void visit(EnumValueExpression* expression) override;
 
 			ElsaParser* parser();
 			void add_statement(std::unique_ptr<Expression> node);

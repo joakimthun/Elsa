@@ -71,6 +71,7 @@ namespace elsa {
 			ElsaType* current_struct_type();
 			const EnumDeclarationExpression* get_enum(const std::wstring& name) const;
 			void add_enum(const EnumDeclarationExpression* enum_exp);
+			void assert_unambiguous_type_name(const std::wstring& name);
 
 		private:
 			ElsaParser(ElsaParser* parent, Lexer* lexer);

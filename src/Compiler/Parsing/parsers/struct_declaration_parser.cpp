@@ -21,6 +21,7 @@ namespace elsa {
 			parser->consume(TokenType::Identifier);
 			parser->consume(TokenType::LBracket);
 
+			parser->assert_unambiguous_type_name(name);
 			parser->struct_table().add_struct(name, struct_exp.get());
 
 			while (parser->current_token()->get_type() != TokenType::RBracket)

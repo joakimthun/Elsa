@@ -20,7 +20,10 @@ namespace elsa {
 			if(!enum_exp->get_value(member_name, enum_value))
 				throw ParsingException(L"The enum '" + enum_name + L"' has no member with the name '" + member_name + L"'");
 
-			return std::make_unique<IntegerLiteralExpression>(enum_value);
+			auto enum_value_exp = std::make_unique<EnumValueExpression>(enum_value);
+			enum_value_exp->set_type(new ElsaType(enum_exp));
+
+			return std::move(enum_value_exp);
 		}
 
 	}
