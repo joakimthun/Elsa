@@ -1,0 +1,88 @@
+use "std/io";
+use "std/assert";
+
+enum First {
+	One,
+	Two,
+	Three,
+	Four
+};
+
+enum Second {
+	One = 3,
+	Two,
+	Three,
+	Four
+};
+
+enum Third {
+	One = 2,
+	Two,
+	Three = 5,
+	Four
+};
+
+struct EnumStruct {
+	First First;
+	Second Second;
+	Third Third;
+};
+
+fn EnumTest() {
+	
+	AssertEq(0, First::One);
+	AssertEq(1, First::Two);
+	AssertEq(2, First::Three);
+	AssertEq(3, First::Four);
+
+	AssertEq(3, Second::One);
+	AssertEq(4, Second::Two);
+	AssertEq(5, Second::Three);
+	AssertEq(6, Second::Four);
+	
+	AssertEq(2, Third::One);
+	AssertEq(3, Third::Two);
+	AssertEq(5, Third::Three);
+	AssertEq(6, Third::Four);
+
+	var es = new EnumStruct;
+
+	// First
+	es.First = First::One;
+	AssertEq(0, es.First);
+
+	es.First = First::Two;
+	AssertEq(1, es.First);
+
+	es.First = First::Three;
+	AssertEq(2, es.First);
+
+	es.First = First::Four;
+	AssertEq(3, es.First);
+
+	// Second
+	es.Second = Second::One;
+	AssertEq(3, es.Second);
+
+	es.Second = Second::Two;
+	AssertEq(4, es.Second);
+
+	es.Second = Second::Three;
+	AssertEq(5, es.Second);
+
+	es.Second = Second::Four;
+	AssertEq(6, es.Second);
+
+	// Third
+	es.Third = Third::One;
+	AssertEq(2, es.Third);
+
+	es.Third = Third::Two;
+	AssertEq(3, es.Third);
+
+	es.Third = Third::Three;
+	AssertEq(5, es.Third);
+
+	es.Third = Third::Four;
+	AssertEq(6, es.Third);
+}

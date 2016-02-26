@@ -10,6 +10,7 @@ use "tests/func_test";
 use "tests/conditionals_test";
 use "tests/closure_test";
 use "tests/precedence_test";
+use "tests/enum_test";
 
 struct Vec2D {
 	int x;
@@ -401,6 +402,9 @@ fn main() : int {
 
 	// Precedence
 	PrecedenceTest();
+
+	// Enums
+	EnumTest();
 
 	return 0;
 }
