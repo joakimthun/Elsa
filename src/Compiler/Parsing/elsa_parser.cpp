@@ -345,6 +345,7 @@ namespace elsa {
 			register_expression_parser(TokenType::CharLiteral, new LiteralParser());
 			register_expression_parser(TokenType::BoolLiteral, new LiteralParser());
 			register_expression_parser(TokenType::StringLiteral, new LiteralParser());
+			register_expression_parser(TokenType::HexLiteral, new LiteralParser());
 			register_expression_parser(TokenType::New, new CreateStructParser());
 			register_expression_parser(TokenType::If, new ConditionalParser());
 			register_expression_parser(TokenType::For, new LoopParser());

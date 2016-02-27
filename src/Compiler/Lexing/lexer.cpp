@@ -223,6 +223,25 @@ namespace elsa {
 		{
 			std::wstring value;
 
+			// Hex literal
+			if (current_char_ == L'0' && file_->peek_char() == L'x')
+			{
+				// Consume the 0
+				value += current_char_;
+				consume();
+				// Consume the x
+				value += current_char_;
+				consume();
+
+				while (file_->good() && (iswdigit(current_char_) || ((current_char_ >= 'A' && current_char_ <= 'F') || (current_char_ >= 'a' && current_char_ <= 'f'))))
+				{
+					value += current_char_;
+					consume();
+				}
+
+				return std::make_unique<Token>(TokenType::HexLiteral, value, line_number_, file_->get_file_name());
+			}
+
 			if (negative)
 				value += L'-';
 

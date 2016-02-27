@@ -39,7 +39,12 @@ namespace elsa {
 			auto expression_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(expression.get()));
 
 			if (explicit_type.get() != nullptr)
-				assert_is_valid_declaration(explicit_type.get(), expression_type.get(), parser);
+			{
+				if (!is_valid_declaration(explicit_type.get(), expression_type.get(), parser) && !TypeConverter::try_convert(expression, explicit_type.get(), &parser->type_checker()))
+				{
+					throw ParsingException(L"Both sides of a variable declaration expression must be of the same type.", parser->current_token());
+				}
+			}
 
 			auto struct_expression = dynamic_cast<CreateStructExpression*>(expression.get());
 			auto array_expression = dynamic_cast<ArrayDeclarationExpression*>(expression.get());
@@ -94,21 +99,23 @@ namespace elsa {
 			return type;
 		}
 
-		void VariableDeclarationParser::assert_is_valid_declaration(const ElsaType* expected, const ElsaType* actual, ElsaParser* parser)
+		bool VariableDeclarationParser::is_valid_declaration(const ElsaType* expected, const ElsaType* actual, ElsaParser* parser)
 		{
 			if (expected->get_type() != actual->get_type())
-				throw ParsingException(L"Both sides of a variable declaration expression must be of the same type.", parser->current_token());
+				return false;
 
 			if (expected->get_type() == ObjectType::GCOPtr)
 			{
-				if(actual->get_type() != ObjectType::GCOPtr)
-					throw ParsingException(L"Both sides of a variable declaration expression must be of the same type.", parser->current_token());
+				if (actual->get_type() != ObjectType::GCOPtr)
+					return false;
 				else
 				{
-					if(expected->get_struct_declaration_expression()->get_name() != actual->get_struct_declaration_expression()->get_name())
-						throw ParsingException(L"Both sides of a variable declaration expression must be of the same type.", parser->current_token());
+					if (expected->get_struct_declaration_expression()->get_name() != actual->get_struct_declaration_expression()->get_name())
+						return false;
 				}
 			}
+
+			return true;
 		}
 
 	}

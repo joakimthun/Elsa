@@ -2,6 +2,6 @@ use "std/io";
 use "std/assert";
 
 fn main() {
-	
-	
+	byte x = 0xcc;
+	PrintLn(x);
 }

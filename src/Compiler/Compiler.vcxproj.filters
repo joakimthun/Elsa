@@ -348,6 +348,9 @@
     <ClInclude Include="ast\enum_value_expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="types\type_converter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="types\type_checker.cpp">
@@ -648,6 +651,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ast\enum_value_expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="types\type_converter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -29,6 +29,10 @@ namespace elsa {
 				parser->consume(TokenType::StringLiteral);
 				return std::make_unique<StringLiteralExpression>(token_value);
 			}
+			case TokenType::HexLiteral: {
+				parser->consume(TokenType::HexLiteral);
+				return std::make_unique<IntegerLiteralExpression>(std::stoi(token_value, nullptr, 16));
+			}
 			default:
 				throw ParsingException(L"Invalid token.", parser->current_token());
 			}

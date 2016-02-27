@@ -12,6 +12,7 @@ namespace elsa {
 			Identifier,
 			Var,
 			IntegerLiteral,
+			HexLiteral,
 			FloatLiteral,
 			CharLiteral,
 			BoolLiteral,

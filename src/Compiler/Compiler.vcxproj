@@ -138,6 +138,7 @@
     <ClInclude Include="parsing\parsers\variable_declaration_parser.h" />
     <ClInclude Include="program.h" />
     <ClInclude Include="types\type_checker.h" />
+    <ClInclude Include="types\type_converter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ast\array_access_expression.cpp" />
@@ -240,6 +241,7 @@
     <ClCompile Include="types\builtin\builtin.cpp" />
     <ClCompile Include="types\elsa_type.cpp" />
     <ClCompile Include="types\type_checker.cpp" />
+    <ClCompile Include="types\type_converter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.vcxproj">

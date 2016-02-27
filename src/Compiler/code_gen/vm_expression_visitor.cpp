@@ -145,7 +145,7 @@ namespace elsa {
 
 		void VMExpressionVisitor::visit(ByteLiteralExpression* expression)
 		{
-			throw ElsaException("Not implemented: VMExpressionVisitor::visit -> ByteLiteralExpression");
+			LiteralExpressionBuilder::build(vm_program_.get(), expression);
 		}
 
 		void VMExpressionVisitor::visit(EnumDeclarationExpression* expression)
