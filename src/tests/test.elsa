@@ -11,6 +11,7 @@ use "tests/conditionals_test";
 use "tests/closure_test";
 use "tests/precedence_test";
 use "tests/enum_test";
+use "tests/literals_test";
 
 struct Vec2D {
 	int x;
@@ -405,6 +406,9 @@ fn main() : int {
 
 	// Enums
 	EnumTest();
+
+	// Literals
+	HexLiteralsTest();
 
 	return 0;
 }

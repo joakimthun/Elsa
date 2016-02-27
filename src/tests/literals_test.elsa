@@ -1,0 +1,18 @@
+use "std/assert";
+
+fn HexLiteralsTest() {
+	AssertEq(0, 0x0);
+	AssertEq(9, 0x9);
+	AssertEq(10, 0xA);
+	AssertEq(11, 0xB);
+	AssertEq(12, 0xC);
+	AssertEq(13, 0xD);
+	AssertEq(14, 0xE);
+	AssertEq(15, 0xF);
+	AssertEq(255, 0xFF);
+	AssertEq(65535, 0xFFFF);
+	AssertEq(255, 0xff);
+	AssertEq(65535, 0xffff);
+	AssertEq(223, 0xDF);
+	AssertEq(2147483647, 0x7FFFFFFF);
+}
