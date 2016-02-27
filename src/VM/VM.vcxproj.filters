@@ -45,10 +45,10 @@
     <ClInclude Include="interop\resource_handle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interop\windows\native_calls.h">
+    <ClInclude Include="interop\windows\windows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interop\windows\windows.h">
+    <ClInclude Include="interop\native_calls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,10 +77,10 @@
     <ClCompile Include="interop\windows\window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="interop\windows\native_calls.cpp">
+    <ClCompile Include="interop\windows\windows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="interop\windows\windows.cpp">
+    <ClCompile Include="interop\native_calls.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

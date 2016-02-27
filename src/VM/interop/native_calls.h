@@ -8,9 +8,9 @@
 #include <functional>
 #include <iostream>
 
-#include "../../stack_frame.h"
+#include "../stack_frame.h"
 #include "object_types/vm_type.h"
-#include "../../memory/heap.h"
+#include "../memory/heap.h"
 
 namespace elsa {
 	namespace vm {

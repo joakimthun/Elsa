@@ -15,9 +15,9 @@
 #include "constants/function_info.h"
 #include "exceptions/runtime_exception.h"
 #include "GC/gc.h"
+#include "interop/native_calls.h"
 
 // Windows stuff
-#include "interop/windows/native_calls.h"
 #include "interop/windows/windows.h"
 
 namespace elsa {

@@ -1,6 +1,6 @@
 #include "native_calls.h"
 
-#include "window.h"
+#include "windows/window.h"
 
 namespace elsa {
 	namespace vm {
