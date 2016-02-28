@@ -19,7 +19,6 @@ namespace elsa {
 			~FileHandle();
 
 			void close();
-			bool good();
 			int read(Object& arr, int num_bytes, Heap* heap);
 			//void write();
 			ResourceHandleType get_type() override;

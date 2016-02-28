@@ -65,6 +65,8 @@ namespace elsa {
 			Percent,
 			VerticalBar,
 			DoubleVerticalBar,
+			DoubleLessThan,
+			DoubleGreaterThan,
 			New,
 			If,
 			Else,

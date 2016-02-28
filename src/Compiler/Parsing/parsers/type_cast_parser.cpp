@@ -13,9 +13,9 @@ namespace elsa {
 			cast_exp->set_expression(parser->parse_expression());
 			parser->consume(TokenType::RParen);
 
-			auto exp_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(cast_exp->get_expression()));
-			if (cast_exp->get_dest_type()->are_equal(exp_type.get()))
-				throw ParsingException(L"Invalid cast: The expression is already of that type", parser->current_token());
+			//auto exp_type = std::unique_ptr<ElsaType>(parser->type_checker().get_expression_type(cast_exp->get_expression()));
+			//if (cast_exp->get_dest_type()->are_equal(exp_type.get()))
+			//	throw ParsingException(L"Invalid cast: The expression is already of that type", parser->current_token());
 
 			return std::move(cast_exp);
 		}

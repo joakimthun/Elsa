@@ -364,6 +364,10 @@ namespace elsa {
 			register_infix_parser(TokenType::Asterix, new BinaryOperatorParser(Precedence::Product));
 			register_infix_parser(TokenType::DoubleAmpersand, new BinaryOperatorParser(Precedence::ConditionalAnd));
 			register_infix_parser(TokenType::DoubleVerticalBar, new BinaryOperatorParser(Precedence::ConditionalOr));
+			register_infix_parser(TokenType::Ampersand, new BinaryOperatorParser(Precedence::LogicalAnd));
+			register_infix_parser(TokenType::VerticalBar, new BinaryOperatorParser(Precedence::LogicalOr));
+			register_infix_parser(TokenType::DoubleLessThan, new BinaryOperatorParser(Precedence::Shift));
+			register_infix_parser(TokenType::DoubleGreaterThan, new BinaryOperatorParser(Precedence::Shift));
 
 			register_infix_parser(TokenType::DoubleEquals, new BinaryOperatorParser(Precedence::Equality));
 			register_infix_parser(TokenType::NotEquals, new BinaryOperatorParser(Precedence::Equality));

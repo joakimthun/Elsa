@@ -12,6 +12,7 @@ use "tests/closure_test";
 use "tests/precedence_test";
 use "tests/enum_test";
 use "tests/literals_test";
+use "tests/binary_operators_test";
 
 struct Vec2D {
 	int x;
@@ -409,6 +410,11 @@ fn main() : int {
 
 	// Literals
 	HexLiteralsTest();
+
+	// Binary operators
+	BinaryShiftTest();
+	BinaryMergeTest();
+	BinaryAndOrTest();
 
 	return 0;
 }

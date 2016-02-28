@@ -561,6 +561,18 @@ namespace elsa {
 				current_frame_->push(Object(o1.i() | o2.i()));
 				break;
 			}
+			case isl: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o2.i() << o1.i()));
+				break;
+			}
+			case isr: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o2.i() >> o1.i()));
+				break;
+			}
 			case band: {
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();

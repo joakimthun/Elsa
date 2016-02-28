@@ -27,11 +27,6 @@ namespace elsa {
 			file_.close();
 		}
 
-		bool FileHandle::good()
-		{
-			return file_.good();
-		}
-
 		int FileHandle::read(Object& arr, int num_bytes, Heap* heap)
 		{
 			assert_is_byte_array(arr);

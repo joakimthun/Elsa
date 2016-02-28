@@ -36,6 +36,18 @@ namespace elsa {
 				case TokenType::Slash:
 					program->emit(OpCode::idiv);
 					return;
+				case TokenType::VerticalBar:
+					program->emit(OpCode::ior);
+					return;
+				case TokenType::Ampersand:
+					program->emit(OpCode::iand);
+					return;
+				case TokenType::DoubleLessThan:
+					program->emit(OpCode::isl);
+					return;
+				case TokenType::DoubleGreaterThan:
+					program->emit(OpCode::isr);
+					return;
 				}
 			}
 			else if (expression->get_type()->get_type() == ObjectType::Byte)
@@ -53,6 +65,12 @@ namespace elsa {
 					return;
 				case TokenType::Slash:
 					program->emit(OpCode::bdiv);
+					return;
+				case TokenType::VerticalBar:
+					program->emit(OpCode::bor);
+					return;
+				case TokenType::Ampersand:
+					program->emit(OpCode::band);
 					return;
 				}
 			}

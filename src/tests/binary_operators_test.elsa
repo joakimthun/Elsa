@@ -1,0 +1,10 @@
+use "std/assert";
+
+fn BinaryShiftTest() {
+}
+
+fn BinaryMergeTest() {
+}
+
+fn BinaryAndOrTest() {
+}

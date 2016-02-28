@@ -60,6 +60,8 @@ namespace elsa {
 			// Bitwise operations
 			iand,
 			ior,
+			isl,
+			isr,
 			band,
 			bor,
 

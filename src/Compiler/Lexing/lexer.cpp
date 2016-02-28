@@ -145,10 +145,18 @@ namespace elsa {
 					if (t != nullptr)
 						return t;
 
+					t = try_match_tokens(L'<', L'<', TokenType::DoubleLessThan);
+					if (t != nullptr)
+						return t;
+
 					return match_token(L'<', TokenType::LessThan);
 				}
 				case L'>': {
 					auto t = try_match_tokens(L'>', L'=', TokenType::GreaterThanEquals);
+					if (t != nullptr)
+						return t;
+
+					t = try_match_tokens(L'>', L'>', TokenType::DoubleGreaterThan);
 					if (t != nullptr)
 						return t;
 
