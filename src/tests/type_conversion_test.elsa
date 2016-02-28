@@ -1,0 +1,40 @@
+use "std/assert";
+
+fn ToInt32Test() {
+	var bytes = new byte[4];
+	bytes.Push(byte(70));
+	bytes.Push(byte(208));
+	bytes.Push(byte(134));
+	bytes.Push(byte(130));
+	AssertEq(-2105094074, ToInt32(bytes));
+
+	bytes[0] = byte(64);
+	bytes[1] = byte(151);
+	bytes[2] = byte(228);
+	bytes[3] = byte(163);
+	AssertEq(-1545300160, ToInt32(bytes));
+
+	bytes[0] = byte(149);
+	bytes[1] = byte(207);
+	bytes[2] = byte(255);
+	bytes[3] = byte(70);
+	AssertEq(1191169941, ToInt32(bytes));
+
+	bytes[0] = byte(161);
+	bytes[1] = byte(205);
+	bytes[2] = byte(16);
+	bytes[3] = byte(52);
+	AssertEq(873516449, ToInt32(bytes));
+
+	bytes[0] = byte(111);
+	bytes[1] = byte(132);
+	bytes[2] = byte(165);
+	bytes[3] = byte(74);
+	AssertEq(1252361327, ToInt32(bytes));
+
+	bytes[0] = byte(223);
+	bytes[1] = byte(122);
+	bytes[2] = byte(14);
+	bytes[3] = byte(160);
+	AssertEq(-1609663777, ToInt32(bytes));
+}

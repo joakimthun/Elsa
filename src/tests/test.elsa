@@ -13,6 +13,7 @@ use "tests/precedence_test";
 use "tests/enum_test";
 use "tests/literals_test";
 use "tests/binary_operators_test";
+use "tests/type_conversion_test";
 
 struct Vec2D {
 	int x;
@@ -415,6 +416,9 @@ fn main() : int {
 	BinaryShiftTest();
 	BinaryMergeTest();
 	BinaryAndOrTest();
+
+	// Type conversions
+	ToInt32Test();
 
 	return 0;
 }

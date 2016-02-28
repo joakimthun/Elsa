@@ -9,3 +9,8 @@ native fn Sleep(int ms);
 
 // Gets the number of milliseconds since the application started
 native fn GetTicks() : int;
+
+// Converts 4 bytes into a 32-bit signed integer
+fn ToInt32(byte[] bytes) : int {
+	return int(bytes[0]) | (int(bytes[1]) << 8) | (int(bytes[2]) << 16) | (int(bytes[3]) << 24);
+}

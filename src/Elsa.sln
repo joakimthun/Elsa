@@ -45,6 +45,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9BEA47F1
 		tests\test.elsa = tests\test.elsa
 		tests\test2.elsa = tests\test2.elsa
 		tests\type_cast_test.elsa = tests\type_cast_test.elsa
+		tests\type_conversion_test.elsa = tests\type_conversion_test.elsa
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bouncy", "bouncy", "{CF11D6EE-3341-4A89-A849-B68EEE6826AB}"

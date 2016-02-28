@@ -2,11 +2,10 @@ use "std/io";
 use "std/assert";
 
 fn main() {
-	//var f = OpenFile("examples\bouncy\assets\asset.bmp", FileMode::Read);
-	//
-	//var buffer = new byte[];
-	//var read = ReadFile(f, buffer, 54);
-	//PrintLn(buffer[0]);
-	//PrintLn(buffer[1]);
-	//PrintLn(read);
+	var f = OpenFile("examples\bouncy\assets\asset.bmp", FileMode::Read);
+	
+	var buffer = new byte[];
+	var read = ReadFile(f, buffer, 54);
+	
+	
 }
