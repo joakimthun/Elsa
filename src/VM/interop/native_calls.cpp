@@ -1,6 +1,7 @@
 #include "native_calls.h"
 
 #include "windows/window.h"
+#include "file_handle.h"
 
 namespace elsa {
 	namespace vm {
@@ -39,6 +40,10 @@ namespace elsa {
 			functions_.push_back(key_down);
 			functions_.push_back(fill_circle);
 			functions_.push_back(render_text);
+			functions_.push_back(file_open);
+			functions_.push_back(file_close);
+			functions_.push_back(file_read);
+			functions_.push_back(file_write);
 		}
 
 		void NativeCalls::print(StackFrame* frame, Heap* heap)
@@ -237,6 +242,32 @@ namespace elsa {
 			w->render_text(x, y, str);
 		}
 
+		void NativeCalls::file_open(StackFrame* frame, Heap* heap)
+		{
+			auto m = frame->pop().i();
+			auto path = read_string(frame->pop(), heap);
+			frame->push(heap->allocate_resource_handle(new FileHandle(path, m)));
+		}
+
+		void NativeCalls::file_close(StackFrame* frame, Heap* heap)
+		{
+			auto fh = get_file_handle(frame->pop());
+			fh->close();
+		}
+
+		void NativeCalls::file_read(StackFrame* frame, Heap* heap)
+		{
+			auto num_bytes = frame->pop().i();
+			auto arr = frame->pop();
+			auto fh = get_file_handle(frame->pop());
+			auto num_read = fh->read(arr, num_bytes, heap);
+			frame->push(Object(num_read));
+		}
+
+		void NativeCalls::file_write(StackFrame* frame, Heap* heap)
+		{
+		}
+
 		std::wstring NativeCalls::read_string(Object& object, Heap* heap)
 		{
 			if (is_string(object))
@@ -265,6 +296,19 @@ namespace elsa {
 			else
 			{
 				throw RuntimeException("NativeCalls::get_window_handle: Invalid window handle");
+			}
+		}
+
+		FileHandle* NativeCalls::get_file_handle(Object & object)
+		{
+			auto gco = object.gco();
+			if (gco != nullptr && gco->type == GCObjectType::RHandle && gco->resource_handle_->get_type() == ResourceHandleType::File)
+			{
+				return static_cast<FileHandle*>(gco->resource_handle_);
+			}
+			else
+			{
+				throw RuntimeException("NativeCalls::get_file_handle: Invalid file handle");
 			}
 		}
 	}

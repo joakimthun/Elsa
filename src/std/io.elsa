@@ -1,3 +1,17 @@
 
 native fn PrintLn(object v);
 native fn Print(object v);
+
+enum FileMode {
+	Read,			// open for reading
+	Write,			// open for writing
+	ReadWrite,		// open for reading and writing
+};
+
+// A handle to file
+struct FileHandle {};
+
+native fn OpenFile(String path, FileMode mode) : FileHandle;
+native fn CloseFile(FileHandle handle);
+native fn ReadFile(FileHandle handle, byte[] array, int num_byte) : int;
+//native fn WriteFile

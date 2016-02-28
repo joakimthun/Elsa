@@ -5,7 +5,8 @@ namespace elsa {
 
 		enum class ResourceHandleType 
 		{
-			Window
+			Window,
+			File
 		};
 
 		class ResourceHandle

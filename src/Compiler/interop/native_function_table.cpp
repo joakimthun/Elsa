@@ -25,6 +25,10 @@ namespace elsa {
 			add(L"KeyDown", new NativeFunctionInfo(L"KeyDown", 12));
 			add(L"FillCircle", new NativeFunctionInfo(L"FillCircle", 13));
 			add(L"RenderText", new NativeFunctionInfo(L"RenderText", 14));
+			add(L"OpenFile", new NativeFunctionInfo(L"OpenFile", 15));
+			add(L"CloseFile", new NativeFunctionInfo(L"CloseFile", 16));
+			add(L"ReadFile", new NativeFunctionInfo(L"ReadFile", 17));
+			add(L"WriteFile", new NativeFunctionInfo(L"WriteFile", 18));
 		}
 
 	}

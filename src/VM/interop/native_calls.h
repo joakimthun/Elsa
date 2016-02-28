@@ -16,6 +16,7 @@ namespace elsa {
 	namespace vm {
 
 		class Window;
+		class FileHandle;
 
 		class NativeCalls
 		{
@@ -44,10 +45,15 @@ namespace elsa {
 			static void get_ticks(StackFrame* frame, Heap* heap);
 			static void key_down(StackFrame* frame, Heap* heap);
 			static void render_text(StackFrame* frame, Heap* heap);
+			static void file_open(StackFrame* frame, Heap* heap);
+			static void file_close(StackFrame* frame, Heap* heap);
+			static void file_read(StackFrame* frame, Heap* heap);
+			static void file_write(StackFrame* frame, Heap* heap);
 
 			static std::wstring read_string(Object& object, Heap* heap);
 			static bool is_string(Object& object);
 			static Window* get_window_handle(Object& object);
+			static FileHandle* get_file_handle(Object& object);
 
 			std::vector<std::function<void(StackFrame*, Heap*)>> functions_;
 			Heap* heap_;
