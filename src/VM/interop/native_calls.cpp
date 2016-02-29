@@ -107,6 +107,8 @@ namespace elsa {
 					return o1.f() == o2.f();
 				case VMType::Char:
 					return o1.c() == o2.c();
+				case VMType::Byte:
+					return o1.b() == o2.b();
 				default:
 					throw RuntimeException("Equals failed, unknown type.");
 				}
