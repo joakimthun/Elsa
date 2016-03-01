@@ -1,5 +1,4 @@
-struct String
-{
+struct String {
 	char[] str;
 
 	fn CharAt(int i) : char {

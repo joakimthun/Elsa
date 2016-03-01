@@ -32,8 +32,7 @@ enum KeyCodes {
 	S = 83,
 };
 
-struct Window
-{
+struct Window {
 	WindowHandle handle;
 	int w;
 	int h;

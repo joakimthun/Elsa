@@ -1,5 +1,4 @@
-struct Rectangle
-{
+struct Rectangle {
 	int x;
 	int y;
 	int w;

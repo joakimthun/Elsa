@@ -1,89 +1,15 @@
 use "std/io";
 use "std/assert";
+use "std/rendering";
 
 fn main() {
-	var f = OpenFile("examples\bouncy\assets\red.bmp", FileMode::Read);
+	var bitmap = CreateBitmapFromBmp24("examples\bouncy\assets\red.bmp");
 	
-	var header = new byte[];
-
-	// Read the 54 byte header
-	var read = ReadFile(f, header, 54);
-	
-	// Assert we have a bmp file
-	AssertEq(byte(0x42), header[0]);
-	AssertEq(byte(0x4D), header[1]);
-
-	// The size of the file in bytes
-	var size = ToInt32(new [ header[2], header[3], header[4], header[5] ]);
-	PrintLn("The size of the file in bytes:");
-	PrintLn(size);
-
-	AssertEq(byte(0), header[6]); // Unused - must be zero
-	AssertEq(byte(0), header[7]); // Unused - must be zero
-	AssertEq(byte(0), header[8]); // Unused - must be zero
-	AssertEq(byte(0), header[9]); // Unused - must be zero
-
-	// Offset to start of Pixel Data
-	var offset = ToInt32(new [ header[10], header[11], header[12], header[13] ]);
-	PrintLn("Offset to start of Pixel Data:");
-	PrintLn(offset);
-
-	// Header Size - Must be at least 40
-	var headerSize = ToInt32(new [ header[14], header[15], header[16], header[17] ]);
-	PrintLn("Header Size - Must be at least 40:");
-	PrintLn(headerSize);
-
-	// Image width in pixels
-	var width = ToInt32(new [ header[18], header[19], header[20], header[21] ]);
-	PrintLn("Image width in pixels:");
-	PrintLn(width);
-
-	// Image height in pixels
-	var height = ToInt32(new [ header[22], header[23], header[24], header[25] ]);
-	PrintLn("Image height in pixels:");
-	PrintLn(height);
-
-	// Skipping biPlanes -> index 26, 27
-
-	// Bits per pixel - 1, 4, 8, 16, 24, or 32
-	var bitCount = ToInt32(new [ header[28], header[29], byte(0), byte(0) ]);
-	PrintLn("Bits per pixel - 1, 4, 8, 16, 24, or 32:");
-	PrintLn(bitCount);
-
-	// Compression type (0 = uncompressed)
-	var compression = ToInt32(new [ header[30], header[31], header[32], header[33] ]);
-	PrintLn("Compression type (0 = uncompressed):");
-	PrintLn(compression);
-
-	// Skipping the rest of the header for now
-
-	var imageDataSize = size - 54;
-	var imageData = new byte[imageDataSize];
-	var dataRead = ReadFile(f, imageData, imageDataSize);
-
-	CloseFile(f);
-
-	PrintLn("imageDataSize:");
-	PrintLn(imageDataSize);
-	AssertEq(imageDataSize, dataRead);
-
-	PrintLn("");
 	PrintLn("Pixel 1:");
 	PrintLn("Red: ");
-	PrintLn(imageData[2]);
+	PrintLn(bitmap.data[0]);
 	PrintLn("Green: ");
-	PrintLn(imageData[1]);
+	PrintLn(bitmap.data[1]);
 	PrintLn("Blue: ");
-	PrintLn(imageData[0]);
-
-	PrintLn("");
-	PrintLn("Pixel 2:");
-	PrintLn("Red: ");
-	PrintLn(imageData[5]);
-	PrintLn("Green: ");
-	PrintLn(imageData[4]);
-	PrintLn("Blue: ");
-	PrintLn(imageData[3]);
-
-	PrintLn("...");
+	PrintLn(bitmap.data[2]);
 }

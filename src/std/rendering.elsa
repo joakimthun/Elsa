@@ -1,0 +1,76 @@
+use "std/io";
+use "std/assert";
+
+struct Color {
+	byte R;
+	byte G;
+	byte B;
+};
+
+struct Bitmap
+{
+	byte[] data;
+	int width;
+	int height;
+};
+
+fn CreateBitmapFromBmp24(String path) : Bitmap {
+	var f = OpenFile(path, FileMode::Read);
+	
+	var header = new byte[];
+
+	// Read the 54 byte header
+	var read = ReadFile(f, header, 54);
+	
+	// Assert we have a bmp file
+	AssertEq(byte(0x42), header[0]);
+	AssertEq(byte(0x4D), header[1]);
+
+	// The size of the file in bytes
+	var size = ToInt32(new [ header[2], header[3], header[4], header[5] ]);
+
+	AssertEq(byte(0), header[6]); // Unused - must be zero
+	AssertEq(byte(0), header[7]); // Unused - must be zero
+	AssertEq(byte(0), header[8]); // Unused - must be zero
+	AssertEq(byte(0), header[9]); // Unused - must be zero
+
+	// Header Size - Must be at least 40
+	var headerSize = ToInt32(new [ header[14], header[15], header[16], header[17] ]);
+
+	// Image width in pixels
+	var width = ToInt32(new [ header[18], header[19], header[20], header[21] ]);
+
+	// Image height in pixels
+	var height = ToInt32(new [ header[22], header[23], header[24], header[25] ]);
+
+	// Skipping biPlanes -> index 26, 27
+
+	// Bits per pixel - 1, 4, 8, 16, 24, or 32
+	var bitCount = ToInt32(new [ header[28], header[29], byte(0), byte(0) ]);
+	AssertEq(24, bitCount);
+
+	// Compression type (0 = uncompressed)
+	var compression = ToInt32(new [ header[30], header[31], header[32], header[33] ]);
+	AssertEq(0, compression);
+
+	// Skipping the rest of the header for now
+
+	var imageDataSize = size - 54;
+	var imageData = new byte[imageDataSize];
+	var dataRead = ReadFile(f, imageData, imageDataSize);
+
+	CloseFile(f);
+
+	// Bmps store the data as bgr so we need to reverse the pixel order
+	for(var i = 0; i < imageDataSize; i = i + 3) {
+		var r = imageData[i + 2];
+		var g = imageData[i + 1];
+		var b = imageData[i];
+
+		imageData[i] = r;
+		imageData[i + 1] = g;
+		imageData[i + 2] = b;
+	}
+
+	return new Bitmap { data: imageData, width: width, height: height };
+}
