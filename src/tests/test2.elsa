@@ -5,6 +5,9 @@ use "std/rendering";
 fn main() {
 	var bitmap = CreateBitmapFromBmp24("examples\bouncy\assets\red.bmp");
 	
+	PrintLn("Data length:");
+	PrintLn(bitmap.data.Length());
+
 	PrintLn("Pixel 1:");
 	PrintLn("Red: ");
 	PrintLn(bitmap.data[0]);
@@ -12,4 +15,40 @@ fn main() {
 	PrintLn(bitmap.data[1]);
 	PrintLn("Blue: ");
 	PrintLn(bitmap.data[2]);
+
+	PrintLn("Pixel 3:");
+	PrintLn("Red: ");
+	PrintLn(bitmap.data[6]);
+	PrintLn("Green: ");
+	PrintLn(bitmap.data[7]);
+	PrintLn("Blue: ");
+	PrintLn(bitmap.data[8]);
+
+	PrintLn("Get pixel 1, 1:");
+	var p = bitmap.GetPixel(1, 1);
+	PrintLn("Red: ");
+	PrintLn(p.R);
+	PrintLn("Green: ");
+	PrintLn(p.G);
+	PrintLn("Blue: ");
+	PrintLn(p.B);
+
+	PrintLn("Get pixel width, height:");
+	var p2 = bitmap.GetPixel(bitmap.width, bitmap.height);
+	PrintLn("Red: ");
+	PrintLn(p2.R);
+	PrintLn("Green: ");
+	PrintLn(p2.G);
+	PrintLn("Blue: ");
+	PrintLn(p2.B);
+
+	PrintLn("Get pixel 100, 100:");
+	var p3 = bitmap.GetPixel(100, 100);
+	PrintLn("Red: ");
+	PrintLn(p3.R);
+	PrintLn("Green: ");
+	PrintLn(p3.G);
+	PrintLn("Blue: ");
+	PrintLn(p3.B);
+
 }

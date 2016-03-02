@@ -12,6 +12,12 @@ struct Bitmap
 	byte[] data;
 	int width;
 	int height;
+
+	fn GetPixel(int x, int y) : Color {
+		var stride = 3;
+		var base = stride * x * width + y * stride;
+		return new Color { R: data[base], G: data[base + 1], B: data[base + 2] };
+	}
 };
 
 fn CreateBitmapFromBmp24(String path) : Bitmap {
