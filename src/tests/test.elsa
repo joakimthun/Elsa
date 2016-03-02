@@ -14,6 +14,7 @@ use "tests/enum_test";
 use "tests/literals_test";
 use "tests/binary_operators_test";
 use "tests/type_conversion_test";
+use "tests/bitmap_test";
 
 struct Vec2D {
 	int x;
@@ -419,6 +420,9 @@ fn main() : int {
 
 	// Type conversions
 	ToInt32Test();
+
+	// Bitmap
+	LoadRedBmpTest();
 
 	return 0;
 }

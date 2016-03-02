@@ -34,6 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9BEA47F1
 	ProjectSection(SolutionItems) = preProject
 		tests\array_test.elsa = tests\array_test.elsa
 		tests\binary_operators_test.elsa = tests\binary_operators_test.elsa
+		tests\bitmap_test.elsa = tests\bitmap_test.elsa
 		tests\closure_test.elsa = tests\closure_test.elsa
 		tests\conditionals_test.elsa = tests\conditionals_test.elsa
 		tests\enum_test.elsa = tests\enum_test.elsa
@@ -55,6 +56,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bouncy", "bouncy", "{CF11D6
 		examples\bouncy\brick.elsa = examples\bouncy\brick.elsa
 		examples\bouncy\main.elsa = examples\bouncy\main.elsa
 		examples\bouncy\paddle.elsa = examples\bouncy\paddle.elsa
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test_files", "test_files", "{522EE837-CA30-4D17-AC66-FE98D8CC222A}"
+	ProjectSection(SolutionItems) = preProject
+		tests\test_files\red.bmp = tests\test_files\red.bmp
 	EndProjectSection
 EndProject
 Global
@@ -157,5 +163,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CF11D6EE-3341-4A89-A849-B68EEE6826AB} = {75B882E4-5D77-4D5A-A71E-D0DD6D0C0716}
+		{522EE837-CA30-4D17-AC66-FE98D8CC222A} = {9BEA47F1-40E2-4E41-9C7F-7D4901EBC4C2}
 	EndGlobalSection
 EndGlobal

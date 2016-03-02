@@ -1,0 +1,31 @@
+use "std/assert";
+use "std/rendering";
+
+fn AssertRedPixel(Color c) {
+	AssertEq(byte(255), c.R);
+	AssertEq(byte(0), c.G);
+	AssertEq(byte(0), c.B);
+}
+
+fn LoadRedBmpTest() {
+	var bitmap = CreateBitmapFromBmp24("tests\test_files\red.bmp");
+	
+	AssertEq(76800, bitmap.data.Length());
+	AssertEq(159, bitmap.width);
+	AssertEq(160, bitmap.height);
+
+	var p00 = bitmap.GetPixel(0, 0);
+	AssertRedPixel(p00);
+
+	var p11 = bitmap.GetPixel(1, 1);
+	AssertRedPixel(p11);
+
+	var pwh = bitmap.GetPixel(bitmap.width, bitmap.height);
+	AssertRedPixel(pwh);
+
+	var p100100 = bitmap.GetPixel(100, 100);
+	AssertRedPixel(p100100);
+
+	var p5050 = bitmap.GetPixel(50, 50);
+	AssertRedPixel(p5050);
+}
