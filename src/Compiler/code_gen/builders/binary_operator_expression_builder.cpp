@@ -36,6 +36,9 @@ namespace elsa {
 				case TokenType::Slash:
 					program->emit(OpCode::idiv);
 					return;
+				case TokenType::Percent:
+					program->emit(OpCode::imod);
+					return;
 				case TokenType::VerticalBar:
 					program->emit(OpCode::ior);
 					return;
@@ -65,6 +68,9 @@ namespace elsa {
 					return;
 				case TokenType::Slash:
 					program->emit(OpCode::bdiv);
+					return;
+				case TokenType::Percent:
+					program->emit(OpCode::bmod);
 					return;
 				case TokenType::VerticalBar:
 					program->emit(OpCode::bor);

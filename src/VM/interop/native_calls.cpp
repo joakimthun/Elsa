@@ -44,6 +44,7 @@ namespace elsa {
 			functions_.push_back(file_close);
 			functions_.push_back(file_read);
 			functions_.push_back(file_write);
+			functions_.push_back(window_blt);
 		}
 
 		void NativeCalls::print(StackFrame* frame, Heap* heap)
@@ -242,6 +243,21 @@ namespace elsa {
 			auto x = frame->pop().i();
 			auto w = get_window_handle(frame->pop());
 			w->render_text(x, y, str);
+		}
+
+		void NativeCalls::window_blt(StackFrame* frame, Heap* heap)
+		{
+			auto src_buffer = frame->pop();
+			auto height = frame->pop().i();
+			auto width = frame->pop().i();
+			auto y = frame->pop().i();
+			auto x = frame->pop().i();
+			auto w = get_window_handle(frame->pop());
+
+			if (src_buffer.gco() == nullptr || src_buffer.gco()->type != GCObjectType::Array || src_buffer.gco()->ai->type != VMType::Byte)
+				throw RuntimeException("NativeCalls::window_blt invalid source buffer");
+
+			w->blt(x, y, width, height, static_cast<uint8_t*>(src_buffer.gco()->ptr));
 		}
 
 		void NativeCalls::file_open(StackFrame* frame, Heap* heap)

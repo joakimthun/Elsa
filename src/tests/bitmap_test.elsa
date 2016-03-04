@@ -10,7 +10,8 @@ fn AssertRedPixel(Color c) {
 fn LoadRedBmpTest() {
 	var bitmap = CreateBitmapFromBmp24("tests\test_files\red.bmp");
 	
-	AssertEq(76800, bitmap.data.Length());
+	// 76 800 bytes in the bitmap + 25 600 for the added a pixels
+	AssertEq(102400, bitmap.data.Length());
 	AssertEq(159, bitmap.width);
 	AssertEq(160, bitmap.height);
 

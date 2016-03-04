@@ -29,6 +29,7 @@ namespace elsa {
 			add(L"CloseFile", new NativeFunctionInfo(L"CloseFile", 16));
 			add(L"ReadFile", new NativeFunctionInfo(L"ReadFile", 17));
 			add(L"WriteFile", new NativeFunctionInfo(L"WriteFile", 18));
+			add(L"WindowBlt", new NativeFunctionInfo(L"WindowBlt", 19));
 		}
 
 	}

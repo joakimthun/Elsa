@@ -5,6 +5,7 @@ struct Color {
 	byte R;
 	byte G;
 	byte B;
+	byte A;
 };
 
 struct Bitmap
@@ -14,9 +15,9 @@ struct Bitmap
 	int height;
 
 	fn GetPixel(int x, int y) : Color {
-		var stride = 3;
+		var stride = 4;
 		var base = stride * x * width + y * stride;
-		return new Color { R: data[base], G: data[base + 1], B: data[base + 2] };
+		return new Color { R: data[base], G: data[base + 1], B: data[base + 2], A: data[base + 3] };
 	}
 };
 
@@ -67,16 +68,19 @@ fn CreateBitmapFromBmp24(String path) : Bitmap {
 
 	CloseFile(f);
 
+	var bitMapData = new byte[imageDataSize + imageDataSize / 3];
+
 	// Bmps store the data as bgr so we need to reverse the pixel order
 	for(var i = 0; i < imageDataSize; i = i + 3) {
 		var r = imageData[i + 2];
 		var g = imageData[i + 1];
 		var b = imageData[i];
 
-		imageData[i] = r;
-		imageData[i + 1] = g;
-		imageData[i + 2] = b;
+		bitMapData.Push(r);
+		bitMapData.Push(g);
+		bitMapData.Push(b);
+		bitMapData.Push(byte(255));
 	}
 
-	return new Bitmap { data: imageData, width: width, height: height };
+	return new Bitmap { data: bitMapData, width: width, height: height };
 }

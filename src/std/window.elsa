@@ -1,3 +1,5 @@
+use "std/rendering";
+
 // A handle to a win32 window
 struct WindowHandle {};
 
@@ -25,6 +27,8 @@ native fn KeyDown(WindowHandle w, int keycode) : bool;
 // Renders the specified text to the specified window
 native fn RenderText(WindowHandle w, int x, int y, String text);
 
+native fn WindowBlt(WindowHandle w, int x, int y, int width, int height, byte[] src);
+
 enum KeyCodes {
 	A = 65,
 	D = 68,
@@ -44,6 +48,10 @@ struct Window {
 
 	fn Update() {
 		UpdateWindowHandle(handle);
+	}
+
+	fn Blt(int x, int y, Bitmap bitmap) {
+		WindowBlt(handle, x, y, bitmap.width, bitmap.height, bitmap.data);
 	}
 
 	fn FillRect(int x, int y, int width, int height, int r, int g, int b) {

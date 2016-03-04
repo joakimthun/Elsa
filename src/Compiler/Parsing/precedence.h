@@ -14,7 +14,7 @@ namespace elsa {
 			Relational = 7,			// <, >, <=, >=
 			Shift = 8,				// <<, >>
 			Sum = 9,				// + , -
-			Product = 10,			// * , /
+			Product = 10,			// * , /, %
 			Unary = 11,				// ++/--
 		};
 

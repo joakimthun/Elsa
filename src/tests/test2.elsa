@@ -1,7 +1,44 @@
 use "std/io";
 use "std/assert";
 use "std/rendering";
+use "std/window";
 
 fn main() {
-	var bitmap = CreateBitmapFromBmp24("examples\bouncy\assets\red.bmp");
+	var bitmap = CreateBitmapFromBmp24("tests\test_files\green10x10.bmp");
+	var w = CreateWindow("Bouncy", 800, 600);
+	w.Open();
+
+	PrintLn(bitmap.width);
+	PrintLn(bitmap.height);
+
+	PrintLn("");
+	var p1 = bitmap.GetPixel(0, 0);
+	PrintLn(p1.R);
+	PrintLn(p1.G);
+	PrintLn(p1.B);
+	PrintLn(p1.A);
+
+	PrintLn("");
+
+	var p2 = bitmap.GetPixel(5, 7);
+	PrintLn(p2.R);
+	PrintLn(p2.G);
+	PrintLn(p2.B);
+	PrintLn(p2.A);
+
+	PrintLn("");
+
+	var p3 = bitmap.GetPixel(bitmap.width, bitmap.height);
+	PrintLn(p3.R);
+	PrintLn(p3.G);
+	PrintLn(p3.B);
+	PrintLn(p3.A);
+
+	while(true) {
+		w.Clear();
+		
+		w.Blt(0, 0, bitmap);
+		
+		w.Update();
+	}
 }

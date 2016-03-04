@@ -182,6 +182,12 @@ namespace elsa {
 				current_frame_->push(Object(o1.i() < o2.i()));
 				break;
 			}
+			case imod: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(o2.i() % o1.i()));
+				break;
+			}
 			case bconst: {
 				auto v = get_instruction(pc_++);
 				current_frame_->push(Object(static_cast<uint8_t>(v)));
@@ -233,6 +239,12 @@ namespace elsa {
 				auto o1 = current_frame_->pop();
 				auto o2 = current_frame_->pop();
 				current_frame_->push(Object(o1.b() < o2.b()));
+				break;
+			}
+			case bmod: {
+				auto o1 = current_frame_->pop();
+				auto o2 = current_frame_->pop();
+				current_frame_->push(Object(static_cast<uint8_t>(o2.b() % o1.b())));
 				break;
 			}
 			case fconst: { 

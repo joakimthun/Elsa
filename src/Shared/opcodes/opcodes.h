@@ -29,6 +29,7 @@ namespace elsa {
 			ineq,
 			ilt,
 			igt,
+			imod,
 
 			// Byte operations
 			bconst,
@@ -40,6 +41,7 @@ namespace elsa {
 			bneq,
 			blt,
 			bgt,
+			bmod,
 
 			// Float operations
 			fconst,

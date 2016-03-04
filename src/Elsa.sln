@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "std", "std", "{05674512-81E
 	ProjectSection(SolutionItems) = preProject
 		std\assert.elsa = std\assert.elsa
 		std\io.elsa = std\io.elsa
+		std\math.elsa = std\math.elsa
 		std\rectangle.elsa = std\rectangle.elsa
 		std\rendering.elsa = std\rendering.elsa
 		std\string.elsa = std\string.elsa
