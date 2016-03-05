@@ -62,7 +62,8 @@ fn CreateBitmapFromBmp24(String path) : Bitmap {
 
 	// Skipping the rest of the header for now
 
-	var bitMapData = new byte[(width * height) * 4];
+	var bytesPerPixel = 4;
+	var bitMapData = new byte[(width * height) * bytesPerPixel];
 
 	// Credit: http://stackoverflow.com/questions/9296059/read-pixel-value-in-bmp-file
 	int rowPadded = (width * 3 + 3) & -4;
@@ -71,7 +72,7 @@ fn CreateBitmapFromBmp24(String path) : Bitmap {
     {
 		var row = new byte[rowPadded];
         ReadFile(f, row, rowPadded);
-        for(int j = 0; j < rowSize; j = j +3)
+        for(int j = 0; j < rowSize; j = j + 3)
         {
 			var r = row[j + 2];
 			var	g = row[j + 1];
@@ -87,5 +88,26 @@ fn CreateBitmapFromBmp24(String path) : Bitmap {
 
 	CloseFile(f);
 
-	return new Bitmap { data: bitMapData, width: width, height: height };
+	// Bmps are stored in reverse order(bottom up) so we need to reverse the buffer data
+    var reversed = new byte[(width * height) * bytesPerPixel];
+	rowSize = width * bytesPerPixel;
+    for (var row = height - 1; row >= 0; row = row - 1)
+    {
+        var rowStart = rowSize * row;
+        for (var column = 0; column < rowSize; column = column + bytesPerPixel)
+        {
+            var base = rowStart + column;
+			var r = bitMapData[base];
+			var g = bitMapData[base + 1];
+			var b = bitMapData[base + 2];
+			var a = bitMapData[base + 3];
+
+            reversed.Push(r);
+            reversed.Push(g);
+            reversed.Push(b);
+			reversed.Push(a);
+        }
+    }
+
+	return new Bitmap { data: reversed, width: width, height: height };
 }
