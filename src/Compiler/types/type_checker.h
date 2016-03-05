@@ -31,6 +31,7 @@
 #include "../ast/struct_initializer_list_expression.h"
 #include "../ast/grouped_expression.h"
 #include "../ast/enum_value_expression.h"
+#include "../ast/postfix_operator_expression.h"
 #include "elsa_type.h"
 #include "../token.h"
 #include "../exceptions\parsing_exception.h"

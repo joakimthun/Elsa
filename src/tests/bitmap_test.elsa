@@ -5,13 +5,19 @@ fn AssertRedPixel(Color c) {
 	AssertEq(byte(255), c.R);
 	AssertEq(byte(0), c.G);
 	AssertEq(byte(0), c.B);
+	AssertEq(byte(255), c.A);
+}
+
+fn AssertGreenPixel(Color c) {
+	AssertEq(byte(0), c.R);
+	AssertEq(byte(255), c.G);
+	AssertEq(byte(0), c.B);
+	AssertEq(byte(255), c.A);
 }
 
 fn LoadRedBmpTest() {
 	var bitmap = CreateBitmapFromBmp24("tests\test_files\red.bmp");
 	
-	// 76 800 bytes in the bitmap + 25 600 for the added a pixels
-	AssertEq(102400, bitmap.data.Length());
 	AssertEq(159, bitmap.width);
 	AssertEq(160, bitmap.height);
 
@@ -21,7 +27,7 @@ fn LoadRedBmpTest() {
 	var p11 = bitmap.GetPixel(1, 1);
 	AssertRedPixel(p11);
 
-	var pwh = bitmap.GetPixel(bitmap.width, bitmap.height);
+	var pwh = bitmap.GetPixel(bitmap.width - 1, bitmap.height - 1);
 	AssertRedPixel(pwh);
 
 	var p100100 = bitmap.GetPixel(100, 100);
@@ -29,4 +35,26 @@ fn LoadRedBmpTest() {
 
 	var p5050 = bitmap.GetPixel(50, 50);
 	AssertRedPixel(p5050);
+}
+
+fn LoadGreenBmpTest() {
+	var bitmap = CreateBitmapFromBmp24("tests\test_files\green10x10.bmp");
+	
+	AssertEq(10, bitmap.width);
+	AssertEq(10, bitmap.height);
+
+	var p00 = bitmap.GetPixel(0, 0);
+	AssertGreenPixel(p00);
+
+	var p11 = bitmap.GetPixel(1, 1);
+	AssertGreenPixel(p11);
+
+	var pwh = bitmap.GetPixel(bitmap.width - 1, bitmap.height - 1);
+	AssertGreenPixel(pwh);
+
+	var p100100 = bitmap.GetPixel(7, 7);
+	AssertGreenPixel(p100100);
+
+	var p5050 = bitmap.GetPixel(5, 5);
+	AssertGreenPixel(p5050);
 }

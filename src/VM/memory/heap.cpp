@@ -303,8 +303,8 @@ namespace elsa {
 
 		void Heap::assert_array_index_in_range(const Object& instance, int element_index)
 		{
-			//if (element_index < 0 || element_index >= instance.gco()->ai->next_index)
-			//	throw RuntimeException("Array index out of bounds");
+			if (element_index < 0 || element_index >= instance.gco()->ai->next_index)
+				throw RuntimeException("Array index out of bounds");
 		}
 
 		byte* Heap::get_field_ptr(void* s_ptr, FieldInfo* f)

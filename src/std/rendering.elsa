@@ -62,25 +62,30 @@ fn CreateBitmapFromBmp24(String path) : Bitmap {
 
 	// Skipping the rest of the header for now
 
-	var imageDataSize = size - 54;
-	var imageData = new byte[imageDataSize];
-	var dataRead = ReadFile(f, imageData, imageDataSize);
+	var bitMapData = new byte[(width * height) * 4];
+
+	// Credit: http://stackoverflow.com/questions/9296059/read-pixel-value-in-bmp-file
+	int rowPadded = (width * 3 + 3) & -4;
+	var rowSize = width * 3;
+	for(int i = 0; i < height; i++)
+    {
+		var row = new byte[rowPadded];
+        ReadFile(f, row, rowPadded);
+        for(int j = 0; j < rowSize; j = j +3)
+        {
+			var r = row[j + 2];
+			var	g = row[j + 1];
+			var	b = row[j];
+
+            // Bmps store the data as bgr so we need to reverse the pixel order
+            bitMapData.Push(r);
+			bitMapData.Push(g);
+			bitMapData.Push(b);
+			bitMapData.Push(byte(255));
+        }
+    }
 
 	CloseFile(f);
-
-	var bitMapData = new byte[imageDataSize + imageDataSize / 3];
-
-	// Bmps store the data as bgr so we need to reverse the pixel order
-	for(var i = 0; i < imageDataSize; i = i + 3) {
-		var r = imageData[i + 2];
-		var g = imageData[i + 1];
-		var b = imageData[i];
-
-		bitMapData.Push(r);
-		bitMapData.Push(g);
-		bitMapData.Push(b);
-		bitMapData.Push(byte(255));
-	}
 
 	return new Bitmap { data: bitMapData, width: width, height: height };
 }

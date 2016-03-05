@@ -20,6 +20,7 @@ namespace elsa {
 			if (auto ie = dynamic_cast<IdentifierExpression*>(expression->get_expression()))
 			{
 				auto local_index = LoadHelper::load_local(program, visitor, ie);
+				LoadHelper::load_local(program, visitor, ie);
 				build_operator(expression->get_operator(), program, expression);
 				program->emit(OpCode::s_local);
 				program->emit(static_cast<int>(local_index));

@@ -223,8 +223,13 @@ namespace elsa {
 				auto eve = static_cast<EnumValueExpression*>(expression);
 				return new ElsaType(eve->get_type());
 			}
+			if (is_of_type<PostfixOperatorExpression>(expression))
+			{
+				auto poe = static_cast<PostfixOperatorExpression*>(expression);
+				return new ElsaType(poe->get_type());
+			}
 
-			throw ParsingException(L"Unkown expression type.", parser_->current_token());
+			throw ParsingException(L"TypeChecker::get_expression_type -> Unkown expression type.", parser_->current_token());
 		}
 
 		ElsaType* TypeChecker::get_type_from_token(Token* token)
