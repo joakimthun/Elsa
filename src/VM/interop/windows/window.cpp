@@ -4,21 +4,13 @@ namespace elsa {
 	namespace vm {
 
 		// Refactor this if support for multiple windows is added
-		static HDC mem_hdc;
-		static HBITMAP bitmap;
 		static std::unordered_map<WPARAM, bool> key_states;
 		static uint8_t* back_buffer;
 		static int back_buffer_width;
 		static int back_buffer_height;
-		const static int bytes_per_pixel = 4; // RGB
+		const static int bytes_per_pixel = 4;
 
-		typedef struct dibinfo_s
-		{
-			BITMAPINFOHEADER bmi_header;
-			RGBQUAD          acolors[256];
-		} dibinfo_t;
-
-		dibinfo_t bitmap_info = { 0 };
+		BITMAPINFOHEADER bitmap_info = { 0 };
 
 		Window::Window(const std::wstring& title, int width, int height)
 		{
@@ -80,25 +72,17 @@ namespace elsa {
 				throw RuntimeException("Could not create window, call to CreateWindow failed");
 			}
 
-			HDC hdc = GetDC(hwnd_);
-			mem_hdc = CreateCompatibleDC(hdc);
-			bitmap = CreateCompatibleBitmap(hdc, width, height);
-
-			SelectObject(mem_hdc, bitmap);
-
-			DeleteObject(hdc);
-
 			back_buffer_width = width;
 			back_buffer_height = height;
 
 			back_buffer = (uint8_t*)malloc(back_buffer_width * back_buffer_height * bytes_per_pixel);
 
-			bitmap_info.bmi_header.biSize = sizeof(bitmap_info.bmi_header);
-			bitmap_info.bmi_header.biWidth = back_buffer_width;
-			bitmap_info.bmi_header.biHeight = -back_buffer_height;
-			bitmap_info.bmi_header.biPlanes = 1;
-			bitmap_info.bmi_header.biBitCount = 8 * bytes_per_pixel;
-			bitmap_info.bmi_header.biCompression = BI_RGB;
+			bitmap_info.biSize = sizeof(bitmap_info);
+			bitmap_info.biWidth = back_buffer_width;
+			bitmap_info.biHeight = -back_buffer_height; // negative sign == render top-down
+			bitmap_info.biPlanes = 1;
+			bitmap_info.biBitCount = 8 * bytes_per_pixel;
+			bitmap_info.biCompression = BI_RGB;
 		}
 
 		Window::~Window() 
@@ -111,39 +95,19 @@ namespace elsa {
 			switch (message)
 			{
 			case WM_PAINT: {
-				//PAINTSTRUCT ps;
-				//HDC hdc = BeginPaint(hWnd, &ps);
-				//auto width = ps.rcPaint.right;
-				//auto height = ps.rcPaint.bottom;
-				//BitBlt(hdc, 0, 0, width, height, mem_hdc, 0, 0, SRCCOPY);
-				
-
-				//int *MemoryWalker = (int*)back_buffer;
-				//for (int height = 0; height < back_buffer_height; height++)
-				//{
-				//	for (int width = 0; width < back_buffer_width; width++)
-				//	{
-				//		unsigned char Red = rand() % 256;
-				//		unsigned char Green = rand() % 256;
-				//		unsigned char Blue = rand() % 256;
-				//
-				//		*MemoryWalker++ = ((Red << 16) | (Green << 8) | Blue);
-				//	}
-				//}
-
 				HDC dc = GetDC(hWnd);
+
 				StretchDIBits(dc,
 					0, 0, back_buffer_width, back_buffer_height,
 					0, 0, back_buffer_width, back_buffer_height,
 					back_buffer, (BITMAPINFO*)&bitmap_info,
 					DIB_RGB_COLORS, SRCCOPY);
+
 				ReleaseDC(hWnd, dc);
 
 				break;
 			}
 			case WM_DESTROY:
-				DeleteObject(mem_hdc);
-				DeleteObject(bitmap);
 				//free(back_buffer);
 				PostQuitMessage(0);
 				break;
@@ -179,30 +143,30 @@ namespace elsa {
 
 		void Window::fill_rect(int x, int y, int width, int height, int r, int g, int b)
 		{
-			auto brush = CreateSolidBrush(RGB(r, b, b));
-			RECT rect;
-			rect.left = x;
-			rect.right = x + width;
-			rect.top = y;
-			rect.bottom = y + height;
-			FillRect(mem_hdc, &rect, brush);
-			DeleteObject(brush);
+			//auto brush = CreateSolidBrush(RGB(r, b, b));
+			//RECT rect;
+			//rect.left = x;
+			//rect.right = x + width;
+			//rect.top = y;
+			//rect.bottom = y + height;
+			//FillRect(mem_hdc, &rect, brush);
+			//DeleteObject(brush);
 		}
 
 		void Window::fill_circle(int x, int y, int diameter, int r, int g, int b)
 		{
-			auto brush = CreateSolidBrush(RGB(r, b, b));
-			SelectObject(mem_hdc, brush);
-
-			RECT rect;
-			rect.left = x;
-			rect.right = x + diameter;
-			rect.top = y;
-			rect.bottom = y + diameter;
-
-			Ellipse(mem_hdc, rect.left, rect.top, rect.right, rect.bottom);
-
-			DeleteObject(brush);
+			//auto brush = CreateSolidBrush(RGB(r, b, b));
+			//SelectObject(mem_hdc, brush);
+			//
+			//RECT rect;
+			//rect.left = x;
+			//rect.right = x + diameter;
+			//rect.top = y;
+			//rect.bottom = y + diameter;
+			//
+			//Ellipse(mem_hdc, rect.left, rect.top, rect.right, rect.bottom);
+			//
+			//DeleteObject(brush);
 		}
 
 		bool Window::key_down(WPARAM keycode)
@@ -218,31 +182,38 @@ namespace elsa {
 
 		void Window::render_text(int x, int y, const std::wstring& str)
 		{
-			TextOut(mem_hdc, x, y, str.c_str(), static_cast<int>(str.size()));
+			//TextOut(mem_hdc, x, y, str.c_str(), static_cast<int>(str.size()));
 		}
 
 		void Window::blt(int x, int y, int width, int height, uint8_t* src)
 		{
-			uint8_t* dest = static_cast<uint8_t*>(back_buffer);
-			uint32_t* src_32 = (uint32_t*)src;
+			uint8_t* buffer = (uint8_t*)back_buffer;
+			buffer += (back_buffer_width * bytes_per_pixel * y) + (x * bytes_per_pixel);
 
-			dest += (width * bytes_per_pixel * y) + (x * bytes_per_pixel);
+			uint32_t* walker = (uint32_t*)buffer;
 
-			uint32_t* buffer_walker = (uint32_t*)dest;
-
-			for (int height_walker = 0; height_walker < height; height_walker++)
+			for (int h = 0; h < height; h++)
 			{
-				for (int width_walker = 0; width_walker < width; width_walker++)
+				for (int w = 0; w < width; w++)
 				{
-					*buffer_walker = *src_32;
-					buffer_walker++;
+					uint8_t red = *src;
 					src++;
+					uint8_t green = *src;
+					src++;
+					uint8_t blue = *src;
+					src++;
+
+					// Skip the A value
+					src++;
+
+					*walker = ((red << 16) | (green << 8) | blue);
+
+					walker++;
 				}
-
-				dest += width * bytes_per_pixel;
-				buffer_walker = (uint32_t*)dest;
+				
+				buffer += back_buffer_width * bytes_per_pixel;
+				walker = (uint32_t*)buffer;
 			}
-
 		}
 	}
 }

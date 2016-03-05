@@ -76,12 +76,12 @@ fn CreateBitmapFromBmp24(String path) : Bitmap {
 			var r = row[j + 2];
 			var	g = row[j + 1];
 			var	b = row[j];
-
+	
             // Bmps store the data as bgr so we need to reverse the pixel order
             bitMapData.Push(r);
 			bitMapData.Push(g);
 			bitMapData.Push(b);
-			bitMapData.Push(byte(255));
+			bitMapData.Push(byte(0));
         }
     }
 

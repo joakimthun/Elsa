@@ -37,6 +37,7 @@ namespace elsa {
 				auto old_ptr = ptr;
 				ptr = new_ptr;
 				ai.reset(new_ai);
+				free(old_ptr);
 			}
 
 			bool marked;
