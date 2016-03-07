@@ -17,11 +17,12 @@ namespace elsa {
 
 		class Window;
 		class FileHandle;
+		class VM;
 
 		class NativeCalls
 		{
 		public:
-			NativeCalls();
+			NativeCalls(VM* vm);
 			
 			void invoke(std::size_t index, StackFrame* frame, Heap* heap);
 

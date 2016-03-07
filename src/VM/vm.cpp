@@ -8,7 +8,9 @@ namespace elsa {
 			program_(program),
 			code_length_(0),
 			pc_(0),
-			oc_(nop)
+			oc_(nop),
+			run_message_loop_(false),
+			native_calls_(this)
 		{
 			code_length_ = program_.get_instructions().size();
 			gc_ = GC(&heap_);
@@ -30,8 +32,6 @@ namespace elsa {
 		{
 			try
 			{
-				//auto window = Window();
-
 				if (call_stack_.size() == 0)
 				{
 					push_main();
@@ -44,7 +44,8 @@ namespace elsa {
 
 				while ((cont || oc_ != halt) && pc_ < code_length_)
 				{
-					peek_message();
+					if(run_message_loop_)
+						peek_message();
 
 					cycle();
 					cont = false;
@@ -89,6 +90,11 @@ namespace elsa {
 		{
 			std::wcout << L"Stack trace:" << std::endl;
 			call_stack_.dump_stack_trace();
+		}
+
+		void VM::set_run_message_loop(bool run)
+		{
+			run_message_loop_ = run;
 		}
 
 		void VM::call_internal(int addr, bool skip_next, GCObject* scope)

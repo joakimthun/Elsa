@@ -36,6 +36,7 @@ namespace elsa {
 			std::size_t get_pc() const;
 			GCResult gc_collect();
 			void dump_stack_trace();
+			void set_run_message_loop(bool run);
 
 		private:
 			void call_internal(int addr, bool skip_next = true, GCObject* scope = nullptr);
@@ -56,6 +57,7 @@ namespace elsa {
 			Heap heap_;
 			GC gc_;
 			NativeCalls native_calls_;
+			bool run_message_loop_;
 		};
 
 	}

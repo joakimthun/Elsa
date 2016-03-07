@@ -4,17 +4,28 @@ use "std/rendering";
 use "std/window";
 
 fn main() {
-	//var bitmap = CreateBitmapFromBmp24("tests\test_files\green10x10.bmp");
-	var bitmap = CreateBitmapFromBmp24("tests\test_files\e.bmp");
-	var window = CreateWindow("Bouncy", 800, 600);
+	var start = GetTicks();
 
-	window.Open();
-
-	while(true) {
-		window.Clear();
-
-		window.Blt(400, 300, bitmap);
-
-		window.Update();
+	var z = 0;
+	for (var x = 0; x < 1000000; x++)
+	{
+	    z++;
 	}
+
+	PrintLn(z);
+	PrintLn(GetTicks() - start);
 }
+
+//var bitmap = CreateBitmapFromBmp24("tests\test_files\green10x10.bmp");
+//var bitmap = CreateBitmapFromBmp24("tests\test_files\e.bmp");
+//var window = CreateWindow("Bouncy", 800, 600);
+
+//window.Open();
+//
+//while(true) {
+//	window.Clear();
+//
+//	window.Blt(400, 300, bitmap);
+//
+//	window.Update();
+//}

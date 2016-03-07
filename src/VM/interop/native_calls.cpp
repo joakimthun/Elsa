@@ -2,20 +2,23 @@
 
 #include "windows/window.h"
 #include "file_handle.h"
+#include "../vm.h"
 
 namespace elsa {
 	namespace vm {
 
 		static LARGE_INTEGER frequency;
 		static LARGE_INTEGER start_time;
+		static VM* vm_instance;
 
-		NativeCalls::NativeCalls()
+		NativeCalls::NativeCalls(VM* vm)
 		{
 			initialize();
 			if (!QueryPerformanceFrequency(&frequency))
 				throw RuntimeException("NativeCalls::get_time: Call to QueryPerformanceFrequency failed");
 
 			QueryPerformanceCounter(&start_time);
+			vm_instance = vm;
 		}
 		
 		void NativeCalls::invoke(std::size_t index, StackFrame* frame, Heap* heap)
@@ -173,11 +176,12 @@ namespace elsa {
 		{
 			auto w = get_window_handle(frame->pop());
 			w->open();
+			vm_instance->set_run_message_loop(true);
 		}
 
 		void NativeCalls::close_window(StackFrame* frame, Heap* heap)
 		{
-
+			vm_instance->set_run_message_loop(false);
 		}
 
 		void NativeCalls::update_window(StackFrame* frame, Heap* heap)
