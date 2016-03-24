@@ -46,5 +46,7 @@ fn main() {
 		}
 
 		w.Update();
+
+		Sleep(5);
 	}
 }

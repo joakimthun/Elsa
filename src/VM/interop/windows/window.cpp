@@ -9,6 +9,8 @@ namespace elsa {
 		static int back_buffer_width;
 		static int back_buffer_height;
 		const static int bytes_per_pixel = 4;
+		static HDC mem_hdc;
+		static HBITMAP bitmap;
 
 		BITMAPINFOHEADER bitmap_info = { 0 };
 
@@ -72,6 +74,14 @@ namespace elsa {
 				throw RuntimeException("Could not create window, call to CreateWindow failed");
 			}
 
+			HDC hdc = GetDC(hwnd_);
+			mem_hdc = CreateCompatibleDC(hdc);
+			bitmap = CreateCompatibleBitmap(hdc, width, height);
+
+			SelectObject(mem_hdc, bitmap);
+
+			DeleteObject(hdc);
+
 			back_buffer_width = width;
 			back_buffer_height = height;
 
@@ -95,19 +105,29 @@ namespace elsa {
 			switch (message)
 			{
 			case WM_PAINT: {
-				HDC dc = GetDC(hWnd);
+				//HDC dc = GetDC(hWnd);
+				//
+				//StretchDIBits(dc,
+				//	0, 0, back_buffer_width, back_buffer_height,
+				//	0, 0, back_buffer_width, back_buffer_height,
+				//	back_buffer, (BITMAPINFO*)&bitmap_info,
+				//	DIB_RGB_COLORS, SRCCOPY);
+				//
+				//ReleaseDC(hWnd, dc);
 
-				StretchDIBits(dc,
-					0, 0, back_buffer_width, back_buffer_height,
-					0, 0, back_buffer_width, back_buffer_height,
-					back_buffer, (BITMAPINFO*)&bitmap_info,
-					DIB_RGB_COLORS, SRCCOPY);
-
-				ReleaseDC(hWnd, dc);
+				PAINTSTRUCT ps;
+				HDC hdc = BeginPaint(hWnd, &ps);
+				auto width = ps.rcPaint.right;
+				auto height = ps.rcPaint.bottom;
+				BitBlt(hdc, 0, 0, width, height, mem_hdc, 0, 0, SRCCOPY);
+				EndPaint(hWnd, &ps);
+				break;
 
 				break;
 			}
 			case WM_DESTROY:
+				DeleteObject(mem_hdc);
+				DeleteObject(bitmap);
 				//free(back_buffer);
 				PostQuitMessage(0);
 				break;
@@ -143,30 +163,30 @@ namespace elsa {
 
 		void Window::fill_rect(int x, int y, int width, int height, int r, int g, int b)
 		{
-			//auto brush = CreateSolidBrush(RGB(r, b, b));
-			//RECT rect;
-			//rect.left = x;
-			//rect.right = x + width;
-			//rect.top = y;
-			//rect.bottom = y + height;
-			//FillRect(mem_hdc, &rect, brush);
-			//DeleteObject(brush);
+			auto brush = CreateSolidBrush(RGB(r, b, b));
+			RECT rect;
+			rect.left = x;
+			rect.right = x + width;
+			rect.top = y;
+			rect.bottom = y + height;
+			FillRect(mem_hdc, &rect, brush);
+			DeleteObject(brush);
 		}
 
 		void Window::fill_circle(int x, int y, int diameter, int r, int g, int b)
 		{
-			//auto brush = CreateSolidBrush(RGB(r, b, b));
-			//SelectObject(mem_hdc, brush);
-			//
-			//RECT rect;
-			//rect.left = x;
-			//rect.right = x + diameter;
-			//rect.top = y;
-			//rect.bottom = y + diameter;
-			//
-			//Ellipse(mem_hdc, rect.left, rect.top, rect.right, rect.bottom);
-			//
-			//DeleteObject(brush);
+			auto brush = CreateSolidBrush(RGB(r, b, b));
+			SelectObject(mem_hdc, brush);
+			
+			RECT rect;
+			rect.left = x;
+			rect.right = x + diameter;
+			rect.top = y;
+			rect.bottom = y + diameter;
+			
+			Ellipse(mem_hdc, rect.left, rect.top, rect.right, rect.bottom);
+			
+			DeleteObject(brush);
 		}
 
 		bool Window::key_down(WPARAM keycode)
@@ -182,7 +202,7 @@ namespace elsa {
 
 		void Window::render_text(int x, int y, const std::wstring& str)
 		{
-			//TextOut(mem_hdc, x, y, str.c_str(), static_cast<int>(str.size()));
+			TextOut(mem_hdc, x, y, str.c_str(), static_cast<int>(str.size()));
 		}
 
 		void Window::blt(int x, int y, int width, int height, uint8_t* src)
