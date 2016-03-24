@@ -16,6 +16,8 @@ A statically typed language that runs on a custom stack based vm
   }
 ```
 
+When passing arguments to functions all built-in types are passed by value and structs and arrays are passed by reference(pointers)
+
 ######Closures
 ```
   // Functions in Elsa are treated as any other "object" and can be passed around and assigned to variables.
@@ -40,6 +42,7 @@ A statically typed language that runs on a custom stack based vm
   PrintLn(x); // Prints 13
 ```
 
+
 ######Variables and built-in types
 ```
   int i = 0;
@@ -62,6 +65,7 @@ A statically typed language that runs on a custom stack based vm
   // Array and struct instances will be null pointers if not instantiated with the new keyword (see the struct section)
 ```
 
+
 ######Type conversions
 ```
   var floatToInt = int(10.0);
@@ -70,6 +74,7 @@ A statically typed language that runs on a custom stack based vm
   var charToInt = int('!');
   var intToByte = byte(10);
 ```
+
 
 ######Operators and precedence
 ```
@@ -92,6 +97,7 @@ A statically typed language that runs on a custom stack based vm
   var r = (int(x1) << 8) | int(y1);   // 65535
 ```
 
+
 ######Arrays
 ```
   var arr = new int[10]; // An array of integers with an intial size of 10
@@ -106,6 +112,7 @@ A statically typed language that runs on a custom stack based vm
   arr[2];       // Access the element at index 2 in the array
 ```
 
+
 ######Branching
 ```
   if(x == 10) {
@@ -116,6 +123,7 @@ A statically typed language that runs on a custom stack based vm
      PrintLn("x == 10");
   }
 ``` 
+
 
 ######Loops
 ```
@@ -128,6 +136,7 @@ A statically typed language that runs on a custom stack based vm
      PrintLn("Loopy loop");
   }
 ``` 
+
 
 ######Structs
 ```
@@ -155,6 +164,7 @@ A statically typed language that runs on a custom stack based vm
   var red = new Color { R: 0xFF, G: o, B: o, A: 0xFF }; 
 ``` 
 
+
 ######Enums
 ```
   // Enums in Elsa are just integers converted by the compiler at compile time
@@ -165,6 +175,7 @@ A statically typed language that runs on a custom stack based vm
      Seven = 7  // 7
   };
 ``` 
+
 
 ######Example VM-program:
 ```
