@@ -3,7 +3,7 @@ A statically typed language that runs on a custom stack based vm
 
 #### Features:
 
-######Functions
+######Basic functions
 ```
   // A function that takes no arguments and returns void
   fn hello() {
@@ -14,6 +14,29 @@ A statically typed language that runs on a custom stack based vm
   fn returnInt(int x) : int {
      return x;
   }
+```
+
+######Closures
+```
+  // Functions in Elsa are treated as any other "object" and can be passed around and be assigned to variables
+  // Functions in Elsa store references to any variables from the context in which they were declared
+  
+  var x = 10;
+  var ret = fn : int => { return x; }; // A function that takes no arguments and returns the integer captured from the outer scope
+  var inc = fn => { x = x + 1; };      // A function that takes no arguments, returns void and increments the captured variable by 1
+  
+  inc(); // x is now 11
+  PrintLn(ret()); // Prints 11
+  
+  // A function that takes another function(taking no arguments and returns void) as an arguments an invokes it twice
+  fn callTwice(fn f) {
+     f();
+     f();
+  }
+  
+  callTwice(inc); // callTwice will call our inc function twice
+  PrintLn(ret()); // Prints 13
+  PrintLn(x); // Prints 13
 ```
 
 ######Variables and built-in types
