@@ -1,7 +1,9 @@
 ##The Elsa Programming Language
-A statically typed language that runs on a custom stack based vm
+A statically typed, garbage collected language that runs on a custom stack based vm
 
-![alt tag](https://raw.githubusercontent.com/joakimthun/Elsa/blob/master/src/examples/bouncy.png)
+#### Examples:
+Bouncy: A Breakout clone written in Elsa
+![alt tag](https://raw.githubusercontent.com/joakimthun/Elsa/master/src/examples/bouncy.png)
 
 #### Features:
 
@@ -12,7 +14,7 @@ A statically typed language that runs on a custom stack based vm
      PrintLn("Hello world!");
   }
  
-  // A function the takes an integer argument and returns an integer
+  // A function that takes an integer argument and returns an integer
   fn returnInt(int x) : int {
      return x;
   }
@@ -22,9 +24,10 @@ When passing arguments to functions all built-in types are passed by value while
 
 ######Closures
 ```
-  // Functions in Elsa are treated as any other "object" and can be passed around and assigned to variables.
-  // If a functions uses any variables from the context in which it was declared the function will 
-  // keep a reference to that variable
+  // All types of functions(including member functions) in Elsa are treated as any other "object" and can be passed around and      /   // assigned to variables.
+  
+  // If a functions uses any variables or fields from the context in which it was declared the function will 
+  // keep a reference to that variable or field
   
   var x = 10;
   var ret = fn : int => { return x; }; // A function that takes no arguments and returns the integer captured from the outer scope
@@ -87,6 +90,7 @@ When passing arguments to functions all built-in types are passed by value while
   var x5 = true || (true && false);                     // true
   var x6 = (true && false) || (false || false);         // false
   var x7 = (1 == 1 && 2 == 2) && (7 == 8 || 0 != 8);    // true
+  var x8 = 10 % 3;                                      // 1
   
   // Binary operators
   x << 1;
@@ -102,8 +106,8 @@ When passing arguments to functions all built-in types are passed by value while
 
 ######Arrays
 ```
-  var arr = new int[10]; // An array of integers with an intial size of 10
-  var arr2 = new [1, 2, 3, 4, 5, 6]; // Arrays can also be defined ny using array literals
+  var arr = new int[10]; // An array of integers with an intial capacity of 10
+  var arr2 = new [1, 2, 3, 4, 5, 6]; // Arrays can also be defined by using array literals
   
   // Array member functions
   arr.Push(1);  // Adds the integer 1 to the back of the array
@@ -143,15 +147,23 @@ When passing arguments to functions all built-in types are passed by value while
 ######Structs
 ```
   struct Bitmap {
+     // Fields are declared like this
      byte[] data;
      int width;
      int height;
 
-     // Member function
+     // Member functions are declared like any other function but inside a struct declaration
      fn GetPixel(int x, int y) : Color {
         var stride = 4;
         var base = stride * x * width + y * stride;
         return new Color { R: data[base], G: data[base + 1], B: data[base + 2], A: data[base + 3] };
+     }
+     
+     // The Equals-function is special. If two struct instances(of the same type) are compared with the
+     // == operator the Equals-function is automatically called.
+     // If no Equals-function is declared, a check for reference equality is done
+     fn Equals(Bitmap other) : bool {
+        return true;
      }
   };
   
@@ -163,6 +175,9 @@ When passing arguments to functions all built-in types are passed by value while
   };
   
   // Struct instances are created by using the new keyword
+  var red = new Color;
+  
+  // Elsa also supports initializer lists
   var red = new Color { R: 0xFF, G: o, B: o, A: 0xFF }; 
 ``` 
 
@@ -178,6 +193,15 @@ When passing arguments to functions all built-in types are passed by value while
   };
 ``` 
 
+######Working with multiple source files
+```
+  // Including stuff from other .elsa source files is done with the use keyword
+  use "std/io";
+
+  fn main() {
+     PrintLn(z);
+  }
+```
 
 ######Example VM-program:
 ```
