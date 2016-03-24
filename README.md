@@ -1,6 +1,8 @@
 ##The Elsa Programming Language
 A statically typed language that runs on a custom stack based vm
 
+![alt tag](https://raw.githubusercontent.com/joakimthun/Elsa/blob/master/src/examples/bouncy.png)
+
 #### Features:
 
 ######Basic functions
