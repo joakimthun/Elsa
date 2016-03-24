@@ -30,6 +30,17 @@ A statically typed language that runs on a custom stack based vm
   var x = 15; // int
 ```
 
+######Operators and precedence
+```
+  var x1 = (3 + 5) * 6;                                 // 48
+  var x2 = (3 + 5) * (6 + 8);                           // 112
+  var x3 = (3 + 5 * 6) * 6;                             // 198
+  var x4 = (3 + 5  / (1 * 6)) * (6 + 8 * (2 - 1));      // 42
+  var x5 = true || (true && false);                     // true
+  var x6 = (true && false) || (false || false);         // false
+  var x7 = (1 == 1 && 2 == 2) && (7 == 8 || 0 != 8);    // true
+```
+
 ######Arrays
 ```
   var arr = new int[10]; // An array of integers with an intial size of 10
