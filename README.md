@@ -10,6 +10,11 @@ Elsa is written just for fun(and educational purposes) and is not really intende
 
 ######Basic functions
 ```
+  // The main function is the entry point of all Elsa programs and is always required
+  fn main() {
+     
+  }
+  
   // A function that takes no arguments and returns void
   fn hello() {
      PrintLn("Hello world!");
@@ -35,6 +40,7 @@ When passing arguments to functions all built-in types are passed by value while
   
   // A function that takes no arguments and returns the integer captured from the outer scope
   var ret = fn : int => { return x; };
+  
   // A function that takes no arguments, returns void and increments the captured variable by 1
   var inc = fn => { x = x + 1; }; 
   
@@ -216,6 +222,9 @@ Elsa has a very small standard library with basic functions for printing stuff t
 opening a window(and drawing basic shapes), reading files etc.
 
 All standard library functions and structs can be found [here](../master/src/std)
+
+####Building and OS support
+Elsa only runs on Windows(right now at least) and has only been tested with the Visual C++ Compiler
 
 ######Example VM-program:
 ```
