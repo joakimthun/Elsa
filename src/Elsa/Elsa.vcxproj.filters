@@ -18,5 +18,13 @@
     <ClCompile Include="elsa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="output\to_string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="output\to_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

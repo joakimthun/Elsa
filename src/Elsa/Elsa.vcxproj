@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="elsa.cpp" />
+    <ClCompile Include="output\to_string.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Compiler\Compiler.vcxproj">
@@ -39,6 +40,9 @@
     <ProjectReference Include="..\VM\VM.vcxproj">
       <Project>{f45fa80e-e6ba-4d96-831b-d5a5debbc8d9}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="output\to_string.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1A7CC214-5115-401C-9D56-F3EF298EC342}</ProjectGuid>
