@@ -18,8 +18,9 @@ A statically typed language that runs on a custom stack based vm
 
 ######Closures
 ```
-  // Functions in Elsa are treated as any other "object" and can be passed around and be assigned to variables
-  // Functions in Elsa store references to any variables from the context in which they were declared
+  // Functions in Elsa are treated as any other "object" and can be passed around and assigned to variables.
+  // If a functions uses any variables from the context in which it was declared the function will 
+  // keep a reference to that variable
   
   var x = 10;
   var ret = fn : int => { return x; }; // A function that takes no arguments and returns the integer captured from the outer scope
