@@ -131,6 +131,17 @@ A statically typed language that runs on a custom stack based vm
   var red = new Color { R: 0xFF, G: o, B: o, A: 0xFF }; 
 ``` 
 
+######Enums
+```
+  // Enums in Elsa are just integers converted by the compiler at compile time
+  enum Enum {
+     Zero,      // 0
+     Three = 3, // 3
+     Four,      // 4
+     Seven = 7  // 7
+  };
+``` 
+
 ######Example VM-program:
 ```
     // factorial (10)
