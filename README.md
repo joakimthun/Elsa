@@ -1,8 +1,9 @@
 ##The Elsa Programming Language
-A statically typed, garbage collected language that runs on a custom stack based vm
+A statically typed, garbage collected language that runs on a custom stack based vm.
+Elsa is written just for fun(and educational purposes) and is not really intended for actual use
 
 #### Examples:
-Bouncy: A Breakout clone written in Elsa
+[Bouncy](../master/src/examples/bouncy): A Breakout clone written in Elsa
 ![alt tag](https://raw.githubusercontent.com/joakimthun/Elsa/master/src/examples/bouncy.png)
 
 #### Features:
@@ -209,6 +210,12 @@ When passing arguments to functions all built-in types are passed by value while
      PrintLn(z);
   }
 ```
+
+######Standard library
+Elsa has a very small standard library with basic functions for printing stuff to the console, 
+opening a window(and drawing basic shapes), reading files etc.
+
+All standard library functions and structs can be found [here](../master/src/std)
 
 ######Example VM-program:
 ```
