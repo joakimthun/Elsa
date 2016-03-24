@@ -1,6 +1,6 @@
 ##The Elsa Programming Language
 A statically typed, garbage collected language that runs on a custom stack based vm.
-Elsa is written just for fun(and educational purposes) and is not really intended for actual use
+Elsa is written just for fun(and educational purposes) and is not really intended for actual use.
 
 #### Examples:
 [Bouncy](../master/src/examples/bouncy): A Breakout clone written in Elsa
@@ -10,7 +10,7 @@ Elsa is written just for fun(and educational purposes) and is not really intende
 Download the latest release from [here](https://github.com/joakimthun/Elsa/releases).
 Then just run "elsa bouncy/main.elsa" from the command line
 
-#### Features:
+#### Language features:
 
 ######Basic functions
 ```
