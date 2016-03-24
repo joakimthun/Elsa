@@ -24,19 +24,24 @@ When passing arguments to functions all built-in types are passed by value while
 
 ######Closures
 ```
-  // All types of functions(including member functions) in Elsa are treated as any other "object" and can be passed around and      /   // assigned to variables.
+  // All types of functions(including member functions) in Elsa are treated as any other 
+  // "object" and can be passed around and assigned to variables.
   
-  // If a functions uses any variables or fields from the context in which it was declared the function will 
-  // keep a reference to that variable or field
+  // If a functions uses any variables or fields from the context in which it was declared 
+  // the function will keep a reference to that variable or field
   
   var x = 10;
-  var ret = fn : int => { return x; }; // A function that takes no arguments and returns the integer captured from the outer scope
-  var inc = fn => { x = x + 1; };      // A function that takes no arguments, returns void and increments the captured variable by 1
+  
+  // A function that takes no arguments and returns the integer captured from the outer scope
+  var ret = fn : int => { return x; };
+  // A function that takes no arguments, returns void and increments the captured variable by 1
+  var inc = fn => { x = x + 1; }; 
   
   inc(); // x is now 11
   PrintLn(ret()); // Prints 11
   
-  // A function that takes another function(taking no arguments and returns void) as an arguments an invokes it twice
+  // A function that takes another function(taking no arguments and returns void) as an argument
+  // and invokes the passed function twice
   fn callTwice(fn f) {
      f();
      f();
@@ -58,7 +63,8 @@ When passing arguments to functions all built-in types are passed by value while
   byte b = byte(0);
   byte b2 = byte(0xff);
   
-  // Variables can also be declared by using the var keyword and letting the compiler infer the type
+  // Variables can also be declared by using the var keyword 
+  // and letting the compiler infer the type
   var x = 15; // int
   
   // All built-in types in Elsa have default values
@@ -67,7 +73,8 @@ When passing arguments to functions all built-in types are passed by value while
   char: '\0'
   byte: 0
   
-  // Array and struct instances will be null pointers if not instantiated with the new keyword (see the struct section)
+  // Array and struct instances will be null pointers if not instantiated 
+  // with the new keyword (see the struct section)
 ```
 
 
