@@ -6,8 +6,9 @@ Elsa is written just for fun(and educational purposes) and is not really intende
 [Bouncy](../master/src/examples/bouncy): A Breakout clone written in Elsa
 ![alt tag](https://raw.githubusercontent.com/joakimthun/Elsa/master/src/examples/bouncy.png)
 
-####Running a program
-Just run "elsa your_source_file.elsa" from the command line
+####Running Bouncy
+Download the latest release from [here](https://github.com/joakimthun/Elsa/releases).
+Then just run "elsa bouncy/main.elsa" from the command line
 
 #### Features:
 
