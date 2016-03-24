@@ -16,7 +16,7 @@ A statically typed language that runs on a custom stack based vm
   }
 ```
 
-When passing arguments to functions all built-in types are passed by value and structs and arrays are passed by reference(pointers)
+When passing arguments to functions all built-in types are passed by value while structs and arrays are passed by reference(pointers)
 
 ######Closures
 ```
