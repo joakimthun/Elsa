@@ -28,6 +28,23 @@ A statically typed language that runs on a custom stack based vm
   
   // Variables can also be declared by using the var keyword and letting the compiler infer the type
   var x = 15; // int
+  
+  // All built-in types in Elsa have default values
+  int: 0
+  float: 0.0
+  char: '\0'
+  byte: 0
+  
+  // Array and struct instances will be null pointers if not instantiated with the new keyword (see the struct section)
+```
+
+######Type conversions
+```
+  var floatToInt = int(10.0);
+  var intToFloat = float(10);
+  var intToChar = char(33);
+  var charToInt = int('!');
+  var intToByte = byte(10);
 ```
 
 ######Operators and precedence
@@ -39,6 +56,16 @@ A statically typed language that runs on a custom stack based vm
   var x5 = true || (true && false);                     // true
   var x6 = (true && false) || (false || false);         // false
   var x7 = (1 == 1 && 2 == 2) && (7 == 8 || 0 != 8);    // true
+  
+  // Binary operators
+  x << 1;
+  x >> 1;
+  x | y;
+  x & y;
+  
+  byte x1 = 0xFF;
+  byte y1 = 0xFF;
+  var r = (int(x1) << 8) | int(y1);   // 65535
 ```
 
 ######Arrays
@@ -54,6 +81,17 @@ A statically typed language that runs on a custom stack based vm
   // Array operators
   arr[2];       // Access the element at index 2 in the array
 ```
+
+######Branching
+```
+  if(x == 10) {
+     PrintLn("x == 10");
+  }
+  else {
+     // The else block can be omitted
+     PrintLn("x == 10");
+  }
+``` 
 
 ######Loops
 ```
@@ -74,12 +112,23 @@ A statically typed language that runs on a custom stack based vm
      int width;
      int height;
 
+     // Member function
      fn GetPixel(int x, int y) : Color {
         var stride = 4;
         var base = stride * x * width + y * stride;
         return new Color { R: data[base], G: data[base + 1], B: data[base + 2], A: data[base + 3] };
      }
   };
+  
+  struct Color {
+     byte R;
+     byte G;
+     byte B;
+     byte A;
+  };
+  
+  // Struct instances are created by using the new keyword
+  var red = new Color { R: 0xFF, G: o, B: o, A: 0xFF }; 
 ``` 
 
 ######Example VM-program:
