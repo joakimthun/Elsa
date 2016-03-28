@@ -88,6 +88,35 @@ When passing arguments to functions all built-in types are passed by value while
   // with the new keyword (see the struct section)
 ```
 
+######Strings
+```
+  // The String struct in Elsa is very incomplete but has some basic functionality
+
+  // Creating new string instances
+  var str = "Hello World!";
+  var first =  "123";
+  var second = "123";
+
+  // Retrives a char at the specified index
+  str.CharAt(1) // e
+  
+  // Returns the length of the string as an integer
+  str.Length()
+
+  // Comparing strings, the String struct define its own Equals-function
+  // see the Structs section for more info
+  first.Equals(second)); // true
+  first == second;       // true    
+  first != second;       // false
+  
+  // Concatenating strings
+  var third = first.Concat(second); // third == "123123"
+  
+  // Substring --> Substring(int startIndex, int length)
+  third.Substring(0, 3); // "123"
+```
+
+The source code for the String struct can be found [here](../master/src/std/string.elsa)
 
 ######Type conversions
 ```
