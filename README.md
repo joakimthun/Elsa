@@ -101,7 +101,7 @@ When passing arguments to functions all built-in types are passed by value while
   str.CharAt(1) // e
   
   // Returns the length of the string as an integer
-  str.Length()
+  str.Length() // 12
 
   // Comparing strings, the String struct define its own Equals-function
   // see the Structs section for more info
@@ -112,7 +112,8 @@ When passing arguments to functions all built-in types are passed by value while
   // Concatenating strings
   var third = first.Concat(second); // third == "123123"
   
-  // Substring --> Substring(int startIndex, int length)
+  // Substring, substring takes 2 integer arguments
+  // the start index and the number of chars to grab
   third.Substring(0, 3); // "123"
 ```
 
