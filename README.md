@@ -258,7 +258,7 @@ opening a window(and drawing basic shapes), reading files etc.
 All standard library functions and structs can be found [here](../master/src/std)
 
 ####Building and OS support
-Elsa only runs on Windows(right now at least) and has only been tested with the Visual C++ Compiler
+Elsa only runs on Windows(at least right now) and has only been tested with the Visual C++ Compiler
 
 ######Example VM-program:
 ```
