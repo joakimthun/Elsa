@@ -1,4 +1,4 @@
-##The Elsa Programming Language
+## The Elsa Programming Language
 A statically typed, garbage collected language that runs on a custom stack based vm.
 Elsa is written just for fun(and educational purposes) and is not really intended for actual use.
 
@@ -6,13 +6,13 @@ Elsa is written just for fun(and educational purposes) and is not really intende
 [Bouncy](../master/src/examples/bouncy): A Breakout clone written in Elsa
 ![alt tag](https://raw.githubusercontent.com/joakimthun/Elsa/master/src/examples/bouncy.png)
 
-####Running Bouncy
+#### Running Bouncy
 Download the latest release from [here](https://github.com/joakimthun/Elsa/releases).
 Then just run "elsa bouncy/main.elsa" from the command line
 
 #### Language features:
 
-######Basic functions
+###### Basic functions
 ```
   // The main function is the entry point of all Elsa programs and is always required
   fn main() {
@@ -32,7 +32,7 @@ Then just run "elsa bouncy/main.elsa" from the command line
 
 When passing arguments to functions all built-in types are passed by value while structs and arrays are passed by reference(pointers)
 
-######Closures
+###### Closures
 ```
   // All types of functions(including member functions) in Elsa are treated as any other 
   // "object" and can be passed around and assigned to variables.
@@ -64,7 +64,7 @@ When passing arguments to functions all built-in types are passed by value while
 ```
 
 
-######Variables and built-in types
+###### Variables and built-in types
 ```
   int i = 0;
   int h = 0xffff;
@@ -88,7 +88,7 @@ When passing arguments to functions all built-in types are passed by value while
   // with the new keyword (see the struct section)
 ```
 
-######Strings
+###### Strings
 ```
   // The String struct in Elsa is very incomplete but has some basic functionality
 
@@ -119,7 +119,7 @@ When passing arguments to functions all built-in types are passed by value while
 
 The source code for the String struct can be found [here](../master/src/std/string.elsa)
 
-######Type conversions
+###### Type conversions
 ```
   var floatToInt = int(10.0);
   var intToFloat = float(10);
@@ -129,7 +129,7 @@ The source code for the String struct can be found [here](../master/src/std/stri
 ```
 
 
-######Operators and precedence
+###### Operators and precedence
 ```
   var x1 = (3 + 5) * 6;                                 // 48
   var x2 = (3 + 5) * (6 + 8);                           // 112
@@ -152,7 +152,7 @@ The source code for the String struct can be found [here](../master/src/std/stri
 ```
 
 
-######Arrays
+###### Arrays
 ```
   var arr = new int[10]; // An array of integers with an intial capacity of 10
   var arr2 = new [1, 2, 3, 4, 5, 6]; // Arrays can also be defined by using array literals
@@ -167,7 +167,7 @@ The source code for the String struct can be found [here](../master/src/std/stri
 ```
 
 
-######Branching
+###### Branching
 ```
   if(x == 10) {
      PrintLn("x == 10");
@@ -179,7 +179,7 @@ The source code for the String struct can be found [here](../master/src/std/stri
 ``` 
 
 
-######Loops
+###### Loops
 ```
   for(var i = 0; i < arr.Length(); i++)
   {
@@ -192,7 +192,7 @@ The source code for the String struct can be found [here](../master/src/std/stri
 ``` 
 
 
-######Structs
+###### Structs
 ```
   struct Bitmap {
      // Fields are declared like this
@@ -230,7 +230,7 @@ The source code for the String struct can be found [here](../master/src/std/stri
 ``` 
 
 
-######Enums
+###### Enums
 ```
   // Enums in Elsa are just integers converted by the compiler at compile time
   enum Enum {
@@ -241,7 +241,7 @@ The source code for the String struct can be found [here](../master/src/std/stri
   };
 ``` 
 
-######Working with multiple source files
+###### Working with multiple source files
 ```
   // Including stuff from other .elsa source files is done with the use keyword
   use "std/io";
@@ -251,16 +251,16 @@ The source code for the String struct can be found [here](../master/src/std/stri
   }
 ```
 
-######Standard library
+###### Standard library
 Elsa has a very small standard library with basic functions for printing stuff to the console, 
 opening a window(and drawing basic shapes), reading files etc.
 
 All standard library functions and structs can be found [here](../master/src/std)
 
-####Building and OS support
+#### Building and OS support
 Elsa only runs on Windows(at least right now) and has only been tested with the Visual C++ Compiler
 
-######Example VM-program:
+###### Example VM-program:
 ```
     // factorial (10)
 	iconst, 1,
